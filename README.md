@@ -1,4 +1,4 @@
-# Fusion Wallet
+# Fusion Wallet [![Build Status](https://app.bitrise.io/app/078d4c59cda43563/status.svg?token=tovI3DjmdyFaFnGMXo7PQg)](https://app.bitrise.io/app/078d4c59cda43563)  
 
 Fusion - Android/iOS wallet for Minter blockchain.
 
