@@ -44,7 +44,7 @@ dependencies:
   flutter_platform_widgets: ^0.32.4
   flutter_staggered_animations: ^0.1.2
   bloc: ^3.0.0
-  provider: ^4.0.4
+  provider: ^4.0.0
   flutter_bloc: ^3.2.0
   auto_size_text: ^2.1.0
   logger: ^0.8.3
@@ -52,6 +52,8 @@ dependencies:
   flutter_datetime_picker: ^1.3.5
   pin_input_text_field: ^3.0.1
   crypto: ^2.1.4
+  flutter_svg: ^0.17.3+1
+
 
 
 
@@ -82,6 +84,43 @@ flutter:
   assets:
     - assets/lang/en.json
     - assets/lang/ru.json
+
+
+    - assets/images/backgrounds/bg_primary.png
+    - assets/images/backgrounds/bg_greeting.png
+
+
+    - assets/images/icons/ic_accounts.svg
+    - assets/images/icons/ic_backarrow.svg
+    - assets/images/icons/ic_contacts.svg
+    - assets/images/icons/ic_copypaste.svg
+    - assets/images/icons/ic_default_settings.svg
+    - assets/images/icons/ic_deletearrow.svg
+    - assets/images/icons/ic_edit.svg
+    - assets/images/icons/ic_exchange.svg
+    - assets/images/icons/ic_faceid.svg
+    - assets/images/icons/ic_folder.svg
+    - assets/images/icons/ic_hamburgermenu.svg
+    - assets/images/icons/ic_history.svg
+    - assets/images/icons/ic_infoicon.svg
+    - assets/images/icons/ic_man.svg
+    - assets/images/icons/ic_next.svg
+    - assets/images/icons/ic_password.svg
+    - assets/images/icons/ic_passwordellipse.svg
+
+    - assets/images/icons/ic_qrcodescan.svg
+    - assets/images/icons/ic_accounts.svg
+    - assets/images/icons/ic_recoverpasswordicon.svg
+    - assets/images/icons/ic_settings.svg
+    - assets/images/icons/ic_shareicon.svg
+    - assets/images/icons/ic_taskdone.svg
+    - assets/images/icons/ic_toggleoff.svg
+    - assets/images/icons/ic_toggleon.svg
+    - assets/images/icons/ic_touch.svg
+    - assets/images/icons/ic_touchid.svg
+    - assets/images/icons/ic_add.svg
+    - assets/images/icons/ic_withdraw.svg
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
