@@ -1,7 +1,642 @@
 {
-  "@@last_modified": "2020-03-10T20:51:40.720693",
+  "@@last_modified": "2020-03-16T20:18:19.891920",
   "appName": "Fusion",
   "@appName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "buttonCreateAccount": "Create account",
+  "@buttonCreateAccount": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "buttonRecoverFromPassphrase": "Recover account from passphrase",
+  "@buttonRecoverFromPassphrase": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelAlreadyHaveAccount": "Already have an account?",
+  "@labelAlreadyHaveAccount": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "toolbarChoosePassTitle": "Choose password",
+  "@toolbarChoosePassTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelChoosePassSubtitle": "Choose a six digit password",
+  "@labelChoosePassSubtitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelChoosePassVerifySubtitle": "Enter the same six digits",
+  "@labelChoosePassVerifySubtitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelEnableBiometricTitle": "Enable Touch ID/Face ID",
+  "@labelEnableBiometricTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelEnableBiometricSubtitle": "We recommend this for improved security",
+  "@labelEnableBiometricSubtitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelYes": "Yes",
+  "@labelYes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelNo": "No",
+  "@labelNo": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "toolbarNewAccountTitle": "New Account",
+  "@toolbarNewAccountTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelBackupPassphraseSubtitle": "Back up this Passphrase",
+  "@labelBackupPassphraseSubtitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "buttonVerifyRecoveryPhrase": "Verify recovery phrase",
+  "@buttonVerifyRecoveryPhrase": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "buttonShare": "Share",
+  "@buttonShare": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelBackupPassphraseCaption": "In order to access this accout if you lose this device, ciopy or print this phrase and keep it someplace safe.",
+  "@labelBackupPassphraseCaption": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelQuestionIndicatorTitle": "Question {current} of {total}",
+  "@labelQuestionIndicatorTitle": {
+    "type": "text",
+    "placeholders": {
+      "current": {},
+      "total": {}
+    }
+  },
+  "labelWordIndicatorSubtitle": "Select the {position} word of your passphrase",
+  "@labelWordIndicatorSubtitle": {
+    "type": "text",
+    "placeholders": {
+      "position": {}
+    }
+  },
+  "toastTryAgain": "Please, try again",
+  "@toastTryAgain": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "popupPassVerifiedTitle": "Passphrase Verified",
+  "@popupPassVerifiedTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "popupPassVerifiedBody": "Your passphrase has been verified. Make sure that you have backed it up as you will needit to recover your account.",
+  "@popupPassVerifiedBody": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelOk": "OK",
+  "@labelOk": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "inputAccountNameHelperText": "Account Name",
+  "@inputAccountNameHelperText": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "inputAccountNameHintText": "Please, name your account",
+  "@inputAccountNameHintText": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "checkboxTermsConditions": "I agree with terms&conditions",
+  "@checkboxTermsConditions": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "buttonNext": "Next",
+  "@buttonNext": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "toolbarTermsConditionsTitle": "Terms and Conditions",
+  "@toolbarTermsConditionsTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "toolbarRecoverFromSeedTitle": "Recover from seed",
+  "@toolbarRecoverFromSeedTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "inputEnterScanPasshpraseHintText": "Enter passphrase or scan QR",
+  "@inputEnterScanPasshpraseHintText": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "buttonVerify": "Verify",
+  "@buttonVerify": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "toolbarScanQrTitle": "Scan QR",
+  "@toolbarScanQrTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "buttonClose": "Close",
+  "@buttonClose": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "popupAccVerificationWelcomeText": "Welcome to Algorand! Your account is ready to use.",
+  "@popupAccVerificationWelcomeText": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelUnlockTitle": "Unlock",
+  "@labelUnlockTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "buttonLogOut": "Log out",
+  "@buttonLogOut": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelUnlockSubtitle": "Enter six digit pin",
+  "@labelUnlockSubtitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelTapToCopy": "Tap to copy",
+  "@labelTapToCopy": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "toolbarViewPasshraseTitle": "View Passphrase",
+  "@toolbarViewPasshraseTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "buttonSend": "Send",
+  "@buttonSend": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "buttonRequest": "Request",
+  "@buttonRequest": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "buttonDelegate": "Delegate",
+  "@buttonDelegate": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "buttonUnbound": "Unbound",
+  "@buttonUnbound": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "buttonPush": "Push",
+  "@buttonPush": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelCryptoAvailable": "Cryptocurrency Available",
+  "@labelCryptoAvailable": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelTotalReward": "Total Rewards Earned",
+  "@labelTotalReward": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelTransanctionsHistoryTitle": "Transanctions History",
+  "@labelTransanctionsHistoryTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "navigationLabelAccounts": "Accounts",
+  "@navigationLabelAccounts": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "navigationLabelExchange": "Exchange",
+  "@navigationLabelExchange": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "navigationItemContacts": "Contacts",
+  "@navigationItemContacts": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "navigationItemHistory": "History",
+  "@navigationItemHistory": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "navigationItemSettings": "Settings",
+  "@navigationItemSettings": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "menuItemShowQR": "Show QR and Address",
+  "@menuItemShowQR": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "menuItemSetDefaults": "Set as defaults",
+  "@menuItemSetDefaults": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "menuItemViewPassphrase": "View Passphrase",
+  "@menuItemViewPassphrase": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "menuItemEditAccountName": "Edit Account Name",
+  "@menuItemEditAccountName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "menuItemRemoveAccount": "Remove Account",
+  "@menuItemRemoveAccount": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "menuItemWithdrawFunds": "Withdraw funds",
+  "@menuItemWithdrawFunds": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "menuItemReferalLink": "Referal link",
+  "@menuItemReferalLink": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelTotalRewardTitle": "Total Rewards Earned",
+  "@labelTotalRewardTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelPendingRewardTitle": "Pending Rewards",
+  "@labelPendingRewardTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelPendingRewardSubtitle": "Pending rewards become confirmed when you send or receive BIP",
+  "@labelPendingRewardSubtitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelRewardsCaption": "For more information on Fusion Rewards, visit our FAQ",
+  "@labelRewardsCaption": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "buttonPreview": "Preview",
+  "@buttonPreview": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelFrom": "From",
+  "@labelFrom": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelTo": "To",
+  "@labelTo": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelAmount": "Amount",
+  "@labelAmount": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelAddress": "Address",
+  "@labelAddress": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelMyContacts": "My Contacts",
+  "@labelMyContacts": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelContacts": "Contacts",
+  "@labelContacts": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelScanQr": "Scan QR",
+  "@labelScanQr": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "toolbarSendTitle": "Send funds",
+  "@toolbarSendTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "inputMaxAmountSuffix": "MAX",
+  "@inputMaxAmountSuffix": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "inputAddressHint": "Enter address",
+  "@inputAddressHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "inputFundsStakeHint": "Stake",
+  "@inputFundsStakeHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelSender": "Sender",
+  "@labelSender": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelReceiver": "Receiver",
+  "@labelReceiver": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelPubkeyOrDomain": "Public key or domain",
+  "@labelPubkeyOrDomain": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelCoin": "Coin",
+  "@labelCoin": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelName": "Name",
+  "@labelName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "popupRemoveAccountTitle": "Remove account",
+  "@popupRemoveAccountTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "popupRemoveAccountBody": "You are about to remove an account. Are you sure you want to proceed with choice?",
+  "@popupRemoveAccountBody": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelCancel": "Cancel",
+  "@labelCancel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelRemove": "Remove",
+  "@labelRemove": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelSave": "Save",
+  "@labelSave": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "inputEditAccountNameTitle": "Edit Account Name",
+  "@inputEditAccountNameTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "inputEditAccountNameHint": "Please, name your account",
+  "@inputEditAccountNameHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "toolbarHistoryTitle": "History",
+  "@toolbarHistoryTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelAccount": "Account:",
+  "@labelAccount": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelStartDate": "Start Date",
+  "@labelStartDate": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelEndDate": "End Date",
+  "@labelEndDate": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "buttonViewResults": "View results",
+  "@buttonViewResults": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "settingsItemUiTheme": "Dark/Light Theme",
+  "@settingsItemUiTheme": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "settingsItemChgPassword": "Set/Change password",
+  "@settingsItemChgPassword": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "settingsItemBiometricFeature": "Touch ID/Face ID",
+  "@settingsItemBiometricFeature": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "settingsItemNotifications": "Notifications",
+  "@settingsItemNotifications": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "settingsItemShowRewards": "Show rewards",
+  "@settingsItemShowRewards": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "settingsItemLanguage": "Language",
+  "@settingsItemLanguage": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "settingsItemSendFeedback": "Send feedback",
+  "@settingsItemSendFeedback": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "settingsItemFaq": "FAQ",
+  "@settingsItemFaq": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelFeedbackNoteTitle": "Note",
+  "@labelFeedbackNoteTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "inputFeedbackCommentHint": "What is on your mind",
+  "@inputFeedbackCommentHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelFeedbackEmailSubtitle": "Email (optionally)",
+  "@labelFeedbackEmailSubtitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "toolbarContactsTitle": "Contacts",
+  "@toolbarContactsTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "toolbarAddContactTitle": "Add Contact",
+  "@toolbarAddContactTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "inputSearchContactHint": "Search contacts",
+  "@inputSearchContactHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelContactsNotFoundError": "No Contact found",
+  "@labelContactsNotFoundError": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelAddContactName": "Name",
+  "@labelAddContactName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelAddContactAddress": "Address",
+  "@labelAddContactAddress": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "inputAddContactNameHint": "Contact Name",
+  "@inputAddContactNameHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "inputAddContactAddressHint": "Enter address",
+  "@inputAddContactAddressHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "buttonAddContact": "Add contact",
+  "@buttonAddContact": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "toolbarExchangeTitle": "Exchange",
+  "@toolbarExchangeTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "toolbarRateTitle": "Rate",
+  "@toolbarRateTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "toolbarConvertTitle": "Convert",
+  "@toolbarConvertTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelExchangeCoins": "My Coins",
+  "@labelExchangeCoins": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "buttonConvert": "Convert",
+  "@buttonConvert": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "buttonRate": "Rate",
+  "@buttonRate": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "buttonBuy": "Buy",
+  "@buttonBuy": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "buttonSell": "Sell",
+  "@buttonSell": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelExchangeUseCash": "Use cash balance",
+  "@labelExchangeUseCash": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelExchangeSimplex": "Simplex",
+  "@labelExchangeSimplex": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelBuy": "BUY",
+  "@labelBuy": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelSell": "SELL",
+  "@labelSell": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelConvertCoinHave": "Coin You have",
+  "@labelConvertCoinHave": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelConvertCoinWant": "Coin you want",
+  "@labelConvertCoinWant": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelConvertWillGet": "You will get approximztely",
+  "@labelConvertWillGet": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelConvertTransanctionFee": "Transanction Fee:",
+  "@labelConvertTransanctionFee": {
     "type": "text",
     "placeholders": {}
   }
