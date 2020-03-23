@@ -4,6 +4,7 @@
 
 import 'dart:math';
 import 'dart:ui';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter/material.dart';
@@ -11,6 +12,8 @@ import 'package:flutter/material.dart';
 class FusionTheme {
 
 
+  static final buttonAndroidTheme = MaterialRaisedButtonData();
+  static final buttonIOSTheme = CupertinoButtonData();
 
   static int tintValue(int value, double factor) =>
       max(0, min((value + ((255 - value) * factor)).round(), 255));
