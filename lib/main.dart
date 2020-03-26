@@ -13,6 +13,11 @@ import 'package:provider/provider.dart';
 import 'file:///C:/repos/newveer/fusion_wallet/lib/ui/pages/app_widgets.dart';
 
 import 'localizations.dart';
+import 'ui/pages/auth/account_creation_page.dart';
+import 'ui/pages/auth/intro_page.dart';
+import 'ui/pages/auth/password_creation_page.dart';
+import 'ui/pages/auth/recover_account_page.dart';
+import 'ui/pages/auth/terms_conditions_page.dart';
 import 'ui/providers/bottom_navigation_provider.dart';
 import 'ui/theme/theme_state.dart';
 
@@ -30,7 +35,12 @@ class MyApp extends StatelessWidget {
   Widget _buildAppWithTheme(BuildContext context, ThemeState themeState) {
     debugPrint('Building App with theme ${themeState.themeData.brightness}');
     return MaterialApp(
-      theme: themeState.themeData,
+      theme: themeState.themeData.copyWith(
+          buttonTheme: ButtonThemeData(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            side: BorderSide(color: Colors.black)),
+      )),
       home: HomePage(),
       localizationsDelegates: [
         const AppLocalizationsDelegate(),
@@ -48,6 +58,15 @@ class MyApp extends StatelessWidget {
         BiometricAuthPage.navId: (context) => BiometricAuthPage(),
         ScanQrPage.navId: (context) => ScanQrPage(),
         PassphraseCreationPage.navId: (context) => PassphraseCreationPage(),
+        IntroPage.navId: (BuildContext context) => IntroPage(),
+        AccountCreationNamePage.navId: (BuildContext context) =>
+            AccountCreationNamePage(),
+        RecoverAccountPage.navId: (BuildContext context) =>
+            RecoverAccountPage(),
+        TermsConditionsPage.navId: (BuildContext context) =>
+            TermsConditionsPage(),
+        PasswordCreationPage.navId: (BuildContext context) =>
+            PasswordCreationPage(),
       },
     );
   }

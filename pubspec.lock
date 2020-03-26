@@ -297,7 +297,7 @@ packages:
       name: flutter_spinkit
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.1.2"
+    version: "4.1.2+1"
   flutter_staggered_animations:
     dependency: "direct main"
     description:
@@ -491,7 +491,7 @@ packages:
       name: package_config
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.9.2"
+    version: "1.9.3"
   package_info:
     dependency: "direct main"
     description:

@@ -14,8 +14,13 @@ import 'package:provider/provider.dart';
 
 import 'file:///C:/repos/newveer/fusion_wallet/lib/ui/pages/app_widgets.dart';
 
+import 'auth/account_creation_page.dart';
 import 'auth/biometric_features_page.dart';
+import 'auth/intro_page.dart';
 import 'auth/passphrase/scan_qr_page.dart';
+import 'auth/password_creation_page.dart';
+import 'auth/recover_account_page.dart';
+import 'auth/terms_conditions_page.dart';
 import 'primary/accounts_page.dart';
 import 'primary/contacts_page.dart';
 import 'primary/exchange_page.dart';
@@ -100,6 +105,15 @@ class _BottomHomePageState extends State<BottomHomePage> {
 
   Widget _buildDrawerBody(BuildContext context) => ListView(
         children: <Widget>[
+          _buildDrawerItem(context, 'IntroPage', IntroPage.navId),
+          _buildDrawerItem(context, 'AccountCreationNamePage',
+              AccountCreationNamePage.navId),
+          _buildDrawerItem(
+              context, 'RecoverAccountPage', RecoverAccountPage.navId),
+          _buildDrawerItem(
+              context, 'TermsConditionsPage', TermsConditionsPage.navId),
+          _buildDrawerItem(
+              context, 'PasswordCreationPage', PasswordCreationPage.navId),
           _buildDrawerItem(
               context,
               AppLocalizations.of(context).toolbarWidgetsTitle(),
