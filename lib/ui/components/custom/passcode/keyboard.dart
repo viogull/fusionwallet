@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 typedef KeyboardTapCallback = void Function(String text);
 
@@ -13,11 +14,11 @@ class KeyboardUIConfig {
   final EdgeInsetsGeometry deleteButtonMargin;
 
   KeyboardUIConfig({
-    this.digitSize = 40,
+    this.digitSize = 45,
     this.digitBorderWidth = 0.1,
-    this.keyboardRowMargin = const EdgeInsets.only(top: 40),
+    this.keyboardRowMargin = const EdgeInsets.only(top: 25),
     this.primaryColor = Colors.tealAccent,
-    this.digitFillColor = Colors.black,
+    this.digitFillColor = Colors.black12,
     this.digitTextStyle = const TextStyle(fontSize: 22, color: Colors.white),
     this.deleteButtonMargin =
         const EdgeInsets.only(right: 0, left: 20, top: 45),
@@ -88,6 +89,7 @@ class Keyboard extends StatelessWidget {
 
   Widget _buildKeyboardDigit(String text) {
     return Container(
+
       margin: keyboardUIConfig.keyboardRowMargin,
       width: keyboardUIConfig.digitSize,
       height: keyboardUIConfig.digitSize,
@@ -95,8 +97,8 @@ class Keyboard extends StatelessWidget {
         child: Material(
           color: keyboardUIConfig.digitFillColor,
           child: InkWell(
-            highlightColor: keyboardUIConfig.primaryColor,
-            splashColor: keyboardUIConfig.primaryColor.withOpacity(0.4),
+            highlightColor: keyboardUIConfig.digitFillColor,
+            splashColor: keyboardUIConfig.digitFillColor.withOpacity(1.0),
             onTap: () {
               onKeyboardTap(text);
             },
@@ -113,19 +115,19 @@ class Keyboard extends StatelessWidget {
       decoration: BoxDecoration(
             boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 4,
-            blurRadius: 4,
-            offset: Offset(0, 4), // changes position of shadow
+            color: Colors.black.withOpacity(0.2),
+            spreadRadius: 1,
+            blurRadius: 2,
+            offset: Offset(0, 6), // changes position of shadow
           ),
         ],
-        shape: BoxShape.rectangle,
+       // shape: BoxShape.rectangle,
         color: keyboardUIConfig.digitFillColor,
         borderRadius: BorderRadius.circular(5.0),
-        border: Border.all(
-            color: keyboardUIConfig.primaryColor,
-            width: keyboardUIConfig.digitBorderWidth,
-        ),
+//        border: Border.all(
+//            color: keyboardUIConfig.digitFillColor,
+//            width: keyboardUIConfig.digitBorderWidth,
+//        ),
       ),
     );
   }
@@ -134,24 +136,10 @@ class Keyboard extends StatelessWidget {
   Widget _buildDeleteButton() {
     return Container(
       margin: keyboardUIConfig.deleteButtonMargin,
-      height: keyboardUIConfig.digitSize,
-      width: keyboardUIConfig.digitSize,
-      child: ClipOval(
-        child: Material(
-          color: keyboardUIConfig.digitFillColor,
-          child: InkWell(
-            highlightColor: keyboardUIConfig.primaryColor,
-            splashColor: keyboardUIConfig.primaryColor.withOpacity(0.9),
+          child: GestureDetector(
             onTap: onDeleteCancelTap,
-            child: Center(
-              child: Text(
-                shouldShowCancel ? cancelLocalizedText : deleteLocalizedText,
-                style: keyboardUIConfig.deleteButtonTextStyle,
-              ),
+            child: SvgPicture.asset('assets/images/icons/ic_deletearrow.svg'),
             ),
-          ),
-        ),
-      ),
     );
   }
 }

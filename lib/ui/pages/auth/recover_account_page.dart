@@ -1,199 +1,191 @@
 import 'package:flutter/material.dart';
-//import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:fusion_wallet/localizations.dart';
+import 'package:fusion_wallet/ui/pages/auth/terms_conditions_page.dart';
 import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
-void main() => runApp(
-    MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: RecaverAccountPage(),
-    )
-);
-
+import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 
 
 class RecaverAccountPage extends StatefulWidget {
+  static const String nav_id = '/RecaverAccountPage';
   @override
   _RecaverAccountPage createState() => new _RecaverAccountPage();
 }
 
 
 class _RecaverAccountPage extends State<RecaverAccountPage> {
-
-  final String assetName = 'assets/image_that_does_not_exist.svg';
   bool _rememberMeFlag = false;
   @override
   Widget build(BuildContext context) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
-//    final logo = Hero(
-//      tag: 'hero',
-//      child: Center(
-////        backgroundColor: Colors.transparent,
-//
-//        child: SvgPicture.asset(assetName),
-//      ),
-//    );
+    final ThemeData theme = Theme.of(context);
 
-    final logo = SvgPicture.network(
-      ('https://www.svgrepo.com/show/2046/dog.svg'),
-      placeholderBuilder: (context) => CircularProgressIndicator(),
-      height: 200.0,
+    final background = SvgPicture.asset(
+      ('assets/images/backgrounds/bg_primary.svg'),
+      fit: BoxFit.fill,
+      height: MediaQuery.of(context).size.height ,
+      width: MediaQuery.of(context).size.width,
+    );
+
+    final logo = SvgPicture.asset(
+      ('assets/images/icons/ic_recoverpasswordicon.svg'),
+//      placeholderBuilder: (context) => CircularProgressIndicator(),
+      height: 100.0,
     );
 
     final text = Container(
+      alignment: Alignment.topLeft,
       margin:  EdgeInsets.symmetric(
-          vertical: 10.0, horizontal: 10.0),
-      child: Text("Account Name"),
+          vertical: 0.0, horizontal: 20.0),
+      child: Text(
+      AppLocalizations.of(context).inputAccountNameHelperText(), style: TextStyle(color: (theme.brightness == Brightness.dark)?
+      FusionTheme.dark.colorScheme.onPrimary: FusionTheme.light.colorScheme.onPrimary),
+      ),
     );
 
     final accountName =  Container(
+      decoration:  BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          border:  Border.all(color: theme.primaryColor)
+      ),
       height:  30.0,
+      width: 39.0,
       child: Center(
         child:   TextField(
-
-
+          style: TextStyle( color:
+          (theme.brightness == Brightness.dark)?
+          FusionTheme.dark.colorScheme.onPrimary: FusionTheme.light.colorScheme.onPrimary,),
           decoration: InputDecoration(
             border: OutlineInputBorder(),
-            labelText: 'Please name your account',
-
+            labelText: AppLocalizations.of(context).inputEditAccountNameHint(),
+            labelStyle: TextStyle(color: (theme.brightness == Brightness.dark)?
+          FusionTheme.dark.colorScheme.onPrimary: FusionTheme.light.colorScheme.onPrimary),
           ),
         ),
-
       ),
-
     );
 
     final scanQR =  Container(
       height: 200.0,
+      width: 100,
       decoration:  BoxDecoration(
         borderRadius: BorderRadius.circular(5),
-          border:  Border.all(color: Colors.black)
+          border:  Border.all(color: theme.primaryColor)
       ),
-
       child:  SizedBox.expand(
         child:  TextFormField(
             maxLines: 10,
-            style: new TextStyle(
-                fontSize: 16.0,
-                // height: 2.0,
-                //color: Colors.black
-            ),
-            decoration: const InputDecoration(
-              hintText: "Enter Passphrase or Scan QR",
-                suffixIcon: IconButton(
-                    icon: Icon(Icons.code),
-
+           style: TextStyle( color:
+           (theme.brightness == Brightness.dark)?
+           FusionTheme.dark.colorScheme.onPrimary: FusionTheme.light.colorScheme.onPrimary,),
+            decoration:  InputDecoration(
+                border: OutlineInputBorder(),
+             hintText: AppLocalizations.of(context).inputEnterScanPasshpraseHintText(),
+             hintStyle: TextStyle( color:
+             (theme.brightness == Brightness.dark)?
+             FusionTheme.dark.colorScheme.onPrimary: FusionTheme.light.colorScheme.onPrimary,),
+                suffixIcon:
+                IconButton(
+                  icon: SvgPicture.asset('assets/images/icons/ic_qrcodescan.svg', height: 35.0,),
+                  onPressed:  () {
+            Navigator.pushNamed(context, TermsConditions.nav_id);
+            },
                   )),
             ),
-
-
-
-
               ),
-              //contentPadding: const EdgeInsets.symmetric(vertical: 60.0),
-
-
     );
 
 
 
 
     final button = Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: Color.fromRGBO(187, 134, 252, 1),
-      ),
       height: 50,
 
-      child: PlatformButton(
-        android: (_) => FusionTheme.buttonAndroidTheme,
-        ios: (_) => FusionTheme.buttonIOSTheme,
-        onPressed: () {},
-        child: Center(
-          child: Text(
-            "VERIFY",
-            style: TextStyle(color: (isDark)? FusionTheme.dark.colorScheme.onPrimary: FusionTheme.light.colorScheme.onPrimary  ),),
-        ),
+      child: FusionButton(
+          AppLocalizations.of(context).buttonVerify(),
+              () {}
       ),
+
     );
 
 
 
-
-    return SafeArea(
-     child: Scaffold(
-      backgroundColor: Colors.white,
-      appBar: MyCustomAppBar(
-        height: 80,
-
-      ),
-
-      body: Center(
-
-        child: ListView(
-          shrinkWrap: true,
-          padding: EdgeInsets.only(left: 24.0, right: 24.0,),
+    return Scaffold(
+      body: Container(
+        //width: MediaQuery.of(context).size.width,
+        child: Stack(
+          fit: StackFit.passthrough,
           children: <Widget>[
-            logo,
-            SizedBox(height: 10.0),
-            text,
-            accountName,
-            SizedBox(height: 10.0),
-            scanQR,
-            SizedBox(height: 10.0),
-            button,
-//            SizedBox(height: 0.0),
+            background,
+            Container(
 
-//            SizedBox(height: 0.0),
-
-
-
-
-
+              padding: EdgeInsets.only(left: 24.0, right: 24.0,),
+//              width: MediaQuery.of(context).size.width,
+              child: ListView(
+                children: <Widget>[
+                  MyCustomAppBar(
+                    height: 80,
+                  ),
+                  logo,
+                  SizedBox(height: 25.0),
+                  text,
+                  SizedBox(height: 25.0),
+                  accountName,
+                  SizedBox(height: 25.0),
+                  scanQR,
+                  SizedBox(height: 100.0),
+                  button,
+                ],
+              ),
+            ),
           ],
         ),
       ),
-     ),
     );
   }
 }
 
 
-
 class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final double height;
-  final bool defaultAppBar;
+final double height;
+final bool defaultAppBar;
 
-  const MyCustomAppBar({
-    Key key,
-    @required this.height,
-    this.defaultAppBar = true,
-  }) : super(key: key);
+const MyCustomAppBar({
+Key key,
+@required this.height,
+this.defaultAppBar = true,
+}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(25.0, 20.0, 25.0, 0.0),
+@override
+Widget build(BuildContext context) {
+  final ThemeData theme = Theme.of(context);
+  return Column(
+    children: [
+      Container(
+        child: Padding(
+            padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
             child: AppBar(
-//              actions: [
-//                IconButton(
-//                  icon: Icon(Icons.arrow_back),
-//                  onPressed: () => null,
-//                ),
-//              ],
-              title:  Text("Recover from Seed",),
-            )
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              leading: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: SvgPicture.asset('assets/images/icons/ic_next.svg', height: 25.0),
+                iconSize: 100.0,
+              ),
+              title: Text( AppLocalizations.of(context).toolbarRecoverFromSeedTitle(),
+//                "Recover from Seed",
+                style: TextStyle(color: (theme.brightness == Brightness.dark)?
+                FusionTheme.dark.colorScheme.onPrimary: FusionTheme.light.colorScheme.onPrimary),
+              ),
+            )),
+      ),
+    ],
+  );
+}
 
-          ),
-        ),
-      ],
-    );
-  }
-
-
-  @override
-  Size get preferredSize => Size.fromHeight(height);
+@override
+Size get preferredSize => Size.fromHeight(height);
 }

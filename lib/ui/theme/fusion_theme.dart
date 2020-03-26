@@ -4,22 +4,35 @@
 
 import 'dart:math';
 import 'dart:ui';
-<<<<<<< HEAD
+
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:provider/provider.dart';
-=======
->>>>>>> abed716601f1a6b78c958802f47add5957bcc7a4
+
 
 import 'package:flutter/material.dart';
+
 
 class FusionTheme {
 
 
-<<<<<<< HEAD
-  static final buttonAndroidTheme = MaterialRaisedButtonData();
-  static final buttonIOSTheme = CupertinoButtonData();
-=======
->>>>>>> abed716601f1a6b78c958802f47add5957bcc7a4
+  static final buttonAndroidTheme = MaterialRaisedButtonData(
+    elevation: 0,
+
+
+    shape: new RoundedRectangleBorder(
+        borderRadius: new BorderRadius.circular(10.0),
+       // side: BorderSide(color: Colors.white),
+      ),
+
+  );
+  static final buttonIOSTheme = CupertinoButtonData(
+
+
+
+  );
+
+
+
 
   static int tintValue(int value, double factor) =>
       max(0, min((value + ((255 - value) * factor)).round(), 255));

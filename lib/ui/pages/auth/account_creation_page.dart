@@ -1,55 +1,65 @@
 import 'package:flutter/material.dart';
-//import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fusion_wallet/localizations.dart';
+import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
+import 'package:fusion_wallet/ui/pages/auth/terms_conditions_page.dart';
 import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-
-void main() => runApp(MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: AccountCreationName(),
-    ));
 
 class AccountCreationName extends StatefulWidget {
+  static const String nav_id = '/AccountCreationName';
   @override
   _AccountCreationNameState createState() => new _AccountCreationNameState();
 }
 
 class _AccountCreationNameState extends State<AccountCreationName> {
-  final String assetName = 'assets/image_that_does_not_exist.svg';
+
   bool _rememberMeFlag = false;
   @override
   Widget build(BuildContext context) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
-//    final logo = Hero(
-//      tag: 'hero',
-//      child: Center(
-////        backgroundColor: Colors.transparent,
-//
-//        child: SvgPicture.asset(assetName),
-//      ),
-//    );
+   final ThemeData theme = Theme.of(context);
+
+    final background = SvgPicture.asset(
+      ('assets/images/backgrounds/bg_primary.svg'),
+     fit: BoxFit.fill,
+     height: MediaQuery.of(context).size.height ,
+     width: MediaQuery.of(context).size.width,
+    );
 
     final logo = SvgPicture.asset(
-      ('assets/images/icons/next.svg'),
+      ('assets/images/icons/ic_man.svg'),
       placeholderBuilder: (context) => CircularProgressIndicator(),
       height: 200.0,
     );
 
+
+
     final text = Container(
+      alignment: Alignment.topLeft,
       margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-      child: Text("Account Name", style: TextStyle(color: (isDark)? FusionTheme.dark.colorScheme.onPrimary: FusionTheme.light.colorScheme.onPrimary  ),),
+      child: Text(AppLocalizations.of(context).inputAccountNameHelperText(), style: TextStyle(color: (theme.brightness == Brightness.dark)?
+      FusionTheme.dark.colorScheme.onPrimary: FusionTheme.light.colorScheme.onPrimary),
+      ),
     );
 
     final email = Container(
+        decoration:  BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          border:  Border.all(color: theme.primaryColor),
+        ),
       height: 30.0,
       child: Center(
         child: TextField(
-          obscureText: true,
+          style: TextStyle( color:
+          (theme.brightness == Brightness.dark)?
+          FusionTheme.dark.colorScheme.onPrimary: FusionTheme.light.colorScheme.onPrimary,),
+         // obscureText: true,
           decoration: InputDecoration(
             border: OutlineInputBorder(),
-            labelText: 'Please, name your account',
-            labelStyle: TextStyle(color: (isDark)? FusionTheme.dark.colorScheme.onPrimary: FusionTheme.light.colorScheme.onPrimary),
+            labelText: AppLocalizations.of(context).inputAccountNameHintText(),
+            labelStyle: TextStyle(color: (theme.brightness == Brightness.dark)?
+            FusionTheme.dark.colorScheme.onPrimary: FusionTheme.light.colorScheme.onPrimary),
 
           ),
         ),
@@ -57,25 +67,16 @@ class _AccountCreationNameState extends State<AccountCreationName> {
     );
 
     final loginButton = Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: Color.fromRGBO(187, 134, 252, 1),
-      ),
-      height: 50,
 
-      child: PlatformButton(
-        android: (_) => FusionTheme.buttonAndroidTheme,
-        ios: (_) => FusionTheme.buttonIOSTheme,
-        onPressed: () {},
-        child: Center(
-          child: Text(
-            "NEXT",
-            style: TextStyle(color: (isDark)? FusionTheme.dark.colorScheme.onPrimary: FusionTheme.light.colorScheme.onPrimary  ),),
-        ),
+      height: 50,
+      child: FusionButton(
+          AppLocalizations.of(context).buttonNext(),
+          () {}
       ),
     );
 
     final checkBox = Container(
+
         margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -85,22 +86,25 @@ class _AccountCreationNameState extends State<AccountCreationName> {
                 GestureDetector(
                   child: Row(
                     children: <Widget>[
-                      Checkbox(
-                        value: _rememberMeFlag,
-                        onChanged: (value) => setState(() {
-                          _rememberMeFlag = !_rememberMeFlag;
-                        }),
-                      ),
+                      Transform.scale(
+                        scale: 1.8,
+                            child: Checkbox(
+                          checkColor: theme.primaryColor ,
+                          value: _rememberMeFlag,
+                          onChanged: (value) => setState(() {
+                            _rememberMeFlag = !_rememberMeFlag;
+                          }),
+                      ),),
+
+                      SizedBox(width : 15.0),
                       GestureDetector(
                         child: Text(
-                          "I agree with terms&conditions",
-                          style: TextStyle(color: (isDark)? FusionTheme.dark.colorScheme.onPrimary: FusionTheme.light.colorScheme.onPrimary  ),
+                          AppLocalizations.of(context).checkboxTermsConditions(),
+                          style: TextStyle(color: (theme.brightness == Brightness.dark)? FusionTheme.dark.colorScheme.onPrimary: FusionTheme.light.colorScheme.onPrimary  ),
                         ),
-                        onTap: () {},
-//                        onTap: () =>
-//                            setState(() {
-//                              _rememberMeFlag = !_rememberMeFlag;
-//                            }),
+                        onTap: () {
+                          Navigator.pushNamed(context, TermsConditions.nav_id);
+                        },
                       )
                     ],
                   ),
@@ -113,63 +117,38 @@ class _AccountCreationNameState extends State<AccountCreationName> {
           ],
         ));
 
-    return SafeArea(
-      top: false,
-      right: false,
-      bottom: false,
-      left: false,
-      child:
+    return
       Scaffold(
-        //backgroundColor: Colors.white,
-
         body: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: Stack(
             children: <Widget>[
-//          Align(
-//            alignment: Alignment.topCenter,
-//            child:
-//          ),
-              Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image:
-                        AssetImage("assets/images/backgrounds/bg_primary.png"),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                child: Column(
-                  //shrinkWrap: true,
-
-                  children: <Widget>[
-                    MyCustomAppBar(
-                      height: 80,
-                    ),
-                    Container(
+              background,
+                     Container(
                       padding: EdgeInsets.only(left: 24.0, right: 24.0,),
-                      child: Column(
+                      child: ListView(
                         children: <Widget>[
+                          MyCustomAppBar(
+                            height: 80,
+                          ),
+                          SizedBox(height: 70.0),
                           logo,
-                          //SizedBox(height: 10.0),
+                          SizedBox(height: 35.0),
                           text,
+                          SizedBox(height: 15.0),
                           email,
-//            SizedBox(height: 0.0),
+                          SizedBox(height: 35.0),
                           checkBox,
-//            SizedBox(height: 0.0),
+                          SizedBox(height: 70.0),
                           loginButton,
                         ],
                       ),
 
                     ),
-
-                  ],
-                ),
-              ),
             ],
           ),
         ),
-      ),
     );
   }
 }
@@ -186,27 +165,24 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final ThemeData theme = Theme.of(context);
     return Column(
       children: [
         Container(
           child: Padding(
-              padding: EdgeInsets.fromLTRB(25.0, 20.0, 25.0, 0.0),
+              padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
               child: AppBar(
                 backgroundColor: Colors.transparent,
                 elevation: 0,
                 leading: IconButton(
-                  icon: Icon(Icons.arrow_back, color: Theme.of(context).primaryColor,),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: SvgPicture.asset('assets/images/icons/ic_next.svg', height: 25.0,),
                 ),
-//              actions: [
-//                IconButton(
-//                  icon: Icon(Icons.arrow_back),
-//                  onPressed: () => null,
-//                ),
-//              ],
-                title: Text(
-                  "Recover from Seed",
-                  style: TextStyle(color: (isDark)? FusionTheme.dark.colorScheme.onPrimary: FusionTheme.light.colorScheme.onPrimary  ),
+                title: Text( AppLocalizations.of(context).buttonCreateAccount(),
+                  style: TextStyle(color: (theme.brightness == Brightness.dark)?
+                  FusionTheme.dark.colorScheme.onPrimary: FusionTheme.light.colorScheme.onPrimary),
                 ),
               )),
         ),
@@ -217,63 +193,3 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => Size.fromHeight(height);
 }
-
-//  Widget build(BuildContext context) {
-//
-//
-//    return Scaffold(
-//      appBar: AppBar (
-//        title: Text('New Account'),
-//      ),
-//    body: Container(
-//      height: MediaQuery.of(context).size.height ,
-//      width: MediaQuery.of(context).size.width,
-//      child:
-//          Container(
-//      child :  Stack(
-//        children: <Widget> [
-//
-//          Container(
-//            child: Center(
-//              child: Image.asset('assets/images/backgrounds/bg_greeting.png'),
-//            ),
-//
-//          ),
-//          SizedBox(height: 50,),
-//          Text ('Account Name:', textAlign: TextAlign.left)  ,
-//
-//           SizedBox(height: 50,),
-//           Container(
-////             height: 800,
-////               width: 300,
-//               child: Center(
-//                 child:   TextField(
-//                   obscureText: true,
-//                   decoration: InputDecoration(
-//                     border: OutlineInputBorder(),
-//                     labelText: 'Please, name your account',
-//
-//                   ),
-//                 ),
-//
-//               ),
-//
-//           ),
-//
-//        ]
-////       Center(
-////
-////            child: Image.asset('assets/images/icons/ic_man.svg'),
-////          ),
-//
-//          ),
-//
-//
-//          ),
-//
-//
-//
-//
-//    ),
-//    );
-//  }

@@ -3,15 +3,18 @@ library passcode_screen;
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:passcode_screen/circle.dart';
-import 'package:passcode_screen/keyboard.dart';
-import 'package:passcode_screen/shake_curve.dart';
+
+import 'circle.dart';
+import 'keyboard.dart';
+import 'shake_curve.dart';
+
 
 typedef PasswordEnteredCallback = void Function(String text);
 typedef IsValidCallback = void Function();
 typedef CancelCallback = void Function();
 
 class PasscodeScreen extends StatefulWidget {
+
   final String title;
   final int passwordDigits;
   final Color titleColor;
@@ -79,13 +82,14 @@ class _PasscodeScreenState extends State<PasscodeScreen> with SingleTickerProvid
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      backgroundColor: widget.backgroundColor ?? Colors.black.withOpacity(0.8),
+      backgroundColor: widget.backgroundColor ?? Colors.black.withOpacity(0.0),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(height: 80,),
+            SizedBox(height: 140,),
             Text(
               widget.title,
               textAlign: TextAlign.center,
@@ -100,9 +104,10 @@ class _PasscodeScreenState extends State<PasscodeScreen> with SingleTickerProvid
                 children: _buildCircles(),
               ),
             ),
+            SizedBox(height: 40,),
             IntrinsicHeight(
               child: Container(
-                margin: const EdgeInsets.only(top: 70, left: 40, right: 40, bottom: 0),
+                margin: const EdgeInsets.only(top: 30, left: 40, right: 40, bottom: 00),
                 child: Keyboard(
                   onDeleteCancelTap: _onDeleteCancelButtonPressed,
                   onKeyboardTap: _onKeyboardButtonPressed,

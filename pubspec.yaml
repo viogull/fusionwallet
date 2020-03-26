@@ -52,10 +52,7 @@ dependencies:
   pin_input_text_field: ^3.0.1
   crypto: ^2.1.4
   flutter_svg: ^0.17.3+1
-<<<<<<< HEAD
 
-=======
->>>>>>> abed716601f1a6b78c958802f47add5957bcc7a4
 
 
 
@@ -88,15 +85,15 @@ flutter:
     - assets/lang/ru.json
 
 
-<<<<<<< HEAD
+
     - assets/images/backgrounds/bg_primary.png
     - assets/images/backgrounds/bg_greeting.png
-=======
+
     - assets/images/backgrounds/bg_primary.svg
     - assets/images/backgrounds/bg_greeting.svg
->>>>>>> abed716601f1a6b78c958802f47add5957bcc7a4
 
 
+    - assets/images/icons/ic_logo.svg
     - assets/images/icons/ic_accounts.svg
     - assets/images/icons/ic_backarrow.svg
     - assets/images/icons/ic_contacts.svg
@@ -113,12 +110,11 @@ flutter:
     - assets/images/icons/ic_man.svg
     - assets/images/icons/ic_next.svg
     - assets/images/icons/ic_password.svg
-<<<<<<< HEAD
+
     - assets/images/icons/ic_passwordellipse.svg
 
-=======
     - assets/images/icons/ic_pass_ellipse.svg
->>>>>>> abed716601f1a6b78c958802f47add5957bcc7a4
+
     - assets/images/icons/ic_qrcodescan.svg
     - assets/images/icons/ic_accounts.svg
     - assets/images/icons/ic_recoverpasswordicon.svg
