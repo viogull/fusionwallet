@@ -1,43 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:fusion_wallet/ui/blocs/theme_bloc.dart';
+import 'package:fusion_wallet/ui/pages/auth/biometric_features_page.dart';
+import 'package:fusion_wallet/ui/pages/auth/passphrase/passphrase_creation_page.dart';
+import 'package:fusion_wallet/ui/pages/auth/passphrase/scan_qr_page.dart';
+import 'package:fusion_wallet/ui/pages/auth/passphrase/share_qr_page.dart';
 import 'package:fusion_wallet/ui/pages/bottom_home_page.dart';
-import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
+import 'file:///C:/repos/newveer/fusion_wallet/lib/ui/pages/app_widgets.dart';
+
 import 'localizations.dart';
 import 'ui/providers/bottom_navigation_provider.dart';
+import 'ui/theme/theme_state.dart';
 
 void main() => runApp(MyApp());
 final logger = Logger();
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-
   @override
   Widget build(BuildContext context) {
+    return BlocProvider(
+        create: (_) => ThemeBloc(),
+        child: BlocBuilder<ThemeBloc, ThemeState>(builder: _buildAppWithTheme));
+  }
+
+  Widget _buildAppWithTheme(BuildContext context, ThemeState themeState) {
+    debugPrint('Building App with theme ${themeState.themeData.brightness}');
     return MaterialApp(
-        theme: FusionTheme.light,
-        home: HomePage(),
-        localizationsDelegates: [
-          const AppLocalizationsDelegate(),
-          GlobalCupertinoLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-        ],
-        supportedLocales: [
-          const Locale('en', ''),
-          const Locale('ru', ''),
-        ]);
+      theme: themeState.themeData,
+      home: HomePage(),
+      localizationsDelegates: [
+        const AppLocalizationsDelegate(),
+        GlobalCupertinoLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [const Locale('en', ''), const Locale('ru', '')],
+      locale: const Locale('ru', ''),
+      initialRoute: HomePage.navId,
+      routes: <String, WidgetBuilder>{
+        HomePage.navId: (context) => HomePage(),
+        PassphraseShareQrPage.navId: (context) => PassphraseShareQrPage(),
+        AppWidgetsPage.navId: (context) => AppWidgetsPage(),
+        BiometricAuthPage.navId: (context) => BiometricAuthPage(),
+        ScanQrPage.navId: (context) => ScanQrPage(),
+        PassphraseCreationPage.navId: (context) => PassphraseCreationPage(),
+      },
+    );
   }
 }
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
-
   static const String navId = '/home';
-
-  final String title;
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -55,12 +72,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     logger.d('HomePage[BottomTabsPage, IdentifcationPage] start building.');
-    // This method is rerun every time s etState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       body: _buildHomepageBody(this.provider),
     );

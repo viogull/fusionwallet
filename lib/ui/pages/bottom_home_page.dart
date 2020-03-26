@@ -1,10 +1,21 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
+import 'package:fusion_wallet/ui/pages/auth/passphrase/passphrase_creation_page.dart';
+import 'package:fusion_wallet/ui/pages/auth/passphrase/share_qr_page.dart';
+import 'package:fusion_wallet/ui/pages/popups/popup_page.dart';
 import 'package:fusion_wallet/ui/providers/bottom_navigation_provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
+import 'file:///C:/repos/newveer/fusion_wallet/lib/ui/pages/app_widgets.dart';
+
+import 'auth/biometric_features_page.dart';
+import 'auth/passphrase/scan_qr_page.dart';
 import 'primary/accounts_page.dart';
 import 'primary/contacts_page.dart';
 import 'primary/exchange_page.dart';
@@ -35,38 +46,88 @@ class _BottomHomePageState extends State<BottomHomePage> {
   ];
 
   @override
-  void initState() {
-    // TODO: implement initState
-  }
-
-  @override
   Widget build(BuildContext context) {
     var provider = Provider.of<BottomNavigationProvider>(context);
     final ThemeData theme = Theme.of(context);
     return Scaffold(
+      drawerScrimColor: theme.primaryColor,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: theme.primaryColor,
-        centerTitle: true,
-        title: Text(AppLocalizations.of(context).inputAccountNameHintText()),
-        actions: <Widget>[],
+        centerTitle: false,
+        title: Text(
+          AppLocalizations.of(context).inputAccountNameHintText(),
+          style: GoogleFonts.notoSans(),
+        ),
+        toolbarOpacity: 0.95,
       ),
-      drawer: Drawer(
-        child: _buildDrawerBody(),
+      drawerDragStartBehavior: DragStartBehavior.down,
+      endDrawer: Drawer(
+        elevation: 32,
+        child: _buildDrawerBody(context),
       ),
-      body: tabs[provider.currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: theme.primaryColor,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white.withOpacity(0.6),
-        elevation: 2,
-        type: BottomNavigationBarType.fixed,
-        items: _bottomBarItems(context, theme),
+      body: Stack(
+        children: <Widget>[
+          tabs[provider.currentIndex],
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: ClipRRect(
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(5),
+                topLeft: Radius.circular(5),
+              ),
+              child: BottomNavigationBar(
+                currentIndex: provider.currentIndex,
+                onTap: (index) {
+                  provider.set(index);
+                },
+                backgroundColor: theme.primaryColor,
+                selectedItemColor: Colors.white,
+                unselectedItemColor: Colors.white.withOpacity(0.6),
+                iconSize: 32,
+                elevation: 8,
+                type: BottomNavigationBarType.fixed,
+                items: _bottomBarItems(context, theme),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
 
-  Widget _buildDrawerBody() => ListView(
-        children: <Widget>[],
+  Widget _buildDrawerBody(BuildContext context) => ListView(
+        children: <Widget>[
+          _buildDrawerItem(
+              context,
+              AppLocalizations.of(context).toolbarWidgetsTitle(),
+              AppWidgetsPage.navId),
+          _buildDrawerItem(
+              context, 'Biometric Feature', BiometricAuthPage.navId),
+          _buildDrawerItem(
+              context, 'Passphrase Creation', PassphraseCreationPage.navId),
+          _buildDrawerItem(
+              context, 'Share Passphrase QR', PassphraseShareQrPage.navId),
+          _buildDrawerItem(context, 'Scan QR', ScanQrPage.navId),
+          Divider(
+            height: 12,
+          ),
+          ListTile(
+            title: Text('Show Passphrase Verified Popup'),
+            onTap: () {
+              Navigator.of(context).push(new MaterialPageRoute(
+                  builder: (_) {
+                    return PopupDialogWidget(
+                        AppLocalizations.of(context).popupPassVerifiedTitle(),
+                        "assets/images/icons/ic_taskdone.svg",
+                        AppLocalizations.of(context).popupPassVerifiedBody());
+                  },
+                  fullscreenDialog: true));
+            },
+          )
+        ],
       );
 
   List<BottomNavigationBarItem> _bottomBarItems(
@@ -74,20 +135,49 @@ class _BottomHomePageState extends State<BottomHomePage> {
       [
         BottomNavigationBarItem(
             title: Text(AppLocalizations.of(context).navigationLabelAccounts()),
-            icon: Icon(Icons.account_box)),
+            icon:
+                _buildBottomNavItemIcon("assets/images/icons/ic_accounts.svg")),
         BottomNavigationBarItem(
             title: Text(AppLocalizations.of(context).navigationLabelExchange()),
-            icon: Icon(Icons.account_balance)),
-        BottomNavigationBarItem(
-            title: Text(AppLocalizations.of(context).navigationItemHistory()),
-            icon: Icon(Icons.account_box)),
+            icon:
+                _buildBottomNavItemIcon("assets/images/icons/ic_exchange.svg")),
         BottomNavigationBarItem(
             title: Text(AppLocalizations.of(context).navigationItemContacts()),
-            icon: Icon(Icons.contacts)),
+            icon:
+                _buildBottomNavItemIcon("assets/images/icons/ic_contacts.svg")),
+        BottomNavigationBarItem(
+            title: Text(AppLocalizations.of(context).navigationItemHistory()),
+            icon:
+                _buildBottomNavItemIcon("assets/images/icons/ic_history.svg")),
         BottomNavigationBarItem(
             title: Text(AppLocalizations.of(context).navigationItemSettings()),
-            icon: Icon(Icons.settings)),
+            icon:
+                _buildBottomNavItemIcon("assets/images/icons/ic_settings.svg")),
       ];
 
-  static buildBody() {}
+  Widget _buildDrawerItem(
+      BuildContext context, String text, String navigationId) {
+    return ListTile(
+      title: Text(text),
+      onTap: () {
+        Navigator.pushNamed(context, navigationId);
+      },
+    );
+  }
+
+  Widget _buildBottomNavItemIcon(String asset) => Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: Center(
+          child: SizedBox(
+            width: 22,
+            height: 22,
+            child: SvgPicture.asset(asset,
+                semanticsLabel: asset,
+                color: Theme.of(context).colorScheme.onPrimary,
+                placeholderBuilder: (BuildContext context) => Container(
+                    padding: const EdgeInsets.all(30.0),
+                    child: PlatformCircularProgressIndicator())),
+          ),
+        ),
+      );
 }

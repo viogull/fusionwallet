@@ -1,16 +1,9 @@
-
-
-
-
 import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
 class FusionTheme {
-
-
-
   static int tintValue(int value, double factor) =>
       max(0, min((value + ((255 - value) * factor)).round(), 255));
 
@@ -29,9 +22,7 @@ class FusionTheme {
       shadeValue(color.blue, factor),
       1);
 
-
-
-  static  MaterialColor generateMaterialColor(Color color) {
+  static MaterialColor generateMaterialColor(Color color) {
     return MaterialColor(color.value, {
       50: tintColor(color, 0.9),
       100: tintColor(color, 0.8),
@@ -52,79 +43,60 @@ class FusionTheme {
   static get lightTeal => hexToColor("#95F2D9");
   static get lightGreen => hexToColor("#1CFEBA");
 
-
   static get purpleHeart => hexToColor("#5E2CD6");
   static get midnightExpress => hexToColor("#171738");
   static get christalle => hexToColor("#2E1760");
   static get wildBlue => hexToColor("#7180B9");
   static get cosmicLatte => hexToColor("#DFF3E4");
 
-
   static get lightColorScheme => ColorScheme.light(
       primary: hexToColor("#6200ee"),
       primaryVariant: hexToColor("#3700b3"),
-      secondary:hexToColor("#03dac6"),
+      secondary: hexToColor("#03dac6"),
       secondaryVariant: hexToColor("#018786"),
-      onPrimary:hexToColor("#ffffff"),
+      onPrimary: hexToColor("#ffffff"),
       onSecondary: hexToColor("#000000"),
       error: hexToColor("#b00020"),
       onError: hexToColor("#FFFFFF"),
       background: hexToColor("#ffffff"),
       onBackground: hexToColor("#6200ee"),
       surface: hexToColor("#ffffff"),
-      onSurface: hexToColor("#000000")
-  );
+      onSurface: hexToColor("#000000"));
 
   static get darkColorScheme => ColorScheme.dark(
       primary: hexToColor("#bb86fc"),
       primaryVariant: hexToColor("#3700B3"),
-      secondary:hexToColor("#03dac6"),
+      secondary: hexToColor("#03dac6"),
       secondaryVariant: hexToColor("#03dac6"),
-      onPrimary:hexToColor("#000000"),
+      onPrimary: hexToColor("#000000"),
       onSecondary: hexToColor("#000000"),
       error: hexToColor("#cf6679"),
-      onError:hexToColor("#6200ee"),
+      onError: hexToColor("#6200ee"),
       background: hexToColor("#121212"),
       onBackground: hexToColor("#ffffff"),
       surface: hexToColor("#121212"),
-      onSurface: hexToColor("#ffffff")
-  );
-
-
+      onSurface: hexToColor("#ffffff"));
 
   static final ThemeData light = ThemeData(
       primarySwatch: generateMaterialColor(FusionTheme.hexToColor("#6200ee")),
       brightness: Brightness.light,
-      colorScheme: lightColorScheme
-  );
-
+      colorScheme: lightColorScheme);
 
   static final ThemeData dark = ThemeData(
       primarySwatch: generateMaterialColor(FusionTheme.hexToColor("#bb86fc")),
       brightness: Brightness.dark,
-      colorScheme: darkColorScheme
-  );
+      colorScheme: darkColorScheme);
 
-
-  static get borderRadius =>  BorderRadius.all(Radius.circular(5));
-
-
+  static get borderRadius => BorderRadius.all(Radius.circular(5));
 
   static Color hexToColor(String code) {
     return new Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
   }
-
-
 }
 
-
-enum FusionThemes {
-  light, dark
-}
+enum FusionThemes { light, dark }
 
 class ThemesNotifier with ChangeNotifier {
-
-
   FusionThemes _currentTheme = FusionThemes.light;
   ThemeData _currentThemeData = FusionTheme.light;
 
@@ -132,20 +104,17 @@ class ThemesNotifier with ChangeNotifier {
 
   get currentThemeData => _currentThemeData;
 
-  void switchTheme() =>
-      (_currentTheme == FusionThemes.light)
-          ? currentTheme(FusionThemes.dark)
-          : currentTheme(FusionThemes.light);
+  void switchTheme() => (_currentTheme == FusionThemes.light)
+      ? currentTheme(FusionThemes.dark)
+      : currentTheme(FusionThemes.light);
 
   set currentTheme(FusionThemes theme) {
     if (theme != null) {
       _currentTheme = theme;
-      _currentThemeData =
-      _currentTheme == FusionThemes.light ? FusionTheme.light : FusionTheme
-          .dark;
+      _currentThemeData = _currentTheme == FusionThemes.light
+          ? FusionTheme.light
+          : FusionTheme.dark;
       notifyListeners();
     }
   }
-
 }
-

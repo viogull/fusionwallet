@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-03-16T20:18:19.891920",
+  "@@last_modified": "2020-03-26T01:17:29.295336",
   "appName": "Fusion",
   "@appName": {
     "type": "text",
@@ -637,6 +637,11 @@
   },
   "labelConvertTransanctionFee": "Transanction Fee:",
   "@labelConvertTransanctionFee": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "toolbarWidgetsTitle": "Компоненты",
+  "@toolbarWidgetsTitle": {
     "type": "text",
     "placeholders": {}
   }
