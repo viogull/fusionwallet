@@ -30,34 +30,42 @@ class RecoverAccountPage extends StatefulWidget {
 
 class _RecoverAccountSate extends State<RecoverAccountPage> {
 
-  Future scan() async {
+  Future<String> scan() async {
     try {
       String barcode = await BarcodeScanner.scan();
       debugPrint(barcode);
-      setState(() => this.barcode = barcode);
+      return barcode;
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.CameraAccessDenied) {
         setState(() {
           this.barcode = 'The user did not grant the camera permission!';
         });
       } else {
-        setState(() => this.barcode = 'Unknown error: $e');
+       return null;
       }
     } on FormatException {
       setState(() => this.barcode =
       'null (User returned using the "back"-button before scanning anything. Result)');
     } catch (e) {
-      setState(() => this.barcode = 'Unknown error: $e');
+     return null;
     }
   }
 
-  String barcode = "";
+//  final TextEditingController _textFieldController = TextEditingController();
+//  @override
+//  void initState() {
+//    _textFieldController.text = barcode;
+//    super.initState();
+//  }
+
+  String barcode = '';
 
 
   bool _rememberMeFlag = false;
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+     debugPrint('rebild $barcode');
 
     final background = SvgPicture.asset(
       ('assets/images/backgrounds/bg_primary.svg'),
@@ -89,7 +97,8 @@ class _RecoverAccountSate extends State<RecoverAccountPage> {
       height: 30.0,
       width: MediaQuery.of(context).size.width,
       child: Center(
-        child: TextField(
+        child: TextFormField(
+          initialValue: '$barcode',
           style: TextStyle(
 
             color: (theme.colorScheme.onSurface),
@@ -106,22 +115,24 @@ class _RecoverAccountSate extends State<RecoverAccountPage> {
     );
 
     final scanQR = Container(
-      height: 200.0,
+      height: 300.0,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           border: Border.all(color: theme.primaryColor)),
       child: SizedBox.expand(
-        child: TextFormField(
-          maxLines: 140,
+        child:  TextFormField(
 
-          initialValue: barcode,
+          maxLines: 14,
+         initialValue: barcode,
+          //initialValue: '(barcode == null ) ? "hvhvhhhhvvhvhh" : barcode',
           style: TextStyle(
             color: (theme.colorScheme.onSurface),
           ),
           decoration: InputDecoration(
               border: OutlineInputBorder(),
-              hintText: AppLocalizations.of(context)
+              hintText:
+              AppLocalizations.of(context)
                   .inputEnterScanPasshpraseHintText(),
              // helperText: barcode,
 
@@ -135,8 +146,12 @@ class _RecoverAccountSate extends State<RecoverAccountPage> {
                   height: 35.0,
 
                 ),
-                onPressed: () {
-                  scan();
+                onPressed: () async {
+                   var barcode = await scan();
+                   setState(() {
+                     this.barcode = barcode;
+                   });
+                   debugPrint(barcode);
 
 //                  Navigator.pushNamed(context, ScanQrPage.navId);
                 },

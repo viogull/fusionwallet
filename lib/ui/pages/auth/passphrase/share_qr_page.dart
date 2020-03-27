@@ -60,6 +60,7 @@ class PassphraseShareQrPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: RaisedButton.icon(
+
                           shape: RoundedRectangleBorder(
                               borderRadius: FusionTheme.borderRadius),
                           label:
