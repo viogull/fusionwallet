@@ -74,8 +74,8 @@ class AppLocalizations {
       Intl.message('Question $current of $total',
           args: [current, total], name: 'labelQuestionIndicatorTitle');
 
-  labelWordIndicatorSubtitle(String position) =>
-      Intl.message('Select the $position word of your passphrase',
+  labelWordIndicatorSubtitle(int position) =>
+      Intl.message('Select the ${position}th word of your passphrase',
           args: [position], name: 'labelWordIndicatorSubtitle');
 
   toastTryAgain() => Intl.message('Please, try again', name: 'toastTryAgain');
