@@ -1,32 +1,20 @@
 import 'dart:math';
 import 'dart:ui';
 
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:provider/provider.dart';
-
-
 import 'package:flutter/material.dart';
-
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class FusionTheme {
-
-
   static final buttonAndroidTheme = MaterialRaisedButtonData(
     elevation: 0,
-
-
     shape: new RoundedRectangleBorder(
-        borderRadius: new BorderRadius.circular(10.0),
-       // side: BorderSide(color: Colors.white),
-      ),
-
+      borderRadius: new BorderRadius.circular(5.0),
+      // side: BorderSide(color: Colors.white),
+    ),
   );
-  static final buttonIOSTheme = CupertinoButtonData(
+  static final buttonIOSTheme = CupertinoButtonData();
 
-
-  );
-
-
+  static const double radius = 5.0;
 
   static int tintValue(int value, double factor) =>
       max(0, min((value + ((255 - value) * factor)).round(), 255));
@@ -103,13 +91,10 @@ class FusionTheme {
 
   static final ThemeData light = ThemeData(
       primarySwatch: generateMaterialColor(FusionTheme.hexToColor("#6200ee")),
-      brightness: Brightness.light,
       colorScheme: lightColorScheme);
 
-  static final ThemeData dark = ThemeData(
-      primarySwatch: generateMaterialColor(FusionTheme.hexToColor("#bb86fc")),
-      brightness: Brightness.dark,
-      colorScheme: darkColorScheme);
+  static final ThemeData dark =
+      ThemeData.dark().copyWith(colorScheme: darkColorScheme);
 
   static get borderRadius => BorderRadius.all(Radius.circular(5));
 

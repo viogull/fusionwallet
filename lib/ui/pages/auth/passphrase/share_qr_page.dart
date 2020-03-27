@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
+import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
+import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:share/share.dart';
 
@@ -17,21 +20,34 @@ class PassphraseShareQrPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final data = ModalRoute.of(context).settings.arguments as List;
 
-    return PlatformScaffold(
-      appBar: PlatformAppBar(
-        android: (_) => MaterialAppBarData(
-            centerTitle: true,
-            elevation: 0,
-            iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
-            backgroundColor: Colors.transparent),
-        backgroundColor: Colors.transparent,
-        title: Text(
-          AppLocalizations.of(context).toolbarSharePasshpraseQr(),
-          style: TextStyle(color: Colors.black),
+    return SafeArea(
+        child: Stack(children: <Widget>[
+      Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: SvgPicture.asset(
+          "assets/images/backgrounds/bg_primary.svg",
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          fit: BoxFit.fill,
         ),
       ),
-      body: Center(
-        child: Column(
+      PlatformScaffold(
+        backgroundColor: Colors.transparent,
+        appBar: PlatformAppBar(
+          android: (_) => MaterialAppBarData(
+              centerTitle: true,
+              elevation: 0,
+              iconTheme:
+                  IconThemeData(color: Theme.of(context).colorScheme.primary),
+              backgroundColor: Colors.transparent),
+          title: Text(
+            AppLocalizations.of(context).toolbarSharePasshpraseQr(),
+            style: TextStyle(
+                color: Theme.of(context).colorScheme.onSurface, fontSize: 16),
+          ),
+        ),
+        body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Flexible(
@@ -43,19 +59,30 @@ class PassphraseShareQrPage extends StatelessWidget {
                     QrImage(
                       version: QrVersions.auto,
                       data: data.toString(),
+                      backgroundColor: Theme.of(context).colorScheme.onSurface,
                       size: MediaQuery.of(context).size.width * 0.5,
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: PlatformButton(
-                        child: Text(AppLocalizations.of(context).buttonShare()),
-                        onPressed: () {
-                          Share.share(data.toString(),
-                              subject: AppLocalizations.of(context)
-                                  .toolbarSharePasshpraseQr()
-                                  .toString());
-                        },
-                      ),
+                      padding: const EdgeInsets.all(8.0),
+                      child: RaisedButton.icon(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: FusionTheme.borderRadius),
+                          label:
+                              Text(AppLocalizations.of(context).buttonShare()),
+                          onPressed: () {
+                            Share.share(data.toString(),
+                                subject: AppLocalizations.of(context)
+                                    .toolbarSharePasshpraseQr()
+                                    .toString());
+                          },
+                          icon: Container(
+                            child: SvgPicture.asset(
+                              'assets/images/icons/ic_shareicon.svg',
+                              color: Colors.white,
+                            ),
+                            width: 18,
+                            height: 18,
+                          )),
                     ),
                   ],
                 ),
@@ -65,16 +92,22 @@ class PassphraseShareQrPage extends StatelessWidget {
               flex: 1,
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-                child: PlatformButton(
-                  child: Text(AppLocalizations.of(context).buttonClose()),
-                  onPressed: () {},
+                    const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                child: Container(
+                  height: 48,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: FusionButton(
+                    AppLocalizations.of(context).buttonClose(),
+                    () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
                 ),
               ),
             )
           ],
         ),
       ),
-    );
+    ]));
   }
 }

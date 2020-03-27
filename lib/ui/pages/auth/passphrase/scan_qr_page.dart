@@ -2,7 +2,6 @@ import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fusion_wallet/localizations.dart';
 
 class ScanQrPage extends StatefulWidget {
   static const navId = "/qr/scan";
@@ -38,16 +37,14 @@ class _ScanQrPageState extends State<ScanQrPage> {
   String barcode = "";
 
   @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    scan();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Center(
-        child: RaisedButton(
-          child: Text(AppLocalizations.of(context).labelScanQr()),
-          onPressed: () {
-            scan();
-          },
-        ),
-      ),
-    );
+    return Container();
   }
 }

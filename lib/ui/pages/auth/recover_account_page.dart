@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
-import 'package:fusion_wallet/ui/pages/auth/terms_conditions_page.dart';
+import 'package:fusion_wallet/ui/pages/auth/passphrase/scan_qr_page.dart';
+import 'package:fusion_wallet/ui/pages/popups/popup_page.dart';
 import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
 
 class RecoverFromSeedPage extends StatelessWidget {
@@ -107,7 +109,7 @@ class _RecaverAccountPage extends State<RecoverAccountPage> {
                   height: 35.0,
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, TermsConditionsPage.navId);
+                  Navigator.pushNamed(context, ScanQrPage.navId);
                 },
               )),
         ),
@@ -116,7 +118,17 @@ class _RecaverAccountPage extends State<RecoverAccountPage> {
 
     final button = Container(
       height: 50,
-      child: FusionButton(AppLocalizations.of(context).buttonVerify(), () {}),
+      child: FusionButton(AppLocalizations.of(context).buttonVerify(), () {
+        Navigator.of(context).push(new MaterialPageRoute(
+            builder: (_) {
+              return PopupDialogWidget(
+                  AppLocalizations.of(context).popupPassVerifiedTitle(),
+                  "assets/images/icons/ic_taskdone.svg",
+                  AppLocalizations.of(context)
+                      .popupAccVerificationWelcomeText());
+            },
+            fullscreenDialog: true));
+      }),
     );
 
     return Scaffold(
@@ -169,34 +181,35 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    return Column(
-      children: [
-        Container(
-          child: Padding(
-              padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
-              child: AppBar(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                leading: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: SvgPicture.asset('assets/images/icons/ic_next.svg',
-                      height: 25.0),
-                  iconSize: 100.0,
+    return Column(children: [
+      Container(
+        child: PlatformAppBar(
+          android: (_) => MaterialAppBarData(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              centerTitle: true,
+              leading: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: LimitedBox(
+                  maxHeight: 24,
+                  maxWidth: 24,
+                  child: SvgPicture.asset(
+                    'assets/images/icons/ic_next.svg',
+                  ),
                 ),
-                title: Text(
-                  AppLocalizations.of(context).toolbarRecoverFromSeedTitle(),
+              ),
+              title: Text(
+                AppLocalizations.of(context).toolbarRecoverFromSeedTitle(),
 //                "Recover from Seed",
-                  style: TextStyle(
-                      color: (theme.brightness == Brightness.dark)
-                          ? FusionTheme.dark.colorScheme.onPrimary
-                          : FusionTheme.light.colorScheme.onPrimary),
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               )),
         ),
-      ],
-    );
+      ),
+    ]);
   }
 
   @override

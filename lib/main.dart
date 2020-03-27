@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fusion_wallet/ui/blocs/theme_bloc.dart';
@@ -19,6 +20,7 @@ import 'ui/pages/auth/password_creation_page.dart';
 import 'ui/pages/auth/recover_account_page.dart';
 import 'ui/pages/auth/terms_conditions_page.dart';
 import 'ui/providers/bottom_navigation_provider.dart';
+import 'ui/theme/fusion_theme.dart';
 import 'ui/theme/theme_state.dart';
 
 void main() => runApp(MyApp());
@@ -35,12 +37,13 @@ class MyApp extends StatelessWidget {
   Widget _buildAppWithTheme(BuildContext context, ThemeState themeState) {
     debugPrint('Building App with theme ${themeState.themeData.brightness}');
     return MaterialApp(
-      theme: themeState.themeData.copyWith(
+      theme: FusionTheme.dark.copyWith(
           buttonTheme: ButtonThemeData(
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            side: BorderSide(color: Colors.black)),
+            borderRadius: FusionTheme.borderRadius,
+            side: BorderSide(color: FusionTheme.dark.colorScheme.background)),
       )),
+      darkTheme: FusionTheme.dark,
       home: HomePage(),
       localizationsDelegates: [
         const AppLocalizationsDelegate(),
@@ -49,7 +52,6 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: [const Locale('en', ''), const Locale('ru', '')],
-      locale: const Locale('ru', ''),
       initialRoute: HomePage.navId,
       routes: <String, WidgetBuilder>{
         HomePage.navId: (context) => HomePage(),
@@ -59,14 +61,10 @@ class MyApp extends StatelessWidget {
         ScanQrPage.navId: (context) => ScanQrPage(),
         PassphraseCreationPage.navId: (context) => PassphraseCreationPage(),
         IntroPage.navId: (BuildContext context) => IntroPage(),
-        AccountCreationNamePage.navId: (BuildContext context) =>
-            AccountCreationNamePage(),
-        RecoverAccountPage.navId: (BuildContext context) =>
-            RecoverAccountPage(),
-        TermsConditionsPage.navId: (BuildContext context) =>
-            TermsConditionsPage(),
-        PasswordCreationPage.navId: (BuildContext context) =>
-            PasswordCreationPage(),
+        AccountCreationNamePage.navId: (context) => AccountCreationNamePage(),
+        RecoverAccountPage.navId: (context) => RecoverAccountPage(),
+        TermsConditionsPage.navId: (context) => TermsConditionsPage(),
+        PasswordCreationPage.navId: (context) => PasswordCreationPage(),
       },
     );
   }
@@ -82,6 +80,14 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   static final GlobalKey<ScaffoldState> _scaffoldKey =
       GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+  }
 
   var provider = ChangeNotifierProvider<BottomNavigationProvider>(
     child: BottomHomePage(),

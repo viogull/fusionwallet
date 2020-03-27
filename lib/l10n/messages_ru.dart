@@ -148,8 +148,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "toolbarNewAccountTitle" : MessageLookupByLibrary.simpleMessage("New Account"),
     "toolbarRateTitle" : MessageLookupByLibrary.simpleMessage("Rate"),
     "toolbarRecoverFromSeedTitle" : MessageLookupByLibrary.simpleMessage("Recover from seed"),
-    "toolbarScanQrTitle" : MessageLookupByLibrary.simpleMessage("Scan QR"),
+    "toolbarScanQrTitle" : MessageLookupByLibrary.simpleMessage("Passphrase QR"),
     "toolbarSendTitle" : MessageLookupByLibrary.simpleMessage("Send funds"),
+    "toolbarSharePasshpraseQr" : MessageLookupByLibrary.simpleMessage("View Passphrase"),
     "toolbarTermsConditionsTitle" : MessageLookupByLibrary.simpleMessage("Terms and Conditions"),
     "toolbarViewPasshraseTitle" : MessageLookupByLibrary.simpleMessage("View Passphrase"),
     "toolbarWidgetsTitle" : MessageLookupByLibrary.simpleMessage("Компоненты")

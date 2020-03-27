@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-03-26T01:17:29.295336",
+  "@@last_modified": "2020-03-27T04:42:56.664128",
   "appName": "Fusion",
   "@appName": {
     "type": "text",
@@ -155,7 +155,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "toolbarScanQrTitle": "Scan QR",
+  "toolbarScanQrTitle": "Passphrase QR",
   "@toolbarScanQrTitle": {
     "type": "text",
     "placeholders": {}
@@ -642,6 +642,11 @@
   },
   "toolbarWidgetsTitle": "Компоненты",
   "@toolbarWidgetsTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "toolbarSharePasshpraseQr": "View Passphrase",
+  "@toolbarSharePasshpraseQr": {
     "type": "text",
     "placeholders": {}
   }

@@ -7,7 +7,6 @@ import 'package:fusion_wallet/ui/components/custom/passcode/circle.dart';
 import 'package:fusion_wallet/ui/components/custom/passcode/keyboard.dart';
 import 'package:fusion_wallet/ui/components/custom/passcode/passcode_screen.dart';
 import 'package:fusion_wallet/ui/pages/auth/intro_page.dart';
-import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
 
 class PasswordCreationPage extends StatefulWidget {
   static const String navId = '/PasswordCreationPage';
@@ -48,7 +47,7 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
           child: Stack(
             children: <Widget>[
               MyCustomAppBar(
-                height: 80,
+                height: 60,
               ),
               SizedBox(
                 height: 30,
@@ -103,34 +102,34 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    return Column(
-      children: [
-        Container(
+    return Column(children: [
+      Container(
 //          padding: EdgeInsets.only(left: 24.0, right: 24.0,),
-          child: Padding(
-              padding: EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 0.0),
-              child: AppBar(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                leading: IconButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, IntroPage.navId);
-                  },
-                  icon: SvgPicture.asset('assets/images/icons/ic_next.svg',
-                      height: 25.0),
-                ),
-                title: Text(
-                  //"Choose Password"
-                  AppLocalizations.of(context).toolbarChoosePassTitle(),
-                  style: TextStyle(
-                      color: (theme.brightness == Brightness.dark)
-                          ? FusionTheme.dark.colorScheme.onPrimary
-                          : FusionTheme.light.colorScheme.onPrimary),
+        child: Padding(
+          padding: EdgeInsets.all(1),
+          child: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              centerTitle: true,
+              leading: IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, IntroPage.navId);
+                },
+                icon: LimitedBox(
+                    maxWidth: 24,
+                    maxHeight: 24,
+                    child: SvgPicture.asset('assets/images/icons/ic_next.svg')),
+              ),
+              title: Text(
+                //"Choose Password"
+                AppLocalizations.of(context).toolbarChoosePassTitle(),
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               )),
         ),
-      ],
-    );
+      )
+    ]);
 
     // Navigator.pushNamed(context , PasswordCreationPage.nav_id);
   }

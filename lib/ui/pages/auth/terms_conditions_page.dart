@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
-import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
 
 class TermsConditionsPage extends StatefulWidget {
   static const String navId = '/TermsConditions';
@@ -23,19 +22,19 @@ class _TermsConditionsPageState extends State<TermsConditionsPage> {
       width: MediaQuery.of(context).size.width,
     );
 
-    final buttonIcon = Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(width: 1.2, color: Colors.white),
-        color: theme.primaryColor,
+    final buttonIcon = Align(
+      alignment: Alignment.bottomCenter,
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.8,
+        height: 50,
+        child: FusionButton(AppLocalizations.of(context).buttonShare(), () {}),
       ),
-      height: 70,
-      width: 90,
-      child: FusionButton(AppLocalizations.of(context).buttonShare(), () {}),
     );
 
     return Scaffold(
       body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         child: Stack(
           children: <Widget>[
             background,
@@ -49,9 +48,12 @@ class _TermsConditionsPageState extends State<TermsConditionsPage> {
                   MyCustomAppBar(
                     height: 80,
                   ),
-                  buttonIcon,
                 ],
               ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 24),
+              child: buttonIcon,
             ),
           ],
         ),
@@ -73,34 +75,29 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    return Column(
-      children: [
-        Container(
-          child: Padding(
-              padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
-              child: AppBar(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                leading: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: SvgPicture.asset(
-                    'assets/images/icons/ic_next.svg',
-                    height: 25.0,
-                  ),
-                ),
-                title: Text(
-                  AppLocalizations.of(context).toolbarTermsConditionsTitle(),
-                  style: TextStyle(
-                      color: (theme.brightness == Brightness.dark)
-                          ? FusionTheme.dark.colorScheme.onPrimary
-                          : FusionTheme.light.colorScheme.onPrimary),
-                ),
-              )),
+    return Column(children: [
+      Container(
+        child: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: SvgPicture.asset(
+              'assets/images/icons/ic_next.svg',
+              height: 24.0,
+            ),
+          ),
+          title: Text(
+            AppLocalizations.of(context).toolbarTermsConditionsTitle(),
+            style: TextStyle(
+              color: theme.colorScheme.onSurface,
+            ),
+          ),
         ),
-      ],
-    );
+      )
+    ]);
   }
 
   @override

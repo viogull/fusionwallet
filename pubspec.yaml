@@ -93,7 +93,7 @@ flutter:
     - assets/images/backgrounds/bg_primary.svg
     - assets/images/backgrounds/bg_greeting.svg
 
-
+    - assets/images/icons/ic_qr.svg
     - assets/images/icons/ic_logo.svg
     - assets/images/icons/ic_accounts.svg
     - assets/images/icons/ic_backarrow.svg

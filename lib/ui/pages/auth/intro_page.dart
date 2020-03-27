@@ -1,11 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
-import 'package:fusion_wallet/ui/pages/auth/password_creation_page.dart';
 import 'package:fusion_wallet/ui/pages/auth/recover_account_page.dart';
 import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
+
+import 'password_creation_page.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -33,54 +35,18 @@ class IntroPage extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
     );
 
-    final logo = SvgPicture.asset(
-      ('assets/images/icons/ic_logo.svg'),
-      fit: BoxFit.fill,
-      height: 100.0,
-      //width: MediaQuery.of(context).size.width,
-    );
-
-    final someText1 = Container(
+    final someText1 = Flexible(
 //      alignment: Alignment.topCenter,
-      child: Text(
-        "Some greeting text",
-        style: TextStyle(
-            color: (theme.brightness == Brightness.dark)
-                ? FusionTheme.dark.colorScheme.onPrimary
-                : FusionTheme.light.colorScheme.onPrimary),
-      ),
-    );
-
-    final someText2 = Container(
-//      alignment: Alignment.topCenter,
-      child: Text(
-        "Some greeting text",
-        style: TextStyle(
-            color: (theme.brightness == Brightness.dark)
-                ? FusionTheme.dark.colorScheme.onPrimary
-                : FusionTheme.light.colorScheme.onPrimary),
-      ),
-    );
-
-    final buttonCreateAccount = Container(
-      height: 50,
-      width: MediaQuery.of(context).size.width,
-      child: FusionButton(
-        AppLocalizations.of(context).buttonCreateAccount(),
-        () {
-          Navigator.pushNamed(context, PasswordCreationPage.navId);
-        },
-      ),
-    );
-
-    final labelAlreadyHaveAccount = Container(
-//      alignment: Alignment.topCenter,
-      child: Text(
-        AppLocalizations.of(context).labelAlreadyHaveAccount(),
-        style: TextStyle(
-            color: (theme.brightness == Brightness.dark)
-                ? FusionTheme.dark.colorScheme.onPrimary
-                : FusionTheme.light.colorScheme.onPrimary),
+      flex: 1,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          "Some greeting text",
+          style: TextStyle(
+              color: (theme.brightness == Brightness.dark)
+                  ? FusionTheme.dark.colorScheme.onPrimary
+                  : FusionTheme.light.colorScheme.onPrimary),
+        ),
       ),
     );
 
@@ -111,25 +77,93 @@ class IntroPage extends StatelessWidget {
                 right: 24.0,
               ),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  SizedBox(height: MediaQuery.of(context).size.height / 6.5),
                   Flexible(
-                    child: logo,
-                    flex: 1,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Flexible(
+                          flex: 4,
+                          child: SvgPicture.asset(
+                            ('assets/images/icons/ic_logo.svg'),
+                            fit: BoxFit.fill,
+                            //width: MediaQuery.of(context).size.width,
+                          ),
+                        ),
+                        Flexible(
+                          flex: 1,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "Some greeting text",
+                              style: TextStyle(
+                                  color: (theme.brightness == Brightness.dark)
+                                      ? FusionTheme.dark.colorScheme.onPrimary
+                                      : FusionTheme
+                                          .light.colorScheme.onPrimary),
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          flex: 1,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: someText1,
+                          ),
+                        ),
+                      ],
+                    ),
+                    flex: 6,
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height / 18.5),
-                  someText2,
-                  SizedBox(height: MediaQuery.of(context).size.height / 20.5),
                   Flexible(
-                    flex: 2,
-                    child: someText1,
-                  ),
-                  SizedBox(height: 250.0),
-                  buttonCreateAccount,
-                  SizedBox(height: 30.0),
-                  labelAlreadyHaveAccount,
-                  SizedBox(height: 30.0),
-                  Flexible(flex: 1, child: buttonRecoverFromPassphrase),
+                    flex: 6,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Flexible(
+                          flex: 4,
+                          child: Container(),
+                        ),
+                        Flexible(
+                          flex: 2,
+                          child: Container(
+                            height: 50,
+                            width: MediaQuery.of(context).size.width,
+                            child: FusionButton(
+                              AppLocalizations.of(context)
+                                  .buttonCreateAccount(),
+                              () {
+                                Navigator.pushNamed(
+                                    context, PasswordCreationPage.navId);
+                              },
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          flex: 1,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              AppLocalizations.of(context)
+                                  .labelAlreadyHaveAccount(),
+                              style: TextStyle(
+                                  color: (theme.brightness == Brightness.dark)
+                                      ? FusionTheme.dark.colorScheme.onSurface
+                                      : FusionTheme
+                                          .light.colorScheme.onSurface),
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                            flex: 2,
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 24),
+                              child: buttonRecoverFromPassphrase,
+                            )),
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),

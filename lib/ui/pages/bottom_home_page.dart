@@ -12,8 +12,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
-import 'file:///C:/repos/newveer/fusion_wallet/lib/ui/pages/app_widgets.dart';
-
 import 'auth/account_creation_page.dart';
 import 'auth/biometric_features_page.dart';
 import 'auth/intro_page.dart';
@@ -54,48 +52,64 @@ class _BottomHomePageState extends State<BottomHomePage> {
   Widget build(BuildContext context) {
     var provider = Provider.of<BottomNavigationProvider>(context);
     final ThemeData theme = Theme.of(context);
-    return Scaffold(
-      drawerScrimColor: theme.primaryColor,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: theme.primaryColor,
-        centerTitle: false,
-        title: Text(
-          AppLocalizations.of(context).inputAccountNameHintText(),
-          style: GoogleFonts.notoSans(),
-        ),
-        toolbarOpacity: 0.95,
-      ),
-      drawerDragStartBehavior: DragStartBehavior.down,
-      endDrawer: Drawer(
-        elevation: 32,
-        child: _buildDrawerBody(context),
-      ),
-      body: Stack(
+    return SafeArea(
+      child: Stack(
         children: <Widget>[
-          tabs[provider.currentIndex],
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: ClipRRect(
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(5),
-                topLeft: Radius.circular(5),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: SvgPicture.asset(
+              "assets/images/backgrounds/bg_primary.svg",
+              fit: BoxFit.fill,
+            ),
+          ),
+          Scaffold(
+            backgroundColor: Colors.transparent,
+            drawerScrimColor: theme.primaryColor,
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              backgroundColor: theme.primaryColor,
+              centerTitle: false,
+              title: Text(
+                AppLocalizations.of(context).inputAccountNameHintText(),
+                style: GoogleFonts.notoSans(),
               ),
-              child: BottomNavigationBar(
-                currentIndex: provider.currentIndex,
-                onTap: (index) {
-                  provider.set(index);
-                },
-                backgroundColor: theme.primaryColor,
-                selectedItemColor: Colors.white,
-                unselectedItemColor: Colors.white.withOpacity(0.6),
-                iconSize: 32,
-                elevation: 8,
-                type: BottomNavigationBarType.fixed,
-                items: _bottomBarItems(context, theme),
-              ),
+              toolbarOpacity: 0.95,
+            ),
+            drawerDragStartBehavior: DragStartBehavior.down,
+            endDrawer: Drawer(
+              elevation: 32,
+              child: _buildDrawerBody(context),
+            ),
+            body: Stack(
+              children: <Widget>[
+                tabs[provider.currentIndex],
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(5),
+                      topLeft: Radius.circular(5),
+                    ),
+                    child: BottomNavigationBar(
+                      currentIndex: provider.currentIndex,
+                      onTap: (index) {
+                        provider.set(index);
+                      },
+                      backgroundColor: theme.colorScheme.primary,
+                      selectedItemColor: theme.colorScheme.onPrimary,
+                      unselectedItemColor:
+                          theme.colorScheme.onPrimary.withOpacity(0.6),
+                      iconSize: 30,
+                      elevation: 8,
+                      type: BottomNavigationBarType.fixed,
+                      items: _bottomBarItems(context, theme),
+                    ),
+                  ),
+                )
+              ],
             ),
           )
         ],
@@ -103,7 +117,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
     );
   }
 
-  Widget _buildDrawerBody(BuildContext context) => ListView(
+  Widget _buildDrawerBody(BuildContext context) => Column(
         children: <Widget>[
           _buildDrawerItem(context, 'IntroPage', IntroPage.navId),
           _buildDrawerItem(context, 'AccountCreationNamePage',
@@ -115,10 +129,6 @@ class _BottomHomePageState extends State<BottomHomePage> {
           _buildDrawerItem(
               context, 'PasswordCreationPage', PasswordCreationPage.navId),
           _buildDrawerItem(
-              context,
-              AppLocalizations.of(context).toolbarWidgetsTitle(),
-              AppWidgetsPage.navId),
-          _buildDrawerItem(
               context, 'Biometric Feature', BiometricAuthPage.navId),
           _buildDrawerItem(
               context, 'Passphrase Creation', PassphraseCreationPage.navId),
@@ -126,7 +136,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
               context, 'Share Passphrase QR', PassphraseShareQrPage.navId),
           _buildDrawerItem(context, 'Scan QR', ScanQrPage.navId),
           Divider(
-            height: 12,
+            height: 1,
           ),
           ListTile(
             title: Text('Show Passphrase Verified Popup'),
@@ -174,7 +184,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
     return ListTile(
       title: Text(text),
       onTap: () {
-        Navigator.pushNamed(context, navigationId);
+        Navigator.of(context).pushNamed(navigationId);
       },
     );
   }

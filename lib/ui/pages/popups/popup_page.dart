@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
+import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 
 class PopupDialogWidget extends StatelessWidget {
   final String title;
@@ -15,6 +16,7 @@ class PopupDialogWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: PlatformScaffold(
+        backgroundColor: Theme.of(context).colorScheme.surface,
         body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
           child: SizedBox.expand(
@@ -44,7 +46,7 @@ class PopupDialogWidget extends StatelessWidget {
                         child: SvgPicture.asset(
                           asset,
                           semanticsLabel: 'Popup Icon',
-                          color: Theme.of(context).primaryColor,
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
                     ),
@@ -54,7 +56,7 @@ class PopupDialogWidget extends StatelessWidget {
                   flex: 1,
                   child: Padding(
                     padding:
-                        const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
                     child: Text(
                       subtitle,
                       textAlign: TextAlign.center,
@@ -63,11 +65,17 @@ class PopupDialogWidget extends StatelessWidget {
                 ),
                 Flexible(
                   flex: 1,
-                  child: PlatformButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text(AppLocalizations.of(context).labelOk()),
+                  child: ButtonBar(
+                    alignment: MainAxisAlignment.center,
+                    buttonMinWidth: MediaQuery.of(context).size.width * 0.8,
+                    children: <Widget>[
+                      FusionButton(
+                        AppLocalizations.of(context).labelOk(),
+                        () {
+                          Navigator.pop(context);
+                        },
+                      )
+                    ],
                   ),
                 )
               ],
