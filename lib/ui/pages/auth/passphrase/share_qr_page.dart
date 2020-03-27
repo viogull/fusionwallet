@@ -20,8 +20,7 @@ class PassphraseShareQrPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final data = ModalRoute.of(context).settings.arguments as List;
 
-    return SafeArea(
-        child: Stack(children: <Widget>[
+    return Stack(children: <Widget>[
       Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
@@ -32,19 +31,15 @@ class PassphraseShareQrPage extends StatelessWidget {
           fit: BoxFit.fill,
         ),
       ),
-      PlatformScaffold(
+      Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: PlatformAppBar(
-          android: (_) => MaterialAppBarData(
-              centerTitle: true,
-              elevation: 0,
-              iconTheme:
-                  IconThemeData(color: Theme.of(context).colorScheme.primary),
-              backgroundColor: Colors.transparent),
-          title: Text(
-            AppLocalizations.of(context).toolbarSharePasshpraseQr(),
-            style: TextStyle(
-                color: Theme.of(context).colorScheme.onSurface, fontSize: 16),
+        appBar: AppBar(
+          title: Text(AppLocalizations.of(context).toolbarRecoverFromSeedTitle()),
+          backgroundColor: Colors.transparent,
+          centerTitle: true ,
+          elevation: 0,
+          iconTheme: IconThemeData(
+              color: Theme.of(context).colorScheme.primary
           ),
         ),
         body: Column(
@@ -65,6 +60,7 @@ class PassphraseShareQrPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: RaisedButton.icon(
+
                           shape: RoundedRectangleBorder(
                               borderRadius: FusionTheme.borderRadius),
                           label:
@@ -104,10 +100,11 @@ class PassphraseShareQrPage extends StatelessWidget {
                   ),
                 ),
               ),
-            )
+            ),
+            SizedBox (height: 5,),
           ],
         ),
       ),
-    ]));
+    ]);
   }
 }

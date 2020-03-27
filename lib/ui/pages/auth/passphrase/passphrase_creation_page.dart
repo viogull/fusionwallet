@@ -19,17 +19,20 @@ class PassphraseCreationPage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _PassphraseCreationPageState();
   }
 }
 
 class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
-  int _verificationStage = -1;
+
+  int _verificationStage;
+
   bool _isConfirmed = false;
 
   @override
   void initState() {
+    if(_verificationStage == null)
+      _verificationStage = -1;
     super.initState();
 
     debugPrint('Init Passphrase Screen, stage $_verificationStage}');
@@ -51,22 +54,18 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
             fit: BoxFit.fill,
           ),
         ),
-        Scaffold(
-            appBar: AppBar(
-              centerTitle: true,
-              elevation: 0,
-              iconTheme:
-                  IconThemeData(color: Theme.of(context).colorScheme.primary),
+          Scaffold(
+            backgroundColor: Colors.transparent,
+             appBar: AppBar(
+              
+              title: Text(AppLocalizations.of(context).toolbarRecoverFromSeedTitle()),
               backgroundColor: Colors.transparent,
-              title: Text(
-                (_verificationStage == -1)
-                    ? AppLocalizations.of(context).toolbarNewAccountTitle()
-                    : "",
-                style:
-                    TextStyle(color: Theme.of(context).colorScheme.onSurface),
+              centerTitle: true ,
+              elevation: 0,
+              iconTheme: IconThemeData(
+                  color: Theme.of(context).colorScheme.primary
               ),
             ),
-            backgroundColor: Colors.transparent,
             body: (this._verificationStage < 0)
                 ? _showPassphraseView(context)
                 : _showPassphraseQuestions(context, this._verificationStage))

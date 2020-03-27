@@ -6,7 +6,9 @@ import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/passcode/circle.dart';
 import 'package:fusion_wallet/ui/components/custom/passcode/keyboard.dart';
 import 'package:fusion_wallet/ui/components/custom/passcode/passcode_screen.dart';
+import 'package:fusion_wallet/ui/pages/auth/biometric_features_page.dart';
 import 'package:fusion_wallet/ui/pages/auth/intro_page.dart';
+import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
 
 class PasswordCreationPage extends StatefulWidget {
   static const String navId = '/PasswordCreationPage';
@@ -22,12 +24,22 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
       StreamController<bool>.broadcast();
 
   bool isAuthenticated = false;
+  bool isVerified = false;
+
+  @override
+  void initState() {
+    super.initState();
+        if (isAuthenticated) {
+          Navigator.of(context).pushNamed(BiometricAuthPage.navId);
+        }
+  }
 
   @override
   Widget build(BuildContext context,
       {bool opaque,
       CircleUIConfig circleUIConfig,
-      KeyboardUIConfig keyboardUIConfig}) {
+      KeyboardUIConfig keyboardUIConfig
+      }) {
     final ThemeData theme = Theme.of(context);
 
     final background = SvgPicture.asset(
@@ -41,19 +53,25 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
     return Scaffold(
         body: Container(
             child: Stack(
-      children: <Widget>[
-        background,
-        Container(
-          child: Stack(
-            children: <Widget>[
-              MyCustomAppBar(
-                height: 60,
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              PasscodeScreen(
-                title: AppLocalizations.of(context).labelChoosePassSubtitle(),
+              children: <Widget>[
+                background,
+                Container(
+                    child: Stack(
+                      children: <Widget>[
+                        AppBar(
+                          title: Text(AppLocalizations.of(context).toolbarRecoverFromSeedTitle()),
+                          backgroundColor: Colors.transparent,
+                          centerTitle: true ,
+                          elevation: 0,
+                          iconTheme: IconThemeData(
+                              color: Theme.of(context).colorScheme.primary,
+                            size: 0,
+                          ),
+                        ),
+//
+                        PasscodeScreen(
+
+                title: (isVerified ? AppLocalizations.of(context).labelChoosePassVerifySubtitle(): AppLocalizations.of(context).labelChoosePassSubtitle()),
                 circleUIConfig: circleUIConfig,
                 keyboardUIConfig: keyboardUIConfig,
                 passwordEnteredCallback: _onPasscodeEntered,
@@ -73,8 +91,9 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
   _onPasscodeEntered(String enteredPasscode) {
     bool isValid = '123456' == enteredPasscode;
     _verificationNotifier.add(isValid);
-    if (isValid) {
+    if (isValid)  {
       setState(() {
+
         this.isAuthenticated = isValid;
       });
     }
@@ -89,51 +108,4 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
   }
 }
 
-class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final double height;
-  final bool defaultAppBar;
 
-  const MyCustomAppBar({
-    Key key,
-    @required this.height,
-    this.defaultAppBar = true,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    return Column(children: [
-      Container(
-//          padding: EdgeInsets.only(left: 24.0, right: 24.0,),
-        child: Padding(
-          padding: EdgeInsets.all(1),
-          child: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              centerTitle: true,
-              leading: IconButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, IntroPage.navId);
-                },
-                icon: LimitedBox(
-                    maxWidth: 24,
-                    maxHeight: 24,
-                    child: SvgPicture.asset('assets/images/icons/ic_next.svg')),
-              ),
-              title: Text(
-                //"Choose Password"
-                AppLocalizations.of(context).toolbarChoosePassTitle(),
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
-              )),
-        ),
-      )
-    ]);
-
-    // Navigator.pushNamed(context , PasswordCreationPage.nav_id);
-  }
-
-  @override
-  Size get preferredSize => Size.fromHeight(height);
-}

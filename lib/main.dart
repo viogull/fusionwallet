@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:fusion_wallet/ui/blocs/theme_bloc.dart';
+import 'package:fusion_wallet/ui/pages/app_widgets.dart';
 import 'package:fusion_wallet/ui/pages/auth/biometric_features_page.dart';
 import 'package:fusion_wallet/ui/pages/auth/passphrase/passphrase_creation_page.dart';
 import 'package:fusion_wallet/ui/pages/auth/passphrase/scan_qr_page.dart';
@@ -11,7 +13,6 @@ import 'package:fusion_wallet/ui/pages/bottom_home_page.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
-import 'file:///C:/repos/newveer/fusion_wallet/lib/ui/pages/app_widgets.dart';
 
 import 'localizations.dart';
 import 'ui/pages/auth/account_creation_page.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
             side: BorderSide(color: FusionTheme.dark.colorScheme.background)),
       )),
       darkTheme: FusionTheme.dark,
+
       home: HomePage(),
       localizationsDelegates: [
         const AppLocalizationsDelegate(),

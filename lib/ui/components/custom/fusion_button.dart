@@ -29,9 +29,8 @@ class FusionButton extends StatelessWidget {
           text.toUpperCase(),
           style: TextStyle(
               fontSize: 14,
-              color: (theme.brightness == Brightness.dark)
-                  ? FusionTheme.dark.colorScheme.onPrimary
-                  : FusionTheme.light.colorScheme.onPrimary),
+            color: (theme.colorScheme.onPrimary),
+          ),
         ),
       ),
     );

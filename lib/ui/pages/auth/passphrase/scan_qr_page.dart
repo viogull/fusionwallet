@@ -17,6 +17,7 @@ class _ScanQrPageState extends State<ScanQrPage> {
   Future scan() async {
     try {
       String barcode = await BarcodeScanner.scan();
+      debugPrint(barcode);
       setState(() => this.barcode = barcode);
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.CameraAccessDenied) {
