@@ -88,18 +88,15 @@ class _RecaverAccountPage extends State<RecoverAccountPage> {
         child: TextFormField(
           maxLines: 10,
           style: TextStyle(
-            color: (theme.brightness == Brightness.dark)
-                ? FusionTheme.dark.colorScheme.onPrimary
-                : FusionTheme.light.colorScheme.onPrimary,
+            color: (Theme.of(context).primaryColorDark)
+
           ),
           decoration: InputDecoration(
               border: OutlineInputBorder(),
               hintText: AppLocalizations.of(context)
                   .inputEnterScanPasshpraseHintText(),
               hintStyle: TextStyle(
-                color: (theme.brightness == Brightness.dark)
-                    ? FusionTheme.dark.colorScheme.onPrimary
-                    : FusionTheme.light.colorScheme.onPrimary,
+                color: (Theme.of(context).primaryColorDark),
               ),
               suffixIcon: IconButton(
                 icon: SvgPicture.asset(
@@ -137,12 +134,16 @@ class _RecaverAccountPage extends State<RecoverAccountPage> {
                   MyCustomAppBar(
                     height: 80,
                   ),
-                  logo,
-                  SizedBox(height: 25.0),
+                  Flexible(
+                    child: logo,
+                    flex: 5,
+                  ),
+                  LimitedBox(maxHeight: 25),
                   text,
-                  SizedBox(height: 25.0),
+                  LimitedBox(maxHeight: 25),
                   accountName,
-                  SizedBox(height: 25.0),
+                  LimitedBox(maxHeight: 25),
+
                   scanQR,
                   SizedBox(height: 100.0),
                   button,
@@ -189,11 +190,10 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   AppLocalizations.of(context).toolbarRecoverFromSeedTitle(),
 //                "Recover from Seed",
                   style: TextStyle(
-                      color: (theme.brightness == Brightness.dark)
-                          ? FusionTheme.dark.colorScheme.onPrimary
-                          : FusionTheme.light.colorScheme.onPrimary),
+                      color: (Theme.of(context).primaryColorDark),
                 ),
               )),
+        ),
         ),
       ],
     );

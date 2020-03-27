@@ -8,6 +8,7 @@ class Prefs {
   static const THEME = "preferences_app_theme";
   static const AUTH_TOKEN = 'preferences_auth_token';
   static const LOCALE = "preferences_app_locale";
+  static const PINCODE = "preferences_pin_code";
 
   static String getLocaleCode(FusionLocales selectedLocale) {
     final code = (selectedLocale == FusionLocales.english) ? "en" : "ru";
@@ -21,6 +22,12 @@ class Prefs {
   static Prefs _instance = new Prefs.internal();
   Prefs.internal();
   factory Prefs() => _instance;
+
+  Future<String> getPin() async {
+    SharedPreferences _sharedPreferences =
+    await SharedPreferences.getInstance();
+    return _sharedPreferences.getString(PINCODE);
+  }
 
   Future<String> getToken() async {
     SharedPreferences _sharedPreferences =

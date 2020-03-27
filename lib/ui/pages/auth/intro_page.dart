@@ -41,24 +41,22 @@ class IntroPage extends StatelessWidget {
     );
 
     final someText1 = Container(
+      height: 20,
 //      alignment: Alignment.topCenter,
       child: Text(
         "Some greeting text",
         style: TextStyle(
-            color: (theme.brightness == Brightness.dark)
-                ? FusionTheme.dark.colorScheme.onPrimary
-                : FusionTheme.light.colorScheme.onPrimary),
+            color: Theme.of(context).primaryColorDark),
       ),
     );
 
     final someText2 = Container(
 //      alignment: Alignment.topCenter,
+    height: 20,
       child: Text(
         "Some greeting text",
         style: TextStyle(
-            color: (theme.brightness == Brightness.dark)
-                ? FusionTheme.dark.colorScheme.onPrimary
-                : FusionTheme.light.colorScheme.onPrimary),
+            color: Theme.of(context).primaryColorDark),
       ),
     );
 
@@ -74,13 +72,13 @@ class IntroPage extends StatelessWidget {
     );
 
     final labelAlreadyHaveAccount = Container(
+      height: 20,
 //      alignment: Alignment.topCenter,
       child: Text(
         AppLocalizations.of(context).labelAlreadyHaveAccount(),
         style: TextStyle(
-            color: (theme.brightness == Brightness.dark)
-                ? FusionTheme.dark.colorScheme.onPrimary
-                : FusionTheme.light.colorScheme.onPrimary),
+            color: (Theme.of(context).primaryColorDark),
+      ),
       ),
     );
 
@@ -100,36 +98,59 @@ class IntroPage extends StatelessWidget {
         // alignment: Alignment(-1.0, -1.0),
         //constraints: BoxConstraints.expand(),
 //                 constraints: BoxConstraints.expand(width: MediaQuery.of(context).size.height, height: MediaQuery.of(context).size.width),
-        //height: MediaQuery.of(context).size.height,
+      height: MediaQuery.of(context).size.height,
         child: Stack(
           children: <Widget>[
+
             background,
             background2,
             Container(
+              height: MediaQuery.of(context).size.height,
               padding: EdgeInsets.only(
                 left: 24.0,
                 right: 24.0,
               ),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
                 children: <Widget>[
-                  SizedBox(height: MediaQuery.of(context).size.height / 6.5),
+                  SizedBox(height: 60),
+                  LimitedBox(maxHeight: 90),
                   Flexible(
                     child: logo,
-                    flex: 1,
+                    flex: 6,
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height / 18.5),
-                  someText2,
-                  SizedBox(height: MediaQuery.of(context).size.height / 20.5),
+                  SizedBox(height: 20),
                   Flexible(
+                    child: someText2,
                     flex: 2,
+                  ),
+
+                  SizedBox(height: 20),
+                  Flexible(
+                    flex: 4,
                     child: someText1,
                   ),
-                  SizedBox(height: 250.0),
-                  buttonCreateAccount,
-                  SizedBox(height: 30.0),
-                  labelAlreadyHaveAccount,
-                  SizedBox(height: 30.0),
-                  Flexible(flex: 1, child: buttonRecoverFromPassphrase),
+                SizedBox(height: 180),
+                  LimitedBox(maxHeight: 230),
+
+
+                  Flexible(
+
+                    child: buttonCreateAccount,
+                    flex: 5,
+                  ),
+                  SizedBox(height: 5),
+
+                  Flexible(
+                    child: labelAlreadyHaveAccount,
+                    flex: 2,
+                  ),
+                  SizedBox(height: 5),
+
+                  Flexible(flex: 5,
+                      child: buttonRecoverFromPassphrase),
+                  SizedBox(height: 10),
                 ],
               ),
             ),

@@ -6,6 +6,7 @@ import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/passcode/circle.dart';
 import 'package:fusion_wallet/ui/components/custom/passcode/keyboard.dart';
 import 'package:fusion_wallet/ui/components/custom/passcode/passcode_screen.dart';
+import 'package:fusion_wallet/ui/pages/auth/biometric_features_page.dart';
 import 'package:fusion_wallet/ui/pages/auth/intro_page.dart';
 import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
 
@@ -23,6 +24,15 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
       StreamController<bool>.broadcast();
 
   bool isAuthenticated = false;
+  bool isVerified = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (isAuthenticated) {
+      Navigator.of(context).pushNamed(BiometricAuthPage.navId);
+    }
+  }
 
   @override
   Widget build(BuildContext context,
@@ -54,7 +64,10 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
                 height: 30,
               ),
               PasscodeScreen(
-                title: AppLocalizations.of(context).labelChoosePassSubtitle(),
+                title: (isVerified
+                    ? AppLocalizations.of(context)
+                        .labelChoosePassVerifySubtitle()
+                    : AppLocalizations.of(context).labelChoosePassSubtitle()),
                 circleUIConfig: circleUIConfig,
                 keyboardUIConfig: keyboardUIConfig,
                 passwordEnteredCallback: _onPasscodeEntered,
@@ -117,7 +130,7 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     Navigator.pushNamed(context, IntroPage.navId);
                   },
                   icon: SvgPicture.asset('assets/images/icons/ic_next.svg',
-                      height: 25.0),
+                      height: 0.0),
                 ),
                 title: Text(
                   //"Choose Password"

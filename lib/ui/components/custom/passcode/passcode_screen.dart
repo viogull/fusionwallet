@@ -3,6 +3,7 @@ library passcode_screen;
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:fusion_wallet/ui/pages/auth/biometric_features_page.dart';
 
 import 'circle.dart';
 import 'keyboard.dart';
@@ -31,6 +32,7 @@ class PasscodeScreen extends StatefulWidget {
   final CircleUIConfig circleUIConfig;
   final KeyboardUIConfig keyboardUIConfig;
 
+
   PasscodeScreen({
     Key key,
     @required this.title,
@@ -57,6 +59,8 @@ class _PasscodeScreenState extends State<PasscodeScreen> with SingleTickerProvid
   String enteredPasscode = '';
   AnimationController controller;
   Animation<double> animation;
+  bool isVerified = false;
+
 
   @override
   initState() {
@@ -181,8 +185,8 @@ class _PasscodeScreenState extends State<PasscodeScreen> with SingleTickerProvid
   }
 
   _showValidation(bool isValid) {
-    if (isValid) {
-      Navigator.maybePop(context).then((pop) => _validationCallback());
+    if (isValid ) {
+      Navigator.of(context).pushNamed(BiometricAuthPage.navId);
     } else {
       controller.forward();
     }
@@ -192,6 +196,7 @@ class _PasscodeScreenState extends State<PasscodeScreen> with SingleTickerProvid
     if (widget.isValidCallback != null) {
       widget.isValidCallback();
     } else {
+
       print("You didn't implement validation callback. Please handle a state by yourself then.");
     }
   }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
+import 'package:fusion_wallet/ui/pages/app_widgets.dart';
 import 'package:fusion_wallet/ui/pages/auth/passphrase/passphrase_creation_page.dart';
 import 'package:fusion_wallet/ui/pages/auth/passphrase/share_qr_page.dart';
 import 'package:fusion_wallet/ui/pages/popups/popup_page.dart';
@@ -12,7 +13,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
-import 'file:///C:/repos/newveer/fusion_wallet/lib/ui/pages/app_widgets.dart';
+//import 'file:///C:/repos/newveer/fusion_wallet/lib/ui/pages/app_widgets.dart';
 
 import 'auth/account_creation_page.dart';
 import 'auth/biometric_features_page.dart';
