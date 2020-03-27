@@ -92,8 +92,7 @@ class _BiometricAuthPageState extends State<BiometricAuthPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return  Scaffold(
           body: Stack(children: <Widget>[
         Container(
           width: MediaQuery.of(context).size.width,
@@ -108,10 +107,11 @@ class _BiometricAuthPageState extends State<BiometricAuthPage> {
         Container(
           alignment: Alignment.center,
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.8,
+          height: MediaQuery.of(context).size.height ,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              SizedBox(height: 10,),
               Flexible(
                 flex: 4,
                 child: Center(
@@ -124,6 +124,7 @@ class _BiometricAuthPageState extends State<BiometricAuthPage> {
                           AppLocalizations.of(context)
                               .labelEnableBiometricTitle(),
                           style: Theme.of(context).textTheme.headline6,
+                          textAlign: TextAlign.center,
                         ),
                       ),
                       Padding(
@@ -143,7 +144,7 @@ class _BiometricAuthPageState extends State<BiometricAuthPage> {
                 child: Container(),
               ),
               Flexible(
-                flex: 4,
+                flex: 5,
                 child: Center(
                   child: Card(
                     borderOnForeground: false,
@@ -199,39 +200,60 @@ class _BiometricAuthPageState extends State<BiometricAuthPage> {
                 ),
               ),
               Flexible(
-                flex: 1,
+                flex: 4,
                 child: Center(
                   child: Container(
-                    alignment: Alignment.center,
-                    child: ButtonBar(
-                      buttonHeight: 80,
-                      alignment: MainAxisAlignment.center,
-                      buttonMinWidth: MediaQuery.of(context).size.width * 0.6,
-                      children: <Widget>[
-                        FusionButton(
-                          AppLocalizations.of(context).labelYes(),
-                          () async {
-                            _checkBiometrics();
-                            _authenticate();
-                          },
-                        ),
-                        SizedBox(height: 20, width: 0),
-                        FusionButton(
-                          AppLocalizations.of(context).labelNo(),
-                          () async {
-                            Navigator.pushNamed(
-                                context, PassphraseCreationPage.navId);
-                          },
-                        ),
-                      ],
+                      width: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.only(
+                      left: 24.0,
+                      right: 24.0,
                     ),
-                  ),
+                      child: Column(
+//                        buttonHeight: 50,
+//
+//
+//                        alignment: MainAxisAlignment.center,
+
+//                        mainAxisSize: MainAxisSize.max,
+//                        mainAxisAlignment: MainAxisAlignment.center,
+
+//                        buttonMinWidth: MediaQuery.of(context).size.width ,
+                        children: <Widget>[
+
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: 50,
+                            child: FusionButton(
+
+                              AppLocalizations.of(context).labelYes(),
+                              () async {
+                                _checkBiometrics();
+                                _authenticate();
+                              },
+                            ),
+                          ),
+                          SizedBox(height: 15, width: 0),
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: 50,
+                            child: FusionButton(
+                              AppLocalizations.of(context).labelNo(),
+                              () async {
+                                Navigator.pushNamed(
+                                    context, PassphraseCreationPage.navId);
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                 ),
+
               )
             ],
           ),
         ),
-      ])),
+      ])
     );
   }
 }

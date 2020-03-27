@@ -14,8 +14,7 @@ class PopupDialogWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: PlatformScaffold(
+    return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.surface,
         body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
@@ -24,11 +23,12 @@ class PopupDialogWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
+                SizedBox(height: 5,),
                 Flexible(
                   flex: 2,
                   child: Padding(
                     padding:
-                        const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
                     child: Text(
                       title,
                       style: Theme.of(context).textTheme.headline6,
@@ -60,29 +60,30 @@ class PopupDialogWidget extends StatelessWidget {
                     child: Text(
                       subtitle,
                       textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.subtitle1,
                     ),
                   ),
                 ),
                 Flexible(
-                  flex: 1,
-                  child: ButtonBar(
-                    alignment: MainAxisAlignment.center,
-                    buttonMinWidth: MediaQuery.of(context).size.width * 0.8,
-                    children: <Widget>[
-                      FusionButton(
+                  flex: 2,
+                  child: Container(
+                    padding: EdgeInsets.only(left: 24, right: 24),
+                    height: 50,
+                    width: MediaQuery.of(context).size.width ,
+                    child:  FusionButton(
                         AppLocalizations.of(context).labelOk(),
                         () {
                           Navigator.pop(context);
                         },
-                      )
-                    ],
+                      ),
                   ),
-                )
+                  ),
+
               ],
             ),
           ),
-        ),
-      ),
+    ),
+
     );
   }
 }

@@ -1,13 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
+import 'package:fusion_wallet/ui/pages/auth/password_creation_page.dart';
 import 'package:fusion_wallet/ui/pages/auth/recover_account_page.dart';
 import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
-
-import 'password_creation_page.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -35,18 +33,51 @@ class IntroPage extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
     );
 
-    final someText1 = Flexible(
+    final logo = SvgPicture.asset(
+      ('assets/images/icons/ic_logo.svg'),
+      fit: BoxFit.fill,
+      height: 100.0,
+      //width: MediaQuery.of(context).size.width,
+    );
+
+    final someText1 = Container(
+      height: 20,
 //      alignment: Alignment.topCenter,
-      flex: 1,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          "Some greeting text",
-          style: TextStyle(
-              color: (theme.brightness == Brightness.dark)
-                  ? FusionTheme.dark.colorScheme.onPrimary
-                  : FusionTheme.light.colorScheme.onPrimary),
-        ),
+      child: Text(
+        "Some greeting text",
+        style: TextStyle(
+          color: (theme.colorScheme.onPrimary),),
+      ),
+    );
+
+    final someText2 = Container(
+//      alignment: Alignment.topCenter,
+    height: 20,
+      child: Text(
+        "Some greeting text",
+        style: TextStyle(
+          color: (theme.colorScheme.onPrimary),),
+      ),
+    );
+
+    final buttonCreateAccount = Container(
+      height: 50,
+      width: MediaQuery.of(context).size.width,
+      child: FusionButton(
+        AppLocalizations.of(context).buttonCreateAccount(),
+        () {
+          Navigator.pushNamed(context, PasswordCreationPage.navId);
+        },
+      ),
+    );
+
+    final labelAlreadyHaveAccount = Container(
+      height: 20,
+//      alignment: Alignment.topCenter,
+      child: Text(
+        AppLocalizations.of(context).labelAlreadyHaveAccount(),
+        style: TextStyle(
+          color: (theme.colorScheme.onSurface),),
       ),
     );
 
@@ -66,104 +97,55 @@ class IntroPage extends StatelessWidget {
         // alignment: Alignment(-1.0, -1.0),
         //constraints: BoxConstraints.expand(),
 //                 constraints: BoxConstraints.expand(width: MediaQuery.of(context).size.height, height: MediaQuery.of(context).size.width),
-        //height: MediaQuery.of(context).size.height,
+      height: MediaQuery.of(context).size.height,
         child: Stack(
           children: <Widget>[
+
             background,
             background2,
             Container(
+              height: MediaQuery.of(context).size.height,
               padding: EdgeInsets.only(
                 left: 24.0,
                 right: 24.0,
               ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
+                  SizedBox(height: 60),
+                  LimitedBox(maxHeight: 90),
                   Flexible(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Flexible(
-                          flex: 4,
-                          child: SvgPicture.asset(
-                            ('assets/images/icons/ic_logo.svg'),
-                            fit: BoxFit.fill,
-                            //width: MediaQuery.of(context).size.width,
-                          ),
-                        ),
-                        Flexible(
-                          flex: 1,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              "Some greeting text",
-                              style: TextStyle(
-                                  color: (theme.brightness == Brightness.dark)
-                                      ? FusionTheme.dark.colorScheme.onPrimary
-                                      : FusionTheme
-                                          .light.colorScheme.onPrimary),
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                          flex: 1,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: someText1,
-                          ),
-                        ),
-                      ],
-                    ),
+                    child: logo,
                     flex: 6,
                   ),
+                  SizedBox(height: 20),
                   Flexible(
-                    flex: 6,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Flexible(
-                          flex: 4,
-                          child: Container(),
-                        ),
-                        Flexible(
-                          flex: 2,
-                          child: Container(
-                            height: 50,
-                            width: MediaQuery.of(context).size.width,
-                            child: FusionButton(
-                              AppLocalizations.of(context)
-                                  .buttonCreateAccount(),
-                              () {
-                                Navigator.pushNamed(
-                                    context, PasswordCreationPage.navId);
-                              },
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                          flex: 1,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              AppLocalizations.of(context)
-                                  .labelAlreadyHaveAccount(),
-                              style: TextStyle(
-                                  color: (theme.brightness == Brightness.dark)
-                                      ? FusionTheme.dark.colorScheme.onSurface
-                                      : FusionTheme
-                                          .light.colorScheme.onSurface),
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                            flex: 2,
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 24),
-                              child: buttonRecoverFromPassphrase,
-                            )),
-                      ],
-                    ),
-                  )
+                    child: someText2,
+                    flex: 2,
+                  ),
+                  SizedBox(height: 20),
+                  Flexible(
+                    flex: 4,
+                    child: someText1,
+                  ),
+                SizedBox(height: 180),
+                  LimitedBox(maxHeight: 230),
+                  Flexible(
+
+                    child: buttonCreateAccount,
+                    flex: 5,
+                  ),
+                  SizedBox(height: 5),
+
+                  Flexible(
+                    child: labelAlreadyHaveAccount,
+                    flex: 2,
+                  ),
+                  SizedBox(height: 5),
+
+                  Flexible(flex: 5,
+                      child: buttonRecoverFromPassphrase),
+                  SizedBox(height: 10),
                 ],
               ),
             ),

@@ -1,3 +1,4 @@
+import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -7,6 +8,9 @@ import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/pages/auth/passphrase/scan_qr_page.dart';
 import 'package:fusion_wallet/ui/pages/popups/popup_page.dart';
 import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class RecoverFromSeedPage extends StatelessWidget {
   static const navId = "/auth/recover";
@@ -21,10 +25,35 @@ class RecoverFromSeedPage extends StatelessWidget {
 class RecoverAccountPage extends StatefulWidget {
   static const String navId = '/RecaverAccountPage';
   @override
-  _RecaverAccountPage createState() => new _RecaverAccountPage();
+  _RecoverAccountSate createState() => new _RecoverAccountSate();
 }
 
-class _RecaverAccountPage extends State<RecoverAccountPage> {
+class _RecoverAccountSate extends State<RecoverAccountPage> {
+
+  Future scan() async {
+    try {
+      String barcode = await BarcodeScanner.scan();
+      debugPrint(barcode);
+      setState(() => this.barcode = barcode);
+    } on PlatformException catch (e) {
+      if (e.code == BarcodeScanner.CameraAccessDenied) {
+        setState(() {
+          this.barcode = 'The user did not grant the camera permission!';
+        });
+      } else {
+        setState(() => this.barcode = 'Unknown error: $e');
+      }
+    } on FormatException {
+      setState(() => this.barcode =
+      'null (User returned using the "back"-button before scanning anything. Result)');
+    } catch (e) {
+      setState(() => this.barcode = 'Unknown error: $e');
+    }
+  }
+
+  String barcode = "";
+
+
   bool _rememberMeFlag = false;
   @override
   Widget build(BuildContext context) {
@@ -46,35 +75,31 @@ class _RecaverAccountPage extends State<RecoverAccountPage> {
     final text = Container(
       alignment: Alignment.topLeft,
       margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
-      child: Text(
-        AppLocalizations.of(context).inputAccountNameHelperText(),
+      child: Text( AppLocalizations.of(context).inputAccountNameHelperText(),
         style: TextStyle(
-            color: (theme.brightness == Brightness.dark)
-                ? FusionTheme.dark.colorScheme.onPrimary
-                : FusionTheme.light.colorScheme.onPrimary),
+            color: (theme.colorScheme.onSurface),
+      ),
       ),
     );
 
     final accountName = Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
-          border: Border.all(color: theme.primaryColor)),
+          border: Border.all(color: theme.colorScheme.onPrimary)),
       height: 30.0,
-      width: 39.0,
+      width: MediaQuery.of(context).size.width,
       child: Center(
         child: TextField(
           style: TextStyle(
-            color: (theme.brightness == Brightness.dark)
-                ? FusionTheme.dark.colorScheme.onPrimary
-                : FusionTheme.light.colorScheme.onPrimary,
+
+            color: (theme.colorScheme.onSurface),
           ),
           decoration: InputDecoration(
             border: OutlineInputBorder(),
-            labelText: AppLocalizations.of(context).inputEditAccountNameHint(),
+            labelText:  AppLocalizations.of(context).inputEditAccountNameHint(),
             labelStyle: TextStyle(
-                color: (theme.brightness == Brightness.dark)
-                    ? FusionTheme.dark.colorScheme.onPrimary
-                    : FusionTheme.light.colorScheme.onPrimary),
+              color: (theme.colorScheme.onSurface),
+            ),
           ),
         ),
       ),
@@ -82,35 +107,40 @@ class _RecaverAccountPage extends State<RecoverAccountPage> {
 
     final scanQR = Container(
       height: 200.0,
-      width: 100,
+      width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           border: Border.all(color: theme.primaryColor)),
       child: SizedBox.expand(
         child: TextFormField(
-          maxLines: 10,
+          maxLines: 140,
+
+          initialValue: barcode,
           style: TextStyle(
-            color: (theme.brightness == Brightness.dark)
-                ? FusionTheme.dark.colorScheme.onPrimary
-                : FusionTheme.light.colorScheme.onPrimary,
+            color: (theme.colorScheme.onSurface),
           ),
           decoration: InputDecoration(
               border: OutlineInputBorder(),
               hintText: AppLocalizations.of(context)
                   .inputEnterScanPasshpraseHintText(),
+             // helperText: barcode,
+
+
               hintStyle: TextStyle(
-                color: (theme.brightness == Brightness.dark)
-                    ? FusionTheme.dark.colorScheme.onPrimary
-                    : FusionTheme.light.colorScheme.onPrimary,
+                color: (theme.colorScheme.onSurface),
               ),
               suffixIcon: IconButton(
                 icon: SvgPicture.asset(
                   'assets/images/icons/ic_qrcodescan.svg',
                   height: 35.0,
+
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, ScanQrPage.navId);
+                  scan();
+
+//                  Navigator.pushNamed(context, ScanQrPage.navId);
                 },
+
               )),
         ),
       ),
@@ -118,6 +148,7 @@ class _RecaverAccountPage extends State<RecoverAccountPage> {
 
     final button = Container(
       height: 50,
+      width: MediaQuery.of(context).size.width,
       child: FusionButton(AppLocalizations.of(context).buttonVerify(), () {
         Navigator.of(context).push(new MaterialPageRoute(
             builder: (_) {
@@ -135,8 +166,9 @@ class _RecaverAccountPage extends State<RecoverAccountPage> {
       body: Container(
         //width: MediaQuery.of(context).size.width,
         child: Stack(
-          fit: StackFit.passthrough,
+          //fit: StackFit.passthrough,
           children: <Widget>[
+
             background,
             Container(
               padding: EdgeInsets.only(
@@ -144,20 +176,47 @@ class _RecaverAccountPage extends State<RecoverAccountPage> {
                 right: 24.0,
               ),
 //              width: MediaQuery.of(context).size.width,
-              child: ListView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  MyCustomAppBar(
-                    height: 80,
+                  AppBar(
+                    title: Text(AppLocalizations.of(context).toolbarRecoverFromSeedTitle()),
+                     backgroundColor: Colors.transparent,
+                    centerTitle: true ,
+                    elevation: 0,
+                    iconTheme: IconThemeData(
+                      color: Theme.of(context).colorScheme.primary
+                    ),
                   ),
-                  logo,
-                  SizedBox(height: 25.0),
-                  text,
-                  SizedBox(height: 25.0),
-                  accountName,
-                  SizedBox(height: 25.0),
-                  scanQR,
-                  SizedBox(height: 100.0),
-                  button,
+                  Flexible(
+                    flex: 4,
+                    child: logo,
+                  ),
+
+                  SizedBox(height:  10,),
+                  Flexible(
+                    flex: 2,
+                    child: text,
+                  ),
+
+
+                  Flexible(
+                    flex: 4,
+                    child: accountName,
+                  ),
+
+                  Flexible(
+                    flex: 8,
+                    child: scanQR,
+                  ),
+                  SizedBox(height:  20,),
+//                  SizedBox(height: 30.0),
+                  LimitedBox(maxHeight: 70.0,),
+                  Flexible(
+                    flex: 5,
+                    child: button,
+                  ),
+                  SizedBox(height:  5,),
                 ],
               ),
             ),
@@ -167,51 +226,51 @@ class _RecaverAccountPage extends State<RecoverAccountPage> {
     );
   }
 }
-
-class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final double height;
-  final bool defaultAppBar;
-
-  const MyCustomAppBar({
-    Key key,
-    @required this.height,
-    this.defaultAppBar = true,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    return Column(children: [
-      Container(
-        child: PlatformAppBar(
-          android: (_) => MaterialAppBarData(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              centerTitle: true,
-              leading: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: LimitedBox(
-                  maxHeight: 24,
-                  maxWidth: 24,
-                  child: SvgPicture.asset(
-                    'assets/images/icons/ic_next.svg',
-                  ),
-                ),
-              ),
-              title: Text(
-                AppLocalizations.of(context).toolbarRecoverFromSeedTitle(),
-//                "Recover from Seed",
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
-              )),
-        ),
-      ),
-    ]);
-  }
-
-  @override
-  Size get preferredSize => Size.fromHeight(height);
-}
+//
+//class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+//  final double height;
+//  final bool defaultAppBar;
+//
+//  const MyCustomAppBar({
+//    Key key,
+//    @required this.height,
+//    this.defaultAppBar = true,
+//  }) : super(key: key);
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    final ThemeData theme = Theme.of(context);
+//    return Column(children: [
+//      Container(
+//        child: PlatformAppBar(
+//          android: (_) => MaterialAppBarData(
+//              backgroundColor: Colors.transparent,
+//              elevation: 0,
+//              centerTitle: true,
+//              leading: IconButton(
+//                onPressed: () {
+//                  Navigator.pop(context);
+//                },
+//                icon: LimitedBox(
+//                  maxHeight: 24,
+//                  maxWidth: 24,
+//                  child: SvgPicture.asset(
+//                    'assets/images/icons/ic_next.svg',
+//                  ),
+//                ),
+//              ),
+//              title: Text(
+//                AppLocalizations.of(context).toolbarRecoverFromSeedTitle(),
+////                "Recover from Seed",
+//                style: TextStyle(
+//                  color: Theme.of(context).colorScheme.onSurface,
+//                ),
+//              )),
+//        ),
+//      ),
+//    ]);
+//  }
+//
+//  @override
+//  Size get preferredSize => Size.fromHeight(height);
+//}

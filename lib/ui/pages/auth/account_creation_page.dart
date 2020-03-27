@@ -37,9 +37,8 @@ class _AccountCreationNamePageState extends State<AccountCreationNamePage> {
       child: Text(
         AppLocalizations.of(context).inputAccountNameHelperText(),
         style: TextStyle(
-            color: (theme.brightness == Brightness.dark)
-                ? FusionTheme.dark.colorScheme.onPrimary
-                : FusionTheme.light.colorScheme.onPrimary),
+          color: (theme.colorScheme.onSurface),
+        ),
       ),
     );
 
@@ -52,18 +51,15 @@ class _AccountCreationNamePageState extends State<AccountCreationNamePage> {
       child: Center(
         child: TextField(
           style: TextStyle(
-            color: (theme.brightness == Brightness.dark)
-                ? FusionTheme.dark.colorScheme.onPrimary
-                : FusionTheme.light.colorScheme.onPrimary,
+            color: (theme.colorScheme.onSurface),
           ),
           // obscureText: true,
           decoration: InputDecoration(
             border: OutlineInputBorder(),
             labelText: AppLocalizations.of(context).inputAccountNameHintText(),
             labelStyle: TextStyle(
-                color: (theme.brightness == Brightness.dark)
-                    ? FusionTheme.dark.colorScheme.onPrimary
-                    : FusionTheme.light.colorScheme.onPrimary),
+              color: (theme.colorScheme.onSurface),
+            ),
           ),
         ),
       ),
@@ -71,6 +67,7 @@ class _AccountCreationNamePageState extends State<AccountCreationNamePage> {
 
     final loginButton = Container(
       height: 50,
+      width: MediaQuery.of(context).size.width,
       child: FusionButton(AppLocalizations.of(context).buttonNext(), () {}),
     );
 
@@ -87,7 +84,7 @@ class _AccountCreationNamePageState extends State<AccountCreationNamePage> {
                       Transform.scale(
                         scale: 1.8,
                         child: Checkbox(
-                          checkColor: theme.primaryColor,
+                          checkColor: theme.colorScheme.onPrimary,
                           value: _rememberMeFlag,
                           onChanged: (value) => setState(() {
                             _rememberMeFlag = !_rememberMeFlag;
@@ -100,9 +97,8 @@ class _AccountCreationNamePageState extends State<AccountCreationNamePage> {
                           AppLocalizations.of(context)
                               .checkboxTermsConditions(),
                           style: TextStyle(
-                              color: (theme.brightness == Brightness.dark)
-                                  ? FusionTheme.dark.colorScheme.onPrimary
-                                  : FusionTheme.light.colorScheme.onPrimary),
+                            color: (theme.colorScheme.onSurface),
+                          ),
                         ),
                         onTap: () {
                           Navigator.pushNamed(
@@ -132,21 +128,50 @@ class _AccountCreationNamePageState extends State<AccountCreationNamePage> {
                 left: 24.0,
                 right: 24.0,
               ),
-              child: ListView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  MyCustomAppBar(
-                    height: 80,
+                  AppBar(
+                    title: Text(AppLocalizations.of(context).toolbarRecoverFromSeedTitle()),
+                    backgroundColor: Colors.transparent,
+                    centerTitle: true ,
+                    elevation: 0,
+                    iconTheme: IconThemeData(
+                        color: Theme.of(context).colorScheme.primary
+                    ),
                   ),
-                  SizedBox(height: 70.0),
-                  logo,
-                  SizedBox(height: 35.0),
-                  text,
-                  SizedBox(height: 15.0),
-                  email,
-                  SizedBox(height: 35.0),
-                  checkBox,
-                  SizedBox(height: 70.0),
-                  loginButton,
+
+                  //LimitedBox (maxHeight: 60,),
+                  SizedBox(height: 5 ,),
+                  Flexible(
+                    flex: 7,
+                    child: logo,
+                  ),
+//                  SizedBox(height: 10 ,),
+                 // LimitedBox(maxHeight: 30,),
+                  Flexible(
+                    flex: 2 ,
+                    child: text,
+                  ),
+
+
+                  Flexible(
+                    flex: 4,
+                    child: email,
+                  ),
+                  SizedBox(height: 15 ,),
+                 // LimitedBox(maxHeight:30 ,),
+                  Flexible(
+                    flex: 2 ,
+                    child: checkBox,
+                  ),
+                  SizedBox(height: 10 ,),
+                  //LimitedBox(maxHeight: 50,),
+                  Flexible(
+                    flex: 5 ,
+                    child: loginButton,
+                  ),
+                  SizedBox(height: 5.0),
                 ],
               ),
             ),
@@ -157,49 +182,3 @@ class _AccountCreationNamePageState extends State<AccountCreationNamePage> {
   }
 }
 
-class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final double height;
-  final bool defaultAppBar;
-
-  const MyCustomAppBar({
-    Key key,
-    @required this.height,
-    this.defaultAppBar = true,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    return Column(
-      children: [
-        Container(
-          child: Padding(
-              padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
-              child: AppBar(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                leading: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: SvgPicture.asset(
-                    'assets/images/icons/ic_next.svg',
-                    height: 25.0,
-                  ),
-                ),
-                title: Text(
-                  AppLocalizations.of(context).buttonCreateAccount(),
-                  style: TextStyle(
-                      color: (theme.brightness == Brightness.dark)
-                          ? FusionTheme.dark.colorScheme.onPrimary
-                          : FusionTheme.light.colorScheme.onPrimary),
-                ),
-              )),
-        ),
-      ],
-    );
-  }
-
-  @override
-  Size get preferredSize => Size.fromHeight(height);
-}

@@ -34,21 +34,15 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
               fit: BoxFit.fill,
             ),
           ),
-          PlatformScaffold(
+          Scaffold(
             backgroundColor: Colors.transparent,
-            appBar: PlatformAppBar(
-              android: (_) => MaterialAppBarData(
-                  centerTitle: true,
-                  elevation: 0,
-                  iconTheme: IconThemeData(
-                      color: Theme.of(context).colorScheme.primary),
-                  backgroundColor: Colors.transparent),
-              title: Text(
-                (_verificationStage == -1)
-                    ? AppLocalizations.of(context).toolbarNewAccountTitle()
-                    : "",
-                style:
-                    TextStyle(color: Theme.of(context).colorScheme.onSurface),
+             appBar: AppBar(
+              title: Text(AppLocalizations.of(context).toolbarRecoverFromSeedTitle()),
+              backgroundColor: Colors.transparent,
+              centerTitle: true ,
+              elevation: 0,
+              iconTheme: IconThemeData(
+                  color: Theme.of(context).colorScheme.primary
               ),
             ),
             body: _buildPassphraseView(context),
