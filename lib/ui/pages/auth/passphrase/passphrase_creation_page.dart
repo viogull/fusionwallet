@@ -24,15 +24,13 @@ class PassphraseCreationPage extends StatefulWidget {
 }
 
 class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
-
   int _verificationStage;
 
   bool _isConfirmed = false;
 
   @override
   void initState() {
-    if(_verificationStage == null)
-      _verificationStage = -1;
+    if (_verificationStage == null) _verificationStage = -1;
     super.initState();
 
     debugPrint('Init Passphrase Screen, stage $_verificationStage}');
@@ -54,17 +52,16 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
             fit: BoxFit.fill,
           ),
         ),
-          Scaffold(
+        Scaffold(
             backgroundColor: Colors.transparent,
-             appBar: AppBar(
-              
-              title: Text(AppLocalizations.of(context).toolbarRecoverFromSeedTitle()),
+            appBar: AppBar(
+              title: Text(
+                  AppLocalizations.of(context).toolbarRecoverFromSeedTitle()),
               backgroundColor: Colors.transparent,
-              centerTitle: true ,
+              centerTitle: true,
               elevation: 0,
-              iconTheme: IconThemeData(
-                  color: Theme.of(context).colorScheme.primary
-              ),
+              iconTheme:
+                  IconThemeData(color: Theme.of(context).colorScheme.primary),
             ),
             body: (this._verificationStage < 0)
                 ? _showPassphraseView(context)
@@ -307,7 +304,7 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
                       crossAxisCount: 3,
                       childAspectRatio: 3),
                   itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
+                    return InkWell(
                         child: Container(
                             alignment: Alignment.center,
                             child: GestureDetector(
@@ -341,11 +338,23 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
                         onTap: () async {
                           debugPrint("Tapped on word ${widget.items[index]}");
                           if (index == randomPosition) {
-                            setState(() {
-                              _verificationStage++;
-                            });
+                            if (_verificationStage == 2) {
+                              Scaffold.of(context).showSnackBar(SnackBar(
+                                content: Text('Succesfully saved passhprase'),
+                              ));
+                              Navigator.of(context)
+                                  .pushNamed(AccountCreationNamePage.navId);
+                            } else {
+                              setState(() {
+                                _verificationStage = _verificationStage + 1;
+                              });
+                            }
                           } else {
                             if (_verificationStage > 0) {
+                              Scaffold.of(context).showSnackBar(SnackBar(
+                                content:
+                                    Text('Incorrect word. Please try again'),
+                              ));
                               setState(() {
                                 _verificationStage = -1;
                               });

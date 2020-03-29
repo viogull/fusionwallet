@@ -1,4 +1,4 @@
-package com.newveer.fusion.wallet
+package com.fusiongroup.fusion.wallet
 
 
 import io.flutter.embedding.android.FlutterFragmentActivity
