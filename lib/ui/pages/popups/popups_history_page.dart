@@ -1,25 +1,21 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
-import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
-import 'package:fusion_wallet/ui/pages/auth/password_creation_page.dart';
-import 'package:fusion_wallet/ui/pages/popups/popups_history_page.dart';
-import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-//import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 
-class HistoryPage extends StatefulWidget {
-  static const String navId = '/HistoryPage';
+import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
+
+class PopupHistoryPage extends StatefulWidget {
+  static const String navId = '/PopupDialogWidget';
   @override
-  _HistoryPageState createState() => new _HistoryPageState();
+  _PopupHistoryPageState createState() => new _PopupHistoryPageState();
 }
 
-class _HistoryPageState extends State<HistoryPage> {
+class _PopupHistoryPageState extends State<PopupHistoryPage> {
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();
+  var list;
 
   Future<Null> _startDateSelect(BuildContext context) async {
     final DateTime picked = await showDatePicker(
@@ -55,73 +51,16 @@ class _HistoryPageState extends State<HistoryPage> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    //DateTime selectedDate = DateTime.now();
 
-    void _showModalSheet() {
-      showModalBottomSheet(
-          context: context,
-          builder: (builder) {
-            return new Container(
-              color: Theme.of(context).colorScheme.surface,
-              child: Expanded(
-                //Expanded is used so that all the widget get fit into the available screen
-                child: ListView.builder(
-                  itemCount: 8,
-                  itemBuilder: (context, i) => SizedBox(
-                    height: 75.0,
-                    child: Container(
-//                      width: MediaQuery.of(context).size.width * 0.8,
-                      decoration: BoxDecoration(
-                        border: Border(
-                           // top: BorderSide(width: 1, color: Colors.white),
-                            bottom: BorderSide (width: 2, color: Colors.white)),
-                      ),
-                      margin: const EdgeInsets.only(bottom: 10, top: 30, left: 22, right: 22),
-                      child: Column(
-//                        crossAxisAlignment: CrossAxisAlignment.,
-//                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(
-                                  AppLocalizations.of(context)
-                                      .inputAccountNameHelperText(),
-                                  textAlign: TextAlign.left,
-                                ),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.3,
-                                ),
-                                SvgPicture.asset(
-                                  ('assets/images/icons/ic_bitcoin.svg'),
-                                  // color: Colors.white,
-                                  fit: BoxFit.fill,
-                                  height: 12,
-                                  width: 12,
-                                ),
-                                Text(
-                                  '0.00',
-                                  textAlign: TextAlign.right,
-                                ),
-                              ],
-                            ),
-                          ),
-
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            );
-          });
-    }
+//    void _showModalSheet() {
+//      showModalBottomSheet(
+//          context: context,
+//          builder: (builder) {
+//            return new Container(
+//              color: Theme.of(context).colorScheme.surface,
+//            );
+//          });
+//    }
 
     final background = SvgPicture.asset(
       ('assets/images/backgrounds/bg_primary.svg'),
@@ -142,7 +81,7 @@ class _HistoryPageState extends State<HistoryPage> {
     );
 
     final history = Container(
-      width: MediaQuery.of(context).size.width,
+      width: MediaQuery.of(context).size.width ,
       child: Card(
         borderOnForeground: false,
         elevation: 16,
@@ -157,7 +96,7 @@ class _HistoryPageState extends State<HistoryPage> {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
             child: GestureDetector(
-              onTap: _showModalSheet,
+//              onTap: _showModalSheet,
               child: Row(
                 children: <Widget>[
                   Text(
@@ -209,11 +148,11 @@ class _HistoryPageState extends State<HistoryPage> {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
             child: GestureDetector(
-              child: Center(
-                  child: Text("${startDate.toLocal()}".split(' ')[0])),
-              onTap: () => _startDateSelect(context),
+                  child: Center(
+                      child: Text("${startDate.toLocal()}".split(' ')[0])),
+             // onTap: () => _startDateSelect(context),
             ),
-          ),
+        ),
         ),
       ),
     );
@@ -239,7 +178,7 @@ class _HistoryPageState extends State<HistoryPage> {
               child: GestureDetector(
                 child: Center(
                     child: Text("${endDate.toLocal()}".split(' ')[0])),
-                onTap: () => _endDateSelect(context),
+                //onTap: () => _endDateSelect(context),
               ),
             )),
       ),
@@ -268,15 +207,67 @@ class _HistoryPageState extends State<HistoryPage> {
     );
 
     final buttonResult = Container(
-      height: 50,
-      width: MediaQuery.of(context).size.width,
-      child: FusionButton(
-        AppLocalizations.of(context).buttonViewResults(),
-        () {
-          Navigator.pushNamed(context, PopupHistoryPage.navId);
-        },
-      ),
+        height: MediaQuery.of(context).size.height * 0.6,
+        child:  Expanded( //Expanded is used so that all the widget get fit into the available screen
+          child: ListView.builder(
+            itemCount: 8,
+            itemBuilder: (context, i) => SizedBox(
+              height: 100.0,
+              child:
+              Card(
+                borderOnForeground: false,
+                elevation: 16,
+                color: Theme.of(context).colorScheme.surface,
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(width: 0.2, color:Colors.white),
+                  borderRadius: FusionTheme.borderRadius,
+                ),
+                margin: const EdgeInsets.only(bottom: 40, top:  0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    SizedBox(height:8,),
+                     Center(
+                       child: Row(
+                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Text(
+                            AppLocalizations.of(context).inputAccountNameHelperText(),
+                            textAlign: TextAlign.left,
+                          ),
+                          SizedBox(width: MediaQuery.of(context).size.width *0.3,),
+                          SvgPicture.asset(
+                            ('assets/images/icons/ic_bitcoin.svg'),
+                            // color: Colors.white,
+                            fit: BoxFit.fill,
+                            height: 12,
+                            width: 12,
+                          ),
+                          Text('0.00', textAlign: TextAlign.right,),
+                        ],
+                    ),
+                     ),
+                    SizedBox(height:10 ,),
+                    Row(
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.symmetric(vertical: 0, horizontal: 15),
+                          child: Text(
+                            '01.01.2020',
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
     );
+
 
     return Scaffold(
       body: Container(
@@ -291,8 +282,8 @@ class _HistoryPageState extends State<HistoryPage> {
                 right: 24.0,
               ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                // mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+               mainAxisSize: MainAxisSize.min,
 //                crossAxisAlignment: Alignment.bottomCenter,
                 children: <Widget>[
                   AppBar(
@@ -350,18 +341,10 @@ class _HistoryPageState extends State<HistoryPage> {
                     ),
                   ),
                   Flexible(
-                    flex: 3,
-                    child: Container(
-                      height: MediaQuery.of(context).size.height * 0.20,
-                    ),
-                  ),
-                  Flexible(
-                    flex: 1,
+                    flex: 6,
                     child: buttonResult,
                   ),
-                  SizedBox(
-                    height: 45,
-                  ),
+
                 ],
               ),
             ),
@@ -371,3 +354,29 @@ class _HistoryPageState extends State<HistoryPage> {
     );
   }
 }
+
+//List<bool> numberTruthList = [true, true, true, true, true, true, true];
+//Widget _buildRow(BuildContext context) {
+//  return Card(
+//    borderOnForeground: false,
+//    elevation: 16,
+//    color: Colors.black,
+//    shape: RoundedRectangleBorder(
+//      borderRadius: BorderRadius.circular(5.0),
+//    ),
+//    margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+//    child: Padding(
+//      padding: const EdgeInsets.all(3.0),
+//      child: ListView.builder(
+//        itemCount: 6,
+//        itemBuilder: (context, i) {
+//          if (numberTruthList[i]) {
+//            return ListTile(
+//              title: Text("$i"),
+//            );
+//          }
+//        },
+//      ),
+//    ),
+//  );
+//}

@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/pages/auth/passphrase/passphrase_creation_page.dart';
 import 'package:fusion_wallet/ui/pages/auth/passphrase/share_qr_page.dart';
+import 'package:fusion_wallet/ui/pages/information/transanction_history_page.dart';
 import 'package:fusion_wallet/ui/pages/popups/popup_page.dart';
 import 'package:fusion_wallet/ui/providers/bottom_navigation_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
