@@ -16,7 +16,7 @@ class ScanQrPage extends StatefulWidget {
 class _ScanQrPageState extends State<ScanQrPage> {
   Future scan() async {
     try {
-      String barcode = await BarcodeScanner.scan();
+      String barcode = await BarcodeScanner.scan(OverlayTheme.NATRIUM);
       debugPrint(barcode);
       setState(() => this.barcode = barcode);
     } on PlatformException catch (e) {

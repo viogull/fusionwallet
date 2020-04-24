@@ -194,10 +194,7 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
                               flex: 1,
                               child: IconButton(
                                   onPressed: () {
-                                    Share.share(widget.items.toString(),
-                                        subject: AppLocalizations.of(context)
-                                            .toolbarSharePasshpraseQr()
-                                            .toString());
+                                    Share.share(widget.items.toString());
                                   },
                                   icon: SizedBox(
                                     width: 24,

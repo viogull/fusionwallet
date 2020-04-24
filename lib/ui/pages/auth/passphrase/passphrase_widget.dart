@@ -188,10 +188,7 @@ class _PassphraseWidgetState extends State<PassphraseWidget> {
                         alignment: Alignment.centerRight,
                         child: FlatButton.icon(
                             onPressed: () {
-                              Share.share(this.widget.items.toString(),
-                                  subject: AppLocalizations.of(context)
-                                      .toolbarSharePasshpraseQr()
-                                      .toString());
+                              Share.share(this.widget.items.toString());
                             },
                             icon: Container(
                               alignment: Alignment.center,
@@ -402,10 +399,7 @@ class _PassphraseWidgetState extends State<PassphraseWidget> {
                               alignment: Alignment.centerRight,
                               child: FlatButton.icon(
                                   onPressed: () {
-                                    Share.share(this.widget.items.toString(),
-                                        subject: AppLocalizations.of(context)
-                                            .toolbarSharePasshpraseQr()
-                                            .toString());
+                                    Share.share(this.widget.items.toString());
                                   },
                                   icon: Container(
                                     alignment: Alignment.center,

@@ -34,13 +34,13 @@ class PassphraseShareQrPage extends StatelessWidget {
       Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context).toolbarRecoverFromSeedTitle()),
+          title:
+              Text(AppLocalizations.of(context).toolbarRecoverFromSeedTitle()),
           backgroundColor: Colors.transparent,
-          centerTitle: true ,
+          centerTitle: true,
           elevation: 0,
-          iconTheme: IconThemeData(
-              color: Theme.of(context).colorScheme.primary
-          ),
+          iconTheme:
+              IconThemeData(color: Theme.of(context).colorScheme.primary),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -60,16 +60,12 @@ class PassphraseShareQrPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: RaisedButton.icon(
-
                           shape: RoundedRectangleBorder(
                               borderRadius: FusionTheme.borderRadius),
                           label:
                               Text(AppLocalizations.of(context).buttonShare()),
                           onPressed: () {
-                            Share.share(data.toString(),
-                                subject: AppLocalizations.of(context)
-                                    .toolbarSharePasshpraseQr()
-                                    .toString());
+                            Share.share(data.toString());
                           },
                           icon: Container(
                             child: SvgPicture.asset(
@@ -101,7 +97,9 @@ class PassphraseShareQrPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox (height: 5,),
+            SizedBox(
+              height: 5,
+            ),
           ],
         ),
       ),

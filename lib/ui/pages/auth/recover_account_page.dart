@@ -29,10 +29,9 @@ class RecoverAccountPage extends StatefulWidget {
 }
 
 class _RecoverAccountSate extends State<RecoverAccountPage> {
-
   Future<String> scan() async {
     try {
-      String barcode = await BarcodeScanner.scan();
+      String barcode = await BarcodeScanner.scan(OverlayTheme.TITANIUM);
       debugPrint(barcode);
       return barcode;
     } on PlatformException catch (e) {
@@ -41,13 +40,13 @@ class _RecoverAccountSate extends State<RecoverAccountPage> {
           this.barcode = 'The user did not grant the camera permission!';
         });
       } else {
-       return null;
+        return null;
       }
     } on FormatException {
       setState(() => this.barcode =
-      'null (User returned using the "back"-button before scanning anything. Result)');
+          'null (User returned using the "back"-button before scanning anything. Result)');
     } catch (e) {
-     return null;
+      return null;
     }
   }
 
@@ -60,12 +59,11 @@ class _RecoverAccountSate extends State<RecoverAccountPage> {
 
   String barcode = '';
 
-
   bool _rememberMeFlag = false;
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-     debugPrint('rebild $barcode');
+    debugPrint('rebild $barcode');
 
     final background = SvgPicture.asset(
       ('assets/images/backgrounds/bg_primary.svg'),
@@ -83,10 +81,11 @@ class _RecoverAccountSate extends State<RecoverAccountPage> {
     final text = Container(
       alignment: Alignment.topLeft,
       margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
-      child: Text( AppLocalizations.of(context).inputAccountNameHelperText(),
+      child: Text(
+        AppLocalizations.of(context).inputAccountNameHelperText(),
         style: TextStyle(
-            color: (theme.colorScheme.onSurface),
-      ),
+          color: (theme.colorScheme.onSurface),
+        ),
       ),
     );
 
@@ -100,12 +99,11 @@ class _RecoverAccountSate extends State<RecoverAccountPage> {
         child: TextFormField(
           initialValue: '$barcode',
           style: TextStyle(
-
             color: (theme.colorScheme.onSurface),
           ),
           decoration: InputDecoration(
             border: OutlineInputBorder(),
-            labelText:  AppLocalizations.of(context).inputEditAccountNameHint(),
+            labelText: AppLocalizations.of(context).inputEditAccountNameHint(),
             labelStyle: TextStyle(
               color: (theme.colorScheme.onSurface),
             ),
@@ -121,21 +119,18 @@ class _RecoverAccountSate extends State<RecoverAccountPage> {
           borderRadius: BorderRadius.circular(5),
           border: Border.all(color: theme.primaryColor)),
       child: SizedBox.expand(
-        child:  TextFormField(
-
+        child: TextFormField(
           maxLines: 14,
-         initialValue: barcode,
+          initialValue: barcode,
           //initialValue: '(barcode == null ) ? "hvhvhhhhvvhvhh" : barcode',
           style: TextStyle(
             color: (theme.colorScheme.onSurface),
           ),
           decoration: InputDecoration(
               border: OutlineInputBorder(),
-              hintText:
-              AppLocalizations.of(context)
+              hintText: AppLocalizations.of(context)
                   .inputEnterScanPasshpraseHintText(),
-             // helperText: barcode,
-
+              // helperText: barcode,
 
               hintStyle: TextStyle(
                 color: (theme.colorScheme.onSurface),
@@ -144,18 +139,16 @@ class _RecoverAccountSate extends State<RecoverAccountPage> {
                 icon: SvgPicture.asset(
                   'assets/images/icons/ic_qrcodescan.svg',
                   height: 35.0,
-
                 ),
                 onPressed: () async {
-                   var barcode = await scan();
-                   setState(() {
-                     this.barcode = barcode;
-                   });
-                   debugPrint(barcode);
+                  var barcode = await scan();
+                  setState(() {
+                    this.barcode = barcode;
+                  });
+                  debugPrint(barcode);
 
 //                  Navigator.pushNamed(context, ScanQrPage.navId);
                 },
-
               )),
         ),
       ),
@@ -183,7 +176,6 @@ class _RecoverAccountSate extends State<RecoverAccountPage> {
         child: Stack(
           //fit: StackFit.passthrough,
           children: <Widget>[
-
             background,
             Container(
               padding: EdgeInsets.only(
@@ -195,25 +187,26 @@ class _RecoverAccountSate extends State<RecoverAccountPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   AppBar(
-                    title: Text(AppLocalizations.of(context).toolbarRecoverFromSeedTitle()),
-                     backgroundColor: Colors.transparent,
-                    centerTitle: true ,
+                    title: Text(AppLocalizations.of(context)
+                        .toolbarRecoverFromSeedTitle()),
+                    backgroundColor: Colors.transparent,
+                    centerTitle: true,
                     elevation: 0,
                     iconTheme: IconThemeData(
-                      color: Theme.of(context).colorScheme.primary
-                    ),
+                        color: Theme.of(context).colorScheme.primary),
                   ),
                   Flexible(
                     flex: 4,
                     child: logo,
                   ),
 
-                  SizedBox(height:  10,),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Flexible(
                     flex: 2,
                     child: text,
                   ),
-
 
                   Flexible(
                     flex: 4,
@@ -224,14 +217,20 @@ class _RecoverAccountSate extends State<RecoverAccountPage> {
                     flex: 8,
                     child: scanQR,
                   ),
-                  SizedBox(height:  20,),
+                  SizedBox(
+                    height: 20,
+                  ),
 //                  SizedBox(height: 30.0),
-                  LimitedBox(maxHeight: 70.0,),
+                  LimitedBox(
+                    maxHeight: 70.0,
+                  ),
                   Flexible(
                     flex: 5,
                     child: button,
                   ),
-                  SizedBox(height:  5,),
+                  SizedBox(
+                    height: 5,
+                  ),
                 ],
               ),
             ),

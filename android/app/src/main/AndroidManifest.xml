@@ -16,8 +16,8 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="Fusion Wallet"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Fusion"
+        android:icon="@mipmap/launcher_icon">
 
 
         <activity

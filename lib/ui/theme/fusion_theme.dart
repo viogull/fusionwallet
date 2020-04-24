@@ -16,6 +16,10 @@ class FusionTheme {
 
   static const double radius = 5.0;
 
+  static final iconThemeColored = IconThemeData(
+    size: 18,
+  );
+
   static int tintValue(int value, double factor) =>
       max(0, min((value + ((255 - value) * factor)).round(), 255));
 
@@ -101,6 +105,10 @@ class FusionTheme {
   static Color hexToColor(String code) {
     return new Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
   }
+
+  static Color redButtonColor() => hexToColor("#D74D63");
+
+  static Color greenButtonColor() => hexToColor("#00B349");
 }
 
 enum FusionThemes { light, dark }
