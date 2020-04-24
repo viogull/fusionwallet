@@ -10,7 +10,6 @@ class TermsConditionsPage extends StatefulWidget {
 }
 
 class _TermsConditionsPageState extends State<TermsConditionsPage> {
-  bool _rememberMeFlag = false;
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);

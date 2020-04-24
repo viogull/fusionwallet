@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +11,12 @@ import 'package:fusion_wallet/ui/pages/auth/passphrase/passphrase_creation_page.
 import 'package:fusion_wallet/ui/pages/auth/passphrase/scan_qr_page.dart';
 import 'package:fusion_wallet/ui/pages/auth/passphrase/share_qr_page.dart';
 import 'package:fusion_wallet/ui/pages/bottom_home_page.dart';
+import 'package:fusion_wallet/ui/pages/information/add_contact_page.dart';
+import 'package:fusion_wallet/ui/pages/information/transanction_history_page.dart';
+import 'package:fusion_wallet/ui/pages/popups/edit_account_name_page.dart';
+import 'package:fusion_wallet/ui/pages/popups/popups_history_page.dart';
+import 'package:fusion_wallet/ui/pages/primary/contacts_page.dart';
+import 'package:fusion_wallet/ui/pages/primary/history_page.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/accounts_page.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/delegate_funds_page.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/push_funds_page.dart';
@@ -22,7 +27,6 @@ import 'package:fusion_wallet/ui/pages/primary/accounts/unbound_funds_page.dart'
 import 'package:fusion_wallet/ui/pages/primary/settings_page.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
-
 import 'localizations.dart';
 import 'ui/pages/auth/account_creation_page.dart';
 import 'ui/pages/auth/intro_page.dart';
@@ -92,6 +96,11 @@ class _AppState extends State<App> {
         AccountCreationNamePage.navId: (context) => AccountCreationNamePage(),
         RecoverAccountPage.navId: (context) => RecoverAccountPage(),
         TermsConditionsPage.navId: (context) => TermsConditionsPage(),
+        PasswordCreationPage.navId: (context) => PasswordCreationPage(),
+        HistoryPage.navId: (context) => HistoryPage(),
+        PopupHistoryPage.navId: (context) => PopupHistoryPage(),
+        ContactsPage.navId: (context) => ContactsPage(),
+        AddContactPage.navId: (context) => AddContactPage(),
         AccountsPage.navId: (context) => AccountsPage(),
         SendFundsPage.navId: (context) => SendFundsPage(),
         RequestFundsPage.navId: (context) => RequestFundsPage(),
@@ -106,6 +115,7 @@ class _AppState extends State<App> {
 }
 
 class HomePage extends StatefulWidget {
+
   static const String navId = '/home';
 
   @override

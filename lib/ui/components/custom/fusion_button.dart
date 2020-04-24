@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -25,7 +26,7 @@ class FusionButton extends StatelessWidget {
         ios: (_) => FusionTheme.buttonIOSTheme,
         color: theme.colorScheme.primary,
         onPressed: this.onPressed,
-        child: Text(
+        child: AutoSizeText(
           text.toUpperCase(),
           style: TextStyle(
               fontSize: 14,
