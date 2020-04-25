@@ -52,11 +52,27 @@ class _AddContactPageState extends State<AddContactPage> {
       width: MediaQuery.of(context).size.width,
     );
 
-    final logo = SvgPicture.asset(
-      ('assets/images/icons/ic_man.svg'),
-      placeholderBuilder: (context) => CircularProgressIndicator(),
-      height: 120.0,
+    final logo = Container(
+      height: 130,
+      child: SvgPicture.asset(
+        ('assets/images/icons/ic_man.svg'),
+        placeholderBuilder: (context) => CircularProgressIndicator(),
+        height: 90.0,
+      ),
     );
+
+
+    final ellipse =
+    Padding(
+      padding: EdgeInsets.fromLTRB(65, 0, 10, 50),
+      child: SvgPicture.asset(
+        ('assets/images/icons/ic_ellipse19.svg'),
+        placeholderBuilder: (context) => CircularProgressIndicator(),
+        height: 40.0,
+
+      ),
+    );
+
 
     final text = Container(
       alignment: Alignment.topLeft,
@@ -72,7 +88,7 @@ class _AddContactPageState extends State<AddContactPage> {
     final email = Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
-        border: Border.all(color: theme.primaryColor),
+        border: Border.all(color: theme.colorScheme.primary),
       ),
       height: 30.0,
       child: Center(
@@ -96,7 +112,7 @@ class _AddContactPageState extends State<AddContactPage> {
       alignment: Alignment.topLeft,
       margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
       child: Text(
-        AppLocalizations.of(context).inputAddressHint(),
+        AppLocalizations.of(context).labelAddContactAddress(),
         style: TextStyle(
           color: (theme.colorScheme.onSurface),
         ),
@@ -107,8 +123,9 @@ class _AddContactPageState extends State<AddContactPage> {
       height: 200.0,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          border: Border.all(color: theme.primaryColor)),
+        borderRadius: BorderRadius.circular(5),
+        border: Border.all(color: theme.colorScheme.primary),
+      ),
       child: SizedBox.expand(
         child: TextFormField(
           maxLines: 14,
@@ -159,6 +176,7 @@ class _AddContactPageState extends State<AddContactPage> {
     final accountNameLabel = Container(
       alignment: Alignment.topLeft,
       margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 40.0),
+
       child: Text(
         AppLocalizations.of(context).inputAccountNameHelperText(),
         style: TextStyle(
@@ -231,6 +249,7 @@ class _AddContactPageState extends State<AddContactPage> {
                     decoration: BoxDecoration(
                       shape: BoxShape.rectangle,
                           borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: theme.colorScheme.primary),
 
 
                     ),
@@ -271,47 +290,7 @@ class _AddContactPageState extends State<AddContactPage> {
             });
       }),
     );
-//              SizedBox(
-//                width: MediaQuery.of(context).size.width,
-//                //double.infinity,
-////                color: Theme.of(context).colorScheme.surface,
-//
-////                width:
-////                MediaQuery.of(context).size.width,
-////                height: MediaQuery.of(context).size.height * 0.35,
-////        padding: EdgeInsets.only(
-////                left: 24.0,
-////                right: 24.0,
-////              ),
-//                child: Column(
-//                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                  mainAxisSize: MainAxisSize.min,
-////                crossAxisAlignment: Alignment.bottomCenter,
-//                  children: <Widget>[
-////                    SizedBox(height: 80,),
-//                    Container(
-//                      decoration: BoxDecoration(
-//                        border: Border(
-//                          // top: BorderSide(width: 1, color: Colors.white),
-//                            bottom: BorderSide (width: 1, color: Colors.grey)),
-//                      ),
-//                      padding: EdgeInsets.only(bottom: 8.0),
-//                      child: Row(
-//                        children: <Widget>[
-//
-//                          menuLabel,
-//
-//                          save,
-//                        ],
-//                      ),
-//                    ),
-//                    accountNameLabel,
-//                    textField,
-//                  ],
-//                ),
-//
-//
-//              );
+
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -343,7 +322,12 @@ class _AddContactPageState extends State<AddContactPage> {
                   ),
                   Flexible(
                     flex: 3,
-                    child: logo,
+                    child: Stack(
+                      children: <Widget>[
+                        logo,
+                        ellipse
+                      ],
+                    ),
                   ),
 //                  SizedBox(height: 10 ,),
                   // LimitedBox(maxHeight: 30,),
@@ -365,7 +349,7 @@ class _AddContactPageState extends State<AddContactPage> {
                     child: label,
                   ),
                   Flexible(
-                    flex: 1,
+                    flex: 2,
                     child: scanQR,
                   ),
                   SizedBox(

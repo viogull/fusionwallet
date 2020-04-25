@@ -95,7 +95,6 @@ class _ContactsPageState extends State<ContactsPage> {
               elevation: 16,
               color: Theme.of(context).colorScheme.surface,
               shape: RoundedRectangleBorder(
-                side: BorderSide(width: 0.2, color:Colors.white),
                 borderRadius: FusionTheme.borderRadius,
               ),
               margin: const EdgeInsets.only(bottom: 40, top:  0),
@@ -183,6 +182,10 @@ class _ContactsPageState extends State<ContactsPage> {
                     ],
                   ),
                   Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(color: theme.colorScheme.primary),
+                    ),
                     height: 35,
                     padding: const EdgeInsets.all(1.0),
                     child: TextField(
@@ -191,8 +194,11 @@ class _ContactsPageState extends State<ContactsPage> {
                       },
                       controller: editingController,
                       decoration: InputDecoration(
+
                           labelText: "Search Contacts",
                           border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+
 
                               borderRadius: BorderRadius.all(Radius.circular(5.0)))),
                     ),

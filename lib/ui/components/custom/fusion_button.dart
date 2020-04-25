@@ -16,24 +16,28 @@ class FusionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: FusionTheme.borderRadius,
-        border: Border.all(color: Theme.of(context).colorScheme.surface),
-      ),
-      child: PlatformButton(
-        android: (_) => FusionTheme.buttonAndroidTheme,
-        ios: (_) => FusionTheme.buttonIOSTheme,
-        color: theme.colorScheme.primary,
-        onPressed: this.onPressed,
-        child: AutoSizeText(
-          text.toUpperCase(),
-          style: TextStyle(
-              fontSize: 14,
-            color: (theme.colorScheme.onPrimary),
-          ),
+    return  Container(
+        decoration: BoxDecoration(
+          borderRadius: FusionTheme.borderRadius,
+          border: Border.all(color: Theme.of(context).colorScheme.surface),
         ),
-      ),
+        child: PlatformButton(
+          android: (_) => FusionTheme.buttonAndroidTheme,
+          ios: (_) => FusionTheme.buttonIOSTheme,
+          color: theme.colorScheme.primary,
+          onPressed: this.onPressed,
+
+            child: Padding(
+              padding: const EdgeInsets.all(0),
+              child: AutoSizeText(
+                text.toUpperCase(), textAlign: TextAlign.center, minFontSize: 14, maxLines: 1,
+                style: TextStyle(
+                  color: (theme.colorScheme.onPrimary),
+                ),
+              ),
+            ),
+
+        ),
     );
   }
 }

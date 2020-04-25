@@ -12,7 +12,9 @@ class FusionTheme {
       // side: BorderSide(color: Colors.white),
     ),
   );
-  static final buttonIOSTheme = CupertinoButtonData();
+  static final buttonIOSTheme = CupertinoButtonData(
+    padding: EdgeInsets.all(1),
+  );
 
   static const double radius = 5.0;
 

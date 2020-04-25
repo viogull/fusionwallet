@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/pages/auth/passphrase/passphrase_creation_page.dart';
 import 'package:fusion_wallet/ui/pages/auth/passphrase/share_qr_page.dart';
+import 'package:fusion_wallet/ui/pages/exchange/convert_funds_page.dart';
 import 'package:fusion_wallet/ui/pages/information/transanction_history_page.dart';
 import 'package:fusion_wallet/ui/pages/popups/popup_page.dart';
 import 'package:fusion_wallet/ui/providers/bottom_navigation_provider.dart';
@@ -25,6 +26,7 @@ import 'primary/contacts_page.dart';
 import 'primary/exchange_page.dart';
 import 'primary/history_page.dart';
 import 'primary/settings_page.dart';
+
 
 final logger = Logger();
 
@@ -46,7 +48,8 @@ class _BottomHomePageState extends State<BottomHomePage> {
     ExchangePage(),
     ContactsPage(),
     HistoryPage(),
-    SettingsPage()
+    SettingsPage(),
+    ConvertExchangePage(),
   ];
 
   @override
