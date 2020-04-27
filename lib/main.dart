@@ -12,11 +12,7 @@ import 'package:fusion_wallet/ui/pages/auth/passphrase/scan_qr_page.dart';
 import 'package:fusion_wallet/ui/pages/auth/passphrase/share_qr_page.dart';
 import 'package:fusion_wallet/ui/pages/bottom_home_page.dart';
 import 'package:fusion_wallet/ui/pages/information/add_contact_page.dart';
-import 'package:fusion_wallet/ui/pages/information/transanction_history_page.dart';
-import 'package:fusion_wallet/ui/pages/popups/edit_account_name_page.dart';
 import 'package:fusion_wallet/ui/pages/popups/popups_history_page.dart';
-import 'package:fusion_wallet/ui/pages/primary/contacts_page.dart';
-import 'package:fusion_wallet/ui/pages/primary/history_page.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/accounts_page.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/delegate_funds_page.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/push_funds_page.dart';
@@ -24,12 +20,15 @@ import 'package:fusion_wallet/ui/pages/primary/accounts/request_funds_page.dart'
 import 'package:fusion_wallet/ui/pages/primary/accounts/rewards_info_page.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/send_funds_page.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/unbound_funds_page.dart';
+import 'package:fusion_wallet/ui/pages/primary/contacts_page.dart';
+import 'package:fusion_wallet/ui/pages/primary/history_page.dart';
 import 'package:fusion_wallet/ui/pages/primary/settings_page.dart';
-import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
+
 import 'localizations.dart';
 import 'ui/pages/auth/account_creation_page.dart';
 import 'ui/pages/auth/intro_page.dart';
+import 'ui/pages/auth/password_creation_page.dart';
 import 'ui/pages/auth/recover_account_page.dart';
 import 'ui/pages/auth/terms_conditions_page.dart';
 import 'ui/providers/bottom_navigation_provider.dart';
@@ -39,11 +38,7 @@ import 'ui/theme/theme_state.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupServiceLocator();
-  if (kReleaseMode) {
-    Logger.level = Level.warning;
-  } else {
-    Logger.level = Level.debug;
-  }
+
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(new StateContainer(child: new App()));
@@ -115,7 +110,6 @@ class _AppState extends State<App> {
 }
 
 class HomePage extends StatefulWidget {
-
   static const String navId = '/home';
 
   @override
