@@ -6,6 +6,29 @@ import 'package:intl/intl.dart';
 import 'l10n/messages_all.dart';
 
 class AppLocalizations {
+  static const LOCALE_ENGLISH = const Locale('en', '');
+  static const LOCALE_RUSSIAN = const Locale('ru', '');
+
+  static const Locales = const [LOCALE_ENGLISH, LOCALE_RUSSIAN];
+
+  static fetchLanguages(BuildContext context) {
+    return [
+      AppLocalizations.of(context).localeEnglishItem(),
+      AppLocalizations.of(context).localeRussianItem()
+    ];
+  }
+
+  static Locale getLocaleBySelectionIndex(int index) {
+    if (index == null) {
+      return LOCALE_ENGLISH;
+    } else {
+      if (index == 1)
+        return LOCALE_RUSSIAN;
+      else
+        return LOCALE_ENGLISH;
+    }
+  }
+
   static Future<AppLocalizations> load(Locale locale) {
     final String name =
         locale.countryCode.isEmpty ? locale.languageCode : locale.toString();
@@ -683,7 +706,7 @@ class AppLocalizations {
 
   String get minimumSend {
     return Intl.message("Minimum send amount is %1 NANO",
-        desc: 'send_minimum_error', name: 'amountMinimumError');
+        desc: 'send_minimum_error', name: 'minimumSend');
   }
 
   String get insufficientBalance {
@@ -1523,6 +1546,12 @@ class AppLocalizations {
   String get privacyUrl {
     return 'https://avengemedia.github.io/kalium/privacy.html';
   }
+
+  String localeEnglishItem() =>
+      Intl.message('English', name: 'localeEnglishItem');
+
+  String localeRussianItem() =>
+      Intl.message('Russian', name: 'localeRussianItem');
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

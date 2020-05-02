@@ -3,20 +3,21 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:fusion_wallet/themes.dart';
 import 'package:fusion_wallet/utils/crypto.dart';
+import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 import 'package:nanodart/nanodart.dart';
 import 'package:uni_links/uni_links.dart';
 
-import 'core/account_service.dart';
 import 'core/db_helper.dart';
 import 'core/models/account.dart';
 import 'core/models/available_currency.dart';
 import 'core/models/available_language.dart';
-import 'core/models/available_themes.dart';
 import 'core/models/state_block.dart';
 import 'service_locator.dart';
-import 'utils/shared_prefs.dart';
 import 'utils/vault.dart';
+
+const String prefsUiThemeMode = "prefsThemeMode";
+const String prefsLanguage = "prefsLocale";
 
 class _InheritedStateContainer extends InheritedWidget {
   final StateContainerState data;
@@ -36,8 +37,9 @@ class _InheritedStateContainer extends InheritedWidget {
 
 class StateContainer extends StatefulWidget {
   final Widget child;
+  final Box preferences;
 
-  StateContainer({@required this.child});
+  StateContainer({@required this.child, @required this.preferences});
 
   @override
   State<StatefulWidget> createState() => StateContainerState();
@@ -54,7 +56,7 @@ class StateContainerState extends State<StateContainer> {
   String receiveThreshold = BigInt.from(10).pow(24).toString();
 
   String currencyLocale;
-  Locale deviceLocale = Locale('en', 'US');
+  Locale locale = Locale('en', '');
   AvailableCurrency curCurrency = AvailableCurrency(AvailableCurrencyEnum.USD);
   LanguageSetting curLanguage = LanguageSetting(AvailableLanguage.DEFAULT);
   BaseTheme curTheme = LightTheme();
@@ -64,6 +66,8 @@ class StateContainerState extends State<StateContainer> {
   // Two most recently used accounts
   Account recentLast;
   Account recentSecondLast;
+
+  ThemeMode themeMode = ThemeMode.light;
 
   // If callback is locked
   bool _locked = false;
@@ -92,23 +96,23 @@ class StateContainerState extends State<StateContainer> {
     super.initState();
     // Register RxBus
     _registerBus();
-    // Set currency locale here for the UI to access
-    sl.get<SharedPrefsUtil>().getCurrency(deviceLocale).then((currency) {
-      setState(() {
-        currencyLocale = currency.getLocale().toString();
-        curCurrency = currency;
-      });
-    });
+
     // Get default language setting
-    sl.get<SharedPrefsUtil>().getLanguage().then((language) {
-      setState(() {
-        curLanguage = language;
-      });
-    });
+    final locale = widget.preferences.get(prefsLanguage);
     // Get theme default
-    sl.get<SharedPrefsUtil>().getTheme().then((theme) {
-      updateTheme(theme, setIcon: false);
-    });
+    var preferencesTheme = widget.preferences.get(prefsUiThemeMode);
+    final currentTheme =
+        (preferencesTheme == null) ? ThemeMode.dark : preferencesTheme;
+
+    final currentLocale =
+        (locale == 'en') ? Locale('en', '') : Locale('ru', '');
+    debugPrint(
+        "Preferences Theme Selected $preferencesTheme , Theme Mode: $currentTheme");
+    debugPrint(
+        "Preferences Language Selected $locale , Theme Mode: $currentLocale");
+
+    updateTheme(currentTheme);
+    updateLanguage(currentLocale);
     // Get initial deep link
     getInitialLink().then((initialLink) {
       setState(() {
@@ -132,16 +136,30 @@ class StateContainerState extends State<StateContainer> {
 
   @override
   void dispose() {
+    widget.preferences.close();
     super.dispose();
   }
 
-  void updateTheme(ThemeSetting theme, {bool setIcon = true}) {
-    setState(() {
-      curTheme = theme.getTheme();
-    });
-    if (setIcon) {
-      AppIcon.setAppIcon(theme.getTheme().appIcon);
+  void updateTheme(ThemeMode theme, {bool save = false}) {
+    debugPrint("Updating theme with new $theme");
+    if (save) {
+      debugPrint("Writing $theme to prefs storage");
+      widget.preferences.put(prefsUiThemeMode, theme);
     }
+    setState(() {
+      themeMode = theme;
+    });
+  }
+
+  void updateLanguage(Locale updatedLocale, {bool save = false}) {
+    debugPrint("Updating language with new $updatedLocale");
+    if (save) {
+      debugPrint("Writing $updatedLocale to prefs storage");
+      widget.preferences.put(prefsLanguage, updatedLocale.countryCode);
+    }
+    setState(() {
+      locale = updatedLocale;
+    });
   }
 
   void logOut() {
