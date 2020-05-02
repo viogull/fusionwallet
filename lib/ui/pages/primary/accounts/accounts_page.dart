@@ -4,9 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fusion_wallet/ui/components/balances_card_item.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
+import 'package:fusion_wallet/ui/pages/primary/accounts/delegate_funds_page.dart';
+import 'package:fusion_wallet/ui/pages/primary/accounts/push_funds_page.dart';
+import 'package:fusion_wallet/ui/pages/primary/accounts/request_funds_page.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/rewards_info_page.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/send_funds_page.dart';
+import 'package:fusion_wallet/ui/pages/primary/accounts/unbound_funds_page.dart';
 import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
 
 import '../../../../localizations.dart';
@@ -27,6 +32,9 @@ class AccountsPage extends StatelessWidget {
         {
           return ButtonBar(
             alignment: MainAxisAlignment.center,
+            buttonHeight: 45,
+            buttonPadding:
+                const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
             children: <Widget>[
               RaisedButton.icon(
                 shape: RoundedRectangleBorder(
@@ -44,7 +52,9 @@ class AccountsPage extends StatelessWidget {
               RaisedButton.icon(
                   shape: RoundedRectangleBorder(
                       borderRadius: FusionTheme.borderRadius),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, RequestFundsPage.navId);
+                  },
                   icon: Icon(Icons.arrow_downward),
                   color: FusionTheme.greenButtonColor(),
                   label: Text(AppLocalizations.of(context)
@@ -58,13 +68,19 @@ class AccountsPage extends StatelessWidget {
       case 1:
         {
           return ButtonBar(
-            mainAxisSize: MainAxisSize.max,
             alignment: MainAxisAlignment.center,
             buttonMinWidth: 100,
+            buttonHeight: 45,
             children: <Widget>[
               FusionButton(
-                  AppLocalizations.of(context).buttonDelegate(), () {}),
-              FusionButton(AppLocalizations.of(context).buttonUnbound(), () {})
+                AppLocalizations.of(context).buttonDelegate(),
+                () {
+                  Navigator.pushNamed(context, DelegateFundsPage.navId);
+                },
+              ),
+              FusionButton(AppLocalizations.of(context).buttonUnbound(), () {
+                Navigator.pushNamed(context, UnboundFundsPage.navId);
+              })
             ],
           );
         }
@@ -73,8 +89,11 @@ class AccountsPage extends StatelessWidget {
         {
           return ButtonBar(
             alignment: MainAxisAlignment.center,
+            buttonHeight: 45,
             children: <Widget>[
-              FusionButton(AppLocalizations.of(context).buttonPush(), () {})
+              FusionButton(AppLocalizations.of(context).buttonPush(), () {
+                Navigator.pushNamed(context, PushFundsPage.navId);
+              })
             ],
           );
         }
@@ -123,9 +142,23 @@ class AccountsPage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
-                        Text(AppLocalizations.of(context)
-                            .labelCryptoAvailable()),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            AppLocalizations.of(context).labelCryptoAvailable(),
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: theme.colorScheme.onSurface
+                                    .withOpacity(0.9)),
+                          ),
+                        ),
+                        BalancesCardItem(title: "Bitcoin", value: "0.00000"),
+                        BalancesCardItem(title: "Bitcoin", value: "0.00000"),
+                        BalancesCardItem(title: "Bitcoin", value: "0.00000"),
+                        BalancesCardItem(title: "Bitcoin", value: "0.00000"),
                       ],
                     ),
                   ),
@@ -135,14 +168,18 @@ class AccountsPage extends StatelessWidget {
             Align(
               alignment: Alignment.topRight,
               child: LimitedBox(
-                maxHeight: 32,
-                maxWidth: 32,
+                maxHeight: 24,
+                maxWidth: 24,
                 child: FloatingActionButton(
                   mini: true,
                   heroTag: 'info_fab_tag',
-                  child: Icon(
-                    Icons.info,
-                    size: 24,
+                  child: SizedBox(
+                    width: 15,
+                    height: 15,
+                    child: SvgPicture.asset("assets/images/icons/ic_dollar.svg",
+                        placeholderBuilder: (BuildContext context) => Container(
+                            padding: const EdgeInsets.all(2.0),
+                            child: PlatformCircularProgressIndicator())),
                   ),
                   onPressed: () {},
                   elevation: 1,

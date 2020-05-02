@@ -3,22 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
-import 'package:fusion_wallet/ui/pages/auth/passphrase/passphrase_creation_page.dart';
-import 'package:fusion_wallet/ui/pages/auth/passphrase/share_qr_page.dart';
-import 'package:fusion_wallet/ui/pages/information/transanction_history_page.dart';
-import 'package:fusion_wallet/ui/pages/popups/popup_page.dart';
+import 'package:fusion_wallet/state_container.dart';
+import 'package:fusion_wallet/ui/pages/popups/popups_remove_account.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/accounts_page.dart';
+import 'package:fusion_wallet/ui/pages/primary/share_qr_address_page.dart';
 import 'package:fusion_wallet/ui/providers/bottom_navigation_provider.dart';
+import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
-import 'auth/account_creation_page.dart';
-import 'auth/biometric_features_page.dart';
+import '../fusion_scaffold.dart';
 import 'auth/passphrase/scan_qr_page.dart';
-import 'auth/password_creation_page.dart';
-import 'auth/recover_account_page.dart';
-import 'auth/terms_conditions_page.dart';
+import 'information/add_contact_page.dart';
 import 'primary/contacts_page.dart';
 import 'primary/exchange_page.dart';
 import 'primary/history_page.dart';
@@ -47,147 +44,158 @@ class _BottomHomePageState extends State<BottomHomePage> {
     ExchangePage(),
     ContactsPage(),
     HistoryPage(),
-    SettingsPage()
+    SettingsPage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<BottomNavigationProvider>(context);
-    final ThemeData theme = Theme.of(context);
-    return Stack(children: <Widget>[
-      Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: SvgPicture.asset(
-          "assets/images/backgrounds/bg_primary.svg",
-          fit: BoxFit.fill,
-        ),
-      ),
-      Scaffold(
-        backgroundColor: Colors.transparent,
-        drawerScrimColor: theme.primaryColor,
-        body: NestedScrollView(
-          body: Stack(
-            children: <Widget>[
-              tabs[provider.currentIndex],
-              Positioned(
-                left: 0,
-                right: 0,
-                bottom: 0,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(5),
-                    topLeft: Radius.circular(5),
-                  ),
-                  child: BottomNavigationBar(
-                    currentIndex: provider.currentIndex,
-                    onTap: (index) {
-                      provider.set(index);
-                    },
-                    backgroundColor: theme.colorScheme.primary,
-                    selectedItemColor: theme.colorScheme.onPrimary,
-                    unselectedItemColor:
-                        theme.colorScheme.onPrimary.withOpacity(0.6),
-                    iconSize: 30,
-                    elevation: 8,
-                    type: BottomNavigationBarType.fixed,
-                    items: _bottomBarItems(context, theme),
-                  ),
-                ),
-              )
-            ],
-          ),
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
-              SliverOverlapAbsorber(
-                handle:
-                    NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-                sliver: SliverAppBar(
-                  elevation: 4,
-                  stretch: true,
-                  floating: true,
-                  pinned: false,
-                  primary: true,
-                  automaticallyImplyLeading: false,
-                  backgroundColor: theme.colorScheme.primary,
-                  centerTitle: false,
-                  title: Text(
-                    AppLocalizations.of(context).inputAccountNameHintText(),
-                    style: GoogleFonts.notoSans()
-                        .copyWith(color: theme.colorScheme.onPrimary),
-                  ),
-                ),
-              ),
-            ];
-          },
-        ),
-        drawer: _buildFusionDrawer(context, [
-          DrawerItem("", Icon(Icons.add_shopping_cart)),
-          DrawerItem(
-              AppLocalizations.of(context).menuItemShowQR(),
-              _buildBottomNavItemIcon(
-                  "assets/images/icons/ic_qrcodescan.svg", false)),
-          DrawerItem(
-              AppLocalizations.of(context).menuItemSetDefaults(),
-              _buildBottomNavItemIcon(
-                  "assets/images/icons/ic_default_settings.svg", true)),
-          DrawerItem(
-              AppLocalizations.of(context).menuItemViewPassphrase(),
-              _buildBottomNavItemIcon(
-                  "assets/images/icons/ic_passwordellipse.svg", true)),
-          DrawerItem(AppLocalizations.of(context).menuItemEditAccountName(),
-              _buildBottomNavItemIcon("assets/images/icons/ic_edit.svg", true)),
-          DrawerItem(
-              AppLocalizations.of(context).menuItemRemoveAccount(),
-              _buildBottomNavItemIcon(
-                  "assets/images/icons/ic_folder.svg", true)),
-          DrawerItem(
-              AppLocalizations.of(context).menuItemWithdrawFunds(),
-              _buildBottomNavItemIcon(
-                  "assets/images/icons/ic_withdraw.svg", true)),
-          DrawerItem(AppLocalizations.of(context).menuItemReferalLink(),
-              Icon(Icons.content_copy)),
-        ]),
-      ),
-    ]);
-  }
 
-  Widget _buildDrawerBody(BuildContext context) => Column(
+    final ThemeData theme = Theme.of(context);
+    final isDarkEnabled =
+        StateContainer.of(context).themeMode == ThemeMode.dark;
+    final bottomBarItems = _bottomBarItems(context, theme);
+
+    return FusionScaffold(
+      child: Stack(
         children: <Widget>[
-          _buildDrawerItem(context, 'AccountsPage', AccountsPage.navId),
-          _buildDrawerItem(context, 'AccountCreationNamePage',
-              AccountCreationNamePage.navId),
-          _buildDrawerItem(
-              context, 'RecoverAccountPage', RecoverAccountPage.navId),
-          _buildDrawerItem(
-              context, 'TermsConditionsPage', TermsConditionsPage.navId),
-          _buildDrawerItem(
-              context, 'PasswordCreationPage', PasswordCreationPage.navId),
-          _buildDrawerItem(
-              context, 'Biometric Feature', BiometricAuthPage.navId),
-          _buildDrawerItem(
-              context, 'Passphrase Creation', PassphraseCreationPage.navId),
-          _buildDrawerItem(
-              context, 'Share Passphrase QR', PassphraseShareQrPage.navId),
-          _buildDrawerItem(context, 'Scan QR', ScanQrPage.navId),
-          Divider(
-            height: 1,
-          ),
-          ListTile(
-            title: Text('Show Passphrase Verified Popup'),
-            onTap: () {
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (_) {
-                    return PopupDialogWidget(
-                        AppLocalizations.of(context).popupPassVerifiedTitle(),
-                        "assets/images/icons/ic_taskdone.svg",
-                        AppLocalizations.of(context).popupPassVerifiedBody());
-                  },
-                  fullscreenDialog: true));
-            },
+          tabs[provider.currentIndex],
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: ClipRRect(
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(5),
+                topLeft: Radius.circular(5),
+              ),
+              child: BottomNavigationBar(
+                currentIndex: provider.currentIndex,
+                onTap: (index) {
+                  provider.set(index);
+                },
+                showUnselectedLabels: false,
+                backgroundColor: theme.colorScheme.primary,
+                selectedItemColor: theme.colorScheme.onPrimary,
+                unselectedItemColor:
+                    theme.colorScheme.onPrimary.withOpacity(0.6),
+                selectedFontSize: 15,
+                unselectedFontSize: 13,
+                iconSize: 30,
+                elevation: 8,
+                type: BottomNavigationBarType.fixed,
+                items: _bottomBarItems(context, theme),
+              ),
+            ),
           )
         ],
-      );
+      ),
+      appBar: SliverAppBar(
+        elevation: 1,
+        stretch: true,
+        floating: true,
+        pinned: false,
+        primary: true,
+        automaticallyImplyLeading: true,
+        backgroundColor: Colors.transparent,
+        centerTitle: true,
+        title: Text(
+          _getToolbarTitle(context, provider.currentIndex),
+          style: GoogleFonts.roboto().copyWith(
+              color: theme.colorScheme.onSurface, fontWeight: FontWeight.bold),
+        ),
+        actions: (provider.currentIndex == 2)
+            ? <Widget>[
+                new IconButton(
+                  icon: new Icon(Icons.add),
+                  onPressed: () =>
+                      Navigator.of(context).pushNamed(AddContactPage.navId),
+                ),
+              ]
+            : [],
+        iconTheme: FusionTheme.iconThemeColored
+            .copyWith(color: theme.colorScheme.primary),
+      ),
+      drawer: _buildFusionDrawer(context, [
+        DrawerItem(title: "", icon: Icon(Icons.add_shopping_cart)),
+        DrawerItem(
+            title: AppLocalizations.of(context).menuItemShowQR(),
+            icon: _buildBottomNavItemIcon(
+                "assets/images/icons/ic_qrcodescan.svg", true),
+            onClick: () {
+              Navigator.pushNamed(context, ShareQrPage.navId);
+            }),
+        DrawerItem(
+            title: AppLocalizations.of(context).menuItemSetDefaults(),
+            icon: _buildBottomNavItemIcon(
+                "assets/images/icons/ic_default_settings.svg", true),
+            onClick: () {}),
+        DrawerItem(
+            title: AppLocalizations.of(context).menuItemViewPassphrase(),
+            icon: _buildBottomNavItemIcon(
+                "assets/images/icons/ic_passwordellipse.svg", true),
+            onClick: () {
+              Navigator.pushNamed(context, ScanQrPage.navId);
+            }),
+        DrawerItem(
+            title: AppLocalizations.of(context).menuItemEditAccountName(),
+            icon: _buildBottomNavItemIcon(
+                "assets/images/icons/ic_edit.svg", true),
+            onClick: () {
+              Navigator.pushNamed(context, ScanQrPage.navId);
+            }),
+        DrawerItem(
+            title: AppLocalizations.of(context).menuItemRemoveAccount(),
+            icon: _buildBottomNavItemIcon(
+                "assets/images/icons/ic_folder.svg", true),
+            onClick: () {
+              showPlatformDialog(
+                  context: context,
+                  builder: (context) => PopupsRemoveAccount());
+            }),
+        DrawerItem(
+            title: AppLocalizations.of(context).menuItemWithdrawFunds(),
+            icon: _buildBottomNavItemIcon(
+                "assets/images/icons/ic_withdraw.svg", true),
+            onClick: () {
+              Navigator.pushNamed(context, ScanQrPage.navId);
+            }),
+        DrawerItem(
+            title: AppLocalizations.of(context).menuItemReferalLink(),
+            icon: _buildBottomNavItemIcon(
+                "assets/images/icons/ic_copy.svg", true),
+            onClick: () {
+              Navigator.pushNamed(context, ScanQrPage.navId);
+            }),
+      ]),
+    );
+  }
+
+  String _getToolbarTitle(BuildContext context, int index) {
+    String title = "";
+
+    switch (index) {
+      case 0:
+        title = AppLocalizations.of(context).toolbarNewAccountTitle();
+        break;
+      case 1:
+        title = AppLocalizations.of(context).toolbarExchangeTitle();
+        break;
+      case 2:
+        title = AppLocalizations.of(context).toolbarContactsTitle();
+        break;
+      case 3:
+        title = AppLocalizations.of(context).toolbarHistoryTitle();
+        break;
+      case 4:
+        title = AppLocalizations.of(context).navigationItemSettings();
+        break;
+      default:
+        title = AppLocalizations.of(context).appName();
+    }
+
+    return title;
+  }
 
   List<BottomNavigationBarItem> _bottomBarItems(
           BuildContext context, ThemeData theme) =>
@@ -213,16 +221,6 @@ class _BottomHomePageState extends State<BottomHomePage> {
             icon:
                 _buildBottomNavItemIcon("assets/images/icons/ic_settings.svg")),
       ];
-
-  Widget _buildDrawerItem(
-      BuildContext context, String text, String navigationId) {
-    return ListTile(
-      title: Text(text),
-      onTap: () {
-        Navigator.of(context).pushNamed(navigationId);
-      },
-    );
-  }
 
   Widget _buildBottomNavItemIcon(String asset, [bool isDrawerIcon = false]) =>
       Padding(
@@ -271,8 +269,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
                     ),
                   );
                 else {
-                  return _buildFusionDrawerItem(
-                      context, items[index].title, items[index].icon);
+                  return _buildFusionDrawerItem(context, items[index]);
                 }
               },
               separatorBuilder: (context, index) {
@@ -291,30 +288,38 @@ class _BottomHomePageState extends State<BottomHomePage> {
         ),
       );
 
-  _buildFusionDrawerItem(BuildContext context, String title, Widget icon,
+  _buildFusionDrawerItem(BuildContext context, DrawerItem item,
           [String navigationId]) =>
-      Container(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 1),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Flexible(
-              flex: 2,
-              child: icon,
-            ),
-            Flexible(
-                flex: 7,
-                child: Text(
-                  title,
-                  textAlign: TextAlign.left,
-                ))
-          ],
+      GestureDetector(
+        onTap: () {
+          item.onClick.call();
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 1),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Flexible(
+                flex: 2,
+                child: item.icon,
+              ),
+              Flexible(
+                  flex: 7,
+                  child: Text(
+                    item.title,
+                    textAlign: TextAlign.left,
+                  ))
+            ],
+          ),
         ),
       );
 }
 
+typedef DrawerItemClickCallback = void Function();
+
 class DrawerItem {
   final String title;
   final Widget icon;
-  DrawerItem(this.title, this.icon);
+  final DrawerItemClickCallback onClick;
+  DrawerItem({this.title, this.icon, @required this.onClick});
 }

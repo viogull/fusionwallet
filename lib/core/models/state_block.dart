@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:manta_dart/messages.dart';
 import 'package:meta/meta.dart';
 import 'package:nanodart/nanodart.dart';
 
@@ -57,7 +56,6 @@ class StateBlock {
   String localCurrencyValue;
   // Represents a manta TX
   @JsonKey(ignore: true)
-  PaymentRequestMessage paymentRequest;
 
   /// StateBlock constructor.
   /// subtype is one of "send", "receive", "change", "open"
@@ -65,16 +63,16 @@ class StateBlock {
   /// then balance should be send amount (not balance after send).
   /// This is by design of this app, where we get previous balance in a server request
   /// and update it later before signing
-  StateBlock(
-      {String subtype,
-      @required String previous,
-      @required String representative,
-      @required String balance,
-      @required String link,
-      @required String account,
-      this.privKey,
-      this.localCurrencyValue,
-      this.paymentRequest}) {
+  StateBlock({
+    String subtype,
+    @required String previous,
+    @required String representative,
+    @required String balance,
+    @required String link,
+    @required String account,
+    this.privKey,
+    this.localCurrencyValue,
+  }) {
     this.link = link;
     this.subType = subtype;
     this.type = BlockTypes.STATE;
