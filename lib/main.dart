@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fusion_wallet/service_locator.dart';
 import 'package:fusion_wallet/state_container.dart';
-import 'package:fusion_wallet/ui/pages/app_widgets.dart';
 import 'package:fusion_wallet/ui/pages/auth/biometric_features_page.dart';
 import 'package:fusion_wallet/ui/pages/auth/passphrase/passphrase_creation_page.dart';
 import 'package:fusion_wallet/ui/pages/auth/passphrase/scan_qr_page.dart';
@@ -31,15 +29,15 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'localizations.dart';
+import 'theme/fusion_theme.dart';
 import 'ui/pages/auth/account_creation_page.dart';
 import 'ui/pages/auth/intro_page.dart';
 import 'ui/pages/auth/password_creation_page.dart';
 import 'ui/pages/auth/recover_account_page.dart';
 import 'ui/pages/auth/terms_conditions_page.dart';
 import 'ui/providers/bottom_navigation_provider.dart';
-import 'ui/theme/fusion_theme.dart';
 
-const preferencesBox = 'prefsBox';
+const String preferencesBox = 'prefsBox';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -57,7 +55,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp(
         theme: FusionTheme.light,
         darkTheme: FusionTheme.dark,
-        themeMode: StateContainer.of(context).themeMode,
+        themeMode: StateContainer.of(context).darkModeEnabled
+            ? ThemeMode.dark
+            : ThemeMode.light,
         localizationsDelegates: [
           const AppLocalizationsDelegate(),
           GlobalCupertinoLocalizations.delegate,
@@ -70,7 +70,6 @@ class App extends StatelessWidget {
         routes: <String, WidgetBuilder>{
           HomePage.navId: (context) => HomePage(),
           PassphraseShareQrPage.navId: (context) => PassphraseShareQrPage(),
-          AppWidgetsPage.navId: (context) => AppWidgetsPage(),
           BiometricAuthPage.navId: (context) => BiometricAuthPage(),
           ScanQrPage.navId: (context) => ScanQrPage(),
           PassphraseCreationPage.navId: (context) => PassphraseCreationPage(),
@@ -112,8 +111,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   }
 
   var provider = ChangeNotifierProvider<BottomNavigationProvider>(

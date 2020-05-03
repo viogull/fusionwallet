@@ -3,16 +3,10 @@ import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:fusion_wallet/core/db_helper.dart';
-import 'package:fusion_wallet/core/models/account.dart';
 import 'package:nanodart/nanodart.dart';
 import 'package:pointycastle/api.dart' show ParametersWithIV, KeyParameter;
+import 'package:pointycastle/export.dart';
 import 'package:pointycastle/pointycastle.dart';
-import 'package:pointycastle/stream/salsa20.dart';
-
-import '../localizations.dart';
-import '../service_locator.dart';
-import '../state_container.dart';
 
 class Encryptor {
   final String key;
@@ -80,16 +74,16 @@ class CryptoUtil {
   }
 
   Future<void> loginAccount(String seed, BuildContext context) async {
-    Account selectedAcct = await sl.get<DBHelper>().getSelectedAccount(seed);
-    if (selectedAcct == null) {
-      selectedAcct = Account(
-          index: 0,
-          lastAccess: 0,
-          name: AppLocalizations.of(context).defaultAccountName,
-          selected: true);
-      await sl.get<DBHelper>().saveAccount(selectedAcct);
-    }
-    StateContainer.of(context).update(account: selectedAcct);
+//    Account selectedAcct = await sl.get<DBHelper>().getSelectedAccount(seed);
+//    if (selectedAcct == null) {
+//      selectedAcct = Account(
+//          index: 0,
+//          lastAccess: 0,
+//          name: AppLocalizations.of(context).defaultAccountName,
+//          selected: true);
+//     // await sl.get<DBHelper>().saveAccount(selectedAcct);
+//    }
+//    StateContainer.of(context).update(account: selectedAcct);
   }
 
   static Uint8List sha256(List<Uint8List> byteArrays) {

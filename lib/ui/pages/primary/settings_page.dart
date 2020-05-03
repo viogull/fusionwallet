@@ -11,14 +11,14 @@ import 'package:fusion_wallet/ui/pages/auth/password_creation_page.dart';
 import 'package:fusion_wallet/ui/pages/information/faq_page.dart';
 import 'package:fusion_wallet/ui/pages/information/send_feedback_page.dart';
 
+import '../../components/fusion_sheet.dart';
+
 class SettingsPage extends StatelessWidget {
   static const navId = "/settings";
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isDarkThemeEnabled =
-        StateContainer.of(context).themeMode == ThemeMode.dark;
 
     final currentLocaleTitle =
         StateContainer.of(context).locale == Locale('en', '')
@@ -32,10 +32,11 @@ class SettingsPage extends StatelessWidget {
         children: <Widget>[
           SwitchFusionPreference(
             title: AppLocalizations.of(context).settingsItemUiTheme(),
-            value: isDarkThemeEnabled,
+            value: StateContainer.of(context).darkModeEnabled,
             onSwitch: (updated) async {
               StateContainer.of(context).updateTheme(
-                  isDarkThemeEnabled ? ThemeMode.light : ThemeMode.dark);
+                  !StateContainer.of(context).darkModeEnabled,
+                  save: true);
             },
           ),
           FusionPreference(
@@ -53,40 +54,49 @@ class SettingsPage extends StatelessWidget {
           FusionPreference(
               title: AppLocalizations.of(context).settingsItemNotifications(),
               onClick: () {
-                showBottomSheet(
+                Sheets.showFusionSheet(
                     context: context,
-                    backgroundColor: theme.colorScheme.surface,
-                    builder: (context) => ListView.separated(
-                        physics: BouncingScrollPhysics(),
-                        itemCount: 5,
-                        separatorBuilder: (context, index) {
-                          if (index != 0)
-                            return Divider(
-                              color: theme.colorScheme.onSurface,
-                              height: 0.25,
-                            );
-                          else
-                            return Container();
-                        },
-                        itemBuilder: (context, index) {
-                          if (index == 0)
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 8, horizontal: 64),
-                              child: Divider(
-                                  height: 2, thickness: 4, color: Colors.white),
-                            );
-                          else
-                            return ListTile(
-                              title: AutoSizeText('Notification Title $index'),
-                              subtitle: AutoSizeText('Subtitle $index'),
-                            );
-                        }));
+                    widget: SafeArea(
+                      child: ListView.separated(
+                          itemCount: 5,
+                          separatorBuilder: (context, index) {
+                            if (index != 0)
+                              return Divider(
+                                color: theme.colorScheme.onSurface,
+                                height: 0.25,
+                              );
+                            else
+                              return Container();
+                          },
+                          itemBuilder: (context, index) {
+                            if (index == 0)
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 120),
+                                child: Divider(
+                                    height: 2,
+                                    thickness: 4,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSurface),
+                              );
+                            else
+                              return ListTile(
+                                title:
+                                    AutoSizeText('Notification Title $index'),
+                                subtitle: AutoSizeText('Subtitle $index'),
+                              );
+                          }),
+                    ));
               }),
           SwitchFusionPreference(
               title: AppLocalizations.of(context).settingsItemShowRewards(),
-              value: false,
-              onSwitch: null),
+              value: StateContainer.of(context).showRewards,
+              onSwitch: (value) {
+                StateContainer.of(context).setRewardsVisibility(
+                    !StateContainer.of(context).showRewards,
+                    save: true);
+              }),
           FusionSingleChoicePreference(
               title: AppLocalizations.of(context).settingsItemLanguage(),
               items: AppLocalizations.fetchLanguages(context),

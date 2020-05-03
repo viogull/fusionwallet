@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fusion_wallet/localizations.dart';
+import 'package:fusion_wallet/theme/fusion_theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
-import 'package:fusion_wallet/ui/fusion_scaffold.dart';
-import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
+import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 
 class PushFundsPage extends StatelessWidget {
   static const String navId = "/funds/push";

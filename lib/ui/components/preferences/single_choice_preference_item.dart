@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
+import 'package:fusion_wallet/theme/fusion_theme.dart';
 
 typedef OnSingleChoiceSelected = void Function(int index);
 
@@ -54,7 +55,7 @@ class _FusionSingleChoicePreferenceState
                       dropdownValue == null ? widget.selected : dropdownValue,
                   icon: Icon(Icons.keyboard_arrow_down),
                   iconSize: 20,
-                  elevation: 1,
+                  elevation: 0,
                   style: TextStyle(
                       color: Theme.of(context)
                           .colorScheme
@@ -71,14 +72,19 @@ class _FusionSingleChoicePreferenceState
                       .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
-                      child: Container(
-                        color: Theme.of(context).colorScheme.surface,
-                        child: AutoSizeText(
-                          value,
-                          minFontSize: 8,
-                          maxFontSize: 12,
-                          style: TextStyle(
-                              color: Theme.of(context).colorScheme.onSurface),
+                      child: Material(
+                        elevation: 0,
+                        clipBehavior: Clip.antiAlias,
+                        child: Container(
+                          margin: const EdgeInsets.all(12),
+                          color: Colors.transparent,
+                          child: AutoSizeText(
+                            value,
+                            minFontSize: 8,
+                            maxFontSize: 12,
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.onSurface),
+                          ),
                         ),
                       ),
                     );

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
+import 'package:fusion_wallet/theme/fusion_theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/pages/popups/popups_history_page.dart';
-import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
-//import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 
 class HistoryPage extends StatefulWidget {
   static const String navId = '/HistoryPage';

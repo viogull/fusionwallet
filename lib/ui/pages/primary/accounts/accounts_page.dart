@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fusion_wallet/theme/fusion_theme.dart';
 import 'package:fusion_wallet/ui/components/balances_card_item.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/delegate_funds_page.dart';
@@ -12,7 +13,6 @@ import 'package:fusion_wallet/ui/pages/primary/accounts/request_funds_page.dart'
 import 'package:fusion_wallet/ui/pages/primary/accounts/rewards_info_page.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/send_funds_page.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/unbound_funds_page.dart';
-import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
 
 import '../../../../localizations.dart';
 
@@ -33,6 +33,7 @@ class AccountsPage extends StatelessWidget {
           return ButtonBar(
             alignment: MainAxisAlignment.center,
             buttonHeight: 45,
+            buttonMinWidth: 130,
             buttonPadding:
                 const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
             children: <Widget>[
@@ -69,18 +70,30 @@ class AccountsPage extends StatelessWidget {
         {
           return ButtonBar(
             alignment: MainAxisAlignment.center,
-            buttonMinWidth: 100,
             buttonHeight: 45,
+            buttonMinWidth: 130,
+            buttonPadding:
+                const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
             children: <Widget>[
-              FusionButton(
-                AppLocalizations.of(context).buttonDelegate(),
-                () {
+              RaisedButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: FusionTheme.borderRadius),
+                onPressed: () {
                   Navigator.pushNamed(context, DelegateFundsPage.navId);
                 },
+                color: Theme.of(context).colorScheme.primary,
+                child: Text(
+                    AppLocalizations.of(context).buttonDelegate().toString()),
               ),
-              FusionButton(AppLocalizations.of(context).buttonUnbound(), () {
-                Navigator.pushNamed(context, UnboundFundsPage.navId);
-              })
+              RaisedButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: FusionTheme.borderRadius),
+                  onPressed: () {
+                    Navigator.pushNamed(context, UnboundFundsPage.navId);
+                  },
+                  color: Theme.of(context).colorScheme.primary,
+                  child: Text(
+                      AppLocalizations.of(context).buttonUnbound().toString()))
             ],
           );
         }

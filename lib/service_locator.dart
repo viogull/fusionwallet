@@ -7,6 +7,9 @@ import 'utils/haptic.dart';
 import 'utils/shared_prefs.dart';
 import 'utils/vault.dart';
 
+/*
+  Base Dependency Injector
+ */
 GetIt sl = GetIt.instance;
 
 void setupServiceLocator() {

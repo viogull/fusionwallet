@@ -4,8 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
+import 'package:fusion_wallet/theme/fusion_theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
-import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
 
 class AllFieldsFormBloc extends FormBloc<String, String> {
   final select1 = SelectFieldBloc(

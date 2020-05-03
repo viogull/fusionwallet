@@ -4,17 +4,17 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/state_container.dart';
+import 'package:fusion_wallet/theme/fusion_theme.dart';
+import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:fusion_wallet/ui/pages/popups/popups_remove_account.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/accounts_page.dart';
 import 'package:fusion_wallet/ui/pages/primary/share_qr_address_page.dart';
 import 'package:fusion_wallet/ui/providers/bottom_navigation_provider.dart';
-import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
-import '../fusion_scaffold.dart';
-import 'auth/passphrase/scan_qr_page.dart';
+import '../components/fusion_sheet.dart';
 import 'information/add_contact_page.dart';
 import 'primary/contacts_page.dart';
 import 'primary/exchange_page.dart';
@@ -52,43 +52,42 @@ class _BottomHomePageState extends State<BottomHomePage> {
     var provider = Provider.of<BottomNavigationProvider>(context);
 
     final ThemeData theme = Theme.of(context);
-    final isDarkEnabled =
-        StateContainer.of(context).themeMode == ThemeMode.dark;
-    final bottomBarItems = _bottomBarItems(context, theme);
 
     return FusionScaffold(
-      child: Stack(
-        children: <Widget>[
-          tabs[provider.currentIndex],
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: ClipRRect(
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(5),
-                topLeft: Radius.circular(5),
+      child: SafeArea(
+        child: Stack(
+          children: <Widget>[
+            tabs[provider.currentIndex],
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(5),
+                  topLeft: Radius.circular(5),
+                ),
+                child: BottomNavigationBar(
+                  currentIndex: provider.currentIndex,
+                  onTap: (index) {
+                    provider.set(index);
+                  },
+                  showUnselectedLabels: true,
+                  backgroundColor: theme.colorScheme.primary,
+                  selectedItemColor: theme.colorScheme.onPrimary,
+                  unselectedItemColor:
+                      theme.colorScheme.onPrimary.withOpacity(0.6),
+                  selectedFontSize: 13,
+                  unselectedFontSize: 12,
+                  iconSize: 30,
+                  elevation: 8,
+                  type: BottomNavigationBarType.fixed,
+                  items: _bottomBarItems(context, theme),
+                ),
               ),
-              child: BottomNavigationBar(
-                currentIndex: provider.currentIndex,
-                onTap: (index) {
-                  provider.set(index);
-                },
-                showUnselectedLabels: false,
-                backgroundColor: theme.colorScheme.primary,
-                selectedItemColor: theme.colorScheme.onPrimary,
-                unselectedItemColor:
-                    theme.colorScheme.onPrimary.withOpacity(0.6),
-                selectedFontSize: 15,
-                unselectedFontSize: 13,
-                iconSize: 30,
-                elevation: 8,
-                type: BottomNavigationBarType.fixed,
-                items: _bottomBarItems(context, theme),
-              ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
       appBar: SliverAppBar(
         elevation: 1,
@@ -117,56 +116,45 @@ class _BottomHomePageState extends State<BottomHomePage> {
             .copyWith(color: theme.colorScheme.primary),
       ),
       drawer: _buildFusionDrawer(context, [
-        DrawerItem(title: "", icon: Icon(Icons.add_shopping_cart)),
-        DrawerItem(
+        DrawerItemData(title: "", icon: Icon(Icons.add_shopping_cart)),
+        DrawerItemData(
             title: AppLocalizations.of(context).menuItemShowQR(),
             icon: _buildBottomNavItemIcon(
                 "assets/images/icons/ic_qrcodescan.svg", true),
-            onClick: () {
-              Navigator.pushNamed(context, ShareQrPage.navId);
-            }),
-        DrawerItem(
+            navId: ShareQrPage.navId),
+        DrawerItemData(
             title: AppLocalizations.of(context).menuItemSetDefaults(),
             icon: _buildBottomNavItemIcon(
                 "assets/images/icons/ic_default_settings.svg", true),
-            onClick: () {}),
-        DrawerItem(
+            navId: ShareQrPage.navId),
+        DrawerItemData(
             title: AppLocalizations.of(context).menuItemViewPassphrase(),
             icon: _buildBottomNavItemIcon(
                 "assets/images/icons/ic_passwordellipse.svg", true),
-            onClick: () {
-              Navigator.pushNamed(context, ScanQrPage.navId);
-            }),
-        DrawerItem(
+            navId: ShareQrPage.navId),
+        DrawerItemData(
             title: AppLocalizations.of(context).menuItemEditAccountName(),
             icon: _buildBottomNavItemIcon(
                 "assets/images/icons/ic_edit.svg", true),
-            onClick: () {
-              Navigator.pushNamed(context, ScanQrPage.navId);
-            }),
-        DrawerItem(
+            navId: ShareQrPage.navId),
+        DrawerItemData(
             title: AppLocalizations.of(context).menuItemRemoveAccount(),
             icon: _buildBottomNavItemIcon(
                 "assets/images/icons/ic_folder.svg", true),
             onClick: () {
-              showPlatformDialog(
-                  context: context,
-                  builder: (context) => PopupsRemoveAccount());
+              Sheets.showFusionBottomSheet(
+                  context: context, widget: PopupsRemoveAccount());
             }),
-        DrawerItem(
+        DrawerItemData(
             title: AppLocalizations.of(context).menuItemWithdrawFunds(),
             icon: _buildBottomNavItemIcon(
                 "assets/images/icons/ic_withdraw.svg", true),
-            onClick: () {
-              Navigator.pushNamed(context, ScanQrPage.navId);
-            }),
-        DrawerItem(
+            navId: ShareQrPage.navId),
+        DrawerItemData(
             title: AppLocalizations.of(context).menuItemReferalLink(),
             icon: _buildBottomNavItemIcon(
                 "assets/images/icons/ic_copy.svg", true),
-            onClick: () {
-              Navigator.pushNamed(context, ScanQrPage.navId);
-            }),
+            navId: ShareQrPage.navId),
       ]),
     );
   }
@@ -232,7 +220,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
             child: SvgPicture.asset(asset,
                 semanticsLabel: asset,
                 color: (isDrawerIcon)
-                    ? Colors.white
+                    ? Theme.of(context).colorScheme.onSurface
                     : Theme.of(context).colorScheme.onPrimary,
                 placeholderBuilder: (BuildContext context) => Container(
                     padding: const EdgeInsets.all(30.0),
@@ -241,74 +229,69 @@ class _BottomHomePageState extends State<BottomHomePage> {
         ),
       );
 
-  _buildFusionDrawer(BuildContext context, List<DrawerItem> items) => Drawer(
-        child: Container(
-          color: Theme.of(context).colorScheme.surface,
-          width: MediaQuery.of(context).size.width *
-              BottomHomePage.drawerWidthRatio,
-          child: ListView.separated(
-              itemBuilder: (context, index) {
-                if (index == 0)
-                  return LimitedBox(
-                    maxHeight: MediaQuery.of(context).size.height *
-                        BottomHomePage.drawerHeaderHeightRatio,
-                    child: DrawerHeader(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primaryVariant,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "AccountName",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.left,
-                            )),
-                      ),
-                    ),
-                  );
-                else {
-                  return _buildFusionDrawerItem(context, items[index]);
-                }
-              },
-              separatorBuilder: (context, index) {
-                if (index == 0) {
-                  return Container();
-                } else
-                  return Padding(
-                    padding: const EdgeInsets.only(left: 32, right: 32),
-                    child: Divider(
-                      color: Theme.of(context).colorScheme.onSurface,
-                      thickness: 0.25,
-                    ),
-                  );
-              },
-              itemCount: items.length),
-        ),
-      );
-
-  _buildFusionDrawerItem(BuildContext context, DrawerItem item,
-          [String navigationId]) =>
-      GestureDetector(
-        onTap: () {
-          item.onClick.call();
-        },
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 1),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+  _buildFusionDrawer(BuildContext context, List<DrawerItemData> items) =>
+      Drawer(
+        child: SafeArea(
+          child: Stack(
             children: <Widget>[
-              Flexible(
-                flex: 2,
-                child: item.icon,
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: SvgPicture.asset(
+                  (StateContainer.of(context).darkModeEnabled)
+                      ? "assets/images/backgrounds/bg_primary.svg"
+                      : "assets/images/backgrounds/bg_primary_light.svg",
+                  fit: BoxFit.fitWidth,
+                ),
               ),
-              Flexible(
-                  flex: 7,
-                  child: Text(
-                    item.title,
-                    textAlign: TextAlign.left,
-                  ))
+              Container(
+                color: Theme.of(context).colorScheme.surface,
+                width: MediaQuery.of(context).size.width *
+                    BottomHomePage.drawerWidthRatio,
+                child: ListView.separated(
+                    itemBuilder: (context, index) {
+                      if (index == 0)
+                        return LimitedBox(
+                          maxHeight: MediaQuery.of(context).size.height *
+                              BottomHomePage.drawerHeaderHeightRatio,
+                          child: DrawerHeader(
+                            decoration: BoxDecoration(
+                              color:
+                                  Theme.of(context).colorScheme.primaryVariant,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    AppLocalizations.of(context).appName(),
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSurface),
+                                    textAlign: TextAlign.left,
+                                  )),
+                            ),
+                          ),
+                        );
+                      else {
+                        return DrawerItem(data: items[index]);
+                      }
+                    },
+                    separatorBuilder: (context, index) {
+                      if (index == 0) {
+                        return SizedBox();
+                      } else
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 32, right: 32),
+                          child: Divider(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                            thickness: 0.25,
+                          ),
+                        );
+                    },
+                    itemCount: items.length),
+              )
             ],
           ),
         ),
@@ -317,9 +300,47 @@ class _BottomHomePageState extends State<BottomHomePage> {
 
 typedef DrawerItemClickCallback = void Function();
 
-class DrawerItem {
+class DrawerItemData {
   final String title;
   final Widget icon;
+  final String navId;
   final DrawerItemClickCallback onClick;
-  DrawerItem({this.title, this.icon, @required this.onClick});
+  DrawerItemData({this.title, this.icon, this.navId, this.onClick});
+}
+
+class DrawerItem extends StatelessWidget {
+  final DrawerItemData data;
+
+  DrawerItem({@required this.data});
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return GestureDetector(
+      onTap: () {
+        if (this.data.onClick != null) {
+          this.data.onClick();
+        } else
+          Navigator.of(context).pushNamed(data.navId);
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 1),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Flexible(
+              flex: 2,
+              child: data != null ? data.icon : Icon(Icons.error),
+            ),
+            Flexible(
+                flex: 7,
+                child: Text(
+                  data != null ? data.title : "",
+                  textAlign: TextAlign.left,
+                ))
+          ],
+        ),
+      ),
+    );
+  }
 }

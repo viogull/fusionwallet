@@ -1,16 +1,12 @@
 import 'package:barcode_scan/barcode_scan.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
-import 'package:fusion_wallet/ui/pages/auth/passphrase/scan_qr_page.dart';
 import 'package:fusion_wallet/ui/pages/popups/popup_page.dart';
-import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class RecoverFromSeedPage extends StatelessWidget {
   static const navId = "/auth/recover";

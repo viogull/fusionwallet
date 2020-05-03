@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
+import 'package:fusion_wallet/theme/fusion_theme.dart';
 
 typedef FusionButtonTapCallBack = void Function();
 
@@ -19,10 +19,8 @@ class FusionButton extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     return Container(
       margin: const EdgeInsets.all(8),
-      width: (expandedWidth == true)
-          ? double.infinity
-          : MediaQuery.of(context).size.width * 0.25,
-      height: 44,
+      width: 100,
+      height: 45,
       decoration: BoxDecoration(
         borderRadius: FusionTheme.borderRadius,
         border: Border.all(color: Theme.of(context).colorScheme.surface),
@@ -37,7 +35,7 @@ class FusionButton extends StatelessWidget {
           child: AutoSizeText(
             text,
             textAlign: TextAlign.center,
-            minFontSize: 14,
+            minFontSize: 10,
             maxLines: 1,
             style: TextStyle(
               color: (theme.colorScheme.onPrimary),

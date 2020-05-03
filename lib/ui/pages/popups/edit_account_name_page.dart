@@ -1,11 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fusion_wallet/localizations.dart';
-
-import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
-import 'package:google_fonts/google_fonts.dart';
 //
 //class PopupEditAccountName extends StatefulWidget {
 //  static const String navId = '/PopupEditAccountName';

@@ -7,8 +7,6 @@ import 'package:fusion_wallet/ui/components/custom/passcode/circle.dart';
 import 'package:fusion_wallet/ui/components/custom/passcode/keyboard.dart';
 import 'package:fusion_wallet/ui/components/custom/passcode/passcode_screen.dart';
 import 'package:fusion_wallet/ui/pages/auth/biometric_features_page.dart';
-import 'package:fusion_wallet/ui/pages/auth/intro_page.dart';
-import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
 
 class PasswordCreationPage extends StatefulWidget {
   static const String navId = '/PasswordCreationPage';
@@ -29,17 +27,16 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
   @override
   void initState() {
     super.initState();
-        if (isAuthenticated) {
-          Navigator.of(context).pushNamed(BiometricAuthPage.navId);
-        }
+    if (isAuthenticated) {
+      Navigator.of(context).pushNamed(BiometricAuthPage.navId);
+    }
   }
 
   @override
   Widget build(BuildContext context,
       {bool opaque,
       CircleUIConfig circleUIConfig,
-      KeyboardUIConfig keyboardUIConfig
-      }) {
+      KeyboardUIConfig keyboardUIConfig}) {
     final ThemeData theme = Theme.of(context);
 
     final background = SvgPicture.asset(
@@ -53,25 +50,28 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
     return Scaffold(
         body: Container(
             child: Stack(
-              children: <Widget>[
-                background,
-                Container(
-                    child: Stack(
-                      children: <Widget>[
-                        AppBar(
-                          title: Text(AppLocalizations.of(context).toolbarRecoverFromSeedTitle()),
-                          backgroundColor: Colors.transparent,
-                          centerTitle: true ,
-                          elevation: 0,
-                          iconTheme: IconThemeData(
-                              color: Theme.of(context).colorScheme.primary,
-                            size: 0,
-                          ),
-                        ),
+      children: <Widget>[
+        background,
+        Container(
+          child: Stack(
+            children: <Widget>[
+              AppBar(
+                title: Text(
+                    AppLocalizations.of(context).toolbarRecoverFromSeedTitle()),
+                backgroundColor: Colors.transparent,
+                centerTitle: true,
+                elevation: 0,
+                iconTheme: IconThemeData(
+                  color: Theme.of(context).colorScheme.primary,
+                  size: 0,
+                ),
+              ),
 //
-                        PasscodeScreen(
-
-                title: (isVerified ? AppLocalizations.of(context).labelChoosePassVerifySubtitle(): AppLocalizations.of(context).labelChoosePassSubtitle()),
+              PasscodeScreen(
+                title: (isVerified
+                    ? AppLocalizations.of(context)
+                        .labelChoosePassVerifySubtitle()
+                    : AppLocalizations.of(context).labelChoosePassSubtitle()),
                 circleUIConfig: circleUIConfig,
                 keyboardUIConfig: keyboardUIConfig,
                 passwordEnteredCallback: _onPasscodeEntered,
@@ -91,9 +91,8 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
   _onPasscodeEntered(String enteredPasscode) {
     bool isValid = '123456' == enteredPasscode;
     _verificationNotifier.add(isValid);
-    if (isValid)  {
+    if (isValid) {
       setState(() {
-
         this.isAuthenticated = isValid;
       });
     }
@@ -107,5 +106,3 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
     super.dispose();
   }
 }
-
-

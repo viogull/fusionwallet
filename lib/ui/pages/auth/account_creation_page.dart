@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/pages/auth/terms_conditions_page.dart';
-import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
 
 class AccountCreationNamePage extends StatefulWidget {
   static const String navId = '/AccountCreationName';
@@ -132,43 +131,48 @@ class _AccountCreationNamePageState extends State<AccountCreationNamePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   AppBar(
-                    title: Text(AppLocalizations.of(context).toolbarRecoverFromSeedTitle()),
+                    title: Text(AppLocalizations.of(context)
+                        .toolbarRecoverFromSeedTitle()),
                     backgroundColor: Colors.transparent,
-                    centerTitle: true ,
+                    centerTitle: true,
                     elevation: 0,
                     iconTheme: IconThemeData(
-                        color: Theme.of(context).colorScheme.primary
-                    ),
+                        color: Theme.of(context).colorScheme.primary),
                   ),
 
                   //LimitedBox (maxHeight: 60,),
-                  SizedBox(height: 5 ,),
+                  SizedBox(
+                    height: 5,
+                  ),
                   Flexible(
                     flex: 7,
                     child: logo,
                   ),
 //                  SizedBox(height: 10 ,),
-                 // LimitedBox(maxHeight: 30,),
+                  // LimitedBox(maxHeight: 30,),
                   Flexible(
-                    flex: 2 ,
+                    flex: 2,
                     child: text,
                   ),
-
 
                   Flexible(
                     flex: 4,
                     child: email,
                   ),
-                  SizedBox(height: 15 ,),
-                 // LimitedBox(maxHeight:30 ,),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  // LimitedBox(maxHeight:30 ,),
                   Flexible(
-                    flex: 2 ,
+                    flex: 2,
                     child: checkBox,
                   ),
-                  SizedBox(height: 10 ,),
+                  SizedBox(
+                    height: 10,
+                  ),
                   //LimitedBox(maxHeight: 50,),
                   Flexible(
-                    flex: 5 ,
+                    flex: 5,
                     child: loginButton,
                   ),
                   SizedBox(height: 5.0),
@@ -181,4 +185,3 @@ class _AccountCreationNamePageState extends State<AccountCreationNamePage> {
     );
   }
 }
-

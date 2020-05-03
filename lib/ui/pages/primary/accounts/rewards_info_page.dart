@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
-import 'package:fusion_wallet/ui/fusion_scaffold.dart';
-import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
+import 'package:fusion_wallet/theme/fusion_theme.dart';
+import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 
 class RewardInformationPage extends StatelessWidget {
   static const String navId = "/reward/info";
@@ -62,7 +62,8 @@ class RewardInformationPage extends StatelessWidget {
                                     semanticsLabel:
                                         "assets/images/icons/ic_bitcoin.svg",
                                     fit: BoxFit.fill,
-                                    color: Colors.white,
+                                    color:
+                                        Theme.of(context).colorScheme.onSurface,
                                   ),
                                 ),
                               ),
@@ -123,7 +124,8 @@ class RewardInformationPage extends StatelessWidget {
                                     semanticsLabel:
                                         "assets/images/icons/ic_bitcoin.svg",
                                     fit: BoxFit.fill,
-                                    color: Colors.white,
+                                    color:
+                                        Theme.of(context).colorScheme.onSurface,
                                   ),
                                 ),
                               ),

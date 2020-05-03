@@ -1,23 +1,24 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:fusion_wallet/themes.dart';
 import 'package:fusion_wallet/utils/crypto.dart';
 import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 import 'package:nanodart/nanodart.dart';
 import 'package:uni_links/uni_links.dart';
 
-import 'core/db_helper.dart';
 import 'core/models/account.dart';
 import 'core/models/available_currency.dart';
 import 'core/models/available_language.dart';
 import 'core/models/state_block.dart';
+import 'main.dart';
 import 'service_locator.dart';
 import 'utils/vault.dart';
 
 const String prefsUiThemeMode = "prefsThemeMode";
 const String prefsLanguage = "prefsLocale";
+const String prefsEnableBiometric = "prefsEnableBiometric";
+const String prefsShowRewards = "prefsEnableBiometric";
 
 class _InheritedStateContainer extends InheritedWidget {
   final StateContainerState data;
@@ -30,7 +31,6 @@ class _InheritedStateContainer extends InheritedWidget {
 
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) {
-    // TODO: implement updateShouldNotify
     return true;
   }
 }
@@ -59,7 +59,6 @@ class StateContainerState extends State<StateContainer> {
   Locale locale = Locale('en', '');
   AvailableCurrency curCurrency = AvailableCurrency(AvailableCurrencyEnum.USD);
   LanguageSetting curLanguage = LanguageSetting(AvailableLanguage.DEFAULT);
-  BaseTheme curTheme = LightTheme();
   // Currently selected account
   Account selectedAccount =
       Account(id: 1, name: "AB", index: 0, lastAccess: 0, selected: true);
@@ -67,7 +66,10 @@ class StateContainerState extends State<StateContainer> {
   Account recentLast;
   Account recentSecondLast;
 
-  ThemeMode themeMode = ThemeMode.light;
+  bool darkModeEnabled = false;
+  bool showRewards = false;
+  bool biometricEnabled = false;
+  String localeCode = 'en';
 
   // If callback is locked
   bool _locked = false;
@@ -88,6 +90,8 @@ class StateContainerState extends State<StateContainer> {
 
   Map<String, StateBlock> pendingBlockMap = Map();
 
+  Box _prefs;
+
   // When wallet is encrypted
   String encryptedSecret;
 
@@ -95,6 +99,11 @@ class StateContainerState extends State<StateContainer> {
   void initState() {
     super.initState();
     // Register RxBus
+
+    Hive.openBox(preferencesBox).then((preferences) {
+      _prefs = preferences;
+    });
+
     _registerBus();
 
     // Get default language setting
@@ -102,7 +111,7 @@ class StateContainerState extends State<StateContainer> {
     // Get theme default
     var preferencesTheme = widget.preferences.get(prefsUiThemeMode);
     final currentTheme =
-        (preferencesTheme == null) ? ThemeMode.dark : preferencesTheme;
+        (preferencesTheme == null && preferencesTheme == ThemeMode.dark);
 
     final currentLocale =
         (locale == 'en') ? Locale('en', '') : Locale('ru', '');
@@ -111,8 +120,15 @@ class StateContainerState extends State<StateContainer> {
     debugPrint(
         "Preferences Language Selected $locale , Theme Mode: $currentLocale");
 
+    final rewardsEnabled = widget.preferences.get(prefsShowRewards) as bool;
+    final biometricEnabled =
+        widget.preferences.get(prefsEnableBiometric) as bool;
+
     updateTheme(currentTheme);
+
     updateLanguage(currentLocale);
+    setBiometric(biometricEnabled);
+    setRewardsVisibility(rewardsEnabled);
     // Get initial deep link
     getInitialLink().then((initialLink) {
       setState(() {
@@ -140,22 +156,50 @@ class StateContainerState extends State<StateContainer> {
     super.dispose();
   }
 
-  void updateTheme(ThemeMode theme, {bool save = false}) {
-    debugPrint("Updating theme with new $theme");
+  /*
+      Set save:true to persist preference into storage.
+   */
+  void updateTheme(@required bool isDarkModeEnabled,
+      {bool save = false}) async {
+    debugPrint("Updating theme with new $isDarkModeEnabled");
     if (save) {
-      debugPrint("Writing $theme to prefs storage");
-      widget.preferences.put(prefsUiThemeMode, theme);
+      debugPrint("Writing $isDarkModeEnabled to prefs storage");
+      await widget.preferences.put(prefsUiThemeMode, isDarkModeEnabled);
     }
     setState(() {
-      themeMode = theme;
+      darkModeEnabled = isDarkModeEnabled;
+    });
+  }
+
+  void setBiometric(@required bool isEnabled, {bool save = false}) async {
+    debugPrint("Updating [biometric] with new $isEnabled");
+    if (save) {
+      debugPrint("Writing $isEnabled to prefs storage");
+      await widget.preferences.put(prefsEnableBiometric, isEnabled);
+    }
+    setState(() {
+      biometricEnabled = isEnabled;
+    });
+  }
+
+  void setRewardsVisibility(bool isShowRewardsEnabled,
+      {bool save = false}) async {
+    debugPrint(
+        "Updating [Show Rewards] prefserence with new $isShowRewardsEnabled");
+    if (save) {
+      debugPrint("Writing $isShowRewardsEnabled to prefs storage");
+      await widget.preferences.put(prefsShowRewards, isShowRewardsEnabled);
+    }
+    setState(() {
+      showRewards = isShowRewardsEnabled;
     });
   }
 
   void updateLanguage(Locale updatedLocale, {bool save = false}) {
-    debugPrint("Updating language with new $updatedLocale");
+    debugPrint("Updating language with new $updatedLocale, save mode -> $save");
     if (save) {
       debugPrint("Writing $updatedLocale to prefs storage");
-      widget.preferences.put(prefsLanguage, updatedLocale.countryCode);
+      widget.preferences.put(prefsLanguage, updatedLocale.languageCode);
     }
     setState(() {
       locale = updatedLocale;
@@ -167,7 +211,7 @@ class StateContainerState extends State<StateContainer> {
       // wallet = AppWallet();
       encryptedSecret = null;
     });
-    sl.get<DBHelper>().dropAccounts();
+    //  sl.get<DBHelper>().dropAccounts();
   }
 
   Future<String> _getPrivKey() async {

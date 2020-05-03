@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 
 import '../../../localizations.dart';
-import '../../fusion_scaffold.dart';
 
 class SendFeedbackPage extends StatelessWidget {
   static const navId = "/feedback";

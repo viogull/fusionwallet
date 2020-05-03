@@ -5,82 +5,82 @@
     "type": "text",
     "placeholders": {}
   },
-  "buttonCreateAccount": "Create account",
+  "buttonCreateAccount": "Создать аккаунт",
   "@buttonCreateAccount": {
     "type": "text",
     "placeholders": {}
   },
-  "buttonRecoverFromPassphrase": "Recover account from passphrase",
+  "buttonRecoverFromPassphrase": "Восстановление по контр.фразе",
   "@buttonRecoverFromPassphrase": {
     "type": "text",
     "placeholders": {}
   },
-  "labelAlreadyHaveAccount": "Already have an account?",
+  "labelAlreadyHaveAccount": "Есть аккаунт?",
   "@labelAlreadyHaveAccount": {
     "type": "text",
     "placeholders": {}
   },
-  "toolbarChoosePassTitle": "Choose password",
+  "toolbarChoosePassTitle": "Создание пароля",
   "@toolbarChoosePassTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "labelChoosePassSubtitle": "Choose a six digit password",
+  "labelChoosePassSubtitle": "Введите ПИН код на 6 символов",
   "@labelChoosePassSubtitle": {
     "type": "text",
     "placeholders": {}
   },
-  "labelChoosePassVerifySubtitle": "Enter the same six digits",
+  "labelChoosePassVerifySubtitle": "Повторите ввод",
   "@labelChoosePassVerifySubtitle": {
     "type": "text",
     "placeholders": {}
   },
-  "labelEnableBiometricTitle": "Enable Touch ID/Face ID",
+  "labelEnableBiometricTitle": "Включить биометрическую аутентификацию?",
   "@labelEnableBiometricTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "labelEnableBiometricSubtitle": "We recommend this for improved security",
+  "labelEnableBiometricSubtitle": "Рекомендуется для повышенной безопасности.",
   "@labelEnableBiometricSubtitle": {
     "type": "text",
     "placeholders": {}
   },
-  "labelYes": "Yes",
+  "labelYes": "Да",
   "@labelYes": {
     "type": "text",
     "placeholders": {}
   },
-  "labelNo": "No",
+  "labelNo": "Нет",
   "@labelNo": {
     "type": "text",
     "placeholders": {}
   },
-  "toolbarNewAccountTitle": "New Account",
+  "toolbarNewAccountTitle": "Новый аккаунт",
   "@toolbarNewAccountTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "labelBackupPassphraseSubtitle": "Back up this Passphrase",
+  "labelBackupPassphraseSubtitle": "Сохраните контрольную фразу",
   "@labelBackupPassphraseSubtitle": {
     "type": "text",
     "placeholders": {}
   },
-  "buttonVerifyRecoveryPhrase": "Verify recovery phrase",
+  "buttonVerifyRecoveryPhrase": "Подтвердить контр.фразу",
   "@buttonVerifyRecoveryPhrase": {
     "type": "text",
     "placeholders": {}
   },
-  "buttonShare": "Share",
+  "buttonShare": "Поделиться",
   "@buttonShare": {
     "type": "text",
     "placeholders": {}
   },
-  "labelBackupPassphraseCaption": "In order to access this accout if you lose this device, ciopy or print this phrase and keep it someplace safe.",
+  "labelBackupPassphraseCaption": "Чтобы восстановить доступ к утерянному аккаунту, напечатайте или сохраните ключ в надежном месте.",
   "@labelBackupPassphraseCaption": {
     "type": "text",
     "placeholders": {}
   },
-  "labelQuestionIndicatorTitle": "Question {current} of {total}",
+  "labelQuestionIndicatorTitle": "Вопрос {current} с {total}",
   "@labelQuestionIndicatorTitle": {
     "type": "text",
     "placeholders": {
@@ -88,24 +88,24 @@
       "total": {}
     }
   },
-  "labelWordIndicatorSubtitle": "Select the {position}th word of your passphrase",
+  "labelWordIndicatorSubtitle": "Выберите {position}-е слово вашей контрольной фразы.",
   "@labelWordIndicatorSubtitle": {
     "type": "text",
     "placeholders": {
       "position": {}
     }
   },
-  "toastTryAgain": "Please, try again",
+  "toastTryAgain": "Пожалуйста, попробуйте еще раз",
   "@toastTryAgain": {
     "type": "text",
     "placeholders": {}
   },
-  "popupPassVerifiedTitle": "Passphrase Verified",
+  "popupPassVerifiedTitle": "Контр.фраза подтверждена!",
   "@popupPassVerifiedTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "popupPassVerifiedBody": "Your passphrase has been verified. Make sure that you have backed it up as you will needit to recover your account.",
+  "popupPassVerifiedBody": "Ваша контрольная фраза создана. Сохраните её в надежном месте ради возможности в будущем восстановить аккаунт.",
   "@popupPassVerifiedBody": {
     "type": "text",
     "placeholders": {}
@@ -115,102 +115,102 @@
     "type": "text",
     "placeholders": {}
   },
-  "inputAccountNameHelperText": "Account Name",
+  "inputAccountNameHelperText": "Имя",
   "@inputAccountNameHelperText": {
     "type": "text",
     "placeholders": {}
   },
-  "inputAccountNameHintText": "Please, name your account",
+  "inputAccountNameHintText": "Пожалуйста, сохраните имя для аккаунта.",
   "@inputAccountNameHintText": {
     "type": "text",
     "placeholders": {}
   },
-  "checkboxTermsConditions": "I agree with terms&conditions",
+  "checkboxTermsConditions": "Я принимаю все правила.",
   "@checkboxTermsConditions": {
     "type": "text",
     "placeholders": {}
   },
-  "buttonNext": "Next",
+  "buttonNext": "Далее",
   "@buttonNext": {
     "type": "text",
     "placeholders": {}
   },
-  "toolbarTermsConditionsTitle": "Terms and Conditions",
+  "toolbarTermsConditionsTitle": "Правила и использование",
   "@toolbarTermsConditionsTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "toolbarRecoverFromSeedTitle": "Recover from seed",
+  "toolbarRecoverFromSeedTitle": "Восстановить по фразе",
   "@toolbarRecoverFromSeedTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "inputEnterScanPasshpraseHintText": "Enter passphrase or scan QR",
+  "inputEnterScanPasshpraseHintText": "Введите фразу или сканируйте QR",
   "@inputEnterScanPasshpraseHintText": {
     "type": "text",
     "placeholders": {}
   },
-  "buttonVerify": "Verify",
+  "buttonVerify": "Подтвердить",
   "@buttonVerify": {
     "type": "text",
     "placeholders": {}
   },
-  "toolbarScanQrTitle": "Passphrase QR",
+  "toolbarScanQrTitle": "QR-код фразы",
   "@toolbarScanQrTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "buttonClose": "Close",
+  "buttonClose": "Закрыть",
   "@buttonClose": {
     "type": "text",
     "placeholders": {}
   },
-  "popupAccVerificationWelcomeText": "Welcome to Algorand! Your account is ready to use.",
+  "popupAccVerificationWelcomeText": "Добро пожаловать! Вы можете начать пользоваться кошельком.",
   "@popupAccVerificationWelcomeText": {
     "type": "text",
     "placeholders": {}
   },
-  "labelUnlockTitle": "Unlock",
+  "labelUnlockTitle": "Разблокировать",
   "@labelUnlockTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "buttonLogOut": "Log out",
+  "buttonLogOut": "Выйти",
   "@buttonLogOut": {
     "type": "text",
     "placeholders": {}
   },
-  "labelUnlockSubtitle": "Enter six digit pin",
+  "labelUnlockSubtitle": "Введите 6-символьный ПИН код",
   "@labelUnlockSubtitle": {
     "type": "text",
     "placeholders": {}
   },
-  "labelTapToCopy": "Tap to copy",
+  "labelTapToCopy": "Нажмите чтобы скопировать",
   "@labelTapToCopy": {
     "type": "text",
     "placeholders": {}
   },
-  "toolbarViewPasshraseTitle": "View Passphrase",
+  "toolbarViewPasshraseTitle": "Показать фразу",
   "@toolbarViewPasshraseTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "buttonSend": "Send",
+  "buttonSend": "Отправить",
   "@buttonSend": {
     "type": "text",
     "placeholders": {}
   },
-  "buttonRequest": "Request",
+  "buttonRequest": "Получить",
   "@buttonRequest": {
     "type": "text",
     "placeholders": {}
   },
-  "buttonDelegate": "Delegate",
+  "buttonDelegate": "Делегировать",
   "@buttonDelegate": {
     "type": "text",
     "placeholders": {}
   },
-  "buttonUnbound": "Unbound",
+  "buttonUnbound": "Освободить",
   "@buttonUnbound": {
     "type": "text",
     "placeholders": {}
@@ -220,142 +220,142 @@
     "type": "text",
     "placeholders": {}
   },
-  "labelCryptoAvailable": "Cryptocurrency Available",
+  "labelCryptoAvailable": "Доступно",
   "@labelCryptoAvailable": {
     "type": "text",
     "placeholders": {}
   },
-  "labelTotalReward": "Total Rewards Earned",
+  "labelTotalReward": "Общее к-во наград",
   "@labelTotalReward": {
     "type": "text",
     "placeholders": {}
   },
-  "labelTransanctionsHistoryTitle": "Transanctions History",
+  "labelTransanctionsHistoryTitle": "История транзанкций",
   "@labelTransanctionsHistoryTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "navigationLabelAccounts": "Accounts",
+  "navigationLabelAccounts": "Аккаунты",
   "@navigationLabelAccounts": {
     "type": "text",
     "placeholders": {}
   },
-  "navigationLabelExchange": "Exchange",
+  "navigationLabelExchange": "Обмен",
   "@navigationLabelExchange": {
     "type": "text",
     "placeholders": {}
   },
-  "navigationItemContacts": "Contacts",
+  "navigationItemContacts": "Контакты",
   "@navigationItemContacts": {
     "type": "text",
     "placeholders": {}
   },
-  "navigationItemHistory": "History",
+  "navigationItemHistory": "История",
   "@navigationItemHistory": {
     "type": "text",
     "placeholders": {}
   },
-  "navigationItemSettings": "Settings",
+  "navigationItemSettings": "Настройки",
   "@navigationItemSettings": {
     "type": "text",
     "placeholders": {}
   },
-  "menuItemShowQR": "Show QR and Address",
+  "menuItemShowQR": "Показать адреса и QR",
   "@menuItemShowQR": {
     "type": "text",
     "placeholders": {}
   },
-  "menuItemSetDefaults": "Set as defaults",
+  "menuItemSetDefaults": "Установить по умолчанию",
   "@menuItemSetDefaults": {
     "type": "text",
     "placeholders": {}
   },
-  "menuItemViewPassphrase": "View Passphrase",
+  "menuItemViewPassphrase": "Просмотр контр.фразы",
   "@menuItemViewPassphrase": {
     "type": "text",
     "placeholders": {}
   },
-  "menuItemEditAccountName": "Edit Account Name",
+  "menuItemEditAccountName": "Изменение имени",
   "@menuItemEditAccountName": {
     "type": "text",
     "placeholders": {}
   },
-  "menuItemRemoveAccount": "Remove Account",
+  "menuItemRemoveAccount": "Удаление аккаунта",
   "@menuItemRemoveAccount": {
     "type": "text",
     "placeholders": {}
   },
-  "menuItemWithdrawFunds": "Withdraw funds",
+  "menuItemWithdrawFunds": "Вывод средств",
   "@menuItemWithdrawFunds": {
     "type": "text",
     "placeholders": {}
   },
-  "menuItemReferalLink": "Referal link",
+  "menuItemReferalLink": "Реферальная ссылка",
   "@menuItemReferalLink": {
     "type": "text",
     "placeholders": {}
   },
-  "labelTotalRewardTitle": "Total Rewards Earned",
+  "labelTotalRewardTitle": "Получено наград",
   "@labelTotalRewardTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "labelPendingRewardTitle": "Pending Rewards",
+  "labelPendingRewardTitle": "Ожидают подтверждения",
   "@labelPendingRewardTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "labelPendingRewardSubtitle": "Pending rewards become confirmed when you send or receive BIP",
+  "labelPendingRewardSubtitle": "Награда становиться подтвержденной после получения или отправки BIP",
   "@labelPendingRewardSubtitle": {
     "type": "text",
     "placeholders": {}
   },
-  "labelRewardsCaption": "For more information on Fusion Rewards, visit our FAQ",
+  "labelRewardsCaption": "За информацией о наградах Fusion, посетите наш FAQ",
   "@labelRewardsCaption": {
     "type": "text",
     "placeholders": {}
   },
-  "buttonPreview": "Preview",
+  "buttonPreview": "Просмотр",
   "@buttonPreview": {
     "type": "text",
     "placeholders": {}
   },
-  "labelFrom": "From",
+  "labelFrom": "Отправитель",
   "@labelFrom": {
     "type": "text",
     "placeholders": {}
   },
-  "labelTo": "To",
+  "labelTo": "Получатель",
   "@labelTo": {
     "type": "text",
     "placeholders": {}
   },
-  "labelAmount": "Amount",
+  "labelAmount": "Количество",
   "@labelAmount": {
     "type": "text",
     "placeholders": {}
   },
-  "labelAddress": "Address",
+  "labelAddress": "Адрес",
   "@labelAddress": {
     "type": "text",
     "placeholders": {}
   },
-  "labelMyContacts": "My Contacts",
+  "labelMyContacts": "Мои контакты",
   "@labelMyContacts": {
     "type": "text",
     "placeholders": {}
   },
-  "labelContacts": "Contacts",
+  "labelContacts": "Контакты",
   "@labelContacts": {
     "type": "text",
     "placeholders": {}
   },
-  "labelScanQr": "Scan QR",
+  "labelScanQr": "Сканировать QR",
   "@labelScanQr": {
     "type": "text",
     "placeholders": {}
   },
-  "toolbarSendTitle": "Send funds",
+  "toolbarSendTitle": "Отправить",
   "@toolbarSendTitle": {
     "type": "text",
     "placeholders": {}
@@ -365,102 +365,102 @@
     "type": "text",
     "placeholders": {}
   },
-  "inputAddressHint": "Enter address",
+  "inputAddressHint": "Введите адрес",
   "@inputAddressHint": {
     "type": "text",
     "placeholders": {}
   },
-  "inputFundsStakeHint": "Stake",
+  "inputFundsStakeHint": "Ставка",
   "@inputFundsStakeHint": {
     "type": "text",
     "placeholders": {}
   },
-  "labelSender": "Sender",
+  "labelSender": "Отправитель",
   "@labelSender": {
     "type": "text",
     "placeholders": {}
   },
-  "labelReceiver": "Receiver",
+  "labelReceiver": "Получатель",
   "@labelReceiver": {
     "type": "text",
     "placeholders": {}
   },
-  "labelPubkeyOrDomain": "Public key or domain",
+  "labelPubkeyOrDomain": "Публичный ключ или домен",
   "@labelPubkeyOrDomain": {
     "type": "text",
     "placeholders": {}
   },
-  "labelCoin": "Coin",
+  "labelCoin": "Монета",
   "@labelCoin": {
     "type": "text",
     "placeholders": {}
   },
-  "labelName": "Name",
+  "labelName": "Имя",
   "@labelName": {
     "type": "text",
     "placeholders": {}
   },
-  "popupRemoveAccountTitle": "Remove account",
+  "popupRemoveAccountTitle": "Удаление аккаунта",
   "@popupRemoveAccountTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "popupRemoveAccountBody": "You are about to remove an account. Are you sure you want to proceed with choice?",
+  "popupRemoveAccountBody": "Вы точно хотите удалить аккаунт? ",
   "@popupRemoveAccountBody": {
     "type": "text",
     "placeholders": {}
   },
-  "labelCancel": "Cancel",
+  "labelCancel": "Отменить",
   "@labelCancel": {
     "type": "text",
     "placeholders": {}
   },
-  "labelRemove": "Remove",
+  "labelRemove": "Удалить",
   "@labelRemove": {
     "type": "text",
     "placeholders": {}
   },
-  "labelSave": "Save",
+  "labelSave": "Сохранить",
   "@labelSave": {
     "type": "text",
     "placeholders": {}
   },
-  "inputEditAccountNameTitle": "Edit Account Name",
+  "inputEditAccountNameTitle": "Изменить имя",
   "@inputEditAccountNameTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "inputEditAccountNameHint": "Please, name your account",
+  "inputEditAccountNameHint": "Имя аккаунта",
   "@inputEditAccountNameHint": {
     "type": "text",
     "placeholders": {}
   },
-  "toolbarHistoryTitle": "History",
+  "toolbarHistoryTitle": "История",
   "@toolbarHistoryTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "labelAccount": "Account:",
+  "labelAccount": "Аккаунт:",
   "@labelAccount": {
     "type": "text",
     "placeholders": {}
   },
-  "labelStartDate": "Start Date",
+  "labelStartDate": "Начальная дата",
   "@labelStartDate": {
     "type": "text",
     "placeholders": {}
   },
-  "labelEndDate": "End Date",
+  "labelEndDate": "Конечная дата",
   "@labelEndDate": {
     "type": "text",
     "placeholders": {}
   },
-  "buttonViewResults": "View results",
+  "buttonViewResults": "Показать результаты",
   "@buttonViewResults": {
     "type": "text",
     "placeholders": {}
   },
-  "settingsItemUiTheme": "Включить темную тема",
+  "settingsItemUiTheme": "Включить темную тему",
   "@settingsItemUiTheme": {
     "type": "text",
     "placeholders": {}
@@ -500,7 +500,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "labelFeedbackNoteTitle": "Note",
+  "labelFeedbackNoteTitle": "Заметка",
   "@labelFeedbackNoteTitle": {
     "type": "text",
     "placeholders": {}
@@ -510,97 +510,97 @@
     "type": "text",
     "placeholders": {}
   },
-  "labelFeedbackEmailSubtitle": "Email (optionally)",
+  "labelFeedbackEmailSubtitle": "Эл.почта (необяз.)",
   "@labelFeedbackEmailSubtitle": {
     "type": "text",
     "placeholders": {}
   },
-  "toolbarContactsTitle": "Contacts",
+  "toolbarContactsTitle": "Контакты",
   "@toolbarContactsTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "toolbarAddContactTitle": "Add Contact",
+  "toolbarAddContactTitle": "Добавить контакт",
   "@toolbarAddContactTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "inputSearchContactHint": "Search contacts",
+  "inputSearchContactHint": "Поиск контактов",
   "@inputSearchContactHint": {
     "type": "text",
     "placeholders": {}
   },
-  "labelContactsNotFoundError": "No Contact found",
+  "labelContactsNotFoundError": "Контакт не найден!",
   "@labelContactsNotFoundError": {
     "type": "text",
     "placeholders": {}
   },
-  "labelAddContactName": "Name",
+  "labelAddContactName": "Имя",
   "@labelAddContactName": {
     "type": "text",
     "placeholders": {}
   },
-  "labelAddContactAddress": "Address",
+  "labelAddContactAddress": "Адрес",
   "@labelAddContactAddress": {
     "type": "text",
     "placeholders": {}
   },
-  "inputAddContactNameHint": "Contact Name",
+  "inputAddContactNameHint": "Имя контакта",
   "@inputAddContactNameHint": {
     "type": "text",
     "placeholders": {}
   },
-  "inputAddContactAddressHint": "Enter address",
+  "inputAddContactAddressHint": "Введите адрес",
   "@inputAddContactAddressHint": {
     "type": "text",
     "placeholders": {}
   },
-  "buttonAddContact": "Add contact",
+  "buttonAddContact": "Новый контакт",
   "@buttonAddContact": {
     "type": "text",
     "placeholders": {}
   },
-  "toolbarExchangeTitle": "Exchange",
+  "toolbarExchangeTitle": "Обмен",
   "@toolbarExchangeTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "toolbarRateTitle": "Rate",
+  "toolbarRateTitle": "Курс",
   "@toolbarRateTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "toolbarConvertTitle": "Convert",
+  "toolbarConvertTitle": "Конвертировать",
   "@toolbarConvertTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "labelExchangeCoins": "My Coins",
+  "labelExchangeCoins": "Мои монеты",
   "@labelExchangeCoins": {
     "type": "text",
     "placeholders": {}
   },
-  "buttonConvert": "Convert",
+  "buttonConvert": "Конвертировать",
   "@buttonConvert": {
     "type": "text",
     "placeholders": {}
   },
-  "buttonRate": "Rate",
+  "buttonRate": "Курс",
   "@buttonRate": {
     "type": "text",
     "placeholders": {}
   },
-  "buttonBuy": "Buy",
+  "buttonBuy": "Покупка",
   "@buttonBuy": {
     "type": "text",
     "placeholders": {}
   },
-  "buttonSell": "Sell",
+  "buttonSell": "Продажа",
   "@buttonSell": {
     "type": "text",
     "placeholders": {}
   },
-  "labelExchangeUseCash": "Use cash balance",
+  "labelExchangeUseCash": "Использовать счёт",
   "@labelExchangeUseCash": {
     "type": "text",
     "placeholders": {}
@@ -635,7 +635,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "labelConvertTransanctionFee": "Transanction Fee:",
+  "labelConvertTransanctionFee": "Комиссия",
   "@labelConvertTransanctionFee": {
     "type": "text",
     "placeholders": {}
@@ -645,7 +645,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "toolbarSharePasshpraseQr": "View Passphrase",
+  "toolbarSharePasshpraseQr": "Просмотр контр.фразы",
   "@toolbarSharePasshpraseQr": {
     "type": "text",
     "placeholders": {}

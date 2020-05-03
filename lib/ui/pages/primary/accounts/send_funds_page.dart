@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fusion_wallet/localizations.dart';
-import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
-import 'package:fusion_wallet/ui/fusion_scaffold.dart';
-import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
+import 'package:fusion_wallet/theme/fusion_theme.dart';
+import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 
 class SendFundsPage extends StatelessWidget {
   static const String navId = "/funds/send";
@@ -178,14 +177,22 @@ class SendFundsPage extends StatelessWidget {
                 flex: 2,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: FusionButton(
-                      AppLocalizations.of(context)
-                          .buttonPreview()
-                          .toString()
-                          .toUpperCase(),
-                      () {},
-                      null,
-                      true),
+                  child: ButtonBar(
+                    alignment: MainAxisAlignment.center,
+                    buttonMinWidth: MediaQuery.of(context).size.width * 0.9,
+                    buttonHeight: 45,
+                    children: <Widget>[
+                      RaisedButton(
+                        onPressed: () {},
+                        child: Text(
+                          AppLocalizations.of(context).buttonPreview(),
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.onPrimary),
+                        ),
+                        color: Theme.of(context).colorScheme.primary,
+                      )
+                    ],
+                  ),
                 ),
               )
             ],

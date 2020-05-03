@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../themes.dart';
+import '../../theme/themes.dart';
 import 'settings_item.dart';
 
 enum ThemeOptions { LIGHT, DARK }

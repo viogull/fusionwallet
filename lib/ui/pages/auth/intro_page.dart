@@ -5,7 +5,6 @@ import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/pages/auth/password_creation_page.dart';
 import 'package:fusion_wallet/ui/pages/auth/recover_account_page.dart';
-import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -46,17 +45,19 @@ class IntroPage extends StatelessWidget {
       child: Text(
         "Some greeting text",
         style: TextStyle(
-          color: (theme.colorScheme.onPrimary),),
+          color: (theme.colorScheme.onPrimary),
+        ),
       ),
     );
 
     final someText2 = Container(
 //      alignment: Alignment.topCenter,
-    height: 20,
+      height: 20,
       child: Text(
         "Some greeting text",
         style: TextStyle(
-          color: (theme.colorScheme.onPrimary),),
+          color: (theme.colorScheme.onPrimary),
+        ),
       ),
     );
 
@@ -77,7 +78,8 @@ class IntroPage extends StatelessWidget {
       child: Text(
         AppLocalizations.of(context).labelAlreadyHaveAccount(),
         style: TextStyle(
-          color: (theme.colorScheme.onSurface),),
+          color: (theme.colorScheme.onSurface),
+        ),
       ),
     );
 
@@ -97,10 +99,9 @@ class IntroPage extends StatelessWidget {
         // alignment: Alignment(-1.0, -1.0),
         //constraints: BoxConstraints.expand(),
 //                 constraints: BoxConstraints.expand(width: MediaQuery.of(context).size.height, height: MediaQuery.of(context).size.width),
-      height: MediaQuery.of(context).size.height,
+        height: MediaQuery.of(context).size.height,
         child: Stack(
           children: <Widget>[
-
             background,
             background2,
             Container(
@@ -128,23 +129,19 @@ class IntroPage extends StatelessWidget {
                     flex: 4,
                     child: someText1,
                   ),
-                SizedBox(height: 180),
+                  SizedBox(height: 180),
                   LimitedBox(maxHeight: 230),
                   Flexible(
-
                     child: buttonCreateAccount,
                     flex: 5,
                   ),
                   SizedBox(height: 5),
-
                   Flexible(
                     child: labelAlreadyHaveAccount,
                     flex: 2,
                   ),
                   SizedBox(height: 5),
-
-                  Flexible(flex: 5,
-                      child: buttonRecoverFromPassphrase),
+                  Flexible(flex: 5, child: buttonRecoverFromPassphrase),
                   SizedBox(height: 10),
                 ],
               ),

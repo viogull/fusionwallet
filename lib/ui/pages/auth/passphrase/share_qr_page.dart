@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
+import 'package:fusion_wallet/theme/fusion_theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
-import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
+import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:share/share.dart';
 
@@ -31,18 +31,9 @@ class PassphraseShareQrPage extends StatelessWidget {
           fit: BoxFit.fill,
         ),
       ),
-      Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          title:
-              Text(AppLocalizations.of(context).toolbarRecoverFromSeedTitle()),
-          backgroundColor: Colors.transparent,
-          centerTitle: true,
-          elevation: 0,
-          iconTheme:
-              IconThemeData(color: Theme.of(context).colorScheme.primary),
-        ),
-        body: Column(
+      FusionScaffold(
+        title: AppLocalizations.of(context).toolbarRecoverFromSeedTitle(),
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Flexible(

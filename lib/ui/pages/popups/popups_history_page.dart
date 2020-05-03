@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
-
-import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
+import 'package:fusion_wallet/theme/fusion_theme.dart';
 
 class PopupHistoryPage extends StatefulWidget {
   static const String navId = '/PopupDialogWidget';
@@ -81,7 +79,7 @@ class _PopupHistoryPageState extends State<PopupHistoryPage> {
     );
 
     final history = Container(
-      width: MediaQuery.of(context).size.width ,
+      width: MediaQuery.of(context).size.width,
       child: Card(
         borderOnForeground: false,
         elevation: 16,
@@ -148,11 +146,11 @@ class _PopupHistoryPageState extends State<PopupHistoryPage> {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
             child: GestureDetector(
-                  child: Center(
-                      child: Text("${startDate.toLocal()}".split(' ')[0])),
-             // onTap: () => _startDateSelect(context),
+              child:
+                  Center(child: Text("${startDate.toLocal()}".split(' ')[0])),
+              // onTap: () => _startDateSelect(context),
             ),
-        ),
+          ),
         ),
       ),
     );
@@ -176,8 +174,8 @@ class _PopupHistoryPageState extends State<PopupHistoryPage> {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
               child: GestureDetector(
-                child: Center(
-                    child: Text("${endDate.toLocal()}".split(' ')[0])),
+                child:
+                    Center(child: Text("${endDate.toLocal()}".split(' ')[0])),
                 //onTap: () => _endDateSelect(context),
               ),
             )),
@@ -207,67 +205,77 @@ class _PopupHistoryPageState extends State<PopupHistoryPage> {
     );
 
     final buttonResult = Container(
-        height: MediaQuery.of(context).size.height * 0.6,
-        child:  Expanded( //Expanded is used so that all the widget get fit into the available screen
-          child: ListView.builder(
-            itemCount: 8,
-            itemBuilder: (context, i) => SizedBox(
-              height: 100.0,
-              child:
-              Card(
-                borderOnForeground: false,
-                elevation: 16,
-                color: Theme.of(context).colorScheme.surface,
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(width: 0.2, color:Colors.white),
-                  borderRadius: FusionTheme.borderRadius,
-                ),
-                margin: const EdgeInsets.only(bottom: 40, top:  0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    SizedBox(height:8,),
-                     Center(
-                       child: Row(
-                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          Text(
-                            AppLocalizations.of(context).inputAccountNameHelperText(),
-                            textAlign: TextAlign.left,
-                          ),
-                          SizedBox(width: MediaQuery.of(context).size.width *0.3,),
-                          SvgPicture.asset(
-                            ('assets/images/icons/ic_bitcoin.svg'),
-                            // color: Colors.white,
-                            fit: BoxFit.fill,
-                            height: 12,
-                            width: 12,
-                          ),
-                          Text('0.00', textAlign: TextAlign.right,),
-                        ],
-                    ),
-                     ),
-                    SizedBox(height:10 ,),
-                    Row(
+      height: MediaQuery.of(context).size.height * 0.6,
+      child: Expanded(
+        //Expanded is used so that all the widget get fit into the available screen
+        child: ListView.builder(
+          itemCount: 8,
+          itemBuilder: (context, i) => SizedBox(
+            height: 100.0,
+            child: Card(
+              borderOnForeground: false,
+              elevation: 16,
+              color: Theme.of(context).colorScheme.surface,
+              shape: RoundedRectangleBorder(
+                side: BorderSide(width: 0.2, color: Colors.white),
+                borderRadius: FusionTheme.borderRadius,
+              ),
+              margin: const EdgeInsets.only(bottom: 40, top: 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.symmetric(vertical: 0, horizontal: 15),
-                          child: Text(
-                            '01.01.2020',
-                            textAlign: TextAlign.left,
-                          ),
+                        Text(
+                          AppLocalizations.of(context)
+                              .inputAccountNameHelperText(),
+                          textAlign: TextAlign.left,
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.3,
+                        ),
+                        SvgPicture.asset(
+                          ('assets/images/icons/ic_bitcoin.svg'),
+                          // color: Colors.white,
+                          fit: BoxFit.fill,
+                          height: 12,
+                          width: 12,
+                        ),
+                        Text(
+                          '0.00',
+                          textAlign: TextAlign.right,
                         ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        margin:
+                            EdgeInsets.symmetric(vertical: 0, horizontal: 15),
+                        child: Text(
+                          '01.01.2020',
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ),
         ),
+      ),
     );
-
 
     return Scaffold(
       body: Container(
@@ -283,7 +291,7 @@ class _PopupHistoryPageState extends State<PopupHistoryPage> {
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
-               mainAxisSize: MainAxisSize.min,
+                mainAxisSize: MainAxisSize.min,
 //                crossAxisAlignment: Alignment.bottomCenter,
                 children: <Widget>[
                   AppBar(
@@ -344,7 +352,6 @@ class _PopupHistoryPageState extends State<PopupHistoryPage> {
                     flex: 6,
                     child: buttonResult,
                   ),
-
                 ],
               ),
             ),
