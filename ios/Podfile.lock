@@ -1,21 +1,132 @@
 PODS:
+  - AFDateHelper (4.2.7)
+  - Alamofire (4.7.3)
+  - AlamofireImage (3.4.1):
+    - Alamofire (~> 4.7)
   - barcode_scan (0.0.1):
     - Flutter
     - MTBBarcodeScanner
+  - BigInt (3.1.0):
+    - SipHash (~> 1.2)
+  - Crashlytics (3.14.0):
+    - Fabric (~> 1.10.2)
+  - CryptoSwift (1.3.1)
+  - DeckTransition (2.2.0)
+  - device_info (0.0.1):
+    - Flutter
+  - Differentiator (4.0.1)
+  - DKImagePickerController/Core (4.2.2):
+    - DKImagePickerController/ImageDataManager
+    - DKImagePickerController/Resource
+  - DKImagePickerController/ImageDataManager (4.2.2)
+  - DKImagePickerController/PhotoGallery (4.2.2):
+    - DKImagePickerController/Core
+    - DKPhotoGallery
+  - DKImagePickerController/Resource (4.2.2)
+  - DKPhotoGallery (0.0.14):
+    - DKPhotoGallery/Core (= 0.0.14)
+    - DKPhotoGallery/Model (= 0.0.14)
+    - DKPhotoGallery/Preview (= 0.0.14)
+    - DKPhotoGallery/Resource (= 0.0.14)
+    - SDWebImage
+    - SDWebImageFLPlugin
+  - DKPhotoGallery/Core (0.0.14):
+    - DKPhotoGallery/Model
+    - DKPhotoGallery/Preview
+    - SDWebImage
+    - SDWebImageFLPlugin
+  - DKPhotoGallery/Model (0.0.14):
+    - SDWebImage
+    - SDWebImageFLPlugin
+  - DKPhotoGallery/Preview (0.0.14):
+    - DKPhotoGallery/Model
+    - DKPhotoGallery/Resource
+    - SDWebImage
+    - SDWebImageFLPlugin
+  - DKPhotoGallery/Resource (0.0.14):
+    - SDWebImage
+    - SDWebImageFLPlugin
+  - Fabric (1.10.2)
+  - file_picker (0.0.1):
+    - DKImagePickerController/PhotoGallery
+    - Flutter
+  - FLAnimatedImage (1.0.12)
   - Flutter (1.0.0)
   - flutter_keyboard_visibility (0.7.0):
     - Flutter
   - flutter_plugin_android_lifecycle (0.0.1):
     - Flutter
+  - flutter_secure_storage (3.3.1):
+    - Flutter
+  - flutter_webview_plugin (0.0.1):
+    - Flutter
+  - fluttertoast (0.0.2):
+    - Flutter
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
+  - GoldenKeystore (1.0.3):
+    - TrezorCrypto (= 0.0.9)
+  - GrowingTextView (0.7.2)
+  - KeychainSwift (12.0.0)
   - local_auth (0.0.1):
     - Flutter
+  - MarqueeLabel/Swift (3.2.1)
+  - MinterCore (0.1.26):
+    - Alamofire (= 4.7.3)
+    - BigInt (~> 3.0)
+    - CryptoSwift (~> 1.0)
+    - ObjectMapper (~> 3.1)
+    - secp256k1.swift (~> 0.1)
+  - MinterExplorer (0.1.15):
+    - MinterCore
+  - MinterMy (0.1.7):
+    - MinterCore
   - MTBBarcodeScanner (5.0.11)
+  - NotificationBannerSwift (1.8.0):
+    - MarqueeLabel/Swift (~> 3.2.0)
+    - SnapKit (~> 4.0.1)
+  - ObjectMapper (3.5.3)
   - package_info (0.0.1):
     - Flutter
   - path_provider (0.0.1):
     - Flutter
   - path_provider_macos (0.0.1):
     - Flutter
+  - ReachabilitySwift (4.3.1)
+  - Realm (5.0.3):
+    - Realm/Headers (= 5.0.3)
+  - Realm/Headers (5.0.3)
+  - RealmSwift (5.0.3):
+    - Realm (= 5.0.3)
+  - root_checker (0.0.1):
+    - Flutter
+  - RxAppState (1.6.0):
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
+  - RxBiBinding (0.2.5):
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
+  - RxCocoa (5.1.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxDataSources (4.0.1):
+    - Differentiator (~> 4.0)
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
+  - RxGesture (3.0.2):
+    - RxCocoa (~> 5.1)
+    - RxSwift (~> 5.1)
+  - RxRelay (5.1.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.1)
+  - SDWebImage (5.7.3):
+    - SDWebImage/Core (= 5.7.3)
+  - SDWebImage/Core (5.7.3)
+  - SDWebImageFLPlugin (0.4.0):
+    - FLAnimatedImage (>= 1.0.11)
+    - SDWebImage/Core (~> 5.6)
+  - secp256k1.swift (0.1.4)
   - share (0.5.2):
     - Flutter
   - shared_preferences (0.0.1):
@@ -24,51 +135,174 @@ PODS:
     - Flutter
   - shared_preferences_web (0.0.1):
     - Flutter
+  - SipHash (1.2.2)
+  - SnapKit (4.0.1)
+  - sqflite (0.0.1):
+    - Flutter
+    - FMDB (~> 2.7.2)
+  - Starscream (3.1.1)
+  - SwiftCentrifuge (0.1.0):
+    - Starscream (~> 3)
+    - SwiftProtobuf
+  - SwiftLint (0.39.2)
+  - SwiftProtobuf (1.9.0)
+  - SwiftValidator (4.0.0)
+  - TPKeyboardAvoiding (1.3.3)
+  - TrezorCrypto (0.0.9)
+  - uni_links (0.0.1):
+    - Flutter
   - url_launcher (0.0.1):
     - Flutter
   - url_launcher_macos (0.0.1):
     - Flutter
   - url_launcher_web (0.0.1):
     - Flutter
+  - vibrate (0.0.1):
+    - Flutter
+  - XLPagerTabStrip (8.1.1)
+  - YandexMobileMetrica/Dynamic (3.2.0)
 
 DEPENDENCIES:
+  - AFDateHelper (~> 4.2.2)
+  - Alamofire
+  - AlamofireImage
   - barcode_scan (from `.symlinks/plugins/barcode_scan/ios`)
+  - Crashlytics (~> 3.10)
+  - CryptoSwift (~> 1.0)
+  - DeckTransition (~> 2.0)
+  - device_info (from `.symlinks/plugins/device_info/ios`)
+  - Fabric (~> 1.7)
+  - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - Flutter (from `Flutter`)
   - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
   - flutter_plugin_android_lifecycle (from `.symlinks/plugins/flutter_plugin_android_lifecycle/ios`)
+  - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
+  - flutter_webview_plugin (from `.symlinks/plugins/flutter_webview_plugin/ios`)
+  - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
+  - GoldenKeystore (from `https://github.com/sidorov-panda/GoldenKeystore`)
+  - GrowingTextView
+  - KeychainSwift (= 12.0.0)
   - local_auth (from `.symlinks/plugins/local_auth/ios`)
+  - MinterCore (from `https://github.com/MinterTeam/minter-ios-core.git`, branch `texas`)
+  - MinterExplorer (from `/Users/andrewtrach/fusion_wallet/ios/minter-ios-explorer-master`)
+  - MinterMy (from `/Users/andrewtrach/fusion_wallet/ios/minter-ios-my-master`)
+  - NotificationBannerSwift (= 1.8.0)
+  - ObjectMapper (~> 3.3)
   - package_info (from `.symlinks/plugins/package_info/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - path_provider_macos (from `.symlinks/plugins/path_provider_macos/ios`)
+  - ReachabilitySwift (~> 4.3)
+  - RealmSwift (from `https://github.com/realm/realm-cocoa.git`, branch `master`)
+  - root_checker (from `.symlinks/plugins/root_checker/ios`)
+  - RxAppState
+  - RxBiBinding
+  - RxDataSources
+  - RxGesture
+  - RxSwift
   - share (from `.symlinks/plugins/share/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - shared_preferences_macos (from `.symlinks/plugins/shared_preferences_macos/ios`)
   - shared_preferences_web (from `.symlinks/plugins/shared_preferences_web/ios`)
+  - sqflite (from `.symlinks/plugins/sqflite/ios`)
+  - SwiftCentrifuge
+  - SwiftLint
+  - SwiftValidator (from `https://github.com/jpotts18/SwiftValidator.git`, branch `master`)
+  - TPKeyboardAvoiding (~> 1.3)
+  - uni_links (from `.symlinks/plugins/uni_links/ios`)
   - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
   - url_launcher_macos (from `.symlinks/plugins/url_launcher_macos/ios`)
   - url_launcher_web (from `.symlinks/plugins/url_launcher_web/ios`)
+  - vibrate (from `.symlinks/plugins/vibrate/ios`)
+  - XLPagerTabStrip (~> 8.0)
+  - YandexMobileMetrica/Dynamic (= 3.2.0)
 
 SPEC REPOS:
+  https://github.com/Cocoapods/Specs:
+    - AFDateHelper
+    - Alamofire
+    - AlamofireImage
+    - BigInt
+    - Crashlytics
+    - CryptoSwift
+    - DeckTransition
+    - Differentiator
+    - Fabric
+    - GrowingTextView
+    - KeychainSwift
+    - MarqueeLabel
+    - NotificationBannerSwift
+    - ObjectMapper
+    - ReachabilitySwift
+    - Realm
+    - RxAppState
+    - RxBiBinding
+    - RxCocoa
+    - RxDataSources
+    - RxGesture
+    - RxRelay
+    - RxSwift
+    - secp256k1.swift
+    - SipHash
+    - SnapKit
+    - Starscream
+    - SwiftCentrifuge
+    - SwiftLint
+    - SwiftProtobuf
+    - TPKeyboardAvoiding
+    - TrezorCrypto
+    - XLPagerTabStrip
+    - YandexMobileMetrica
   trunk:
+    - DKImagePickerController
+    - DKPhotoGallery
+    - FLAnimatedImage
+    - FMDB
     - MTBBarcodeScanner
+    - SDWebImage
+    - SDWebImageFLPlugin
 
 EXTERNAL SOURCES:
   barcode_scan:
     :path: ".symlinks/plugins/barcode_scan/ios"
+  device_info:
+    :path: ".symlinks/plugins/device_info/ios"
+  file_picker:
+    :path: ".symlinks/plugins/file_picker/ios"
   Flutter:
     :path: Flutter
   flutter_keyboard_visibility:
     :path: ".symlinks/plugins/flutter_keyboard_visibility/ios"
   flutter_plugin_android_lifecycle:
     :path: ".symlinks/plugins/flutter_plugin_android_lifecycle/ios"
+  flutter_secure_storage:
+    :path: ".symlinks/plugins/flutter_secure_storage/ios"
+  flutter_webview_plugin:
+    :path: ".symlinks/plugins/flutter_webview_plugin/ios"
+  fluttertoast:
+    :path: ".symlinks/plugins/fluttertoast/ios"
+  GoldenKeystore:
+    :git: https://github.com/sidorov-panda/GoldenKeystore
   local_auth:
     :path: ".symlinks/plugins/local_auth/ios"
+  MinterCore:
+    :branch: texas
+    :git: https://github.com/MinterTeam/minter-ios-core.git
+  MinterExplorer:
+    :path: "/Users/andrewtrach/fusion_wallet/ios/minter-ios-explorer-master"
+  MinterMy:
+    :path: "/Users/andrewtrach/fusion_wallet/ios/minter-ios-my-master"
   package_info:
     :path: ".symlinks/plugins/package_info/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
   path_provider_macos:
     :path: ".symlinks/plugins/path_provider_macos/ios"
+  RealmSwift:
+    :branch: master
+    :git: https://github.com/realm/realm-cocoa.git
+    :submodules: true
+  root_checker:
+    :path: ".symlinks/plugins/root_checker/ios"
   share:
     :path: ".symlinks/plugins/share/ios"
   shared_preferences:
@@ -77,31 +311,110 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shared_preferences_macos/ios"
   shared_preferences_web:
     :path: ".symlinks/plugins/shared_preferences_web/ios"
+  sqflite:
+    :path: ".symlinks/plugins/sqflite/ios"
+  SwiftValidator:
+    :branch: master
+    :git: https://github.com/jpotts18/SwiftValidator.git
+  uni_links:
+    :path: ".symlinks/plugins/uni_links/ios"
   url_launcher:
     :path: ".symlinks/plugins/url_launcher/ios"
   url_launcher_macos:
     :path: ".symlinks/plugins/url_launcher_macos/ios"
   url_launcher_web:
     :path: ".symlinks/plugins/url_launcher_web/ios"
+  vibrate:
+    :path: ".symlinks/plugins/vibrate/ios"
+
+CHECKOUT OPTIONS:
+  GoldenKeystore:
+    :commit: 2f58a6eb405561bec305d5a197bcaa1514eed77e
+    :git: https://github.com/sidorov-panda/GoldenKeystore
+  MinterCore:
+    :commit: 7ade692dfea37dddbe681836044bf2eeb077dc9d
+    :git: https://github.com/MinterTeam/minter-ios-core.git
+  RealmSwift:
+    :commit: 986208fe6a516522a5438ce7612b00f65bb44ecf
+    :git: https://github.com/realm/realm-cocoa.git
+    :submodules: true
+  SwiftValidator:
+    :commit: d370353b7a0ce758a53b189c81e485dcd53c99a4
+    :git: https://github.com/jpotts18/SwiftValidator.git
 
 SPEC CHECKSUMS:
+  AFDateHelper: 4ad66fb19503041fbba8a3018cb7ef9c71b2ff88
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
   barcode_scan: 33f586d02270046fc6559135038b34b5754eaa4f
+  BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
+  Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
+  CryptoSwift: f12f037f6d0fcd6d48c96db0071b653de64e6c4d
+  DeckTransition: c705e1f6bf8d63a3515a91d8a41be7038005bf35
+  device_info: d7d233b645a32c40dfdc212de5cf646ca482f175
+  Differentiator: 886080237d9f87f322641dedbc5be257061b0602
+  DKImagePickerController: 4a3e7948a848c4348e600b3fe5ce41478835fa10
+  DKPhotoGallery: 0290d32343574f06eaa4c26f8f2f8a1035e916be
+  Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
+  file_picker: 3e6c3790de664ccf9b882732d9db5eaf6b8d4eb1
+  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   flutter_keyboard_visibility: 6195387fb6d8f46e5cd6dda4a4154e41f800f545
-  flutter_plugin_android_lifecycle: 47de533a02850f070f5696a623995e93eddcdb9b
-  local_auth: 2571c49920ae469f46d5557435fad8fa473a5e88
+  flutter_plugin_android_lifecycle: dc0b544e129eebb77a6bfb1239d4d1c673a60a35
+  flutter_secure_storage: 7953c38a04c3fdbb00571bcd87d8e3b5ceb9daec
+  flutter_webview_plugin: ed9e8a6a96baf0c867e90e1bce2673913eeac694
+  fluttertoast: b644586ef3b16f67fae9a1f8754cef6b2d6b634b
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  GoldenKeystore: 6d176bbb332a4abb99024ebce06a3e3067c73a8a
+  GrowingTextView: 876bf42005b5e4a4fd740597db12caaf41f0fe6c
+  KeychainSwift: d5e776578587ee5958ce36601df22f168f65138a
+  local_auth: 25938960984c3a7f6e3253e3f8d962fdd16852bd
+  MarqueeLabel: 2daf039bf916937c8a4c9adfc13577cc5e51b4ce
+  MinterCore: 524460f52445065280ee8b4d365216b3772670f9
+  MinterExplorer: 27c5ba3bef42457fab572b8102b71c582f3f3c6a
+  MinterMy: 4198c68f2dbdcced3cb6cbe86a6d300b81433288
   MTBBarcodeScanner: f453b33c4b7dfe545d8c6484ed744d55671788cb
-  package_info: 48b108e75b8802c2d5e126f208ef540561c98aef
-  path_provider: fb74bd0465e96b594bb3b5088ee4a4e7bb1f2a9d
+  NotificationBannerSwift: 49fc4be7fabada55b189b50e72184c92edd5f7f7
+  ObjectMapper: 97111c97e054a6ee25917662106689f0b4127b37
+  package_info: 873975fc26034f0b863a300ad47e7f1ac6c7ec62
+  path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
   path_provider_macos: f760a3c5b04357c380e2fddb6f9db6f3015897e0
-  share: bae0a282aab4483288913fc4dc0b935d4b491f2e
-  shared_preferences: 430726339841afefe5142b9c1f50cb6bd7793e01
+  ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
+  Realm: bfca1699b61b0b17c3a69ae0e648314eae91fbdb
+  RealmSwift: 493c9f089cd3893b3959007973c0e4f640906ba0
+  root_checker: 0813e70bd17104226b9ab1f00b833f0407ed26a4
+  RxAppState: b633d7370970ecb80081912ea08a7bf3eb644b4e
+  RxBiBinding: 6cc627d9e0dfa0b2ce8470cd7e539f3cb100f782
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
+  RxGesture: d6bd7447ca3a596c7a9702a6a2b6a2bb5d8bae54
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
+  SDWebImage: 97351f6582ceca541ea294ba66a1fcb342a331c2
+  SDWebImageFLPlugin: 6c2295fb1242d44467c6c87dc5db6b0a13228fd8
+  secp256k1.swift: a7e7a214f6db6ce5db32cc6b2b45e5c4dd633634
+  share: 7d22fe8baedfe93aefd864bf0b73f29711fbb0a3
+  shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
   shared_preferences_macos: f3f29b71ccbb56bf40c9dd6396c9acf15e214087
   shared_preferences_web: 141cce0c3ed1a1c5bf2a0e44f52d31eeb66e5ea9
-  url_launcher: a1c0cc845906122c4784c542523d8cacbded5626
+  SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
+  SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
+  sqflite: 4001a31ff81d210346b500c55b17f4d6c7589dd0
+  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
+  SwiftCentrifuge: 17ca50145ff38bfb8a95ab571b20df046b1dc143
+  SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
+  SwiftProtobuf: ecbec1be9036d15655f6b3443a1c4ea693c97932
+  SwiftValidator: 249b6b3ae3b294266c5b9de134d94f18f2d5aa47
+  TPKeyboardAvoiding: 6dd3fe3268b8f2627beb7ff3d82a3cacbdf66a36
+  TrezorCrypto: bfeea47a052dca2c77d4a39e1e183865e52de14d
+  uni_links: d97da20c7701486ba192624d99bffaaffcfc298a
+  url_launcher: 6fef411d543ceb26efce54b05a0a40bfd74cbbef
   url_launcher_macos: fd7894421cd39320dce5f292fc99ea9270b2a313
   url_launcher_web: e5527357f037c87560776e36436bf2b0288b965c
+  vibrate: 967ba16b8bd87d2fa3646472bb10429f1927c32f
+  XLPagerTabStrip: 63166e21c9844fa30f2d95d30f335e73be5caf22
+  YandexMobileMetrica: f18374ee6977a4cd1d0a86298a0df4ad7baf4135
 
-PODFILE CHECKSUM: 1b66dae606f75376c5f2135a8290850eeb09ae83
+PODFILE CHECKSUM: 36b73ebd5e5b801808445b39bf2cc6db6a6a0b7d
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.9.3
