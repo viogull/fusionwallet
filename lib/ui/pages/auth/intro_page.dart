@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
+import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:fusion_wallet/ui/pages/auth/password_creation_page.dart';
 import 'package:fusion_wallet/ui/pages/auth/recover_account_page.dart';
 
@@ -17,13 +18,7 @@ class IntroPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
-    final background = SvgPicture.asset(
-      ('assets/images/backgrounds/bg_primary.svg'),
-      fit: BoxFit.fill,
-      //alignment: Alignment(0.0,0.0),
-      height: MediaQuery.of(context).size.height,
-//      width: MediaQuery.of(context).size.width,
-    );
+
 
     final background2 = Image.asset(
       ('assets/images/backgrounds/bg_greeting.png'),
@@ -92,8 +87,8 @@ class IntroPage extends StatelessWidget {
       }),
     );
 
-    return Scaffold(
-      body: Container(
+    return FusionScaffold(
+      child: Container(
         //margin: EdgeInsets.fromLTRB(00.0, 0.0, 0.0, 0.0),
 
         // alignment: Alignment(-1.0, -1.0),
@@ -102,7 +97,6 @@ class IntroPage extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         child: Stack(
           children: <Widget>[
-            background,
             background2,
             Container(
               height: MediaQuery.of(context).size.height,

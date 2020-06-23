@@ -65,6 +65,11 @@ class FusionDrawer extends StatelessWidget {
       case TargetPlatform.android:
       case TargetPlatform.fuchsia:
         label = semanticLabel ?? MaterialLocalizations.of(context)?.drawerLabel;
+
+        break;
+      case TargetPlatform.macOS:
+        // TODO: Handle this case.
+        break;
     }
     return Semantics(
       scopesRoute: true,

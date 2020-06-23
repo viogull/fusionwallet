@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
+import 'package:fusion_wallet/ui/pages/auth/password_creation_page.dart';
 import 'package:fusion_wallet/ui/pages/exchange/convert_funds_page.dart';
 import 'package:fusion_wallet/ui/pages/exchange/rate_exhange_page.dart';
 
@@ -18,12 +19,7 @@ class _ExchangePageState extends State<ExchangePage> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
-    final background = SvgPicture.asset(
-      ('assets/images/backgrounds/bg_primary.svg'),
-      fit: BoxFit.fill,
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-    );
+
 
     final myCoinLabel = Container(
       alignment: Alignment.topLeft,
@@ -246,7 +242,9 @@ class _ExchangePageState extends State<ExchangePage> {
     final buyButton1 = Container(
       height: 50,
       width: MediaQuery.of(context).size.width * 0.30,
-      child: FusionButton(AppLocalizations.of(context).buttonBuy(), () {}),
+      child: FusionButton(AppLocalizations.of(context).buttonBuy(), () {
+        Navigator.pushNamed(context, PasswordCreationPage.navId);
+      }),
     );
 
     final buyButton2 = Container(
@@ -258,10 +256,7 @@ class _ExchangePageState extends State<ExchangePage> {
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      child: Stack(
-        children: <Widget>[
-          background,
-          Container(
+      child: Container(
             padding: EdgeInsets.only(
               left: 24.0,
               right: 24.0,
@@ -331,8 +326,6 @@ class _ExchangePageState extends State<ExchangePage> {
                 ),
               ],
             ),
-          ),
-        ],
       ),
     );
   }

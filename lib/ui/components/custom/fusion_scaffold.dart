@@ -9,7 +9,7 @@ class FusionScaffold extends StatelessWidget {
   final Drawer drawer;
   final SliverAppBar appBar;
 
-  FusionScaffold({@required this.child, this.title, this.drawer, this.appBar});
+  FusionScaffold({@required this.child, this.title, this.drawer, this.appBar, Container body});
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/theme/fusion_theme.dart';
+import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 
 class ContactsPage extends StatefulWidget {
   ContactsPage({Key key, this.title}) : super(key: key);
@@ -50,12 +51,7 @@ class _ContactsPageState extends State<ContactsPage> {
     final ThemeData theme = Theme.of(context);
     //DateTime selectedDate = DateTime.now();
 
-    final background = SvgPicture.asset(
-      ('assets/images/backgrounds/bg_primary.svg'),
-      fit: BoxFit.fill,
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-    );
+
 
     final labelAccount = Container(
       alignment: Alignment.topLeft,
@@ -131,48 +127,46 @@ class _ContactsPageState extends State<ContactsPage> {
       ),
     );
 
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height,
-      child: Stack(
-        children: <Widget>[
-          background,
-          Container(
-            padding: EdgeInsets.only(
-              left: 24.0,
-              right: 24.0,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              // mainAxisSize: MainAxisSize.min,
+    return FusionScaffold(
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+       child: Container(
+              padding: EdgeInsets.only(
+                left: 24.0,
+                right: 24.0,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                // mainAxisSize: MainAxisSize.min,
 //                crossAxisAlignment: Alignment.bottomCenter,
-              children: <Widget>[
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(color: theme.colorScheme.primary),
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(color: theme.colorScheme.primary),
+                    ),
+                    height: 35,
+                    padding: const EdgeInsets.all(1.0),
+                    child: TextField(
+                      onChanged: (value) {
+                        filterSearchResults(value);
+                      },
+                      controller: editingController,
+                      decoration: InputDecoration(
+                          labelText: "Search Contacts",
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5.0)))),
+                    ),
                   ),
-                  height: 35,
-                  padding: const EdgeInsets.all(1.0),
-                  child: TextField(
-                    onChanged: (value) {
-                      filterSearchResults(value);
-                    },
-                    controller: editingController,
-                    decoration: InputDecoration(
-                        labelText: "Search Contacts",
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(5.0)))),
-                  ),
-                ),
-                buttonResult,
+                  buttonResult,
 //                  SizedBox(height: 20,),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+
       ),
     );
   }

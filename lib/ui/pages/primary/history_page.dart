@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
@@ -84,7 +85,7 @@ class _HistoryPageState extends State<HistoryPage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                Text(
+                                AutoSizeText(
                                   AppLocalizations.of(context)
                                       .inputAccountNameHelperText(),
                                   textAlign: TextAlign.left,
@@ -117,12 +118,6 @@ class _HistoryPageState extends State<HistoryPage> {
           });
     }
 
-    final background = SvgPicture.asset(
-      ('assets/images/backgrounds/bg_primary.svg'),
-      fit: BoxFit.fill,
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-    );
 
     final labelAccount = Container(
       alignment: Alignment.topLeft,
@@ -154,13 +149,15 @@ class _HistoryPageState extends State<HistoryPage> {
               onTap: _showModalSheet,
               child: Row(
                 children: <Widget>[
-                  Text(
+                  AutoSizeText(
                     AppLocalizations.of(context).inputAccountNameHintText(),
                     textAlign: TextAlign.left,
+                    minFontSize: 10,
+                    maxFontSize: 12,
                   ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.1,
-                  ),
+//                  SizedBox(
+//                    width: MediaQuery.of(context).size.width * 0.03,
+//                  ),
                   SvgPicture.asset(
                     ('assets/images/icons/ic_bitcoin.svg'),
                     // color: Colors.white,
@@ -275,10 +272,7 @@ class _HistoryPageState extends State<HistoryPage> {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
-      child: Stack(
-        children: <Widget>[
-          background,
-          Container(
+      child: Container(
             padding: EdgeInsets.only(
               left: 24.0,
               right: 24.0,
@@ -349,8 +343,9 @@ class _HistoryPageState extends State<HistoryPage> {
               ],
             ),
           ),
-        ],
-      ),
+
     );
   }
 }
+
+
