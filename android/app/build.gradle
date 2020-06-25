@@ -48,6 +48,7 @@ android {
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -63,8 +64,7 @@ android {
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
+
             signingConfig signingConfigs.release
 
             minifyEnabled true
@@ -83,7 +83,11 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation "network.minter.android:minter-android-core:${minterCoreSDK}"
+    implementation "network.minter.android:minter-android-explorer:${minterExplorerSDK}"
+    implementation "network.minter.android:minter-android-blockchain:${minterBlockchainSDK}"
+    implementation "network.minter.android:minter-android-profile:${minterProfileSDK}"
+    implementation "network.minter.android:ledger-connector:${minterLedgerSDK}"
+    implementation  "network.minter.android:ledger-rxjava2-connector:${minterLedgerSDK}"
+
 }

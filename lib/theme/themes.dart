@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:barcode_scan/barcode_scan.dart';
 
 abstract class BaseTheme {
   Color primary;
@@ -56,7 +55,6 @@ abstract class BaseTheme {
   BoxShadow boxShadowButton;
 
   // QR scanner theme
-  OverlayTheme qrScanTheme;
   // App icon (iOS only)
   AppIconEnum appIcon;
 }
@@ -131,7 +129,6 @@ class LightTheme extends BaseTheme {
   BoxShadow boxShadow = BoxShadow(color: Colors.transparent);
   BoxShadow boxShadowButton = BoxShadow(color: Colors.transparent);
 
-  OverlayTheme qrScanTheme = OverlayTheme.NATRIUM;
   AppIconEnum appIcon = AppIconEnum.NATRIUM;
 }
 
@@ -205,7 +202,6 @@ class DarkTheme extends BaseTheme {
   BoxShadow boxShadow = BoxShadow(color: Colors.transparent);
   BoxShadow boxShadowButton = BoxShadow(color: Colors.transparent);
 
-  OverlayTheme qrScanTheme = OverlayTheme.TITANIUM;
   AppIconEnum appIcon = AppIconEnum.TITANIUM;
 }
 
@@ -285,7 +281,6 @@ class IndiumTheme extends BaseTheme {
       offset: Offset(0, 5),
       blurRadius: 15);
 
-  OverlayTheme qrScanTheme = OverlayTheme.INDIUM;
   AppIconEnum appIcon = AppIconEnum.INDIUM;
 }
 
@@ -359,7 +354,6 @@ class NeptuniumTheme extends BaseTheme {
   BoxShadow boxShadow = BoxShadow(color: Colors.transparent);
   BoxShadow boxShadowButton = BoxShadow(color: Colors.transparent);
 
-  OverlayTheme qrScanTheme = OverlayTheme.NEPTUNIUM;
   AppIconEnum appIcon = AppIconEnum.NEPTUNIUM;
 }
 
@@ -433,7 +427,6 @@ class ThoriumTheme extends BaseTheme {
   BoxShadow boxShadow = BoxShadow(color: Colors.transparent);
   BoxShadow boxShadowButton = BoxShadow(color: Colors.transparent);
 
-  OverlayTheme qrScanTheme = OverlayTheme.THORIUM;
   AppIconEnum appIcon = AppIconEnum.THORIUM;
 }
 

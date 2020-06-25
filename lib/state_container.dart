@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fusion_wallet/utils/crypto.dart';
 import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
@@ -52,8 +53,14 @@ class StateContainer extends StatefulWidget {
 }
 
 class StateContainerState extends State<StateContainer> {
+  static const platformChannel =
+      const MethodChannel('com.fusiongroup.fusion.wallet/natives');
+
   final Logger log = sl.get<Logger>();
+
   String receiveThreshold = BigInt.from(10).pow(24).toString();
+
+  String encryptedSeed = "";
 
   String currencyLocale;
   Locale locale = Locale('en', '');
@@ -95,10 +102,20 @@ class StateContainerState extends State<StateContainer> {
   // When wallet is encrypted
   String encryptedSecret;
 
+  Future<dynamic> _generateAddress() async {
+    try {
+      final secretData = await platformChannel.invokeMethod('address');
+      debugPrint('Generated address ${secretData}');
+      return secretData;
+    } on PlatformException catch (e) {}
+  }
+
   @override
   void initState() {
     super.initState();
     // Register RxBus
+
+    _generateAddress();
 
     Hive.openBox(preferencesBox).then((preferences) {
       _prefs = preferences;

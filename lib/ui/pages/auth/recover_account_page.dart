@@ -26,24 +26,24 @@ class RecoverAccountPage extends StatefulWidget {
 
 class _RecoverAccountSate extends State<RecoverAccountPage> {
   Future<String> scan() async {
-    try {
-      String barcode = await BarcodeScanner.scan(OverlayTheme.TITANIUM);
-      debugPrint(barcode);
-      return barcode;
-    } on PlatformException catch (e) {
-      if (e.code == BarcodeScanner.CameraAccessDenied) {
-        setState(() {
-          this.barcode = 'The user did not grant the camera permission!';
-        });
-      } else {
-        return null;
-      }
-    } on FormatException {
-      setState(() => this.barcode =
-          'null (User returned using the "back"-button before scanning anything. Result)');
-    } catch (e) {
-      return null;
-    }
+//    try {
+//      String barcode = await BarcodeScanner.scan(OverlayTheme.TITANIUM);
+//      debugPrint(barcode);
+//      return barcode;
+//    } on PlatformException catch (e) {
+//      if (e.code == BarcodeScanner.CameraAccessDenied) {
+//        setState(() {
+//          this.barcode = 'The user did not grant the camera permission!';
+//        });
+//      } else {
+//        return null;
+//      }
+//    } on FormatException {
+//      setState(() => this.barcode =
+//          'null (User returned using the "back"-button before scanning anything. Result)');
+//    } catch (e) {
+//      return null;
+//    }
   }
 
 //  final TextEditingController _textFieldController = TextEditingController();
