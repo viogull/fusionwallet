@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:fusion_wallet/box/models/account.dart';
+import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/main.dart';
 import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';

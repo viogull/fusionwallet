@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fusion_wallet/box/models/contact.dart';
+import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/theme/fusion_theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
@@ -66,22 +66,41 @@ class _ContactsPageState extends State<ContactsPage> {
 
     return FusionScaffold(
         child: Container(
-            child: Column(children: <Widget>[
-      Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        child: TextField(
-          onChanged: (value) {
-            filterSearchResults(value);
-          },
-          controller: editingController,
-          decoration: InputDecoration(
-              labelText: AppLocalizations.of(context).inputSearchContactHint(),
-              hintText: AppLocalizations.of(context).inputSearchContactHint(),
-              prefixIcon: Icon(Icons.search),
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(5.0)))),
-        ),
-      ),
-    ])));
+            height: MediaQuery.of(context).size.height,
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Flexible(
+                    flex: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 16),
+                      child: TextField(
+                        onChanged: (value) {
+                          filterSearchResults(value);
+                        },
+                        controller: editingController,
+                        decoration: InputDecoration(
+                            labelText: AppLocalizations.of(context)
+                                .inputSearchContactHint(),
+                            hintText: AppLocalizations.of(context)
+                                .inputSearchContactHint(),
+                            prefixIcon: Icon(Icons.search),
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5.0)))),
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    flex: 8,
+                    child: ListView.builder(
+                      itemBuilder: (context, index) {
+                        return ContactItem(data: items[index]);
+                      },
+                      itemCount: items.length,
+                    ),
+                  )
+                ])));
   }
 }

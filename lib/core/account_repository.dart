@@ -1,8 +1,7 @@
 import 'package:flutter/foundation.dart';
+import 'package:fusion_wallet/core/models/boxes/account.dart';
 import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
-
-import 'models/account.dart';
 
 class AccountRepository {
   final Box<Account> accounts;

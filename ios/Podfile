@@ -1,12 +1,8 @@
 # Uncomment this line to define a global platform for your project
-# platform :ios, '10.0'
-
-use_frameworks!
-
+# platform :ios, '9.0'
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
-
 
 project 'Runner', {
   'Debug' => :debug,
@@ -39,7 +35,7 @@ end
 target 'Runner' do
   use_frameworks!
   use_modular_headers!
-  
+
   # Flutter Pod
 
   copied_flutter_dir = File.join(__dir__, 'Flutter')
@@ -69,12 +65,14 @@ target 'Runner' do
   pod 'Flutter', :path => 'Flutter'
 
 
-	pod 'MinterCore', :git => 'https://github.com/MinterTeam/minter-ios-core.git', :branch => 'texas'
-	pod 'MinterMy'
-	pod 'MinterExplorer'
+  pod 'MinterCore', :git => 'https://github.com/MinterTeam/minter-ios-core.git', :branch => 'texas'
+  pod 'MinterMy'
+  pod 'MinterExplorer'
 
+  # Plugin Pods
 
-
+  # Prepare symlinks folder. We use symlinks to avoid having Podfile.lock
+  # referring to absolute paths on developers' machines.
   system('rm -rf .symlinks')
   system('mkdir -p .symlinks/plugins')
   plugin_pods = parse_KV_file('../.flutter-plugins')
@@ -84,9 +82,6 @@ target 'Runner' do
     pod name, :path => File.join(symlink, 'ios')
   end
 end
-
-# Prevent Cocoapods from embedding a second Flutter framework and causing an error with the new Xcode build system.
-install! 'cocoapods', :disable_input_output_paths => true
 
 post_install do |installer|
   installer.pods_project.targets.each do |target|

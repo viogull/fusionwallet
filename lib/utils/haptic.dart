@@ -50,7 +50,7 @@ class HapticUtil {
       if (await hasTapicEngine() && await Vibrate.canVibrate) {
         Vibrate.feedback(FeedbackType.medium);
       } else {
-        HapticFeedback.mediumImpact();
+        HapticFeedback.lightImpact();
       }
     } else {
       HapticFeedback.mediumImpact();
@@ -61,7 +61,14 @@ class HapticUtil {
   /// iOS-only, since Android already gives us feedback on success
   Future<void> fingerprintSucess() async {
     if (Platform.isIOS) {
-      Future.delayed(Duration(milliseconds: 50), () => success());
+      Future.delayed(Duration(milliseconds: 111), () => success());
+    }
+  }
+
+  base() {
+    if (Platform.isIOS) {
+      Future.delayed(
+          Duration(milliseconds: 120), () => HapticFeedback.selectionClick());
     }
   }
 }

@@ -5,7 +5,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fusion_wallet/core/models/models.dart';
 import 'package:fusion_wallet/theme/fusion_theme.dart';
 import 'package:fusion_wallet/ui/components/balances_card_item.dart';
+import 'package:fusion_wallet/utils/haptic.dart';
 
+import '../../../inject.dart';
 import '../../../localizations.dart';
 
 class AccountBalancesCard extends StatefulWidget {
@@ -43,6 +45,7 @@ class _AccountBalancesCardState extends State<AccountBalancesCard> {
             Align(
               alignment: Alignment.center,
               child: Card(
+                elevation: 2,
                 color: theme.colorScheme.surface,
                 margin: const EdgeInsets.all(16),
                 shape: RoundedRectangleBorder(
@@ -81,10 +84,13 @@ class _AccountBalancesCardState extends State<AccountBalancesCard> {
                 maxHeight: 24,
                 maxWidth: 24,
                 child: FloatingActionButton(
+                  focusElevation: 2,
+                  highlightElevation: 8,
                   mini: true,
                   heroTag: 'info_fab_tag',
                   child: GestureDetector(
                     onTap: () {
+                      injector.get<HapticUtil>().base();
                       setState(() {
                         this._showUsdValues = !(this._showUsdValues);
                       });
@@ -104,7 +110,7 @@ class _AccountBalancesCardState extends State<AccountBalancesCard> {
                     ),
                   ),
                   onPressed: () {},
-                  elevation: 1,
+                  elevation: 8,
                 ),
               ),
             ),
@@ -120,7 +126,7 @@ class _AccountBalancesCardState extends State<AccountBalancesCard> {
                     size: 24,
                   ),
                   onPressed: () {},
-                  elevation: 1,
+                  elevation: 0,
                 ),
               ),
             )

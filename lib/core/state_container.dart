@@ -4,7 +4,7 @@ import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 import 'package:nanodart/nanodart.dart';
 
-import '../box/models/account.dart';
+import 'models.dart';
 import 'models/available_currency.dart';
 import 'models/available_language.dart';
 import '../inject.dart';

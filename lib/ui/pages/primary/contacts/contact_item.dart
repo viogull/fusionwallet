@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fusion_wallet/box/models/contact.dart';
+import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/theme/fusion_theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 

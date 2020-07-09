@@ -42,7 +42,7 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.4.1"
+    version: "2.4.2"
   auto_size_text:
     dependency: "direct main"
     description:
@@ -70,14 +70,14 @@ packages:
       name: bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.0"
+    version: "5.0.1"
   bloc_test:
     dependency: transitive
     description:
       name: bloc_test
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.1.0"
+    version: "6.0.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -204,6 +204,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.16.1"
+  cubit:
+    dependency: transitive
+    description:
+      name: cubit
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.2"
+  cubit_test:
+    dependency: transitive
+    description:
+      name: cubit_test
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.1"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -301,7 +315,7 @@ packages:
       name: flare_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.3"
+    version: "2.0.5"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -313,7 +327,14 @@ packages:
       name: flutter_bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.1"
+    version: "5.0.1"
+  flutter_cubit:
+    dependency: transitive
+    description:
+      name: flutter_cubit
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.1"
   flutter_cupertino_localizations:
     dependency: "direct main"
     description:
@@ -334,14 +355,14 @@ packages:
       name: flutter_form_bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.14.0"
+    version: "0.15.0"
   flutter_keyboard_visibility:
     dependency: transitive
     description:
       name: flutter_keyboard_visibility
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "3.2.1"
   flutter_launcher_icons:
     dependency: "direct dev"
     description:
@@ -357,9 +378,11 @@ packages:
   flutter_platform_widgets:
     dependency: "direct main"
     description:
-      name: flutter_platform_widgets
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "."
+      ref: beta
+      resolved-ref: e144647d8965c581d8969078bfe16f17805fe755
+      url: "git@github.com:stryder-dev/flutter_platform_widgets.git"
+    source: git
     version: "0.51.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
@@ -421,14 +444,14 @@ packages:
       name: fluttertoast
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.1"
+    version: "6.0.1"
   form_bloc:
     dependency: "direct main"
     description:
       name: form_bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.14.0"
+    version: "0.15.0"
   get_it:
     dependency: "direct main"
     description:
@@ -624,7 +647,7 @@ packages:
       name: modal_bottom_sheet
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.6+1"
+    version: "0.2.0"
   nanodart:
     dependency: "direct main"
     description:
@@ -764,7 +787,7 @@ packages:
       name: pin_input_text_field
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.3"
+    version: "3.0.4"
   platform:
     dependency: transitive
     description:
@@ -827,7 +850,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.1.3"
+    version: "4.3.0"
   pub_semver:
     dependency: transitive
     description:
@@ -922,7 +945,14 @@ packages:
       name: shared_preferences
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.7+3"
+    version: "0.5.8"
+  shared_preferences_linux:
+    dependency: transitive
+    description:
+      name: shared_preferences_linux
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.2+1"
   shared_preferences_macos:
     dependency: transitive
     description:

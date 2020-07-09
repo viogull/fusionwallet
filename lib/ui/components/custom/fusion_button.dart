@@ -14,21 +14,24 @@ class FusionButton extends StatelessWidget {
   final Icon icons;
   final bool expandedWidth;
 
+  final double _width2height = 280 / 45;
   FusionButton(
       {@required this.text,
       @required this.onPressed,
       this.icons,
-      this.expandedWidth});
+      this.expandedWidth = false});
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final fullWidth = MediaQuery.of(context).size.width * 0.85;
+    final calculatedHeight = fullWidth / _width2height;
 
     final double height = 50;
     return Container(
       margin: const EdgeInsets.all(8),
-      width: 120,
-      height: height,
+      width: (expandedWidth) ? fullWidth : 120,
+      height: (expandedWidth) ? calculatedHeight : height,
       decoration: BoxDecoration(
         borderRadius: FusionTheme.borderRadius,
         border: Border.all(color: Theme.of(context).colorScheme.surface),
@@ -46,7 +49,8 @@ class FusionButton extends StatelessWidget {
           child: AutoSizeText(
             text,
             textAlign: TextAlign.center,
-            minFontSize: 10,
+            minFontSize: 11,
+            maxFontSize: 14,
             maxLines: 1,
             style: TextStyle(
               color: (theme.colorScheme.onPrimary),

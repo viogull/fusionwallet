@@ -7,8 +7,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:provider/provider.dart';
 
-import 'box/models/account.dart';
-import 'box/models/contact.dart';
+import 'core/models.dart';
 import 'localizations.dart';
 import 'inject.dart';
 import 'ui/pages/auth/splash.dart';

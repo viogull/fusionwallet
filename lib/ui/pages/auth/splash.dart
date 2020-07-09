@@ -2,13 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/main.dart';
 import 'package:fusion_wallet/ui/pages/v2/bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:root_checker/root_checker.dart';
 
-import '../../../box/models/account.dart';
 import '../../../inject.dart';
 import '../../components/custom/fusion_scaffold.dart';
 

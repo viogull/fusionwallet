@@ -11,8 +11,6 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-#  minterfluttercore:
-#    path: ./../minter_flutter_core
 
   cupertino_icons: ^0.1.3
   dio: ^3.0.9
@@ -23,49 +21,39 @@ dependencies:
   progress_dialog: ^1.2.4
   google_fonts: ^1.1.0
   path_provider: ^1.6.11
-  async: ^2.4.1
+  async: ^2.4.2
   flutter_spinkit: ^4.1.2+1
-  flutter_platform_widgets: ^0.51.0
+
   flutter_staggered_animations: ^0.1.2
-  bloc: ^4.0.0
-  provider: ^4.1.3
-  flutter_bloc: ^4.0.0
+  bloc: ^5.0.1
+  provider: ^4.3.0
+  flutter_bloc: ^5.0.1
   rubber: ^0.4.0
   qr_flutter: ^3.2.0
   flutter_datetime_picker: ^1.3.8
-  pin_input_text_field: ^3.0.3
+  pin_input_text_field: ^3.0.4
   crypto: ^2.1.5
   flutter_svg: ^0.17.4
   local_auth: ^0.6.2+3
   meta: ^1.1.8
-  fluttertoast: ^4.0.1
+  fluttertoast: ^6.0.1
   flutter_secure_storage: ^3.3.3
   nanodart: ^1.0.0
-  flare_flutter: ^2.0.3
+  flare_flutter: ^2.0.5
   pointycastle: ^1.0.2
   hive: ^1.4.1+1
   hive_flutter: ^0.3.0+2
   # Platform-specific build info
   package_info: ^0.4.1
-
   # Device-specific info
   device_info: ^0.4.2+4
   # JSON Serialization
   json_annotation: ^3.0.1
-
   # Localization
   intl: ^0.16.1
-
-  # BigDecimal alternative
   decimal: ^0.3.5
-
-  # Logger
   logger: ^0.9.1
-
-  # Native webview plugin
   flutter_webview_plugin: ^0.3.11
-
-
   # Eventbus
   event_taxi: ^0.1.5
 
@@ -89,6 +77,12 @@ dependencies:
   # HTTP client
   http: ^0.12.1
 
+  flutter_platform_widgets:
+    git:
+      url: git@github.com:stryder-dev/flutter_platform_widgets.git
+      ref: beta
+
+
   # Vibrate
   vibrate:
     git:
@@ -107,11 +101,11 @@ dependencies:
   passcode_screen: ^1.2.0
   # Lock helper
   synchronized: ^2.2.0+1
-  modal_bottom_sheet: ^0.1.6+1
+  modal_bottom_sheet: ^0.2.0
 
   # Service provider
   get_it: ^4.0.2
-  shared_preferences: ^0.5.7+3
+  shared_preferences: ^0.5.8
   # Root/Jailbreak detection
   root_checker:
     git:
@@ -124,15 +118,15 @@ dependencies:
   # Auto resize text widget
   auto_size_text: ^2.1.0
   settings_ui: ^0.3.0
-  form_bloc: 0.14.0
+  form_bloc: 0.15.0
   flutter_form_bloc: ^0.15.0
-  random_string: ^2.0.1
+  random_string: ^2.1.0
 # Avoid keyboard from overlapping text fields
   keyboard_avoider: ^0.1.2
   barcode_scan: ^3.0.1
   slide_popup_dialog: ^0.0.2
   dropdown_banner: ^1.4.0
-  rxdart: ^0.24.0
+  rxdart: ^0.24.1
 
 
 

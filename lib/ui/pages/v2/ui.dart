@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:fusion_wallet/main.dart';
 import 'package:fusion_wallet/ui/pages/auth/splash.dart';
 import 'package:fusion_wallet/ui/pages/auth/account_name.dart';
@@ -46,8 +47,10 @@ class AuthUi extends StatelessWidget {
             }
             if (state is AccountUnlockedState) {
               return HomePage();
-            }
+            } else
+              return PlatformCircularProgressIndicator();
           },
         ));
+    return Container();
   }
 }

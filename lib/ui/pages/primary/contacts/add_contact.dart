@@ -4,11 +4,15 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fusion_wallet/core/models.dart';
+import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/localizations.dart';
+import 'package:fusion_wallet/main.dart';
 import 'package:fusion_wallet/theme/fusion_theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:fusion_wallet/ui/pages/auth/splash.dart';
+import 'package:hive/hive.dart';
 
 class AddContactPage extends StatefulWidget {
   static const String navId = '/contacts/add';
@@ -114,25 +118,37 @@ class _AddContactPageState extends State<AddContactPage> {
                             textFieldBloc: loginFormBloc.accountName,
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: FusionTheme.borderRadius),
                               labelText:
                                   AppLocalizations.of(context).labelName(),
                             ),
                           ),
                         ),
-                        TextFieldBlocBuilder(
-                          keyboardType: TextInputType.multiline,
-                          textFieldBloc: loginFormBloc.address,
-                          maxLines: 4,
-                          decoration: InputDecoration(
-                              labelText: AppLocalizations.of(context)
-                                  .labelAddContactAddress(),
-                              suffixIcon: SizedBox(
-                                width: 12,
-                                height: 12,
-                                child: SvgPicture.asset(
-                                  "assets/images/icons/ic_qrcodescan.svg",
-                                ),
-                              )),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFieldBlocBuilder(
+                            keyboardType: TextInputType.multiline,
+                            textFieldBloc: loginFormBloc.address,
+                            maxLines: 4,
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: FusionTheme.borderRadius),
+                                labelText: AppLocalizations.of(context)
+                                    .labelAddContactAddress(),
+                                suffixIcon: GestureDetector(
+                                  onTap: () {
+                                    _scan();
+                                  },
+                                  child: SizedBox(
+                                    width: 12,
+                                    height: 12,
+                                    child: SvgPicture.asset(
+                                      "assets/images/icons/ic_qrcodescan.svg",
+                                    ),
+                                  ),
+                                )),
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(
@@ -186,6 +202,11 @@ class AddContactFormBloc extends FormBloc<String, String> {
     print(address.value);
     print(showSuccessResponse.value);
 
+    Box<Account> accsBox = Hive.box(accountsBox);
+    final lastAccount = accsBox.getAt(accsBox.length - 1);
+    if (lastAccount != null) {
+      debugPrint("Checking current account contacts");
+    }
     await Future<void>.delayed(Duration(seconds: 1));
 
     if (showSuccessResponse.value) {
