@@ -262,8 +262,8 @@ class _HistoryPageState extends State<HistoryPage> {
       height: 50,
       width: MediaQuery.of(context).size.width,
       child: FusionButton(
-        AppLocalizations.of(context).buttonViewResults(),
-        () {
+        text: AppLocalizations.of(context).buttonViewResults(),
+        onPressed:() {
           Navigator.pushNamed(context, PopupHistoryPage.navId);
         },
       ),

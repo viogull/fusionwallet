@@ -3,23 +3,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
-import 'package:fusion_wallet/state_container.dart';
+import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/theme/fusion_theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
+import 'package:fusion_wallet/ui/pages/auth/account_name.dart';
+import 'package:fusion_wallet/ui/pages/auth/change_account_name.dart';
+import 'package:fusion_wallet/ui/pages/auth/passphrase/share_qr_page.dart';
+import 'package:fusion_wallet/ui/pages/auth/splash.dart';
 import 'package:fusion_wallet/ui/pages/popups/popups_remove_account.dart';
-import 'package:fusion_wallet/ui/pages/primary/accounts/accounts_page.dart';
-import 'package:fusion_wallet/ui/pages/primary/share_qr_address_page.dart';
+import 'package:fusion_wallet/ui/pages/accounts_page.dart';
+import 'package:fusion_wallet/ui/pages/v2/ui.dart';
 import 'package:fusion_wallet/ui/providers/bottom_navigation_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
+import 'package:slide_popup_dialog/slide_dialog.dart';
 
 import '../components/fusion_sheet.dart';
-import 'information/add_contact_page.dart';
-import 'primary/contacts_page.dart';
+import 'auth/passphrase/passphrase_widget.dart';
+import '../components/custom/passphrase_view.dart';
+import 'primary/contacts/add_contact.dart';
+import 'primary/contacts/contacts_page.dart';
 import 'primary/exchange_page.dart';
 import 'primary/history_page.dart';
 import 'primary/settings_page.dart';
+import 'primary/share_address.dart';
 
 final logger = Logger();
 
@@ -52,7 +60,6 @@ class _BottomHomePageState extends State<BottomHomePage> {
     var provider = Provider.of<BottomNavigationProvider>(context);
 
     final ThemeData theme = Theme.of(context);
-
     return FusionScaffold(
       child: SafeArea(
         child: Stack(
@@ -104,12 +111,14 @@ class _BottomHomePageState extends State<BottomHomePage> {
               color: theme.colorScheme.onSurface, fontWeight: FontWeight.bold),
         ),
         actions: (provider.currentIndex == 2)
-            ? <Widget>[
-                new IconButton(
-                  icon: new Icon(Icons.add),
-                  onPressed: () =>
-                      Navigator.of(context).pushNamed(AddContactPage.navId),
-                ),
+            ? [
+                IconButton(
+                    icon: new Icon(Icons.add),
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => AddContactPage(),
+                          fullscreenDialog: true));
+                    })
               ]
             : [],
         iconTheme: FusionTheme.iconThemeColored
@@ -121,22 +130,39 @@ class _BottomHomePageState extends State<BottomHomePage> {
             title: AppLocalizations.of(context).menuItemShowQR(),
             icon: _buildBottomNavItemIcon(
                 "assets/images/icons/ic_qrcodescan.svg", true),
-            navId: ShareQrPage.navId),
+            onClick: () {
+              Navigator.of(context).push(new MaterialPageRoute(
+                  builder: (context) => ShareAddressPage(
+                      "Mx${StateContainer.of(context).selectedAccount.address}"),
+                  fullscreenDialog: true));
+            }),
         DrawerItemData(
             title: AppLocalizations.of(context).menuItemSetDefaults(),
             icon: _buildBottomNavItemIcon(
                 "assets/images/icons/ic_default_settings.svg", true),
-            navId: ShareQrPage.navId),
+            navId: LockUi.navId),
         DrawerItemData(
             title: AppLocalizations.of(context).menuItemViewPassphrase(),
             icon: _buildBottomNavItemIcon(
                 "assets/images/icons/ic_passwordellipse.svg", true),
-            navId: ShareQrPage.navId),
+            onClick: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => SlideDialog(
+                      backgroundColor: theme.colorScheme.background,
+                      pillColor: theme.colorScheme.primaryVariant,
+                      child: PassphraseViewWidget()),
+                  fullscreenDialog: true));
+            }),
         DrawerItemData(
-            title: AppLocalizations.of(context).menuItemEditAccountName(),
-            icon: _buildBottomNavItemIcon(
-                "assets/images/icons/ic_edit.svg", true),
-            navId: ShareQrPage.navId),
+          title: AppLocalizations.of(context).menuItemEditAccountName(),
+          icon:
+              _buildBottomNavItemIcon("assets/images/icons/ic_edit.svg", true),
+          onClick: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (_) => ChangeAccountNameDialog(),
+                fullscreenDialog: false));
+          },
+        ),
         DrawerItemData(
             title: AppLocalizations.of(context).menuItemRemoveAccount(),
             icon: _buildBottomNavItemIcon(
@@ -149,12 +175,12 @@ class _BottomHomePageState extends State<BottomHomePage> {
             title: AppLocalizations.of(context).menuItemWithdrawFunds(),
             icon: _buildBottomNavItemIcon(
                 "assets/images/icons/ic_withdraw.svg", true),
-            navId: ShareQrPage.navId),
+            navId: LockUi.navId),
         DrawerItemData(
             title: AppLocalizations.of(context).menuItemReferalLink(),
             icon: _buildBottomNavItemIcon(
                 "assets/images/icons/ic_copy.svg", true),
-            navId: ShareQrPage.navId),
+            navId: LockUi.navId),
       ]),
     );
   }
@@ -164,7 +190,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
 
     switch (index) {
       case 0:
-        title = AppLocalizations.of(context).toolbarNewAccountTitle();
+        title = StateContainer.of(context).selectedAccount.name;
         break;
       case 1:
         title = AppLocalizations.of(context).toolbarExchangeTitle();
@@ -182,7 +208,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
         title = AppLocalizations.of(context).appName();
     }
 
-    return title;
+    return (title == null) ? AppLocalizations.of(context).appName() : title;
   }
 
   List<BottomNavigationBarItem> _bottomBarItems(

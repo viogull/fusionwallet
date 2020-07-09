@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class FusionTheme {
   static final buttonAndroidTheme = MaterialRaisedButtonData(
@@ -24,6 +25,9 @@ class FusionTheme {
   static final toolbarIconTheme = IconThemeData(
     size: 18,
   );
+
+  static final subtitleTextStyle =
+      GoogleFonts.notoSans().copyWith(fontSize: 11);
 
   static int tintValue(int value, double factor) =>
       max(0, min((value + ((255 - value) * factor)).round(), 255));

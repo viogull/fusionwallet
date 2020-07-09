@@ -85,10 +85,10 @@ class DelegateFundsPage extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: FusionButton(
-                      AppLocalizations.of(context).buttonDelegate().toString(),
-                      () {},
-                      null,
-                      true),
+                     text:  AppLocalizations.of(context).buttonDelegate().toString(),
+                     onPressed: () {},
+                      expandedWidth: true,
+                      ),
                 ),
               )
             ],

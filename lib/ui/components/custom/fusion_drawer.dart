@@ -68,7 +68,12 @@ class FusionDrawer extends StatelessWidget {
 
         break;
       case TargetPlatform.macOS:
-        // TODO: Handle this case.
+        break;
+      case TargetPlatform.linux:
+        //
+        break;
+      case TargetPlatform.windows:
+        //
         break;
     }
     return Semantics(

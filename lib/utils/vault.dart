@@ -1,20 +1,83 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fusion_wallet/box/models/account.dart';
+import 'package:fusion_wallet/main.dart';
+import 'package:hive/hive.dart';
+import 'package:logger/logger.dart';
+import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../service_locator.dart';
+import '../inject.dart';
 import 'crypto.dart';
 import 'shared_prefs.dart';
 
 class Vault {
+  static const _pincode_key = 'pincode_key';
+  static const _last_account_key = 'last_used_account_key';
+
+  static const _firstlaunch_key = 'first_launch_key';
+  static const _secure_encryption_key = 'secure_encryption_key';
+
+  static const String accountsBoxEncrypted = "accountBoxEncrypted";
+  static const String prefsUiThemeMode = "prefsThemeMode";
+  static const String prefsLanguage = "prefsLocale";
+  static const String prefsEnableBiometric = "prefsEnableBiometric";
+  static const String prefsShowRewards = "prefsEnableBiometric";
   static const String seedKey = 'fusion_seed';
   static const String encryptionKey = 'fusion_secret_phrase';
   static const String pinKey = 'fusion_pin';
+  static const String mnemonicKey = 'fusion_passphrase';
   static const String sessionKey = 'fusion_session_key';
+  static const String prefsCurrentAccountName = 'current_account_name';
+
+  final log = injector.get<Logger>();
+  Box<Account> accsBox;
+  Box<dynamic> preferences;
+
+  Vault() {
+    init();
+  }
+
+  void init() async {
+    log.d(
+        "Checking encrypted accounts availability. ${Hive.isBoxOpen(accountsBox)}");
+    final pin = await getCurrentPin();
+    final encryptionKey = await getSecureEncryptionKey();
+    final isBiometricAuthEnabled = await getBiometricEnabled();
+
+    log.d(
+        "Encryption key ${encryptionKey != null ? 'exist' : 'not exist'}. \n : ${encryptionKey.toString()}");
+    log.d(
+        "Biometric auth is ${(isBiometricAuthEnabled != null) ? 'enabled' : 'disabled'}  [ $isBiometricAuthEnabled)] ");
+    log.d("Pincode is ${pin != null ? 'exist' : 'not exist'}");
+  }
+
   final FlutterSecureStorage secureStorage = new FlutterSecureStorage();
 
+  Future<dynamic> getSecureEncryptionKey() async {
+    var key = await secureStorage.read(key: _secure_encryption_key);
+
+    return key != null ? key : Hive.generateSecureKey();
+  }
+
+  Future<bool> isFirstStart() async {
+    return await secureStorage.read(key: _firstlaunch_key) as bool;
+  }
+
+  void savePincode({@required String pin}) async {
+    secureStorage.write(key: _pincode_key, value: pin);
+  }
+
+  Future<String> getCurrentPin() async {
+    return secureStorage.read(key: _pincode_key);
+  }
+
+  Future<String> getBiometricEnabled() async {
+    return secureStorage.read(key: Vault.prefsEnableBiometric);
+  }
+
   Future<bool> legacy() async {
-    return await sl.get<SharedPrefsUtil>().useLegacyStorage();
+    return await injector.get<SharedPrefsUtil>().useLegacyStorage();
   }
 
   // Re-usable
@@ -142,5 +205,32 @@ class Vault {
 
   Future<String> getSecret() async {
     return await _channel.invokeMethod('getSecret');
+  }
+
+  setBiometricEnabled({String value}) {
+    secureStorage.write(key: Vault.prefsEnableBiometric, value: value);
+  }
+
+  saveName({String name}) {
+    secureStorage.write(key: Vault.prefsCurrentAccountName, value: name);
+  }
+
+  void setLastAccount(String name) {
+    secureStorage.write(key: _last_account_key, value: name);
+  }
+
+  Future<String> getLastUsedAccount() async {
+    return await secureStorage.read(key: _last_account_key);
+  }
+
+  Future<bool> isAccountPersisted() async {
+    var account = accsBox.getAt(0);
+    return account != null;
+  }
+
+  void saveAccount(String accountName, String pin, String mnemonic, String seed,
+      String publicKey, String privateKey, String address) async {
+    log.d("Creating and persisting new account $accountName");
+    await writePin(pin);
   }
 }

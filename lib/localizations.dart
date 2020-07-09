@@ -1552,6 +1552,18 @@ class AppLocalizations {
 
   String localeRussianItem() =>
       Intl.message('Russian', name: 'localeRussianItem');
+
+  String generatingWalletMessage() =>
+      Intl.message("Creating wallet", name: 'generatingWalletMessage');
+
+  String toolbarRewards() => Intl.message('Rewards', name: 'toolbarRewards');
+
+  String toolbarTitleShowPassphrase() =>
+      Intl.message('Passphrase', name: 'toolbarTitleShowPassphrase');
+
+  String errorCameraRestriction() =>
+      Intl.message('The user did not grant the camera permission!',
+          name: 'errorCameraRestriction');
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

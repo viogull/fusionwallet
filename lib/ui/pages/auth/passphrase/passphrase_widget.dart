@@ -78,145 +78,161 @@ class _PassphraseWidgetState extends State<PassphraseWidget> {
           ),
         ),
         Flexible(
-          flex: 14,
-          child: SizedBox.expand(
+          flex: 8,
+          child: SizedBox(
+              height: MediaQuery.of(context).size.height * 0.3,
               child: Card(
-            color: Theme.of(context).colorScheme.primary,
-            elevation: 24,
-            margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 16),
-            child: Column(
-              children: <Widget>[
-                new GridView.builder(
-                  itemCount: widget.items.length,
-                  shrinkWrap: true,
-                  padding: EdgeInsets.all(8),
-                  physics: BouncingScrollPhysics(),
-                  gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-                      mainAxisSpacing: 12,
-                      crossAxisCount: 3,
-                      childAspectRatio: 3),
-                  itemBuilder: (BuildContext context, int index) {
-                    return new GestureDetector(
-                      child: LimitedBox(
-                        maxWidth: (MediaQuery.of(context).size.width / 7),
-                        child: new Container(
-                          alignment: Alignment.center,
-                          child: GestureDetector(
-                            child: Container(
-                              child: new Text(
-                                widget.items[index],
-                                maxLines: 1,
-                                style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+                elevation: 12,
+                margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 16),
+                child: Center(
+                  child: LimitedBox(
+                    child: Column(
+                      children: <Widget>[
+                        new GridView.builder(
+                          itemCount: widget.items.length,
+                          shrinkWrap: true,
+                          padding: EdgeInsets.all(8),
+                          physics: BouncingScrollPhysics(),
+                          gridDelegate:
+                              new SliverGridDelegateWithFixedCrossAxisCount(
+                                  mainAxisSpacing: 12,
+                                  crossAxisCount: 3,
+                                  childAspectRatio: 3),
+                          itemBuilder: (BuildContext context, int index) {
+                            return new GestureDetector(
+                              child: LimitedBox(
+                                maxWidth:
+                                    (MediaQuery.of(context).size.width / 7),
+                                child: new Container(
+                                  alignment: Alignment.center,
+                                  child: GestureDetector(
+                                    child: Container(
+                                      child: new Text(
+                                        widget.items[index],
+                                        maxLines: 1,
+                                        style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onPrimary)
+                                            .copyWith(fontSize: 12),
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      setState(() {
+                                        _selected = index;
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ),
+                              onTap: () {
+                                showDialog(
+                                    barrierDismissible: false,
+                                    context: context,
+                                    child: new CupertinoAlertDialog(
+                                      title: new Column(
+                                        children: <Widget>[
+                                          new Text("GridView"),
+                                          new Icon(
+                                            Icons.favorite,
+                                            color: Colors.red,
+                                          ),
+                                        ],
+                                      ),
+                                      content: new Text(widget.items[index]),
+                                      actions: <Widget>[
+                                        new FlatButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: new Text("OK"))
+                                      ],
+                                    ));
+                              },
+                            );
+                          },
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Flexible(
+                              flex: 1,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                      new MaterialPageRoute(
+                                          builder: (context) =>
+                                              ViewPassphraseDialog(),
+                                          fullscreenDialog: true));
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 24, bottom: 16),
+                                  child: Center(
+                                    child: SizedBox(
+                                      width: 24,
+                                      height: 24,
+                                      child: SvgPicture.asset(
+                                          "assets/images/icons/ic_qr.svg",
+                                          semanticsLabel:
+                                              "assets/images/icons/ic_qr.svg",
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onPrimary,
+                                          placeholderBuilder: (BuildContext
+                                                  context) =>
+                                              Container(
+                                                  padding: const EdgeInsets.all(
+                                                      30.0),
+                                                  child:
+                                                      PlatformCircularProgressIndicator())),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Flexible(
+                              flex: 7,
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: FlatButton.icon(
+                                    onPressed: () {
+                                      Share.share(this.widget.items.toString());
+                                    },
+                                    icon: Container(
+                                      alignment: Alignment.center,
+                                      width: 24,
+                                      height: 24,
+                                      child: SvgPicture.asset(
+                                        "assets/images/icons/ic_shareicon.svg",
                                         color: Theme.of(context)
                                             .colorScheme
-                                            .onPrimary)
-                                    .copyWith(fontSize: 12),
+                                            .onPrimary,
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                    label: Text(
+                                      AppLocalizations.of(context)
+                                          .buttonShare(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .button
+                                          .copyWith(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onPrimary),
+                                    )),
                               ),
                             ),
-                            onTap: () {
-                              setState(() {
-                                _selected = index;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                      onTap: () {
-                        showDialog(
-                            barrierDismissible: false,
-                            context: context,
-                            child: new CupertinoAlertDialog(
-                              title: new Column(
-                                children: <Widget>[
-                                  new Text("GridView"),
-                                  new Icon(
-                                    Icons.favorite,
-                                    color: Colors.red,
-                                  ),
-                                ],
-                              ),
-                              content: new Text(widget.items[index]),
-                              actions: <Widget>[
-                                new FlatButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: new Text("OK"))
-                              ],
-                            ));
-                      },
-                    );
-                  },
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Flexible(
-                      flex: 1,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(new MaterialPageRoute(
-                              builder: (context) => PassphraseShareQrPage(),
-                              fullscreenDialog: true));
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 24, bottom: 16),
-                          child: Center(
-                            child: SizedBox(
-                              width: 24,
-                              height: 24,
-                              child: SvgPicture.asset(
-                                  "assets/images/icons/ic_qr.svg",
-                                  semanticsLabel:
-                                      "assets/images/icons/ic_qr.svg",
-                                  color:
-                                      Theme.of(context).colorScheme.onPrimary,
-                                  placeholderBuilder: (BuildContext context) =>
-                                      Container(
-                                          padding: const EdgeInsets.all(30.0),
-                                          child:
-                                              PlatformCircularProgressIndicator())),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      flex: 7,
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: FlatButton.icon(
-                            onPressed: () {
-                              Share.share(this.widget.items.toString());
-                            },
-                            icon: Container(
-                              alignment: Alignment.center,
-                              width: 24,
-                              height: 24,
-                              child: SvgPicture.asset(
-                                "assets/images/icons/ic_shareicon.svg",
-                                color: Theme.of(context).colorScheme.onPrimary,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            label: Text(
-                              AppLocalizations.of(context).buttonShare(),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .button
-                                  .copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onPrimary),
-                            )),
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
-          )),
+              )),
         ),
         Flexible(
           flex: 2,
@@ -245,11 +261,12 @@ class _PassphraseWidgetState extends State<PassphraseWidget> {
             width: MediaQuery.of(context).size.width * 0.9,
             height: 50,
             child: FusionButton(
-                AppLocalizations.of(context).buttonVerifyRecoveryPhrase(), () {
-              setState(() {
-                _verificationStage++;
-              });
-            }),
+                text: AppLocalizations.of(context).buttonVerifyRecoveryPhrase(),
+                onPressed: () {
+                  setState(() {
+                    _verificationStage++;
+                  });
+                }),
           ),
         )
       ],
@@ -280,7 +297,7 @@ class _PassphraseWidgetState extends State<PassphraseWidget> {
           ),
         ),
         Flexible(
-          flex: 12,
+          flex: 10,
           child: SizedBox.expand(
             child: Column(
               children: <Widget>[
@@ -365,7 +382,7 @@ class _PassphraseWidgetState extends State<PassphraseWidget> {
                                 Navigator.of(context).push(
                                     new MaterialPageRoute(
                                         builder: (context) =>
-                                            PassphraseShareQrPage(),
+                                            ViewPassphraseDialog(),
                                         fullscreenDialog: true));
                               },
                               child: Padding(

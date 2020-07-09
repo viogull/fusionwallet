@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
-import 'package:fusion_wallet/ui/pages/auth/password_creation_page.dart';
+import 'package:fusion_wallet/ui/pages/auth/pincode.dart';
 import 'package:fusion_wallet/ui/pages/exchange/convert_funds_page.dart';
 import 'package:fusion_wallet/ui/pages/exchange/rate_exhange_page.dart';
 
@@ -18,8 +18,6 @@ class _ExchangePageState extends State<ExchangePage> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-
-
 
     final myCoinLabel = Container(
       alignment: Alignment.topLeft,
@@ -206,17 +204,21 @@ class _ExchangePageState extends State<ExchangePage> {
     final convertButton = Container(
       height: 50,
       width: MediaQuery.of(context).size.width,
-      child: FusionButton(AppLocalizations.of(context).buttonConvert(), () {
-        Navigator.pushNamed(context, ConvertExchangePage.navId);
-      }),
+      child: FusionButton(
+          text: AppLocalizations.of(context).buttonConvert(),
+          onPressed: () {
+            Navigator.pushNamed(context, ConvertExchangePage.navId);
+          }),
     );
 
     final rateButton = Container(
       height: 50,
       width: MediaQuery.of(context).size.width,
-      child: FusionButton(AppLocalizations.of(context).buttonRate(), () {
-        Navigator.pushNamed(context, RateExchangePage.navId);
-      }),
+      child: FusionButton(
+          text: AppLocalizations.of(context).buttonRate(),
+          onPressed: () {
+            Navigator.pushNamed(context, RateExchangePage.navId);
+          }),
     );
 
     final cashBalance = Center(
@@ -242,90 +244,93 @@ class _ExchangePageState extends State<ExchangePage> {
     final buyButton1 = Container(
       height: 50,
       width: MediaQuery.of(context).size.width * 0.30,
-      child: FusionButton(AppLocalizations.of(context).buttonBuy(), () {
-        Navigator.pushNamed(context, PasswordCreationPage.navId);
-      }),
+      child: FusionButton(
+          text: AppLocalizations.of(context).buttonBuy(),
+          onPressed: () {
+            Navigator.pushNamed(context, PasswordCreationPage.navId);
+          }),
     );
 
     final buyButton2 = Container(
       height: 50,
       width: MediaQuery.of(context).size.width * 0.30,
-      child: FusionButton(AppLocalizations.of(context).buttonBuy(), () {}),
+      child: FusionButton(
+          text: AppLocalizations.of(context).buttonBuy(), onPressed: () {}),
     );
 
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: Container(
-            padding: EdgeInsets.only(
-              left: 24.0,
-              right: 24.0,
+        padding: EdgeInsets.only(
+          left: 24.0,
+          right: 24.0,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            //LimitedBox (maxHeight: 60,),
+            Flexible(
+              flex: 1,
+              child: myCoinLabel,
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                //LimitedBox (maxHeight: 60,),
-                Flexible(
-                  flex: 1,
-                  child: myCoinLabel,
-                ),
-                Flexible(
-                  flex: 1,
-                  child: currency1,
-                ),
-                Flexible(
-                  flex: 1,
-                  child: currency2,
-                ),
-                Flexible(
-                  flex: 1,
-                  child: currency3,
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Flexible(
-                  flex: 1,
-                  child: convertButton,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Flexible(
-                  flex: 1,
-                  child: rateButton,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Flexible(
-                  flex: 1,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      cashBalance,
-                      buyButton1,
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Flexible(
-                  flex: 1,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      simplex,
-                      buyButton2,
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 60,
-                ),
-              ],
+            Flexible(
+              flex: 1,
+              child: currency1,
             ),
+            Flexible(
+              flex: 1,
+              child: currency2,
+            ),
+            Flexible(
+              flex: 1,
+              child: currency3,
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Flexible(
+              flex: 1,
+              child: convertButton,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Flexible(
+              flex: 1,
+              child: rateButton,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Flexible(
+              flex: 1,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  cashBalance,
+                  buyButton1,
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Flexible(
+              flex: 1,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  simplex,
+                  buyButton2,
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 60,
+            ),
+          ],
+        ),
       ),
     );
   }

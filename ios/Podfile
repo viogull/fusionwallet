@@ -1,4 +1,3 @@
-source 'https://github.com/Cocoapods/Specs'
 # Uncomment this line to define a global platform for your project
 # platform :ios, '10.0'
 
@@ -75,12 +74,7 @@ target 'Runner' do
 	pod 'MinterExplorer'
 
 
- # pod 'MinterCore'
 
-  # Plugin Pods
-
-  # Prepare symlinks folder. We use symlinks to avoid having Podfile.lock
-  # referring to absolute paths on developers' machines.
   system('rm -rf .symlinks')
   system('mkdir -p .symlinks/plugins')
   plugin_pods = parse_KV_file('../.flutter-plugins')

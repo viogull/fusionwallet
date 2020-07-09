@@ -1,4 +1,5 @@
 import 'package:fusion_wallet/core/base/results/account_rename_result.dart';
+import 'package:meta/meta.dart';
 
 import 'results/account_creation_result.dart';
 import 'results/delegate_result.dart';
@@ -47,3 +48,46 @@ class SendFeedbackResult {}
 class HistoryResult {}
 
 class AccountRewardResult {}
+
+
+
+class WalletCurrency {
+  final String iconUrl;
+  final String name;
+  final String symbol;
+   final num qty;
+
+  const WalletCurrency({@required this.symbol, @required this.qty,
+    this.name, this.iconUrl
+  });
+}
+
+class RewardsData {
+  const RewardsData({
+    @required num earned, num pending
+  });
+}
+
+
+class Transanction {
+  final num datetime;
+  final num qty;
+  final String from;
+  final String to;
+
+  const Transanction({
+    @required this.qty, @required this.from, @required this.to, @required this.datetime
+  });
+
+}
+
+
+
+abstract class BaseRepository {
+  Future<List<WalletCurrency>> getAvailableCurrencies();
+  Future<RewardsData> getRewards();
+  Future<List<Transanction>> getTransanctionsHistory({String accountName, num startDate, num endDate});
+  Future<List<String>> getAddresses();
+
+
+}

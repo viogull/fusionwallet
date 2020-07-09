@@ -14,7 +14,7 @@ class RewardInformationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double cardWidth = MediaQuery.of(context).size.width * 0.8;
     return FusionScaffold(
-      title: null,
+      title: AppLocalizations.of(context).toolbarRewards(),
       child: Center(
         child: Padding(
           padding: const EdgeInsets.all(8.0),

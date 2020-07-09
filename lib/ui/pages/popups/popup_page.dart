@@ -73,8 +73,8 @@ class PopupDialogWidget extends StatelessWidget {
                   height: 50,
                   width: MediaQuery.of(context).size.width,
                   child: FusionButton(
-                    AppLocalizations.of(context).labelOk(),
-                    () {
+                 text:   AppLocalizations.of(context).labelOk(),
+                    onPressed: () {
                       Navigator.pop(context);
                     },
                   ),

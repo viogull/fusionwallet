@@ -9,7 +9,7 @@ import 'package:fusion_wallet/core/models/device_lock_timeout.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../service_locator.dart';
+import '../inject.dart';
 import 'crypto.dart';
 import 'vault.dart';
 
@@ -64,12 +64,12 @@ class SharedPrefsUtil {
   // For encrypted data
   Future<void> setEncrypted(String key, String value) async {
     // Retrieve/Generate encryption password
-    String secret = await sl.get<Vault>().getEncryptionPhrase();
+    String secret = await injector.get<Vault>().getEncryptionPhrase();
     if (secret == null) {
       secret = Encryptor.generateEncryptionSecret(16) +
           ":" +
           Encryptor.generateEncryptionSecret(8);
-      await sl.get<Vault>().writeEncryptionPhrase(secret);
+      await injector.get<Vault>().writeEncryptionPhrase(secret);
     }
     // Encrypt and save
     Encryptor encrypter =
@@ -79,7 +79,7 @@ class SharedPrefsUtil {
   }
 
   Future<String> getEncrypted(String key) async {
-    String secret = await sl.get<Vault>().getEncryptionPhrase();
+    String secret = await injector.get<Vault>().getEncryptionPhrase();
     if (secret == null) return null;
     // Decrypt and return
     Encryptor encrypter =

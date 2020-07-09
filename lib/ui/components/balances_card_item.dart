@@ -2,16 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fusion_wallet/theme/fusion_theme.dart';
 
 class BalancesCardItem extends StatelessWidget {
   final String title;
   final String value;
+  bool showUsd = false;
 
-  BalancesCardItem({@required this.title, @required this.value});
+  BalancesCardItem({@required this.title, @required this.value, this.showUsd});
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     final width = MediaQuery.of(context).size.width * 0.5;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
@@ -28,7 +29,10 @@ class BalancesCardItem extends StatelessWidget {
               child: SizedBox(
                 width: 16,
                 height: 16,
-                child: SvgPicture.asset("assets/images/icons/ic_bitcoin.svg",
+                child: SvgPicture.asset(
+                    (showUsd)
+                        ? "assets/images/icons/ic_dollar.svg"
+                        : "assets/images/icons/ic_bitcoin.svg",
                     color: Theme.of(context)
                         .colorScheme
                         .onSurface
@@ -42,22 +46,14 @@ class BalancesCardItem extends StatelessWidget {
               flex: 10,
               child: Text(
                 title,
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                    fontSize: 14,
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurface
-                        .withOpacity(0.7)),
+                textAlign: TextAlign.center,
               ),
             ),
             Flexible(
-              flex: 10,
-              child: Text(
-                value,
-                style: TextStyle(fontSize: 22),
-              ),
-            )
+                flex: 10,
+                child: Text(value,
+                    style:
+                        FusionTheme.subtitleTextStyle.copyWith(fontSize: 20)))
           ],
         ),
       ),

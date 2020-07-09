@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-05-02T18:57:46.169038",
+  "@@last_modified": "2020-07-09T12:29:58.001728",
   "appName": "Fusion",
   "@appName": {
     "type": "text",
@@ -1893,6 +1893,26 @@
   },
   "localeRussianItem": "Russian",
   "@localeRussianItem": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "generatingWalletMessage": "Creating wallet",
+  "@generatingWalletMessage": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "toolbarRewards": "Rewards",
+  "@toolbarRewards": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "toolbarTitleShowPassphrase": "Passphrase",
+  "@toolbarTitleShowPassphrase": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errorCameraRestriction": "The user did not grant the camera permission!",
+  "@errorCameraRestriction": {
     "type": "text",
     "placeholders": {}
   }

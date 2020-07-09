@@ -86,8 +86,5 @@ dependencies {
     implementation "network.minter.android:minter-android-core:${minterCoreSDK}"
     implementation "network.minter.android:minter-android-explorer:${minterExplorerSDK}"
     implementation "network.minter.android:minter-android-blockchain:${minterBlockchainSDK}"
-    implementation "network.minter.android:minter-android-profile:${minterProfileSDK}"
-    implementation "network.minter.android:ledger-connector:${minterLedgerSDK}"
-    implementation  "network.minter.android:ledger-rxjava2-connector:${minterLedgerSDK}"
 
 }

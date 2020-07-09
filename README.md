@@ -12,7 +12,7 @@ Fusion - Android/iOS wallet for Minter blockchain.
 
 
 
-
+hill like wise coyote obey improve extra frog treat tortoise hint split
 
 # How to use localization?
 

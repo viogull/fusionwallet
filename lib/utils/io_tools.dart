@@ -1,7 +1,3 @@
-
-
-
-
 import 'dart:async';
 import 'dart:io';
 
@@ -11,8 +7,7 @@ import 'package:logger/logger.dart';
 import 'package:nanodart/nanodart.dart';
 import 'package:validators/validators.dart';
 
-import '../service_locator.dart';
-
+import '../inject.dart';
 
 enum DataType { RAW, URL, ADDRESS, MANTA_ADDRESS, SEED }
 
@@ -20,7 +15,11 @@ class QRScanErrs {
   static const String PERMISSION_DENIED = "qr_denied";
   static const String UNKNOWN_ERROR = "qr_unknown";
   static const String CANCEL_ERROR = "qr_cancel";
-  static const List<String> ERROR_LIST = [PERMISSION_DENIED, UNKNOWN_ERROR, CANCEL_ERROR];
+  static const List<String> ERROR_LIST = [
+    PERMISSION_DENIED,
+    UNKNOWN_ERROR,
+    CANCEL_ERROR
+  ];
 }
 
 class IOTools {
@@ -49,7 +48,8 @@ class IOTools {
       Address address = Address(data);
       if (address.isValid()) {
         return data;
-      } /* else if (MantaWallet.parseUrl(data) != null) {
+      }
+      /* else if (MantaWallet.parseUrl(data) != null) {
         return data;
       } */
     } else if (type == DataType.SEED) {
@@ -68,7 +68,6 @@ class IOTools {
     }
     return _parseData(data.text, type);
   }
-
 
   static Future<void> setSecureClipboardItem(String value) async {
     if (Platform.isIOS) {
@@ -89,7 +88,9 @@ class IOTools {
       });
       setStream = delayed.asStream().listen((_) {
         Clipboard.getData("text/plain").then((data) {
-          if (data != null && data.text != null && NanoSeeds.isValidSeed(data.text)) {
+          if (data != null &&
+              data.text != null &&
+              NanoSeeds.isValidSeed(data.text)) {
             Clipboard.setData(ClipboardData(text: ""));
           }
         });

@@ -1,0 +1,70 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fusion_wallet/box/models/account.dart';
+import 'package:fusion_wallet/main.dart';
+import 'package:hive/hive.dart';
+
+import 'event.dart';
+import 'state.dart';
+
+class AuthenticationBloc
+    extends Bloc<AccountCreationEvent, AccountCreationState> {
+  AuthenticationBloc();
+
+  Account _account = Account();
+
+  String _cachedPin;
+  bool _cachedEnableBiometric;
+  @override
+  AccountCreationState get initialState => AccountInitialState();
+
+  @override
+  Stream<AccountCreationState> mapEventToState(
+    AccountCreationEvent event,
+  ) async* {
+    debugPrint("New event incoming -> $event");
+
+    if (event is AccountLockEvent) {
+      yield AccountLockedState();
+    }
+    if (event is AccountStartRecoverEvent) {
+      yield AccountRecoveryState();
+    } else if (event is AccountCreateWalletEvent) {
+      yield CreatePincodeState();
+    } else if (event is PincodeCreatedEvent) {
+      _account.pin = event.pin;
+      yield BiometricsConfigureState();
+    } else if (event is BiometricConfiguredEvent) {
+      _account.biometricEnabled = event.enableBiometrics;
+
+      yield PassphraseCreationState();
+    } else if (event is PassphraseVerifiedEvent) {
+      _account.address = event.address;
+      _account.seed = event.seed;
+      _account.publicKey = event.publicKey;
+      _account.privateKey = event.privateKey;
+      _account.mnemonic = event.mnemonic;
+
+      yield AccountNamingState();
+    } else if (event is AccountNameCreatedEvent) {
+      _account.name = event.name;
+      if (_account.isInBox) {
+        _account.save();
+      } else {
+        Box<Account> accs = Hive.box(accountsBox);
+        accs.add(_account);
+      }
+
+      yield AccountUnlockedState();
+    } else if (event is AccountUnlockEvent) {
+      yield AccountUnlockedState();
+    } else if (event is AccountLockEvent) {
+      yield AccountLockedState();
+    }
+//    } else if (event is AuthenticationLoggedIn) {
+//      yield* _mapAuthenticationLoggedInToState();
+//    } else if (event is AuthenticationLoggedOut) {
+//      yield* _mapAuthenticationLoggedOutToState();
+//    }
+  }
+}

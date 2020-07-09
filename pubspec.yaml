@@ -15,9 +15,8 @@ dependencies:
 #    path: ./../minter_flutter_core
 
   cupertino_icons: ^0.1.3
-  barcode_scan: ^3.0.1
   dio: ^3.0.9
-  url_launcher: ^5.4.11
+  url_launcher: ^5.5.0
   equatable: ^1.2.0
   flutter_cupertino_localizations: ^1.0.1
   page_transition: ^1.1.5
@@ -26,11 +25,11 @@ dependencies:
   path_provider: ^1.6.11
   async: ^2.4.1
   flutter_spinkit: ^4.1.2+1
-  flutter_platform_widgets: ^0.50.1
+  flutter_platform_widgets: ^0.51.0
   flutter_staggered_animations: ^0.1.2
   bloc: ^4.0.0
   provider: ^4.1.3
-  flutter_bloc: ^4.0.1
+  flutter_bloc: ^4.0.0
   rubber: ^0.4.0
   qr_flutter: ^3.2.0
   flutter_datetime_picker: ^1.3.8
@@ -46,15 +45,11 @@ dependencies:
   pointycastle: ^1.0.2
   hive: ^1.4.1+1
   hive_flutter: ^0.3.0+2
-
-  web_socket_channel: ^1.1.0
-
   # Platform-specific build info
   package_info: ^0.4.1
 
   # Device-specific info
   device_info: ^0.4.2+4
-
   # JSON Serialization
   json_annotation: ^3.0.1
 
@@ -70,8 +65,6 @@ dependencies:
   # Native webview plugin
   flutter_webview_plugin: ^0.3.11
 
-  # SQLite
-  sqflite: ^1.3.1
 
   # Eventbus
   event_taxi: ^0.1.5
@@ -86,8 +79,6 @@ dependencies:
       ref: master
 
   # File picker
-  file_picker: ^1.12.0
-
   # Deep link support
   #uni_links: ^0.2.0
   uni_links:
@@ -113,6 +104,7 @@ dependencies:
   # Slidable list actions
   flutter_slidable: ^0.5.4
 
+  passcode_screen: ^1.2.0
   # Lock helper
   synchronized: ^2.2.0+1
   modal_bottom_sheet: ^0.1.6+1
@@ -133,10 +125,14 @@ dependencies:
   auto_size_text: ^2.1.0
   settings_ui: ^0.3.0
   form_bloc: 0.14.0
-  flutter_form_bloc: ^0.14.0
+  flutter_form_bloc: ^0.15.0
   random_string: ^2.0.1
 # Avoid keyboard from overlapping text fields
   keyboard_avoider: ^0.1.2
+  barcode_scan: ^3.0.1
+  slide_popup_dialog: ^0.0.2
+  dropdown_banner: ^1.4.0
+  rxdart: ^0.24.0
 
 
 
@@ -150,6 +146,7 @@ dev_dependencies:
   flutter_launcher_icons: ^0.7.5
   hive_generator: ^0.7.0+2
   path: ^1.7.0
+
 
 flutter_icons:
   android: "launcher_icon"
@@ -170,6 +167,7 @@ flutter:
     - assets/lang/ru.json
 
 
+    - assets/images/icon.png
 
     - assets/images/backgrounds/bg_primary.png
     - assets/images/backgrounds/bg_greeting.png

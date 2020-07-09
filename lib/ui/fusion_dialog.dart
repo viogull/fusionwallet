@@ -1,10 +1,8 @@
-
-
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
 import '../localizations.dart';
-import '../state_container.dart';
+import '../core/state_container.dart';
 /* 
 class AppDialogs {
   static void showConfirmDialog(

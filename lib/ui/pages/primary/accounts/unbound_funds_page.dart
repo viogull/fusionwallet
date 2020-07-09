@@ -179,13 +179,13 @@ class UnboundFundsPage extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: FusionButton(
-                      AppLocalizations.of(context)
+                   text:   AppLocalizations.of(context)
                           .buttonPreview()
                           .toString()
                           .toUpperCase(),
-                      () {},
-                      null,
-                      true),
+                   onPressed:   () {},
+                      
+                     expandedWidth: true),
                 ),
               )
             ],

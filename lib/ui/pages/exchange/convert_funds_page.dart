@@ -249,7 +249,7 @@ class _ConvertExchangePageState extends State<ConvertExchangePage> {
     final convertButton = Container(
       height: 50,
       width: MediaQuery.of(context).size.width,
-      child: FusionButton(AppLocalizations.of(context).buttonConvert(), () {
+      child: FusionButton(text: AppLocalizations.of(context).buttonConvert(), onPressed:  () {
         Navigator.pushNamed(context, ConvertExchangePage.navId);
       }),
     );

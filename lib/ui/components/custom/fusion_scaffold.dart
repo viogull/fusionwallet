@@ -1,15 +1,24 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fusion_wallet/state_container.dart';
+import 'package:fusion_wallet/core/state_container.dart';
+
+typedef AppBarBackButtonCallback = void Function(String destination);
 
 class FusionScaffold extends StatelessWidget {
   final Widget child;
   final String title;
   final Drawer drawer;
   final SliverAppBar appBar;
+  final AppBarBackButtonCallback onBackClicked;
 
-  FusionScaffold({@required this.child, this.title, this.drawer, this.appBar, Container body});
+  FusionScaffold(
+      {@required this.child,
+      this.title,
+      this.drawer,
+      this.appBar,
+      Container body,
+      this.onBackClicked});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +52,7 @@ class FusionScaffold extends StatelessWidget {
                               NestedScrollView.sliverOverlapAbsorberHandleFor(
                                   context),
                           sliver: (appBar == null)
-                              ? buildDefaultAppBar(theme)
+                              ? buildDefaultAppBar(theme, context)
                               : appBar),
                     ];
                   },
@@ -55,13 +64,14 @@ class FusionScaffold extends StatelessWidget {
     );
   }
 
-  Widget buildDefaultAppBar(ThemeData theme) => SliverAppBar(
-        elevation: 4,
+  Widget buildDefaultAppBar(ThemeData theme, BuildContext context) =>
+      SliverAppBar(
+        elevation: 12,
         stretch: true,
         floating: true,
         pinned: false,
         primary: true,
-        automaticallyImplyLeading: (title != null),
+        automaticallyImplyLeading: true,
         backgroundColor: Colors.transparent,
         iconTheme: IconThemeData(color: theme.colorScheme.primary),
         centerTitle: true,
@@ -70,7 +80,7 @@ class FusionScaffold extends StatelessWidget {
             : AutoSizeText(
                 title,
                 style: theme.textTheme.headline6
-                    .copyWith(color: theme.colorScheme.onSurface, fontSize: 17),
+                    .copyWith(color: theme.colorScheme.onSurface, fontSize: 16),
               ),
       );
 }

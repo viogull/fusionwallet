@@ -1,54 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:fusion_wallet/service_locator.dart';
-import 'package:fusion_wallet/state_container.dart';
-import 'package:fusion_wallet/ui/pages/auth/biometric_features_page.dart';
-import 'package:fusion_wallet/ui/pages/auth/passphrase/passphrase_creation_page.dart';
-import 'package:fusion_wallet/ui/pages/auth/passphrase/scan_qr_page.dart';
-import 'package:fusion_wallet/ui/pages/auth/passphrase/share_qr_page.dart';
-import 'package:fusion_wallet/ui/pages/bottom_home_page.dart';
-import 'package:fusion_wallet/ui/pages/exchange/convert_funds_page.dart';
-import 'package:fusion_wallet/ui/pages/exchange/rate_exhange_page.dart';
-import 'package:fusion_wallet/ui/pages/information/add_contact_page.dart';
-import 'package:fusion_wallet/ui/pages/information/faq_page.dart';
-import 'package:fusion_wallet/ui/pages/information/send_feedback_page.dart';
-import 'package:fusion_wallet/ui/pages/popups/popups_history_page.dart';
-import 'package:fusion_wallet/ui/pages/primary/accounts/accounts_page.dart';
-import 'package:fusion_wallet/ui/pages/primary/accounts/delegate_funds_page.dart';
-import 'package:fusion_wallet/ui/pages/primary/accounts/push_funds_page.dart';
-import 'package:fusion_wallet/ui/pages/primary/accounts/request_funds_page.dart';
-import 'package:fusion_wallet/ui/pages/primary/accounts/rewards_info_page.dart';
-import 'package:fusion_wallet/ui/pages/primary/accounts/send_funds_page.dart';
-import 'package:fusion_wallet/ui/pages/primary/accounts/unbound_funds_page.dart';
-import 'package:fusion_wallet/ui/pages/primary/contacts_page.dart';
-import 'package:fusion_wallet/ui/pages/primary/history_page.dart';
-import 'package:fusion_wallet/ui/pages/primary/settings_page.dart';
-import 'package:fusion_wallet/ui/pages/primary/share_qr_address_page.dart';
+import 'package:fusion_wallet/ui/pages/v2/ui.dart';
+
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
 import 'package:provider/provider.dart';
 
+import 'box/models/account.dart';
+import 'box/models/contact.dart';
 import 'localizations.dart';
+import 'inject.dart';
+import 'ui/pages/auth/splash.dart';
+import 'core/state_container.dart';
 import 'theme/fusion_theme.dart';
-import 'ui/pages/auth/account_creation_page.dart';
-import 'ui/pages/auth/intro_page.dart';
-import 'ui/pages/auth/password_creation_page.dart';
+import 'ui/components/custom/passcode/passcode_screen.dart';
+import 'ui/pages/auth/account_name.dart';
+import 'ui/pages/auth/biometrics.dart';
+import 'ui/pages/auth/intro.dart';
+import 'ui/pages/auth/passphrase/passphrase.dart';
+import 'ui/pages/auth/passphrase/share_qr_page.dart';
+import 'ui/pages/auth/pincode.dart';
 import 'ui/pages/auth/recover_account_page.dart';
-import 'ui/pages/auth/terms_conditions_page.dart';
+import 'ui/pages/auth/terms_and_conditions.dart';
+import 'ui/pages/bottom_home_page.dart';
+import 'ui/pages/exchange/convert_funds_page.dart';
+import 'ui/pages/exchange/rate_exhange_page.dart';
+import 'ui/pages/information/faq_page.dart';
+import 'ui/pages/information/send_feedback_page.dart';
+import 'ui/pages/popups/popups_history_page.dart';
+import 'ui/pages/accounts_page.dart';
+import 'ui/pages/primary/accounts/delegate_funds_page.dart';
+import 'ui/pages/primary/accounts/push_funds_page.dart';
+import 'ui/pages/primary/accounts/request_funds_page.dart';
+import 'ui/pages/primary/accounts/rewards_info_page.dart';
+import 'ui/pages/primary/accounts/send_funds_page.dart';
+import 'ui/pages/primary/accounts/unbound_funds_page.dart';
+
+import 'ui/pages/primary/contacts/contacts_page.dart';
+import 'ui/pages/primary/contacts/add_contact.dart';
+import 'ui/pages/primary/contacts/contacts.dart';
+import 'ui/pages/primary/history_page.dart';
+import 'ui/pages/primary/settings_page.dart';
 import 'ui/providers/bottom_navigation_provider.dart';
 
 const String preferencesBox = 'prefsBox';
+const String accountsBox = 'accountsBox';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupServiceLocator();
   await Hive.initFlutter();
-  Hive.openBox(preferencesBox).then((box) {
-    runApp(new StateContainer(
-      child: new App(),
-      preferences: box,
-    ));
-  });
+  Hive.registerAdapter<Account>(AccountAdapter());
+  Hive.registerAdapter<Contact>(ContactAdapter());
+  var accsBox = await Hive.openBox<Account>(accountsBox);
+  runApp(new StateContainer(
+    child: new App(),
+    accounts: accsBox,
+  ));
 }
 
 class App extends StatelessWidget {
@@ -66,12 +75,15 @@ class App extends StatelessWidget {
         ],
         locale: StateContainer.of(context).locale,
         supportedLocales: AppLocalizations.Locales,
-        initialRoute: HomePage.navId,
+        initialRoute: Splash.navId,
         routes: <String, WidgetBuilder>{
+          Splash.navId: (context) => Splash(),
+          LockUi.navId: (context) => LockUi(),
           HomePage.navId: (context) => HomePage(),
-          PassphraseShareQrPage.navId: (context) => PassphraseShareQrPage(),
+          ViewPassphraseDialog.navId: (context) => ViewPassphraseDialog(
+                data: null,
+              ),
           BiometricAuthPage.navId: (context) => BiometricAuthPage(),
-          ScanQrPage.navId: (context) => ScanQrPage(),
           PassphraseCreationPage.navId: (context) => PassphraseCreationPage(),
           IntroPage.navId: (BuildContext context) => IntroPage(),
           AccountCreationNamePage.navId: (context) => AccountCreationNamePage(),
@@ -94,8 +106,8 @@ class App extends StatelessWidget {
           RateExchangePage.navId: (context) => RateExchangePage(),
           SendFeedbackPage.navId: (context) => SendFeedbackPage(),
           FaqPage.navId: (context) => FaqPage(),
-          ShareQrPage.navId: (context) => ShareQrPage()
-//        PopupEditAccountName.navId: (context) => PopupEditAccountName(),
+          PasscodeScreen.navId: (context) => PasswordCreationPage(),
+          AuthUi.navId: (context) => AuthUi()
         },
       );
 }
@@ -107,10 +119,17 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 
   var provider = ChangeNotifierProvider<BottomNavigationProvider>(
@@ -120,12 +139,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: _buildHomepageBody(this.provider),
-    );
-  }
-
-  Widget _buildHomepageBody(ChangeNotifierProvider provider) {
-    return provider;
+    return Material(child: this.provider);
   }
 }

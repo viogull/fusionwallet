@@ -70,8 +70,8 @@ class PopupsRemoveAccount extends StatelessWidget {
                         Flexible(
                           flex: 1,
                           child: FusionButton(
-                            AppLocalizations.of(context).labelOk(),
-                            () {
+                           text:  AppLocalizations.of(context).labelOk(),
+                          onPressed:  () {
                               Navigator.pop(context);
                             },
                           ),
@@ -79,8 +79,8 @@ class PopupsRemoveAccount extends StatelessWidget {
                         Flexible(
                           flex: 1,
                           child: FusionButton(
-                            AppLocalizations.of(context).labelCancel(),
-                            () {
+                           text:  AppLocalizations.of(context).labelCancel(),
+                           onPressed: () {
                               Navigator.pop(context);
                             },
                           ),

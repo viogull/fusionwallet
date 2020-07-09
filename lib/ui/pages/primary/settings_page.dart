@@ -1,13 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:fusion_wallet/localizations.dart';
-import 'package:fusion_wallet/state_container.dart';
+import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/ui/components/preferences/preference.dart';
 import 'package:fusion_wallet/ui/components/preferences/preference_switch.dart';
 import 'package:fusion_wallet/ui/components/preferences/single_choice_preference_item.dart';
-import 'package:fusion_wallet/ui/pages/auth/biometric_features_page.dart';
-import 'package:fusion_wallet/ui/pages/auth/password_creation_page.dart';
+import 'package:fusion_wallet/ui/pages/auth/biometrics.dart';
+import 'package:fusion_wallet/ui/pages/auth/pincode.dart';
 import 'package:fusion_wallet/ui/pages/information/faq_page.dart';
 import 'package:fusion_wallet/ui/pages/information/send_feedback_page.dart';
 
@@ -91,11 +92,10 @@ class SettingsPage extends StatelessWidget {
               }),
           SwitchFusionPreference(
               title: AppLocalizations.of(context).settingsItemShowRewards(),
-              value: StateContainer.of(context).showRewards,
-              onSwitch: (value) {
-                StateContainer.of(context).setRewardsVisibility(
-                    !StateContainer.of(context).showRewards,
-                    save: true);
+              value: StateContainer.of(context).selectedAccount.showRewards,
+              onSwitch: (value) async {
+                StateContainer.of(context)
+                    .setRewardsVisibility(value, save: true);
               }),
           FusionSingleChoicePreference(
               title: AppLocalizations.of(context).settingsItemLanguage(),

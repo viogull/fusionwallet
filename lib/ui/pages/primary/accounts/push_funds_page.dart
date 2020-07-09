@@ -125,13 +125,13 @@ class PushFundsPage extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: FusionButton(
-                      AppLocalizations.of(context)
+                   text:    AppLocalizations.of(context)
                           .buttonPush()
                           .toString()
                           .toUpperCase(),
-                      () {},
-                      null,
-                      true),
+                  onPressed:   () {},
+                      
+                    expandedWidth:  true),
                 ),
               )
             ],

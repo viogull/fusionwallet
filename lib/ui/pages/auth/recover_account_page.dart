@@ -1,4 +1,7 @@
 import 'package:barcode_scan/barcode_scan.dart';
+import 'package:barcode_scan/model/android_options.dart';
+import 'package:barcode_scan/model/scan_options.dart';
+import 'package:barcode_scan/platform_wrapper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -8,65 +11,71 @@ import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/pages/popups/popup_page.dart';
 
-class RecoverFromSeedPage extends StatelessWidget {
+import '../../widgets.dart';
+
+class RecoverAccountPage extends StatefulWidget {
   static const navId = "/auth/recover";
+  static const passphrasePattern = "[\w ]{12}";
+
+  @override
+  _RecoverAccountState createState() => new _RecoverAccountState();
+}
+
+class _RecoverAccountState extends State<RecoverAccountPage> {
+  final _cancelController = TextEditingController(text: "Cancel");
+  var _aspectTolerance = 0.00;
+  var _numberOfCameras = 0;
+  var _selectedCamera = -1;
+  var _useAutoFocus = true;
+  var _autoEnableFlash = false;
+  static final _possibleFormats = BarcodeFormat.values.toList()
+    ..removeWhere((e) => e == BarcodeFormat.unknown);
+  List<BarcodeFormat> selectedFormats = [..._possibleFormats];
+  ScanResult scanResult;
+
+  @override
+// ignore: type_annotate_public_apis
+  initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () async {
+      _numberOfCameras = await BarcodeScanner.numberOfCameras;
+      setState(() {});
+    });
+  }
+
+  Future _scan() async {
+    try {
+      var options = ScanOptions(
+        autoEnableFlash: true,
+        android: AndroidOptions(
+          useAutoFocus: true,
+        ),
+      );
+      var result = await BarcodeScanner.scan(options: options);
+      setState(() => scanResult = result);
+    } on PlatformException catch (e) {
+      var result = ScanResult(
+        type: ResultType.Error,
+        format: BarcodeFormat.unknown,
+      );
+      if (e.code == BarcodeScanner.cameraAccessDenied) {
+        setState(() {
+          result.rawContent =
+              AppLocalizations.of(context).errorCameraRestriction();
+        });
+      } else {
+        result.rawContent = 'Unknown error: $e';
+      }
+      setState(() {
+        scanResult = result;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Container();
-  }
-}
-
-class RecoverAccountPage extends StatefulWidget {
-  static const String navId = '/RecaverAccountPage';
-  @override
-  _RecoverAccountSate createState() => new _RecoverAccountSate();
-}
-
-class _RecoverAccountSate extends State<RecoverAccountPage> {
-  Future<String> scan() async {
-//    try {
-//      String barcode = await BarcodeScanner.scan(OverlayTheme.TITANIUM);
-//      debugPrint(barcode);
-//      return barcode;
-//    } on PlatformException catch (e) {
-//      if (e.code == BarcodeScanner.CameraAccessDenied) {
-//        setState(() {
-//          this.barcode = 'The user did not grant the camera permission!';
-//        });
-//      } else {
-//        return null;
-//      }
-//    } on FormatException {
-//      setState(() => this.barcode =
-//          'null (User returned using the "back"-button before scanning anything. Result)');
-//    } catch (e) {
-//      return null;
-//    }
-  }
-
-//  final TextEditingController _textFieldController = TextEditingController();
-//  @override
-//  void initState() {
-//    _textFieldController.text = barcode;
-//    super.initState();
-//  }
-
-  String barcode = '';
-
-  bool _rememberMeFlag = false;
-  @override
-  Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    debugPrint('rebild $barcode');
-
-    final background = SvgPicture.asset(
-      ('assets/images/backgrounds/bg_primary.svg'),
-      fit: BoxFit.fill,
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-    );
 
     final logo = SvgPicture.asset(
       ('assets/images/icons/ic_recoverpasswordicon.svg'),
@@ -93,7 +102,7 @@ class _RecoverAccountSate extends State<RecoverAccountPage> {
       width: MediaQuery.of(context).size.width,
       child: Center(
         child: TextFormField(
-          initialValue: '$barcode',
+          initialValue: "",
           style: TextStyle(
             color: (theme.colorScheme.onSurface),
           ),
@@ -117,7 +126,7 @@ class _RecoverAccountSate extends State<RecoverAccountPage> {
       child: SizedBox.expand(
         child: TextFormField(
           maxLines: 14,
-          initialValue: barcode,
+          initialValue: "",
           //initialValue: '(barcode == null ) ? "hvhvhhhhvvhvhh" : barcode',
           style: TextStyle(
             color: (theme.colorScheme.onSurface),
@@ -132,20 +141,11 @@ class _RecoverAccountSate extends State<RecoverAccountPage> {
                 color: (theme.colorScheme.onSurface),
               ),
               suffixIcon: IconButton(
-                icon: SvgPicture.asset(
-                  'assets/images/icons/ic_qrcodescan.svg',
-                  height: 35.0,
-                ),
-                onPressed: () async {
-                  var barcode = await scan();
-                  setState(() {
-                    this.barcode = barcode;
-                  });
-                  debugPrint(barcode);
-
-//                  Navigator.pushNamed(context, ScanQrPage.navId);
-                },
-              )),
+                  icon: SvgPicture.asset(
+                    'assets/images/icons/ic_qrcodescan.svg',
+                    height: 35.0,
+                  ),
+                  onPressed: _scan)),
         ),
       ),
     );
@@ -153,89 +153,75 @@ class _RecoverAccountSate extends State<RecoverAccountPage> {
     final button = Container(
       height: 50,
       width: MediaQuery.of(context).size.width,
-      child: FusionButton(AppLocalizations.of(context).buttonVerify(), () {
-        Navigator.of(context).push(new MaterialPageRoute(
-            builder: (_) {
-              return PopupDialogWidget(
-                  AppLocalizations.of(context).popupPassVerifiedTitle(),
-                  "assets/images/icons/ic_taskdone.svg",
-                  AppLocalizations.of(context)
-                      .popupAccVerificationWelcomeText());
-            },
-            fullscreenDialog: true));
-      }),
+      child: FusionButton(
+          text: AppLocalizations.of(context).buttonVerify(),
+          onPressed: () {
+            Navigator.of(context).push(new MaterialPageRoute(
+                builder: (_) {
+                  return PopupDialogWidget(
+                      AppLocalizations.of(context).popupPassVerifiedTitle(),
+                      "assets/images/icons/ic_taskdone.svg",
+                      AppLocalizations.of(context)
+                          .popupAccVerificationWelcomeText());
+                },
+                fullscreenDialog: true));
+          }),
     );
 
-    return Scaffold(
-      body: Container(
-        //width: MediaQuery.of(context).size.width,
-        child: Stack(
-          //fit: StackFit.passthrough,
+    return SafeArea(
+        child: FusionScaffold(
+      title: AppLocalizations.of(context).toolbarRecoverFromSeedTitle(),
+      onBackClicked: (_) {
+        Navigator.of(context).pop();
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            background,
-            Container(
-              padding: EdgeInsets.only(
-                left: 24.0,
-                right: 24.0,
-              ),
-//              width: MediaQuery.of(context).size.width,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  AppBar(
-                    title: Text(AppLocalizations.of(context)
-                        .toolbarRecoverFromSeedTitle()),
-                    backgroundColor: Colors.transparent,
-                    centerTitle: true,
-                    elevation: 0,
-                    iconTheme: IconThemeData(
-                        color: Theme.of(context).colorScheme.primary),
-                  ),
-                  Flexible(
-                    flex: 4,
-                    child: logo,
-                  ),
+            Flexible(
+              flex: 4,
+              child: logo,
+            ),
 
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Flexible(
-                    flex: 2,
-                    child: text,
-                  ),
+            SizedBox(
+              height: 10,
+            ),
+            Flexible(
+              flex: 2,
+              child: text,
+            ),
 
-                  Flexible(
-                    flex: 4,
-                    child: accountName,
-                  ),
+            Flexible(
+              flex: 4,
+              child: accountName,
+            ),
 
-                  Flexible(
-                    flex: 8,
-                    child: scanQR,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
+            Flexible(
+              flex: 8,
+              child: scanQR,
+            ),
+            SizedBox(
+              height: 20,
+            ),
 //                  SizedBox(height: 30.0),
-                  LimitedBox(
-                    maxHeight: 70.0,
-                  ),
-                  Flexible(
-                    flex: 5,
-                    child: button,
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                ],
-              ),
+            LimitedBox(
+              maxHeight: 70.0,
+            ),
+            Flexible(
+              flex: 5,
+              child: button,
+            ),
+            SizedBox(
+              height: 5,
             ),
           ],
         ),
       ),
-    );
+    ));
   }
 }
+
 //
 //class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 //  final double height;
