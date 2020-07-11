@@ -1,78 +1,103 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:fusion_wallet/ui/blocs/theme_bloc.dart';
-import 'package:fusion_wallet/ui/pages/app_widgets.dart';
+import 'package:fusion_wallet/service_locator.dart';
+import 'package:fusion_wallet/state_container.dart';
 import 'package:fusion_wallet/ui/pages/auth/biometric_features_page.dart';
 import 'package:fusion_wallet/ui/pages/auth/passphrase/passphrase_creation_page.dart';
 import 'package:fusion_wallet/ui/pages/auth/passphrase/scan_qr_page.dart';
 import 'package:fusion_wallet/ui/pages/auth/passphrase/share_qr_page.dart';
 import 'package:fusion_wallet/ui/pages/bottom_home_page.dart';
-import 'package:fusion_wallet/ui/theme/fusion_theme.dart';
-import 'package:logger/logger.dart';
+import 'package:fusion_wallet/ui/pages/exchange/convert_funds_page.dart';
+import 'package:fusion_wallet/ui/pages/exchange/rate_exhange_page.dart';
+import 'package:fusion_wallet/ui/pages/information/add_contact_page.dart';
+import 'package:fusion_wallet/ui/pages/information/faq_page.dart';
+import 'package:fusion_wallet/ui/pages/information/send_feedback_page.dart';
+import 'package:fusion_wallet/ui/pages/popups/popups_history_page.dart';
+import 'package:fusion_wallet/ui/pages/primary/accounts/accounts_page.dart';
+import 'package:fusion_wallet/ui/pages/primary/accounts/delegate_funds_page.dart';
+import 'package:fusion_wallet/ui/pages/primary/accounts/push_funds_page.dart';
+import 'package:fusion_wallet/ui/pages/primary/accounts/request_funds_page.dart';
+import 'package:fusion_wallet/ui/pages/primary/accounts/rewards_info_page.dart';
+import 'package:fusion_wallet/ui/pages/primary/accounts/send_funds_page.dart';
+import 'package:fusion_wallet/ui/pages/primary/accounts/unbound_funds_page.dart';
+import 'package:fusion_wallet/ui/pages/primary/contacts_page.dart';
+import 'package:fusion_wallet/ui/pages/primary/history_page.dart';
+import 'package:fusion_wallet/ui/pages/primary/settings_page.dart';
+import 'package:fusion_wallet/ui/pages/primary/share_qr_address_page.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
-//import 'file:///C:/repos/newveer/fusion_wallet/lib/ui/pages/app_widgets.dart';
-
 import 'localizations.dart';
+import 'theme/fusion_theme.dart';
 import 'ui/pages/auth/account_creation_page.dart';
 import 'ui/pages/auth/intro_page.dart';
 import 'ui/pages/auth/password_creation_page.dart';
 import 'ui/pages/auth/recover_account_page.dart';
 import 'ui/pages/auth/terms_conditions_page.dart';
 import 'ui/providers/bottom_navigation_provider.dart';
-import 'ui/theme/theme_state.dart';
 
-void main() => runApp(MyApp());
-final logger = Logger();
+const String preferencesBox = 'prefsBox';
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (_) => ThemeBloc(),
-        child: BlocBuilder<ThemeBloc, ThemeState>(builder: _buildAppWithTheme));
-  }
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  setupServiceLocator();
+  await Hive.initFlutter();
+  Hive.openBox(preferencesBox).then((box) {
+    runApp(new StateContainer(
+      child: new App(),
+      preferences: box,
+    ));
+  });
+}
 
-  Widget _buildAppWithTheme(BuildContext context, ThemeState themeState) {
-    debugPrint('Building App with theme ${themeState.themeData.brightness}');
-    return MaterialApp(
-      theme: FusionTheme.dark,
-//      copyWith(
-//          buttonTheme: ButtonThemeData(
-//        shape: RoundedRectangleBorder(
-//            borderRadius: BorderRadius.circular(10.0),
-//            side: BorderSide(color: Colors.black)),
-//      )),
-      home: HomePage(),
-      localizationsDelegates: [
-        const AppLocalizationsDelegate(),
-        GlobalCupertinoLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: [const Locale('en', ''), const Locale('ru', '')],
-      locale: const Locale('ru', ''),
-      initialRoute: HomePage.navId,
-      routes: <String, WidgetBuilder>{
-        HomePage.navId: (context) => HomePage(),
-        PassphraseShareQrPage.navId: (context) => PassphraseShareQrPage(),
-        AppWidgetsPage.navId: (context) => AppWidgetsPage(),
-        BiometricAuthPage.navId: (context) => BiometricAuthPage(),
-        ScanQrPage.navId: (context) => ScanQrPage(),
-        PassphraseCreationPage.navId: (context) => PassphraseCreationPage(),
-        IntroPage.navId: (BuildContext context) => IntroPage(),
-        AccountCreationNamePage.navId: (BuildContext context) =>
-            AccountCreationNamePage(),
-        RecoverAccountPage.navId: (BuildContext context) =>
-            RecoverAccountPage(),
-        TermsConditionsPage.navId: (BuildContext context) =>
-            TermsConditionsPage(),
-        PasswordCreationPage.navId: (BuildContext context) =>
-            PasswordCreationPage(),
-      },
-    );
-  }
+class App extends StatelessWidget {
+  Widget build(BuildContext context) => MaterialApp(
+        theme: FusionTheme.light,
+        darkTheme: FusionTheme.dark,
+        themeMode: StateContainer.of(context).darkModeEnabled
+            ? ThemeMode.dark
+            : ThemeMode.light,
+        localizationsDelegates: [
+          const AppLocalizationsDelegate(),
+          GlobalCupertinoLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        locale: StateContainer.of(context).locale,
+        supportedLocales: AppLocalizations.Locales,
+        initialRoute: HomePage.navId,
+        routes: <String, WidgetBuilder>{
+          HomePage.navId: (context) => HomePage(),
+          PassphraseShareQrPage.navId: (context) => PassphraseShareQrPage(),
+          BiometricAuthPage.navId: (context) => BiometricAuthPage(),
+          ScanQrPage.navId: (context) => ScanQrPage(),
+          PassphraseCreationPage.navId: (context) => PassphraseCreationPage(),
+          IntroPage.navId: (BuildContext context) => IntroPage(),
+          AccountCreationNamePage.navId: (context) => AccountCreationNamePage(),
+          RecoverAccountPage.navId: (context) => RecoverAccountPage(),
+          TermsConditionsPage.navId: (context) => TermsConditionsPage(),
+          PasswordCreationPage.navId: (context) => PasswordCreationPage(),
+          HistoryPage.navId: (context) => HistoryPage(),
+          PopupHistoryPage.navId: (context) => PopupHistoryPage(),
+          ContactsPage.navId: (context) => ContactsPage(),
+          AddContactPage.navId: (context) => AddContactPage(),
+          AccountsPage.navId: (context) => AccountsPage(),
+          SendFundsPage.navId: (context) => SendFundsPage(),
+          RequestFundsPage.navId: (context) => RequestFundsPage(),
+          DelegateFundsPage.navId: (context) => DelegateFundsPage(),
+          UnboundFundsPage.navId: (context) => UnboundFundsPage(),
+          PushFundsPage.navId: (context) => PushFundsPage(),
+          SettingsPage.navId: (context) => SettingsPage(),
+          RewardInformationPage.navId: (context) => RewardInformationPage(),
+          ConvertExchangePage.navId: (context) => ConvertExchangePage(),
+          RateExchangePage.navId: (context) => RateExchangePage(),
+          SendFeedbackPage.navId: (context) => SendFeedbackPage(),
+          FaqPage.navId: (context) => FaqPage(),
+          ShareQrPage.navId: (context) => ShareQrPage()
+//        PopupEditAccountName.navId: (context) => PopupEditAccountName(),
+        },
+      );
 }
 
 class HomePage extends StatefulWidget {
@@ -83,8 +108,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  static final GlobalKey<ScaffoldState> _scaffoldKey =
-      GlobalKey<ScaffoldState>();
+  @override
+  void initState() {
+    super.initState();
+  }
 
   var provider = ChangeNotifierProvider<BottomNavigationProvider>(
     child: BottomHomePage(),
@@ -93,9 +120,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    logger.d('HomePage[BottomTabsPage, IdentifcationPage] start building.');
-    return Scaffold(
-      body: _buildHomepageBody(this.provider),
+    return Material(
+      child: _buildHomepageBody(this.provider),
     );
   }
 

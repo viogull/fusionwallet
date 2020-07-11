@@ -1,8 +1,13 @@
+source 'https://github.com/Cocoapods/Specs'
 # Uncomment this line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '10.0'
+
+use_frameworks!
+
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
+
 
 project 'Runner', {
   'Debug' => :debug,
@@ -63,6 +68,14 @@ target 'Runner' do
 
   # Keep pod path relative so it can be checked into Podfile.lock.
   pod 'Flutter', :path => 'Flutter'
+
+
+	pod 'MinterCore', :git => 'https://github.com/MinterTeam/minter-ios-core.git', :branch => 'texas'
+	pod 'MinterMy'
+	pod 'MinterExplorer'
+
+
+ # pod 'MinterCore'
 
   # Plugin Pods
 

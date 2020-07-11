@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.newveer.fusion.wallet">
+    package="com.fusiongroup.fusion.wallet">
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
          calls FlutterMain.startInitialization(this); in its onCreate method.
          In most cases you can leave this as-is, but you if you want to provide
@@ -16,12 +16,12 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="Fusion Wallet"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Fusion"
+        android:icon="@mipmap/launcher_icon">
 
 
         <activity
-            android:name="com.newveer.fusion.wallet.MainActivity"
+            android:name="com.fusiongroup.fusion.wallet.MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"

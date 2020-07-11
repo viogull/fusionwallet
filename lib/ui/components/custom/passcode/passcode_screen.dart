@@ -91,37 +91,52 @@ class _PasscodeScreenState extends State<PasscodeScreen> with SingleTickerProvid
       backgroundColor: widget.backgroundColor ?? Colors.black.withOpacity(0.0),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            SizedBox(height: 140,),
-            Text(
-              widget.title,
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20, color: widget.titleColor, fontWeight: FontWeight.w300),
-            ),
-            SizedBox(height: 70,),
-            Container(
-              margin: const EdgeInsets.only(top: 15, left: 10, right: 10),
-              height: 35,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: _buildCircles(),
+            LimitedBox (maxHeight: 70,),
+            SizedBox(height: 90,),
+            Flexible(
+              flex: 2,
+              child: Text(
+                widget.title,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20, color: widget.titleColor, fontWeight: FontWeight.w300),
               ),
             ),
-            SizedBox(height: 40,),
-            IntrinsicHeight(
-              child: Container(
-                margin: const EdgeInsets.only(top: 30, left: 40, right: 40, bottom: 00),
-                child: Keyboard(
-                  onDeleteCancelTap: _onDeleteCancelButtonPressed,
-                  onKeyboardTap: _onKeyboardButtonPressed,
-                  shouldShowCancel: enteredPasscode.length == 0,
-                  cancelLocalizedText: widget.cancelLocalizedText,
-                  deleteLocalizedText: widget.deleteLocalizedText,
-                  keyboardUIConfig: widget.keyboardUIConfig != null ? widget.keyboardUIConfig : KeyboardUIConfig(),
+
+            //LimitedBox (maxHeight: 70,),
+            SizedBox(height: 5,),
+            Flexible(
+              flex: 5,
+              child:  Container(
+                margin: const EdgeInsets.only(top: 5, left: 10, right: 10),
+                height: 35,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: _buildCircles(),
                 ),
               ),
             ),
+
+
+            //LimitedBox (maxHeight: 20,),
+            Flexible(
+              flex: 29,
+              child: IntrinsicHeight(
+                child: Container(
+                  margin: const EdgeInsets.only(top: 0, left: 40, right: 40, bottom: 00),
+                  child: Keyboard(
+                    onDeleteCancelTap: _onDeleteCancelButtonPressed,
+                    onKeyboardTap: _onKeyboardButtonPressed,
+                    shouldShowCancel: enteredPasscode.length == 0,
+                    cancelLocalizedText: widget.cancelLocalizedText,
+                    deleteLocalizedText: widget.deleteLocalizedText,
+                    keyboardUIConfig: widget.keyboardUIConfig != null ? widget.keyboardUIConfig : KeyboardUIConfig(),
+                  ),
+                ),
+              ),
+            ),
+
             widget.bottomWidget != null ? widget.bottomWidget : Container()
           ],
         ),
@@ -196,7 +211,6 @@ class _PasscodeScreenState extends State<PasscodeScreen> with SingleTickerProvid
     if (widget.isValidCallback != null) {
       widget.isValidCallback();
     } else {
-
       print("You didn't implement validation callback. Please handle a state by yourself then.");
     }
   }
