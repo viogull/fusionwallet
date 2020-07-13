@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:fusion_wallet/ui/pages/routes.dart';
 import 'package:fusion_wallet/ui/pages/v2/ui.dart';
 
 import 'package:hive/hive.dart';
@@ -12,7 +13,8 @@ import 'localizations.dart';
 import 'inject.dart';
 import 'ui/pages/auth/splash.dart';
 import 'core/state_container.dart';
-import 'theme/fusion_theme.dart';
+import 'ui/pages/lockscreen/lockscreen.dart';
+import 'ui/theme.dart';
 import 'ui/components/custom/passcode/passcode_screen.dart';
 import 'ui/pages/auth/account_name.dart';
 import 'ui/pages/auth/biometrics.dart';
@@ -28,7 +30,7 @@ import 'ui/pages/exchange/rate_exhange_page.dart';
 import 'ui/pages/information/faq_page.dart';
 import 'ui/pages/information/send_feedback_page.dart';
 import 'ui/pages/popups/popups_history_page.dart';
-import 'ui/pages/accounts_page.dart';
+import 'ui/pages/accounts.dart';
 import 'ui/pages/primary/accounts/delegate_funds_page.dart';
 import 'ui/pages/primary/accounts/push_funds_page.dart';
 import 'ui/pages/primary/accounts/request_funds_page.dart';
@@ -37,11 +39,9 @@ import 'ui/pages/primary/accounts/send_funds_page.dart';
 import 'ui/pages/primary/accounts/unbound_funds_page.dart';
 
 import 'ui/pages/primary/contacts/contacts_page.dart';
-import 'ui/pages/primary/contacts/add_contact.dart';
-import 'ui/pages/primary/contacts/contacts.dart';
+
 import 'ui/pages/primary/history_page.dart';
 import 'ui/pages/primary/settings_page.dart';
-import 'ui/providers/bottom_navigation_provider.dart';
 
 const String preferencesBox = 'prefsBox';
 const String accountsBox = 'accountsBox';
@@ -53,6 +53,7 @@ void main() async {
   Hive.registerAdapter<Account>(AccountAdapter());
   Hive.registerAdapter<Contact>(ContactAdapter());
   var accsBox = await Hive.openBox<Account>(accountsBox);
+
   runApp(new StateContainer(
     child: new App(),
     accounts: accsBox,
@@ -92,7 +93,6 @@ class App extends StatelessWidget {
           HistoryPage.navId: (context) => HistoryPage(),
           PopupHistoryPage.navId: (context) => PopupHistoryPage(),
           ContactsPage.navId: (context) => ContactsPage(),
-          AddContactPage.navId: (context) => AddContactPage(),
           AccountsPage.navId: (context) => AccountsPage(),
           SendFundsPage.navId: (context) => SendFundsPage(),
           RequestFundsPage.navId: (context) => RequestFundsPage(),
@@ -122,6 +122,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
+
     WidgetsBinding.instance.addObserver(this);
   }
 

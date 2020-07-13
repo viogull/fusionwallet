@@ -80,6 +80,7 @@ class StateContainerState extends State<StateContainer> {
   @override
   void initState() {
     super.initState();
+
     if (widget.accounts.length > 0) {
       selectedAccount = widget.accounts.getAt(widget.accounts.length - 1);
     } else {
@@ -90,7 +91,7 @@ class StateContainerState extends State<StateContainer> {
 
     // Get theme default
     var preferencesTheme = selectedAccount.darkModeEnabled;
-    final currentTheme = (preferencesTheme == null && preferencesTheme);
+    final currentTheme = (preferencesTheme != null && preferencesTheme);
 
     var currentAccountMnemonic = selectedAccount.mnemonic;
 
@@ -104,7 +105,7 @@ class StateContainerState extends State<StateContainer> {
     final rewardsEnabled = selectedAccount.showRewards;
 
     updateMnemonicPassphrase(currentAccountMnemonic);
-    updateTheme(currentTheme);
+    updateTheme(isDarkModeEnabled: currentTheme);
     updateLanguage(currentLocale);
     setBiometric(biometricEnabled);
     setRewardsVisibility(rewardsEnabled);
@@ -113,25 +114,27 @@ class StateContainerState extends State<StateContainer> {
   /*
           Set save:true to persist preference into storage.
        */
-  void updateTheme(bool isDarkModeEnabled, {bool save = false}) async {
-    debugPrint("Updating theme with new $isDarkModeEnabled");
+  void updateTheme({bool isDarkModeEnabled}) async {
+    debugPrint(
+        "Updating theme with new $isDarkModeEnabled. Accounts In Box ${selectedAccount.isInBox}");
     debugPrint("Writing $isDarkModeEnabled to prefs storage");
+    checkAccountsBox();
     selectedAccount.darkModeEnabled = isDarkModeEnabled;
     selectedAccount.save();
     setState(() {
-      darkModeEnabled = isDarkModeEnabled;
+      this.darkModeEnabled = isDarkModeEnabled;
     });
   }
 
   void setBiometric(@required bool isEnabled, {bool save = false}) async {
     debugPrint("Updating [biometric] with new $isEnabled");
-    if (save) {
-      debugPrint("Writing new biometric status $isEnabled to secure storage");
-      selectedAccount.biometricEnabled = isEnabled;
-      selectedAccount.save();
-    }
+
+    debugPrint("Writing new biometric status $isEnabled to secure storage");
+    selectedAccount.biometricEnabled = isEnabled;
+    selectedAccount.save();
+
     setState(() {
-      biometricEnabled = isEnabled;
+      this.biometricEnabled = isEnabled;
     });
   }
 
@@ -139,15 +142,15 @@ class StateContainerState extends State<StateContainer> {
       {bool save = false}) async {
     debugPrint(
         "Updating [Show Rewards] prefserence with new $isShowRewardsEnabled");
-    if (save) {
-      debugPrint("Writing $isShowRewardsEnabled to prefs storage");
-//      await widget.preferences
-//          .put(Vault.prefsShowRewards, isShowRewardsEnabled);
-      selectedAccount.showRewards = isShowRewardsEnabled;
-      selectedAccount.save();
-    }
+
+    debugPrint("Writing $isShowRewardsEnabled to prefs storage");
+    //      await widget.preferences
+    //          .put(Vault.prefsShowRewards, isShowRewardsEnabled);
+    selectedAccount.showRewards = isShowRewardsEnabled;
+    selectedAccount.save();
+
     setState(() {
-      showRewards = isShowRewardsEnabled;
+      this.showRewards = isShowRewardsEnabled;
     });
   }
 
@@ -205,4 +208,16 @@ class StateContainerState extends State<StateContainer> {
   }
 
   void updateMnemonicPassphrase(currentAccountMnemonic) {}
+
+  void checkAccountsBox() {
+    if (!selectedAccount.isInBox) {
+      selectedAccount.save();
+    }
+  }
+
+  void loadAccount() {
+    setState(() {
+      this.selectedAccount = widget.accounts.getAt(0);
+    });
+  }
 }

@@ -33,11 +33,10 @@ class SettingsPage extends StatelessWidget {
         children: <Widget>[
           SwitchFusionPreference(
             title: AppLocalizations.of(context).settingsItemUiTheme(),
-            value: StateContainer.of(context).darkModeEnabled,
+            value: StateContainer.of(context).selectedAccount.darkModeEnabled,
             onSwitch: (updated) async {
-              StateContainer.of(context).updateTheme(
-                  !StateContainer.of(context).darkModeEnabled,
-                  save: true);
+              StateContainer.of(context)
+                  .updateTheme(isDarkModeEnabled: !updated);
             },
           ),
           FusionPreference(
@@ -47,9 +46,9 @@ class SettingsPage extends StatelessWidget {
               }),
           SwitchFusionPreference(
             title: AppLocalizations.of(context).settingsItemBiometricFeature(),
-            value: true,
+            value: StateContainer.of(context).biometricEnabled,
             onSwitch: (updated) {
-              Navigator.of(context).pushNamed(BiometricAuthPage.navId);
+              StateContainer.of(context).setBiometric(!updated, save: true);
             },
           ),
           FusionPreference(

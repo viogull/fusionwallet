@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
@@ -34,17 +35,6 @@ class _AccountCreationNamePageState extends State<AccountCreationNamePage> {
       height: 200.0,
     );
 
-    final text = Container(
-      alignment: Alignment.topLeft,
-      margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-      child: Text(
-        AppLocalizations.of(context).inputAccountNameHelperText(),
-        style: TextStyle(
-          color: (theme.colorScheme.onSurface),
-        ),
-      ),
-    );
-
     final nameForm = Form(
         key: _formKey,
         child: Column(
@@ -71,12 +61,12 @@ class _AccountCreationNamePageState extends State<AccountCreationNamePage> {
             ]));
 
     final loginButton = Container(
-      height: 50,
       width: MediaQuery.of(context).size.width,
       child: FusionButton(
           text: AppLocalizations.of(context).buttonNext(),
           onPressed: () {
             // Finishing account creation
+            StateContainer.of(context).loadAccount();
             BlocProvider.of<AuthenticationBloc>(context).add(
                 AccountNameCreatedEvent(name: _accountNameController.text));
           }),
@@ -150,13 +140,8 @@ class _AccountCreationNamePageState extends State<AccountCreationNamePage> {
 //                  SizedBox(height: 10 ,),
               // LimitedBox(maxHeight: 30,),
               Flexible(
-                flex: 2,
-                child: text,
-              ),
-
-              Flexible(
-                flex: 4,
-                child: nameForm,
+                flex: 6,
+                child: Center(child: nameForm),
               ),
               SizedBox(
                 height: 15,

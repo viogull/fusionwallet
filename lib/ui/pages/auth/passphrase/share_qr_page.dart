@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/core/state_container.dart';
-import 'package:fusion_wallet/theme/fusion_theme.dart';
+import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -37,15 +37,15 @@ class ViewPassphraseDialog extends StatelessWidget {
                   children: <Widget>[
                     QrImage(
                       version: QrVersions.auto,
-                      data: qr.toString(),
-                      backgroundColor: Theme.of(context).colorScheme.surface,
+                      data: data == null ? qr.toString() : data,
+                      foregroundColor: Theme.of(context).colorScheme.primary,
                       size: MediaQuery.of(context).size.width * 0.5,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Center(
                         child: Text(
-                          qr,
+                          data == null ? qr : data,
                           textAlign: TextAlign.center,
                         ),
                       ),

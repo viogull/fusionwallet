@@ -11,6 +11,7 @@ import 'utils/vault.dart';
 /*
   Base Service Locator (DI)
  */
+
 GetIt injector = GetIt.instance;
 
 void setupServiceLocator() {

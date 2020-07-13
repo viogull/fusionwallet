@@ -3,15 +3,16 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:fusion_wallet/core/models.dart';
-import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/main.dart';
-import 'package:fusion_wallet/ui/pages/v2/bloc.dart';
+
 import 'package:hive/hive.dart';
+
 import 'package:root_checker/root_checker.dart';
 
 import '../../../inject.dart';
 import '../../components/custom/fusion_scaffold.dart';
 
+import '../pages.dart';
 import '../v2/ui.dart';
 import '../../../utils/shared_prefs.dart';
 import '../../../utils/vault.dart';
@@ -129,51 +130,20 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return new FusionScaffold(
-        child: Center(
-      child: Image.asset(
-        "assets/images/icon.png",
-        width: 128,
-        height: 128,
-        fit: BoxFit.contain,
-      ),
-    ));
-  }
-}
-
-class LockscreenArgs {
-  final String pin;
-  final bool biometricEnabled;
-
-  const LockscreenArgs({@required this.pin, @required this.biometricEnabled});
-}
-
-class LockUi extends StatelessWidget {
-  final AuthenticationBloc bloc;
-
-  LockUi({this.bloc});
-
-  static const navId = "/lockscreen";
-  @override
-  Widget build(BuildContext context) {
-    var ctx = context;
-    final args = ModalRoute.of(context).settings.arguments as LockscreenArgs;
-    return Center(
-      child: FusionScaffold(
-          title: AppLocalizations.of(context).unlock,
+        child: Column(
+      children: [
+        Flexible(
+          flex: 8,
           child: Center(
-            child: Column(
-              children: <Widget>[
-                Text(
-                    'Lockscreen. Pin ${args.pin}, biometric ${args.biometricEnabled}'),
-                RaisedButton(
-                  onPressed: () {
-                    Navigator.of(context).pushReplacementNamed(HomePage.navId);
-                  },
-                  child: Text("Unlock"),
-                )
-              ],
+            child: Image.asset(
+              "assets/images/icon.png",
+              width: 98,
+              height: 98,
+              fit: BoxFit.contain,
             ),
-          )),
-    );
+          ),
+        )
+      ],
+    ));
   }
 }

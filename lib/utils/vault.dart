@@ -233,4 +233,12 @@ class Vault {
     log.d("Creating and persisting new account $accountName");
     await writePin(pin);
   }
+
+  Account get currentAccount => accsBox.getAt(0);
+
+  Future<void> addContact(Contact contact) {
+    if (!contact.isInBox) {
+      contact.save();
+    }
+  }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:fusion_wallet/theme/fusion_theme.dart';
+import 'package:fusion_wallet/ui/theme.dart';
 
 typedef SettingsSwitchCallBack = void Function(bool valueUpdate);
 

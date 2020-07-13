@@ -1,36 +1,185 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
+import 'package:fusion_wallet/core/state_container.dart';
+import 'package:fusion_wallet/main.dart';
+import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/pages/v2/bloc.dart';
 import 'package:fusion_wallet/ui/pages/v2/event.dart';
+import 'package:fusion_wallet/utils/haptic.dart';
+import 'package:local_auth/local_auth.dart';
+import 'package:logger/logger.dart';
+import 'package:lottie/lottie.dart';
 
+import '../../../inject.dart';
 import '../../../localizations.dart';
+import '../../widgets.dart';
+import 'package:meta/meta.dart';
 
-class PasswordCreationPage extends StatefulWidget {
-  final bool isCreating;
-  static const String navId = '/pincode/create';
+class LockscreenArgs {
+  final String pin;
+  final bool biometricEnabled;
 
-  PasswordCreationPage({this.isCreating = false});
-
-  @override
-  _PasswordCreationPageState createState() =>
-      _PasswordCreationPageState(isCreating);
+  const LockscreenArgs({@required this.pin, @required this.biometricEnabled});
 }
 
-class _PasswordCreationPageState extends State<PasswordCreationPage> {
-  bool isAuthenticated = false;
-  bool isVerified = false;
-  bool passCreate = false;
+typedef OnUnlockCallback = Function();
 
-  _PasswordCreationPageState(bool isCreating) {
-    this.passCreate = isCreating;
+class LockUi extends StatefulWidget {
+  final AuthenticationBloc bloc;
+
+  final log = injector.get<Logger>();
+
+  LockUi({this.bloc});
+
+  static const navId = "/lockscreen";
+
+  @override
+  _LockUiState createState() => _LockUiState();
+}
+
+class _LockUiState extends State<LockUi> with TickerProviderStateMixin {
+  AnimationController _lockAnimController;
+  final _auth = LocalAuthentication();
+
+  @override
+  void initState() {
+    widget.log.d("CanCheckBiometric() -> ");
+
+    _lockAnimController = AnimationController(vsync: this);
+    super.initState();
   }
+
+  Widget _buildLockAnimation() => Container(
+        width: 64,
+        height: 64,
+        child: Lottie.asset(
+          'assets/anim/locker2.json',
+          controller: _lockAnimController,
+          onLoaded: (composition) {
+            // Configure the AnimationController with the duration of the
+            // Lottie file and start the animation.
+            _lockAnimController..duration = composition.duration;
+          },
+        ),
+      );
+
+  Future<bool> _isBiometricAvailable() async {
+    bool isAvailable = false;
+    try {
+      isAvailable = await _auth.canCheckBiometrics;
+    } on PlatformException catch (e) {
+      widget.log.e(e);
+    }
+
+    if (!mounted) return isAvailable;
+
+    isAvailable
+        ? widget.log.d('Biometric is available!')
+        : widget.log.d('Biometric is unavailable.');
+
+    return isAvailable;
+  }
+
+  Future<void> _getListOfBiometricTypes() async {
+    List<BiometricType> listOfBiometrics;
+    try {
+      listOfBiometrics = await _auth.getAvailableBiometrics();
+    } on PlatformException catch (e) {
+      widget.log.e(e);
+    }
+
+    if (!mounted) return;
+
+    print(listOfBiometrics);
+  }
+
+  Future<void> _authenticateUser(BuildContext context) async {
+    bool isAuthenticated = false;
+    try {
+      isAuthenticated = await _auth.authenticateWithBiometrics(
+        localizedReason:
+            "Please authenticate to view your transaction overview",
+        useErrorDialogs: true,
+        stickyAuth: true,
+      );
+    } on PlatformException catch (e) {
+      widget.log.e(e);
+    }
+
+    if (!mounted) return;
+
+    isAuthenticated
+        ? widget.log.d('User is authenticated!')
+        : widget.log.d('User is not authenticated.');
+
+    if (isAuthenticated) {
+      //injector.get<HapticUtil>().fingerprintSucess();
+      Navigator.of(context).pushReplacementNamed(HomePage.navId);
+    }
+    Navigator.of(context).pushReplacementNamed(HomePage.navId);
+  }
+
+  void _cancelAuthentication() {
+    _auth.stopAuthentication();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+        child: FusionScaffold(
+      child: Container(
+          height: MediaQuery.of(context).size.height,
+          child: StateContainer.of(context).selectedAccount.biometricEnabled
+              ? buildBiometricUnlockUi(context)
+              : buildPinUnlockUi(
+                  context, StateContainer.of(context).selectedAccount.pin)),
+    ));
+  }
+
+  @override
+  void dispose() {
+    _lockAnimController.dispose();
+    super.dispose();
+  }
+
+  Widget buildBiometricUnlockUi(BuildContext context) => Center(
+          child: GestureDetector(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: _buildLockAnimation(),
+        ),
+        onTap: () async {
+          if (await _isBiometricAvailable()) {
+            await _getListOfBiometricTypes();
+            await _authenticateUser(context);
+          }
+        },
+      ));
+
+  Widget buildPinUnlockUi(BuildContext context, String pin) => LockUiPincode(
+        expected: pin,
+      );
+}
+
+class LockUiPincode extends StatefulWidget {
+  final String expected;
+
+  const LockUiPincode({this.expected});
+
+  @override
+  _LockUiPincodeState createState() => _LockUiPincodeState();
+}
+
+class _LockUiPincodeState extends State<LockUiPincode> {
+  bool isAuthenticated = false;
+  bool passCreate = true;
+
   @override
   void initState() {
     super.initState();
     if (isAuthenticated) {
-      //Navigator.of(context).pushNamed(BiometricAuthPage.navId);
-
+      Navigator.of(context).pushReplacementNamed(HomePage.navId);
     }
   }
 
@@ -54,10 +203,10 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
       }
     });
     if (_otp.length == 6) {
-      if (pincode != null && pincode == _otp) {
-        BlocProvider.of<AuthenticationBloc>(context).add(
-          PincodeCreatedEvent(pin: pincode),
-        );
+      debugPrint(
+          "PinLength is max, expected ${widget.expected}, entered ${_otp}");
+      if (_otp == widget.expected) {
+        Navigator.of(context).pushReplacementNamed(HomePage.navId);
       } else {
         setState(() {
           this.pincode = _otp;
@@ -103,49 +252,20 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
     // print(_otp);
   }
 
-//  void _handleSubmit() {
-//    if (_otp.length == 6)
-//    _scaffoldKey.currentState.showSnackBar(SnackBar(
-//      content: Text('Entered OTP is $_otp'),
-//    ));
-//    else
-//      print(_otp);
-////      _scaffoldKey.currentState.showSnackBar(SnackBar(
-////        content: Text('OTP has to be of 6 digits'),
-////          backgroundColor: Colors.red,
-////      ));
-//  }
-
   @override
   Widget build(BuildContext context) {
-    passCreate = ModalRoute.of(context).settings.arguments as bool;
-    final textLabel =
-//    if(_otp.length == 6 )
-//      passCreate ?
-        Stack(children: <Widget>[
-      (pincode == null
-          ? Container(
-              height: 70,
-              margin: const EdgeInsets.only(top: 30),
-              child: Text(
-                AppLocalizations.of(context).pinCreateTitle,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
-                ),
-              ))
-          : Container(
-              height: 70,
-              margin: const EdgeInsets.only(top: 30),
-              child: Text(
-                AppLocalizations.of(context).labelChoosePassVerifySubtitle(),
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
-                ),
-              )))
+    final textLabel = Stack(children: <Widget>[
+      Container(
+          height: 70,
+          margin: const EdgeInsets.only(top: 30),
+          child: Text(
+            AppLocalizations.of(context).labelUnlockTitle(),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w400,
+            ),
+          ))
     ]);
 
     final pinCodeView = Padding(

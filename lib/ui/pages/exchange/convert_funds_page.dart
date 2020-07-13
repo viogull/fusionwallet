@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
-import 'package:fusion_wallet/theme/fusion_theme.dart';
+import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 
 class AllFieldsFormBloc extends FormBloc<String, String> {
@@ -249,9 +249,11 @@ class _ConvertExchangePageState extends State<ConvertExchangePage> {
     final convertButton = Container(
       height: 50,
       width: MediaQuery.of(context).size.width,
-      child: FusionButton(text: AppLocalizations.of(context).buttonConvert(), onPressed:  () {
-        Navigator.pushNamed(context, ConvertExchangePage.navId);
-      }),
+      child: FusionButton(
+          text: AppLocalizations.of(context).buttonConvert(),
+          onPressed: () {
+            Navigator.pushNamed(context, ConvertExchangePage.navId);
+          }),
     );
 
     return Scaffold(

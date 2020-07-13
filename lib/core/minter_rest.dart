@@ -36,9 +36,11 @@ class MinterRest {
         logger.e('Cannot fetch info for null address');
         return null;
       }
+      if (!address.contains("Mx")) address = "Mx" + address;
+
       logger.d('Fetching address $address');
       // Adding Mx to get valid address
-      final url = "$baseUrl/addresses/Mx$address";
+      final url = "$baseUrl/addresses/$address";
       logger.d("Fetch Address Data Url $url");
       Response response = await dio.get(url);
 

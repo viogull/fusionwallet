@@ -13,9 +13,6 @@ class AuthenticationBloc
 
   Account _account = Account();
 
-  String _cachedPin;
-  bool _cachedEnableBiometric;
-  @override
   AccountCreationState get initialState => AccountInitialState();
 
   @override

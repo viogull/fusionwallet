@@ -6,7 +6,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/core/minter_rest.dart';
-import 'package:fusion_wallet/theme/fusion_theme.dart';
+import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/delegate_funds_page.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/push_funds_page.dart';
@@ -185,6 +185,7 @@ class AccountsPage extends StatelessWidget {
             );
         } else {
           return Card(
+            margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
             shape: RoundedRectangleBorder(
                 borderRadius: FusionTheme.borderRadius,
                 side:
@@ -192,37 +193,14 @@ class AccountsPage extends StatelessWidget {
             color: theme.colorScheme.surface,
             elevation: 4,
             child: Container(
-                height: 100, child: PlatformCircularProgressIndicator()),
+                width: width,
+                height: 100,
+                child: Center(child: PlatformCircularProgressIndicator())),
           );
         }
       },
     );
   }
-
-  _buildBalancesAvailableCard(String title, String value) {
-    return ListTile(
-      leading: Icon(Icons.info),
-      title: Text(title),
-      trailing: Row(
-        children: <Widget>[Icon(Icons.info), Text(value)],
-      ),
-    );
-  }
-
-  Widget _buildBtcIcon(@required String asset) => Padding(
-        padding: const EdgeInsets.all(1.0),
-        child: Center(
-          child: SizedBox(
-            width: 14,
-            height: 14,
-            child: SvgPicture.asset(asset,
-                semanticsLabel: asset,
-                placeholderBuilder: (BuildContext context) => Container(
-                    padding: const EdgeInsets.all(30.0),
-                    child: PlatformCircularProgressIndicator())),
-          ),
-        ),
-      );
 
   Widget _buildRewardsCard(BuildContext context) {
     final theme = Theme.of(context);
@@ -233,15 +211,18 @@ class AccountsPage extends StatelessWidget {
       },
       child: Card(
           color: theme.colorScheme.surface,
-          margin: const EdgeInsets.all(16),
+          margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
           shape: RoundedRectangleBorder(
               borderRadius: FusionTheme.borderRadius,
               side: BorderSide(color: theme.colorScheme.onSurface, width: 0.1)),
-          child: ListTile(
-            leading: Icon(Icons.info),
-            title:
-                AutoSizeText(AppLocalizations.of(context).labelTotalReward()),
-            trailing: AutoSizeText("0.00"),
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.8,
+            child: ListTile(
+              leading: Icon(Icons.info),
+              title:
+                  AutoSizeText(AppLocalizations.of(context).labelTotalReward()),
+              trailing: AutoSizeText("0.00"),
+            ),
           )),
     );
   }
@@ -250,8 +231,6 @@ class AccountsPage extends StatelessWidget {
 class TransanctionHistoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return Text("NAme OF Receiver");
   }
 }

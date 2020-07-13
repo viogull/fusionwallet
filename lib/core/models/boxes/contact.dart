@@ -1,15 +1,9 @@
-
-
-
-
 import 'package:hive/hive.dart';
-
 
 part 'contact.g.dart';
 
-
 @HiveType(typeId: 1)
-class Contact {
+class Contact extends HiveObject {
   @HiveField(0)
   String name;
   @HiveField(1)

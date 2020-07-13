@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+
 import 'package:meta/meta.dart';
 
 class AccountCreationEvent extends Equatable {
@@ -78,17 +79,19 @@ class AccountNameCreatedEvent extends AccountCreationEvent {
 }
 
 class AccountLockEvent extends AccountCreationEvent {
-  final bool biometricRequired;
+
+  final bool unlockWithBiometric;
   final String expectedPincode;
 
-  const AccountLockEvent({this.biometricRequired, this.expectedPincode});
+  const AccountLockEvent({ this.unlockWithBiometric, this.expectedPincode});
 
   @override
-  List<Object> get props => [biometricRequired, expectedPincode];
+  List<Object> get props => [unlockWithBiometric, expectedPincode];
 
   @override
   String toString() =>
-      'LockAccountEvent { $biometricRequired, expected code $expectedPincode } ';
+      'LockAccountEvent { $unlockWithBiometric, expected code $expectedPincode } ';
+
 }
 
 class AccountUnlockEvent extends AccountCreationEvent {}

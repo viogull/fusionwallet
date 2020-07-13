@@ -6,7 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/main.dart';
 import 'package:fusion_wallet/core/state_container.dart';
-import 'package:fusion_wallet/theme/fusion_theme.dart';
+import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/pages/bottom_home_page.dart';
 import 'package:fusion_wallet/ui/pages/v2/bloc.dart';
@@ -228,7 +228,6 @@ class _BiometricAuthPageState extends State<BiometricAuthPage> {
                     children: <Widget>[
                       Container(
                         width: MediaQuery.of(context).size.width,
-                        height: 50,
                         child: FusionButton(
                           text: AppLocalizations.of(context).labelYes(),
                           onPressed: () async {
@@ -241,7 +240,6 @@ class _BiometricAuthPageState extends State<BiometricAuthPage> {
                       SizedBox(height: 15, width: 0),
                       Container(
                         width: MediaQuery.of(context).size.width,
-                        height: 50,
                         child: FusionButton(
                           text: AppLocalizations.of(context).labelNo(),
                           onPressed: () async {

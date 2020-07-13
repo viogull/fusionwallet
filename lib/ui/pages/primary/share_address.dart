@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:fusion_wallet/theme/fusion_theme.dart';
+import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:fusion_wallet/utils/haptic.dart';
 import 'package:fusion_wallet/utils/io_tools.dart';
@@ -82,6 +82,7 @@ class ShareAddressPage extends StatelessWidget {
                       onTap: () {
                         Clipboard.setData(ClipboardData(text: _data));
                         injector.get<HapticUtil>().success();
+
 //                        Fluttertoast.showToast(
 //                            msg: AppLocalizations.of(context).labelOk());
                       },
@@ -108,8 +109,8 @@ class ShareAddressPage extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () async {
-                        showToast(
-                            AppLocalizations.of(context).labelTapToCopy());
+                        showToast(AppLocalizations.of(context).labelTapToCopy(),
+                            context: context);
                         IOTools.setSecureClipboardItem(_data);
                       },
                       child: Padding(

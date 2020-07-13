@@ -6,10 +6,6 @@ import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugins.GeneratedPluginRegistrant
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import network.minter.core.MinterSDK
 import network.minter.core.bip39.NativeBip39
 import network.minter.core.bip39.NativeHDKeyEncoder
@@ -52,10 +48,10 @@ class MainActivity: FlutterFragmentActivity() {
 
             return HashMap<String, String>().apply {
                 put("mnemonic", mnemonicResult.mnemonic)
-                put("seed", seed.stringValue())
-                put("private_key", privateKey.stringValue())
-                put("public_key", publicKey.stringValue())
-                put("address", address.stringValue() )
+                put("seed", seed.toHexString())
+                put("private_key", privateKey.toHexString())
+                put("public_key", publicKey.toHexString())
+                put("address", address.toHexString() )
             }
         }
 

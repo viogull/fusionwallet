@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fusion_wallet/localizations.dart';
-import 'package:fusion_wallet/theme/fusion_theme.dart';
+import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 
@@ -125,13 +125,12 @@ class PushFundsPage extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: FusionButton(
-                   text:    AppLocalizations.of(context)
+                      text: AppLocalizations.of(context)
                           .buttonPush()
                           .toString()
                           .toUpperCase(),
-                  onPressed:   () {},
-                      
-                    expandedWidth:  true),
+                      onPressed: () {},
+                      expandedWidth: true),
                 ),
               )
             ],

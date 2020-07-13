@@ -10,6 +10,7 @@ import 'package:fusion_wallet/ui/pages/auth/passphrase/passphrase.dart';
 import 'package:fusion_wallet/ui/pages/auth/pincode.dart';
 import 'package:fusion_wallet/ui/pages/auth/recover_account_page.dart';
 
+import '../pages.dart';
 import 'bloc.dart';
 import 'state.dart';
 
@@ -24,6 +25,8 @@ class AuthUi extends StatelessWidget {
         create: (context) => AuthenticationBloc(),
         child: BlocBuilder<AuthenticationBloc, AccountCreationState>(
           builder: (context, state) {
+            debugPrint("Current State -> $state");
+
             if (state is AccountInitialState) {
               return IntroPage();
             }
@@ -43,14 +46,13 @@ class AuthUi extends StatelessWidget {
               return AccountCreationNamePage();
             }
             if (state is AccountLockedState) {
-              return Splash();
+              return LockUi();
             }
             if (state is AccountUnlockedState) {
               return HomePage();
             } else
-              return PlatformCircularProgressIndicator();
+              return IntroPage();
           },
         ));
-    return Container();
   }
 }

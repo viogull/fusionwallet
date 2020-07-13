@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fusion_wallet/core/state_container.dart';
 
@@ -12,13 +13,16 @@ class FusionScaffold extends StatelessWidget {
   final SliverAppBar appBar;
   final AppBarBackButtonCallback onBackClicked;
 
+  final bool hideDrawer;
+
   FusionScaffold(
       {@required this.child,
       this.title,
       this.drawer,
       this.appBar,
       Container body,
-      this.onBackClicked});
+      this.onBackClicked,
+      this.hideDrawer = true});
 
   @override
   Widget build(BuildContext context) {
@@ -38,28 +42,23 @@ class FusionScaffold extends StatelessWidget {
             fit: BoxFit.fill,
           ),
         ),
-        SafeArea(
-          child: Scaffold(
-            backgroundColor: Colors.transparent,
-            drawer: drawer,
-            body: SafeArea(
-              child: NestedScrollView(
-                  headerSliverBuilder:
-                      (BuildContext context, bool innerBoxIsScrolled) {
-                    return <Widget>[
-                      SliverOverlapAbsorber(
-                          handle:
-                              NestedScrollView.sliverOverlapAbsorberHandleFor(
-                                  context),
-                          sliver: (appBar == null)
-                              ? buildDefaultAppBar(theme, context)
-                              : appBar),
-                    ];
-                  },
-                  body: child),
-            ),
-          ),
-        )
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          drawer: drawer,
+          body: NestedScrollView(
+              headerSliverBuilder:
+                  (BuildContext context, bool innerBoxIsScrolled) {
+                return <Widget>[
+                  SliverOverlapAbsorber(
+                      handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                          context),
+                      sliver: (appBar == null)
+                          ? buildDefaultAppBar(theme, context)
+                          : appBar),
+                ];
+              },
+              body: child),
+        ),
       ],
     );
   }
@@ -67,10 +66,6 @@ class FusionScaffold extends StatelessWidget {
   Widget buildDefaultAppBar(ThemeData theme, BuildContext context) =>
       SliverAppBar(
         elevation: 12,
-        stretch: true,
-        floating: true,
-        pinned: false,
-        primary: true,
         automaticallyImplyLeading: true,
         backgroundColor: Colors.transparent,
         iconTheme: IconThemeData(color: theme.colorScheme.primary),
@@ -80,7 +75,7 @@ class FusionScaffold extends StatelessWidget {
             : AutoSizeText(
                 title,
                 style: theme.textTheme.headline6
-                    .copyWith(color: theme.colorScheme.onSurface, fontSize: 16),
+                    .copyWith(color: theme.colorScheme.onSurface, fontSize: 19),
               ),
       );
 }

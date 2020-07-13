@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:fusion_wallet/core/models.dart';
+import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/localizations.dart';
-import 'package:fusion_wallet/theme/fusion_theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:fusion_wallet/ui/pages/primary/contacts/contact_item.dart';
 import 'package:random_string/random_string.dart';
@@ -17,24 +16,10 @@ class ContactsPage extends StatefulWidget {
 }
 
 class _ContactsPageState extends State<ContactsPage> {
-  static List<Contact> generateListOfContacts() {
-    List<Contact> contacts = List();
-    for (var i = 0; i < 24; i++) {
-      contacts.add(Contact(randomString(8), randomString(32)));
-    }
-    return contacts;
-  }
-
   TextEditingController editingController = TextEditingController();
 
-  final duplicateItems = List<String>.generate(10000, (i) => "Item $i");
+  final duplicateItems = [];
   var items = List<Contact>();
-
-  @override
-  void initState() {
-    items.addAll(generateListOfContacts());
-    super.initState();
-  }
 
   void filterSearchResults(String query) {
     List<Contact> dummySearchList = List<Contact>();
@@ -61,8 +46,9 @@ class _ContactsPageState extends State<ContactsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    //DateTime selectedDate = DateTime.now();
+    var loadContacts = StateContainer.of(context).selectedAccount.contacts;
+
+    items.addAll(loadContacts == null ? [] : loadContacts);
 
     return FusionScaffold(
         child: Container(
@@ -94,13 +80,18 @@ class _ContactsPageState extends State<ContactsPage> {
                   ),
                   Flexible(
                     flex: 8,
-                    child: ListView.builder(
-                      itemBuilder: (context, index) {
-                        return ContactItem(data: items[index]);
-                      },
-                      itemCount: items.length,
-                    ),
+                    child: (items.isEmpty)
+                        ? showEmptyView(context)
+                        : ListView.builder(
+                            itemBuilder: (context, index) {
+                              return ContactItem(data: items[index]);
+                            },
+                            itemCount: items.length,
+                          ),
                   )
                 ])));
   }
+
+  Widget showEmptyView(BuildContext context) =>
+      Center(child: Text(AppLocalizations.of(context).noContactsTitle()));
 }

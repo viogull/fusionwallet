@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
-import 'package:fusion_wallet/theme/fusion_theme.dart';
+import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/pages/popups/popups_history_page.dart';
 
@@ -117,7 +117,6 @@ class _HistoryPageState extends State<HistoryPage> {
             );
           });
     }
-
 
     final labelAccount = Container(
       alignment: Alignment.topLeft,
@@ -263,7 +262,7 @@ class _HistoryPageState extends State<HistoryPage> {
       width: MediaQuery.of(context).size.width,
       child: FusionButton(
         text: AppLocalizations.of(context).buttonViewResults(),
-        onPressed:() {
+        onPressed: () {
           Navigator.pushNamed(context, PopupHistoryPage.navId);
         },
       ),
@@ -273,79 +272,76 @@ class _HistoryPageState extends State<HistoryPage> {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: Container(
-            padding: EdgeInsets.only(
-              left: 24.0,
-              right: 24.0,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              // mainAxisSize: MainAxisSize.min,
+        padding: EdgeInsets.only(
+          left: 24.0,
+          right: 24.0,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          // mainAxisSize: MainAxisSize.min,
 //                crossAxisAlignment: Alignment.bottomCenter,
-              children: <Widget>[
+          children: <Widget>[
 //                  SizedBox(height: 20,),
-                Flexible(
-                  flex: 1,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      labelAccount,
-                      history,
-                    ],
-                  ),
-                ),
+            Flexible(
+              flex: 1,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  labelAccount,
+                  history,
+                ],
+              ),
+            ),
 
 //                  SizedBox(height: MediaQuery.of(context).size.height * 0.05,),
-                Flexible(
-                  flex: 2,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Flexible(
+              flex: 2,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              labelStartDate,
-                              cardStart,
-                            ],
-                          )
+                          labelStartDate,
+                          cardStart,
                         ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              labelEndDate,
-                              cardEnd,
-                            ],
-                          )
-                        ],
-                      ),
+                      )
                     ],
                   ),
-                ),
-                Flexible(
-                  flex: 3,
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.20,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          labelEndDate,
+                          cardEnd,
+                        ],
+                      )
+                    ],
                   ),
-                ),
-                Flexible(
-                  flex: 1,
-                  child: buttonResult,
-                ),
-                SizedBox(
-                  height: 45,
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-
+            Flexible(
+              flex: 3,
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.20,
+              ),
+            ),
+            Flexible(
+              flex: 1,
+              child: buttonResult,
+            ),
+            SizedBox(
+              height: 45,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
-
-

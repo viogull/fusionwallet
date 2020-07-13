@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:fusion_wallet/inject.dart';
-import 'package:fusion_wallet/theme/fusion_theme.dart';
+import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/utils/haptic.dart';
 
 typedef FusionButtonTapCallBack = void Function();
@@ -49,8 +49,8 @@ class FusionButton extends StatelessWidget {
           child: AutoSizeText(
             text,
             textAlign: TextAlign.center,
-            minFontSize: 11,
-            maxFontSize: 14,
+            minFontSize: 13,
+            maxFontSize: 16,
             maxLines: 1,
             style: TextStyle(
               color: (theme.colorScheme.onPrimary),

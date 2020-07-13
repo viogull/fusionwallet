@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fusion_wallet/theme/fusion_theme.dart';
+import 'package:fusion_wallet/ui/theme.dart';
 
 class BalancesCardItem extends StatelessWidget {
   final String title;
@@ -46,6 +46,7 @@ class BalancesCardItem extends StatelessWidget {
               flex: 10,
               child: Text(
                 title,
+                style: FusionTheme.subtitleTextStyle.copyWith(fontSize: 24),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -53,7 +54,7 @@ class BalancesCardItem extends StatelessWidget {
                 flex: 10,
                 child: Text(value,
                     style:
-                        FusionTheme.subtitleTextStyle.copyWith(fontSize: 20)))
+                        FusionTheme.subtitleTextStyle.copyWith(fontSize: 24)))
           ],
         ),
       ),

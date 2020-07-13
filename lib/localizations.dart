@@ -1564,6 +1564,9 @@ class AppLocalizations {
   String errorCameraRestriction() =>
       Intl.message('The user did not grant the camera permission!',
           name: 'errorCameraRestriction');
+
+  String noContactsTitle() =>
+      Intl.message('No any contacts yet.', name: 'noContactsTitle');
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

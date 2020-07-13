@@ -42,43 +42,37 @@ class _ChangeAccountNameState extends State<ChangeAccountNameDialog> {
               )
             ]));
 
-    return SafeArea(
-        child: SlideDialog(
-      backgroundColor: theme.colorScheme.surface,
-      pillColor: theme.colorScheme.secondary,
-      child: LimitedBox(
-        maxHeight: 300,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            //LimitedBox (maxHeight: 60,),
-            SizedBox(
-              height: 10,
-            ),
-            // LimitedBox(maxHeight: 30,),
-            Flexible(
-              flex: 2,
-              child:
-                  Text(AppLocalizations.of(context).menuItemEditAccountName()),
-            ),
+    return LimitedBox(
+      maxHeight: 300,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          //LimitedBox (maxHeight: 60,),
+          SizedBox(
+            height: 10,
+          ),
+          // LimitedBox(maxHeight: 30,),
+          Flexible(
+            flex: 2,
+            child: Text(AppLocalizations.of(context).menuItemEditAccountName()),
+          ),
 
-            Flexible(
-              flex: 4,
-              child: nameForm,
+          Flexible(
+            flex: 4,
+            child: nameForm,
+          ),
+          //LimitedBox(maxHeight: 50,),
+          Flexible(
+            flex: 5,
+            child: RaisedButton(
+              child: Text(AppLocalizations.of(context).labelSave()),
+              onPressed: () {},
             ),
-            //LimitedBox(maxHeight: 50,),
-            Flexible(
-              flex: 5,
-              child: RaisedButton(
-                child: Text(AppLocalizations.of(context).labelSave()),
-                onPressed: () {},
-              ),
-            ),
-            SizedBox(height: 5.0),
-          ],
-        ),
+          ),
+          SizedBox(height: 5.0),
+        ],
       ),
-    ));
+    );
   }
 
   @override

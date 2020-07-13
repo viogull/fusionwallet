@@ -54,6 +54,8 @@ class _PassphraseWidgetState extends State<PassphraseWidget> {
 
   int _selected = -1;
 
+  String get mnemonicQrData => widget.items.join(" ");
+
   set(selectionIndex) {
     if (selectionIndex == _selected) _selected = -1;
   }
@@ -164,7 +166,8 @@ class _PassphraseWidgetState extends State<PassphraseWidget> {
                                   Navigator.of(context).push(
                                       new MaterialPageRoute(
                                           builder: (context) =>
-                                              ViewPassphraseDialog(),
+                                              ViewPassphraseDialog(
+                                                  data: mnemonicQrData),
                                           fullscreenDialog: true));
                                 },
                                 child: Padding(
@@ -382,7 +385,9 @@ class _PassphraseWidgetState extends State<PassphraseWidget> {
                                 Navigator.of(context).push(
                                     new MaterialPageRoute(
                                         builder: (context) =>
-                                            ViewPassphraseDialog(),
+                                            ViewPassphraseDialog(
+                                              data: widget.items.toString(),
+                                            ),
                                         fullscreenDialog: true));
                               },
                               child: Padding(

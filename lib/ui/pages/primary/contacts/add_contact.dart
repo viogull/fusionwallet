@@ -3,19 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/main.dart';
-import 'package:fusion_wallet/theme/fusion_theme.dart';
+import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:fusion_wallet/ui/pages/auth/splash.dart';
 import 'package:hive/hive.dart';
 
 class AddContactPage extends StatefulWidget {
+  final Account acc;
+
+  const AddContactPage({@required this.acc});
+
   static const String navId = '/contacts/add';
+  static const addressRegularExp = "\Mx\w{40}";
+
   @override
   _AddContactPageState createState() => new _AddContactPageState();
 }
@@ -77,9 +84,10 @@ class _AddContactPageState extends State<AddContactPage> {
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
           child: BlocProvider(
-            create: (context) => AddContactFormBloc(),
+            create: (context) => AddContactFormBloc(widget.acc),
             child: Builder(
               builder: (context) {
+                final ThemeData theme = Theme.of(context);
                 final loginFormBloc = context.bloc<AddContactFormBloc>();
 
                 return FormBlocListener<AddContactFormBloc, String, String>(
@@ -89,8 +97,7 @@ class _AddContactPageState extends State<AddContactPage> {
                   onSuccess: (context, state) {
                     LoadingDialog.hide(context);
 
-                    Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (_) => SuccessScreen()));
+                    Navigator.of(context).pop();
                   },
                   onFailure: (context, state) {
                     LoadingDialog.hide(context);
@@ -118,7 +125,12 @@ class _AddContactPageState extends State<AddContactPage> {
                             textFieldBloc: loginFormBloc.accountName,
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 16, horizontal: 12),
                               enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: theme.colorScheme.onSurface
+                                          .withOpacity(0.5)),
                                   borderRadius: FusionTheme.borderRadius),
                               labelText:
                                   AppLocalizations.of(context).labelName(),
@@ -132,19 +144,25 @@ class _AddContactPageState extends State<AddContactPage> {
                             textFieldBloc: loginFormBloc.address,
                             maxLines: 4,
                             decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 16, horizontal: 12),
                                 enabledBorder: OutlineInputBorder(
-                                    borderRadius: FusionTheme.borderRadius),
+                                    borderRadius: FusionTheme.borderRadius,
+                                    borderSide: BorderSide(
+                                        color: theme.colorScheme.onSurface
+                                            .withOpacity(0.5))),
                                 labelText: AppLocalizations.of(context)
                                     .labelAddContactAddress(),
                                 suffixIcon: GestureDetector(
                                   onTap: () {
                                     _scan();
                                   },
-                                  child: SizedBox(
-                                    width: 12,
-                                    height: 12,
+                                  child: Container(
+                                    width: 8,
+                                    height: 8,
                                     child: SvgPicture.asset(
                                       "assets/images/icons/ic_qrcodescan.svg",
+                                      fit: BoxFit.contain,
                                     ),
                                   ),
                                 )),
@@ -172,6 +190,8 @@ class _AddContactPageState extends State<AddContactPage> {
 }
 
 class AddContactFormBloc extends FormBloc<String, String> {
+  final Account _account;
+
   final accountName = TextFieldBloc(
     validators: [
       FieldBlocValidators.required,
@@ -186,7 +206,7 @@ class AddContactFormBloc extends FormBloc<String, String> {
 
   final showSuccessResponse = BooleanFieldBloc();
 
-  AddContactFormBloc() {
+  AddContactFormBloc(this._account) {
     addFieldBlocs(
       fieldBlocs: [
         accountName,
@@ -202,17 +222,18 @@ class AddContactFormBloc extends FormBloc<String, String> {
     print(address.value);
     print(showSuccessResponse.value);
 
-    Box<Account> accsBox = Hive.box(accountsBox);
-    final lastAccount = accsBox.getAt(accsBox.length - 1);
-    if (lastAccount != null) {
-      debugPrint("Checking current account contacts");
-    }
-    await Future<void>.delayed(Duration(seconds: 1));
+    try {
+      if (this._account != null) {
+        debugPrint("Checking current account contacts");
+        if (this._account.contacts == null) this._account.contacts = List();
 
-    if (showSuccessResponse.value) {
-      emitSuccess();
-    } else {
-      emitFailure(failureResponse: 'This is an awesome error!');
+        this._account.contacts.add(Contact(accountName.value, address.value));
+        if (!this._account.isInBox) {}
+        this._account.save();
+        this.emitSuccess();
+      }
+    } on Exception catch (e) {
+      emitFailure();
     }
   }
 }
@@ -258,15 +279,11 @@ class LoadingDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async => false,
-      child: Center(
-        child: Card(
-          child: Container(
-            width: 80,
-            height: 80,
-            padding: EdgeInsets.all(12.0),
-            child: CircularProgressIndicator(),
-          ),
-        ),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).pop();
+        },
+        child: Center(child: PlatformCircularProgressIndicator()),
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fusion_wallet/ui/theme.dart';
 
-import '../../theme/themes.dart';
 import 'settings_item.dart';
 
 enum ThemeOptions { LIGHT, DARK }
