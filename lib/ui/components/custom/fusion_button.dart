@@ -5,6 +5,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:fusion_wallet/inject.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/utils/haptic.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 typedef FusionButtonTapCallBack = void Function();
 
@@ -52,7 +53,7 @@ class FusionButton extends StatelessWidget {
             minFontSize: 13,
             maxFontSize: 16,
             maxLines: 1,
-            style: TextStyle(
+            style: GoogleFonts.openSans().copyWith(
               color: (theme.colorScheme.onPrimary),
             ),
           ),

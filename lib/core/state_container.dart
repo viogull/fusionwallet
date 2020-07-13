@@ -66,6 +66,7 @@ class StateContainerState extends State<StateContainer> {
     return true;
   }
 
+  String accountName;
   bool biometricEnabled = false;
   String localeCode = 'en';
 
@@ -104,11 +105,24 @@ class StateContainerState extends State<StateContainer> {
 
     final rewardsEnabled = selectedAccount.showRewards;
 
+    updateName(name: selectedAccount.name);
     updateMnemonicPassphrase(currentAccountMnemonic);
     updateTheme(isDarkModeEnabled: currentTheme);
     updateLanguage(currentLocale);
     setBiometric(biometricEnabled);
     setRewardsVisibility(rewardsEnabled);
+  }
+
+  void updateName({String name}) async {
+    debugPrint(
+        "Updating name with new $name. Accounts In Box ${selectedAccount.isInBox}");
+    debugPrint("Writing $name to prefs storage");
+    checkAccountsBox();
+    selectedAccount.name = name;
+    selectedAccount.save();
+    setState(() {
+      this.accountName = name;
+    });
   }
 
   /*

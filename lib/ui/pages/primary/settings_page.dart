@@ -94,7 +94,7 @@ class SettingsPage extends StatelessWidget {
               value: StateContainer.of(context).selectedAccount.showRewards,
               onSwitch: (value) async {
                 StateContainer.of(context)
-                    .setRewardsVisibility(value, save: true);
+                    .setRewardsVisibility(!value, save: true);
               }),
           FusionSingleChoicePreference(
               title: AppLocalizations.of(context).settingsItemLanguage(),

@@ -259,7 +259,7 @@ class _LockUiPincodeState extends State<LockUiPincode> {
           height: 70,
           margin: const EdgeInsets.only(top: 30),
           child: Text(
-            AppLocalizations.of(context).labelUnlockTitle(),
+            AppLocalizations.of(context).labelUnlockSubtitle(),
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 20,
@@ -443,6 +443,7 @@ class _LockUiPincodeState extends State<LockUiPincode> {
     );
 
     return FusionScaffold(
+      title: AppLocalizations.of(context).labelUnlockTitle(),
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
@@ -508,7 +509,10 @@ class KeyboardNumber extends StatelessWidget {
       alignment: Alignment.center,
       child: MaterialButton(
         padding: EdgeInsets.all(8.0),
-        onPressed: onPressed,
+        onPressed: () {
+          injector.get<HapticUtil>().selection();
+          onPressed.call();
+        },
         elevation: 50,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),

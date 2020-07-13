@@ -13,7 +13,6 @@ import 'package:fusion_wallet/ui/components/custom/passphrase_view.dart';
 import 'package:fusion_wallet/ui/pages/auth/change_account_name.dart';
 import 'package:fusion_wallet/ui/pages/popups/popups_remove_account.dart';
 import 'package:fusion_wallet/ui/pages/accounts.dart';
-import 'package:fusion_wallet/ui/pages/v2/event.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -97,22 +96,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
         automaticallyImplyLeading: true,
         backgroundColor: Colors.transparent,
         centerTitle: true,
-        title: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.account_balance_wallet,
-              size: 4,
-            ),
-            Text(
-              _getToolbarTitle(context, provider.currentIndex),
-              style: GoogleFonts.firaSansCondensed().copyWith(
-                  color: theme.colorScheme.onSurface,
-                  fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
+        title: buildToolbarTitle(context, provider.currentIndex),
         actions: _buildToolbarActions(context, provider.currentIndex),
         iconTheme: FusionTheme.iconThemeColored
             .copyWith(color: theme.colorScheme.primary),
@@ -176,10 +160,10 @@ class _BottomHomePageState extends State<BottomHomePage> {
   }
 
   String _getToolbarTitle(BuildContext context, int index) {
-    String title = "";
+    String title = StateContainer.of(context).selectedAccount.name;
     switch (index) {
       case 0:
-        title = StateContainer.of(context).selectedAccount.name;
+        title = StateContainer.of(context).accountName;
         break;
       case 1:
         title = AppLocalizations.of(context).toolbarExchangeTitle();
@@ -194,10 +178,12 @@ class _BottomHomePageState extends State<BottomHomePage> {
         title = AppLocalizations.of(context).navigationItemSettings();
         break;
       default:
-        title = AppLocalizations.of(context).appName();
+        title = StateContainer.of(context).selectedAccount.name;
     }
-
-    return (title == null) ? AppLocalizations.of(context).appName() : title;
+    debugPrint("Title $title");
+    return (title == null)
+        ? StateContainer.of(context).selectedAccount.name
+        : title;
   }
 
   List<BottomNavigationBarItem> _bottomBarItems(
@@ -249,10 +235,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
         child: Stack(
           children: <Widget>[
             Container(
-                width: MediaQuery.of(context).size.width,
-                height: 50,
-                color: Theme.of(context).colorScheme.primary),
-            Container(
+              color: Colors.transparent,
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               child: SvgPicture.asset(
@@ -273,9 +256,17 @@ class _BottomHomePageState extends State<BottomHomePage> {
                         maxHeight: MediaQuery.of(context).size.height *
                             BottomHomePage.drawerHeaderHeightRatio,
                         child: DrawerHeader(
-                          decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.primary),
-                        ),
+                            decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.surface),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 12, top: 8),
+                              child: Text(
+                                  AppLocalizations.of(context).appName(),
+                                  style: GoogleFonts.poppins().copyWith(
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                      fontSize: 24)),
+                            )),
                       );
                     else {
                       return DrawerItem(data: items[index]);

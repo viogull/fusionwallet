@@ -43,6 +43,45 @@ class HapticUtil {
     }
   }
 
+  Future<void> impact() async {
+    if (Platform.isIOS) {
+      // If this is simulator or this device doesnt have tapic then we can't use this
+      if (await hasTapicEngine() && await Vibrate.canVibrate) {
+        Vibrate.feedback(FeedbackType.impact);
+      } else {
+        HapticFeedback.vibrate();
+      }
+    } else {
+      HapticFeedback.vibrate();
+    }
+  }
+
+  Future<void> warn() async {
+    if (Platform.isIOS) {
+      // If this is simulator or this device doesnt have tapic then we can't use this
+      if (await hasTapicEngine() && await Vibrate.canVibrate) {
+        Vibrate.feedback(FeedbackType.warning);
+      } else {
+        HapticFeedback.vibrate();
+      }
+    } else {
+      HapticFeedback.vibrate();
+    }
+  }
+
+  Future<void> selection() async {
+    if (Platform.isIOS) {
+      // If this is simulator or this device doesnt have tapic then we can't use this
+      if (await hasTapicEngine() && await Vibrate.canVibrate) {
+        Vibrate.feedback(FeedbackType.selection);
+      } else {
+        HapticFeedback.vibrate();
+      }
+    } else {
+      HapticFeedback.vibrate();
+    }
+  }
+
   /// Feedback for success
   Future<void> success() async {
     if (Platform.isIOS) {

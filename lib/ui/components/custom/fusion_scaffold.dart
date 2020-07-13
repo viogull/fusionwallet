@@ -45,6 +45,7 @@ class FusionScaffold extends StatelessWidget {
         Scaffold(
           backgroundColor: Colors.transparent,
           drawer: drawer,
+          resizeToAvoidBottomPadding: true,
           body: NestedScrollView(
               headerSliverBuilder:
                   (BuildContext context, bool innerBoxIsScrolled) {
@@ -65,7 +66,7 @@ class FusionScaffold extends StatelessWidget {
 
   Widget buildDefaultAppBar(ThemeData theme, BuildContext context) =>
       SliverAppBar(
-        elevation: 12,
+        elevation: 1,
         automaticallyImplyLeading: true,
         backgroundColor: Colors.transparent,
         iconTheme: IconThemeData(color: theme.colorScheme.primary),
