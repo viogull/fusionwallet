@@ -22,7 +22,6 @@ import 'share_qr_page.dart';
 
 class PassphraseCreationPage extends StatefulWidget {
   static String navId = "/passphrase/creation";
-  final List<String> items = PassphraseWidget.templateData;
 
   @override
   State<StatefulWidget> createState() {
@@ -41,7 +40,7 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
     debugPrint('Init Passphrase Screen, stage $_verificationStage}');
 
     if (_verificationStage > 2) {
-      Navigator.of(context).pushNamed(AccountCreationNamePage.navId);
+      Navigator.of(context).pushNamed(AccountCreationNameForm.navId);
     }
   }
 
@@ -59,7 +58,7 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
         child: (this._verificationStage < 0)
             ? _showPassphraseView(context)
             : _showPassphraseQuestions(
-                context, cachedMnemonic, cachedWords, this._verificationStage));
+                context, cachedMnemonic, this._verificationStage));
   }
 
   Widget _showPassphraseView(BuildContext context) => FutureBuilder(
@@ -154,7 +153,7 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
                                           ),
                                         ],
                                       ),
-                                      content: new Text(widget.items[index]),
+                                      content: new Text(words[index]),
                                       actions: <Widget>[
                                         new FlatButton(
                                             onPressed: () {
@@ -279,6 +278,7 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
         } else
           return Container(
             height: MediaQuery.of(context).size.height,
+            width: double.infinity,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -292,13 +292,14 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
           );
       });
 
-  Widget _showPassphraseQuestions(BuildContext context, String mnemonic,
-      List<String> _words, int verificationStage) {
-    _words.shuffle();
-    final randomPosition = Random().nextInt(_words.length);
-
-    debugPrint(
-        'Current question for index position $randomPosition, predictable choice -> ${_words[randomPosition]}');
+  Widget _showPassphraseQuestions(
+      BuildContext context, String mnemonic, int verificationStage) {
+    final originWords = mnemonic.split(" ");
+    final randomPosition = Random().nextInt(originWords.length);
+    final shuffledWords = new List();
+    shuffledWords.addAll(originWords);
+    shuffledWords.shuffle();
+//    beyond river whale six edit tiger inner member cover govern erase beyond
     return Column(children: <Widget>[
       Flexible(
         flex: 3,
@@ -320,7 +321,7 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 AppLocalizations.of(context)
-                    .labelWordIndicatorSubtitle(randomPosition),
+                    .labelWordIndicatorSubtitle(randomPosition + 1),
                 style: Theme.of(context)
                     .textTheme
                     .subtitle1
@@ -340,7 +341,7 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     new GridView.builder(
-                      itemCount: _words.length,
+                      itemCount: originWords.length,
                       shrinkWrap: true,
                       padding: EdgeInsets.all(4),
                       physics: BouncingScrollPhysics(),
@@ -372,7 +373,7 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
                                                 .primary,
                                             child: Center(
                                               child: new Text(
-                                                _words[index],
+                                                shuffledWords[index],
                                                 maxLines: 1,
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
@@ -387,8 +388,18 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
                                   ),
                                 )),
                             onTap: () async {
-                              debugPrint("Tapped on word ${_words[index]}");
-                              if (index == randomPosition) {
+                              // isolate mansion armor helmet have empty visit water analyst matter cactus cancel
+
+                              debugPrint(
+                                  "Tapped Index [ $index on word ${shuffledWords[index]}");
+
+                              final tappedWord = shuffledWords[index];
+                              final expectableWord =
+                                  originWords[randomPosition];
+                              debugPrint(
+                                  "Selected [$tappedWord], expect. $expectableWord");
+
+                              if (tappedWord == expectableWord) {
                                 if (_verificationStage == 2) {
                                   StateContainer.of(context)
                                       .persistPassphrase(mnemonic);
@@ -424,6 +435,7 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
                     ),
                   ]))),
       Flexible(
+        // major smooth alarm moon sport multiply radar badge palace head payment ready
         flex: 1,
         child: Container(),
       ),
