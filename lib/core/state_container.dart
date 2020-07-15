@@ -4,6 +4,7 @@ import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 import 'package:nanodart/nanodart.dart';
 
+import 'abstract/preferences.dart';
 import 'models.dart';
 import 'models/available_currency.dart';
 import 'models/available_language.dart';
@@ -28,8 +29,12 @@ class _InheritedStateContainer extends InheritedWidget {
 class StateContainer extends StatefulWidget {
   final Widget child;
   final Box<Account> accounts;
+  final Preferences preferences;
 
-  StateContainer({@required this.child, @required this.accounts});
+  StateContainer(
+      {@required this.child,
+      @required this.accounts,
+      @required this.preferences});
 
   @override
   State<StatefulWidget> createState() => StateContainerState();
@@ -44,6 +49,8 @@ class StateContainer extends StatefulWidget {
 class StateContainerState extends State<StateContainer> {
   final Logger log = injector.get<Logger>();
   final storage = injector.get<Vault>();
+
+  Preferences preferences() => widget.preferences;
 
   String receiveThreshold = BigInt.from(10).pow(24).toString();
 
@@ -88,10 +95,10 @@ class StateContainerState extends State<StateContainer> {
       selectedAccount = Account();
     }
     // Get default language setting
-    final locale = selectedAccount.locale;
+    final locale = widget.preferences.locale;
 
     // Get theme default
-    var preferencesTheme = selectedAccount.darkModeEnabled;
+    final preferencesTheme = widget.preferences.darkThemeEnabled;
     final currentTheme = (preferencesTheme != null && preferencesTheme);
 
     var currentAccountMnemonic = selectedAccount.mnemonic;
@@ -133,8 +140,8 @@ class StateContainerState extends State<StateContainer> {
         "Updating theme with new $isDarkModeEnabled. Accounts In Box ${selectedAccount.isInBox}");
     debugPrint("Writing $isDarkModeEnabled to prefs storage");
     checkAccountsBox();
-    selectedAccount.darkModeEnabled = isDarkModeEnabled;
-    selectedAccount.save();
+    widget.preferences.darkThemeEnabled = isDarkModeEnabled;
+    widget.preferences.save();
     setState(() {
       this.darkModeEnabled = isDarkModeEnabled;
     });
@@ -144,8 +151,8 @@ class StateContainerState extends State<StateContainer> {
     debugPrint("Updating [biometric] with new $isEnabled");
 
     debugPrint("Writing new biometric status $isEnabled to secure storage");
-    selectedAccount.biometricEnabled = isEnabled;
-    selectedAccount.save();
+    widget.preferences.biometricEnabled = isEnabled;
+    widget.preferences.save();
 
     setState(() {
       this.biometricEnabled = isEnabled;
@@ -172,8 +179,8 @@ class StateContainerState extends State<StateContainer> {
     debugPrint("Updating language with new $updatedLocale, save mode -> $save");
     if (save) {
       debugPrint("Writing $updatedLocale to prefs storage");
-      selectedAccount.locale = updatedLocale.languageCode;
-      selectedAccount.save();
+      widget.preferences.locale = updatedLocale.languageCode;
+      widget.preferences.save();
     }
     setState(() {
       locale = updatedLocale;

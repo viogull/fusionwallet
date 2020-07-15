@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:fusion_wallet/core/abstract/preferences.dart';
 import 'package:fusion_wallet/core/models.dart';
+import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/main.dart';
 
 import 'package:hive/hive.dart';
@@ -70,9 +72,8 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
         debugPrint('Accounts exists. Seed: ${lastAccount.pin}');
 
         Navigator.of(context).pushReplacementNamed(LockUi.navId,
-            arguments: LockscreenArgs(
-                pin: lastAccount.pin,
-                biometricEnabled: lastAccount.biometricEnabled));
+            arguments:
+                LockscreenArgs(pin: lastAccount.pin, biometricEnabled: true));
       }
     } catch (e) {
       if (Platform.isAndroid && e.toString().contains("flutter_secure")) {

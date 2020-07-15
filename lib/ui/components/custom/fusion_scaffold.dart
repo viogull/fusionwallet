@@ -10,10 +10,11 @@ class FusionScaffold extends StatelessWidget {
   final Widget child;
   final String title;
   final Drawer drawer;
-  final SliverAppBar appBar;
+  final AppBar appBar;
   final AppBarBackButtonCallback onBackClicked;
 
   final bool hideDrawer;
+  final bool hideToolbar;
 
   FusionScaffold(
       {@required this.child,
@@ -22,7 +23,8 @@ class FusionScaffold extends StatelessWidget {
       this.appBar,
       Container body,
       this.onBackClicked,
-      this.hideDrawer = true});
+      this.hideDrawer = true,
+      this.hideToolbar = false});
 
   @override
   Widget build(BuildContext context) {
@@ -45,38 +47,37 @@ class FusionScaffold extends StatelessWidget {
         Scaffold(
           backgroundColor: Colors.transparent,
           drawer: drawer,
+          appBar: _buildToolbar(context),
           resizeToAvoidBottomPadding: true,
-          body: NestedScrollView(
-              headerSliverBuilder:
-                  (BuildContext context, bool innerBoxIsScrolled) {
-                return <Widget>[
-                  SliverOverlapAbsorber(
-                      handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                          context),
-                      sliver: (appBar == null)
-                          ? buildDefaultAppBar(theme, context)
-                          : appBar),
-                ];
-              },
-              body: child),
+          body: child,
         ),
       ],
     );
   }
 
-  Widget buildDefaultAppBar(ThemeData theme, BuildContext context) =>
-      SliverAppBar(
-        elevation: 1,
-        automaticallyImplyLeading: true,
-        backgroundColor: Colors.transparent,
-        iconTheme: IconThemeData(color: theme.colorScheme.primary),
-        centerTitle: true,
-        title: (title == null)
-            ? null
-            : AutoSizeText(
-                title,
-                style: theme.textTheme.headline6
-                    .copyWith(color: theme.colorScheme.onSurface, fontSize: 19),
-              ),
-      );
+  Widget _buildDefaultAppBar(BuildContext context) {
+    final theme = Theme.of(context);
+    return AppBar(
+      elevation: 0,
+      automaticallyImplyLeading: true,
+      backgroundColor: Colors.transparent,
+      iconTheme: IconThemeData(color: theme.colorScheme.primary),
+      centerTitle: true,
+      title: (title == null)
+          ? null
+          : AutoSizeText(
+              title,
+              style: theme.textTheme.headline6
+                  .copyWith(color: theme.colorScheme.onSurface, fontSize: 19),
+            ),
+    );
+  }
+
+  _buildToolbar(BuildContext context) {
+    if (hideToolbar) {
+      return null;
+    } else {
+      return this.appBar != null ? this.appBar : _buildDefaultAppBar(context);
+    }
+  }
 }

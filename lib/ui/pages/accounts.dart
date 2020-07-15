@@ -2,9 +2,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/core/minter_rest.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
@@ -20,24 +20,30 @@ import '../../inject.dart';
 import '../../core/state_container.dart';
 import '../components/lists/balances_card.dart';
 
+import './../../core/abstract/wallet.dart';
+
+import './../../main.dart';
+
 class AccountsPage extends StatelessWidget {
   static const String navId = "/accounts";
 
   @override
-  Widget build(BuildContext context) {
-    return AnimationLimiter(
-        child: ListView.builder(
-      itemCount: 5,
-      itemBuilder: (BuildContext context, int index) {
-        return AnimationConfiguration.staggeredList(
-          position: index,
-          duration: const Duration(milliseconds: 890),
-          child: FadeInAnimation(
-              child: _buildAccountsPageBodyItem(context, index)),
-        );
-      },
-    ));
-  }
+  Widget build(BuildContext context) =>
+      Observer(builder: (_) => _buildAccountsUi(context, wallet));
+
+  Widget _buildAccountsUi(BuildContext context, Wallet wallet) =>
+      AnimationLimiter(
+          child: ListView.builder(
+        itemCount: 5,
+        itemBuilder: (BuildContext context, int index) {
+          return AnimationConfiguration.staggeredList(
+            position: index,
+            duration: const Duration(milliseconds: 890),
+            child: FadeInAnimation(
+                child: _buildAccountsPageBodyItem(context, index)),
+          );
+        },
+      ));
 
   Widget _buildAccountsPageBodyItem(BuildContext context, int index) {
     switch (index) {

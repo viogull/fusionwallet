@@ -7,3 +7,5 @@ gradle-wrapper.jar
 GeneratedPluginRegistrant.java
 !/app/fusion.jks
 !/key.properties
+.bundle
+.vendor/*

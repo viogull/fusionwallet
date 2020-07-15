@@ -5,6 +5,8 @@ import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:fusion_wallet/ui/pages/primary/contacts/contact_item.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:random_string/random_string.dart';
 
 class ContactsPage extends StatefulWidget {
@@ -46,12 +48,13 @@ class _ContactsPageState extends State<ContactsPage> {
 
   @override
   Widget build(BuildContext context) {
-    var loadContacts = StateContainer.of(context).selectedAccount.contacts;
-
-    items.addAll(loadContacts == null ? [] : loadContacts);
-
     return FusionScaffold(
-        child: Container(
+        child: ValueListenableBuilder(
+      valueListenable: Hive.box<Contact>(contactsBox).listenable(),
+      builder: (context, Box<Contact> contacts, _) {
+        final _contacts = contacts.values.toList();
+
+        return Container(
             height: MediaQuery.of(context).size.height,
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -80,16 +83,18 @@ class _ContactsPageState extends State<ContactsPage> {
                   ),
                   Flexible(
                     flex: 8,
-                    child: (items.isEmpty)
+                    child: (_contacts.isEmpty)
                         ? showEmptyView(context)
                         : ListView.builder(
                             itemBuilder: (context, index) {
-                              return ContactItem(data: items[index]);
+                              return ContactItem(data: _contacts[index]);
                             },
-                            itemCount: items.length,
+                            itemCount: _contacts.length,
                           ),
                   )
-                ])));
+                ]));
+      },
+    ));
   }
 
   Widget showEmptyView(BuildContext context) =>

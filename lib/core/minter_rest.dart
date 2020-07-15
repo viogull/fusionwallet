@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:fusion_wallet/core/models/minter/address_data.dart';
+import 'package:fusion_wallet/core/models/exchange_rate_response.dart';
+import 'package:fusion_wallet/core/models/address_data.dart';
+import 'package:fusion_wallet/core/models/spec_exchange_rates_response.dart';
 import 'package:logger/logger.dart';
 import 'package:meta/meta.dart';
 
@@ -7,6 +9,11 @@ import '../inject.dart';
 
 class MinterRest {
   static const baseUrl = "https://explorer-api.minter.network/api/v1";
+
+  static const exchangeRatesUrl = "https://bipchange.org/api/";
+
+  static specExchangeRatesUrl(String exchange) =>
+      "https://bipchange.org/api/ex/$exchange";
 
   static MinterRest _instance = new MinterRest.internal();
   MinterRest.internal();
@@ -29,6 +36,13 @@ class MinterRest {
   final Dio dio = Dio(dioOptions);
 
   final logger = injector.get<Logger>();
+
+  Future<ExchangeRateResponse> fetchExchangeRates() async {
+    //TODO
+  }
+
+  Future<SpecExchangeRatesResponse> fetchExchangerRates(
+      String exchangeName) async {}
 
   Future<AddressData> fetchAddressData({@required String address}) async {
     try {

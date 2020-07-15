@@ -1,8 +1,6 @@
-import 'package:connection_status_bar/connection_status_bar.dart';
-import 'package:flare_flutter/flare.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
@@ -91,8 +89,8 @@ class _BottomHomePageState extends State<BottomHomePage> {
           )
         ],
       ),
-      appBar: SliverAppBar(
-        elevation: 4,
+      appBar: AppBar(
+        elevation: 0,
         automaticallyImplyLeading: true,
         backgroundColor: Colors.transparent,
         centerTitle: true,
@@ -105,8 +103,13 @@ class _BottomHomePageState extends State<BottomHomePage> {
         DrawerItemData(title: "", icon: Icon(Icons.add_shopping_cart)),
         DrawerItemData(
             title: AppLocalizations.of(context).menuItemShowQR(),
-            icon: _buildBottomNavItemIcon(
-                "assets/images/icons/ic_qrcodescan.svg", true),
+            icon: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Icon(
+                AntDesign.qrcode,
+                size: 22,
+              ),
+            ),
             onClick: () {
               Navigator.of(context).push(new MaterialPageRoute(
                   builder: (context) => ShareAddressPage(
@@ -120,8 +123,10 @@ class _BottomHomePageState extends State<BottomHomePage> {
             navId: LockUi.navId),
         DrawerItemData(
             title: AppLocalizations.of(context).menuItemViewPassphrase(),
-            icon: _buildBottomNavItemIcon(
-                "assets/images/icons/ic_passwordellipse.svg", true),
+            icon: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Icon(FontAwesome.user_secret),
+            ),
             onClick: () {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (_) => PassphraseViewWidget(),
@@ -133,7 +138,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
               _buildBottomNavItemIcon("assets/images/icons/ic_edit.svg", true),
           onClick: () {
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (_) => ChangeAccountNameDialog(),
+                builder: (_) => ChangeAccountNameForm(),
                 fullscreenDialog: false));
           },
         ),
@@ -163,7 +168,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
     String title = StateContainer.of(context).selectedAccount.name;
     switch (index) {
       case 0:
-        title = StateContainer.of(context).accountName;
+        title = StateContainer.of(context).preferences().name;
         break;
       case 1:
         title = AppLocalizations.of(context).toolbarExchangeTitle();
@@ -298,16 +303,9 @@ class _BottomHomePageState extends State<BottomHomePage> {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            Icons.account_balance_wallet,
-            size: 8,
-          ),
-          Text(
-            _getToolbarTitle(context, currentIndex),
-            style: GoogleFonts.firaSansCondensed().copyWith(
-                color: theme.colorScheme.onSurface,
-                fontWeight: FontWeight.bold),
-          ),
+          Text(_getToolbarTitle(context, currentIndex),
+              style: GoogleFonts.robotoCondensed()
+                  .copyWith(color: theme.colorScheme.primary)),
         ],
       );
     } else

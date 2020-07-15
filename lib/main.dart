@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:fusion_wallet/core/abstract/preferences.dart';
 import 'package:fusion_wallet/ui/pages/routes.dart';
 import 'package:fusion_wallet/ui/pages/v2/ui.dart';
 
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 import 'package:provider/provider.dart';
 
+import 'core/abstract/contact.dart';
 import 'core/models.dart';
 import 'localizations.dart';
 import 'inject.dart';
@@ -45,19 +48,36 @@ import 'ui/pages/primary/settings_page.dart';
 
 const String preferencesBox = 'prefsBox';
 const String accountsBox = 'accountsBox';
+const String contactsBox = 'contactsBox';
+
+final wallet = Wallet();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   setupServiceLocator();
   await Hive.initFlutter();
   Hive.registerAdapter<Account>(AccountAdapter());
   Hive.registerAdapter<Contact>(ContactAdapter());
-  var accsBox = await Hive.openBox<Account>(accountsBox);
+  Hive.registerAdapter<Preferences>(PreferencesAdapter());
 
+  var accsBox = await Hive.openBox<Account>(accountsBox);
+  await Hive.openBox<Contact>(contactsBox);
+  final prefs = await Hive.openBox<Preferences>(preferencesBox);
+  var prefsSingleton =
+      prefs.values.isEmpty ? Preferences() : prefs.values.first;
+
+  if (prefsSingleton.isInBox == false) prefs.add(prefsSingleton);
+  OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
+
+  OneSignal.shared.init("64051c9d-c06c-419d-b1a3-10196218dda3", iOSSettings: {
+    OSiOSSettings.autoPrompt: false,
+    OSiOSSettings.inAppLaunchUrl: true
+  });
+  OneSignal.shared
+      .setInFocusDisplayType(OSNotificationDisplayType.notification);
   runApp(new StateContainer(
-    child: new App(),
-    accounts: accsBox,
-  ));
+      child: new App(), accounts: accsBox, preferences: prefsSingleton));
 }
 
 class App extends StatelessWidget {
@@ -86,7 +106,7 @@ class App extends StatelessWidget {
           BiometricAuthPage.navId: (context) => BiometricAuthPage(),
           PassphraseCreationPage.navId: (context) => PassphraseCreationPage(),
           IntroPage.navId: (BuildContext context) => IntroPage(),
-          AccountCreationNamePage.navId: (context) => AccountCreationNamePage(),
+          AccountCreationNameForm.navId: (context) => AccountCreationNameForm(),
           RecoverAccountPage.navId: (context) => RecoverAccountPage(),
           TermsConditionsPage.navId: (context) => TermsConditionsPage(),
           PasswordCreationPage.navId: (context) => PasswordCreationPage(),

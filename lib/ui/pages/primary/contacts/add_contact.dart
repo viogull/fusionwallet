@@ -13,7 +13,10 @@ import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:fusion_wallet/ui/pages/auth/splash.dart';
+import 'package:fusion_wallet/utils/vault.dart';
 import 'package:hive/hive.dart';
+
+import '../../../../inject.dart';
 
 class AddContactPage extends StatefulWidget {
   final Account acc;
@@ -127,7 +130,7 @@ class _AddContactPageState extends State<AddContactPage> {
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.symmetric(
                                   vertical: 16, horizontal: 12),
-                              enabledBorder: OutlineInputBorder(
+                              border: OutlineInputBorder(
                                   borderSide: BorderSide(
                                       color: theme.colorScheme.onSurface
                                           .withOpacity(0.5)),
@@ -146,7 +149,7 @@ class _AddContactPageState extends State<AddContactPage> {
                             decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.symmetric(
                                     vertical: 16, horizontal: 12),
-                                enabledBorder: OutlineInputBorder(
+                                border: OutlineInputBorder(
                                     borderRadius: FusionTheme.borderRadius,
                                     borderSide: BorderSide(
                                         color: theme.colorScheme.onSurface
@@ -157,12 +160,14 @@ class _AddContactPageState extends State<AddContactPage> {
                                   onTap: () {
                                     _scan();
                                   },
-                                  child: Container(
-                                    width: 8,
-                                    height: 8,
+                                  child: LimitedBox(
+                                    maxHeight: 24,
+                                    maxWidth: 24,
                                     child: SvgPicture.asset(
                                       "assets/images/icons/ic_qrcodescan.svg",
-                                      fit: BoxFit.contain,
+                                      fit: BoxFit.scaleDown,
+                                      width: 24,
+                                      height: 24,
                                     ),
                                   ),
                                 )),
@@ -223,13 +228,11 @@ class AddContactFormBloc extends FormBloc<String, String> {
     print(showSuccessResponse.value);
 
     try {
-      if (this._account != null) {
+      if (this.accountName.value != null && address.value != null) {
         debugPrint("Checking current account contacts");
-        if (this._account.contacts == null) this._account.contacts = List();
-
-        this._account.contacts.add(Contact(accountName.value, address.value));
-        if (!this._account.isInBox) {}
-        this._account.save();
+        injector
+            .get<Vault>()
+            .addContact(Contact(accountName.value, address.value));
         this.emitSuccess();
       }
     } on Exception catch (e) {

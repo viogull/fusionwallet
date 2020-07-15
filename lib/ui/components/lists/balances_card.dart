@@ -36,7 +36,7 @@ class _AccountBalancesCardState extends State<AccountBalancesCard> {
     final width = MediaQuery.of(context).size.width;
     final ThemeData theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 1),
       child: Container(
         width: width,
         height: width * 0.5,
@@ -54,12 +54,13 @@ class _AccountBalancesCardState extends State<AccountBalancesCard> {
                         color: theme.colorScheme.onSurface, width: 0.1)),
                 child: SizedBox.expand(
                     child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.only(top: 4),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
                             Padding(
-                              padding: const EdgeInsets.all(4.0),
+                              padding:
+                                  const EdgeInsets.only(bottom: 12, top: 8),
                               child: Text(
                                 AppLocalizations.of(context)
                                     .labelCryptoAvailable(),

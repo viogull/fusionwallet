@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fusion_wallet/core/abstract/preferences.dart';
 import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/main.dart';
 import 'package:hive/hive.dart';
@@ -9,9 +10,13 @@ import 'state.dart';
 
 class AuthenticationBloc
     extends Bloc<AccountCreationEvent, AccountCreationState> {
-  AuthenticationBloc() : super(null);
+  AuthenticationBloc() : super(null) {
+    preferences = _box.getAt(0);
+  }
 
+  Preferences preferences;
   Account _account = Account();
+  Box<Preferences> _box = Hive.box(preferencesBox);
 
   AccountCreationState get initialState => AccountInitialState();
 
@@ -32,7 +37,7 @@ class AuthenticationBloc
       _account.pin = event.pin;
       yield BiometricsConfigureState();
     } else if (event is BiometricConfiguredEvent) {
-      _account.biometricEnabled = event.enableBiometrics;
+      preferences.biometricEnabled = event.enableBiometrics;
 
       yield PassphraseCreationState();
     } else if (event is PassphraseVerifiedEvent) {
@@ -45,8 +50,10 @@ class AuthenticationBloc
       yield AccountNamingState();
     } else if (event is AccountNameCreatedEvent) {
       _account.name = event.name;
+      preferences.name = event.name;
       if (_account.isInBox) {
         _account.save();
+        preferences.save();
       } else {
         Box<Account> accs = Hive.box(accountsBox);
         accs.add(_account);

@@ -11,31 +11,17 @@ class NumberUtil {
   static final BigInt rawPerNano = BigInt.from(10).pow(30);
   static const int maxDecimalDigits = 6; // Max digits after decimal
 
-  /// Convert raw to ban and return as BigDecimal
-  ///
-  /// @param raw 100000000000000000000000000000
-  /// @return Decimal value 1.000000000000000000000000000000
-  ///
   static Decimal getRawAsUsableDecimal(String raw) {
     Decimal amount = Decimal.parse(raw.toString());
     Decimal result = amount / Decimal.parse(rawPerNano.toString());
     return result;
   }
 
-  /// Truncate a Decimal to a specific amount of digits
-  ///
-  /// @param input 1.059
-  /// @return double value 1.05
-  ///
   static double truncateDecimal(Decimal input, {int digits = maxDecimalDigits}) {
     return (input * Decimal.fromInt(pow(10, digits))).truncateToDouble() / pow(10, digits);
   }
 
-  /// Return raw as a normal amount.
-  ///
-  /// @param raw 100000000000000000000000000000
-  /// @returns 1
-  ///
+
   static String getRawAsUsableString(String raw) {
     NumberFormat nf = new NumberFormat.currency(locale:'en_US', decimalDigits: maxDecimalDigits, symbol:'');
     String asString = nf.format(truncateDecimal(getRawAsUsableDecimal(raw)));

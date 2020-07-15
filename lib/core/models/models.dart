@@ -1,1 +1,1 @@
-export 'minter/address_data.dart';
+export 'address_data.dart';

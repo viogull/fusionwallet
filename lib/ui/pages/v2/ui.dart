@@ -43,7 +43,7 @@ class AuthUi extends StatelessWidget {
               return PassphraseCreationPage();
             }
             if (state is AccountNamingState) {
-              return AccountCreationNamePage();
+              return AccountCreationNameForm();
             }
             if (state is AccountLockedState) {
               return LockUi();

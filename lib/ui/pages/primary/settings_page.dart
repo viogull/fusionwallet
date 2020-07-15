@@ -33,7 +33,7 @@ class SettingsPage extends StatelessWidget {
         children: <Widget>[
           SwitchFusionPreference(
             title: AppLocalizations.of(context).settingsItemUiTheme(),
-            value: StateContainer.of(context).selectedAccount.darkModeEnabled,
+            value: StateContainer.of(context).darkModeEnabled,
             onSwitch: (updated) async {
               StateContainer.of(context)
                   .updateTheme(isDarkModeEnabled: !updated);

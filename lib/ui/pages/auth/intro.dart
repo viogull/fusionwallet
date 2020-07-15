@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
@@ -20,29 +21,23 @@ class IntroPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
-    final logo = Image.asset(
-      ('assets/images/icon.png'),
-      fit: BoxFit.fill,
-      height: 100.0,
-      //width: MediaQuery.of(context).size.width,
+    final bg = Image.asset(
+      ('assets/images/backgrounds/bg_greeting.png'),
+      fit: BoxFit.fitHeight,
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
     );
+
+    final logo = Image.asset(('assets/images/icon.png'),
+        fit: BoxFit.contain, height: 100.0, width: 100.0
+        //width: MediaQuery.of(context).size.width,
+        );
 
     final someText1 = Container(
       height: 20,
 //      alignment: Alignment.topCenter,
       child: Text(
-        "Some greeting text",
-        style: TextStyle(
-          color: (theme.colorScheme.onPrimary),
-        ),
-      ),
-    );
-
-    final someText2 = Container(
-//      alignment: Alignment.topCenter,
-      height: 20,
-      child: Text(
-        "Some greeting text",
+        AppLocalizations.of(context).appName(),
         style: TextStyle(
           color: (theme.colorScheme.onPrimary),
         ),
@@ -50,7 +45,6 @@ class IntroPage extends StatelessWidget {
     );
 
     final buttonCreateAccount = Container(
-      height: 50,
       width: MediaQuery.of(context).size.width,
       child: FusionButton(
         text: AppLocalizations.of(context).buttonCreateAccount(),
@@ -74,7 +68,6 @@ class IntroPage extends StatelessWidget {
     );
 
     final buttonRecoverFromPassphrase = Container(
-      height: 50,
       width: MediaQuery.of(context).size.width,
       child: FusionButton(
         text: AppLocalizations.of(context).buttonRecoverFromPassphrase(),
@@ -86,41 +79,49 @@ class IntroPage extends StatelessWidget {
     );
 
     return FusionScaffold(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          SizedBox(height: 60),
-          LimitedBox(maxHeight: 90),
-          Flexible(
-            child: logo,
-            flex: 6,
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: Stack(
+            children: [
+              bg,
+              Container(
+                color: Colors.transparent,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    SizedBox(height: 60),
+                    LimitedBox(maxHeight: 90),
+                    Flexible(
+                      child: logo,
+                      flex: 6,
+                    ),
+                    SizedBox(height: 20),
+                    SizedBox(height: 20),
+                    Flexible(
+                      flex: 4,
+                      child: someText1,
+                    ),
+                    SizedBox(height: 180),
+                    LimitedBox(maxHeight: 230),
+                    Flexible(
+                      child: buttonCreateAccount,
+                      flex: 5,
+                    ),
+                    SizedBox(height: 5),
+                    Flexible(
+                      child: labelAlreadyHaveAccount,
+                      flex: 2,
+                    ),
+                    SizedBox(height: 5),
+                    Flexible(flex: 5, child: buttonRecoverFromPassphrase),
+                    SizedBox(height: 10),
+                  ],
+                ),
+              ),
+            ],
           ),
-          SizedBox(height: 20),
-          Flexible(
-            child: someText2,
-            flex: 2,
-          ),
-          SizedBox(height: 20),
-          Flexible(
-            flex: 4,
-            child: someText1,
-          ),
-          SizedBox(height: 180),
-          LimitedBox(maxHeight: 230),
-          Flexible(
-            child: buttonCreateAccount,
-            flex: 5,
-          ),
-          SizedBox(height: 5),
-          Flexible(
-            child: labelAlreadyHaveAccount,
-            flex: 2,
-          ),
-          SizedBox(height: 5),
-          Flexible(flex: 5, child: buttonRecoverFromPassphrase),
-          SizedBox(height: 10),
-        ],
-      ),
-    );
+        ),
+        hideToolbar: true);
   }
 }

@@ -50,8 +50,7 @@ class FusionButton extends StatelessWidget {
           child: AutoSizeText(
             text,
             textAlign: TextAlign.center,
-            minFontSize: 13,
-            maxFontSize: 16,
+            maxFontSize: 20,
             maxLines: 1,
             style: GoogleFonts.openSans().copyWith(
               color: (theme.colorScheme.onPrimary),

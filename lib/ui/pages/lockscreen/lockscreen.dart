@@ -9,7 +9,6 @@ import 'package:fusion_wallet/ui/pages/v2/event.dart';
 import 'package:fusion_wallet/utils/haptic.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:logger/logger.dart';
-import 'package:lottie/lottie.dart';
 
 import '../../../inject.dart';
 import '../../../localizations.dart';
@@ -53,15 +52,7 @@ class _LockUiState extends State<LockUi> with TickerProviderStateMixin {
   Widget _buildLockAnimation() => Container(
         width: 64,
         height: 64,
-        child: Lottie.asset(
-          'assets/anim/locker2.json',
-          controller: _lockAnimController,
-          onLoaded: (composition) {
-            // Configure the AnimationController with the duration of the
-            // Lottie file and start the animation.
-            _lockAnimController..duration = composition.duration;
-          },
-        ),
+        child: Container(),
       );
 
   Future<bool> _isBiometricAvailable() async {
@@ -130,7 +121,7 @@ class _LockUiState extends State<LockUi> with TickerProviderStateMixin {
         child: FusionScaffold(
       child: Container(
           height: MediaQuery.of(context).size.height,
-          child: StateContainer.of(context).selectedAccount.biometricEnabled
+          child: StateContainer.of(context).biometricEnabled
               ? buildBiometricUnlockUi(context)
               : buildPinUnlockUi(
                   context, StateContainer.of(context).selectedAccount.pin)),

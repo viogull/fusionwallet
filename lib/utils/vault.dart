@@ -31,7 +31,7 @@ class Vault {
   static const String prefsCurrentAccountName = 'current_account_name';
 
   final log = injector.get<Logger>();
-  Box<Account> accsBox;
+  Box<Account> _accountsBox;
   Box<dynamic> preferences;
 
   Vault() {
@@ -224,7 +224,7 @@ class Vault {
   }
 
   Future<bool> isAccountPersisted() async {
-    var account = accsBox.getAt(0);
+    var account = _accountsBox.getAt(0);
     return account != null;
   }
 
@@ -234,11 +234,17 @@ class Vault {
     await writePin(pin);
   }
 
-  Account get currentAccount => accsBox.getAt(0);
+  Account get currentAccount => _accountsBox.getAt(0);
 
   Future<void> addContact(Contact contact) {
     if (!contact.isInBox) {
       contact.save();
     }
   }
+
+  Future<List<Account>> getAccounts() async {}
+
+  Future<void> deleteAllAccounts() async {}
+
+  Future<dynamic> setLastAuthentication(@required String uu) async {}
 }
