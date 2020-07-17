@@ -45,18 +45,18 @@ class FusionButton extends StatelessWidget {
           injector.get<HapticUtil>().fingerprintSucess();
           this.onPressed();
         },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+
           child: AutoSizeText(
             text,
             textAlign: TextAlign.center,
+//            minFontSize: 10,
             maxFontSize: 20,
             maxLines: 1,
             style: GoogleFonts.openSans().copyWith(
               color: (theme.colorScheme.onPrimary),
             ),
           ),
-        ),
+
       ),
     );
   }
