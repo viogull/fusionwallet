@@ -1,0 +1,23 @@
+A new implementation of the concept of cryptocurrencies, which allows any user to easily and safely store funds, as well as make money transfers.
+
+Instantly make transactions with Minter cryptocurrencies, Etherium and Tether USD, and also store your funds in stable fiat currencies UAN, RUB, EUR, USD, which you can conveniently deposit and withdraw from your wallet using popular payment systems. Look through the overall account balance in different currencies. Exchange currency with users without commission using codes.
+
+Features:
+- Quick access at Minter address
+- Lack of registration
+- Security
+- Speed
+- Availability 24/7
+- Touch ID / Face ID
+
+Security:
+- The application is always protected by a PIN code. For convenience, you can use a Fingerprint or Face Recognition instead of a PIN code.
+- The application does not store databases.
+- If desired, you can configure an additional protection factor (2FA) through a one-time password generator (Google Authenticator)
+ - The wallet address book is stored only on the user's device
+- The entire application infrastructure revolves around Minter Blockchain.
+
+We plan to develop many more new features for the convenience of using the Minter cryptocurrency.
+
+We worked hard to make your experience in the world of cryptocurrencies as clear as possible, simply, and safe. But we are not going to stop there and will continue to improve the service. We are waiting for your comments and suggestions to the address.
+Fusion4pro@gmail.com

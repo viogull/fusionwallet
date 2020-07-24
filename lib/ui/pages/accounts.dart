@@ -6,6 +6,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:fusion_wallet/core/minter_rest.dart';
+import 'package:fusion_wallet/ui/pages/primary/share_address.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/delegate_funds_page.dart';
@@ -81,7 +82,10 @@ class AccountsPage extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                         borderRadius: FusionTheme.borderRadius),
                     onPressed: () {
-                      Navigator.pushNamed(context, RequestFundsPage.navId);
+                      Navigator.of(context).push(new MaterialPageRoute(
+                          builder: (context) => ShareAddressPage(
+                              "Mx${StateContainer.of(context).selectedAccount.address}"),
+                          fullscreenDialog: true));
                     },
                     icon: Icon(Icons.arrow_downward),
                     color: FusionTheme.greenButtonColor(),

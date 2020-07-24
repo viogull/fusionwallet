@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "944024617752",
+    "firebase_url": "https://archy-a0823.firebaseio.com",
+    "project_id": "archy-a0823",
+    "storage_bucket": "archy-a0823.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944024617752:android:c2b2ebe4f340e88b95d46d",
+        "android_client_info": {
+          "package_name": "com.fusiongroup.fusion.wallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "944024617752-tfcfj3nobb58h53ho5v8m1qamlgg84if.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fusiongroup.fusion.wallet",
+            "certificate_hash": "7ff6b662e66faebb055eae1aa088d4d783917d56"
+          }
+        },
+        {
+          "client_id": "944024617752-7or45io7s7rsip16rllfb6t2m5ns72fa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCD_WSVZLrB05HN0vqzqI8fY7ZF9bwtMiI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "944024617752-7or45io7s7rsip16rllfb6t2m5ns72fa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

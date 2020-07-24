@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fusion_wallet/core/abstract/preferences.dart';
@@ -74,6 +75,7 @@ void main() async {
     OSiOSSettings.autoPrompt: false,
     OSiOSSettings.inAppLaunchUrl: true
   });
+  FirebaseApp.configure(name: null, options: null);
   OneSignal.shared
       .setInFocusDisplayType(OSNotificationDisplayType.notification);
   runApp(new StateContainer(
@@ -100,9 +102,8 @@ class App extends StatelessWidget {
           Splash.navId: (context) => Splash(),
           LockUi.navId: (context) => LockUi(),
           HomePage.navId: (context) => HomePage(),
-          ViewPassphraseDialog.navId: (context) => ViewPassphraseDialog(
-                data: null,
-              ),
+          ViewPassphraseDialog.navId: (context) =>
+              ViewPassphraseDialog(data: null),
           BiometricAuthPage.navId: (context) => BiometricAuthPage(),
           PassphraseCreationPage.navId: (context) => PassphraseCreationPage(),
           IntroPage.navId: (BuildContext context) => IntroPage(),

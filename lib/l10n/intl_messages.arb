@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-07-09T12:29:58.001728",
+  "@@last_modified": "2020-07-18T01:18:55.151413",
   "appName": "Fusion",
   "@appName": {
     "type": "text",
@@ -1913,6 +1913,31 @@
   },
   "errorCameraRestriction": "The user did not grant the camera permission!",
   "@errorCameraRestriction": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "noContactsTitle": "No any contacts yet.",
+  "@noContactsTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "flashOperationSuccess": "Operation was completed succesfully",
+  "@flashOperationSuccess": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "flashOperationFailed": "Operation was completed with failure.",
+  "@flashOperationFailed": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "flashFundsSended": "Succesfully sended",
+  "@flashFundsSended": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "flashAddressCopied": "Address was copied to clipboard.",
+  "@flashAddressCopied": {
     "type": "text",
     "placeholders": {}
   }

@@ -1,0 +1,21 @@
+current directory: /Users/rostyslavskrypychaiko/fusion_wallet/android/vendor/bundle/ruby/2.6.0/gems/digest-crc-0.6.1/ext/digest
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/bin/ruby -rrubygems /Users/rostyslavskrypychaiko/fusion_wallet/android/vendor/bundle/ruby/2.6.0/gems/rake-13.0.1/exe/rake RUBYARCHDIR\=/Users/rostyslavskrypychaiko/fusion_wallet/android/vendor/bundle/ruby/2.6.0/extensions/universal-darwin-19/2.6.0/digest-crc-0.6.1 RUBYLIBDIR\=/Users/rostyslavskrypychaiko/fusion_wallet/android/vendor/bundle/ruby/2.6.0/extensions/universal-darwin-19/2.6.0/digest-crc-0.6.1
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/bin/ruby -S extconf.rb
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+make
+make: *** No rule to make target `"/Users/rostyslavskrypychaiko/Downloads/Xcode-beta', needed by `crc16_genibus.o'.  Stop.
+rake aborted!
+Command failed with status (2): [make...]
+/Users/rostyslavskrypychaiko/fusion_wallet/android/vendor/bundle/ruby/2.6.0/gems/digest-crc-0.6.1/ext/digest/Rakefile:20:in `make'
+/Users/rostyslavskrypychaiko/fusion_wallet/android/vendor/bundle/ruby/2.6.0/gems/digest-crc-0.6.1/ext/digest/Rakefile:44:in `block (3 levels) in <top (required)>'
+/Users/rostyslavskrypychaiko/fusion_wallet/android/vendor/bundle/ruby/2.6.0/gems/digest-crc-0.6.1/ext/digest/Rakefile:41:in `chdir'
+/Users/rostyslavskrypychaiko/fusion_wallet/android/vendor/bundle/ruby/2.6.0/gems/digest-crc-0.6.1/ext/digest/Rakefile:41:in `block (2 levels) in <top (required)>'
+/Users/rostyslavskrypychaiko/fusion_wallet/android/vendor/bundle/ruby/2.6.0/gems/rake-13.0.1/exe/rake:27:in `<main>'
+Tasks: TOP => default => crc16_genibus/crc16_genibus_ext.bundle
+(See full trace by running task with --trace)
+
+rake failed, exit code 1

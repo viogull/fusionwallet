@@ -1,10 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flash/flash.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
+import 'package:fusion_wallet/ui/tools/flasher.dart';
 import 'package:fusion_wallet/utils/haptic.dart';
 import 'package:fusion_wallet/utils/io_tools.dart';
 import 'package:oktoast/oktoast.dart';
@@ -108,12 +110,14 @@ class ShareAddressPage extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () async {
-                        showToast(AppLocalizations.of(context).labelTapToCopy(),
-                            context: context);
+                        FlashHelper.infoBar(context,
+                            message:
+                                AppLocalizations.of(context).addressCopied);
+                        injector.get<HapticUtil>().selection();
                         IOTools.setSecureClipboardItem(_data);
                       },
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(4.0),
                         child: AutoSizeText(
                           AppLocalizations.of(context).labelTapToCopy(),
                           textAlign: TextAlign.center,

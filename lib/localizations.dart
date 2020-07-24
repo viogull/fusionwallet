@@ -1567,6 +1567,20 @@ class AppLocalizations {
 
   String noContactsTitle() =>
       Intl.message('No any contacts yet.', name: 'noContactsTitle');
+
+  String flashOperationSuccess() =>
+      Intl.message("Operation was completed succesfully",
+          name: "flashOperationSuccess");
+  String flashOperationFailed() =>
+      Intl.message("Operation was completed with failure.",
+          name: "flashOperationFailed");
+
+  String flashFundsSended() =>
+      Intl.message("Succesfully sended", name: "flashFundsSended");
+
+  String flashAddressCopied() =>
+      Intl.message("Address was copied to clipboard.",
+          name: "flashAddressCopied");
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

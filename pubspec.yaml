@@ -1,7 +1,7 @@
 name: fusion_wallet
 description: Android/iOS wallet for Minter.Network
 
-version: 1.0.0+1
+version: 1.0.0+3
 
 environment:
   sdk: ">=2.2.0 <3.0.0"
@@ -146,6 +146,7 @@ dev_dependencies:
   flutter_launcher_icons: ^0.7.5
   path: ^1.7.0
   hive_generator: ^0.7.0+2
+  pedantic: ^1.8.0
 
 flutter_icons:
   android: "launcher_icon"

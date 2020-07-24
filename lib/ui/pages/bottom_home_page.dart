@@ -1,3 +1,4 @@
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -13,6 +14,7 @@ import 'package:fusion_wallet/ui/pages/popups/popups_remove_account.dart';
 import 'package:fusion_wallet/ui/pages/accounts.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
+import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 
 import '../components/fusion_sheet.dart';
@@ -42,6 +44,10 @@ class BottomHomePage extends StatefulWidget {
 }
 
 class _BottomHomePageState extends State<BottomHomePage> {
+  String _linkMessage;
+  bool _isCreatingLink = false;
+  String _testString = "Example";
+
   final List<Widget> tabs = [
     AccountsPage(),
     ExchangePage(),
@@ -49,6 +55,12 @@ class _BottomHomePageState extends State<BottomHomePage> {
     HistoryPage(),
     SettingsPage(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    loadDynamicLinks();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -162,6 +174,60 @@ class _BottomHomePageState extends State<BottomHomePage> {
             navId: LockUi.navId),
       ]),
     );
+  }
+
+  void loadDynamicLinks() async {
+    FirebaseDynamicLinks.instance.onLink(
+        onSuccess: (PendingDynamicLinkData dynamicLink) async {
+      final Uri deepLink = dynamicLink?.link;
+      if (deepLink != null) {
+        Navigator.pushNamed(context, deepLink.path);
+      }
+    }, onError: (OnLinkErrorException e) async {
+      print('onLinkError');
+      print(e.message);
+    });
+
+    final data = await FirebaseDynamicLinks.instance.getInitialLink();
+    final deepLink = data?.link;
+
+    if (deepLink != null) {
+      Navigator.pushNamed(context, deepLink.path);
+    }
+  }
+
+  Future<void> _createDynamicLink(bool short) async {
+    setState(() {
+      _isCreatingLink = true;
+    });
+
+    final params = DynamicLinkParameters(
+      uriPrefix: '',
+      link: Uri.parse('https://fusiongroup.page.link/push'),
+      androidParameters: AndroidParameters(
+        packageName: "com.fusiongroup.fusion.wallet",
+        minimumVersion: 0,
+      ),
+      dynamicLinkParametersOptions: DynamicLinkParametersOptions(
+        shortDynamicLinkPathLength: ShortDynamicLinkPathLength.short,
+      ),
+      iosParameters: IosParameters(
+        bundleId: "com.fusiongroup.wallet",
+        minimumVersion: '0',
+      ),
+    );
+    Uri url;
+    if (short) {
+      final ShortDynamicLink shortLink = await params.buildShortLink();
+      url = shortLink.shortUrl;
+    } else {
+      url = await params.buildUrl();
+    }
+
+    setState(() {
+      _linkMessage = url.toString();
+      _isCreatingLink = false;
+    });
   }
 
   String _getToolbarTitle(BuildContext context, int index) {
@@ -351,7 +417,6 @@ class DrawerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return GestureDetector(
       onTap: () {
         if (this.data.onClick != null) {
