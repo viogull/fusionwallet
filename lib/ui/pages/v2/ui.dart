@@ -26,7 +26,6 @@ class AuthUi extends StatelessWidget {
         child: BlocBuilder<AuthenticationBloc, AccountCreationState>(
           builder: (context, state) {
             debugPrint("Current State -> $state");
-
             if (state is AccountInitialState) {
               return IntroPage();
             }

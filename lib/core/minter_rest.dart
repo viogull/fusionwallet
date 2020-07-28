@@ -16,8 +16,6 @@ enum MinterNetwork { Main, Test }
 class MinterRest {
   final MinterNetwork networkType;
 
-  static const fusionRestUrl = "https://api.minter-push.cash/";
-
   static const explorerMainnetUrl =
       "https://explorer-api.minter.network/api/v1";
   static const explorerTestnetUrl =
@@ -28,9 +26,6 @@ class MinterRest {
       "https://testnet.gate-api.minter.network/api/v1/";
 
   static const exchangeRatesUrl = "https://bipchange.org/api/";
-
-  static const FUSION_DELEGATE_NODE =
-      "Mp4926c68cec9b85d743810c801c35c33bd3d1e74ae0a801e4e08998e656835727";
 
   static specExchangeRatesUrl(String exchange) =>
       "https://bipchange.org/api/ex/$exchange";
@@ -56,40 +51,6 @@ class MinterRest {
   final Dio dio = Dio(dioOptions);
 
   final logger = injector.get<Logger>();
-
-  Future<bool> synchronize(
-      {@required String playerId,
-      @required String publicKey,
-      @required String name}) async {
-    try {
-      Response response = await dio.post("$fusionRestUrl/profile/create",
-          data: {
-            "name": name,
-            "player_id": playerId,
-            "publicKey": publicKey,
-          },
-          options: Options(contentType: "application/json"));
-
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        // response -> response.data;
-        return response.data != null;
-      } else
-        return null;
-    } on DioError catch (exception) {
-      if (exception == null) {
-        if (exception == null ||
-            exception.toString().contains('SocketException')) {
-          throw Exception("Network Error");
-        } else if (exception.type == DioErrorType.RECEIVE_TIMEOUT ||
-            exception.type == DioErrorType.CONNECT_TIMEOUT) {
-          throw Exception(
-              "Could'nt connect, please ensure you have a stable network.");
-        } else {
-          return null;
-        }
-      }
-    }
-  }
 
   Future<ExchangeRateResponse> fetchExchangeRates() async {
     //TODO
@@ -244,44 +205,5 @@ class MinterRest {
     }
   }
 
-  Future<String> sign(dynamic txData, String privateKey) async {}
-
   Future<PushTransactionResult> push(@required PushTransactionRequest) async {}
-
-  Future<String> send(
-      String receiver, num value, String coin, String privKey) async {
-    try {
-      Response response = await dio.post("$fusionRestUrl/tx/send",
-          data: {
-            "to": receiver,
-            "value": value,
-            "coin": coin,
-            "privateKey": privKey
-          },
-          options: Options(contentType: "application/json"));
-
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        // response -> response.data;
-        return response.data['hash'];
-      } else
-        return null;
-    } on DioError catch (exception) {
-      if (exception == null) {
-        if (exception == null ||
-            exception.toString().contains('SocketException')) {
-          throw Exception("Network Error");
-        } else if (exception.type == DioErrorType.RECEIVE_TIMEOUT ||
-            exception.type == DioErrorType.CONNECT_TIMEOUT) {
-          throw Exception(
-              "Could'nt connect, please ensure you have a stable network.");
-        } else {
-          return null;
-        }
-      }
-    }
-  }
-
-  Future<String> delegate(String pubkey, String coin, num stake) async {}
-
-  Future<String> ubound(String pubkey, String coin, num stake) async {}
 }

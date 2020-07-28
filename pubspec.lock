@@ -161,7 +161,7 @@ packages:
       name: characters
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.1"
+    version: "1.0.0"
   charcode:
     dependency: transitive
     description:
@@ -294,7 +294,7 @@ packages:
       name: dartx
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.0"
+    version: "0.5.0"
   decimal:
     dependency: "direct main"
     description:
@@ -504,11 +504,9 @@ packages:
   flutter_platform_widgets:
     dependency: "direct main"
     description:
-      path: "."
-      ref: beta
-      resolved-ref: e144647d8965c581d8969078bfe16f17805fe755
-      url: "git@github.com:stryder-dev/flutter_platform_widgets.git"
-    source: git
+      name: flutter_platform_widgets
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.51.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
@@ -626,7 +624,7 @@ packages:
       name: hive_generator
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.7.0+2"
+    version: "0.7.1"
   html:
     dependency: transitive
     description:
@@ -922,7 +920,7 @@ packages:
     source: hosted
     version: "1.0.2"
   pedantic:
-    dependency: "direct dev"
+    dependency: transitive
     description:
       name: pedantic
       url: "https://pub.dartlang.org"
@@ -1253,7 +1251,7 @@ packages:
     source: hosted
     version: "1.1.0"
   test:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: test
       url: "https://pub.dartlang.org"

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:fusion_wallet/core/abstract/preferences.dart';
@@ -44,6 +45,7 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
 
   Future checkLoggedIn() async {
     // Update session key
+
     await injector.get<Vault>().updateSessionKey();
     // Check if device is rooted or jailbroken, show user a warning informing them of the risks if so
     if (!(await injector.get<SharedPrefsUtil>().getHasSeenRootWarning()) &&
@@ -103,6 +105,22 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
         SchedulerPhase.persistentCallbacks) {
       SchedulerBinding.instance.addPostFrameCallback((_) => checkLoggedIn());
     }
+    FirebaseDynamicLinks.instance.onLink(
+        onSuccess: (PendingDynamicLinkData dynamicLink) async {
+      final Uri deepLink = dynamicLink?.link;
+
+      if (deepLink != null) {
+        debugPrint("Received deeplink " + dynamicLink.link.toString());
+        // https://fusiongroup.page.link/ref
+        final referalInviter = dynamicLink.link.queryParameters['from'];
+        StateContainer.of(context).updateInviter(referalInviter);
+        debugPrint("From: ${referalInviter}");
+        Navigator.pushNamed(context, deepLink.path);
+      }
+    }, onError: (OnLinkErrorException e) async {
+      print('onLinkError');
+      print(e.message);
+    });
   }
 
   @override

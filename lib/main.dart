@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fusion_wallet/core/abstract/preferences.dart';
@@ -43,6 +44,7 @@ import 'ui/pages/primary/accounts/send_funds_page.dart';
 import 'ui/pages/primary/accounts/unbound_funds_page.dart';
 
 import 'ui/pages/primary/contacts/contacts_page.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'ui/pages/primary/history_page.dart';
 import 'ui/pages/primary/settings_page.dart';
@@ -54,6 +56,8 @@ const String contactsBox = 'contactsBox';
 final wallet = Wallet();
 
 void main() async {
+// or
+
   WidgetsFlutterBinding.ensureInitialized();
 
   setupServiceLocator();
@@ -75,7 +79,6 @@ void main() async {
     OSiOSSettings.autoPrompt: false,
     OSiOSSettings.inAppLaunchUrl: true
   });
-  FirebaseApp.configure(name: null, options: null);
   OneSignal.shared
       .setInFocusDisplayType(OSNotificationDisplayType.notification);
   runApp(new StateContainer(
@@ -102,8 +105,9 @@ class App extends StatelessWidget {
           Splash.navId: (context) => Splash(),
           LockUi.navId: (context) => LockUi(),
           HomePage.navId: (context) => HomePage(),
-          ViewPassphraseDialog.navId: (context) =>
-              ViewPassphraseDialog(data: null),
+          ViewPassphraseDialog.navId: (context) => ViewPassphraseDialog(
+                data: null,
+              ),
           BiometricAuthPage.navId: (context) => BiometricAuthPage(),
           PassphraseCreationPage.navId: (context) => PassphraseCreationPage(),
           IntroPage.navId: (BuildContext context) => IntroPage(),
@@ -143,9 +147,10 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-
     WidgetsBinding.instance.addObserver(this);
   }
+
+  void initDynamicLinks(BuildContext context) async {}
 
   @override
   void dispose() {

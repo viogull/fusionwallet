@@ -1,3 +1,4 @@
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hive/hive.dart';
@@ -50,6 +51,8 @@ class StateContainerState extends State<StateContainer> {
   final Logger log = injector.get<Logger>();
   final storage = injector.get<Vault>();
 
+  String referalInviter;
+
   Preferences preferences() => widget.preferences;
 
   String receiveThreshold = BigInt.from(10).pow(24).toString();
@@ -88,7 +91,6 @@ class StateContainerState extends State<StateContainer> {
   @override
   void initState() {
     super.initState();
-
     if (widget.accounts.length > 0) {
       selectedAccount = widget.accounts.getAt(widget.accounts.length - 1);
     } else {
@@ -239,6 +241,12 @@ class StateContainerState extends State<StateContainer> {
   void loadAccount() {
     setState(() {
       this.selectedAccount = widget.accounts.getAt(0);
+    });
+  }
+
+  void updateInviter(String referalInviter) {
+    setState(() {
+      this.referalInviter = referalInviter;
     });
   }
 }

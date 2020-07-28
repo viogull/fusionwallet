@@ -12,11 +12,14 @@ import 'package:fusion_wallet/ui/components/custom/passphrase_view.dart';
 import 'package:fusion_wallet/ui/pages/auth/change_account_name.dart';
 import 'package:fusion_wallet/ui/pages/popups/popups_remove_account.dart';
 import 'package:fusion_wallet/ui/pages/accounts.dart';
+import 'package:fusion_wallet/utils/haptic.dart';
+import 'package:fusion_wallet/utils/io_tools.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 
+import '../../inject.dart';
 import '../components/fusion_sheet.dart';
 import 'lockscreen/lockscreen.dart';
 import 'primary/contacts/add_contact.dart';
@@ -171,23 +174,15 @@ class _BottomHomePageState extends State<BottomHomePage> {
             title: AppLocalizations.of(context).menuItemReferalLink(),
             icon: _buildBottomNavItemIcon(
                 "assets/images/icons/ic_copy.svg", true),
-            navId: LockUi.navId),
+            onClick: () async {
+              injector.get<HapticUtil>().selection();
+              IOTools.setSecureClipboardItem(await buildReferalLink(false));
+            }),
       ]),
     );
   }
 
   void loadDynamicLinks() async {
-    FirebaseDynamicLinks.instance.onLink(
-        onSuccess: (PendingDynamicLinkData dynamicLink) async {
-      final Uri deepLink = dynamicLink?.link;
-      if (deepLink != null) {
-        Navigator.pushNamed(context, deepLink.path);
-      }
-    }, onError: (OnLinkErrorException e) async {
-      print('onLinkError');
-      print(e.message);
-    });
-
     final data = await FirebaseDynamicLinks.instance.getInitialLink();
     final deepLink = data?.link;
 
@@ -255,6 +250,34 @@ class _BottomHomePageState extends State<BottomHomePage> {
     return (title == null)
         ? StateContainer.of(context).selectedAccount.name
         : title;
+  }
+
+  Future<String> buildReferalLink(bool short) async {
+    final params = DynamicLinkParameters(
+      uriPrefix: '',
+      link: Uri.parse('https://fusion-push.cash/ref?id=' +
+          StateContainer.of(context).selectedAccount.publicKey),
+      androidParameters: AndroidParameters(
+        packageName: "com.fusiongroup.fusion.wallet",
+        minimumVersion: 0,
+      ),
+      dynamicLinkParametersOptions: DynamicLinkParametersOptions(
+        shortDynamicLinkPathLength: ShortDynamicLinkPathLength.short,
+      ),
+      iosParameters: IosParameters(
+        bundleId: "com.fusiongroup.wallet",
+        minimumVersion: '0',
+      ),
+    );
+    Uri url;
+    if (short) {
+      final ShortDynamicLink shortLink = await params.buildShortLink();
+      url = shortLink.shortUrl;
+    } else {
+      url = await params.buildUrl();
+    }
+    debugPrint("Referal Url created ${url.toString()}");
+    return url.toString();
   }
 
   List<BottomNavigationBarItem> _bottomBarItems(

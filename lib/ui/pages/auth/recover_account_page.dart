@@ -10,6 +10,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/pages/popups/popup_page.dart';
+import 'package:fusion_wallet/utils/validators.dart';
 
 import '../../widgets.dart';
 
@@ -126,7 +127,14 @@ class _RecoverAccountState extends State<RecoverAccountPage> {
       child: SizedBox.expand(
         child: TextFormField(
           maxLines: 14,
+
           initialValue: "",
+
+          validator: (input) =>
+              Validator.isMnemonicValid(mnemonic: input) == true
+                  ? null
+                  : "Invalid mnemonic",
+
           //initialValue: '(barcode == null ) ? "hvhvhhhhvvhvhh" : barcode',
           style: TextStyle(
             color: (theme.colorScheme.onSurface),
@@ -154,26 +162,12 @@ class _RecoverAccountState extends State<RecoverAccountPage> {
       height: 50,
       width: MediaQuery.of(context).size.width,
       child: FusionButton(
-          text: AppLocalizations.of(context).buttonVerify(),
-          onPressed: () {
-            Navigator.of(context).push(new MaterialPageRoute(
-                builder: (_) {
-                  return PopupDialogWidget(
-                      AppLocalizations.of(context).popupPassVerifiedTitle(),
-                      "assets/images/icons/ic_taskdone.svg",
-                      AppLocalizations.of(context)
-                          .popupAccVerificationWelcomeText());
-                },
-                fullscreenDialog: true));
-          }),
+          text: AppLocalizations.of(context).buttonVerify(), onPressed: () {}),
     );
 
     return SafeArea(
         child: FusionScaffold(
       title: AppLocalizations.of(context).toolbarRecoverFromSeedTitle(),
-      onBackClicked: (_) {
-        Navigator.of(context).pop();
-      },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
         child: Column(
@@ -221,52 +215,3 @@ class _RecoverAccountState extends State<RecoverAccountPage> {
     ));
   }
 }
-
-//
-//class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-//  final double height;
-//  final bool defaultAppBar;
-//
-//  const MyCustomAppBar({
-//    Key key,
-//    @required this.height,
-//    this.defaultAppBar = true,
-//  }) : super(key: key);
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    final ThemeData theme = Theme.of(context);
-//    return Column(children: [
-//      Container(
-//        child: PlatformAppBar(
-//          android: (_) => MaterialAppBarData(
-//              backgroundColor: Colors.transparent,
-//              elevation: 0,
-//              centerTitle: true,
-//              leading: IconButton(
-//                onPressed: () {
-//                  Navigator.pop(context);
-//                },
-//                icon: LimitedBox(
-//                  maxHeight: 24,
-//                  maxWidth: 24,
-//                  child: SvgPicture.asset(
-//                    'assets/images/icons/ic_next.svg',
-//                  ),
-//                ),
-//              ),
-//              title: Text(
-//                AppLocalizations.of(context).toolbarRecoverFromSeedTitle(),
-////                "Recover from Seed",
-//                style: TextStyle(
-//                  color: Theme.of(context).colorScheme.onSurface,
-//                ),
-//              )),
-//        ),
-//      ),
-//    ]);
-//  }
-//
-//  @override
-//  Size get preferredSize => Size.fromHeight(height);
-//}
