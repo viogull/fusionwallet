@@ -24,7 +24,7 @@ class IntroPage extends StatelessWidget {
     final bg = Image.asset(
       ('assets/images/backgrounds/bg_greeting.png'),
       fit: BoxFit.fitHeight,
-      height: MediaQuery.of(context).size.height,
+      height: MediaQuery.of(context).size.height * 0.67,
       width: MediaQuery.of(context).size.width,
     );
 
@@ -115,7 +115,7 @@ class IntroPage extends StatelessWidget {
                     ),
                     SizedBox(height: 5),
                     Flexible(flex: 5, child: buttonRecoverFromPassphrase),
-                    SizedBox(height: 10),
+
                   ],
                 ),
               ),

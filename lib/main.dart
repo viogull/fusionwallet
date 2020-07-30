@@ -158,7 +158,9 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     create: (context) => BottomNavigationProvider(),
   );
 
-  @override
+
+
+ @override
   Widget build(BuildContext context) {
     return Material(child: this.provider);
   }

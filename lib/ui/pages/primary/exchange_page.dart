@@ -4,7 +4,12 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
+import 'package:fusion_wallet/ui/components/custom/fusion_text_field.dart';
+import 'package:fusion_wallet/ui/pages/auth/account_name.dart';
+import 'package:fusion_wallet/ui/pages/auth/intro.dart';
+
 import 'package:fusion_wallet/ui/pages/auth/pincode.dart';
+import 'package:fusion_wallet/ui/pages/auth/recover_account_page.dart';
 import 'package:fusion_wallet/ui/pages/exchange/convert_funds_page.dart';
 import 'package:fusion_wallet/ui/pages/exchange/rate_exhange_page.dart';
 
@@ -19,6 +24,8 @@ class _ExchangePageState extends State<ExchangePage> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
+
+
     final myCoinLabel = Container(
       alignment: Alignment.topLeft,
       margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 00.0),
@@ -30,195 +37,34 @@ class _ExchangePageState extends State<ExchangePage> {
       ),
     );
 
-    final currency1 = Container(
-      margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        border: Border.all(color: theme.colorScheme.primary),
-      ),
-      height: 30.0,
-      child: Center(
-        child: LimitedBox(
-          maxWidth: MediaQuery.of(context).size.width,
-          maxHeight: 35,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
-            child: GestureDetector(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Flexible(
-                    flex: 3,
-                    child: Row(
-                      children: <Widget>[
-                        SvgPicture.asset(
-                          ('assets/images/icons/ic_bitcoin.svg'),
-                          // color: Colors.white,
-                          fit: BoxFit.fill,
-                          height: 12,
-                          width: 12,
-                          // height: MediaQuery.of(context).size.height,
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.02,
-                        ),
-                        Text(
-                          "Currency 1 ",
-                          textAlign: TextAlign.left,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: 7,
-                  ),
-                  Flexible(
-                    flex: 1,
-                    child: Text(
-                      '0.00',
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
+    final currency1 =
+    FusionTextField(
+      text: "Currency 1", value: "0.00",
+    );
+    final currency2 =
+    FusionTextField(
+      text: "Currency 2", value: "0.00",
     );
 
-    final currency2 = Container(
-      margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        border: Border.all(color: theme.colorScheme.primary),
-      ),
-      height: 30.0,
-      child: Center(
-        child: LimitedBox(
-          maxWidth: MediaQuery.of(context).size.width,
-          maxHeight: 35,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
-            child: GestureDetector(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Flexible(
-                    flex: 3,
-                    child: Row(
-                      children: <Widget>[
-                        SvgPicture.asset(
-                          ('assets/images/icons/ic_bitcoin.svg'),
-                          // color: Colors.white,
-                          fit: BoxFit.fill,
-                          height: 12,
-                          width: 12,
-                          // height: MediaQuery.of(context).size.height,
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.02,
-                        ),
-                        Text(
-                          "Currency 2 ",
-                          textAlign: TextAlign.left,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: 7,
-                  ),
-                  Flexible(
-                    flex: 1,
-                    child: Text(
-                      '0.00',
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-
-    final currency3 = Container(
-      margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        border: Border.all(color: theme.colorScheme.primary),
-      ),
-      height: 30.0,
-      child: Center(
-        child: LimitedBox(
-          maxWidth: MediaQuery.of(context).size.width,
-          maxHeight: 35,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
-            child: GestureDetector(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Flexible(
-                    flex: 3,
-                    child: Row(
-                      children: <Widget>[
-                        SvgPicture.asset(
-                          ('assets/images/icons/ic_bitcoin.svg'),
-                          // color: Colors.white,
-                          fit: BoxFit.fill,
-                          height: 12,
-                          width: 12,
-                          // height: MediaQuery.of(context).size.height,
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.02,
-                        ),
-                        Text(
-                          "Currency 3 ",
-                          textAlign: TextAlign.left,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: 7,
-                  ),
-                  Flexible(
-                    flex: 1,
-                    child: Text(
-                      '0.00',
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
+    final currency3 =
+        FusionTextField(
+          text: "Currency 3", value: "0.00",
+        );
 
     final convertButton = Container(
       height: 50,
       width: MediaQuery.of(context).size.width,
-      child: FusionButton(
-          text: AppLocalizations.of(context).buttonConvert(),
-          onPressed: () {
-            Navigator.pushNamed(context, ConvertExchangePage.navId);
-          }),
+      child: FusionButton(text: AppLocalizations.of(context).buttonConvert(), onPressed: () {
+        Navigator.pushNamed(context, ConvertExchangePage.navId);
+      }),
     );
 
     final rateButton = Container(
       height: 50,
       width: MediaQuery.of(context).size.width,
-      child: FusionButton(
-          text: AppLocalizations.of(context).buttonRate(),
-          onPressed: () {
-            Navigator.pushNamed(context, RateExchangePage.navId);
-          }),
+      child: FusionButton(text: AppLocalizations.of(context).buttonRate(), onPressed: () {
+        Navigator.pushNamed(context, RateExchangePage.navId);
+      }),
     );
 
     final cashBalance = Center(
@@ -232,7 +78,7 @@ class _ExchangePageState extends State<ExchangePage> {
 
     final simplex = Container(
       alignment: Alignment.center,
-      margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 00.0),
+      margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
       child: Text(
         AppLocalizations.of(context).labelExchangeSimplex(),
         style: TextStyle(
@@ -244,18 +90,15 @@ class _ExchangePageState extends State<ExchangePage> {
     final buyButton1 = Container(
       height: 50,
       width: MediaQuery.of(context).size.width * 0.30,
-      child: FusionButton(
-          text: AppLocalizations.of(context).buttonBuy(),
-          onPressed: () {
-            Navigator.pushNamed(context, PasswordCreationPage.navId);
-          }),
+      child: FusionButton(text: AppLocalizations.of(context).buttonBuy(),onPressed: () {
+        Navigator.pushNamed(context, IntroPage.navId);
+      }),
     );
 
     final buyButton2 = Container(
       height: 50,
       width: MediaQuery.of(context).size.width * 0.30,
-      child: FusionButton(
-          text: AppLocalizations.of(context).buttonBuy(), onPressed: () {}),
+      child: FusionButton(text: AppLocalizations.of(context).buttonBuy(), onPressed: () {}),
     );
 
     return Container(
@@ -271,23 +114,16 @@ class _ExchangePageState extends State<ExchangePage> {
           children: <Widget>[
             //LimitedBox (maxHeight: 60,),
             Flexible(
-              flex: 1,
-              child: myCoinLabel,
-            ),
-            Flexible(
-              flex: 1,
-              child: currency1,
-            ),
-            Flexible(
-              flex: 1,
-              child: currency2,
-            ),
-            Flexible(
-              flex: 1,
-              child: currency3,
-            ),
-            SizedBox(
-              height: 15,
+              flex: 3,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  myCoinLabel,
+                  currency1,
+                  currency2,
+                  currency3
+                ],
+              ),
             ),
             Flexible(
               flex: 1,
