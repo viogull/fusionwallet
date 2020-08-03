@@ -1,3 +1,95 @@
+//import 'package:flutter/cupertino.dart';
+//import 'package:flutter/material.dart';
+//import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+//import 'package:flutter_svg/svg.dart';
+//import 'package:fusion_wallet/core/models/models.dart';
+//import 'package:fusion_wallet/ui/theme.dart';
+//import 'package:fusion_wallet/ui/components/balances_card_item.dart';
+//import 'package:fusion_wallet/utils/haptic.dart';
+//
+//import '../../../inject.dart';
+//import '../../../localizations.dart';
+//
+//class AccountBalancesCard extends StatefulWidget {
+//  final AddressData data;
+//
+//  AccountBalancesCard({this.data});
+//
+//  @override
+//  _AccountBalancesCardState createState() => _AccountBalancesCardState();
+//}
+//
+//class _AccountBalancesCardState extends State<AccountBalancesCard> {
+//  bool _showUsdValues = false;
+//
+//  Widget buildBalancesList(BuildContext context) {
+//    return ListView.builder(
+//        itemCount: widget.data.data.address.length,
+//
+//        itemBuilder: (_, index) {
+//          return ListTile(
+//              title: Text(widget.data.data.address[index].length.toString()));
+//        });
+//  }
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    final width = MediaQuery.of(context).size.width;
+//    final ThemeData theme = Theme.of(context);
+//
+//    return Padding(
+//      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 1),
+//      child: Container(
+//        width: width,
+//        height: width * 0.5,
+//        child: Stack(
+//          children: <Widget>[
+//            Align(
+//              alignment: Alignment.center,
+//              child: Card(
+//                elevation: 2,
+//                color: theme.colorScheme.surface,
+//                margin: const EdgeInsets.all(16),
+//                shape: RoundedRectangleBorder(
+//                    borderRadius: FusionTheme.borderRadius,
+//                    side: BorderSide(
+//                        color: theme.colorScheme.onSurface, width: 0.1)),
+//                child: SizedBox.expand(
+//                    child: Padding(
+//                        padding: const EdgeInsets.only(top: 4),
+//                        child: Column(
+//                          mainAxisAlignment: MainAxisAlignment.start,
+//                          children: <Widget>[
+//                            Padding(
+//                              padding:
+//                                  const EdgeInsets.only(bottom: 12, top: 8),
+//                              child: Text(
+//                                AppLocalizations.of(context)
+//                                    .labelCryptoAvailable(),
+//                                textAlign: TextAlign.left,
+//                                style: TextStyle(
+//                                    fontSize: 12,
+//                                    color: theme.colorScheme.onSurface
+//                                        .withOpacity(0.9)),
+//                              ),
+//                            ),
+//                            BalancesCardItem(
+//                                title: widget.data.data.balances.first.amount,
+//                                value: widget.data.data.balances.first.amount,
+//                                showUsd: this._showUsdValues)
+//                          ],
+//                        ))),
+//              ),
+//            ),
+//
+//
+//          ],
+//        ),
+//      ),
+//    );
+//  }
+//}
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -60,7 +152,7 @@ class _AccountBalancesCardState extends State<AccountBalancesCard> {
                           children: <Widget>[
                             Padding(
                               padding:
-                                  const EdgeInsets.only(bottom: 12, top: 8),
+                              const EdgeInsets.only(bottom: 12, top: 8),
                               child: Text(
                                 AppLocalizations.of(context)
                                     .labelCryptoAvailable(),
@@ -137,3 +229,6 @@ class _AccountBalancesCardState extends State<AccountBalancesCard> {
     );
   }
 }
+
+
+

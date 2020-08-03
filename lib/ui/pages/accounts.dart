@@ -234,7 +234,7 @@ class AccountsPage extends StatelessWidget {
   }
 }
 
-class TransanctionHistoryItem extends StatelessWidget {
+class TransanctionHistoryItem extends  StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text("NAme OF Receiver");

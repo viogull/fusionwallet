@@ -1,9 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fusion_wallet/core/minter_rest.dart';
 import 'package:fusion_wallet/core/models.dart';
+import 'package:fusion_wallet/core/state_container.dart';
+import 'package:fusion_wallet/inject.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
+import 'package:fusion_wallet/ui/components/lists/balances_card.dart';
 import 'package:fusion_wallet/ui/pages/popups/popups_history_page.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 
@@ -52,6 +57,50 @@ class _HistoryPageState extends State<HistoryPage> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     //DateTime selectedDate = DateTime.now();
+
+    Widget _buildBalancesCard(BuildContext context) {
+      final ThemeData theme = Theme.of(context);
+      final width = MediaQuery.of(context).size.width * 0.8;
+      return FutureBuilder(
+        future: injector.get<MinterRest>().fetchAddressData(
+            address: StateContainer.of(context).selectedAccount.address),
+        builder: (context, snapshot) {
+          debugPrint(
+              'Connection State ${snapshot.connectionState}, has data : ${snapshot.hasData}');
+          if (snapshot.connectionState == ConnectionState.done &&
+              snapshot.hasData) {
+            var balances = snapshot.data.data.balances;
+            if (balances.length > 0) {
+              debugPrint("Rendering balances length ${balances.length}");
+              return AccountBalancesCard(data: snapshot.data);
+            } else
+              Card(
+                margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                shape: RoundedRectangleBorder(
+                    borderRadius: FusionTheme.borderRadius,
+                    side: BorderSide(
+                        color: theme.colorScheme.onSurface, width: 0.1)),
+                child: Container(
+                    height: 001, child: PlatformCircularProgressIndicator()),
+              );
+          } else {
+            return Card(
+              margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              shape: RoundedRectangleBorder(
+                  borderRadius: FusionTheme.borderRadius,
+                  side:
+                  BorderSide(color: theme.colorScheme.onSurface, width: 0.1)),
+              color: theme.colorScheme.surface,
+              elevation: 4,
+              child: Container(
+                  width: width,
+                  height: 100,
+                  child: Center(child: PlatformCircularProgressIndicator())),
+            );
+          }
+        },
+      );
+    }
 
     void _showModalSheet() {
       showModalBottomSheet(
@@ -313,6 +362,7 @@ class _HistoryPageState extends State<HistoryPage> {
           // mainAxisSize: MainAxisSize.min,
 //                crossAxisAlignment: Alignment.bottomCenter,
           children: <Widget>[
+
 //                  SizedBox(height: 20,),
             Flexible(
               flex: 1,
@@ -321,6 +371,7 @@ class _HistoryPageState extends State<HistoryPage> {
                 children: <Widget>[
                   labelAccount,
                   history,
+
                 ],
               ),
             ),
@@ -351,6 +402,7 @@ class _HistoryPageState extends State<HistoryPage> {
                         children: <Widget>[
                           labelEndDate,
                           cardEnd,
+
                         ],
                       )
                     ],
@@ -365,7 +417,7 @@ class _HistoryPageState extends State<HistoryPage> {
               ),
             ),
             Flexible(
-              flex: 1,
+              flex: 5,
               child: buttonResult,
             ),
             SizedBox(
@@ -377,4 +429,6 @@ class _HistoryPageState extends State<HistoryPage> {
 
     );
   }
+
 }
+

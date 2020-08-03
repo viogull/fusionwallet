@@ -12,7 +12,7 @@ class MinterChannel {
   MinterChannel();
 
   static const platformChannel =
-      const MethodChannel('com.fusiongroup.fusion.wallet/natives');
+  const MethodChannel('com.fusiongroup.fusion.wallet/natives');
 
   List<String> getMnemonicsWords(String mnemonic) {
     return mnemonic.split(" ");

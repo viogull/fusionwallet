@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 import 'package:hive/hive.dart';
@@ -33,15 +34,15 @@ class StateContainer extends StatefulWidget {
 
   StateContainer(
       {@required this.child,
-      @required this.accounts,
-      @required this.preferences});
+        @required this.accounts,
+        @required this.preferences});
 
   @override
   State<StatefulWidget> createState() => StateContainerState();
 
   static StateContainerState of(BuildContext context) {
     return (context.inheritFromWidgetOfExactType(_InheritedStateContainer)
-            as _InheritedStateContainer)
+    as _InheritedStateContainer)
         .data;
   }
 }
@@ -104,7 +105,7 @@ class StateContainerState extends State<StateContainer> {
     var currentAccountMnemonic = selectedAccount.mnemonic;
 
     final currentLocale =
-        (locale == 'en') ? Locale('en', '') : Locale('ru', '');
+    (locale == 'en') ? Locale('en', '') : Locale('ru', '');
     debugPrint(
         "Preferences Theme Selected $preferencesTheme , Theme Mode: $currentTheme");
     debugPrint(
@@ -242,3 +243,4 @@ class StateContainerState extends State<StateContainer> {
     });
   }
 }
+
