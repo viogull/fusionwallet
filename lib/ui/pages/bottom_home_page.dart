@@ -16,7 +16,6 @@ import 'package:fusion_wallet/utils/haptic.dart';
 import 'package:fusion_wallet/utils/io_tools.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
-import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 
 import '../../inject.dart';
@@ -28,7 +27,6 @@ import 'primary/exchange_page.dart';
 import 'primary/history_page.dart';
 import 'primary/settings_page.dart';
 import 'primary/share_address.dart';
-import 'v2/bloc.dart';
 
 final logger = Logger();
 

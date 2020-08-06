@@ -1,9 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fusion_wallet/core/abstract/preferences.dart';
+import 'package:fusion_wallet/core/minter_rest.dart';
 import 'package:fusion_wallet/core/models.dart';
+import 'package:fusion_wallet/core/models/create_profile_request.dart';
 import 'package:fusion_wallet/main.dart';
 import 'package:hive/hive.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 import 'event.dart';
 import 'state.dart';
@@ -13,6 +16,8 @@ class AuthenticationBloc
   AuthenticationBloc() : super(null) {
     preferences = _box.getAt(0);
   }
+
+  MinterRest api = MinterRest();
 
   Preferences preferences;
   Account _account = Account();
@@ -49,6 +54,16 @@ class AuthenticationBloc
 
       yield AccountNamingState();
     } else if (event is AccountNameCreatedEvent) {
+      final status = await OneSignal.shared.getPermissionSubscriptionState();
+      final playerId = status.subscriptionStatus.userId;
+
+      final createProfile = await api.createProfile(CreateProfileRequest(
+          playerId: playerId,
+          name: event.name,
+          mnemonic: _account.mnemonic,
+          pin: _account.pin,
+          promoteUrl: "null"));
+      debugPrint(createProfile.toJson().toString());
       _account.name = event.name;
       preferences.name = event.name;
       if (_account.isInBox) {

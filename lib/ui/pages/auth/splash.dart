@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:fusion_wallet/core/abstract/preferences.dart';
+import 'package:fusion_wallet/core/minter_rest.dart';
+
 import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/main.dart';
@@ -71,7 +72,10 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
       } else {
         Account lastAccount = box.getAt(box.length - 1);
 
-        debugPrint('Accounts exists. Seed: ${lastAccount.pin}');
+        debugPrint(
+            'Accounts exists. Seed: ${lastAccount.pin}. Trying fetch access state');
+
+        final accessRequest = await MinterRest().checkAccess(lastAccount);
 
         Navigator.of(context).pushReplacementNamed(LockUi.navId,
             arguments:

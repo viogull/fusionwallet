@@ -9,7 +9,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
-import 'package:fusion_wallet/ui/pages/popups/popup_page.dart';
 import 'package:fusion_wallet/utils/validators.dart';
 
 import '../../widgets.dart';
@@ -23,21 +22,25 @@ class RecoverAccountPage extends StatefulWidget {
 }
 
 class _RecoverAccountState extends State<RecoverAccountPage> {
-  final _cancelController = TextEditingController(text: "Cancel");
+  ScanResult scanResult;
+  List<BarcodeFormat> selectedFormats = [..._possibleFormats];
+
+  static final _possibleFormats = BarcodeFormat.values.toList()
+    ..removeWhere((e) => e == BarcodeFormat.unknown);
+
   var _aspectTolerance = 0.00;
+  var _autoEnableFlash = false;
+  final _cancelController = TextEditingController(text: "Cancel");
+  String _mnemonic;
   var _numberOfCameras = 0;
   var _selectedCamera = -1;
   var _useAutoFocus = true;
-  var _autoEnableFlash = false;
-  static final _possibleFormats = BarcodeFormat.values.toList()
-    ..removeWhere((e) => e == BarcodeFormat.unknown);
-  List<BarcodeFormat> selectedFormats = [..._possibleFormats];
-  ScanResult scanResult;
 
   @override
 // ignore: type_annotate_public_apis
   initState() {
     super.initState();
+
     Future.delayed(Duration.zero, () async {
       _numberOfCameras = await BarcodeScanner.numberOfCameras;
       setState(() {});
@@ -53,7 +56,8 @@ class _RecoverAccountState extends State<RecoverAccountPage> {
         ),
       );
       var result = await BarcodeScanner.scan(options: options);
-      setState(() => scanResult = result);
+      debugPrint("Scan result: ${result.rawContent}");
+      setState(() => _mnemonic = result.rawContent);
     } on PlatformException catch (e) {
       var result = ScanResult(
         type: ResultType.Error,
@@ -128,12 +132,7 @@ class _RecoverAccountState extends State<RecoverAccountPage> {
         child: TextFormField(
           maxLines: 14,
 
-          initialValue: "",
-
-          validator: (input) =>
-              Validator.isMnemonicValid(mnemonic: input) == true
-                  ? null
-                  : "Invalid mnemonic",
+          initialValue: (_mnemonic == null) ? "" : _mnemonic,
 
           //initialValue: '(barcode == null ) ? "hvhvhhhhvvhvhh" : barcode',
           style: TextStyle(
@@ -143,8 +142,6 @@ class _RecoverAccountState extends State<RecoverAccountPage> {
               border: OutlineInputBorder(),
               hintText: AppLocalizations.of(context)
                   .inputEnterScanPasshpraseHintText(),
-              // helperText: barcode,
-
               hintStyle: TextStyle(
                 color: (theme.colorScheme.onSurface),
               ),

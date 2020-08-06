@@ -30,7 +30,7 @@
 .pub/
 /build/
 
-# Web related
+# WeCb related
 lib/generated_plugin_registrant.dart
 
 # Exceptions to above rules.

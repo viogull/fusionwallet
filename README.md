@@ -1,6 +1,7 @@
 # Fusion Wallet [![Build Status](https://app.bitrise.io/app/078d4c59cda43563/status.svg?token=tovI3DjmdyFaFnGMXo7PQg)](https://app.bitrise.io/app/078d4c59cda43563)  
 
 Fusion - Android/iOS wallet for Minter blockchain.
+[✓] Flutter (Channel stable, 1.20.0, on macOS 11.0 20A5323l, locale ru-UA)
 
 
 
@@ -9,10 +10,8 @@ Fusion - Android/iOS wallet for Minter blockchain.
 
 
 
-
-
-
-hill like wise coyote obey improve extra frog treat tortoise hint split
+# Generate models
+`flutter packages pub run build_runner watch --delete-conflicting-outputs`
 
 # How to use localization?
 

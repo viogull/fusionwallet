@@ -1,7 +1,5 @@
 import 'package:hive/hive.dart';
 
-import 'contact.dart';
-
 part 'account.g.dart';
 
 @HiveType(typeId: 0)
@@ -18,12 +16,18 @@ class Account extends HiveObject {
   String publicKey;
   @HiveField(5)
   String privateKey;
-  @HiveField(7)
+  @HiveField(6)
   String pin;
-  @HiveField(11)
+  @HiveField(7)
   bool showRewards = true;
-  @HiveField(12)
+  @HiveField(8)
   String sessionKey = "";
+  @HiveField(9)
+  String hash;
+  @HiveField(10)
+  bool hasAccess = true;
+  @HiveField(11)
+  String uuid;
 
   Account(
       {this.name,

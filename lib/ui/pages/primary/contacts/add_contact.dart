@@ -6,15 +6,11 @@ import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/core/models.dart';
-import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/localizations.dart';
-import 'package:fusion_wallet/main.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
-import 'package:fusion_wallet/ui/pages/auth/splash.dart';
 import 'package:fusion_wallet/utils/vault.dart';
-import 'package:hive/hive.dart';
 
 import '../../../../inject.dart';
 
