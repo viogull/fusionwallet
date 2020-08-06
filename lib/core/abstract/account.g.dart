@@ -8,13 +8,13 @@ part of 'account.dart';
 
 class AccountAdapter extends TypeAdapter<Account> {
   @override
-  final typeId = 0;
+  final int typeId = 0;
 
   @override
   Account read(BinaryReader reader) {
-    var numOfFields = reader.readByte();
-    var fields = <int, dynamic>{
-      for (var i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Account(
       name: fields[0] as String,
@@ -24,15 +24,18 @@ class AccountAdapter extends TypeAdapter<Account> {
       publicKey: fields[4] as String,
       privateKey: fields[5] as String,
     )
-      ..pin = fields[7] as String
-      ..showRewards = fields[11] as bool
-      ..sessionKey = fields[12] as String;
+      ..pin = fields[6] as String
+      ..showRewards = fields[7] as bool
+      ..sessionKey = fields[8] as String
+      ..hash = fields[9] as String
+      ..hasAccess = fields[10] as bool
+      ..uuid = fields[11] as String;
   }
 
   @override
   void write(BinaryWriter writer, Account obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -45,11 +48,27 @@ class AccountAdapter extends TypeAdapter<Account> {
       ..write(obj.publicKey)
       ..writeByte(5)
       ..write(obj.privateKey)
-      ..writeByte(7)
+      ..writeByte(6)
       ..write(obj.pin)
-      ..writeByte(11)
+      ..writeByte(7)
       ..write(obj.showRewards)
-      ..writeByte(12)
-      ..write(obj.sessionKey);
+      ..writeByte(8)
+      ..write(obj.sessionKey)
+      ..writeByte(9)
+      ..write(obj.hash)
+      ..writeByte(10)
+      ..write(obj.hasAccess)
+      ..writeByte(11)
+      ..write(obj.uuid);
   }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is AccountAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }

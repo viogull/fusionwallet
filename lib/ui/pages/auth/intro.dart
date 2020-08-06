@@ -1,3 +1,4 @@
+import 'package:alice/alice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,16 +34,20 @@ class IntroPage extends StatelessWidget {
         //width: MediaQuery.of(context).size.width,
         );
 
-    final someText1 = Container(
-      height: 20,
+    final someText1 = GestureDetector(
+        child: Container(
+          height: 20,
 //      alignment: Alignment.topCenter,
-      child: Text(
-        AppLocalizations.of(context).appName(),
-        style: TextStyle(
-          color: (theme.colorScheme.onPrimary),
+          child: Text(
+            AppLocalizations.of(context).appName(),
+            style: TextStyle(
+              color: (theme.colorScheme.onPrimary),
+            ),
+          ),
         ),
-      ),
-    );
+        onTap: () {
+          Alice().showInspector();
+        });
 
     final buttonCreateAccount = Container(
       width: MediaQuery.of(context).size.width,

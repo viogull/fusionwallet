@@ -1,11 +1,8 @@
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/main.dart';
-import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/pages/v2/bloc.dart';
-import 'package:fusion_wallet/ui/pages/v2/event.dart';
 import 'package:fusion_wallet/utils/haptic.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:logger/logger.dart';

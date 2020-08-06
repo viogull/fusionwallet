@@ -1,7 +1,14 @@
 import 'package:dio/dio.dart';
+import 'package:fusion_wallet/core/abstract/account.dart';
+import 'package:fusion_wallet/core/models/create_profile_request.dart';
+import 'package:fusion_wallet/core/models/create_push_link_request.dart';
+import 'package:fusion_wallet/core/models/create_push_link_response.dart';
+import 'package:fusion_wallet/core/models/delegate_ubound_tx_request.dart';
 import 'package:fusion_wallet/core/models/exchange_rate_response.dart';
 import 'package:fusion_wallet/core/models/address_data.dart';
 import 'package:fusion_wallet/core/models/nonce_response.dart';
+import 'package:fusion_wallet/core/models/profile_response.dart';
+import 'package:fusion_wallet/core/models/send_tx_request.dart';
 import 'package:fusion_wallet/core/models/spec_exchange_rates_response.dart';
 import 'package:fusion_wallet/core/models/statistic_rewards_response.dart';
 import 'package:fusion_wallet/core/models/transanctions_response.dart';
@@ -15,6 +22,11 @@ enum MinterNetwork { Main, Test }
 
 class MinterRest {
   final MinterNetwork networkType;
+
+  static const fusionApiUrl = "https://api.fusion-push.cash";
+
+  static const fusionApiMirrorUrl =
+      "http://whispering-depths-02969.herokuapp.com";
 
   static const explorerMainnetUrl =
       "https://explorer-api.minter.network/api/v1";
@@ -48,9 +60,224 @@ class MinterRest {
           return false;
       });
 
+  static final BaseOptions fusionDioOptions = BaseOptions(
+      baseUrl: fusionApiMirrorUrl,
+      responseType: ResponseType.json,
+      connectTimeout: 30000,
+      receiveTimeout: 30000,
+      validateStatus: (code) {
+        if (code >= 200)
+          return true;
+        else
+          return false;
+      });
+
   final Dio dio = Dio(dioOptions);
+  final Dio fusionDio = Dio(fusionDioOptions);
+
+  void loadInterceptors() async {}
 
   final logger = injector.get<Logger>();
+
+  //post
+
+  Future<ProfileResponse> createProfile(CreateProfileRequest data) async {
+    try {
+      Response response = await fusionDio.post('/profile/create',
+          data: data.toJson(),
+          options: Options(contentType: "application/json"));
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return ProfileResponse.fromJson(response.data);
+      } else
+        return null;
+    } on DioError catch (exception) {
+      if (exception == null) {
+        if (exception == null ||
+            exception.toString().contains('SocketException')) {
+          throw Exception("Network Error");
+        } else if (exception.type == DioErrorType.RECEIVE_TIMEOUT ||
+            exception.type == DioErrorType.CONNECT_TIMEOUT) {
+          throw Exception(
+              "Could'nt connect, please ensure you have a stable network.");
+        } else {
+          return null;
+        }
+      }
+    }
+  }
+
+  //get
+  Future<ProfileResponse> fetchProfileData(String id, String hash) async {
+    try {
+      if (id == null || hash == null) {
+        logger.e('Cannot fetch info for null address');
+        return null;
+      }
+
+      logger.d('Fetching profile $id');
+      // Adding Mx to get valid address
+      final url = "$fusionApiMirrorUrl/profile/$id?hash=$hash";
+      logger.d("Fetch Address Data Url $url");
+      Response response = await fusionDio.get(url);
+
+      if (response.statusCode == 200) {
+        logger.d("Response status code " + response.statusCode.toString());
+        return ProfileResponse.fromJson(response.data);
+      }
+    } on DioError catch (exception) {
+      if (exception == null) {
+        if (exception == null ||
+            exception.toString().contains('SocketException')) {
+          throw Exception("Network Error");
+        } else if (exception.type == DioErrorType.RECEIVE_TIMEOUT ||
+            exception.type == DioErrorType.CONNECT_TIMEOUT) {
+          throw Exception(
+              "Could'nt connect, please ensure you have a stable network.");
+        } else {
+          return null;
+        }
+      }
+      return null;
+    }
+  }
+
+  //put
+  Future<dynamic> updateProfileData() {}
+
+  Future<dynamic> send(SendTxRequest txData) async {
+    try {
+      Response response = await fusionDio.post('/tx/send',
+          data: txData.toJson(),
+          options: Options(contentType: "application/json"));
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return TransactionsResponse.fromJson(response.data);
+      } else
+        return null;
+    } on DioError catch (exception) {
+      if (exception == null) {
+        if (exception == null ||
+            exception.toString().contains('SocketException')) {
+          throw Exception("Network Error");
+        } else if (exception.type == DioErrorType.RECEIVE_TIMEOUT ||
+            exception.type == DioErrorType.CONNECT_TIMEOUT) {
+          throw Exception(
+              "Could'nt connect, please ensure you have a stable network.");
+        } else {
+          return null;
+        }
+      }
+    }
+  }
+
+  Future<dynamic> multisend() {}
+
+  Future<dynamic> delegate(DelegateUboundTxRequest txData, String hash) async {
+    try {
+      Response response = await fusionDio.post('/tx/delegate?hash=$hash',
+          data: txData.toJson(),
+          options: Options(contentType: "application/json"));
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.data;
+      } else
+        return null;
+    } on DioError catch (exception) {
+      if (exception == null) {
+        if (exception == null ||
+            exception.toString().contains('SocketException')) {
+          throw Exception("Network Error");
+        } else if (exception.type == DioErrorType.RECEIVE_TIMEOUT ||
+            exception.type == DioErrorType.CONNECT_TIMEOUT) {
+          throw Exception(
+              "Could'nt connect, please ensure you have a stable network.");
+        } else {
+          return null;
+        }
+      }
+    }
+  }
+
+  Future<dynamic> ubound(DelegateUboundTxRequest txData, String hash) async {
+    try {
+      Response response = await fusionDio.post('/tx/ubound?hash=$hash',
+          data: txData.toJson(),
+          options: Options(contentType: "application/json"));
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.data;
+      } else
+        return null;
+    } on DioError catch (exception) {
+      if (exception == null) {
+        if (exception == null ||
+            exception.toString().contains('SocketException')) {
+          throw Exception("Network Error");
+        } else if (exception.type == DioErrorType.RECEIVE_TIMEOUT ||
+            exception.type == DioErrorType.CONNECT_TIMEOUT) {
+          throw Exception(
+              "Could'nt connect, please ensure you have a stable network.");
+        } else {
+          return null;
+        }
+      }
+    }
+  }
+
+  Future<dynamic> createPushLink(
+      CreatePushLinkRequest txData, String receiver, String sender) async {
+    try {
+      Response response = await fusionDio.post(
+          "$fusionApiMirrorUrl/push/create?sender=$sender&receiver=$receiver",
+          data: txData.toJson(),
+          options: Options(contentType: "application/json"));
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return CreatePushLinkResponse.fromJson(response.data);
+      } else
+        return null;
+    } on DioError catch (exception) {
+      if (exception == null) {
+        if (exception == null ||
+            exception.toString().contains('SocketException')) {
+          throw Exception("Network Error");
+        } else if (exception.type == DioErrorType.RECEIVE_TIMEOUT ||
+            exception.type == DioErrorType.CONNECT_TIMEOUT) {
+          throw Exception(
+              "Could'nt connect, please ensure you have a stable network.");
+        } else {
+          return null;
+        }
+      }
+    }
+  }
+
+  Future<dynamic> applyPush(String pushId, String to) async {
+    try {
+      Response response = await fusionDio.put(
+          "$fusionApiMirrorUrl/push/$pushId?to=$to",
+          options: Options(contentType: "application/json"));
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.data;
+      } else
+        return null;
+    } on DioError catch (exception) {
+      if (exception == null) {
+        if (exception == null ||
+            exception.toString().contains('SocketException')) {
+          throw Exception("Network Error");
+        } else if (exception.type == DioErrorType.RECEIVE_TIMEOUT ||
+            exception.type == DioErrorType.CONNECT_TIMEOUT) {
+          throw Exception(
+              "Could'nt connect, please ensure you have a stable network.");
+        } else {
+          return null;
+        }
+      }
+    }
+  }
 
   Future<ExchangeRateResponse> fetchExchangeRates() async {
     //TODO
@@ -206,4 +433,6 @@ class MinterRest {
   }
 
   Future<PushTransactionResult> push(@required PushTransactionRequest) async {}
+
+  checkAccess(Account lastAccount) {}
 }

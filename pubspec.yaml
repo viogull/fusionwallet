@@ -44,7 +44,7 @@ dependencies:
   flutter_datetime_picker: ^1.3.8
   pin_input_text_field: ^3.0.4
   crypto: ^2.1.5
-  flutter_svg: ^0.17.4
+  flutter_svg: ^0.18.0
   local_auth: ^0.6.2+3
   meta: ^1.1.8
   flutter_secure_storage: ^3.3.3
@@ -67,13 +67,12 @@ dependencies:
   event_taxi: ^0.1.5
 
 
+  alice: ^0.1.3
+
 
   # Share files
-  share:
-    git:
-      url: https://github.com/bbedward/plugins.git
-      path: packages/share
-      ref: master
+  share: ^0.6.4+3
+
 
   # File picker
   # Deep link support
@@ -86,7 +85,10 @@ dependencies:
   # HTTP client
   http: ^0.12.1
 
-  flutter_platform_widgets: ^0.51.0
+  flutter_platform_widgets:
+      git:
+        url: git@github.com:stryder-dev/flutter_platform_widgets.git
+        ref: beta
 
   # Vibrate
   vibrate:

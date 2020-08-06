@@ -1,3 +1,4 @@
+import 'package:alice/alice.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,6 @@ import 'ui/pages/primary/accounts/send_funds_page.dart';
 import 'ui/pages/primary/accounts/unbound_funds_page.dart';
 
 import 'ui/pages/primary/contacts/contacts_page.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 import 'ui/pages/primary/history_page.dart';
 import 'ui/pages/primary/settings_page.dart';
@@ -67,6 +67,7 @@ void main() async {
   Hive.registerAdapter<Preferences>(PreferencesAdapter());
 
   var accsBox = await Hive.openBox<Account>(accountsBox);
+
   await Hive.openBox<Contact>(contactsBox);
   final prefs = await Hive.openBox<Preferences>(preferencesBox);
   var prefsSingleton =
@@ -81,12 +82,32 @@ void main() async {
   });
   OneSignal.shared
       .setInFocusDisplayType(OSNotificationDisplayType.notification);
+
   runApp(new StateContainer(
-      child: new App(), accounts: accsBox, preferences: prefsSingleton));
+    child: new App(),
+    accounts: accsBox,
+    preferences: prefsSingleton,
+  ));
 }
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
+  @override
+  AppState createState() => AppState();
+}
+
+class AppState extends State<App> {
+  Alice _alice;
+
+  @override
+  void initState() {
+    _alice = Alice(
+        showNotification: true, showInspectorOnShake: true, darkTheme: false);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) => MaterialApp(
+        navigatorKey: _alice.getNavigatorKey(),
         theme: FusionTheme.light,
         darkTheme: FusionTheme.dark,
         themeMode: StateContainer.of(context).darkModeEnabled
@@ -144,13 +165,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  void initDynamicLinks(BuildContext context) async {}
+  var provider = ChangeNotifierProvider<BottomNavigationProvider>(
+    child: BottomHomePage(),
+    create: (context) => BottomNavigationProvider(),
+  );
 
   @override
   void dispose() {
@@ -158,10 +176,13 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     super.dispose();
   }
 
-  var provider = ChangeNotifierProvider<BottomNavigationProvider>(
-    child: BottomHomePage(),
-    create: (context) => BottomNavigationProvider(),
-  );
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  void initDynamicLinks(BuildContext context) async {}
 
   @override
   Widget build(BuildContext context) {

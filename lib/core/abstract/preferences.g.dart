@@ -8,13 +8,13 @@ part of 'preferences.dart';
 
 class PreferencesAdapter extends TypeAdapter<Preferences> {
   @override
-  final typeId = 2;
+  final int typeId = 2;
 
   @override
   Preferences read(BinaryReader reader) {
-    var numOfFields = reader.readByte();
-    var fields = <int, dynamic>{
-      for (var i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Preferences()
       ..biometricEnabled = fields[0] as bool
@@ -36,4 +36,14 @@ class PreferencesAdapter extends TypeAdapter<Preferences> {
       ..writeByte(3)
       ..write(obj.name);
   }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PreferencesAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }

@@ -1,16 +1,16 @@
+import 'package:alice/alice.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
-
 import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 import 'package:nanodart/nanodart.dart';
 
+import '../inject.dart';
+import '../utils/vault.dart';
 import 'abstract/preferences.dart';
 import 'models.dart';
 import 'models/available_currency.dart';
 import 'models/available_language.dart';
-import '../inject.dart';
-import '../utils/vault.dart';
 
 class _InheritedStateContainer extends InheritedWidget {
   final StateContainerState data;
@@ -31,11 +31,13 @@ class StateContainer extends StatefulWidget {
   final Widget child;
   final Box<Account> accounts;
   final Preferences preferences;
+  final Alice alice;
 
   StateContainer(
       {@required this.child,
       @required this.accounts,
-      @required this.preferences});
+      @required this.preferences,
+      @required this.alice});
 
   @override
   State<StatefulWidget> createState() => StateContainerState();
@@ -233,7 +235,11 @@ class StateContainerState extends State<StateContainer> {
   void updateMnemonicPassphrase(currentAccountMnemonic) {}
 
   void checkAccountsBox() {
-    if (!selectedAccount.isInBox) {
+    try {
+      if (!selectedAccount.isInBox) {
+        selectedAccount.save();
+      }
+    } on HiveError catch (e) {
       selectedAccount.save();
     }
   }
