@@ -469,12 +469,10 @@ packages:
   flutter_platform_widgets:
     dependency: "direct main"
     description:
-      path: "."
-      ref: beta
-      resolved-ref: "3c807135f81df614a798c3264582d9c03e3ad2f2"
-      url: "https://github.com/stryder-dev/flutter_platform_widgets.git"
-    source: git
-    version: "0.51.0"
+      name: flutter_platform_widgets
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.60.1"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
