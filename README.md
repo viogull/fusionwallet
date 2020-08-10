@@ -1,19 +1,16 @@
 # Fusion Wallet [![Build Status](https://app.bitrise.io/app/078d4c59cda43563/status.svg?token=tovI3DjmdyFaFnGMXo7PQg)](https://app.bitrise.io/app/078d4c59cda43563)  
-
-Fusion - Android/iOS wallet for Minter blockchain.
-[✓] Flutter (Channel stable, 1.20.0, on macOS 11.0 20A5323l, locale ru-UA)
-
-
-
-# Unified API for iOS/Android SDK
+ Android/iOS wallet for Minter blockchain.
+##
+`[✓] Flutter (Channel stable, 1.20.0, macOS 11.0 20A5323l,ru-UA)`
 
 
+## Generate App Icons
+`flutter pub run flutter_launcher_icons:main`
 
+## Generate models
+`flutter packages pub run build_runner build --delete-conflicting-outputs`
 
-# Generate models
-`flutter packages pub run build_runner watch --delete-conflicting-outputs`
-
-# How to use localization?
+## How to use localization?
 
 1. Add new text getter to lib/localizations.dart
 2. After **lib/localizations.dart** appending, run next command in terminal to generate **.arb** files.  

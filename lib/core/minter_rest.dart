@@ -1,3 +1,4 @@
+import 'package:alice/alice.dart';
 import 'package:dio/dio.dart';
 import 'package:fusion_wallet/core/abstract/account.dart';
 import 'package:fusion_wallet/core/models/create_profile_request.dart';
@@ -75,7 +76,11 @@ class MinterRest {
   final Dio dio = Dio(dioOptions);
   final Dio fusionDio = Dio(fusionDioOptions);
 
-  void loadInterceptors() async {}
+  void loadInterceptors() async {
+    final alice = injector.get<Alice>();
+    dio.interceptors.add(alice.getDioInterceptor());
+    fusionDio.interceptors.add(alice.getDioInterceptor());
+  }
 
   final logger = injector.get<Logger>();
 
@@ -143,7 +148,9 @@ class MinterRest {
   }
 
   //put
-  Future<dynamic> updateProfileData() {}
+  Future<dynamic> updateProfileData() {
+    
+  }
 
   Future<dynamic> send(SendTxRequest txData) async {
     try {
@@ -434,5 +441,16 @@ class MinterRest {
 
   Future<PushTransactionResult> push(@required PushTransactionRequest) async {}
 
-  checkAccess(Account lastAccount) {}
+  Future<bool> checkAccess(Account lastAccount) async {
+    fetchProfileData(lastAccount.sessionKey, lastAccount.hash).then((value) {
+      logger.d(value);
+      if (value is ProfileResponse) return value.hasAccess;
+      return false;
+    }).catchError((onError) {
+      return false;
+    });
+    return false;
+  }
+
+  recover(String value, String value2) {}
 }

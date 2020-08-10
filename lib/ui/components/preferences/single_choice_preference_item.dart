@@ -74,10 +74,9 @@ class _FusionSingleChoicePreferenceState
                       value: value,
                       child: Material(
                         elevation: 0,
-                        clipBehavior: Clip.antiAlias,
                         child: Container(
                           margin: const EdgeInsets.all(12),
-                          color: Colors.transparent,
+                          color: Theme.of(context).colorScheme.background,
                           child: AutoSizeText(
                             value,
                             minFontSize: 8,

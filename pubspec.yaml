@@ -1,7 +1,7 @@
 name: fusion_wallet
 description: Android/iOS wallet for Minter.Network
 
-version: 1.0.0+3
+version: 1.0.0+5
 
 environment:
   sdk: ">=2.2.0 <3.0.0"
@@ -12,7 +12,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-
   firebase_core: ^0.4.5
   firebase_analytics: ^5.0.16
   firebase_dynamic_links: ^0.5.1
@@ -20,7 +19,6 @@ dependencies:
   onesignal_flutter: ^2.6.0
 
   web3dart: ^1.2.3
-
 
   mobx: ^1.2.1+1
   flutter_mobx: ^1.1.0+1
@@ -33,13 +31,11 @@ dependencies:
   page_transition: ^1.1.5
   progress_dialog: ^1.2.4
   path_provider: ^1.6.11
-  async: ^2.4.2
   flutter_staggered_animations: ^0.1.2
   google_fonts: ^1.1.0
   flutter_spinkit: ^4.1.2+1
   provider: ^4.3.0
   flutter_bloc: ^5.0.1
-  rubber: ^0.4.0
   qr_flutter: ^3.2.0
   flutter_datetime_picker: ^1.3.8
   pin_input_text_field: ^3.0.4
@@ -49,7 +45,6 @@ dependencies:
   meta: ^1.1.8
   flutter_secure_storage: ^3.3.3
   nanodart: ^1.0.0
-  flare_flutter: ^2.0.5
   pointycastle: ^1.0.2
   hive: ^1.4.1+1
   hive_flutter: ^0.3.0+2
@@ -63,27 +58,13 @@ dependencies:
   intl: ^0.16.1
   decimal: ^0.3.5
   logger: ^0.9.1
-  flutter_webview_plugin: ^0.3.11
-  event_taxi: ^0.1.5
-
-
   alice: ^0.1.3
-
-
   # Share files
   share: ^0.6.4+3
-
-
-  # File picker
-  # Deep link support
-  #uni_links: ^0.2.0
   uni_links:
     git:
       url: https://github.com/CathalT/uni_links.git
       ref: nfc_android
-
-  # HTTP client
-  http: ^0.12.1
 
   flutter_platform_widgets:
       git:
@@ -100,13 +81,8 @@ dependencies:
   oktoast: ^2.3.2
   # Push notifications
   # Slidable list actions
-  flutter_slidable: ^0.5.4
-
-  passcode_screen: ^1.2.0
   # Lock helper
-  synchronized: ^2.2.0+1
   modal_bottom_sheet: ^0.2.0
-
   # Service provider
   get_it: ^4.0.2
   shared_preferences: ^0.5.8
@@ -115,7 +91,6 @@ dependencies:
     git:
       url: https://github.com/bbedward/root_checker.git
       ref: master
-
   # Validation utilities
   validators: ^2.0.1
   # Auto resize text widget
@@ -128,11 +103,13 @@ dependencies:
   keyboard_avoider: ^0.1.2
   barcode_scan: ^3.0.1
   slide_popup_dialog: ^0.0.2
-  dropdown_banner: ^1.4.0
   connection_status_bar: ^1.1.2
-  responsive_scaffold: ^1.3.0+2
   flutter_icons: ^1.1.0
   flash: ^1.3.1
+  flutter_easyrefresh: ^2.1.5
+  flutter_sliding_up_panel: ^1.1.0+1
+  flutter_bounce: ^1.0.8
+
 
 dependency_overrides:
   path: ^1.7.0
@@ -145,7 +122,6 @@ dev_dependencies:
   flutter_launcher_icons: ^0.7.5
   path: ^1.7.0
   hive_generator: ^0.7.0+2
-  test: ^1.0.0
 
 flutter_icons:
   android: "launcher_icon"

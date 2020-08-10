@@ -1,8 +1,10 @@
 import 'dart:math';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/core/minter_channel.dart';
@@ -119,9 +121,10 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
                                     (MediaQuery.of(context).size.width / 4),
                                 child: new Container(
                                   alignment: Alignment.center,
-                                  child: GestureDetector(
+                                  child: Bounce(
+                                    duration: Duration(milliseconds: 400),
                                     child: Container(
-                                      child: new Text(
+                                      child: new AutoSizeText(
                                         words[index],
                                         maxLines: 1,
                                         style: TextStyle(
@@ -133,7 +136,7 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
                                                 fontWeight: FontWeight.w700),
                                       ),
                                     ),
-                                    onTap: () {
+                                    onPressed: () {
                                       setState(() {});
                                     },
                                   ),
@@ -404,8 +407,8 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
                                   StateContainer.of(context)
                                       .persistPassphrase(mnemonic);
                                   Scaffold.of(context).showSnackBar(SnackBar(
-                                    content:
-                                        Text('Succesfully saved passhprase.'),
+                                    content: Text(AppLocalizations.of(context)
+                                        .copiedSuccesfullyMessage()),
                                   ));
                                   BlocProvider.of<AuthenticationBloc>(context)
                                       .add(PassphraseVerifiedEvent(
@@ -422,8 +425,8 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
                               } else {
                                 if (_verificationStage > 0) {
                                   Scaffold.of(context).showSnackBar(SnackBar(
-                                    content: Text(
-                                        'Incorrect word. Please try again'),
+                                    content: Text(AppLocalizations.of(context)
+                                        .flashIncorrectWordMessage()),
                                   ));
                                   setState(() {
                                     _verificationStage = -1;

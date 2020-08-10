@@ -244,9 +244,10 @@ class StateContainerState extends State<StateContainer> {
     }
   }
 
-  void loadAccount() {
+  void loadAccount() async {
+    var acc = await Hive.box<Account>(accountsBox).getAt(0);
     setState(() {
-      this.selectedAccount = widget.accounts.getAt(0);
+      this.selectedAccount = acc;
     });
   }
 

@@ -47,16 +47,16 @@ class ProfileResponse {
         rewards.add(v.fromJson(v));
       });
     }
-    id = json["Id"];
+    id = json["_id"];
     name = json["name"];
     mnemonic = json["mnemonic"];
     address = json["address"];
     hash = json["hash"];
-    playerId = json["playerId"];
+    playerId = json["player_id"];
     uuid = json["uuid"];
-    promoteUrl = json["promoteUrl"];
+    promoteUrl = json["promote_url"];
     lastSync = json["lastSync"];
-    v = json["V"];
+    v = json["__v"];
   }
 
   Map<String, dynamic> toJson() {
@@ -65,16 +65,16 @@ class ProfileResponse {
     if (rewards != null) {
       map["rewards"] = rewards.map((v) => v.toJson()).toList();
     }
-    map["Id"] = id;
+    map["_id"] = id;
     map["name"] = name;
     map["mnemonic"] = mnemonic;
     map["address"] = address;
     map["hash"] = hash;
-    map["playerId"] = playerId;
+    map["player_id"] = playerId;
     map["uuid"] = uuid;
-    map["promoteUrl"] = promoteUrl;
+    map["promote_url"] = promoteUrl;
     map["lastSync"] = lastSync;
-    map["V"] = v;
+    map["__v"] = v;
     return map;
   }
 }

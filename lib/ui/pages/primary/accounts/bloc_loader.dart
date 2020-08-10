@@ -19,6 +19,7 @@ class BlocLoader extends StatelessWidget {
       onWillPop: () async => false,
       child: Center(
         child: Card(
+          elevation: 1,
           child: Container(
             width: 80,
             height: 80,

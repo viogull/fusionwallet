@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:fusion_wallet/core/models.dart';
 
 import 'package:meta/meta.dart';
 
@@ -45,6 +46,18 @@ class PassphraseVerifiedEvent extends AccountCreationEvent {
   String toString() => 'PassphraseVerifiedEvent { $seed } ';
 }
 
+class AccountCompleteRecoverEvent extends AccountCreationEvent {
+  final Account recoveryAccount;
+
+  const AccountCompleteRecoverEvent({@required this.recoveryAccount});
+
+  @override
+  List<Object> get props => [recoveryAccount.toString()];
+
+  @override
+  String toString() => 'AccountCompleteRecoverEvent { $recoveryAccount } ';
+}
+
 class BiometricConfiguredEvent extends AccountCreationEvent {
   final bool enableBiometrics;
   const BiometricConfiguredEvent({@required this.enableBiometrics});
@@ -79,11 +92,10 @@ class AccountNameCreatedEvent extends AccountCreationEvent {
 }
 
 class AccountLockEvent extends AccountCreationEvent {
-
   final bool unlockWithBiometric;
   final String expectedPincode;
 
-  const AccountLockEvent({ this.unlockWithBiometric, this.expectedPincode});
+  const AccountLockEvent({this.unlockWithBiometric, this.expectedPincode});
 
   @override
   List<Object> get props => [unlockWithBiometric, expectedPincode];
@@ -91,7 +103,6 @@ class AccountLockEvent extends AccountCreationEvent {
   @override
   String toString() =>
       'LockAccountEvent { $unlockWithBiometric, expected code $expectedPincode } ';
-
 }
 
 class AccountUnlockEvent extends AccountCreationEvent {}

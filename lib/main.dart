@@ -14,9 +14,11 @@ import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'core/abstract/contact.dart';
+import 'core/minter_rest.dart';
 import 'core/models.dart';
 import 'localizations.dart';
 import 'inject.dart';
+import 'ui/pages/auth/access_ui.dart';
 import 'ui/pages/auth/splash.dart';
 import 'core/state_container.dart';
 import 'ui/pages/lockscreen/lockscreen.dart';
@@ -61,6 +63,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   setupServiceLocator();
+  injector.get<MinterRest>().loadInterceptors();
   await Hive.initFlutter();
   Hive.registerAdapter<Account>(AccountAdapter());
   Hive.registerAdapter<Contact>(ContactAdapter());
@@ -96,18 +99,14 @@ class App extends StatefulWidget {
 }
 
 class AppState extends State<App> {
-  Alice _alice;
-
   @override
   void initState() {
-    _alice = Alice(
-        showNotification: true, showInspectorOnShake: true, darkTheme: false);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-        navigatorKey: _alice.getNavigatorKey(),
+        navigatorKey: injector.get<Alice>().getNavigatorKey(),
         theme: FusionTheme.light,
         darkTheme: FusionTheme.dark,
         themeMode: StateContainer.of(context).darkModeEnabled
@@ -125,6 +124,7 @@ class AppState extends State<App> {
         routes: <String, WidgetBuilder>{
           Splash.navId: (context) => Splash(),
           LockUi.navId: (context) => LockUi(),
+          AccessLockedUi.navId: (context) => AccessLockedUi(),
           HomePage.navId: (context) => HomePage(),
           ViewPassphraseDialog.navId: (context) => ViewPassphraseDialog(
                 data: null,

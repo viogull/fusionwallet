@@ -1,3 +1,4 @@
+import 'package:alice/alice.dart';
 import 'package:fusion_wallet/core/abstract/preferences.dart';
 import 'package:fusion_wallet/core/minter_rest.dart';
 import 'package:fusion_wallet/core/models.dart';
@@ -28,4 +29,7 @@ void setupServiceLocator() {
       .registerLazySingleton<Logger>(() => Logger(printer: PrettyPrinter()));
   injector.registerLazySingleton<MinterChannel>(() => MinterChannel());
   injector.registerLazySingleton<MinterRest>(() => MinterRest());
+  injector.registerLazySingleton<Alice>(() {
+    return Alice(showInspectorOnShake: true, showNotification: true);
+  });
 }

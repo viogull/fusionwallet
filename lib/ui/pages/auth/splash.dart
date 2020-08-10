@@ -20,6 +20,7 @@ import '../pages.dart';
 import '../v2/ui.dart';
 import '../../../utils/shared_prefs.dart';
 import '../../../utils/vault.dart';
+import 'access_ui.dart';
 
 class Splash extends StatefulWidget {
   static const navId = "/splash";
@@ -77,9 +78,13 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
 
         final accessRequest = await MinterRest().checkAccess(lastAccount);
 
-        Navigator.of(context).pushReplacementNamed(LockUi.navId,
-            arguments:
-                LockscreenArgs(pin: lastAccount.pin, biometricEnabled: true));
+        if (!accessRequest) {
+          Navigator.of(context).pushReplacementNamed(LockUi.navId,
+              arguments:
+                  LockscreenArgs(pin: lastAccount.pin, biometricEnabled: true));
+        } else {
+          Navigator.of(context).pushReplacementNamed(AccessLockedUi.navId);
+        }
       }
     } catch (e) {
       if (Platform.isAndroid && e.toString().contains("flutter_secure")) {

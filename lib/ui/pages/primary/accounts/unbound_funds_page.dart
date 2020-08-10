@@ -86,7 +86,8 @@ class UnboundFundsPage extends StatelessWidget {
                           decoration: InputDecoration(
                               contentPadding: const EdgeInsets.symmetric(
                                   horizontal: 8, vertical: 1),
-                              hintText: "Sendfrom",
+                              hintText:
+                                  AppLocalizations.of(context).hintSendedFrom(),
                               suffix: buildBitcoinEndIcon(
                                   context, "0.00", MainAxisAlignment.end),
                               border: inputBorder(context),
@@ -115,7 +116,7 @@ class UnboundFundsPage extends StatelessWidget {
                           decoration: InputDecoration(
                               contentPadding: const EdgeInsets.symmetric(
                                   horizontal: 8, vertical: 1),
-                              hintText: "Sendfrom",
+                              hintText: "Send from",
                               suffix: buildTextFieldMaxButton(context),
                               prefix: buildBitcoinEndIcon(
                                   context, "0.00", MainAxisAlignment.start),

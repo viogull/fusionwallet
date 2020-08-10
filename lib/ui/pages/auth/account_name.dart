@@ -17,7 +17,6 @@ import 'package:fusion_wallet/core/models.dart';
 import 'package:hive/hive.dart';
 
 class AccountNamingFormBloc extends FormBloc<String, String> {
-  // ignore: close_sinks
   final accountName = TextFieldBloc();
 
   AccountNamingFormBloc() {
@@ -103,7 +102,8 @@ class AccountCreationNameForm extends StatelessWidget {
                           flex: 4,
                           child: TextFieldBlocBuilder(
                             textFieldBloc: bloc.accountName,
-                            keyboardType: TextInputType.text,
+                            keyboardType: TextInputType.name,
+                            autofocus: true,
                             decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.symmetric(
                                     vertical: 16, horizontal: 12),
@@ -194,7 +194,7 @@ class SuccessScreen extends StatelessWidget {
             RaisedButton.icon(
               onPressed: () {},
               icon: Icon(Icons.replay),
-              label: Text('AGAIN'),
+              label: Text(AppLocalizations.of(context).labelAgain()),
             ),
           ],
         ),

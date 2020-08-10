@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:fusion_wallet/ui/pages/v2/bloc.dart';
 import 'package:fusion_wallet/ui/pages/v2/event.dart';
+import 'package:fusion_wallet/utils/haptic.dart';
 
+import '../../../inject.dart';
 import '../../../localizations.dart';
 
 class PasswordCreationPage extends StatefulWidget {
@@ -47,6 +50,7 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
   ];
 
   void _handleKeypadClick(String val, BuildContext context) {
+    injector.get<HapticUtil>().impact();
     setState(() {
       if (_otp.length < 6) {
         _otp = _otp + val;
@@ -367,40 +371,43 @@ class KeyboardNumber extends StatelessWidget {
   KeyboardNumber({this.n, this.onPressed});
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 50.0,
-      height: 50.0,
-      decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.4),
-              blurRadius: 5.0, // has the effect of softening the shadow
-              spreadRadius: 2.0, // has the effect of extending the shadow
-              offset: Offset(
-                0.0, // horizontal, move right 10
-                10.0, // vertical, move down 10
-              ),
-            )
-          ],
-          borderRadius: BorderRadius.circular(10),
-          shape: BoxShape.rectangle,
-          color: Theme.of(context).colorScheme.background),
-      alignment: Alignment.center,
-      child: MaterialButton(
-        padding: EdgeInsets.all(8.0),
-        onPressed: onPressed,
-        elevation: 50,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        height: 90.0,
-        child: Text(
-          "$n",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 24 * MediaQuery.of(context).textScaleFactor,
-            color: Theme.of(context).colorScheme.onSurface,
-            fontWeight: FontWeight.bold,
+    return Bounce(
+      duration: Duration(seconds: 1),
+      child: Container(
+        width: 50.0,
+        height: 50.0,
+        decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.4),
+                blurRadius: 5.0, // has the effect of softening the shadow
+                spreadRadius: 2.0, // has the effect of extending the shadow
+                offset: Offset(
+                  0.0, // horizontal, move right 10
+                  10.0, // vertical, move down 10
+                ),
+              )
+            ],
+            borderRadius: BorderRadius.circular(10),
+            shape: BoxShape.rectangle,
+            color: Theme.of(context).colorScheme.background),
+        alignment: Alignment.center,
+        child: MaterialButton(
+          padding: EdgeInsets.all(8.0),
+          onPressed: onPressed,
+          elevation: 50,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          height: 90.0,
+          child: Text(
+            "$n",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 24 * MediaQuery.of(context).textScaleFactor,
+              color: Theme.of(context).colorScheme.onSurface,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),

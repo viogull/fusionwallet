@@ -12,6 +12,7 @@ import 'package:fusion_wallet/ui/components/custom/passphrase_view.dart';
 import 'package:fusion_wallet/ui/pages/auth/change_account_name.dart';
 import 'package:fusion_wallet/ui/pages/popups/popups_remove_account.dart';
 import 'package:fusion_wallet/ui/pages/accounts.dart';
+import 'package:fusion_wallet/ui/tools/flasher.dart';
 import 'package:fusion_wallet/utils/haptic.dart';
 import 'package:fusion_wallet/utils/io_tools.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -174,7 +175,9 @@ class _BottomHomePageState extends State<BottomHomePage> {
                 "assets/images/icons/ic_copy.svg", true),
             onClick: () async {
               injector.get<HapticUtil>().selection();
-              IOTools.setSecureClipboardItem(await buildReferalLink(false));
+              IOTools.setSecureClipboardItem(buildReferal(context));
+              FlashHelper.successBar(context,
+                  message: 'Referal link was copied to clipboard.');
             }),
       ]),
     );
@@ -185,6 +188,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
     final deepLink = data?.link;
 
     if (deepLink != null) {
+      logger.d('Deeplink attached ', deepLink);
       Navigator.pushNamed(context, deepLink.path);
     }
   }
@@ -277,6 +281,9 @@ class _BottomHomePageState extends State<BottomHomePage> {
     debugPrint("Referal Url created ${url.toString()}");
     return url.toString();
   }
+
+  String buildReferal(BuildContext context) =>
+      "https://fusion-push.cash/ref/${StateContainer.of(context).selectedAccount.address}";
 
   List<BottomNavigationBarItem> _bottomBarItems(
           BuildContext context, ThemeData theme) =>

@@ -42,7 +42,7 @@ class FusionButton extends StatelessWidget {
         ios: (_) => FusionTheme.buttonIOSTheme,
         color: theme.colorScheme.primary,
         onPressed: () {
-          injector.get<HapticUtil>().fingerprintSucess();
+          injector.get<HapticUtil>().impact();
           this.onPressed();
         },
         child: Padding(
@@ -50,7 +50,8 @@ class FusionButton extends StatelessWidget {
           child: AutoSizeText(
             text,
             textAlign: TextAlign.center,
-            maxFontSize: 20,
+            maxFontSize: 24,
+            minFontSize: 16,
             maxLines: 1,
             style: GoogleFonts.openSans().copyWith(
               color: (theme.colorScheme.onPrimary),

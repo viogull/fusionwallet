@@ -1581,6 +1581,34 @@ class AppLocalizations {
   String flashAddressCopied() =>
       Intl.message("Address was copied to clipboard.",
           name: "flashAddressCopied");
+
+  String accessBlocked() =>
+      Intl.message("Access was blocked. Please, contact with administration",
+          name: 'accessBlockedTitle');
+
+  String pushLinkWasCopied() =>
+      Intl.message("Link was copied to clipboard.", name: 'pushLinkWasCopied');
+
+  String sendFundsToPushWallet(num qty, String wallet) =>
+      Intl.message('Send $qty funds to $wallet',
+          name: 'sendFundsToPushWallet', args: [qty, wallet]);
+
+  String copiedSuccesfullyMessage() =>
+      Intl.message('Succesfully saved passhprase.',
+          name: 'copiedSuccesfullyMessage');
+
+  String flashIncorrectWordMessage() =>
+      Intl.message("Incorrect word. Please try again",
+          name: 'flashIncorrectWordMessage');
+
+  String labelAgain() => Intl.message('Again', name: 'labelAgain');
+
+  String hintSendedFrom() =>
+      Intl.message("Sending from", name: 'hintSendedFrom');
+
+  String errorInvalidInputsPush() =>
+      Intl.message("Invalid values for push transaction",
+          name: 'errorInvalidInputsPush');
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

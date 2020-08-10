@@ -2,11 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fusion_wallet/core/minter_rest.dart';
+import 'package:fusion_wallet/core/models/create_push_link_request.dart';
+import 'package:fusion_wallet/core/models/create_push_link_response.dart';
 import 'package:fusion_wallet/localizations.dart';
+import 'package:fusion_wallet/ui/pages/pushing/share_push.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 
+import '../../../../inject.dart';
 import 'bloc_loader.dart';
 
 class PushFormBloc extends FormBloc<String, String> {
@@ -18,7 +23,20 @@ class PushFormBloc extends FormBloc<String, String> {
   }
 
   @override
-  void onSubmitting() async {}
+  void onSubmitting() async {
+    final amount = qty.value;
+    final receiverName = name.value;
+    final createPushLinkReq = await injector.get<MinterRest>().createPushLink(
+        CreatePushLinkRequest(coin: 'BIP', value: amount, payload: 'Message'),
+        receiverName,
+        "");
+    if (createPushLinkReq is CreatePushLinkResponse) {
+      final response = createPushLinkReq as CreatePushLinkResponse;
+      emitSuccess(successResponse: response.toJson().toString());
+    } else {
+      emitFailure();
+    }
+  }
 }
 
 class PushFundsPage extends StatelessWidget {
@@ -65,6 +83,10 @@ class PushFundsPage extends StatelessWidget {
           BlocLoader.show(context);
         }, onSuccess: (context, state) {
           BlocLoader.hide(context);
+          Navigator.of(context).push(new MaterialPageRoute(
+              builder: (context) => SharePush(
+                  CreatePushLinkResponse.fromJson(state.successResponse)),
+              fullscreenDialog: true));
         }, onFailure: (context, state) {
           BlocLoader.hide(context);
         }, child: Builder(builder: (context) {
@@ -108,7 +130,7 @@ class PushFundsPage extends StatelessWidget {
                                 data: Theme.of(context),
                                 child: TextFieldBlocBuilder(
                                   textFieldBloc: pushBloc.name,
-                                  keyboardType: TextInputType.number,
+                                  keyboardType: TextInputType.name,
                                   maxLines: 1,
                                   decoration: InputDecoration(
                                       contentPadding:
@@ -140,6 +162,8 @@ class PushFundsPage extends StatelessWidget {
                                 data: Theme.of(context),
                                 child: TextFieldBlocBuilder(
                                   textFieldBloc: pushBloc.qty,
+                                  keyboardType: TextInputType.numberWithOptions(
+                                      decimal: true),
                                   decoration: InputDecoration(
                                       contentPadding:
                                           const EdgeInsets.symmetric(

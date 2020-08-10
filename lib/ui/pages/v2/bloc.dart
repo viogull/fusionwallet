@@ -16,12 +16,13 @@ class AuthenticationBloc
   AuthenticationBloc() : super(null) {
     preferences = _box.getAt(0);
   }
-
   MinterRest api = MinterRest();
 
   Preferences preferences;
   Account _account = Account();
   Box<Preferences> _box = Hive.box(preferencesBox);
+
+  bool _isRecoveringAccount = false;
 
   AccountCreationState get initialState => AccountInitialState();
 
@@ -36,14 +37,20 @@ class AuthenticationBloc
     }
     if (event is AccountStartRecoverEvent) {
       yield AccountRecoveryState();
+    } else if (event is AccountCompleteRecoverEvent) {
+      _isRecoveringAccount = true;
+      _account = event.recoveryAccount;
+      yield CreatePincodeState();
     } else if (event is AccountCreateWalletEvent) {
       yield CreatePincodeState();
     } else if (event is PincodeCreatedEvent) {
       _account.pin = event.pin;
-      yield BiometricsConfigureState();
+      if (this._isRecoveringAccount)
+        yield AccountUnlockedState();
+      else
+        yield BiometricsConfigureState();
     } else if (event is BiometricConfiguredEvent) {
       preferences.biometricEnabled = event.enableBiometrics;
-
       yield PassphraseCreationState();
     } else if (event is PassphraseVerifiedEvent) {
       _account.address = event.address;
@@ -65,16 +72,22 @@ class AuthenticationBloc
           promoteUrl: "null"));
       debugPrint(createProfile.toJson().toString());
       _account.name = event.name;
+      _account.hash = createProfile.hash;
+      _account.sessionKey = createProfile.id;
       preferences.name = event.name;
-      if (_account.isInBox) {
-        _account.save();
-        preferences.save();
-      } else {
-        Box<Account> accs = Hive.box(accountsBox);
-        accs.add(_account);
-      }
 
-      yield AccountUnlockedState();
+      if (createProfile != null) {
+        if (_account.isInBox) {
+          _account.save();
+          preferences.save();
+        } else {
+          Box<Account> accs = Hive.box(accountsBox);
+          accs.add(_account);
+          _account.save();
+          preferences.save();
+        }
+        yield AccountUnlockedState();
+      }
     } else if (event is AccountUnlockEvent) {
       yield AccountUnlockedState();
     } else if (event is AccountLockEvent) {

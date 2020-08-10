@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
+import '../theme.dart';
+
 class _MessageItem<T> {
   final String message;
   Completer<Future<T>> completer;
@@ -110,10 +112,11 @@ class FlashHelper {
         return Flash(
           controller: controller,
           horizontalDismissDirection: HorizontalDismissDirection.horizontal,
-          backgroundColor: Theme.of(context).colorScheme.primary,
+          backgroundColor: Theme.of(context).colorScheme.primaryVariant,
           style: FlashStyle.floating,
           margin: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
           position: FlashPosition.top,
+          borderRadius: const BorderRadius.all(Radius.circular(8.0)),
           child: FlashBar(
             title: title == null
                 ? null
@@ -145,15 +148,19 @@ class FlashHelper {
         return Flash(
           controller: controller,
           horizontalDismissDirection: HorizontalDismissDirection.horizontal,
-          backgroundColor: Colors.black87,
+          position: FlashPosition.bottom,
+          borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+          margin: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+          backgroundColor: FusionTheme.greenButtonColor(),
           child: FlashBar(
-            title: title == null
-                ? null
-                : Text(title, style: _titleStyle(context, Colors.white)),
-            message: Text(message, style: _contentStyle(context, Colors.white)),
-            icon: Icon(Icons.check_circle, color: Colors.blue[300]),
-            leftBarIndicatorColor: Colors.blue[300],
-          ),
+              title: title == null
+                  ? null
+                  : Text(title, style: _titleStyle(context, Colors.white)),
+              message:
+                  Text(message, style: _contentStyle(context, Colors.white)),
+              icon: Icon(Icons.check_circle,
+                  color: Theme.of(context).colorScheme.onPrimary),
+              leftBarIndicatorColor: Theme.of(context).colorScheme.onPrimary),
         );
       },
     );
