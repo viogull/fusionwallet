@@ -373,6 +373,7 @@ class KeyboardNumber extends StatelessWidget {
   Widget build(BuildContext context) {
     return Bounce(
       duration: Duration(seconds: 1),
+      onPressed: () {  },
       child: Container(
         width: 50.0,
         height: 50.0,

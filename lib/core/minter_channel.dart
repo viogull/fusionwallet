@@ -24,7 +24,7 @@ class MinterChannel {
           .invokeMethod<Map<dynamic, dynamic>>('create_address');
     } on Exception catch (e) {
       log.e(" Exception on generating new address. Details: "
-          "\n ${e} \n");
+          "\n $e \n");
     }
     return null;
   }

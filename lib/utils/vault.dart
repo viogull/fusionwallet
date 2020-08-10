@@ -246,5 +246,5 @@ class Vault {
 
   Future<void> deleteAllAccounts() async {}
 
-  Future<dynamic> setLastAuthentication(@required String uu) async {}
+  Future<dynamic> setLastAuthentication({@required String uu}) async {}
 }

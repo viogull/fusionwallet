@@ -15,31 +15,6 @@ class _PopupHistoryPageState extends State<PopupHistoryPage> {
   DateTime endDate = DateTime.now();
   var list;
 
-  Future<Null> _startDateSelect(BuildContext context) async {
-    final DateTime picked = await showDatePicker(
-        context: context,
-        initialDate: startDate,
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101));
-
-    if (picked != null && picked != startDate)
-      setState(() {
-        startDate = picked;
-      });
-  }
-
-  Future<Null> _endDateSelect(BuildContext context) async {
-    final DateTime picked = await showDatePicker(
-        context: context,
-        initialDate: endDate,
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101));
-
-    if (picked != null && picked != endDate)
-      setState(() {
-        endDate = picked;
-      });
-  }
 
   @override
   void initState() {

@@ -1,1899 +1,1916 @@
 {
-  "@@last_modified": "2020-05-02T18:57:46.169038",
-  "appName": "Fusion",
-  "@appName": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonCreateAccount": "Создать аккаунт",
-  "@buttonCreateAccount": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonRecoverFromPassphrase": "Восстановление по контр.фразе",
-  "@buttonRecoverFromPassphrase": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelAlreadyHaveAccount": "Есть аккаунт?",
-  "@labelAlreadyHaveAccount": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarChoosePassTitle": "Создание пароля",
-  "@toolbarChoosePassTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelChoosePassSubtitle": "Введите ПИН код на 6 символов",
-  "@labelChoosePassSubtitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelChoosePassVerifySubtitle": "Повторите ввод",
-  "@labelChoosePassVerifySubtitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelEnableBiometricTitle": "Включить биометрическую аутентификацию?",
-  "@labelEnableBiometricTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelEnableBiometricSubtitle": "Рекомендуется для повышенной безопасности.",
-  "@labelEnableBiometricSubtitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelYes": "Да",
-  "@labelYes": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelNo": "Нет",
-  "@labelNo": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarNewAccountTitle": "Новый аккаунт",
-  "@toolbarNewAccountTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelBackupPassphraseSubtitle": "Сохраните контрольную фразу",
-  "@labelBackupPassphraseSubtitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonVerifyRecoveryPhrase": "Подтвердить контр.фразу",
-  "@buttonVerifyRecoveryPhrase": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonShare": "Поделиться",
-  "@buttonShare": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelBackupPassphraseCaption": "Чтобы восстановить доступ к утерянному аккаунту, напечатайте или сохраните ключ в надежном месте.",
-  "@labelBackupPassphraseCaption": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelQuestionIndicatorTitle": "Вопрос {current} с {total}",
-  "@labelQuestionIndicatorTitle": {
-    "type": "text",
-    "placeholders": {
-      "current": {},
-      "total": {}
-    }
-  },
-  "labelWordIndicatorSubtitle": "Выберите {position}-е слово вашей контрольной фразы.",
-  "@labelWordIndicatorSubtitle": {
-    "type": "text",
-    "placeholders": {
-      "position": {}
-    }
-  },
-  "toastTryAgain": "Пожалуйста, попробуйте еще раз",
-  "@toastTryAgain": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "popupPassVerifiedTitle": "Контр.фраза подтверждена!",
-  "@popupPassVerifiedTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "popupPassVerifiedBody": "Ваша контрольная фраза создана. Сохраните её в надежном месте ради возможности в будущем восстановить аккаунт.",
-  "@popupPassVerifiedBody": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelOk": "OK",
-  "@labelOk": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "inputAccountNameHelperText": "Имя",
-  "@inputAccountNameHelperText": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "inputAccountNameHintText": "Пожалуйста, сохраните имя для аккаунта.",
-  "@inputAccountNameHintText": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "checkboxTermsConditions": "Я принимаю все правила.",
-  "@checkboxTermsConditions": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonNext": "Далее",
-  "@buttonNext": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarTermsConditionsTitle": "Правила и использование",
-  "@toolbarTermsConditionsTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarRecoverFromSeedTitle": "Восстановить по фразе",
-  "@toolbarRecoverFromSeedTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "inputEnterScanPasshpraseHintText": "Введите фразу или сканируйте QR",
-  "@inputEnterScanPasshpraseHintText": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonVerify": "Подтвердить",
-  "@buttonVerify": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarScanQrTitle": "QR-код фразы",
-  "@toolbarScanQrTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonClose": "Закрыть",
-  "@buttonClose": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "popupAccVerificationWelcomeText": "Добро пожаловать! Вы можете начать пользоваться кошельком.",
-  "@popupAccVerificationWelcomeText": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelUnlockTitle": "Разблокировать",
-  "@labelUnlockTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonLogOut": "Выйти",
-  "@buttonLogOut": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelUnlockSubtitle": "Введите 6-символьный ПИН код",
-  "@labelUnlockSubtitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelTapToCopy": "Нажмите чтобы скопировать",
-  "@labelTapToCopy": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarViewPasshraseTitle": "Показать фразу",
-  "@toolbarViewPasshraseTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonSend": "Отправить",
-  "@buttonSend": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonRequest": "Получить",
-  "@buttonRequest": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonDelegate": "Делегировать",
-  "@buttonDelegate": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonUnbound": "Освободить",
-  "@buttonUnbound": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonPush": "Push",
-  "@buttonPush": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelCryptoAvailable": "Доступно",
-  "@labelCryptoAvailable": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelTotalReward": "Общее к-во наград",
-  "@labelTotalReward": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelTransanctionsHistoryTitle": "История транзанкций",
-  "@labelTransanctionsHistoryTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "navigationLabelAccounts": "Аккаунты",
-  "@navigationLabelAccounts": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "navigationLabelExchange": "Обмен",
-  "@navigationLabelExchange": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "navigationItemContacts": "Контакты",
-  "@navigationItemContacts": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "navigationItemHistory": "История",
-  "@navigationItemHistory": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "navigationItemSettings": "Настройки",
-  "@navigationItemSettings": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "menuItemShowQR": "Показать адреса и QR",
-  "@menuItemShowQR": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "menuItemSetDefaults": "Установить по умолчанию",
-  "@menuItemSetDefaults": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "menuItemViewPassphrase": "Просмотр контр.фразы",
-  "@menuItemViewPassphrase": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "menuItemEditAccountName": "Изменение имени",
-  "@menuItemEditAccountName": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "menuItemRemoveAccount": "Удаление аккаунта",
-  "@menuItemRemoveAccount": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "menuItemWithdrawFunds": "Вывод средств",
-  "@menuItemWithdrawFunds": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "menuItemReferalLink": "Реферальная ссылка",
-  "@menuItemReferalLink": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelTotalRewardTitle": "Получено наград",
-  "@labelTotalRewardTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelPendingRewardTitle": "Ожидают подтверждения",
-  "@labelPendingRewardTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelPendingRewardSubtitle": "Награда становиться подтвержденной после получения или отправки BIP",
-  "@labelPendingRewardSubtitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelRewardsCaption": "За информацией о наградах Fusion, посетите наш FAQ",
-  "@labelRewardsCaption": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonPreview": "Просмотр",
-  "@buttonPreview": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelFrom": "Отправитель",
-  "@labelFrom": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelTo": "Получатель",
-  "@labelTo": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelAmount": "Количество",
-  "@labelAmount": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelAddress": "Адрес",
-  "@labelAddress": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelMyContacts": "Мои контакты",
-  "@labelMyContacts": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelContacts": "Контакты",
-  "@labelContacts": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelScanQr": "Сканировать QR",
-  "@labelScanQr": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarSendTitle": "Отправить",
-  "@toolbarSendTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "inputMaxAmountSuffix": "MAX",
-  "@inputMaxAmountSuffix": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "inputAddressHint": "Введите адрес",
-  "@inputAddressHint": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "inputFundsStakeHint": "Ставка",
-  "@inputFundsStakeHint": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelSender": "Отправитель",
-  "@labelSender": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelReceiver": "Получатель",
-  "@labelReceiver": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelPubkeyOrDomain": "Публичный ключ или домен",
-  "@labelPubkeyOrDomain": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelCoin": "Монета",
-  "@labelCoin": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelName": "Имя",
-  "@labelName": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "popupRemoveAccountTitle": "Удаление аккаунта",
-  "@popupRemoveAccountTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "popupRemoveAccountBody": "Вы точно хотите удалить аккаунт? ",
-  "@popupRemoveAccountBody": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelCancel": "Отменить",
-  "@labelCancel": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelRemove": "Удалить",
-  "@labelRemove": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelSave": "Сохранить",
-  "@labelSave": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "inputEditAccountNameTitle": "Изменить имя",
-  "@inputEditAccountNameTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "inputEditAccountNameHint": "Имя аккаунта",
-  "@inputEditAccountNameHint": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarHistoryTitle": "История",
-  "@toolbarHistoryTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelAccount": "Аккаунт:",
-  "@labelAccount": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelStartDate": "Начальная дата",
-  "@labelStartDate": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelEndDate": "Конечная дата",
-  "@labelEndDate": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonViewResults": "Показать результаты",
-  "@buttonViewResults": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "settingsItemUiTheme": "Включить темную тему",
-  "@settingsItemUiTheme": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "settingsItemChgPassword": "Установить/сменить пароль",
-  "@settingsItemChgPassword": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "settingsItemBiometricFeature": "Биометрическая аутентификация",
-  "@settingsItemBiometricFeature": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "settingsItemNotifications": "Уведомления",
-  "@settingsItemNotifications": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "settingsItemShowRewards": "Показать награды",
-  "@settingsItemShowRewards": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "settingsItemLanguage": "Язык",
-  "@settingsItemLanguage": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "settingsItemSendFeedback": "Отправить отзыв",
-  "@settingsItemSendFeedback": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "settingsItemFaq": "FAQ",
-  "@settingsItemFaq": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelFeedbackNoteTitle": "Заметка",
-  "@labelFeedbackNoteTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "inputFeedbackCommentHint": "What is on your mind",
-  "@inputFeedbackCommentHint": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelFeedbackEmailSubtitle": "Эл.почта (необяз.)",
-  "@labelFeedbackEmailSubtitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarContactsTitle": "Контакты",
-  "@toolbarContactsTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarAddContactTitle": "Добавить контакт",
-  "@toolbarAddContactTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "inputSearchContactHint": "Поиск контактов",
-  "@inputSearchContactHint": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelContactsNotFoundError": "Контакт не найден!",
-  "@labelContactsNotFoundError": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelAddContactName": "Имя",
-  "@labelAddContactName": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelAddContactAddress": "Адрес",
-  "@labelAddContactAddress": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "inputAddContactNameHint": "Имя контакта",
-  "@inputAddContactNameHint": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "inputAddContactAddressHint": "Введите адрес",
-  "@inputAddContactAddressHint": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonAddContact": "Новый контакт",
-  "@buttonAddContact": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarExchangeTitle": "Обмен",
-  "@toolbarExchangeTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarRateTitle": "Курс",
-  "@toolbarRateTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarConvertTitle": "Конвертировать",
-  "@toolbarConvertTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelExchangeCoins": "Мои монеты",
-  "@labelExchangeCoins": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonConvert": "Конвертировать",
-  "@buttonConvert": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonRate": "Курс",
-  "@buttonRate": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonBuy": "Покупка",
-  "@buttonBuy": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonSell": "Продажа",
-  "@buttonSell": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelExchangeUseCash": "Использовать счёт",
-  "@labelExchangeUseCash": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelExchangeSimplex": "Simplex",
-  "@labelExchangeSimplex": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelBuy": "BUY",
-  "@labelBuy": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelSell": "SELL",
-  "@labelSell": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelConvertCoinHave": "Coin You have",
-  "@labelConvertCoinHave": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelConvertCoinWant": "Coin you want",
-  "@labelConvertCoinWant": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelConvertWillGet": "You will get approximztely",
-  "@labelConvertWillGet": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelConvertTransanctionFee": "Комиссия",
-  "@labelConvertTransanctionFee": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarWidgetsTitle": "Components",
-  "@toolbarWidgetsTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarSharePasshpraseQr": "Просмотр контр.фразы",
-  "@toolbarSharePasshpraseQr": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "cancel": "Cancel",
-  "@cancel": {
-    "description": "dialog_cancel",
-    "type": "text",
-    "placeholders": {}
-  },
-  "close": "Close",
-  "@close": {
-    "description": "dialog_close",
-    "type": "text",
-    "placeholders": {}
-  },
-  "confirm": "Confirm",
-  "@confirm": {
-    "description": "dialog_confirm",
-    "type": "text",
-    "placeholders": {}
-  },
-  "no": "No",
-  "@no": {
-    "description": "intro_new_wallet_backup_no",
-    "type": "text",
-    "placeholders": {}
-  },
-  "yes": "Yes",
-  "@yes": {
-    "description": "intro_new_wallet_backup_yes",
-    "type": "text",
-    "placeholders": {}
-  },
-  "onStr": "On",
-  "@onStr": {
-    "description": "generic_on",
-    "type": "text",
-    "placeholders": {}
-  },
-  "off": "Off",
-  "@off": {
-    "description": "generic_off",
-    "type": "text",
-    "placeholders": {}
-  },
-  "send": "Send",
-  "@send": {
-    "description": "home_send_cta",
-    "type": "text",
-    "placeholders": {}
-  },
-  "receive": "Receive",
-  "@receive": {
-    "description": "home_receive_cta",
-    "type": "text",
-    "placeholders": {}
-  },
-  "sent": "Sent",
-  "@sent": {
-    "description": "history_sent",
-    "type": "text",
-    "placeholders": {}
-  },
-  "received": "Received",
-  "@received": {
-    "description": "history_received",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transactions": "Transactions",
-  "@transactions": {
-    "description": "transaction_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "addressCopied": "Address Copied",
-  "@addressCopied": {
-    "description": "receive_copied",
-    "type": "text",
-    "placeholders": {}
-  },
-  "copyAddress": "Copy Address",
-  "@copyAddress": {
-    "description": "receive_copy_cta",
-    "type": "text",
-    "placeholders": {}
-  },
-  "addressShare": "Share Address",
-  "@addressShare": {
-    "description": "receive_share_cta",
-    "type": "text",
-    "placeholders": {}
-  },
-  "addressHint": "Enter Address",
-  "@addressHint": {
-    "description": "send_address_hint",
-    "type": "text",
-    "placeholders": {}
-  },
-  "seed": "Seed",
-  "@seed": {
-    "description": "intro_new_wallet_seed_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "seedInvalid": "Seed is Invalid",
-  "@seedInvalid": {
-    "description": "intro_seed_invalid",
-    "type": "text",
-    "placeholders": {}
-  },
-  "seedCopied": "Seed Copied to Clipboard\nIt is pasteable for 2 minutes.",
-  "@seedCopied": {
-    "description": "intro_new_wallet_seed_copied",
-    "type": "text",
-    "placeholders": {}
-  },
-  "scanQrCode": "Scan QR Code",
-  "@scanQrCode": {
-    "description": "send_scan_qr",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactsImportErr": "Failed to import contacts",
-  "@contactsImportErr": {
-    "description": "contact_import_error",
-    "type": "text",
-    "placeholders": {}
-  },
-  "viewDetails": "View Details",
-  "@viewDetails": {
-    "description": "transaction_details",
-    "type": "text",
-    "placeholders": {}
-  },
-  "qrInvalidSeed": "QR code does not contain a valid seed or private key",
-  "@qrInvalidSeed": {
-    "description": "qr_invalid_seed",
-    "type": "text",
-    "placeholders": {}
-  },
-  "qrInvalidAddress": "QR code does not contain a valid destination",
-  "@qrInvalidAddress": {
-    "description": "qr_invalid_address",
-    "type": "text",
-    "placeholders": {}
-  },
-  "qrInvalidPermissions": "Please Grant Camera Permissions to scan QR Codes",
-  "@qrInvalidPermissions": {
-    "description": "User did not grant camera permissions to the app",
-    "type": "text",
-    "placeholders": {}
-  },
-  "qrUnknownError": "Could not Read QR Code",
-  "@qrUnknownError": {
-    "description": "An unknown error occurred with the QR scanner",
-    "type": "text",
-    "placeholders": {}
-  },
-  "removeContact": "Remove Contact",
-  "@removeContact": {
-    "description": "contact_remove_btn",
-    "type": "text",
-    "placeholders": {}
-  },
-  "removeContactConfirmation": "Are you sure you want to delete %1?",
-  "@removeContactConfirmation": {
-    "description": "contact_remove_sure",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactHeader": "Contact",
-  "@contactHeader": {
-    "description": "contact_view_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactsHeader": "Contacts",
-  "@contactsHeader": {
-    "description": "contact_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "addContact": "Add Contact",
-  "@addContact": {
-    "description": "contact_add_button",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactNameHint": "Enter a Name @",
-  "@contactNameHint": {
-    "description": "contact_name_hint",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactInvalid": "Invalid Contact Name",
-  "@contactInvalid": {
-    "description": "contact_invalid_name",
-    "type": "text",
-    "placeholders": {}
-  },
-  "noContactsExport": "There's no contacts to export.",
-  "@noContactsExport": {
-    "description": "contact_export_none",
-    "type": "text",
-    "placeholders": {}
-  },
-  "noContactsImport": "No new contacts to import.",
-  "@noContactsImport": {
-    "description": "contact_import_none",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactsImportSuccess": "Sucessfully imported %1 contacts.",
-  "@contactsImportSuccess": {
-    "description": "contact_import_success",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactAdded": "%1 added to contacts.",
-  "@contactAdded": {
-    "description": "contact_added",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactRemoved": "%1 has been removed from contacts!",
-  "@contactRemoved": {
-    "description": "contact_removed",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactNameMissing": "Choose a Name for this Contact",
-  "@contactNameMissing": {
-    "description": "contact_name_missing",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactExists": "Contact Already Exists",
-  "@contactExists": {
-    "description": "contact_name_exists",
-    "type": "text",
-    "placeholders": {}
-  },
-  "backupYourSeed": "Backup your seed",
-  "@backupYourSeed": {
-    "description": "intro_new_wallet_seed_backup_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "backupSeedConfirm": "Are you sure that you backed up your wallet seed?",
-  "@backupSeedConfirm": {
-    "description": "intro_new_wallet_backup",
-    "type": "text",
-    "placeholders": {}
-  },
-  "seedBackupInfo": "Below is your wallet's seed. It is crucial that you backup your seed and never store it as plaintext or a screenshot.",
-  "@seedBackupInfo": {
-    "description": "intro_new_wallet_seed",
-    "type": "text",
-    "placeholders": {}
-  },
-  "copySeed": "Copy Seed",
-  "@copySeed": {
-    "description": "copy_seed_btn",
-    "type": "text",
-    "placeholders": {}
-  },
-  "seedCopiedShort": "Seed Copied",
-  "@seedCopiedShort": {
-    "description": "seed_copied_btn",
-    "type": "text",
-    "placeholders": {}
-  },
-  "importSeed": "Import Seed",
-  "@importSeed": {
-    "description": "intro_seed_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "importSeedHint": "Please enter your seed below.",
-  "@importSeedHint": {
-    "description": "intro_seed_info",
-    "type": "text",
-    "placeholders": {}
-  },
-  "welcomeText": "Welcome to Natrium. To begin, you may create a new wallet or import an existing one.",
-  "@welcomeText": {
-    "description": "intro_welcome_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "newWallet": "New Wallet",
-  "@newWallet": {
-    "description": "intro_welcome_new_wallet",
-    "type": "text",
-    "placeholders": {}
-  },
-  "importWallet": "Import Wallet",
-  "@importWallet": {
-    "description": "intro_welcome_have_wallet",
-    "type": "text",
-    "placeholders": {}
-  },
-  "sentTo": "Sent To",
-  "@sentTo": {
-    "description": "sent_to",
-    "type": "text",
-    "placeholders": {}
-  },
-  "sending": "Sending",
-  "@sending": {
-    "description": "send_sending",
-    "type": "text",
-    "placeholders": {}
-  },
-  "to": "To",
-  "@to": {
-    "description": "send_to",
-    "type": "text",
-    "placeholders": {}
-  },
-  "sendAmountConfirm": "Send %1 NANO",
-  "@sendAmountConfirm": {
-    "description": "send_pin_description",
-    "type": "text",
-    "placeholders": {}
-  },
-  "sendError": "An error occured. Try again later.",
-  "@sendError": {
-    "description": "send_generic_error",
-    "type": "text",
-    "placeholders": {}
-  },
-  "mantaError": "Couldn't Verify Request",
-  "@mantaError": {
-    "description": "Was unable to verify the manta/appia payment request (from scanning QR code, etc.)",
-    "type": "text",
-    "placeholders": {}
-  },
-  "enterAmount": "Enter Amount",
-  "@enterAmount": {
-    "description": "send_amount_hint",
-    "type": "text",
-    "placeholders": {}
-  },
-  "enterAddress": "Enter Address",
-  "@enterAddress": {
-    "description": "enter_address",
-    "type": "text",
-    "placeholders": {}
-  },
-  "invalidAddress": "Address entered was invalid",
-  "@invalidAddress": {
-    "description": "send_invalid_address",
-    "type": "text",
-    "placeholders": {}
-  },
-  "addressMising": "Please Enter an Address",
-  "@addressMising": {
-    "description": "send_enter_address",
-    "type": "text",
-    "placeholders": {}
-  },
-  "amountMissing": "Please Enter an Amount",
-  "@amountMissing": {
-    "description": "send_enter_amount",
-    "type": "text",
-    "placeholders": {}
-  },
-  "minimumSend": "Minimum send amount is %1 NANO",
-  "@minimumSend": {
-    "description": "send_minimum_error",
-    "type": "text",
-    "placeholders": {}
-  },
-  "insufficientBalance": "Insufficient Balance",
-  "@insufficientBalance": {
-    "description": "send_insufficient_balance",
-    "type": "text",
-    "placeholders": {}
-  },
-  "sendFrom": "Send From",
-  "@sendFrom": {
-    "description": "send_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "pinCreateTitle": "Create a 6-digit pin",
-  "@pinCreateTitle": {
-    "description": "pin_create_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "pinConfirmTitle": "Confirm your pin",
-  "@pinConfirmTitle": {
-    "description": "pin_confirm_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "pinEnterTitle": "Enter pin",
-  "@pinEnterTitle": {
-    "description": "pin_enter_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "pinConfirmError": "Pins do not match",
-  "@pinConfirmError": {
-    "description": "pin_confirm_error",
-    "type": "text",
-    "placeholders": {}
-  },
-  "pinInvalid": "Invalid pin entered",
-  "@pinInvalid": {
-    "description": "pin_error",
-    "type": "text",
-    "placeholders": {}
-  },
-  "themeHeader": "Theme",
-  "@themeHeader": {
-    "description": "theme_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "changeRepButton": "Change",
-  "@changeRepButton": {
-    "description": "change_representative_change",
-    "type": "text",
-    "placeholders": {}
-  },
-  "changeRepAuthenticate": "Change Representative",
-  "@changeRepAuthenticate": {
-    "description": "settings_change_rep",
-    "type": "text",
-    "placeholders": {}
-  },
-  "currentlyRepresented": "Currently Represented By",
-  "@currentlyRepresented": {
-    "description": "change_representative_current_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "changeRepSucces": "Representative Changed Successfully",
-  "@changeRepSucces": {
-    "description": "change_representative_success",
-    "type": "text",
-    "placeholders": {}
-  },
-  "repInfoHeader": "What is a representative?",
-  "@repInfoHeader": {
-    "description": "change_representative_info_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "repInfo": "A representative is an account that votes for network consensus. Voting power is weighted by balance, you may delegate your balance to increase the voting weight of a representative you trust. Your representative does not have spending power over your funds. You should choose a representative that has little downtime and is trustworthy.",
-  "@repInfo": {
-    "description": "change_representative_info",
-    "type": "text",
-    "placeholders": {}
-  },
-  "pinRepChange": "Enter PIN to change representative.",
-  "@pinRepChange": {
-    "description": "change_representative_pin",
-    "type": "text",
-    "placeholders": {}
-  },
-  "changeRepHint": "Enter New Representative",
-  "@changeRepHint": {
-    "description": "change_representative_hint",
-    "type": "text",
-    "placeholders": {}
-  },
-  "representatives": "Representatives",
-  "@representatives": {
-    "description": "representatives",
-    "type": "text",
-    "placeholders": {}
-  },
-  "pickFromList": "Pick From a List",
-  "@pickFromList": {
-    "description": "pick rep from list",
-    "type": "text",
-    "placeholders": {}
-  },
-  "votingWeight": "Voting Weight",
-  "@votingWeight": {
-    "description": "Representative Voting Weight",
-    "type": "text",
-    "placeholders": {}
-  },
-  "uptime": "Uptime",
-  "@uptime": {
-    "description": "Rep uptime",
-    "type": "text",
-    "placeholders": {}
-  },
-  "authMethod": "Authentication Method",
-  "@authMethod": {
-    "description": "settings_disable_fingerprint",
-    "type": "text",
-    "placeholders": {}
-  },
-  "pinMethod": "PIN",
-  "@pinMethod": {
-    "description": "settings_pin_method",
-    "type": "text",
-    "placeholders": {}
-  },
-  "privacyPolicy": "Privacy Policy",
-  "@privacyPolicy": {
-    "description": "settings_privacy_policy",
-    "type": "text",
-    "placeholders": {}
-  },
-  "biometricsMethod": "Biometrics",
-  "@biometricsMethod": {
-    "description": "settings_fingerprint_method",
-    "type": "text",
-    "placeholders": {}
-  },
-  "currency": "Currency",
-  "@currency": {
-    "description": "A settings menu item for changing currency",
-    "type": "text",
-    "placeholders": {}
-  },
-  "changeCurrency": "Change Currency",
-  "@changeCurrency": {
-    "description": "settings_local_currency",
-    "type": "text",
-    "placeholders": {}
-  },
-  "language": "Language",
-  "@language": {
-    "description": "settings_change_language",
-    "type": "text",
-    "placeholders": {}
-  },
-  "shareNatrium": "Share Natrium",
-  "@shareNatrium": {
-    "description": "settings_share",
-    "type": "text",
-    "placeholders": {}
-  },
-  "shareNatriumText": "Check out Natrium! A premier NANO mobile wallet!",
-  "@shareNatriumText": {
-    "description": "share_extra",
-    "type": "text",
-    "placeholders": {}
-  },
-  "logout": "Logout",
-  "@logout": {
-    "description": "settings_logout",
-    "type": "text",
-    "placeholders": {}
-  },
-  "rootWarning": "It appears your device is \"rooted\", \"jailbroken\", or modified in a way that compromises security. It is recommended that you reset your device to its original state before proceeding.",
-  "@rootWarning": {
-    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device",
-    "type": "text",
-    "placeholders": {}
-  },
-  "iUnderstandTheRisks": "I Understand the Risks",
-  "@iUnderstandTheRisks": {
-    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device",
-    "type": "text",
-    "placeholders": {}
-  },
-  "exit": "Exit",
-  "@exit": {
-    "description": "Exit action, like a button",
-    "type": "text",
-    "placeholders": {}
-  },
-  "warning": "Warning",
-  "@warning": {
-    "description": "settings_logout_alert_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "logoutDetail": "Logging out will remove your seed and all Natrium-related data from this device. If your seed is not backed up, you will never be able to access your funds again",
-  "@logoutDetail": {
-    "description": "settings_logout_alert_message",
-    "type": "text",
-    "placeholders": {}
-  },
-  "logoutAction": "Delete Seed and Logout",
-  "@logoutAction": {
-    "description": "settings_logout_alert_confirm_cta",
-    "type": "text",
-    "placeholders": {}
-  },
-  "logoutAreYouSure": "Are you sure?",
-  "@logoutAreYouSure": {
-    "description": "settings_logout_warning_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "logoutReassurance": "As long as you've backed up your seed you have nothing to worry about.",
-  "@logoutReassurance": {
-    "description": "settings_logout_warning_message",
-    "type": "text",
-    "placeholders": {}
-  },
-  "settingsHeader": "Settings",
-  "@settingsHeader": {
-    "description": "settings_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "preferences": "Preferences",
-  "@preferences": {
-    "description": "settings_preferences_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "manage": "Manage",
-  "@manage": {
-    "description": "settings_manage_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "backupSeed": "Backup Seed",
-  "@backupSeed": {
-    "description": "settings_backup_seed",
-    "type": "text",
-    "placeholders": {}
-  },
-  "fingerprintSeedBackup": "Authenticate to backup seed.",
-  "@fingerprintSeedBackup": {
-    "description": "settings_fingerprint_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "pinSeedBackup": "Enter PIN to Backup Seed",
-  "@pinSeedBackup": {
-    "description": "settings_pin_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "systemDefault": "System Default",
-  "@systemDefault": {
-    "description": "settings_default_language_string",
-    "type": "text",
-    "placeholders": {}
-  },
-  "notifications": "Notifications",
-  "@notifications": {
-    "description": "notifications_settings",
-    "type": "text",
-    "placeholders": {}
-  },
-  "notificationTitle": "Received %1 NANO",
-  "@notificationTitle": {
-    "description": "notification_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "notificationBody": "Open Natrium to view this transaction",
-  "@notificationBody": {
-    "description": "notification_body",
-    "type": "text",
-    "placeholders": {}
-  },
-  "notificationHeaderSupplement": "Tap to open",
-  "@notificationHeaderSupplement": {
-    "description": "notificaiton_header_suplement",
-    "type": "text",
-    "placeholders": {}
-  },
-  "settingsTransfer": "Load from Paper Wallet",
-  "@settingsTransfer": {
-    "description": "settings_transfer",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferError": "An error has occurred during the transfer. Please try again later.",
-  "@transferError": {
-    "description": "transfer_error",
-    "type": "text",
-    "placeholders": {}
-  },
-  "paperWallet": "Paper Wallet",
-  "@paperWallet": {
-    "description": "paper_wallet",
-    "type": "text",
-    "placeholders": {}
-  },
-  "kaliumWallet": "Natrium Wallet",
-  "@kaliumWallet": {
-    "description": "kalium_wallet",
-    "type": "text",
-    "placeholders": {}
-  },
-  "manualEntry": "Manual Entry",
-  "@manualEntry": {
-    "description": "transfer_manual_entry",
-    "type": "text",
-    "placeholders": {}
-  },
-  "mnemonicPhrase": "Mnemonic Phrase",
-  "@mnemonicPhrase": {
-    "description": "mnemonic_phrase",
-    "type": "text",
-    "placeholders": {}
-  },
-  "rawSeed": "Raw Seed",
-  "@rawSeed": {
-    "description": "raw_seed",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferHeader": "Transfer Funds",
-  "@transferHeader": {
-    "description": "transfer_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transfer": "Transfer",
-  "@transfer": {
-    "description": "transfer_btn",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferManualHint": "Please enter the seed below.",
-  "@transferManualHint": {
-    "description": "transfer_hint",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferIntro": "This process will transfer the funds from a paper wallet to your Natrium wallet.\n\nTap the \"%1\" button to start.",
-  "@transferIntro": {
-    "description": "transfer_intro",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferQrScanHint": "Scan a Nano \nseed or private key",
-  "@transferQrScanHint": {
-    "description": "transfer_qr_scan_hint",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferQrScanError": "This QR code does not contain a valid seed.",
-  "@transferQrScanError": {
-    "description": "transfer_qr_scan_error",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferNoFunds": "This seed does not have any NANO on it",
-  "@transferNoFunds": {
-    "description": "transfer_no_funds_toast",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferConfirmInfo": "A wallet with a balance of %1 NANO has been detected.\n",
-  "@transferConfirmInfo": {
-    "description": "transfer_confirm_info_first",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferConfirmInfoSecond": "Tap confirm to transfer the funds.\n",
-  "@transferConfirmInfoSecond": {
-    "description": "transfer_confirm_info_second",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferConfirmInfoThird": "Transfer may take several seconds to complete.",
-  "@transferConfirmInfoThird": {
-    "description": "transfer_confirm_info_third",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferLoading": "Transferring",
-  "@transferLoading": {
-    "description": "transfer_loading_text",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferComplete": "%1 NANO successfully transferred to your Natrium Wallet.\n",
-  "@transferComplete": {
-    "description": "transfer_complete_text",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferClose": "Tap anywhere to close the window.",
-  "@transferClose": {
-    "description": "transfer_close_text",
-    "type": "text",
-    "placeholders": {}
-  },
-  "scanInstructions": "Scan a Nano \naddress QR code",
-  "@scanInstructions": {
-    "description": "scan_send_instruction_label",
-    "type": "text",
-    "placeholders": {}
-  },
-  "unlockPin": "Enter PIN to Unlock Natrium",
-  "@unlockPin": {
-    "description": "unlock_kalium_pin",
-    "type": "text",
-    "placeholders": {}
-  },
-  "unlockBiometrics": "Authenticate to Unlock Natrium",
-  "@unlockBiometrics": {
-    "description": "unlock_kalium_bio",
-    "type": "text",
-    "placeholders": {}
-  },
-  "lockAppSetting": "Authenticate on Launch",
-  "@lockAppSetting": {
-    "description": "authenticate_on_launch",
-    "type": "text",
-    "placeholders": {}
-  },
-  "locked": "Locked",
-  "@locked": {
-    "description": "lockedtxt",
-    "type": "text",
-    "placeholders": {}
-  },
-  "unlock": "Unlock",
-  "@unlock": {
-    "description": "unlocktxt",
-    "type": "text",
-    "placeholders": {}
-  },
-  "tooManyFailedAttempts": "Too many failed unlock attempts.",
-  "@tooManyFailedAttempts": {
-    "description": "fail_toomany_attempts",
-    "type": "text",
-    "placeholders": {}
-  },
-  "securityHeader": "Security",
-  "@securityHeader": {
-    "description": "security_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "autoLockHeader": "Automatically Lock",
-  "@autoLockHeader": {
-    "description": "auto_lock_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "xMinutes": "After %1 minutes",
-  "@xMinutes": {
-    "description": "after_minutes",
-    "type": "text",
-    "placeholders": {}
-  },
-  "xMinute": "After %1 minute",
-  "@xMinute": {
-    "description": "after_minute",
-    "type": "text",
-    "placeholders": {}
-  },
-  "instantly": "Instantly",
-  "@instantly": {
-    "description": "insantly",
-    "type": "text",
-    "placeholders": {}
-  },
-  "setWalletPassword": "Set Wallet Password",
-  "@setWalletPassword": {
-    "description": "Allows user to encrypt wallet with a password",
-    "type": "text",
-    "placeholders": {}
-  },
-  "setPassword": "Set Password",
-  "@setPassword": {
-    "description": "A button that sets the wallet password",
-    "type": "text",
-    "placeholders": {}
-  },
-  "disableWalletPassword": "Disable Wallet Password",
-  "@disableWalletPassword": {
-    "description": "Allows user to deencrypt wallet with a password",
-    "type": "text",
-    "placeholders": {}
-  },
-  "encryptionFailedError": "Failed to set a wallet password",
-  "@encryptionFailedError": {
-    "description": "If encrypting a wallet raised an error",
-    "type": "text",
-    "placeholders": {}
-  },
-  "setPasswordSuccess": "Password has been set successfully",
-  "@setPasswordSuccess": {
-    "description": "Setting a Wallet Password was successful",
-    "type": "text",
-    "placeholders": {}
-  },
-  "disablePasswordSuccess": "Password has been disabled",
-  "@disablePasswordSuccess": {
-    "description": "Disabling a Wallet Password was successful",
-    "type": "text",
-    "placeholders": {}
-  },
-  "exampleCardIntro": "Welcome to Natrium. Once you receive NANO, transactions will show up like this:",
-  "@exampleCardIntro": {
-    "description": "example_card_intro",
-    "type": "text",
-    "placeholders": {}
-  },
-  "exampleCardLittle": "A little",
-  "@exampleCardLittle": {
-    "description": "example_card_little",
-    "type": "text",
-    "placeholders": {}
-  },
-  "exampleCardLot": "A lot of",
-  "@exampleCardLot": {
-    "description": "example_card_lot",
-    "type": "text",
-    "placeholders": {}
-  },
-  "exampleCardTo": "to someone",
-  "@exampleCardTo": {
-    "description": "example_card_to",
-    "type": "text",
-    "placeholders": {}
-  },
-  "exampleCardFrom": "from someone",
-  "@exampleCardFrom": {
-    "description": "example_card_from",
-    "type": "text",
-    "placeholders": {}
-  },
-  "defaultAccountName": "Main Account",
-  "@defaultAccountName": {
-    "description": "Default account name",
-    "type": "text",
-    "placeholders": {}
-  },
-  "defaultNewAccountName": "Account %1",
-  "@defaultNewAccountName": {
-    "description": "Default new account name - e.g. Account 1",
-    "type": "text",
-    "placeholders": {}
-  },
-  "newAccountIntro": "This is your new account. Once you receive NANO, transactions will show up like this:",
-  "@newAccountIntro": {
-    "description": "Alternate account intro card",
-    "type": "text",
-    "placeholders": {}
-  },
-  "account": "Account",
-  "@account": {
-    "description": "Account text",
-    "type": "text",
-    "placeholders": {}
-  },
-  "accounts": "Accounts",
-  "@accounts": {
-    "description": "Accounts header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "addAccount": "Add Account",
-  "@addAccount": {
-    "description": "Default new account name - e.g. Account 1",
-    "type": "text",
-    "placeholders": {}
-  },
-  "hideAccountHeader": "Hide Account?",
-  "@hideAccountHeader": {
-    "description": "Confirmation dialog header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "removeAccountText": "Are you sure you want to hide this account? You can re-add it later by tapping the \"%1\" button.",
-  "@removeAccountText": {
-    "description": "Remove account dialog body",
-    "type": "text",
-    "placeholders": {}
-  },
-  "tapToReveal": "Tap to reveal",
-  "@tapToReveal": {
-    "description": "Tap to reveal hidden content",
-    "type": "text",
-    "placeholders": {}
-  },
-  "tapToHide": "Tap to hide",
-  "@tapToHide": {
-    "description": "Tap to hide content",
-    "type": "text",
-    "placeholders": {}
-  },
-  "copied": "Copied",
-  "@copied": {
-    "description": "Copied (to clipboard)",
-    "type": "text",
-    "placeholders": {}
-  },
-  "copy": "Copy",
-  "@copy": {
-    "description": "Copy (to clipboard)",
-    "type": "text",
-    "placeholders": {}
-  },
-  "seedDescription": "A seed bears the same information as a secret phrase, but in a machine-readable way. As long as you have one of them backed up, you'll have access to your funds.",
-  "@seedDescription": {
-    "description": "Describing what a seed is",
-    "type": "text",
-    "placeholders": {}
-  },
-  "importSecretPhrase": "Import Secret Phrase",
-  "@importSecretPhrase": {
-    "description": "Header for restoring using mnemonic",
-    "type": "text",
-    "placeholders": {}
-  },
-  "importSecretPhraseHint": "Please enter your 24-word secret phrase below. Each word should be separated by a space.",
-  "@importSecretPhraseHint": {
-    "description": "helper message for importing mnemnic",
-    "type": "text",
-    "placeholders": {}
-  },
-  "qrMnemonicError": "QR does not contain a valid secret phrase",
-  "@qrMnemonicError": {
-    "description": "When QR does not contain a valid mnemonic phrase",
-    "type": "text",
-    "placeholders": {}
-  },
-  "mnemonicInvalidWord": "%1 is not a valid word",
-  "@mnemonicInvalidWord": {
-    "description": "A word that is not part of bip39",
-    "type": "text",
-    "placeholders": {}
-  },
-  "mnemonicSizeError": "Secret phrase may only contain 24 words",
-  "@mnemonicSizeError": {
-    "description": "err",
-    "type": "text",
-    "placeholders": {}
-  },
-  "secretPhrase": "Secret Phrase",
-  "@secretPhrase": {
-    "description": "Secret (mnemonic) phrase",
-    "type": "text",
-    "placeholders": {}
-  },
-  "backupConfirmButton": "I've Backed It Up",
-  "@backupConfirmButton": {
-    "description": "Has backed up seed confirmation button",
-    "type": "text",
-    "placeholders": {}
-  },
-  "secretInfoHeader": "Safety First!",
-  "@secretInfoHeader": {
-    "description": "secret info header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "secretInfo": "In the next screen, you will see your secret phrase. It is a password to access your funds. It is crucial that you back it up and never share it with anyone.",
-  "@secretInfo": {
-    "description": "Description for seed",
-    "type": "text",
-    "placeholders": {}
-  },
-  "secretWarning": "If you lose your device or uninstall the application, you'll need your secret phrase or seed to recover your funds!",
-  "@secretWarning": {
-    "description": "Secret warning",
-    "type": "text",
-    "placeholders": {}
-  },
-  "gotItButton": "Got It!",
-  "@gotItButton": {
-    "description": "Got It! Acknowledgement button",
-    "type": "text",
-    "placeholders": {}
-  },
-  "ackBackedUp": "Are you sure that you've backed up your secret phrase or seed?",
-  "@ackBackedUp": {
-    "description": "Ack backed up",
-    "type": "text",
-    "placeholders": {}
-  },
-  "secretPhraseCopy": "Copy Secret Phrase",
-  "@secretPhraseCopy": {
-    "description": "Copy secret phrase to clipboard",
-    "type": "text",
-    "placeholders": {}
-  },
-  "secretPhraseCopied": "Secret Phrase Copied",
-  "@secretPhraseCopied": {
-    "description": "Copied secret phrase to clipboard",
-    "type": "text",
-    "placeholders": {}
-  },
-  "import": "Import",
-  "@import": {
-    "description": "Generic import",
-    "type": "text",
-    "placeholders": {}
-  },
-  "importSeedInstead": "Import Seed Instead",
-  "@importSeedInstead": {
-    "description": "importSeedInstead",
-    "type": "text",
-    "placeholders": {}
-  },
-  "switchToSeed": "Switch to Seed",
-  "@switchToSeed": {
-    "description": "switchToSeed",
-    "type": "text",
-    "placeholders": {}
-  },
-  "backupSecretPhrase": "Backup Secret Phrase",
-  "@backupSecretPhrase": {
-    "description": "backup seed",
-    "type": "text",
-    "placeholders": {}
-  },
-  "createPasswordHint": "Create a password",
-  "@createPasswordHint": {
-    "description": "A text field hint that tells the user to create a password",
-    "type": "text",
-    "placeholders": {}
-  },
-  "confirmPasswordHint": "Confirm the password",
-  "@confirmPasswordHint": {
-    "description": "A text field hint that tells the user to confirm the password",
-    "type": "text",
-    "placeholders": {}
-  },
-  "enterPasswordHint": "Enter your password",
-  "@enterPasswordHint": {
-    "description": "A text field hint that tells the users to enter their password",
-    "type": "text",
-    "placeholders": {}
-  },
-  "passwordsDontMatch": "Passwords do not match",
-  "@passwordsDontMatch": {
-    "description": "An error indicating a password has been confirmed incorrectly",
-    "type": "text",
-    "placeholders": {}
-  },
-  "passwordBlank": "Password cannot be empty",
-  "@passwordBlank": {
-    "description": "An error indicating a password has been entered incorrectly",
-    "type": "text",
-    "placeholders": {}
-  },
-  "invalidPassword": "Invalid Password",
-  "@invalidPassword": {
-    "description": "An error indicating a password has been entered incorrectly",
-    "type": "text",
-    "placeholders": {}
-  },
-  "passwordWillBeRequiredToOpenParagraph": "This password will be required to open Natrium.",
-  "@passwordWillBeRequiredToOpenParagraph": {
-    "description": "A paragraph that tells the users that the created password will be required to open Natrium.",
-    "type": "text",
-    "placeholders": {}
-  },
-  "passwordNoLongerRequiredToOpenParagraph": "You will not need a password to open Natrium anymore.",
-  "@passwordNoLongerRequiredToOpenParagraph": {
-    "description": "An info paragraph that tells the user a password will no longer be needed to open Natrium",
-    "type": "text",
-    "placeholders": {}
-  },
-  "createPasswordFirstParagraph": "You can create a password to add additional security to your wallet.",
-  "@createPasswordFirstParagraph": {
-    "description": "A paragraph that tells the users that they can create a password for additional security.",
-    "type": "text",
-    "placeholders": {}
-  },
-  "createPasswordSecondParagraph": "Password is optional, and your wallet will be protected with your PIN or biometrics regardless.",
-  "@createPasswordSecondParagraph": {
-    "description": "A paragraph that tells the users that the password creation is optional and the wallet will be still protected with biometrics or PIN regardless.",
-    "type": "text",
-    "placeholders": {}
-  },
-  "createAPasswordHeader": "Create a password.",
-  "@createAPasswordHeader": {
-    "description": "A paragraph that tells the users to create a password.",
-    "type": "text",
-    "placeholders": {}
-  },
-  "createPasswordSheetHeader": "Create",
-  "@createPasswordSheetHeader": {
-    "description": "Prompt user to create a new password",
-    "type": "text",
-    "placeholders": {}
-  },
-  "disablePasswordSheetHeader": "Disable",
-  "@disablePasswordSheetHeader": {
-    "description": "Prompt user to disable their password",
-    "type": "text",
-    "placeholders": {}
-  },
-  "requireAPasswordToOpenHeader": "Require a password to open Natrium?",
-  "@requireAPasswordToOpenHeader": {
-    "description": "A paragraph that asks the users if they would like a password to be required to open Natrium.",
-    "type": "text",
-    "placeholders": {}
-  },
-  "noSkipButton": "No, Skip",
-  "@noSkipButton": {
-    "description": "A button that declines and skips the mentioned process.",
-    "type": "text",
-    "placeholders": {}
-  },
-  "yesButton": "Yes",
-  "@yesButton": {
-    "description": "A button that accepts the mentioned process.",
-    "type": "text",
-    "placeholders": {}
-  },
-  "nextButton": "Next",
-  "@nextButton": {
-    "description": "A button that goes to the next screen.",
-    "type": "text",
-    "placeholders": {}
-  },
-  "goBackButton": "Go Back",
-  "@goBackButton": {
-    "description": "A button that goes to the previous screen.",
-    "type": "text",
-    "placeholders": {}
-  },
-  "supportButton": "Support",
-  "@supportButton": {
-    "description": "A button to open up the live support window",
-    "type": "text",
-    "placeholders": {}
-  },
-  "liveSupportButton": "Support",
-  "@liveSupportButton": {
-    "description": "A button to open up the live support window",
-    "type": "text",
-    "placeholders": {}
-  },
-  "connectingHeader": "Connecting",
-  "@connectingHeader": {
-    "description": "A header to let the user now that Natrium is currently connecting to (or loading) live chat.",
-    "type": "text",
-    "placeholders": {}
-  },
-  "localeEnglishItem": "English",
-  "@localeEnglishItem": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "localeRussianItem": "Русский",
-  "@localeRussianItem": {
-    "type": "text",
-    "placeholders": {}
-  }
+	"@@last_modified": "2020-05-02T18:57:46.169038",
+	"appName": "Fusion",
+	"@appName": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonCreateAccount": "Создать аккаунт",
+	"@buttonCreateAccount": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonRecoverFromPassphrase": "Восстановление по фразе",
+	"@buttonRecoverFromPassphrase": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelAlreadyHaveAccount": "Есть аккаунт?",
+	"@labelAlreadyHaveAccount": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarChoosePassTitle": "Создание пароля",
+	"@toolbarChoosePassTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelChoosePassSubtitle": "Введите ПИН код на 6 символов",
+	"@labelChoosePassSubtitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelChoosePassVerifySubtitle": "Повторите ввод",
+	"@labelChoosePassVerifySubtitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelEnableBiometricTitle": "Включить биометрическую аутентификацию?",
+	"@labelEnableBiometricTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelEnableBiometricSubtitle": "Рекомендуется для повышенной безопасности.",
+	"@labelEnableBiometricSubtitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelYes": "Да",
+	"@labelYes": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelNo": "Нет",
+	"@labelNo": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarNewAccountTitle": "Новый аккаунт",
+	"@toolbarNewAccountTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelBackupPassphraseSubtitle": "Сохраните контрольную фразу",
+	"@labelBackupPassphraseSubtitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonVerifyRecoveryPhrase": "Подтвердить контр.фразу",
+	"@buttonVerifyRecoveryPhrase": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonShare": "Поделиться",
+	"@buttonShare": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelBackupPassphraseCaption": "Чтобы восстановить доступ к утерянному аккаунту, напечатайте или сохраните ключ в надежном месте.",
+	"@labelBackupPassphraseCaption": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelQuestionIndicatorTitle": "Вопрос {current} с {total}",
+	"@labelQuestionIndicatorTitle": {
+		"type": "text",
+		"placeholders": {
+			"current": {},
+			"total": {}
+		}
+	},
+	"labelWordIndicatorSubtitle": "Выберите {position}-е слово вашей контрольной фразы.",
+	"@labelWordIndicatorSubtitle": {
+		"type": "text",
+		"placeholders": {
+			"position": {}
+		}
+	},
+	"toastTryAgain": "Пожалуйста, попробуйте еще раз",
+	"@toastTryAgain": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"popupPassVerifiedTitle": "Контр.фраза подтверждена!",
+	"@popupPassVerifiedTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"popupPassVerifiedBody": "Ваша контрольная фраза создана. Сохраните её в надежном месте ради возможности в будущем восстановить аккаунт.",
+	"@popupPassVerifiedBody": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelOk": "Хорошо",
+	"@labelOk": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"inputAccountNameHelperText": "Имя профиля",
+	"@inputAccountNameHelperText": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"inputAccountNameHintText": "Пожалуйста, введите имя для аккаунта.",
+	"@inputAccountNameHintText": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"checkboxTermsConditions": "Я согласен с условиями",
+	"@checkboxTermsConditions": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonNext": "Далее",
+	"@buttonNext": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarTermsConditionsTitle": "Правила и использование",
+	"@toolbarTermsConditionsTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarRecoverFromSeedTitle": "Восстановить по фразе",
+	"@toolbarRecoverFromSeedTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"inputEnterScanPasshpraseHintText": "Введите фразу или сканируйте QR",
+	"@inputEnterScanPasshpraseHintText": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonVerify": "Подтвердить",
+	"@buttonVerify": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarScanQrTitle": "Кодовая фраза QR",
+	"@toolbarScanQrTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonClose": "Закрыть",
+	"@buttonClose": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"popupAccVerificationWelcomeText": "Добро пожаловать! Вы можете начать пользоваться кошельком.",
+	"@popupAccVerificationWelcomeText": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelUnlockTitle": "Разблокировать",
+	"@labelUnlockTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonLogOut": "Выйти",
+	"@buttonLogOut": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelUnlockSubtitle": "Введите 6-символьный ПИН код",
+	"@labelUnlockSubtitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelTapToCopy": "Нажмите чтобы скопировать",
+	"@labelTapToCopy": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarViewPasshraseTitle": "Показать фразу",
+	"@toolbarViewPasshraseTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonSend": "Отправить",
+	"@buttonSend": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonRequest": "Получить",
+	"@buttonRequest": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonDelegate": "Делегировать",
+	"@buttonDelegate": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonUnbound": "Освободить",
+	"@buttonUnbound": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonPush": "Отправить Push",
+	"@buttonPush": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelCryptoAvailable": "Доступно",
+	"@labelCryptoAvailable": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelTotalReward": "Общее к-во наград",
+	"@labelTotalReward": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelTransanctionsHistoryTitle": "История сделок",
+	"@labelTransanctionsHistoryTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"navigationLabelAccounts": "Аккаунты",
+	"@navigationLabelAccounts": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"navigationLabelExchange": "Обмен",
+	"@navigationLabelExchange": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"navigationItemContacts": "Контакты",
+	"@navigationItemContacts": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"navigationItemHistory": "История",
+	"@navigationItemHistory": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"navigationItemSettings": "Настройки",
+	"@navigationItemSettings": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"menuItemShowQR": "Показать QR и адрес",
+	"@menuItemShowQR": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"menuItemSetDefaults": "Установить по умолчанию",
+	"@menuItemSetDefaults": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"menuItemViewPassphrase": "Просмотреть кодовую фразу",
+	"@menuItemViewPassphrase": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"menuItemEditAccountName": "Изменить имя учетной записи",
+	"@menuItemEditAccountName": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"menuItemRemoveAccount": "Удалить учетную запись",
+	"@menuItemRemoveAccount": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"menuItemWithdrawFunds": "Снять Средства",
+	"@menuItemWithdrawFunds": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"menuItemReferalLink": "Реферальная ссылка",
+	"@menuItemReferalLink": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelTotalRewardTitle": "Получено наград",
+	"@labelTotalRewardTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelPendingRewardTitle": "Ожидающие награды",
+	"@labelPendingRewardTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelPendingRewardSubtitle": "Награда становиться подтвержденной после получения или отправки BIP",
+	"@labelPendingRewardSubtitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelRewardsCaption": "За информацией о наградах Fusion, посетите наш FAQ",
+	"@labelRewardsCaption": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonPreview": "Просмотр",
+	"@buttonPreview": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelFrom": "Отправитель",
+	"@labelFrom": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelTo": "Получатель",
+	"@labelTo": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelAmount": "Количество",
+	"@labelAmount": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelAddress": "Адрес",
+	"@labelAddress": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelMyContacts": "Мои контакты",
+	"@labelMyContacts": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelContacts": "Контакты",
+	"@labelContacts": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelScanQr": "Сканировать QR",
+	"@labelScanQr": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarSendTitle": "Отправить",
+	"@toolbarSendTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"inputMaxAmountSuffix": "MAX",
+	"@inputMaxAmountSuffix": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"inputAddressHint": "Введите адрес",
+	"@inputAddressHint": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"inputFundsStakeHint": "Ставка",
+	"@inputFundsStakeHint": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelSender": "Отправитель",
+	"@labelSender": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelReceiver": "Получатель",
+	"@labelReceiver": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelPubkeyOrDomain": "Публичный ключ или домен",
+	"@labelPubkeyOrDomain": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelCoin": "Монета",
+	"@labelCoin": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelName": "Имя",
+	"@labelName": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"popupRemoveAccountTitle": "Удаление аккаунта",
+	"@popupRemoveAccountTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"popupRemoveAccountBody": "Вы точно хотите удалить аккаунт? ",
+	"@popupRemoveAccountBody": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelCancel": "Отменить",
+	"@labelCancel": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelRemove": "Удалить",
+	"@labelRemove": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelSave": "Сохранить",
+	"@labelSave": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"inputEditAccountNameTitle": "Изменить имя",
+	"@inputEditAccountNameTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"inputEditAccountNameHint": "Имя аккаунта",
+	"@inputEditAccountNameHint": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarHistoryTitle": "История",
+	"@toolbarHistoryTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelAccount": "Аккаунт:",
+	"@labelAccount": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelStartDate": "Начальная дата",
+	"@labelStartDate": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelEndDate": "Конечная дата",
+	"@labelEndDate": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonViewResults": "Показать результаты",
+	"@buttonViewResults": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"settingsItemUiTheme": "Включить темную тему",
+	"@settingsItemUiTheme": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"settingsItemChgPassword": "Установить/сменить пароль",
+	"@settingsItemChgPassword": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"settingsItemBiometricFeature": "Биометрическая аутентификация",
+	"@settingsItemBiometricFeature": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"settingsItemNotifications": "Уведомления",
+	"@settingsItemNotifications": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"settingsItemShowRewards": "Показать награды",
+	"@settingsItemShowRewards": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"settingsItemLanguage": "Язык",
+	"@settingsItemLanguage": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"settingsItemSendFeedback": "Отправить отзыв",
+	"@settingsItemSendFeedback": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"settingsItemFaq": "Часто задаваемые вопросы",
+	"@settingsItemFaq": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelFeedbackNoteTitle": "Заметка",
+	"@labelFeedbackNoteTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"inputFeedbackCommentHint": "What is on your mind",
+	"@inputFeedbackCommentHint": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelFeedbackEmailSubtitle": "Эл.почта (необяз.)",
+	"@labelFeedbackEmailSubtitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarContactsTitle": "Контакты",
+	"@toolbarContactsTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarAddContactTitle": "Добавить контакт",
+	"@toolbarAddContactTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"inputSearchContactHint": "Поиск контактов",
+	"@inputSearchContactHint": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelContactsNotFoundError": "Контакт не найден!",
+	"@labelContactsNotFoundError": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelAddContactName": "Имя",
+	"@labelAddContactName": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelAddContactAddress": "Адрес",
+	"@labelAddContactAddress": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"inputAddContactNameHint": "Имя контакта",
+	"@inputAddContactNameHint": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"inputAddContactAddressHint": "Введите адрес",
+	"@inputAddContactAddressHint": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonAddContact": "Новый контакт",
+	"@buttonAddContact": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarExchangeTitle": "Обмен",
+	"@toolbarExchangeTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarRateTitle": "Курс",
+	"@toolbarRateTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarConvertTitle": "Конвертировать",
+	"@toolbarConvertTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelExchangeCoins": "Мои монеты",
+	"@labelExchangeCoins": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonConvert": "Конвертировать",
+	"@buttonConvert": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonRate": "Курс",
+	"@buttonRate": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonBuy": "Покупка",
+	"@buttonBuy": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonSell": "Продажа",
+	"@buttonSell": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelExchangeUseCash": "Использовать счёт",
+	"@labelExchangeUseCash": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelExchangeSimplex": "Simplex",
+	"@labelExchangeSimplex": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelBuy": "BUY",
+	"@labelBuy": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelSell": "SELL",
+	"@labelSell": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelConvertCoinHave": "Доступные валюты",
+	"@labelConvertCoinHave": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelConvertCoinWant": "Желаемая валюта",
+	"@labelConvertCoinWant": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelConvertWillGet": "Вы получите примерно",
+	"@labelConvertWillGet": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelConvertTransanctionFee": "Комиссия за транзакцию:",
+	"@labelConvertTransanctionFee": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarWidgetsTitle": "Компоненты",
+	"@toolbarWidgetsTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarSharePasshpraseQr": "Просмотр контр.фразы",
+	"@toolbarSharePasshpraseQr": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"cancel": "Отменить",
+	"@cancel": {
+		"description": "dialog_cancel",
+		"type": "text",
+		"placeholders": {}
+	},
+	"close": "Закрыть",
+	"@close": {
+		"description": "dialog_close",
+		"type": "text",
+		"placeholders": {}
+	},
+	"confirm": "Подтвердить",
+	"@confirm": {
+		"description": "dialog_confirm",
+		"type": "text",
+		"placeholders": {}
+	},
+	"no": "Нет",
+	"@no": {
+		"description": "intro_new_wallet_backup_no",
+		"type": "text",
+		"placeholders": {}
+	},
+	"yes": "Да",
+	"@yes": {
+		"description": "intro_new_wallet_backup_yes",
+		"type": "text",
+		"placeholders": {}
+	},
+	"onStr": "On",
+	"@onStr": {
+		"description": "generic_on",
+		"type": "text",
+		"placeholders": {}
+	},
+	"off": "Откл",
+	"@off": {
+		"description": "generic_off",
+		"type": "text",
+		"placeholders": {}
+	},
+	"send": "Отправить",
+	"@send": {
+		"description": "home_send_cta",
+		"type": "text",
+		"placeholders": {}
+	},
+	"receive": "Получать",
+	"@receive": {
+		"description": "home_receive_cta",
+		"type": "text",
+		"placeholders": {}
+	},
+	"sent": "Отправил",
+	"@sent": {
+		"description": "history_sent",
+		"type": "text",
+		"placeholders": {}
+	},
+	"received": "Получено",
+	"@received": {
+		"description": "history_received",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transactions": "Операции",
+	"@transactions": {
+		"description": "transaction_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addressCopied": "Адрес скопирован",
+	"@addressCopied": {
+		"description": "receive_copied",
+		"type": "text",
+		"placeholders": {}
+	},
+	"copyAddress": "Копировать адрес",
+	"@copyAddress": {
+		"description": "receive_copy_cta",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addressShare": "Поделиться адресом",
+	"@addressShare": {
+		"description": "receive_share_cta",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addressHint": "Введите адрес",
+	"@addressHint": {
+		"description": "send_address_hint",
+		"type": "text",
+		"placeholders": {}
+	},
+	"seed": "Seed",
+	"@seed": {
+		"description": "intro_new_wallet_seed_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"seedInvalid": "Seed недействителен",
+	"@seedInvalid": {
+		"description": "intro_seed_invalid",
+		"type": "text",
+		"placeholders": {}
+	},
+	"seedCopied": "Seed скопировано в буфер обмена\nЕго можно скопировать в течение 2 минут.",
+	"@seedCopied": {
+		"description": "intro_new_wallet_seed_copied",
+		"type": "text",
+		"placeholders": {}
+	},
+	"scanQrCode": "Сканировать QR-код",
+	"@scanQrCode": {
+		"description": "send_scan_qr",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactsImportErr": "Не удалось импортировать контакты",
+	"@contactsImportErr": {
+		"description": "contact_import_error",
+		"type": "text",
+		"placeholders": {}
+	},
+	"viewDetails": "Посмотреть детали",
+	"@viewDetails": {
+		"description": "transaction_details",
+		"type": "text",
+		"placeholders": {}
+	},
+	"qrInvalidSeed": "QR-код не содержит действительного seed или закрытого ключа",
+	"@qrInvalidSeed": {
+		"description": "qr_invalid_seed",
+		"type": "text",
+		"placeholders": {}
+	},
+	"qrInvalidAddress": "QR-код не содержит действительного адреса",
+	"@qrInvalidAddress": {
+		"description": "qr_invalid_address",
+		"type": "text",
+		"placeholders": {}
+	},
+	"qrInvalidPermissions": "Пожалуйста, предоставьте разрешение камеры на сканирование QR-кодов",
+	"@qrInvalidPermissions": {
+		"description": "User did not grant camera permissions to the app",
+		"type": "text",
+		"placeholders": {}
+	},
+	"qrUnknownError": "Не удалось прочитать QR-код",
+	"@qrUnknownError": {
+		"description": "An unknown error occurred with the QR scanner",
+		"type": "text",
+		"placeholders": {}
+	},
+	"removeContact": "Удалить контакт",
+	"@removeContact": {
+		"description": "contact_remove_btn",
+		"type": "text",
+		"placeholders": {}
+	},
+	"removeContactConfirmation": "Вы уверены, что хотите удалить %1?",
+	"@removeContactConfirmation": {
+		"description": "contact_remove_sure",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactHeader": "Контакт",
+	"@contactHeader": {
+		"description": "contact_view_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactsHeader": "Контакты",
+	"@contactsHeader": {
+		"description": "contact_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addContact": "Добавить контакт",
+	"@addContact": {
+		"description": "contact_add_button",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactNameHint": "Введите имя @",
+	"@contactNameHint": {
+		"description": "contact_name_hint",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactInvalid": "Неверное имя контакта",
+	"@contactInvalid": {
+		"description": "contact_invalid_name",
+		"type": "text",
+		"placeholders": {}
+	},
+	"noContactsExport": "Нет контактов для экспорта.",
+	"@noContactsExport": {
+		"description": "contact_export_none",
+		"type": "text",
+		"placeholders": {}
+	},
+	"noContactsImport": "Нет новых контактов для импорта.",
+	"@noContactsImport": {
+		"description": "contact_import_none",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactsImportSuccess": "Успешно импортировано %1 контактов.",
+	"@contactsImportSuccess": {
+		"description": "contact_import_success",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactAdded": "%1 добавлен в контакты.",
+	"@contactAdded": {
+		"description": "contact_added",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactRemoved": "%1 удален из контактов!",
+	"@contactRemoved": {
+		"description": "contact_removed",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactNameMissing": "Выберите имя для этого контакта",
+	"@contactNameMissing": {
+		"description": "contact_name_missing",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactExists": "Контакт уже существует",
+	"@contactExists": {
+		"description": "contact_name_exists",
+		"type": "text",
+		"placeholders": {}
+	},
+	"backupYourSeed": "Сделайте резервную копию своего seed",
+	"@backupYourSeed": {
+		"description": "intro_new_wallet_seed_backup_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"backupSeedConfirm": "Вы уверены, что сделали резервную копию своего кошелька?",
+	"@backupSeedConfirm": {
+		"description": "intro_new_wallet_backup",
+		"type": "text",
+		"placeholders": {}
+	},
+	"seedBackupInfo": "Ниже находится seed вашего кошелька. Крайне важно, чтобы вы делали резервную копию своего seed и никогда не сохраняли его в виде открытого текста или снимка экрана.",
+	"@seedBackupInfo": {
+		"description": "intro_new_wallet_seed",
+		"type": "text",
+		"placeholders": {}
+	},
+	"copySeed": "Копировать seed",
+	"@copySeed": {
+		"description": "copy_seed_btn",
+		"type": "text",
+		"placeholders": {}
+	},
+	"seedCopiedShort": "Seed скопировано",
+	"@seedCopiedShort": {
+		"description": "seed_copied_btn",
+		"type": "text",
+		"placeholders": {}
+	},
+	"importSeed": "Импорт seed",
+	"@importSeed": {
+		"description": "intro_seed_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"importSeedHint": "Пожалуйста, введите ваше seed ниже.",
+	"@importSeedHint": {
+		"description": "intro_seed_info",
+		"type": "text",
+		"placeholders": {}
+	},
+	"welcomeText": "Добро пожаловать в Fusion. Для начала вы можете создать новый кошелек или импортировать существующий.",
+	"@welcomeText": {
+		"description": "intro_welcome_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"newWallet": "Новый кошелек",
+	"@newWallet": {
+		"description": "intro_welcome_new_wallet",
+		"type": "text",
+		"placeholders": {}
+	},
+	"importWallet": "Импорт кошелька",
+	"@importWallet": {
+		"description": "intro_welcome_have_wallet",
+		"type": "text",
+		"placeholders": {}
+	},
+	"sentTo": "Отправлено ",
+	"@sentTo": {
+		"description": "sent_to",
+		"type": "text",
+		"placeholders": {}
+	},
+	"sending": "Отправка",
+	"@sending": {
+		"description": "send_sending",
+		"type": "text",
+		"placeholders": {}
+	},
+	"to": "",
+	"@to": {
+		"description": "send_to",
+		"type": "text",
+		"placeholders": {}
+	},
+	"sendAmountConfirm": "Отправить %1 Fusion",
+	"@sendAmountConfirm": {
+		"description": "send_pin_description",
+		"type": "text",
+		"placeholders": {}
+	},
+	"sendError": "Произошла ошибка. Попробуйте позже.",
+	"@sendError": {
+		"description": "send_generic_error",
+		"type": "text",
+		"placeholders": {}
+	},
+	"mantaError": "Couldn't Verify Request!",
+	"@mantaError": {
+		"description": "Was unable to verify the manta/appia payment request (from scanning QR code, etc.)",
+		"type": "text",
+		"placeholders": {}
+	},
+	"enterAmount": "Введите количество",
+	"@enterAmount": {
+		"description": "send_amount_hint",
+		"type": "text",
+		"placeholders": {}
+	},
+	"enterAddress": "Введите адрес",
+	"@enterAddress": {
+		"description": "enter_address",
+		"type": "text",
+		"placeholders": {}
+	},
+	"invalidAddress": "Введенный адрес недействителен",
+	"@invalidAddress": {
+		"description": "send_invalid_address",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addressMising": "Пожалуйста, введите адрес",
+	"@addressMising": {
+		"description": "send_enter_address",
+		"type": "text",
+		"placeholders": {}
+	},
+	"amountMissing": "Пожалуйста, введите сумму",
+	"@amountMissing": {
+		"description": "send_enter_amount",
+		"type": "text",
+		"placeholders": {}
+	},
+	"minimumSend": "Минимальная сумма отправки составляет %1 BIP",
+	"@minimumSend": {
+		"description": "send_minimum_error",
+		"type": "text",
+		"placeholders": {}
+	},
+	"insufficientBalance": "Недостаточный баланс",
+	"@insufficientBalance": {
+		"description": "send_insufficient_balance",
+		"type": "text",
+		"placeholders": {}
+	},
+	"sendFrom": "Отправлено из",
+	"@sendFrom": {
+		"description": "send_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"pinCreateTitle": "Создайте 6-значный PIN-код",
+	"@pinCreateTitle": {
+		"description": "pin_create_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"pinConfirmTitle": "Подтвердите свой PIN-код",
+	"@pinConfirmTitle": {
+		"description": "pin_confirm_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"pinEnterTitle": "Введите пин-код",
+	"@pinEnterTitle": {
+		"description": "pin_enter_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"pinConfirmError": "PIN не совпадают",
+	"@pinConfirmError": {
+		"description": "pin_confirm_error",
+		"type": "text",
+		"placeholders": {}
+	},
+	"pinInvalid": "Введен неверный PIN-код",
+	"@pinInvalid": {
+		"description": "pin_error",
+		"type": "text",
+		"placeholders": {}
+	},
+	"themeHeader": "Тема",
+	"@themeHeader": {
+		"description": "theme_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"changeRepButton": "+ Изменить",
+	"@changeRepButton": {
+		"description": "change_representative_change",
+		"type": "text",
+		"placeholders": {}
+	},
+	"changeRepAuthenticate": "Сменить представителя",
+	"@changeRepAuthenticate": {
+		"description": "settings_change_rep",
+		"type": "text",
+		"placeholders": {}
+	},
+	"currentlyRepresented": "В настоящее время представлен",
+	"@currentlyRepresented": {
+		"description": "change_representative_current_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"changeRepSucces": "Представитель успешно изменен",
+	"@changeRepSucces": {
+		"description": "change_representative_success",
+		"type": "text",
+		"placeholders": {}
+	},
+	"repInfoHeader": "Что такое представитель?",
+	"@repInfoHeader": {
+		"description": "change_representative_info_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"repInfo": "Представитель - это аккаунт, голосующий за сетевой консенсус. Право голоса взвешивается по балансу, вы можете делегировать свой баланс, чтобы увеличить вес голоса представителя, которому вы доверяете.",
+	"@repInfo": {
+		"description": "change_representative_info",
+		"type": "text",
+		"placeholders": {}
+	},
+	"pinRepChange": "Введите ПИН-код, чтобы сменить представителя.q",
+	"@pinRepChange": {
+		"description": "change_representative_pin",
+		"type": "text",
+		"placeholders": {}
+	},
+	"changeRepHint": "Введите нового представителя",
+	"@changeRepHint": {
+		"description": "change_representative_hint",
+		"type": "text",
+		"placeholders": {}
+	},
+	"representatives": "Представители",
+	"@representatives": {
+		"description": "representatives",
+		"type": "text",
+		"placeholders": {}
+	},
+	"pickFromList": "Выбрать из списка",
+	"@pickFromList": {
+		"description": "pick rep from list",
+		"type": "text",
+		"placeholders": {}
+	},
+	"votingWeight": "Вес голосования",
+	"@votingWeight": {
+		"description": "Representative Voting Weight",
+		"type": "text",
+		"placeholders": {}
+	},
+	"uptime": "Время работы",
+	"@uptime": {
+		"description": "Rep uptime",
+		"type": "text",
+		"placeholders": {}
+	},
+	"authMethod": "Метод проверки подлинности",
+	"@authMethod": {
+		"description": "settings_disable_fingerprint",
+		"type": "text",
+		"placeholders": {}
+	},
+	"pinMethod": "PIN",
+	"@pinMethod": {
+		"description": "settings_pin_method",
+		"type": "text",
+		"placeholders": {}
+	},
+	"privacyPolicy": "Политика конфиденциальности",
+	"@privacyPolicy": {
+		"description": "settings_privacy_policy",
+		"type": "text",
+		"placeholders": {}
+	},
+	"biometricsMethod": "Биометрия",
+	"@biometricsMethod": {
+		"description": "settings_fingerprint_method",
+		"type": "text",
+		"placeholders": {}
+	},
+	"currency": "Валюта",
+	"@currency": {
+		"description": "A settings menu item for changing currency",
+		"type": "text",
+		"placeholders": {}
+	},
+	"changeCurrency": "Изменить валюту",
+	"@changeCurrency": {
+		"description": "settings_local_currency",
+		"type": "text",
+		"placeholders": {}
+	},
+	"language": "Язык",
+	"@language": {
+		"description": "settings_change_language",
+		"type": "text",
+		"placeholders": {}
+	},
+	"shareNatrium": "Поделиться Fusion",
+	"@shareNatrium": {
+		"description": "settings_share",
+		"type": "text",
+		"placeholders": {}
+	},
+	"shareNatriumText": "Оцените Fusion! Лучший мобильный кошелек BIP!",
+	"@shareNatriumText": {
+		"description": "share_extra",
+		"type": "text",
+		"placeholders": {}
+	},
+	"logout": "Выйти",
+	"@logout": {
+		"description": "settings_logout",
+		"type": "text",
+		"placeholders": {}
+	},
+	"rootWarning": "Похоже, что ваше устройство \"внедрено\", \"взломано\" или модифицировано таким образом, что ставит под угрозу безопасность. Перед продолжением рекомендуется сбросить устройство в исходное состояние.",
+	"@rootWarning": {
+		"description": "Shown to users if they have a rooted Android device or jailbroken iOS device",
+		"type": "text",
+		"placeholders": {}
+	},
+	"iUnderstandTheRisks": "Я понимаю риски",
+	"@iUnderstandTheRisks": {
+		"description": "Shown to users if they have a rooted Android device or jailbroken iOS device",
+		"type": "text",
+		"placeholders": {}
+	},
+	"exit": "Выход",
+	"@exit": {
+		"description": "Exit action, like a button",
+		"type": "text",
+		"placeholders": {}
+	},
+	"warning": "Предупреждение",
+	"@warning": {
+		"description": "settings_logout_alert_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"logoutDetail": "При выходе из системы  с этого устройства будет удалено все данные, связанные с Fusion. Если Ваш seed или фразу не будет сохранено, вы больше никогда не сможете получить доступ к своим средствам",
+	"@logoutDetail": {
+		"description": "settings_logout_alert_message",
+		"type": "text",
+		"placeholders": {}
+	},
+	"logoutAction": "Удалить Seed и выйти",
+	"@logoutAction": {
+		"description": "settings_logout_alert_confirm_cta",
+		"type": "text",
+		"placeholders": {}
+	},
+	"logoutAreYouSure": "Уверены ли вы?",
+	"@logoutAreYouSure": {
+		"description": "settings_logout_warning_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"logoutReassurance": "Пока вы сделали резервную копию своей фразы, вам не о чем беспокоиться.",
+	"@logoutReassurance": {
+		"description": "settings_logout_warning_message",
+		"type": "text",
+		"placeholders": {}
+	},
+	"settingsHeader": "Настройки",
+	"@settingsHeader": {
+		"description": "settings_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"preferences": "Настройки",
+	"@preferences": {
+		"description": "settings_preferences_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"manage": "Управление",
+	"@manage": {
+		"description": "settings_manage_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"backupSeed": "Резервный seed",
+	"@backupSeed": {
+		"description": "settings_backup_seed",
+		"type": "text",
+		"placeholders": {}
+	},
+	"fingerprintSeedBackup": "Авторизуйтесь в резервной копии.",
+	"@fingerprintSeedBackup": {
+		"description": "settings_fingerprint_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"pinSeedBackup": "Введите PIN-код для резервного копирования",
+	"@pinSeedBackup": {
+		"description": "settings_pin_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"systemDefault": "Системные установки по умолчанию",
+	"@systemDefault": {
+		"description": "settings_default_language_string",
+		"type": "text",
+		"placeholders": {}
+	},
+	"notifications": "Уведомления",
+	"@notifications": {
+		"description": "notifications_settings",
+		"type": "text",
+		"placeholders": {}
+	},
+	"notificationTitle": "Получено %1",
+	"@notificationTitle": {
+		"description": "notification_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"notificationBody": "Откройте Fusion, чтобы просмотреть эту транзакцию",
+	"@notificationBody": {
+		"description": "notification_body",
+		"type": "text",
+		"placeholders": {}
+	},
+	"notificationHeaderSupplement": "Нажмите, чтобы открыть",
+	"@notificationHeaderSupplement": {
+		"description": "notificaiton_header_suplement",
+		"type": "text",
+		"placeholders": {}
+	},
+	"settingsTransfer": "Load from Paper Wallet",
+	"@settingsTransfer": {
+		"description": "settings_transfer",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferError": "An error has occurred during the transfer. Please try again later.",
+	"@transferError": {
+		"description": "transfer_error",
+		"type": "text",
+		"placeholders": {}
+	},
+	"paperWallet": "Paper Wallet",
+	"@paperWallet": {
+		"description": "paper_wallet",
+		"type": "text",
+		"placeholders": {}
+	},
+	"kaliumWallet": "Fusion Wallet",
+	"@kaliumWallet": {
+		"description": "kalium_wallet",
+		"type": "text",
+		"placeholders": {}
+	},
+	"manualEntry": "Ручной ввод",
+	"@manualEntry": {
+		"description": "transfer_manual_entry",
+		"type": "text",
+		"placeholders": {}
+	},
+	"mnemonicPhrase": "Мнемоническая фраза",
+	"@mnemonicPhrase": {
+		"description": "mnemonic_phrase",
+		"type": "text",
+		"placeholders": {}
+	},
+	"rawSeed": "Seed",
+	"@rawSeed": {
+		"description": "raw_seed",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferHeader": "Перевод средств",
+	"@transferHeader": {
+		"description": "transfer_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transfer": "Перечислить",
+	"@transfer": {
+		"description": "transfer_btn",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferManualHint": "Пожалуйста, введите seed ниже.",
+	"@transferManualHint": {
+		"description": "transfer_hint",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferIntro": "Этот процесс переведет средства с бумажного кошелька на ваш кошелек Fusion.\n\nНажмите кнопку «%1», чтобы начать.",
+	"@transferIntro": {
+		"description": "transfer_intro",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferQrScanHint": "Сканирование начального или закрытого ключа Fusion",
+	"@transferQrScanHint": {
+		"description": "transfer_qr_scan_hint",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferQrScanError": "Этот QR-код не содержит действительного seed.",
+	"@transferQrScanError": {
+		"description": "transfer_qr_scan_error",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferNoFunds": "На этом seed нет BIP",
+	"@transferNoFunds": {
+		"description": "transfer_no_funds_toast",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferConfirmInfo": "Обнаружен кошелек с балансом %1.\n",
+	"@transferConfirmInfo": {
+		"description": "transfer_confirm_info_first",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferConfirmInfoSecond": "Нажмите «Подтвердить», чтобы перевести средства.\n",
+	"@transferConfirmInfoSecond": {
+		"description": "transfer_confirm_info_second",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferConfirmInfoThird": "Передача может занять несколько секунд.",
+	"@transferConfirmInfoThird": {
+		"description": "transfer_confirm_info_third",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferLoading": "Передача",
+	"@transferLoading": {
+		"description": "transfer_loading_text",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferComplete": "%1 успешно переведен в ваш Fusion Wallet.",
+	"@transferComplete": {
+		"description": "transfer_complete_text",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferClose": "Коснитесь в любом месте, чтобы закрыть окно.",
+	"@transferClose": {
+		"description": "transfer_close_text",
+		"type": "text",
+		"placeholders": {}
+	},
+	"scanInstructions": "Отсканируйте QR-код Mx-адреса",
+	"@scanInstructions": {
+		"description": "scan_send_instruction_label",
+		"type": "text",
+		"placeholders": {}
+	},
+	"unlockPin": "Введите PIN-код, чтобы разблокировать Fusion",
+	"@unlockPin": {
+		"description": "unlock_kalium_pin",
+		"type": "text",
+		"placeholders": {}
+	},
+	"unlockBiometrics": "Выполните аутентификацию, чтобы разблокировать Fusion",
+	"@unlockBiometrics": {
+		"description": "unlock_kalium_bio",
+		"type": "text",
+		"placeholders": {}
+	},
+	"lockAppSetting": "Аутентифицироваться при запуске",
+	"@lockAppSetting": {
+		"description": "authenticate_on_launch",
+		"type": "text",
+		"placeholders": {}
+	},
+	"locked": "Заблокировано",
+	"@locked": {
+		"description": "lockedtxt",
+		"type": "text",
+		"placeholders": {}
+	},
+	"unlock": "Разблокировать",
+	"@unlock": {
+		"description": "unlocktxt",
+		"type": "text",
+		"placeholders": {}
+	},
+	"tooManyFailedAttempts": "Слишком много неудачных попыток разблокировки.",
+	"@tooManyFailedAttempts": {
+		"description": "fail_toomany_attempts",
+		"type": "text",
+		"placeholders": {}
+	},
+	"securityHeader": "Security",
+	"@securityHeader": {
+		"description": "security_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"autoLockHeader": "Автоматическая блокировка",
+	"@autoLockHeader": {
+		"description": "auto_lock_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"xMinutes": "Через %1 минут",
+	"@xMinutes": {
+		"description": "after_minutes",
+		"type": "text",
+		"placeholders": {}
+	},
+	"xMinute": "Через %1 минуту",
+	"@xMinute": {
+		"description": "after_minute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"instantly": "немедленно",
+	"@instantly": {
+		"description": "insantly",
+		"type": "text",
+		"placeholders": {}
+	},
+	"setWalletPassword": "Set Wallet Password",
+	"@setWalletPassword": {
+		"description": "Allows user to encrypt wallet with a password",
+		"type": "text",
+		"placeholders": {}
+	},
+	"setPassword": "Установка пароля",
+	"@setPassword": {
+		"description": "A button that sets the wallet password",
+		"type": "text",
+		"placeholders": {}
+	},
+	"disableWalletPassword": "Отключить пароль кошелька",
+	"@disableWalletPassword": {
+		"description": "Allows user to deencrypt wallet with a password",
+		"type": "text",
+		"placeholders": {}
+	},
+	"encryptionFailedError": "Не удалось установить пароль кошелька",
+	"@encryptionFailedError": {
+		"description": "If encrypting a wallet raised an error",
+		"type": "text",
+		"placeholders": {}
+	},
+	"setPasswordSuccess": "Пароль установлен успешно",
+	"@setPasswordSuccess": {
+		"description": "Setting a Wallet Password was successful",
+		"type": "text",
+		"placeholders": {}
+	},
+	"disablePasswordSuccess": "Пароль был отключен",
+	"@disablePasswordSuccess": {
+		"description": "Disabling a Wallet Password was successful",
+		"type": "text",
+		"placeholders": {}
+	},
+	"exampleCardIntro": "Добро пожаловать в кошелек Fusion. Как только вы получите FUSION, транзакции будут выглядеть следующим образом:",
+	"@exampleCardIntro": {
+		"description": "example_card_intro",
+		"type": "text",
+		"placeholders": {}
+	},
+	"exampleCardLittle": "Немного",
+	"@exampleCardLittle": {
+		"description": "example_card_little",
+		"type": "text",
+		"placeholders": {}
+	},
+	"exampleCardLot": "Полно",
+	"@exampleCardLot": {
+		"description": "example_card_lot",
+		"type": "text",
+		"placeholders": {}
+	},
+	"exampleCardTo": "кому-то",
+	"@exampleCardTo": {
+		"description": "example_card_to",
+		"type": "text",
+		"placeholders": {}
+	},
+	"exampleCardFrom": "от кого-то",
+	"@exampleCardFrom": {
+		"description": "example_card_from",
+		"type": "text",
+		"placeholders": {}
+	},
+	"defaultAccountName": "Основной аккаунт",
+	"@defaultAccountName": {
+		"description": "Default account name",
+		"type": "text",
+		"placeholders": {}
+	},
+	"defaultNewAccountName": "Аккаунт %1",
+	"@defaultNewAccountName": {
+		"description": "Default new account name - e.g. Account 1",
+		"type": "text",
+		"placeholders": {}
+	},
+	"newAccountIntro": "Это ваша новая учетная запись. Как только вы получите BIP, транзакции будут выглядеть следующим образом:",
+	"@newAccountIntro": {
+		"description": "Alternate account intro card",
+		"type": "text",
+		"placeholders": {}
+	},
+	"account": "Профиль",
+	"@account": {
+		"description": "Account text",
+		"type": "text",
+		"placeholders": {}
+	},
+	"accounts": "Счета",
+	"@accounts": {
+		"description": "Accounts header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addAccount": "Добавить счет",
+	"@addAccount": {
+		"description": "Default new account name - e.g. Account 1",
+		"type": "text",
+		"placeholders": {}
+	},
+	"hideAccountHeader": "Скрыть аккаунт?",
+	"@hideAccountHeader": {
+		"description": "Confirmation dialog header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"removeAccountText": "Вы уверены, что хотите скрыть эту учетную запись? Вы можете повторно добавить его позже, нажав кнопку «% 1».",
+	"@removeAccountText": {
+		"description": "Remove account dialog body",
+		"type": "text",
+		"placeholders": {}
+	},
+	"tapToReveal": "Нажмите, чтобы открыть",
+	"@tapToReveal": {
+		"description": "Tap to reveal hidden content",
+		"type": "text",
+		"placeholders": {}
+	},
+	"tapToHide": "Нажмите, чтобы скрыть",
+	"@tapToHide": {
+		"description": "Tap to hide content",
+		"type": "text",
+		"placeholders": {}
+	},
+	"copied": "Скопировано",
+	"@copied": {
+		"description": "Copied (to clipboard)",
+		"type": "text",
+		"placeholders": {}
+	},
+	"copy": "Копировать",
+	"@copy": {
+		"description": "Copy (to clipboard)",
+		"type": "text",
+		"placeholders": {}
+	},
+	"seedDescription": "Seed содержит ту же информацию, что и секретная фраза, но в машиночитаемом виде. Пока у вас есть резервная копия одного из них, у вас будет доступ к своим средствам.",
+	"@seedDescription": {
+		"description": "Describing what a seed is",
+		"type": "text",
+		"placeholders": {}
+	},
+	"importSecretPhrase": "Импортировать секретную фразу",
+	"@importSecretPhrase": {
+		"description": "Header for restoring using mnemonic",
+		"type": "text",
+		"placeholders": {}
+	},
+	"importSecretPhraseHint": "Пожалуйста, введите вашу секретную фразу из 12 слов ниже. Каждое слово следует разделять пробелом.",
+	"@importSecretPhraseHint": {
+		"description": "helper message for importing mnemnic",
+		"type": "text",
+		"placeholders": {}
+	},
+	"qrMnemonicError": "QR не содержит действительной секретной фразы",
+	"@qrMnemonicError": {
+		"description": "When QR does not contain a valid mnemonic phrase",
+		"type": "text",
+		"placeholders": {}
+	},
+	"mnemonicInvalidWord": "%1 не является допустимым словом",
+	"@mnemonicInvalidWord": {
+		"description": "A word that is not part of bip39",
+		"type": "text",
+		"placeholders": {}
+	},
+	"mnemonicSizeError": "Секретная фраза может содержать не более 12 слов",
+	"@mnemonicSizeError": {
+		"description": "err",
+		"type": "text",
+		"placeholders": {}
+	},
+	"secretPhrase": "Секретная фраза",
+	"@secretPhrase": {
+		"description": "Secret (mnemonic) phrase",
+		"type": "text",
+		"placeholders": {}
+	},
+	"backupConfirmButton": "Я сделал резервную копию",
+	"@backupConfirmButton": {
+		"description": "Has backed up seed confirmation button",
+		"type": "text",
+		"placeholders": {}
+	},
+	"secretInfoHeader": "Безопасность прежде всего!",
+	"@secretInfoHeader": {
+		"description": "secret info header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"secretInfo": "На следующем экране вы увидите свою секретную фразу. Это пароль для доступа к вашим средствам. Очень важно сделать резервную копию и никогда никому не рассказывать.",
+	"@secretInfo": {
+		"description": "Description for seed",
+		"type": "text",
+		"placeholders": {}
+	},
+	"secretWarning": "If you lose your device or uninstall the application, you'll need your secret phrase or seed to recover your funds!",
+	"@secretWarning": {
+		"description": "Secret warning",
+		"type": "text",
+		"placeholders": {}
+	},
+	"gotItButton": "Понял!",
+	"@gotItButton": {
+		"description": "Got It! Acknowledgement button",
+		"type": "text",
+		"placeholders": {}
+	},
+	"ackBackedUp": "Вы уверены, что сохранили свою секретную фразу?",
+	"@ackBackedUp": {
+		"description": "Ack backed up",
+		"type": "text",
+		"placeholders": {}
+	},
+	"secretPhraseCopy": "Копировать секретную фразу",
+	"@secretPhraseCopy": {
+		"description": "Copy secret phrase to clipboard",
+		"type": "text",
+		"placeholders": {}
+	},
+	"secretPhraseCopied": "Секретная фраза скопирована",
+	"@secretPhraseCopied": {
+		"description": "Copied secret phrase to clipboard",
+		"type": "text",
+		"placeholders": {}
+	},
+	"import": "Импортировать",
+	"@import": {
+		"description": "Generic import",
+		"type": "text",
+		"placeholders": {}
+	},
+	"importSeedInstead": "Импортировать seed вместо",
+	"@importSeedInstead": {
+		"description": "importSeedInstead",
+		"type": "text",
+		"placeholders": {}
+	},
+	"switchToSeed": "Перейти на seed",
+	"@switchToSeed": {
+		"description": "switchToSeed",
+		"type": "text",
+		"placeholders": {}
+	},
+	"backupSecretPhrase": "Резервное копирование секретной фразы",
+	"@backupSecretPhrase": {
+		"description": "backup seed",
+		"type": "text",
+		"placeholders": {}
+	},
+	"createPasswordHint": "Создайте пароль",
+	"@createPasswordHint": {
+		"description": "A text field hint that tells the user to create a password",
+		"type": "text",
+		"placeholders": {}
+	},
+	"confirmPasswordHint": "Подтвердите Пароль",
+	"@confirmPasswordHint": {
+		"description": "A text field hint that tells the user to confirm the password",
+		"type": "text",
+		"placeholders": {}
+	},
+	"enterPasswordHint": "Введите ваш пароль",
+	"@enterPasswordHint": {
+		"description": "A text field hint that tells the users to enter their password",
+		"type": "text",
+		"placeholders": {}
+	},
+	"passwordsDontMatch": "Пароли не совпадают",
+	"@passwordsDontMatch": {
+		"description": "An error indicating a password has been confirmed incorrectly",
+		"type": "text",
+		"placeholders": {}
+	},
+	"passwordBlank": "Пароль не может быть пустым",
+	"@passwordBlank": {
+		"description": "An error indicating a password has been entered incorrectly",
+		"type": "text",
+		"placeholders": {}
+	},
+	"invalidPassword": "Неверный пароль",
+	"@invalidPassword": {
+		"description": "An error indicating a password has been entered incorrectly",
+		"type": "text",
+		"placeholders": {}
+	},
+	"passwordWillBeRequiredToOpenParagraph": "Этот пароль потребуется для открытия Fusion.",
+	"@passwordWillBeRequiredToOpenParagraph": {
+		"description": "A paragraph that tells the users that the created password will be required to open Natrium.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"passwordNoLongerRequiredToOpenParagraph": "Вам больше не потребуется пароль для открытия Fusion.",
+	"@passwordNoLongerRequiredToOpenParagraph": {
+		"description": "An info paragraph that tells the user a password will no longer be needed to open Natrium",
+		"type": "text",
+		"placeholders": {}
+	},
+	"createPasswordFirstParagraph": "Вы можете создать пароль, чтобы повысить безопасность своего кошелька.",
+	"@createPasswordFirstParagraph": {
+		"description": "A paragraph that tells the users that they can create a password for additional security.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"createPasswordSecondParagraph": "Пароль не является обязательным, и ваш кошелек будет защищен вашим PIN-кодом или биометрическими данными в любом случае.",
+	"@createPasswordSecondParagraph": {
+		"description": "A paragraph that tells the users that the password creation is optional and the wallet will be still protected with biometrics or PIN regardless.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"createAPasswordHeader": "Создайте пароль.",
+	"@createAPasswordHeader": {
+		"description": "A paragraph that tells the users to create a password.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"createPasswordSheetHeader": "Создайте",
+	"@createPasswordSheetHeader": {
+		"description": "Prompt user to create a new password",
+		"type": "text",
+		"placeholders": {}
+	},
+	"disablePasswordSheetHeader": "Запретить",
+	"@disablePasswordSheetHeader": {
+		"description": "Prompt user to disable their password",
+		"type": "text",
+		"placeholders": {}
+	},
+	"requireAPasswordToOpenHeader": "Требовать пароль для открытия Fusion?",
+	"@requireAPasswordToOpenHeader": {
+		"description": "A paragraph that asks the users if they would like a password to be required to open Natrium.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"noSkipButton": "Нет, пропустить",
+	"@noSkipButton": {
+		"description": "A button that declines and skips the mentioned process.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"yesButton": "Да",
+	"@yesButton": {
+		"description": "A button that accepts the mentioned process.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"nextButton": "Далее",
+	"@nextButton": {
+		"description": "A button that goes to the next screen.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"goBackButton": "Назад",
+	"@goBackButton": {
+		"description": "A button that goes to the previous screen.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"supportButton": "Cлужба поддержки",
+	"@supportButton": {
+		"description": "A button to open up the live support window",
+		"type": "text",
+		"placeholders": {}
+	},
+	"liveSupportButton": "Служба поддержки",
+	"@liveSupportButton": {
+		"description": "A button to open up the live support window",
+		"type": "text",
+		"placeholders": {}
+	},
+	"connectingHeader": "Подключение ...",
+	"@connectingHeader": {
+		"description": "A header to let the user now that Natrium is currently connecting to (or loading) live chat.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"localeEnglishItem": "English",
+	"@localeEnglishItem": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"localeRussianItem": "Русский",
+	"@localeRussianItem": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"accessBlocked": "Профиль заблокирован. Пожалуйста, свяжитесь с администрацией.",
+	"copiedSuccesfullyMessage": "Фраза сохранена.",
+	"errorCameraRestriction": "Пользователь не предоставил разрешение камере!",
+	"errorInvalidInputsPush": "Недействительные значения для push-транзакции",
+	"flashAddressCopied": "Адрес скопирован в буфер обмена.",
+	"flashFundsSended": "Успешно отправлено",
+	"flashIncorrectWordMessage": "Неправильное слово. Пожалуйста, попробуйте еще раз",
+	"flashOperationFailed": "Операция завершилась неудачно.",
+	"flashOperationSuccess": "Операция завершена успешно",
+	"generatingWalletMessage": "Идет создание кошелька",
+	"hintSendedFrom": "Отправка из",
+	"labelAgain": "Снова",
+	"noContactsTitle": "Никаких контактов пока нет.",
+	"pushLinkWasCopied": "Ссылка скопирована в буфер обмена.",
+	"sendFundsToPushWallet": "Отправить {qty} средства на {wallet}",
+	"toolbarRewards": "Награды",
+	"toolbarTitleShowPassphrase": "Показать кодовую фразу"
 }

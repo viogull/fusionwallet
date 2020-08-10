@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-07-18T01:18:55.151413",
+  "@@last_modified": "2020-08-10T17:51:04.770627",
   "appName": "Fusion",
   "@appName": {
     "type": "text",
@@ -1938,6 +1938,49 @@
   },
   "flashAddressCopied": "Address was copied to clipboard.",
   "@flashAddressCopied": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "accessBlocked": "Access was blocked. Please, contact with administration",
+  "@accessBlocked": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "pushLinkWasCopied": "Link was copied to clipboard.",
+  "@pushLinkWasCopied": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sendFundsToPushWallet": "Send {qty} funds to {wallet}",
+  "@sendFundsToPushWallet": {
+    "type": "text",
+    "placeholders": {
+      "qty": {},
+      "wallet": {}
+    }
+  },
+  "copiedSuccesfullyMessage": "Succesfully saved passhprase.",
+  "@copiedSuccesfullyMessage": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "flashIncorrectWordMessage": "Incorrect word. Please try again",
+  "@flashIncorrectWordMessage": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelAgain": "Again",
+  "@labelAgain": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "hintSendedFrom": "Sending from",
+  "@hintSendedFrom": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errorInvalidInputsPush": "Invalid values for push transaction",
+  "@errorInvalidInputsPush": {
     "type": "text",
     "placeholders": {}
   }

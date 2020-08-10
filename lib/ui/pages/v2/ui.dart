@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:fusion_wallet/main.dart';
-import 'package:fusion_wallet/ui/pages/auth/splash.dart';
 import 'package:fusion_wallet/ui/pages/auth/account_name.dart';
 import 'package:fusion_wallet/ui/pages/auth/biometrics.dart';
 import 'package:fusion_wallet/ui/pages/auth/intro.dart';

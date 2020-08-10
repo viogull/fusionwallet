@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-
 import 'package:fusion_wallet/core/models.dart';
-import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:fusion_wallet/ui/pages/primary/contacts/contact_item.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:random_string/random_string.dart';
 
 class ContactsPage extends StatefulWidget {
   ContactsPage({Key key, this.title}) : super(key: key);

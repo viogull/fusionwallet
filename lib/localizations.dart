@@ -44,7 +44,6 @@ class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  // Return localized string
 
   appName() => Intl.message('Fusion', name: 'appName');
 
@@ -1584,7 +1583,7 @@ class AppLocalizations {
 
   String accessBlocked() =>
       Intl.message("Access was blocked. Please, contact with administration",
-          name: 'accessBlockedTitle');
+          name: 'accessBlocked');
 
   String pushLinkWasCopied() =>
       Intl.message("Link was copied to clipboard.", name: 'pushLinkWasCopied');

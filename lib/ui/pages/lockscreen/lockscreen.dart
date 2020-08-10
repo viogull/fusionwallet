@@ -6,11 +6,11 @@ import 'package:fusion_wallet/ui/pages/v2/bloc.dart';
 import 'package:fusion_wallet/utils/haptic.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:logger/logger.dart';
+import 'package:meta/meta.dart';
 
 import '../../../inject.dart';
 import '../../../localizations.dart';
 import '../../widgets.dart';
-import 'package:meta/meta.dart';
 
 class LockscreenArgs {
   final String pin;
@@ -108,9 +108,7 @@ class _LockUiState extends State<LockUi> with TickerProviderStateMixin {
     Navigator.of(context).pushReplacementNamed(HomePage.navId);
   }
 
-  void _cancelAuthentication() {
-    _auth.stopAuthentication();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -192,7 +190,7 @@ class _LockUiPincodeState extends State<LockUiPincode> {
     });
     if (_otp.length == 6) {
       debugPrint(
-          "PinLength is max, expected ${widget.expected}, entered ${_otp}");
+          "PinLength is max, expected ${widget.expected}, entered $_otp");
       if (_otp == widget.expected) {
         Navigator.of(context).pushReplacementNamed(HomePage.navId);
       } else {
@@ -228,17 +226,6 @@ class _LockUiPincodeState extends State<LockUiPincode> {
     // print(_otp);
   }
 
-  void _clean() {
-    setState(() {
-      if (_otp.length > 0) {
-        _otp = _otp.substring(0, _otp.length - 1);
-        for (int i = _otp.length; i < 6; i++) _otpSymbols[i] = "\u{25CB}";
-      }
-    });
-    if (_otp.length < 6) passCreate = false;
-
-    // print(_otp);
-  }
 
   @override
   Widget build(BuildContext context) {

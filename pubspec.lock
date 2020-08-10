@@ -70,7 +70,7 @@ packages:
       name: basic_utils
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.5.5"
+    version: "2.6.1"
   bip39:
     dependency: transitive
     description:
@@ -140,7 +140,7 @@ packages:
       name: build_runner_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.2.0"
+    version: "6.0.1"
   built_collection:
     dependency: transitive
     description:
@@ -203,7 +203,7 @@ packages:
       name: code_builder
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.3.0"
+    version: "3.4.0"
   collection:
     dependency: transitive
     description:
@@ -211,41 +211,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.14.13"
-  connection_status_bar:
-    dependency: "direct main"
-    description:
-      name: connection_status_bar
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.2"
-  connectivity:
-    dependency: transitive
-    description:
-      name: connectivity
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.4.9"
-  connectivity_for_web:
-    dependency: transitive
-    description:
-      name: connectivity_for_web
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.0"
-  connectivity_macos:
-    dependency: transitive
-    description:
-      name: connectivity_macos
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.0+3"
-  connectivity_platform_interface:
-    dependency: transitive
-    description:
-      name: connectivity_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.6"
   convert:
     dependency: transitive
     description:
@@ -273,7 +238,7 @@ packages:
       name: csslib
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.16.1"
+    version: "0.16.2"
   cubit:
     dependency: transitive
     description:
@@ -329,14 +294,14 @@ packages:
       name: dio
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.9"
+    version: "3.0.10"
   equatable:
     dependency: "direct main"
     description:
       name: equatable
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.0"
+    version: "1.2.3"
   ffi:
     dependency: transitive
     description:
@@ -358,27 +323,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "7.3.0"
-  firebase_analytics:
-    dependency: "direct main"
-    description:
-      name: firebase_analytics
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.0.16"
-  firebase_analytics_platform_interface:
-    dependency: transitive
-    description:
-      name: firebase_analytics_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.3"
-  firebase_analytics_web:
-    dependency: transitive
-    description:
-      name: firebase_analytics_web
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.1"
   firebase_core:
     dependency: "direct main"
     description:
@@ -406,7 +350,7 @@ packages:
       name: firebase_dynamic_links
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.1"
+    version: "0.5.3"
   fixnum:
     dependency: transitive
     description:
@@ -460,7 +404,7 @@ packages:
       name: flutter_datetime_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.3.8"
+    version: "1.4.0"
   flutter_easyrefresh:
     dependency: "direct main"
     description:
@@ -474,7 +418,7 @@ packages:
       name: flutter_form_bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.15.0"
+    version: "0.15.1"
   flutter_icons:
     dependency: "direct main"
     description:
@@ -521,7 +465,7 @@ packages:
       name: flutter_mobx
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.0+1"
+    version: "1.1.0+2"
   flutter_platform_widgets:
     dependency: "direct main"
     description:
@@ -626,7 +570,7 @@ packages:
       name: hive
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.4.2"
+    version: "1.4.3"
   hive_flutter:
     dependency: "direct main"
     description:
@@ -787,7 +731,7 @@ packages:
       name: mobx
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.1+1"
+    version: "1.2.1+2"
   mobx_codegen:
     dependency: "direct dev"
     description:
@@ -844,13 +788,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.4.12"
-  oktoast:
-    dependency: "direct main"
-    description:
-      name: oktoast
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.3.2"
   onesignal_flutter:
     dependency: "direct main"
     description:
@@ -892,7 +829,7 @@ packages:
       name: page_transition
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.5"
+    version: "1.1.6"
   path:
     dependency: "direct dev"
     description:
@@ -927,7 +864,7 @@ packages:
       name: path_provider_linux
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.1+1"
+    version: "0.0.1+2"
   path_provider_macos:
     dependency: transitive
     description:
@@ -1039,7 +976,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.3.0"
+    version: "4.3.2"
   pub_semver:
     dependency: transitive
     description:
@@ -1074,7 +1011,7 @@ packages:
       name: quiver
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.5"
+    version: "2.1.3"
   random_string:
     dependency: "direct main"
     description:
@@ -1112,13 +1049,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.2+2"
-  settings_ui:
-    dependency: "direct main"
-    description:
-      name: settings_ui
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.0"
   shake:
     dependency: transitive
     description:
@@ -1201,20 +1131,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
-  slide_popup_dialog:
-    dependency: "direct main"
-    description:
-      name: slide_popup_dialog
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.2"
   source_gen:
     dependency: transitive
     description:
       name: source_gen
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.9.5"
+    version: "0.9.6"
   source_map_stack_trace:
     dependency: transitive
     description:
@@ -1242,7 +1165,7 @@ packages:
       name: stack_trace
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.9.3"
+    version: "1.9.5"
   stream_channel:
     dependency: transitive
     description:
@@ -1356,14 +1279,14 @@ packages:
       name: url_launcher_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.1+6"
+    version: "0.1.2"
   uuid:
     dependency: transitive
     description:
       name: uuid
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0"
+    version: "2.2.0"
   validators:
     dependency: "direct main"
     description:
@@ -1421,7 +1344,7 @@ packages:
       name: vm_service
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.1.0"
+    version: "4.2.0"
   wakelock:
     dependency: transitive
     description:

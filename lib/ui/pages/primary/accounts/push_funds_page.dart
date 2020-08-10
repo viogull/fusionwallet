@@ -6,10 +6,10 @@ import 'package:fusion_wallet/core/minter_rest.dart';
 import 'package:fusion_wallet/core/models/create_push_link_request.dart';
 import 'package:fusion_wallet/core/models/create_push_link_response.dart';
 import 'package:fusion_wallet/localizations.dart';
-import 'package:fusion_wallet/ui/pages/pushing/share_push.dart';
-import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
+import 'package:fusion_wallet/ui/pages/pushing/share_push.dart';
+import 'package:fusion_wallet/ui/theme.dart';
 
 import '../../../../inject.dart';
 import 'bloc_loader.dart';
@@ -31,7 +31,7 @@ class PushFormBloc extends FormBloc<String, String> {
         receiverName,
         "");
     if (createPushLinkReq is CreatePushLinkResponse) {
-      final response = createPushLinkReq as CreatePushLinkResponse;
+      final response = createPushLinkReq;
       emitSuccess(successResponse: response.toJson().toString());
     } else {
       emitFailure();

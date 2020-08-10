@@ -1,20 +1,19 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flash/flash.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fusion_wallet/core/models/create_push_link_response.dart';
-import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
+import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/ui/tools/flasher.dart';
 import 'package:fusion_wallet/utils/haptic.dart';
 import 'package:fusion_wallet/utils/io_tools.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:share/share.dart';
 
-import '../../../localizations.dart';
 import '../../../inject.dart';
+import '../../../localizations.dart';
 
 class SharePush extends StatelessWidget {
   final CreatePushLinkResponse _pushData;

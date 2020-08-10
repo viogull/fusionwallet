@@ -1,29 +1,22 @@
 import 'package:alice/alice.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fusion_wallet/core/abstract/preferences.dart';
-import 'package:fusion_wallet/ui/pages/routes.dart';
 import 'package:fusion_wallet/ui/pages/v2/ui.dart';
-
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
-
 import 'package:provider/provider.dart';
 
 import 'core/abstract/contact.dart';
 import 'core/minter_rest.dart';
 import 'core/models.dart';
-import 'localizations.dart';
-import 'inject.dart';
-import 'ui/pages/auth/access_ui.dart';
-import 'ui/pages/auth/splash.dart';
 import 'core/state_container.dart';
-import 'ui/pages/lockscreen/lockscreen.dart';
-import 'ui/theme.dart';
+import 'inject.dart';
+import 'localizations.dart';
 import 'ui/components/custom/passcode/passcode_screen.dart';
+import 'ui/pages/accounts.dart';
+import 'ui/pages/auth/access_ui.dart';
 import 'ui/pages/auth/account_name.dart';
 import 'ui/pages/auth/biometrics.dart';
 import 'ui/pages/auth/intro.dart';
@@ -31,25 +24,25 @@ import 'ui/pages/auth/passphrase/passphrase.dart';
 import 'ui/pages/auth/passphrase/share_qr_page.dart';
 import 'ui/pages/auth/pincode.dart';
 import 'ui/pages/auth/recover_account_page.dart';
+import 'ui/pages/auth/splash.dart';
 import 'ui/pages/auth/terms_and_conditions.dart';
 import 'ui/pages/bottom_home_page.dart';
 import 'ui/pages/exchange/convert_funds_page.dart';
 import 'ui/pages/exchange/rate_exhange_page.dart';
 import 'ui/pages/information/faq_page.dart';
 import 'ui/pages/information/send_feedback_page.dart';
+import 'ui/pages/lockscreen/lockscreen.dart';
 import 'ui/pages/popups/popups_history_page.dart';
-import 'ui/pages/accounts.dart';
 import 'ui/pages/primary/accounts/delegate_funds_page.dart';
 import 'ui/pages/primary/accounts/push_funds_page.dart';
 import 'ui/pages/primary/accounts/request_funds_page.dart';
 import 'ui/pages/primary/accounts/rewards_info_page.dart';
 import 'ui/pages/primary/accounts/send_funds_page.dart';
 import 'ui/pages/primary/accounts/unbound_funds_page.dart';
-
 import 'ui/pages/primary/contacts/contacts_page.dart';
-
 import 'ui/pages/primary/history_page.dart';
 import 'ui/pages/primary/settings_page.dart';
+import 'ui/theme.dart';
 
 const String preferencesBox = 'prefsBox';
 const String accountsBox = 'accountsBox';
@@ -90,6 +83,7 @@ void main() async {
     child: new App(),
     accounts: accsBox,
     preferences: prefsSingleton,
+    alice: injector.get<Alice>()
   ));
 }
 

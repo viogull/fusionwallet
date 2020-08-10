@@ -7,9 +7,9 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/localizations.dart';
-import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
+import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/utils/vault.dart';
 
 import '../../../../inject.dart';
@@ -205,6 +205,12 @@ class AddContactFormBloc extends FormBloc<String, String> {
     ],
   );
 
+  @override
+  Future<Function> close() {
+      address.close();
+      accountName.close();
+  }
+
   final showSuccessResponse = BooleanFieldBloc();
 
   AddContactFormBloc(this._account) {
@@ -231,7 +237,7 @@ class AddContactFormBloc extends FormBloc<String, String> {
             .addContact(Contact(accountName.value, address.value));
         this.emitSuccess();
       }
-    } on Exception catch (e) {
+    } on Exception {
       emitFailure();
     }
   }

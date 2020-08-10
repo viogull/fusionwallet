@@ -1,12 +1,12 @@
 import 'package:alice/alice.dart';
 import 'package:dio/dio.dart';
 import 'package:fusion_wallet/core/abstract/account.dart';
+import 'package:fusion_wallet/core/models/address_data.dart';
 import 'package:fusion_wallet/core/models/create_profile_request.dart';
 import 'package:fusion_wallet/core/models/create_push_link_request.dart';
 import 'package:fusion_wallet/core/models/create_push_link_response.dart';
 import 'package:fusion_wallet/core/models/delegate_ubound_tx_request.dart';
 import 'package:fusion_wallet/core/models/exchange_rate_response.dart';
-import 'package:fusion_wallet/core/models/address_data.dart';
 import 'package:fusion_wallet/core/models/nonce_response.dart';
 import 'package:fusion_wallet/core/models/profile_response.dart';
 import 'package:fusion_wallet/core/models/send_tx_request.dart';
@@ -110,6 +110,7 @@ class MinterRest {
         }
       }
     }
+    return null;
   }
 
   //get
@@ -145,6 +146,7 @@ class MinterRest {
       }
       return null;
     }
+    return null;
   }
 
   //put
