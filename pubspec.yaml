@@ -67,7 +67,7 @@ dependencies:
 
   flutter_platform_widgets:
       git:
-        url: git@github.com:stryder-dev/flutter_platform_widgets.git
+        url: https://github.com/stryder-dev/flutter_platform_widgets.git
         ref: beta
 
   # Vibrate
