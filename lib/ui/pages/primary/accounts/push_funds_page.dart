@@ -124,7 +124,7 @@ class PushFundsPage extends StatelessWidget {
             child: FusionScaffold(
               title: AppLocalizations.of(context).buttonPush(),
               child: SingleChildScrollView(
-                physics: ClampingScrollPhysics(),
+                physics: NeverScrollableScrollPhysics(),
                 padding: const EdgeInsets.all(8),
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.9,

@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:fusion_wallet/core/models.dart';
-
 import 'package:meta/meta.dart';
 
 class AccountCreationEvent extends Equatable {
@@ -9,6 +8,8 @@ class AccountCreationEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class AccountInitialEvent extends AccountCreationEvent {}
 
 class AccountCreateWalletEvent extends AccountCreationEvent {}
 

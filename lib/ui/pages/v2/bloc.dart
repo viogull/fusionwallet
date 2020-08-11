@@ -40,6 +40,9 @@ class AuthenticationBloc
     if (event is AccountLockEvent) {
       yield AccountLockedState();
     }
+    if (event is AccountInitialEvent) {
+      yield AccountInitialState();
+    }
     if (event is AccountStartRecoverEvent) {
       yield AccountRecoveryState();
     } else if (event is AccountCompleteRecoverEvent) {

@@ -314,6 +314,7 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
               child: Text(
                 AppLocalizations.of(context).labelQuestionIndicatorTitle(
                     (_verificationStage + 1).toString(), "3"),
+                textAlign: TextAlign.center,
                 style: Theme.of(context)
                     .textTheme
                     .subtitle1
@@ -325,6 +326,7 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
               child: Text(
                 AppLocalizations.of(context)
                     .labelWordIndicatorSubtitle(randomPosition + 1),
+                textAlign: TextAlign.center,
                 style: Theme.of(context)
                     .textTheme
                     .subtitle1

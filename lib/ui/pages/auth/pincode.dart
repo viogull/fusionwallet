@@ -4,6 +4,7 @@ import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:fusion_wallet/ui/pages/v2/bloc.dart';
 import 'package:fusion_wallet/ui/pages/v2/event.dart';
+import 'package:fusion_wallet/ui/tools/flasher.dart';
 import 'package:fusion_wallet/utils/haptic.dart';
 
 import '../../../inject.dart';
@@ -17,7 +18,7 @@ class PasswordCreationPage extends StatefulWidget {
 
   @override
   _PasswordCreationPageState createState() =>
-      _PasswordCreationPageState(isCreating);
+      _PasswordCreationPageState(passCreate: isCreating);
 }
 
 class _PasswordCreationPageState extends State<PasswordCreationPage> {
@@ -25,9 +26,10 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
   bool isVerified = false;
   bool passCreate = false;
 
-  _PasswordCreationPageState(bool isCreating) {
-    this.passCreate = isCreating;
+  _PasswordCreationPageState({this.passCreate}) {
   }
+
+
   @override
   void initState() {
     super.initState();
@@ -63,6 +65,7 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
           PincodeCreatedEvent(pin: pincode),
         );
       } else {
+        FlashHelper.errorBar(context, message: "Invalid input");
         setState(() {
           this.pincode = _otp;
           this._otp = "";
@@ -110,7 +113,7 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
 
   @override
   Widget build(BuildContext context) {
-    passCreate = ModalRoute.of(context).settings.arguments as bool;
+
     final textLabel =
 //    if(_otp.length == 6 )
 //      passCreate ?
@@ -120,7 +123,7 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
               height: 70,
               margin: const EdgeInsets.only(top: 30),
               child: Text(
-                AppLocalizations.of(context).pinCreateTitle,
+                AppLocalizations.of(context).labelChoosePassSubtitle(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 20,
@@ -315,11 +318,15 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
     );
 
     return FusionScaffold(
-      hideToolbar: false,
-      appBarIcon: Icon(Icons.arrow_back),
-      onBackClicked: (str) {
-        Navigator.of(context).pop();
-      },
+      title: ( passCreate) ? AppLocalizations.of(context).pinCreateTitle : AppLocalizations.of(context).labelUnlockTitle(),
+     appBarIcon: IconButton(
+       icon: Icon(Icons.arrow_back, color: Theme.of(context).colorScheme.primary),
+       onPressed: () {
+         BlocProvider.of<AuthenticationBloc>(context).add(
+           AccountInitialEvent()
+         );
+       },
+     ),
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,

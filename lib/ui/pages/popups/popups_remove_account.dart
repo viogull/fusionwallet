@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
+import 'package:fusion_wallet/ui/pages/auth/intro.dart';
+import 'package:fusion_wallet/ui/pages/auth/splash.dart';
+import 'package:fusion_wallet/utils/vault.dart';
+
+import '../../../inject.dart';
 
 class PopupsRemoveAccount extends StatelessWidget {
   @override
@@ -71,8 +76,9 @@ class PopupsRemoveAccount extends StatelessWidget {
                           flex: 1,
                           child: FusionButton(
                            text:  AppLocalizations.of(context).labelOk(),
-                          onPressed:  () {
-                              Navigator.pop(context);
+                          onPressed:  () async {
+                              await injector.get<Vault>().deleteAll();
+                              Navigator.of(context).pushNamedAndRemoveUntil(IntroPage.navId, (route) => (route.settings.name == Splash.navId));
                             },
                           ),
                         ),

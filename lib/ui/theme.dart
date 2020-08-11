@@ -98,7 +98,7 @@ class FusionTheme {
       onPrimary: hexToColor("#000000"),
       onSecondary: hexToColor("#000000"),
       error: hexToColor("#cf6679"),
-      onError: hexToColor("#6200ee"),
+      onError: hexToColor("#ffffff"),
       background: hexToColor("#121212"),
       onBackground: hexToColor("#ffffff"),
       surface: hexToColor("#121212"),

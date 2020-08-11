@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/main.dart';
 import 'package:fusion_wallet/ui/pages/auth/account_name.dart';
 import 'package:fusion_wallet/ui/pages/auth/biometrics.dart';
@@ -28,7 +29,7 @@ class AuthUi extends StatelessWidget {
               return IntroPage();
             }
             if (state is CreatePincodeState) {
-              return PasswordCreationPage();
+              return PasswordCreationPage(isCreating: true,);
             }
             if (state is BiometricsConfigureState) {
               return BiometricAuthPage();
@@ -46,6 +47,7 @@ class AuthUi extends StatelessWidget {
               return LockUi();
             }
             if (state is AccountUnlockedState) {
+              StateContainer.of(context).loadAccount();
               return HomePage();
             } else
               return IntroPage();

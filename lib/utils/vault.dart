@@ -57,7 +57,7 @@ class Vault {
   Future<dynamic> getSecureEncryptionKey() async {
     var key = await secureStorage.read(key: _secure_encryption_key);
 
-    return key != null ? key : Hive.generateSecureKey();
+    return key;
   }
 
   Future<bool> isFirstStart() async {
@@ -98,15 +98,25 @@ class Vault {
   }
 
   Future<void> deleteAll() async {
-    if (await legacy()) {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.remove(encryptionKey);
-      await prefs.remove(seedKey);
-      await prefs.remove(pinKey);
-      await prefs.remove(sessionKey);
-      return;
+    try {
+      if (await legacy()) {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.remove(encryptionKey);
+        await prefs.remove(seedKey);
+        await prefs.remove(pinKey);
+        await prefs.remove(sessionKey);
+        return;
+      }
+
+      await Hive.deleteFromDisk();
+
+
+
+      await secureStorage.deleteAll();
+    } on Exception catch (exception) {
+      return false;
     }
-    return await secureStorage.deleteAll();
+    return true;
   }
 
   // Specific keys
