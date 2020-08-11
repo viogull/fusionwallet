@@ -4,17 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fusion_wallet/localizations.dart';
+import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/core/state_container.dart';
-import 'package:fusion_wallet/ui/theme.dart';
+import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:fusion_wallet/ui/components/custom/passphrase_view.dart';
+import 'package:fusion_wallet/ui/pages/accounts.dart';
 import 'package:fusion_wallet/ui/pages/auth/change_account_name.dart';
 import 'package:fusion_wallet/ui/pages/popups/popups_remove_account.dart';
-import 'package:fusion_wallet/ui/pages/accounts.dart';
+import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/ui/tools/flasher.dart';
 import 'package:fusion_wallet/utils/haptic.dart';
 import 'package:fusion_wallet/utils/io_tools.dart';
+import 'package:fusion_wallet/utils/vault.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +28,7 @@ import 'primary/contacts/add_contact.dart';
 import 'primary/contacts/contacts_page.dart';
 import 'primary/exchange_page.dart';
 import 'primary/history_page.dart';
-import 'primary/settings_page.dart';
+import 'primary/settings.dart';
 import 'primary/share_address.dart';
 
 final logger = Logger();
@@ -50,6 +52,9 @@ class _BottomHomePageState extends State<BottomHomePage> {
   bool _isCreatingLink = false;
   String _testString = "Example";
 
+
+  Account _account;
+
   final List<Widget> tabs = [
     AccountsPage(),
     ExchangePage(),
@@ -61,13 +66,24 @@ class _BottomHomePageState extends State<BottomHomePage> {
   @override
   void initState() {
     super.initState();
+    injector.get<Vault>().getAccounts().then((accounts) {
+      if(accounts.isNotEmpty) {
+        setState(() {
+          _account = accounts[0];
+        });
+      }
+    }).catchError((onError) {
+      logger.e("Error on loading account. ${onError}");
+    });
     loadDynamicLinks();
   }
 
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<BottomNavigationProvider>(context);
-
+    if(this._account != null) {
+      StateContainer.of(context).loadAccount(account: this._account);
+    }
     final ThemeData theme = Theme.of(context);
     return FusionScaffold(
       child: Stack(
@@ -177,7 +193,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
               injector.get<HapticUtil>().selection();
               IOTools.setSecureClipboardItem(buildReferal(context));
               FlashHelper.successBar(context,
-                  message: 'Referal link was copied to clipboard.');
+                  message: "Referal link was copied to clipboard.");
             }),
       ]),
     );

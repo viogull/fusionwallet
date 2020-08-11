@@ -16,6 +16,7 @@ import 'package:fusion_wallet/core/models/transanctions_response.dart';
 import 'package:logger/logger.dart';
 import 'package:meta/meta.dart';
 
+import './models.dart';
 import '../inject.dart';
 import 'models/push_transaction_result.dart';
 
@@ -26,8 +27,8 @@ class MinterRest {
 
   static const fusionApiUrl = "https://api.fusion-push.cash";
 
-  static const fusionApiMirrorUrl =
-      "http://whispering-depths-02969.herokuapp.com";
+//  static const fusionApiMirrorUrl =
+//      "https://whispering-depths-02969.herokuapp.com";
 
   static const explorerMainnetUrl =
       "https://explorer-api.minter.network/api/v1";
@@ -62,7 +63,7 @@ class MinterRest {
       });
 
   static final BaseOptions fusionDioOptions = BaseOptions(
-      baseUrl: fusionApiMirrorUrl,
+      baseUrl: fusionApiUrl,
       responseType: ResponseType.json,
       connectTimeout: 30000,
       receiveTimeout: 30000,
@@ -123,7 +124,7 @@ class MinterRest {
 
       logger.d('Fetching profile $id');
       // Adding Mx to get valid address
-      final url = "$fusionApiMirrorUrl/profile/$id?hash=$hash";
+      final url = "$fusionApiUrl/profile/$id?hash=$hash";
       logger.d("Fetch Address Data Url $url");
       Response response = await fusionDio.get(url);
 
@@ -238,7 +239,7 @@ class MinterRest {
       CreatePushLinkRequest txData, String receiver, String sender) async {
     try {
       Response response = await fusionDio.post(
-          "$fusionApiMirrorUrl/push/create?sender=$sender&receiver=$receiver",
+          "$fusionApiUrl/push/create?sender=$sender&receiver=$receiver",
           data: txData.toJson(),
           options: Options(contentType: "application/json"));
 
@@ -265,7 +266,7 @@ class MinterRest {
   Future<dynamic> applyPush(String pushId, String to) async {
     try {
       Response response = await fusionDio.put(
-          "$fusionApiMirrorUrl/push/$pushId?to=$to",
+          "$fusionApiUrl/push/$pushId?to=$to",
           options: Options(contentType: "application/json"));
 
       if (response.statusCode == 200 || response.statusCode == 201) {
@@ -350,6 +351,42 @@ class MinterRest {
         logger.d("Response status code " + response.statusCode.toString());
         var data = TransactionsResponse.fromJson(response.data);
         return data;
+      }
+    } on DioError catch (exception) {
+      if (exception == null) {
+        if (exception == null ||
+            exception.toString().contains('SocketException')) {
+          throw Exception("Network Error");
+        } else if (exception.type == DioErrorType.RECEIVE_TIMEOUT ||
+            exception.type == DioErrorType.CONNECT_TIMEOUT) {
+          throw Exception(
+              "Could'nt connect, please ensure you have a stable network.");
+        } else {
+          return null;
+        }
+      }
+      return null;
+    }
+  }
+
+
+  Future<List<FusionNotification>> fetchNotifications() async {
+    try {
+
+      logger.d('Fetching notifications ');
+      // Adding Mx to get valid address
+      final url = "$fusionApiUrl/notifications/";
+      logger.d("Fetch Address Data Url $url");
+      Response response = await dio.get(url);
+
+      if (response.statusCode == 200) {
+        logger.d("Response status code " + response.statusCode.toString());
+        var resList = List();
+        final notificationsList = response.data as List<dynamic>;
+        notificationsList.forEach((element) {
+          resList.add(FusionNotification.fromJson(element));
+        });
+        return resList;
       }
     } on DioError catch (exception) {
       if (exception == null) {

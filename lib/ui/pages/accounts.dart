@@ -6,24 +6,21 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:fusion_wallet/core/minter_rest.dart';
-import 'package:fusion_wallet/ui/pages/primary/share_address.dart';
-import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/delegate_funds_page.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/push_funds_page.dart';
-import 'package:fusion_wallet/ui/pages/primary/accounts/request_funds_page.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/rewards_info_page.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/send_funds_page.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/unbound_funds_page.dart';
-
-import '../../localizations.dart';
-import '../../inject.dart';
-import '../../core/state_container.dart';
-import '../components/lists/balances_card.dart';
+import 'package:fusion_wallet/ui/pages/primary/share_address.dart';
+import 'package:fusion_wallet/ui/theme.dart';
 
 import './../../core/abstract/wallet.dart';
-
 import './../../main.dart';
+import '../../core/state_container.dart';
+import '../../inject.dart';
+import '../../localizations.dart';
+import '../components/lists/balances_card.dart';
 
 class AccountsPage extends StatelessWidget {
   static const String navId = "/accounts";
@@ -134,12 +131,19 @@ class AccountsPage extends StatelessWidget {
         {
           return ButtonBar(
             alignment: MainAxisAlignment.center,
-            buttonHeight: 45,
+            buttonHeight: 40,
+            buttonMinWidth: 130,
+            buttonPadding:
+            const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
             children: <Widget>[
               FusionButton(
                   text: AppLocalizations.of(context).buttonPush(),
                   onPressed: () {
-                    Navigator.pushNamed(context, PushFundsPage.navId);
+                    Navigator.of(context).push(
+                      new MaterialPageRoute(builder: (context) {
+                        return PushFundsPage();
+                      }, fullscreenDialog: true)
+                    );
                   })
             ],
           );
@@ -231,7 +235,7 @@ class AccountsPage extends StatelessWidget {
               leading: Icon(Icons.info),
               title:
                   AutoSizeText(AppLocalizations.of(context).labelTotalReward()),
-              trailing: AutoSizeText("0.00"),
+              trailing: AutoSizeText("0.00", minFontSize: 17,),
             ),
           )),
     );

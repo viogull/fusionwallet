@@ -115,7 +115,7 @@ class FlashHelper {
           backgroundColor: Theme.of(context).colorScheme.primaryVariant,
           style: FlashStyle.floating,
           margin: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-          position: FlashPosition.top,
+          position: FlashPosition.bottom,
           borderRadius: const BorderRadius.all(Radius.circular(8.0)),
           child: FlashBar(
             title: title == null
@@ -124,11 +124,11 @@ class FlashHelper {
                     style: _titleStyle(
                         context, Theme.of(context).colorScheme.onPrimary)),
             message: Text(message,
+                textAlign: TextAlign.center,
                 style: _contentStyle(
                     context, Theme.of(context).colorScheme.onPrimary)),
             icon: Icon(AntDesign.qrcode,
                 color: Theme.of(context).colorScheme.onPrimary),
-            leftBarIndicatorColor: Theme.of(context).colorScheme.onPrimary,
           ),
         );
       },
@@ -157,10 +157,10 @@ class FlashHelper {
                   ? null
                   : Text(title, style: _titleStyle(context, Colors.white)),
               message:
-                  Text(message, style: _contentStyle(context, Colors.white)),
+
+                  Text(message, textAlign: TextAlign.center ,style: _contentStyle(context, Colors.white)),
               icon: Icon(Icons.check_circle,
-                  color: Theme.of(context).colorScheme.onPrimary),
-              leftBarIndicatorColor: Theme.of(context).colorScheme.onPrimary),
+                  color: Theme.of(context).colorScheme.onPrimary)),
         );
       },
     );
@@ -180,17 +180,19 @@ class FlashHelper {
         return StatefulBuilder(builder: (context, setState) {
           return Flash(
             controller: controller,
+            position: FlashPosition.bottom,
+            borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+            margin: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
             horizontalDismissDirection: HorizontalDismissDirection.horizontal,
-            backgroundColor: Colors.black87,
+            backgroundColor: Theme.of(context).colorScheme.error,
             child: FlashBar(
               title: title == null
                   ? null
-                  : Text(title, style: _titleStyle(context, Colors.white)),
+                  : Text(title, style: _titleStyle(context, Theme.of(context).colorScheme.onError)),
               message:
-                  Text(message, style: _contentStyle(context, Colors.white)),
+                  Text(message, style: _contentStyle(context, Theme.of(context).colorScheme.onError)),
               primaryAction: primaryAction?.call(context, controller, setState),
-              icon: Icon(Icons.warning, color: Colors.red[300]),
-              leftBarIndicatorColor: Colors.red[300],
+              icon: Icon(Icons.warning, color: Theme.of(context).colorScheme.onError),
             ),
           );
         });

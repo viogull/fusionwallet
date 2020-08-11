@@ -34,7 +34,7 @@ class _FusionSingleChoicePreferenceState
 
     return Card(
       elevation: 3,
-      color: Theme.of(context).colorScheme.surface,
+      color: Theme.of(context).colorScheme.background,
       shape: RoundedRectangleBorder(borderRadius: FusionTheme.borderRadius),
       child: Container(
         width: cardWidth,

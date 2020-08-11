@@ -1,7 +1,7 @@
+import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
 
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -9,7 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class FusionTheme {
   static final buttonAndroidTheme = MaterialRaisedButtonData(
-    elevation: 0,
+    elevation: 4,
     shape: new RoundedRectangleBorder(
       borderRadius: new BorderRadius.circular(5.0),
       // side: BorderSide(color: Colors.white),

@@ -11,6 +11,7 @@ class FusionScaffold extends StatelessWidget {
   final Drawer drawer;
   final AppBar appBar;
   final AppBarBackButtonCallback onBackClicked;
+  final Icon appBarIcon;
 
   final bool hideDrawer;
   final bool hideToolbar;
@@ -23,7 +24,7 @@ class FusionScaffold extends StatelessWidget {
       Container body,
       this.onBackClicked,
       this.hideDrawer = true,
-      this.hideToolbar = false});
+      this.hideToolbar = false, this.appBarIcon});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,7 @@ class FusionScaffold extends StatelessWidget {
           backgroundColor: Colors.transparent,
           drawer: drawer,
           appBar: _buildToolbar(context),
-          resizeToAvoidBottomPadding: true,
+          resizeToAvoidBottomPadding: false,
           body: child,
         ),
       ],
@@ -62,6 +63,7 @@ class FusionScaffold extends StatelessWidget {
       backgroundColor: Colors.transparent,
       iconTheme: IconThemeData(color: theme.colorScheme.primary),
       centerTitle: true,
+      leading: (appBarIcon != null) ? appBarIcon : null,
       title: (title == null)
           ? null
           : AutoSizeText(

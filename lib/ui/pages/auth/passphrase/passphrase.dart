@@ -9,17 +9,16 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/core/minter_channel.dart';
 import 'package:fusion_wallet/core/state_container.dart';
-import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:fusion_wallet/ui/pages/auth/account_name.dart';
-import 'package:fusion_wallet/ui/pages/auth/passphrase/passphrase_widget.dart';
 import 'package:fusion_wallet/ui/pages/v2/bloc.dart';
 import 'package:fusion_wallet/ui/pages/v2/event.dart';
+import 'package:fusion_wallet/ui/theme.dart';
 import 'package:share/share.dart';
 
-import '../../../../localizations.dart';
 import '../../../../inject.dart';
+import '../../../../localizations.dart';
 import 'share_qr_page.dart';
 
 class PassphraseCreationPage extends StatefulWidget {
@@ -56,7 +55,8 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
   @override
   Widget build(BuildContext context) {
     return FusionScaffold(
-        title: AppLocalizations.of(context).toolbarSharePasshpraseQr(),
+        //title: AppLocalizations.of(context).toolbarSharePasshpraseQr(),
+      hideToolbar: false,
         child: (this._verificationStage < 0)
             ? _showPassphraseView(context)
             : _showPassphraseQuestions(
@@ -373,17 +373,27 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
                                                 vertical: 2, horizontal: 2),
                                             color: Theme.of(context)
                                                 .colorScheme
-                                                .primary,
+                                                .surface,
                                             child: Center(
-                                              child: new Text(
-                                                shuffledWords[index],
-                                                maxLines: 1,
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .onPrimary,
-                                                ).copyWith(fontSize: 12),
+                                              child: Card(
+                                                elevation: 1,
+                                                child: Container(
+                                                  width: 75,
+                                                  child: Padding(
+                                                    padding:
+                                                    const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+                                                    child: new Text(
+                                                      shuffledWords[index],
+                                                      maxLines: 1,
+                                                      textAlign: TextAlign.center,
+                                                      style: TextStyle(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .onSurface,
+                                                      ).copyWith(fontSize: 12),
+                                                    ),
+                                                  ),
+                                                ),
                                               ),
                                             ),
                                           ))

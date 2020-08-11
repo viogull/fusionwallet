@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fusion_wallet/core/models/models.dart';
-import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/ui/components/balances_card_item.dart';
+import 'package:fusion_wallet/ui/theme.dart';
+import 'package:fusion_wallet/ui/tools/flasher.dart';
 import 'package:fusion_wallet/utils/haptic.dart';
 
 import '../../../inject.dart';
@@ -91,8 +92,12 @@ class _AccountBalancesCardState extends State<AccountBalancesCard> {
                   heroTag: 'info_fab_tag',
                   child: GestureDetector(
                     onTap: () {
-                      injector.get<HapticUtil>().base();
+                      injector.get<HapticUtil>().selection();
+
+                      String flashText = (this._showUsdValues) ? "Switched to currency values mode." : "Switched to USD mode";
+                      FlashHelper.infoBar(context, message: flashText);
                       setState(() {
+
                         this._showUsdValues = !(this._showUsdValues);
                       });
                     },

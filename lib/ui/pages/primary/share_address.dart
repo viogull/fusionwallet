@@ -81,7 +81,9 @@ class ShareAddressPage extends StatelessWidget {
                       onTap: () {
                         Clipboard.setData(ClipboardData(text: _data));
                         injector.get<HapticUtil>().success();
-
+                        FlashHelper.infoBar(context,
+                            message:
+                            AppLocalizations.of(context).addressCopied);
 //                        Fluttertoast.showToast(
 //                            msg: AppLocalizations.of(context).labelOk());
                       },

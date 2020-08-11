@@ -234,20 +234,23 @@ class StateContainerState extends State<StateContainer> {
 
   void updateMnemonicPassphrase(currentAccountMnemonic) {}
 
-  void checkAccountsBox() {
+  void checkAccountsBox() async {
     try {
       if (!selectedAccount.isInBox) {
-        selectedAccount.save();
+        selectedAccount = Hive.box(accountsBox).getAt(0);
       }
+      selectedAccount.save();
+
     } on HiveError catch (e) {
       selectedAccount.save();
     }
   }
 
-  void loadAccount() async {
-    var acc = await Hive.box<Account>(accountsBox).getAt(0);
+  void loadAccount({Account account}) async {
+    var _ = (account == null ) ? await Hive.box<Account>(accountsBox).getAt(0)
+    :account;
     setState(() {
-      this.selectedAccount = acc;
+      this.selectedAccount = _;
     });
   }
 

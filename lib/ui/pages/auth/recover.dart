@@ -1,6 +1,4 @@
 import 'package:barcode_scan/barcode_scan.dart';
-import 'package:barcode_scan/model/android_options.dart';
-import 'package:barcode_scan/model/scan_options.dart';
 import 'package:barcode_scan/platform_wrapper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +9,6 @@ import 'package:form_bloc/form_bloc.dart';
 import 'package:fusion_wallet/core/minter_rest.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
-import 'package:fusion_wallet/utils/validators.dart';
 
 import '../../../inject.dart';
 import '../../widgets.dart';

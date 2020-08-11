@@ -10,32 +10,60 @@ import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:fusion_wallet/ui/pages/pushing/share_push.dart';
 import 'package:fusion_wallet/ui/theme.dart';
+import 'package:fusion_wallet/utils/vault.dart';
+import 'package:logger/logger.dart';
 
 import '../../../../inject.dart';
 import 'bloc_loader.dart';
 
 class PushFormBloc extends FormBloc<String, String> {
+
+
+  final logger = injector.get<Logger>();
+
   final name = TextFieldBloc();
   final qty = TextFieldBloc(validators: [FieldBlocValidators.required]);
 
+  final coin = SelectFieldBloc<String, dynamic>(items: ['BIP', 'USDT']);
+
+
   PushFormBloc() {
-    addFieldBlocs(fieldBlocs: [name, qty]);
+    addFieldBlocs(fieldBlocs: [name, qty, coin]);
   }
+
+
+
 
   @override
   void onSubmitting() async {
+
     final amount = qty.value;
     final receiverName = name.value;
+    logger.d("Creating new push link with ${coin.value} $amount to $receiverName");
     final createPushLinkReq = await injector.get<MinterRest>().createPushLink(
-        CreatePushLinkRequest(coin: 'BIP', value: amount, payload: 'Message'),
+        CreatePushLinkRequest(coin: coin.value, value: amount, payload: receiverName),
         receiverName,
         "");
+    logger.d("Response from Pusher -> $createPushLinkReq");
     if (createPushLinkReq is CreatePushLinkResponse) {
       final response = createPushLinkReq;
       emitSuccess(successResponse: response.toJson().toString());
     } else {
-      emitFailure();
+      emitFailure(failureResponse: '');
     }
+  }
+
+  @override
+  void onLoading() async {
+    injector.get<Vault>().getAccounts().then((accounts) async  {
+      if(accounts.isNotEmpty) {
+        logger.d("Not empty accounts.");
+        final balances =
+          await injector.get<MinterRest>().fetchAddressData(address: accounts[0].address);
+        logger.d(balances);
+      }
+    }
+    ).catchError((onError) => logger.e(onError));
   }
 }
 
@@ -96,6 +124,7 @@ class PushFundsPage extends StatelessWidget {
             child: FusionScaffold(
               title: AppLocalizations.of(context).buttonPush(),
               child: SingleChildScrollView(
+                physics: ClampingScrollPhysics(),
                 padding: const EdgeInsets.all(8),
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.9,
@@ -111,21 +140,7 @@ class PushFundsPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Text(
-                                    AppLocalizations.of(context).labelName(),
-                                    style: TextStyle(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onSurface,
-                                        fontWeight: FontWeight.bold),
-                                    textAlign: TextAlign.start,
-                                  ),
-                                ),
-                              ),
+
                               Theme(
                                 data: Theme.of(context),
                                 child: TextFieldBlocBuilder(
@@ -135,29 +150,33 @@ class PushFundsPage extends StatelessWidget {
                                   decoration: InputDecoration(
                                       contentPadding:
                                           const EdgeInsets.symmetric(
-                                              horizontal: 8, vertical: 1),
-                                      hintText: AppLocalizations.of(context)
+                                              horizontal: 16, vertical: 4),
+                                      labelText: AppLocalizations.of(context)
                                           .labelSender(),
                                       border: inputBorder(context),
                                       enabled: true,
+                                      helperText: AppLocalizations.of(context).exampleCardFrom,
                                       enabledBorder: inputBorder(context)),
                                 ),
                               ),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Text(
-                                    AppLocalizations.of(context).labelAmount(),
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onSurface,
-                                        fontWeight: FontWeight.bold),
+                              Theme(
+                                data: Theme.of(context),
+                                child:  DropdownFieldBlocBuilder<String>(
+                                  selectFieldBloc: pushBloc.coin,
+                                  showEmptyItem: false,
+                                  decoration: InputDecoration(
+                                    labelText: AppLocalizations.of(context).currency,
+                                      contentPadding:
+                                      const EdgeInsets.symmetric(
+                                          horizontal: 16, vertical: 4),
+                                      border: inputBorder(context),
+                                      enabled: true,
+                                      enabledBorder: inputBorder(context)
                                   ),
+                                  itemBuilder: (context, value) => value,
                                 ),
                               ),
+
                               Theme(
                                 data: Theme.of(context),
                                 child: TextFieldBlocBuilder(
@@ -167,11 +186,12 @@ class PushFundsPage extends StatelessWidget {
                                   decoration: InputDecoration(
                                       contentPadding:
                                           const EdgeInsets.symmetric(
-                                              horizontal: 8, vertical: 1),
-                                      hintStyle: TextStyle(
+                                              horizontal: 12, vertical: 4),
+                                      helperStyle: TextStyle(
                                           color: theme.colorScheme.onSurface),
-                                      hintText: AppLocalizations.of(context)
+                                      helperText: AppLocalizations.of(context)
                                           .enterAmount,
+                                      labelText: AppLocalizations.of(context).labelAmount(),
                                       border: inputBorder(context),
                                       enabledBorder: inputBorder(context)),
                                 ),
@@ -204,6 +224,9 @@ class PushFundsPage extends StatelessWidget {
           );
         })));
   }
+
+
+
 
   inputBorder(BuildContext context) => OutlineInputBorder(
       gapPadding: 4,

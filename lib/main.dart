@@ -5,6 +5,7 @@ import 'package:fusion_wallet/core/abstract/preferences.dart';
 import 'package:fusion_wallet/ui/pages/v2/ui.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:logger/logger.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -19,13 +20,13 @@ import 'ui/pages/accounts.dart';
 import 'ui/pages/auth/access_ui.dart';
 import 'ui/pages/auth/account_name.dart';
 import 'ui/pages/auth/biometrics.dart';
+import 'ui/pages/auth/conditions.dart';
 import 'ui/pages/auth/intro.dart';
 import 'ui/pages/auth/passphrase/passphrase.dart';
 import 'ui/pages/auth/passphrase/share_qr_page.dart';
 import 'ui/pages/auth/pincode.dart';
-import 'ui/pages/auth/recover_account_page.dart';
+import 'ui/pages/auth/recover.dart';
 import 'ui/pages/auth/splash.dart';
-import 'ui/pages/auth/terms_and_conditions.dart';
 import 'ui/pages/bottom_home_page.dart';
 import 'ui/pages/exchange/convert_funds_page.dart';
 import 'ui/pages/exchange/rate_exhange_page.dart';
@@ -41,8 +42,9 @@ import 'ui/pages/primary/accounts/send_funds_page.dart';
 import 'ui/pages/primary/accounts/unbound_funds_page.dart';
 import 'ui/pages/primary/contacts/contacts_page.dart';
 import 'ui/pages/primary/history_page.dart';
-import 'ui/pages/primary/settings_page.dart';
+import 'ui/pages/primary/settings.dart';
 import 'ui/theme.dart';
+import 'utils/vault.dart';
 
 const String preferencesBox = 'prefsBox';
 const String accountsBox = 'accountsBox';
@@ -128,7 +130,7 @@ class AppState extends State<App> {
           IntroPage.navId: (BuildContext context) => IntroPage(),
           AccountCreationNameForm.navId: (context) => AccountCreationNameForm(),
           RecoverAccountPage.navId: (context) => RecoverAccountPage(),
-          TermsConditionsPage.navId: (context) => TermsConditionsPage(),
+          TermsConditions.navId: (context) => TermsConditions(),
           PasswordCreationPage.navId: (context) => PasswordCreationPage(),
           HistoryPage.navId: (context) => HistoryPage(),
           PopupHistoryPage.navId: (context) => PopupHistoryPage(),
@@ -173,6 +175,15 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
+    injector.get<Vault>().getAccounts().then((accounts) {
+      
+    }
+    ).catchError( (onError) {
+      injector.get<Logger>().e("Error on loading account");
+    });
+    setState(() {
+      
+    });
     WidgetsBinding.instance.addObserver(this);
   }
 

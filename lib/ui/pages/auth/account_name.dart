@@ -1,39 +1,44 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fusion_wallet/core/state_container.dart';
+import 'package:fusion_wallet/core/abstract/preferences.dart';
+import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
+import 'package:fusion_wallet/ui/pages/auth/conditions.dart';
 import 'package:fusion_wallet/ui/pages/v2/bloc.dart';
 import 'package:fusion_wallet/ui/pages/v2/event.dart';
+import 'package:hive/hive.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../../main.dart';
 import '../../theme.dart';
 
-import 'package:flutter_form_bloc/flutter_form_bloc.dart';
-import 'package:fusion_wallet/core/abstract/preferences.dart';
-import 'package:fusion_wallet/core/models.dart';
-import 'package:hive/hive.dart';
-
 class AccountNamingFormBloc extends FormBloc<String, String> {
   final accountName = TextFieldBloc();
 
+  final applyTermsBloc = BooleanFieldBloc();
+
   AccountNamingFormBloc() {
-    addFieldBlocs(fieldBlocs: [accountName]);
+    addFieldBlocs(fieldBlocs: [accountName, applyTermsBloc]);
   }
 
   @override
   void onSubmitting() async {
-    debugPrint("Saving ${accountName.value} name to settings.");
-    Box<Preferences> prefs = Hive.box(preferencesBox);
-    final preferences = prefs.getAt(0);
-    if (accountName.value.isNotEmpty) {
-      preferences.name = accountName.value;
-      preferences.save();
-      emitSuccess();
-    } else {
-      emitFailure();
+    if(applyTermsBloc.value) {
+      debugPrint("Saving ${accountName.value} name to settings.");
+      Box<Preferences> prefs = Hive.box(preferencesBox);
+      final preferences = prefs.getAt(0);
+      if (accountName.value.isNotEmpty) {
+        preferences.name = accountName.value;
+        preferences.save();
+        emitSuccess();
+      } else {
+        emitFailure();
+      }
     }
   }
 }
@@ -63,7 +68,6 @@ class AccountCreationNameForm extends StatelessWidget {
                 onPressed: () {
                   // Finishing account creation
                   bloc.submit();
-                  StateContainer.of(context).loadAccount();
                 }),
           );
 
@@ -83,7 +87,7 @@ class AccountCreationNameForm extends StatelessWidget {
                     SnackBar(content: Text(state.failureResponse)));
               },
               child: FusionScaffold(
-                  title: AppLocalizations.of(context).menuItemEditAccountName(),
+                  title: AppLocalizations.of(context).defaultAccountName,
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     child: Column(
@@ -119,13 +123,34 @@ class AccountCreationNameForm extends StatelessWidget {
                         SizedBox(
                           height: 15,
                         ),
-                        // LimitedBox(maxHeight:30 ,),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        //LimitedBox(maxHeight: 50,),
 
-                        SizedBox(height: 5.0),
+                        Flexible(
+                          flex: 4,
+                          child:  CheckboxFieldBlocBuilder(
+                            booleanFieldBloc: bloc.applyTermsBloc,
+                            body: Container(
+                              alignment: Alignment.centerLeft,
+                              width: double.infinity,
+                              child:   RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: AppLocalizations.of(context).checkboxTermsConditions(),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () async {
+                                          showCupertinoModalBottomSheet(context: context, builder: (context, controller) {
+                                            return TermsConditions();
+                                          });
+                                        },
+                                    ),
+
+                                  ],
+                                ))
+                            )
+                          ),
+                        ),
+
+
                         // LimitedBox(maxHeight: 30,),
 
                         //LimitedBox(maxHeight: 50,),

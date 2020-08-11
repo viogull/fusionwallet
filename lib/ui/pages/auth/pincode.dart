@@ -107,18 +107,6 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
     // print(_otp);
   }
 
-//  void _handleSubmit() {
-//    if (_otp.length == 6)
-//    _scaffoldKey.currentState.showSnackBar(SnackBar(
-//      content: Text('Entered OTP is $_otp'),
-//    ));
-//    else
-//      print(_otp);
-////      _scaffoldKey.currentState.showSnackBar(SnackBar(
-////        content: Text('OTP has to be of 6 digits'),
-////          backgroundColor: Colors.red,
-////      ));
-//  }
 
   @override
   Widget build(BuildContext context) {
@@ -153,49 +141,49 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
     ]);
 
     final pinCodeView = Padding(
-      padding: EdgeInsets.all(20),
+      padding: EdgeInsets.all(8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Text(
             _otpSymbols[0],
             style: TextStyle(
-                fontSize: 40,
+                fontSize: 56,
                 fontWeight: FontWeight.w200,
                 color: Theme.of(context).colorScheme.secondary),
           ),
           Text(
             _otpSymbols[1],
             style: TextStyle(
-                fontSize: 40,
+                fontSize: 56,
                 fontWeight: FontWeight.w200,
                 color: Theme.of(context).colorScheme.secondary),
           ),
           Text(
             _otpSymbols[2],
             style: TextStyle(
-                fontSize: 40,
+                fontSize: 56,
                 fontWeight: FontWeight.w200,
                 color: Theme.of(context).colorScheme.secondary),
           ),
           Text(
             _otpSymbols[3],
             style: TextStyle(
-                fontSize: 40,
+                fontSize: 56,
                 fontWeight: FontWeight.w200,
                 color: Theme.of(context).colorScheme.secondary),
           ),
           Text(
             _otpSymbols[4],
             style: TextStyle(
-                fontSize: 40,
+                fontSize: 56,
                 fontWeight: FontWeight.w200,
                 color: Theme.of(context).colorScheme.secondary),
           ),
           Text(
             _otpSymbols[5],
             style: TextStyle(
-                fontSize: 40,
+                fontSize: 56,
                 fontWeight: FontWeight.w200,
                 color: Theme.of(context).colorScheme.secondary),
           )
@@ -327,6 +315,11 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
     );
 
     return FusionScaffold(
+      hideToolbar: false,
+      appBarIcon: Icon(Icons.arrow_back),
+      onBackClicked: (str) {
+        Navigator.of(context).pop();
+      },
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
@@ -407,7 +400,6 @@ class KeyboardNumber extends StatelessWidget {
             style: TextStyle(
               fontSize: 24 * MediaQuery.of(context).textScaleFactor,
               color: Theme.of(context).colorScheme.onSurface,
-              fontWeight: FontWeight.bold,
             ),
           ),
         ),

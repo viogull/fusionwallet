@@ -3,23 +3,20 @@ import 'dart:io';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:fusion_wallet/core/minter_rest.dart';
-
 import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/main.dart';
-
 import 'package:hive/hive.dart';
-
 import 'package:root_checker/root_checker.dart';
 
 import '../../../inject.dart';
-import '../../components/custom/fusion_scaffold.dart';
-
-import '../pages.dart';
-import '../v2/ui.dart';
 import '../../../utils/shared_prefs.dart';
 import '../../../utils/vault.dart';
+import '../../components/custom/fusion_scaffold.dart';
+import '../pages.dart';
+import '../v2/ui.dart';
 import 'access_ui.dart';
 
 class Splash extends StatefulWidget {
@@ -158,20 +155,22 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return new FusionScaffold(
-        child: Column(
+        child: Center(
+          child: (_hasCheckedLoggedIn) ? Column(
       children: [
-        Flexible(
-          flex: 8,
-          child: Center(
-            child: Image.asset(
-              "assets/images/icon.png",
-              width: 98,
-              height: 98,
-              fit: BoxFit.contain,
+          Flexible(
+            flex: 8,
+            child: Center(
+              child:  Image.asset(
+                "assets/images/icon.png",
+                width: 98,
+                height: 98,
+                fit: BoxFit.contain,
+              )
             ),
-          ),
-        )
+          )
       ],
-    ));
+    ): PlatformCircularProgressIndicator()
+        ));
   }
 }

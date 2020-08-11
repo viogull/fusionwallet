@@ -6,7 +6,7 @@ import 'package:fusion_wallet/ui/pages/auth/biometrics.dart';
 import 'package:fusion_wallet/ui/pages/auth/intro.dart';
 import 'package:fusion_wallet/ui/pages/auth/passphrase/passphrase.dart';
 import 'package:fusion_wallet/ui/pages/auth/pincode.dart';
-import 'package:fusion_wallet/ui/pages/auth/recover_account_page.dart';
+import 'package:fusion_wallet/ui/pages/auth/recover.dart';
 
 import '../pages.dart';
 import 'bloc.dart';

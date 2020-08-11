@@ -53,6 +53,7 @@ class BalancesCardItem extends StatelessWidget {
             Flexible(
                 flex: 10,
                 child: Text(value,
+                    textAlign: TextAlign.center,
                     style:
                         FusionTheme.subtitleTextStyle.copyWith(fontSize: 24)))
           ],

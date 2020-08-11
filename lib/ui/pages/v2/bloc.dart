@@ -5,9 +5,12 @@ import 'package:fusion_wallet/core/minter_rest.dart';
 import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/core/models/create_profile_request.dart';
 import 'package:fusion_wallet/main.dart';
+import 'package:fusion_wallet/utils/biometric.dart';
 import 'package:hive/hive.dart';
+import 'package:logger/logger.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
+import '../../../inject.dart';
 import 'event.dart';
 import 'state.dart';
 
@@ -16,6 +19,8 @@ class AuthenticationBloc
   AuthenticationBloc() : super(null) {
     preferences = _box.getAt(0);
   }
+
+  Logger log = injector.get<Logger>();
   MinterRest api = MinterRest();
 
   Preferences preferences;
@@ -47,10 +52,21 @@ class AuthenticationBloc
       _account.pin = event.pin;
       if (this._isRecoveringAccount)
         yield AccountUnlockedState();
-      else
-        yield BiometricsConfigureState();
+      else {
+        final isBiometricAvailable = await injector.get<BiometricUtil>().hasBiometrics();
+
+        log.d("Checking biometrics for availability, is available? -> $isBiometricAvailable");
+        if(isBiometricAvailable)
+          yield BiometricsConfigureState();
+        else {
+          preferences.biometricEnabled = false;
+          yield PassphraseCreationState();
+        }
+      }
     } else if (event is BiometricConfiguredEvent) {
+
       preferences.biometricEnabled = event.enableBiometrics;
+
       yield PassphraseCreationState();
     } else if (event is PassphraseVerifiedEvent) {
       _account.address = event.address;

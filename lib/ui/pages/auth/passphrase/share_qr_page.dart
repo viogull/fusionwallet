@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/core/state_container.dart';
-import 'package:fusion_wallet/ui/theme.dart';
+import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
+import 'package:fusion_wallet/ui/theme.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:share/share.dart';
 
@@ -38,7 +38,7 @@ class ViewPassphraseDialog extends StatelessWidget {
                     QrImage(
                       version: QrVersions.auto,
                       data: data == null ? qr.toString() : data,
-                      foregroundColor: Theme.of(context).colorScheme.primary,
+                      backgroundColor: Theme.of(context).colorScheme.background,
                       size: MediaQuery.of(context).size.width * 0.5,
                     ),
                     Padding(
@@ -53,12 +53,14 @@ class ViewPassphraseDialog extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: RaisedButton.icon(
+                        color: Theme.of(context).colorScheme.primary,
                           shape: RoundedRectangleBorder(
                               borderRadius: FusionTheme.borderRadius),
                           label:
-                              Text(AppLocalizations.of(context).buttonShare()),
+                              Text(AppLocalizations.of(context).buttonShare(),
+                              style: TextStyle(color: Theme.of(context).colorScheme.onPrimary)),
                           onPressed: () {
-                            Share.share(qr);
+                            Share.share(data);
                           },
                           icon: Container(
                             child: SvgPicture.asset(
@@ -79,7 +81,6 @@ class ViewPassphraseDialog extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                 child: Container(
-                  height: 48,
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: FusionButton(
                     text: AppLocalizations.of(context).buttonClose(),

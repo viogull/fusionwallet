@@ -34,9 +34,10 @@ class FusionButton extends StatelessWidget {
       width: (expandedWidth) ? fullWidth : 120,
       height: (expandedWidth) ? calculatedHeight : height,
       decoration: BoxDecoration(
-        borderRadius: FusionTheme.borderRadius,
-        border: Border.all(color: Theme.of(context).colorScheme.surface),
+        borderRadius: FusionTheme.borderRadius
       ),
+
+
       child: PlatformButton(
         material: (_, __) => FusionTheme.buttonAndroidTheme,
         ios: (_) => FusionTheme.buttonIOSTheme,
