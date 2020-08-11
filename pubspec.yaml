@@ -65,10 +65,7 @@ dependencies:
       url: https://github.com/CathalT/uni_links.git
       ref: nfc_android
 
-  flutter_platform_widgets:
-      git:
-        url: git@github.com:stryder-dev/flutter_platform_widgets.git
-        ref: beta
+  flutter_platform_widgets: ^0.60.1
 
   # Vibrate
   vibrate:
