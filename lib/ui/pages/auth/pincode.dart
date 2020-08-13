@@ -318,7 +318,8 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
     );
 
     return FusionScaffold(
-      title: ( passCreate) ? AppLocalizations.of(context).pinCreateTitle : AppLocalizations.of(context).labelUnlockTitle(),
+      title:  AppLocalizations.of(context).toolbarChoosePassTitle()
+          ,
      appBarIcon: IconButton(
        icon: Icon(Icons.arrow_back, color: Theme.of(context).colorScheme.primary),
        onPressed: () {

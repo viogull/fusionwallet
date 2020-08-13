@@ -75,7 +75,7 @@ class IntroPage extends StatelessWidget {
       child: FusionButton(
         text: AppLocalizations.of(context).buttonRecoverFromPassphrase(),
         onPressed: () {
-          Navigator.of(context).pushNamed(RecoverAccountPage.navId);
+          BlocProvider.of<AuthenticationBloc>(context).add(AccountStartRecoverEvent());
         },
         expandedWidth: true,
       ),

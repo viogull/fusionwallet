@@ -117,8 +117,9 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
 
       if (deepLink != null) {
         debugPrint("Received deeplink " + dynamicLink.link.toString());
-        // https://fusiongroup.page.link/ref
-        final referalInviter = dynamicLink.link.queryParameters['from'];
+        const reference = "https://fusiongroup.page.link/ref";
+        final referalInviter = dynamicLink.link.resolve(reference).toString();
+        debugPrint("Link params: ${referalInviter}, address -> ${dynamicLink.link.toString()}");
         StateContainer.of(context).updateInviter(referalInviter);
         debugPrint("From: ${referalInviter}");
         Navigator.pushNamed(context, deepLink.path);

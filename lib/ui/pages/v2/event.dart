@@ -48,15 +48,16 @@ class PassphraseVerifiedEvent extends AccountCreationEvent {
 }
 
 class AccountCompleteRecoverEvent extends AccountCreationEvent {
-  final Account recoveryAccount;
+  final String name;
+  final String mnemonic;
 
-  const AccountCompleteRecoverEvent({@required this.recoveryAccount});
-
-  @override
-  List<Object> get props => [recoveryAccount.toString()];
+  const AccountCompleteRecoverEvent({@required this.name, @required this.mnemonic});
 
   @override
-  String toString() => 'AccountCompleteRecoverEvent { $recoveryAccount } ';
+  List<Object> get props => [name.toString()];
+
+  @override
+  String toString() => 'AccountCompleteRecoverEvent { $name } ';
 }
 
 class BiometricConfiguredEvent extends AccountCreationEvent {

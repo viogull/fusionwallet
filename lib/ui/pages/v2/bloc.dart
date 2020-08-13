@@ -47,7 +47,8 @@ class AuthenticationBloc
       yield AccountRecoveryState();
     } else if (event is AccountCompleteRecoverEvent) {
       _isRecoveringAccount = true;
-      _account = event.recoveryAccount;
+      _account.mnemonic = event.mnemonic;
+      _account.name = event.name;
       yield CreatePincodeState();
     } else if (event is AccountCreateWalletEvent) {
       yield CreatePincodeState();
@@ -69,6 +70,7 @@ class AuthenticationBloc
     } else if (event is BiometricConfiguredEvent) {
 
       preferences.biometricEnabled = event.enableBiometrics;
+      preferences.save();
 
       yield PassphraseCreationState();
     } else if (event is PassphraseVerifiedEvent) {

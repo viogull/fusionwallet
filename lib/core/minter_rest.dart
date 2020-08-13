@@ -492,4 +492,7 @@ class MinterRest {
   }
 
   recover(String value, String value2) {}
+
+  //TODO
+  canRecover(String value, String value2) {}
 }

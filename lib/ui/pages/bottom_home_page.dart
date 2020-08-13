@@ -23,6 +23,7 @@ import 'package:provider/provider.dart';
 
 import '../../inject.dart';
 import '../components/fusion_sheet.dart';
+import 'auth/passphrase/share.dart';
 import 'lockscreen/lockscreen.dart';
 import 'primary/contacts/add_contact.dart';
 import 'primary/contacts/contacts_page.dart';
@@ -158,9 +159,14 @@ class _BottomHomePageState extends State<BottomHomePage> {
               child: Icon(FontAwesome.user_secret),
             ),
             onClick: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (_) => PassphraseViewWidget(),
-                  fullscreenDialog: true));
+              new MaterialPageRoute(
+                  builder: (context) =>
+                      ViewPassphraseDialog(
+                          data: StateContainer
+                              .of(context)
+                              .selectedAccount
+                              .mnemonic),
+                  fullscreenDialog: true);
             }),
         DrawerItemData(
           title: AppLocalizations.of(context).menuItemEditAccountName(),
@@ -209,14 +215,14 @@ class _BottomHomePageState extends State<BottomHomePage> {
     }
   }
 
-  Future<void> _createDynamicLink(bool short) async {
+  Future<void> _createDynamicLink(bool short, String address) async {
     setState(() {
       _isCreatingLink = true;
     });
 
     final params = DynamicLinkParameters(
       uriPrefix: '',
-      link: Uri.parse('https://fusiongroup.page.link/push'),
+      link: Uri.parse('https://fusiongroup.page.link/promo/$address'),
       androidParameters: AndroidParameters(
         packageName: "com.fusiongroup.fusion.wallet",
         minimumVersion: 0,

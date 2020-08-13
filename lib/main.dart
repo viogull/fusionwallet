@@ -23,7 +23,7 @@ import 'ui/pages/auth/biometrics.dart';
 import 'ui/pages/auth/conditions.dart';
 import 'ui/pages/auth/intro.dart';
 import 'ui/pages/auth/passphrase/passphrase.dart';
-import 'ui/pages/auth/passphrase/share_qr_page.dart';
+import 'ui/pages/auth/passphrase/share.dart';
 import 'ui/pages/auth/pincode.dart';
 import 'ui/pages/auth/recover.dart';
 import 'ui/pages/auth/splash.dart';
@@ -72,7 +72,7 @@ void main() async {
       prefs.values.isEmpty ? Preferences() : prefs.values.first;
 
   if (prefsSingleton.isInBox == false) prefs.add(prefsSingleton);
-  OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
+  OneSignal.shared.setLogLevel(OSLogLevel.debug, OSLogLevel.none);
 
   OneSignal.shared.init("64051c9d-c06c-419d-b1a3-10196218dda3", iOSSettings: {
     OSiOSSettings.autoPrompt: false,

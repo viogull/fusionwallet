@@ -13,6 +13,7 @@ import 'package:fusion_wallet/ui/pages/v2/bloc.dart';
 import 'package:fusion_wallet/ui/pages/v2/event.dart';
 import 'package:hive/hive.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:styled_text/styled_text.dart';
 
 import '../../../main.dart';
 import '../../theme.dart';
@@ -87,7 +88,7 @@ class AccountCreationNameForm extends StatelessWidget {
                     SnackBar(content: Text(state.failureResponse)));
               },
               child: FusionScaffold(
-                  title: AppLocalizations.of(context).defaultAccountName,
+                  title: AppLocalizations.of(context).toolbarNewAccountTitle(),
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     child: Column(
@@ -131,21 +132,20 @@ class AccountCreationNameForm extends StatelessWidget {
                             body: Container(
                               alignment: Alignment.centerLeft,
                               width: double.infinity,
-                              child:   RichText(
-                                text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: AppLocalizations.of(context).checkboxTermsConditions(),
-                                      recognizer: TapGestureRecognizer()
-                                        ..onTap = () async {
-                                          showCupertinoModalBottomSheet(context: context, builder: (context, controller) {
-                                            return TermsConditions();
-                                          });
-                                        },
-                                    ),
+                              child: StyledText(
+                                text: "<link>${AppLocalizations.of(context).checkboxTermsConditions()}</link>",
 
-                                  ],
-                                ))
+                                styles: {
+                              'link': ActionTextStyle(
+                              decoration: TextDecoration.underline,
+                              onTap: (TextSpan text, Map<String, String> attrs) => {
+                              showCupertinoModalBottomSheet(context: context, builder: (context, controller) {
+                              return TermsConditions();
+                              })
+                              },
+                              ),
+                              },
+                              ),
                             )
                           ),
                         ),
