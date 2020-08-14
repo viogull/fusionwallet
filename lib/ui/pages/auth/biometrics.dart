@@ -11,8 +11,8 @@ import 'package:fusion_wallet/ui/pages/bottom_home.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 import 'package:local_auth/local_auth.dart';
 
-import 'bloc/bloc.dart';
-import 'bloc/event.dart';
+import 'bloc.dart';
+import 'event.dart';
 
 class BiometricAuthPage extends StatefulWidget {
   static const navId = "/auth/biometric";

@@ -4,13 +4,13 @@ import 'package:fusion_wallet/core/abstract/preferences.dart';
 import 'package:fusion_wallet/core/minter_rest.dart';
 import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/core/models/create_profile_request.dart';
+import 'package:fusion_wallet/inject.dart';
 import 'package:fusion_wallet/main.dart';
 import 'package:fusion_wallet/utils/biometric.dart';
 import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
-import '../../../../inject.dart';
 import 'event.dart';
 import 'state.dart';
 

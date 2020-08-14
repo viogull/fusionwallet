@@ -15,7 +15,7 @@ import 'package:styled_text/styled_text.dart';
 import '../../../main.dart';
 import '../../theme.dart';
 import '../pages.dart';
-import 'bloc/event.dart';
+import 'event.dart';
 
 class AccountNamingFormBloc extends FormBloc<String, String> {
   final accountName = TextFieldBloc();

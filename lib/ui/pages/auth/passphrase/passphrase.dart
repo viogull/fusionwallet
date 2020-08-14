@@ -15,10 +15,10 @@ import 'package:fusion_wallet/ui/pages/auth/account_name.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 import 'package:share/share.dart';
 
-import  './../bloc/event.dart';
 import '../../../../inject.dart';
 import '../../../../localizations.dart';
 import '../../pages.dart';
+import  '../event.dart';
 import 'share.dart';
 
 class PassphraseCreationPage extends StatefulWidget {

@@ -7,8 +7,8 @@ import 'package:fusion_wallet/utils/haptic.dart';
 
 import '../../../inject.dart';
 import '../../../localizations.dart';
-import 'bloc/bloc.dart';
-import 'bloc/event.dart';
+import 'bloc.dart';
+import 'event.dart';
 
 class PasswordCreationPage extends StatefulWidget {
   final bool isCreating;

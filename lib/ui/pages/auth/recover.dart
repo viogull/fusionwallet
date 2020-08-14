@@ -14,7 +14,7 @@ import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import '../../../inject.dart';
 import '../../widgets.dart';
 import '../pages.dart';
-import 'bloc/event.dart';
+import 'event.dart';
 
 class RecoverAccountBloc extends FormBloc<String, String> {
   final nameTextBloc = TextFieldBloc(

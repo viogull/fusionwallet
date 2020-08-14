@@ -16,6 +16,7 @@ import '../../../utils/vault.dart';
 import '../../components/custom/fusion_scaffold.dart';
 import '../pages.dart';
 import 'access_ui.dart';
+import 'ui.dart';
 
 class Splash extends StatefulWidget {
   static const navId = "/splash";
