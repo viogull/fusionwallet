@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
@@ -9,14 +8,14 @@ import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:fusion_wallet/ui/pages/auth/conditions.dart';
-import 'package:fusion_wallet/ui/pages/v2/bloc.dart';
-import 'package:fusion_wallet/ui/pages/v2/event.dart';
 import 'package:hive/hive.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:styled_text/styled_text.dart';
 
 import '../../../main.dart';
 import '../../theme.dart';
+import '../pages.dart';
+import 'bloc/event.dart';
 
 class AccountNamingFormBloc extends FormBloc<String, String> {
   final accountName = TextFieldBloc();

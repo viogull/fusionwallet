@@ -6,11 +6,15 @@ class CreatePushLinkResponse {
   String url;
   String shortUrl;
   String wallet;
+  String push_id;
+  String shortDeeplink;
 
-  CreatePushLinkResponse({this.url, this.shortUrl, this.wallet});
+
+  CreatePushLinkResponse({this.url, this.shortUrl, this.wallet, this.shortDeeplink, this.push_id});
 
   CreatePushLinkResponse.fromJson(dynamic json) {
     url = json["url"];
+    push_id = json["push_id"];
     shortUrl = json["shortUrl"];
     wallet = json["wallet"];
   }
@@ -18,6 +22,7 @@ class CreatePushLinkResponse {
   Map<String, dynamic> toJson() {
     var map = <String, dynamic>{};
     map["url"] = url;
+    map["push_id"] = push_id;
     map["shortUrl"] = shortUrl;
     map["wallet"] = wallet;
     return map;

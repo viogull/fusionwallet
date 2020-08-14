@@ -13,11 +13,13 @@ import 'package:fusion_wallet/core/models/send_tx_request.dart';
 import 'package:fusion_wallet/core/models/spec_exchange_rates_response.dart';
 import 'package:fusion_wallet/core/models/statistic_rewards_response.dart';
 import 'package:fusion_wallet/core/models/transanctions_response.dart';
+import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 import 'package:meta/meta.dart';
 
 import './models.dart';
 import '../inject.dart';
+import 'abstract/admin_notification.dart';
 import 'models/push_transaction_result.dart';
 
 enum MinterNetwork { Main, Test }
@@ -235,11 +237,12 @@ class MinterRest {
     }
   }
 
-  Future<dynamic> createPushLink(
-      CreatePushLinkRequest txData, String receiver, String sender) async {
+  Future<CreatePushLinkResponse> createPushLink(
+      {CreatePushLinkRequest txData, String receiver, String sender}) async {
     try {
+      final _acc =  Hive.box<Account>(accountsBox).getAt(0).sessionKey ;
       Response response = await fusionDio.post(
-          "$fusionApiUrl/push/create?sender=$sender&receiver=$receiver",
+          "$fusionApiUrl/push/create?sender=${sender.isNotEmpty ? sender : _acc }&receiver=$receiver&creatorId=${_acc}",
           data: txData.toJson(),
           options: Options(contentType: "application/json"));
 
@@ -370,7 +373,7 @@ class MinterRest {
   }
 
 
-  Future<List<FusionNotification>> fetchNotifications() async {
+  Future<List<AdminNotification>> fetchNotifications() async {
     try {
 
       logger.d('Fetching notifications ');
@@ -384,7 +387,7 @@ class MinterRest {
         var resList = List();
         final notificationsList = response.data as List<dynamic>;
         notificationsList.forEach((element) {
-          resList.add(FusionNotification.fromJson(element));
+          resList.add(AdminNotification.fromJson(element));
         });
         return resList;
       }

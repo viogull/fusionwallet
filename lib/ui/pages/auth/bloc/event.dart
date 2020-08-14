@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:fusion_wallet/core/models.dart';
 import 'package:meta/meta.dart';
 
 class AccountCreationEvent extends Equatable {

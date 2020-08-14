@@ -1,19 +1,16 @@
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fusion_wallet/core/minter_rest.dart';
-import 'package:fusion_wallet/core/models/create_push_link_request.dart';
-import 'package:fusion_wallet/core/models/create_push_link_response.dart';
-import 'package:fusion_wallet/localizations.dart';
-import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
-import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
-import 'package:fusion_wallet/ui/pages/pushing/share_push.dart';
-import 'package:fusion_wallet/ui/theme.dart';
-import 'package:fusion_wallet/utils/vault.dart';
-import 'package:logger/logger.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
+import '../../../../core/models.dart';
 import '../../../../inject.dart';
+import '../../../../localizations.dart';
+import '../../../theme.dart';
+import '../../../widgets.dart';
+import '../../pages.dart';
 import 'bloc_loader.dart';
 
 class PushFormBloc extends FormBloc<String, String> {
@@ -40,17 +37,44 @@ class PushFormBloc extends FormBloc<String, String> {
     final amount = qty.value;
     final receiverName = name.value;
     logger.d("Creating new push link with ${coin.value} $amount to $receiverName");
-    final createPushLinkReq = await injector.get<MinterRest>().createPushLink(
-        CreatePushLinkRequest(coin: coin.value, value: amount, payload: receiverName),
-        receiverName,
-        "");
-    logger.d("Response from Pusher -> $createPushLinkReq");
-    if (createPushLinkReq is CreatePushLinkResponse) {
-      final response = createPushLinkReq;
-      emitSuccess(successResponse: response.toJson().toString());
+
+    final req = await injector.get<MinterRest>()
+        .createPushLink(txData: CreatePushLinkRequest(coin: coin.value,
+        value: amount, payload: receiverName),
+      receiver: receiverName, sender: "" );
+
+
+    if (req is CreatePushLinkResponse) {
+      logger.d("Response from Push API. ${req.push_id}.\n Url: ${req.url}\m Shortified:${req.shortUrl}" );
+
+      final response = req;
+      logger.d("Generating new deeplink from input data");
+      final shortUrl = await _createDynamicLink(response);
+      logger.d("Dynamic Link Result ->  $shortUrl");
+      emitSuccess(successResponse: shortUrl);
     } else {
       emitFailure(failureResponse: '');
     }
+  }
+
+  Future<String> _createDynamicLink(CreatePushLinkResponse _data) async {
+
+    final params = DynamicLinkParameters(
+      uriPrefix: 'https://fusiongroup.page.link',
+      link: Uri.parse(_data.shortUrl),
+      androidParameters: AndroidParameters(
+        packageName: "com.fusiongroup.fusion.wallet",
+        minimumVersion: 0,
+      ),
+      dynamicLinkParametersOptions: DynamicLinkParametersOptions(
+        shortDynamicLinkPathLength: ShortDynamicLinkPathLength.short,
+      ),
+      iosParameters: IosParameters(
+        bundleId: "com.fusiongroup.wallet",
+      ),
+    );
+    final short =  await params.buildShortLink();
+    return short.shortUrl.toString();
   }
 
   @override
@@ -109,12 +133,13 @@ class PushFundsPage extends StatelessWidget {
         child: FormBlocListener<PushFormBloc, String, String>(
             onSubmitting: (context, state) {
           BlocLoader.show(context);
-        }, onSuccess: (context, state) {
+        }, onSuccess: (context, state) async {
           BlocLoader.hide(context);
-          Navigator.of(context).push(new MaterialPageRoute(
-              builder: (context) => SharePush(
-                  CreatePushLinkResponse.fromJson(state.successResponse)),
-              fullscreenDialog: true));
+
+            showCupertinoModalBottomSheet(context: context, builder: (context, scrollController) {
+              return SharePush( shortDeeplink: state.successResponse,);
+            });
+
         }, onFailure: (context, state) {
           BlocLoader.hide(context);
         }, child: Builder(builder: (context) {
@@ -155,7 +180,6 @@ class PushFundsPage extends StatelessWidget {
                                           .labelSender(),
                                       border: inputBorder(context),
                                       enabled: true,
-                                      helperText: AppLocalizations.of(context).exampleCardFrom,
                                       enabledBorder: inputBorder(context)),
                                 ),
                               ),
@@ -181,16 +205,13 @@ class PushFundsPage extends StatelessWidget {
                                 data: Theme.of(context),
                                 child: TextFieldBlocBuilder(
                                   textFieldBloc: pushBloc.qty,
-                                  keyboardType: TextInputType.numberWithOptions(
-                                      decimal: true),
+                                  keyboardType: TextInputType.numberWithOptions(decimal: true),
                                   decoration: InputDecoration(
                                       contentPadding:
                                           const EdgeInsets.symmetric(
                                               horizontal: 12, vertical: 4),
                                       helperStyle: TextStyle(
                                           color: theme.colorScheme.onSurface),
-                                      helperText: AppLocalizations.of(context)
-                                          .enterAmount,
                                       labelText: AppLocalizations.of(context).labelAmount(),
                                       border: inputBorder(context),
                                       enabledBorder: inputBorder(context)),
@@ -224,7 +245,6 @@ class PushFundsPage extends StatelessWidget {
           );
         })));
   }
-
 
 
 

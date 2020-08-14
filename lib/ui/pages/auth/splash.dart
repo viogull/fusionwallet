@@ -4,19 +4,17 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:fusion_wallet/core/minter_rest.dart';
-import 'package:fusion_wallet/core/models.dart';
-import 'package:fusion_wallet/core/state_container.dart';
-import 'package:fusion_wallet/main.dart';
 import 'package:hive/hive.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:root_checker/root_checker.dart';
 
+import './../../../core/models.dart';
 import '../../../inject.dart';
+import '../../../main.dart';
 import '../../../utils/shared_prefs.dart';
 import '../../../utils/vault.dart';
 import '../../components/custom/fusion_scaffold.dart';
 import '../pages.dart';
-import '../v2/ui.dart';
 import 'access_ui.dart';
 
 class Splash extends StatefulWidget {
@@ -27,6 +25,11 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> with WidgetsBindingObserver {
+  
+  
+  final logger = injector.get<Logger>();
+  
+  
   bool _hasCheckedLoggedIn;
   bool _retried;
 
@@ -37,7 +40,7 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
     try {
       return true;
     } catch (e) {
-      debugPrint(e);
+      logger.d(e);
       return false;
     }
   }
@@ -45,7 +48,7 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
   Future checkLoggedIn() async {
     // Update session key
 
-    await injector.get<Vault>().updateSessionKey();
+    injector.get<Vault>().updateSessionKey();
     // Check if device is rooted or jailbroken, show user a warning informing them of the risks if so
     if (!(await injector.get<SharedPrefsUtil>().getHasSeenRootWarning()) &&
         (await RootChecker.isDeviceRooted)) {}
@@ -57,25 +60,30 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
     try {
       bool firstLaunch = await injector.get<SharedPrefsUtil>().getFirstLaunch();
       if (firstLaunch) {
-        debugPrint('Detected first start. Deleting datas if exists');
+        logger.d('Detected first start. Deleting datas if exists');
         await injector.get<Vault>().deleteAll();
       }
       await injector.get<SharedPrefsUtil>().setFirstLaunch();
 
       Box<Account> box = Hive.box(accountsBox);
       if (box.length < 1) {
-        debugPrint(
+        logger.d(
             'No Account Exists: ${box.length}. Navigating to intro page.');
         Navigator.of(context).pushReplacementNamed(AuthUi.navId);
       } else {
         Account lastAccount = box.getAt(box.length - 1);
 
-        debugPrint(
+        logger.d(
             'Accounts exists. Seed: ${lastAccount.pin}. Trying fetch access state');
 
         final accessRequest = await MinterRest().checkAccess(lastAccount);
 
         if (!accessRequest) {
+          List<AdminNotification> notifications = await injector.get<MinterRest>().fetchNotifications();
+          if(notifications.isNotEmpty) {
+            logger.d("Saving ${notifications.length} to storage");
+            Hive.box(notificationsBox).addAll(notifications);
+          }
           Navigator.of(context).pushReplacementNamed(LockUi.navId,
               arguments:
                   LockscreenArgs(pin: lastAccount.pin, biometricEnabled: true));
@@ -116,19 +124,36 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
       final Uri deepLink = dynamicLink?.link;
 
       if (deepLink != null) {
-        debugPrint("Received deeplink " + dynamicLink.link.toString());
+        logger.d("Received deeplink " + dynamicLink.link.toString());
+        
         const reference = "https://fusiongroup.page.link/ref";
         final referalInviter = dynamicLink.link.resolve(reference).toString();
-        debugPrint("Link params: ${referalInviter}, address -> ${dynamicLink.link.toString()}");
-        StateContainer.of(context).updateInviter(referalInviter);
-        debugPrint("From: ${referalInviter}");
+        logger.d("Link params: ${referalInviter}, address -> ${dynamicLink.link.toString()}");
+        logger.d("From: ${referalInviter}");
+
+        if(dynamicLink.link.toString().contains("https://fusion-push.cash/push") ) {
+          logger.w("Detected PUSH deeplink. Opening Applier.");
+
+         Future.delayed(Duration(milliseconds: 500), () {
+           logger.d("Showing Push Receive Windows");
+           showCupertinoModalBottomSheet(context: context, builder: (context, controller) {
+             return ApplyPushDeeplink(url: dynamicLink.link.toString());
+           });
+         });
+        } else if(dynamicLink.link.toString().contains('https://fusiongroup.page.link/promo/')) {
+          logger.w("Detected promo referal deeplink");
+        }
         Navigator.pushNamed(context, deepLink.path);
       }
     }, onError: (OnLinkErrorException e) async {
       print('onLinkError');
       print(e.message);
     });
+
+
   }
+
+
 
   @override
   void dispose() {

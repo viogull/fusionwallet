@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
-import 'package:fusion_wallet/ui/pages/v2/bloc.dart';
-import 'package:fusion_wallet/ui/pages/v2/event.dart';
-import 'package:fusion_wallet/ui/tools/flasher.dart';
+import 'package:fusion_wallet/utils/flasher.dart';
 import 'package:fusion_wallet/utils/haptic.dart';
 
 import '../../../inject.dart';
 import '../../../localizations.dart';
+import 'bloc/bloc.dart';
+import 'bloc/event.dart';
 
 class PasswordCreationPage extends StatefulWidget {
   final bool isCreating;
@@ -61,11 +61,16 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
     });
     if (_otp.length == 6) {
       if (pincode != null && pincode == _otp) {
-        BlocProvider.of<AuthenticationBloc>(context).add(
-          PincodeCreatedEvent(pin: pincode),
-        );
+        FlashHelper.errorBar(context, message: "Succesfully authenticated");
+        Future.delayed(new Duration(seconds: 1), () {
+          BlocProvider.of<AuthenticationBloc>(context).add(
+            PincodeCreatedEvent(pin: pincode),
+          );
+        });
+
       } else {
-        FlashHelper.errorBar(context, message: "Invalid input");
+        if(pincode != null && pincode != _otp)
+          FlashHelper.errorBar(context, message: "Invalid input");
         setState(() {
           this.pincode = _otp;
           this._otp = "";

@@ -10,14 +10,11 @@ import 'package:form_bloc/form_bloc.dart';
 import 'package:fusion_wallet/core/minter_rest.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
-import 'package:fusion_wallet/ui/pages/primary/accounts/bloc_loader.dart';
-import 'package:fusion_wallet/ui/pages/v2/event.dart';
-import 'package:fusion_wallet/utils/validators.dart';
 
 import '../../../inject.dart';
 import '../../widgets.dart';
 import '../pages.dart';
-import 'account_name.dart';
+import 'bloc/event.dart';
 
 class RecoverAccountBloc extends FormBloc<String, String> {
   final nameTextBloc = TextFieldBloc(

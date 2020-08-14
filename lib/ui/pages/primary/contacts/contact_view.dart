@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/ui/theme.dart';
-import 'package:fusion_wallet/ui/tools/flasher.dart';
+import 'package:fusion_wallet/utils/flasher.dart';
 import 'package:fusion_wallet/utils/haptic.dart';
 import 'package:fusion_wallet/utils/io_tools.dart';
 
@@ -17,13 +17,12 @@ class ContactItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Card(
-      elevation: 3,
+      elevation: 2,
       color: Theme.of(context).colorScheme.surface,
-      margin: EdgeInsets.symmetric(vertical: 4, horizontal: 13),
+      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 13),
       child: GestureDetector(
-        onLongPress: () {
+        onTap: () {
           FlashHelper.infoBar(context,
               message:
               AppLocalizations.of(context).addressCopied);

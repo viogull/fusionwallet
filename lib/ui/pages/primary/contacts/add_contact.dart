@@ -9,12 +9,8 @@ import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
-import 'package:fusion_wallet/ui/pages/bottom_home.dart';
 import 'package:fusion_wallet/ui/theme.dart';
-import 'package:fusion_wallet/utils/vault.dart';
 import 'package:hive/hive.dart';
-
-import '../../../../inject.dart';
 
 class AddContactPage extends StatefulWidget {
   final Account acc;
@@ -233,14 +229,20 @@ class AddContactFormBloc extends FormBloc<String, String> {
     print(showSuccessResponse.value);
 
     try {
-      if (this.accountName.value != null && address.value != null) {
+      if (this.accountName.value != null
+          && address.value != null
+      && address.value.contains("Mx", 0)) {
         debugPrint("Checking current account contacts");
         final contacts = Hive.box<Contact>(contactsBox);
         if(!address.value.contains("Mx")) {
           address.addFieldError("Must be valid Minter address with Mx prefix");
+          emitSubmissionCancelled();
         }
         await contacts.add(new Contact(accountName.value, address.value));
         emitSuccess();
+      } else {
+        address.addFieldError("Must be valid Minter address with Mx prefix");
+        emitFailure();
       }
     } on Exception {
      // emitFailure();

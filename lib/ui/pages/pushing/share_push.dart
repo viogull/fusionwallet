@@ -3,10 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fusion_wallet/core/models/create_push_link_response.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:fusion_wallet/ui/theme.dart';
-import 'package:fusion_wallet/ui/tools/flasher.dart';
+import 'package:fusion_wallet/utils/flasher.dart';
 import 'package:fusion_wallet/utils/haptic.dart';
 import 'package:fusion_wallet/utils/io_tools.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -16,9 +15,15 @@ import '../../../inject.dart';
 import '../../../localizations.dart';
 
 class SharePush extends StatelessWidget {
-  final CreatePushLinkResponse _pushData;
+  Logger logger;
 
-  const SharePush(this._pushData);
+  String shortDeeplink;
+
+  //final CreatePushLinkResponse pushData;
+
+   SharePush({ this.shortDeeplink}) {
+    this.logger  = injector.get<Logger>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +43,7 @@ class SharePush extends StatelessWidget {
                     QrImage(
                       version: QrVersions.auto,
                       foregroundColor: Theme.of(context).colorScheme.primary,
-                      data: this._pushData.shortUrl,
+                      data: shortDeeplink,
                       backgroundColor: Theme.of(context).colorScheme.surface,
                       size: MediaQuery.of(context).size.width * 0.5,
                     ),
@@ -60,7 +65,7 @@ class SharePush extends StatelessWidget {
                           color: Theme.of(context).colorScheme.onPrimary),
                     ),
                     onPressed: () {
-                      Share.share(this._pushData.shortUrl);
+                      Share.share(shortDeeplink);
                     },
                     icon: Container(
                       child: SvgPicture.asset(
@@ -79,9 +84,11 @@ class SharePush extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         Clipboard.setData(
-                            ClipboardData(text: this._pushData.shortUrl));
+                            ClipboardData(text: shortDeeplink));
                         injector.get<HapticUtil>().success();
-
+                        FlashHelper.infoBar(context,
+                            message: AppLocalizations.of(context)
+                                .pushLinkWasCopied());
 //                        Fluttertoast.showToast(
 //                            msg: AppLocalizations.of(context).labelOk());
                       },
@@ -98,9 +105,9 @@ class SharePush extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(12),
                             child: AutoSizeText(
-                              this._pushData.shortUrl,
+                              shortDeeplink,
                               textAlign: TextAlign.center,
-                              minFontSize: 8,
+                              minFontSize: 12,
                               maxLines: 4,
                               maxFontSize: 14,
                             ),
@@ -112,7 +119,7 @@ class SharePush extends StatelessWidget {
                             message: AppLocalizations.of(context)
                                 .pushLinkWasCopied());
                         injector.get<HapticUtil>().selection();
-                        IOTools.setSecureClipboardItem(this._pushData.shortUrl);
+                        IOTools.setSecureClipboardItem(this.shortDeeplink);
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(4.0),
@@ -129,7 +136,7 @@ class SharePush extends StatelessWidget {
                       padding: const EdgeInsets.all(4.0),
                       child: AutoSizeText(
                         AppLocalizations.of(context)
-                            .sendFundsToPushWallet(0.0, _pushData.wallet),
+                            .sendFundsToPushWallet(0.0, shortDeeplink),
                         textAlign: TextAlign.center,
                         minFontSize: 6,
                         maxLines: 1,
@@ -155,7 +162,7 @@ class SharePush extends StatelessWidget {
                           style: TextStyle(
                               color: Theme.of(context).colorScheme.onPrimary),
                         ),
-                        color: Theme.of(context).colorScheme.primary,
+                        color: Theme.of(context).colorScheme.error,
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
@@ -173,4 +180,10 @@ class SharePush extends StatelessWidget {
       ),
     );
   }
+
+
+
+
+
+
 }

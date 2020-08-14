@@ -1,15 +1,18 @@
+import 'dart:async';
+
 import 'package:alice/alice.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:fusion_wallet/core/abstract/preferences.dart';
-import 'package:fusion_wallet/ui/pages/v2/ui.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logger/logger.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
 
+import 'core/abstract/admin_notification.dart';
 import 'core/abstract/contact.dart';
+import 'core/abstract/preferences.dart';
 import 'core/minter_rest.dart';
 import 'core/models.dart';
 import 'core/state_container.dart';
@@ -20,6 +23,7 @@ import 'ui/pages/accounts.dart';
 import 'ui/pages/auth/access_ui.dart';
 import 'ui/pages/auth/account_name.dart';
 import 'ui/pages/auth/biometrics.dart';
+import 'ui/pages/auth/bloc/ui.dart';
 import 'ui/pages/auth/conditions.dart';
 import 'ui/pages/auth/intro.dart';
 import 'ui/pages/auth/passphrase/passphrase.dart';
@@ -39,8 +43,8 @@ import 'ui/pages/primary/accounts/push_funds_page.dart';
 import 'ui/pages/primary/accounts/request_funds_page.dart';
 import 'ui/pages/primary/accounts/rewards_info_page.dart';
 import 'ui/pages/primary/accounts/send_funds_page.dart';
-import 'ui/pages/primary/accounts/unbound_funds_page.dart';
-import 'ui/pages/primary/contacts/contacts_page.dart';
+import 'ui/pages/primary/accounts/unbound.dart';
+import 'ui/pages/primary/contacts/contacts.dart';
 import 'ui/pages/primary/history_page.dart';
 import 'ui/pages/primary/settings.dart';
 import 'ui/theme.dart';
@@ -49,6 +53,7 @@ import 'utils/vault.dart';
 const String preferencesBox = 'prefsBox';
 const String accountsBox = 'accountsBox';
 const String contactsBox = 'contactsBox';
+const String notificationsBox = 'notificationsBox';
 
 final wallet = Wallet();
 
@@ -58,11 +63,15 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   setupServiceLocator();
+
   injector.get<MinterRest>().loadInterceptors();
+
   await Hive.initFlutter();
+
   Hive.registerAdapter<Account>(AccountAdapter());
   Hive.registerAdapter<Contact>(ContactAdapter());
   Hive.registerAdapter<Preferences>(PreferencesAdapter());
+  Hive.registerAdapter<AdminNotification>(AdminNotificationAdapter());
 
   var accsBox = await Hive.openBox<Account>(accountsBox);
 
@@ -71,7 +80,12 @@ void main() async {
   var prefsSingleton =
       prefs.values.isEmpty ? Preferences() : prefs.values.first;
 
-  if (prefsSingleton.isInBox == false) prefs.add(prefsSingleton);
+  if (prefsSingleton.isInBox == false)
+    prefs.add(prefsSingleton);
+
+
+  await Hive.openBox<AdminNotification>(notificationsBox);
+
   OneSignal.shared.setLogLevel(OSLogLevel.debug, OSLogLevel.none);
 
   OneSignal.shared.init("64051c9d-c06c-419d-b1a3-10196218dda3", iOSSettings: {
@@ -139,7 +153,7 @@ class AppState extends State<App> {
           SendFundsPage.navId: (context) => SendFundsPage(),
           RequestFundsPage.navId: (context) => RequestFundsPage(),
           DelegateFundsPage.navId: (context) => DelegateFundsPage(),
-          UnboundFundsPage.navId: (context) => UnboundFundsPage(),
+          UboundFundsPage.navId: (context) => UboundFundsPage(),
           PushFundsPage.navId: (context) => PushFundsPage(),
           SettingsPage.navId: (context) => SettingsPage(),
           RewardInformationPage.navId: (context) => RewardInformationPage(),
@@ -156,6 +170,8 @@ class AppState extends State<App> {
 class HomePage extends StatefulWidget {
   static const String navId = '/home';
 
+
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -166,11 +182,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     create: (context) => BottomNavigationProvider(),
   );
 
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
+  Timer _timerLink;
+
 
   @override
   void initState() {
@@ -187,10 +200,37 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     WidgetsBinding.instance.addObserver(this);
   }
 
-  void initDynamicLinks(BuildContext context) async {}
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      _timerLink = new Timer(const Duration(milliseconds: 1000), () {
+        _retrieveDynamicLink();
+      });
+    }
+  }
+
+
+  Future<void> _retrieveDynamicLink() async {
+    final PendingDynamicLinkData data = await FirebaseDynamicLinks.instance.getInitialLink();
+    final Uri deepLink = data?.link;
+    if (deepLink != null) {
+      Navigator.pushNamed(context, deepLink.path);
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return Material(child: this.provider);
+  }
+
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    if (_timerLink != null) {
+      _timerLink.cancel();
+    }
+    super.dispose();
   }
 }

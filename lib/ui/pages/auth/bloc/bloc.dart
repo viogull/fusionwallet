@@ -10,7 +10,7 @@ import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
-import '../../../inject.dart';
+import '../../../../inject.dart';
 import 'event.dart';
 import 'state.dart';
 
