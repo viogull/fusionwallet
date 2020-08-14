@@ -12,6 +12,11 @@ import 'utils/haptic.dart';
 import 'utils/shared_prefs.dart';
 import 'utils/vault.dart';
 
+
+export 'package:logger/logger.dart';
+export './core/minter_rest.dart';
+export './utils/vault.dart';
+
 /*
   Base Service Locator (DI)
  */
@@ -33,3 +38,5 @@ void setupServiceLocator() {
     return Alice(showInspectorOnShake: true, showNotification: true);
   });
 }
+
+

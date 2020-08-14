@@ -51,6 +51,8 @@ class _FusionSingleChoicePreferenceState
             Flexible(
                 flex: 2,
                 child: DropdownButton<String>(
+
+                  dropdownColor: Theme.of(context).colorScheme.surface.withOpacity(0.7),
                   value:
                       dropdownValue == null ? widget.selected : dropdownValue,
                   icon: Icon(Icons.keyboard_arrow_down),
@@ -73,10 +75,11 @@ class _FusionSingleChoicePreferenceState
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Material(
+                        borderOnForeground: false,
                         elevation: 0,
+                        color: Theme.of(context).colorScheme.background,
                         child: Container(
                           margin: const EdgeInsets.all(12),
-                          color: Theme.of(context).colorScheme.background,
                           child: AutoSizeText(
                             value,
                             minFontSize: 8,

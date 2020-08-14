@@ -9,8 +9,10 @@ import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
+import 'package:fusion_wallet/ui/pages/bottom_home.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/utils/vault.dart';
+import 'package:hive/hive.dart';
 
 import '../../../../inject.dart';
 
@@ -141,6 +143,7 @@ class _AddContactPageState extends State<AddContactPage> {
                           child: TextFieldBlocBuilder(
                             keyboardType: TextInputType.multiline,
                             textFieldBloc: loginFormBloc.address,
+                            textInputAction: TextInputAction.done,
                             maxLines: 4,
                             decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.symmetric(
@@ -232,15 +235,18 @@ class AddContactFormBloc extends FormBloc<String, String> {
     try {
       if (this.accountName.value != null && address.value != null) {
         debugPrint("Checking current account contacts");
-        injector
-            .get<Vault>()
-            .addContact(Contact(accountName.value, address.value));
-        this.emitSuccess();
+        final contacts = Hive.box<Contact>(contactsBox);
+        if(!address.value.contains("Mx")) {
+          address.addFieldError("Must be valid Minter address with Mx prefix");
+        }
+        await contacts.add(new Contact(accountName.value, address.value));
+        emitSuccess();
       }
     } on Exception {
-      emitFailure();
+     // emitFailure();
     }
   }
+
 }
 
 class SuccessScreen extends StatelessWidget {

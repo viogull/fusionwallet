@@ -6,7 +6,7 @@
 class DelegateUboundTxRequest {
   String publicKey;
   String coin;
-  int stake;
+  String stake;
   String gasCoin;
 
   DelegateUboundTxRequest(

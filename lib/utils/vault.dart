@@ -249,6 +249,10 @@ class Vault {
   Future<void> addContact(Contact contact) {
     if (!contact.isInBox) {
       contact.save();
+    } else {
+      Hive.box(contactsBox).add(contact).then((value) {
+        return value;
+      }).catchError( (err) { return null; } );
     }
   }
 

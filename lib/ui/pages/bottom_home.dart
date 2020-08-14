@@ -19,6 +19,7 @@ import 'package:fusion_wallet/utils/io_tools.dart';
 import 'package:fusion_wallet/utils/vault.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
 import '../../inject.dart';
@@ -142,10 +143,11 @@ class _BottomHomePageState extends State<BottomHomePage> {
               ),
             ),
             onClick: () {
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (context) => ShareAddressPage(
-                      "Mx${StateContainer.of(context).selectedAccount.address}"),
-                  fullscreenDialog: true));
+              showCupertinoModalBottomSheet(context: context,
+                  builder: (context, controller) {
+                      return ShareAddressPage(
+                          "Mx${StateContainer.of(context).selectedAccount.address}");
+                  });
             }),
         DrawerItemData(
             title: AppLocalizations.of(context).menuItemSetDefaults(),
@@ -159,32 +161,39 @@ class _BottomHomePageState extends State<BottomHomePage> {
               child: Icon(FontAwesome.user_secret),
             ),
             onClick: () {
-              new MaterialPageRoute(
-                  builder: (context) =>
-                      ViewPassphraseDialog(
-                          data: StateContainer
-                              .of(context)
-                              .selectedAccount
-                              .mnemonic),
-                  fullscreenDialog: true);
+              showCupertinoModalBottomSheet(context: context,
+                  builder: (BuildContext context, ScrollController controller) {
+                    return ViewPassphraseDialog(
+                        data: StateContainer
+                            .of(context)
+                            .selectedAccount
+                            .mnemonic);
+              });
             }),
         DrawerItemData(
           title: AppLocalizations.of(context).menuItemEditAccountName(),
           icon:
               _buildBottomNavItemIcon("assets/images/icons/ic_edit.svg", true),
           onClick: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (_) => ChangeAccountNameForm(),
-                fullscreenDialog: false));
+            showCupertinoModalBottomSheet(context: context,
+                builder: (BuildContext context, ScrollController controller) {
+                  return  ChangeAccountNameForm();
+                });
+
           },
         ),
         DrawerItemData(
+
+
             title: AppLocalizations.of(context).menuItemRemoveAccount(),
             icon: _buildBottomNavItemIcon(
                 "assets/images/icons/ic_folder.svg", true),
             onClick: () {
-              Sheets.showFusionBottomSheet(
-                  context: context, widget: PopupsRemoveAccount());
+              showCupertinoModalBottomSheet(context: context,
+                  builder: (BuildContext context, ScrollController controller) {
+                    return PopupsRemoveAccount();
+                  });
+
             }),
         DrawerItemData(
             title: AppLocalizations.of(context).menuItemWithdrawFunds(),
@@ -197,7 +206,9 @@ class _BottomHomePageState extends State<BottomHomePage> {
                 "assets/images/icons/ic_copy.svg", true),
             onClick: () async {
               injector.get<HapticUtil>().selection();
-              IOTools.setSecureClipboardItem(buildReferal(context));
+              final link = await _createDynamicLink(true, StateContainer.of(context).selectedAccount.address);
+              logger.d("Link ${link as dynamic}");
+              IOTools.setSecureClipboardItem((link as dynamic).toString());;
               FlashHelper.successBar(context,
                   message: "Referal link was copied to clipboard.");
             }),
@@ -219,10 +230,11 @@ class _BottomHomePageState extends State<BottomHomePage> {
     setState(() {
       _isCreatingLink = true;
     });
-
+    final host = Uri.parse('https://fusiongroup.page.link/promo/Mx$address');
+    logger.d("Deeplink pre -> $host");
     final params = DynamicLinkParameters(
-      uriPrefix: '',
-      link: Uri.parse('https://fusiongroup.page.link/promo/$address'),
+      uriPrefix: 'https://fusiongroup.page.link',
+      link: host,
       androidParameters: AndroidParameters(
         packageName: "com.fusiongroup.fusion.wallet",
         minimumVersion: 0,
@@ -242,7 +254,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
     } else {
       url = await params.buildUrl();
     }
-
+    return url.toString();
     setState(() {
       _linkMessage = url.toString();
       _isCreatingLink = false;

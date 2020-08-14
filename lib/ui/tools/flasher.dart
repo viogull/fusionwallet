@@ -127,8 +127,7 @@ class FlashHelper {
                 textAlign: TextAlign.center,
                 style: _contentStyle(
                     context, Theme.of(context).colorScheme.onPrimary)),
-            icon: Icon(AntDesign.qrcode,
-                color: Theme.of(context).colorScheme.onPrimary),
+
           ),
         );
       },

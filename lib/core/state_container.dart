@@ -120,7 +120,7 @@ class StateContainerState extends State<StateContainer> {
     updateMnemonicPassphrase(currentAccountMnemonic);
     updateTheme(isDarkModeEnabled: currentTheme);
     updateLanguage(currentLocale);
-    setBiometric(biometricEnabled);
+    setBiometric(widget.preferences.biometricEnabled);
     setRewardsVisibility(rewardsEnabled);
   }
 

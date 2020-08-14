@@ -52,8 +52,10 @@ class _ContactsPageState extends State<ContactsPage> {
         final _contacts = contacts.values.toList();
 
         return Container(
+
             height: MediaQuery.of(context).size.height,
             child: Column(
+
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Flexible(
@@ -86,6 +88,7 @@ class _ContactsPageState extends State<ContactsPage> {
                             itemBuilder: (context, index) {
                               return ContactItem(data: _contacts[index]);
                             },
+                      physics: ClampingScrollPhysics(),
                             itemCount: _contacts.length,
                           ),
                   )

@@ -21,6 +21,7 @@ class AccountNamingFormBloc extends FormBloc<String, String> {
     debugPrint("Saving ${accountName.value} name to settings.");
     Box<Preferences> prefs = Hive.box(preferencesBox);
     final preferences = prefs.getAt(0);
+
     if (accountName.value.isNotEmpty) {
       preferences.name = accountName.value;
       preferences.save();

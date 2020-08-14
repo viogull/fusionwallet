@@ -7,7 +7,7 @@ import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/main.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
-import 'package:fusion_wallet/ui/pages/bottom_home_page.dart';
+import 'package:fusion_wallet/ui/pages/bottom_home.dart';
 import 'package:fusion_wallet/ui/pages/v2/bloc.dart';
 import 'package:fusion_wallet/ui/pages/v2/event.dart';
 import 'package:fusion_wallet/ui/theme.dart';

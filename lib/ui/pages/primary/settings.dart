@@ -11,7 +11,7 @@ import 'package:fusion_wallet/ui/components/preferences/preference.dart';
 import 'package:fusion_wallet/ui/components/preferences/preference_switch.dart';
 import 'package:fusion_wallet/ui/components/preferences/single_choice_preference_item.dart';
 import 'package:fusion_wallet/ui/pages/auth/pincode.dart';
-import 'package:fusion_wallet/ui/pages/bottom_home_page.dart';
+import 'package:fusion_wallet/ui/pages/bottom_home.dart';
 import 'package:fusion_wallet/ui/pages/information/faq_page.dart';
 import 'package:fusion_wallet/ui/pages/information/send_feedback_page.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';

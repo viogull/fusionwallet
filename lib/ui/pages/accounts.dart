@@ -7,13 +7,14 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:fusion_wallet/core/minter_rest.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
-import 'package:fusion_wallet/ui/pages/primary/accounts/delegate_funds_page.dart';
+import 'package:fusion_wallet/ui/pages/primary/accounts/delegate.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/push_funds_page.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/rewards_info_page.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/send_funds_page.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/unbound_funds_page.dart';
 import 'package:fusion_wallet/ui/pages/primary/share_address.dart';
 import 'package:fusion_wallet/ui/theme.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import './../../core/abstract/wallet.dart';
 import './../../main.dart';
@@ -79,10 +80,10 @@ class AccountsPage extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                         borderRadius: FusionTheme.borderRadius),
                     onPressed: () {
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => ShareAddressPage(
-                              "Mx${StateContainer.of(context).selectedAccount.address}"),
-                          fullscreenDialog: true));
+                    showCupertinoModalBottomSheet(context: context, builder: (context, controller) {
+                      return ShareAddressPage(
+                          "Mx${StateContainer.of(context).selectedAccount.address}");
+                    });
                     },
                     icon: Icon(Icons.arrow_downward),
                     color: FusionTheme.greenButtonColor(),
