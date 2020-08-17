@@ -61,7 +61,7 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
     });
     if (_otp.length == 6) {
       if (pincode != null && pincode == _otp) {
-        FlashHelper.errorBar(context, message: "Succesfully authenticated");
+        FlashHelper.successBar(context, message: "Succesfully saved pin.");
         Future.delayed(new Duration(seconds: 1), () {
           BlocProvider.of<AuthenticationBloc>(context).add(
             PincodeCreatedEvent(pin: pincode),
@@ -70,7 +70,7 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
 
       } else {
         if(pincode != null && pincode != _otp)
-          FlashHelper.errorBar(context, message: "Invalid input");
+          FlashHelper.errorBar(context, message: "Invalid code input");
         setState(() {
           this.pincode = _otp;
           this._otp = "";

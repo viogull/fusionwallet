@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:logger/logger.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -48,7 +47,6 @@ import 'ui/pages/primary/contacts/contacts.dart';
 import 'ui/pages/primary/history_page.dart';
 import 'ui/pages/primary/settings.dart';
 import 'ui/theme.dart';
-import 'utils/vault.dart';
 
 const String preferencesBox = 'prefsBox';
 const String accountsBox = 'accountsBox';
@@ -109,6 +107,8 @@ class App extends StatefulWidget {
 }
 
 class AppState extends State<App> {
+
+
   @override
   void initState() {
     super.initState();
@@ -188,15 +188,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    injector.get<Vault>().getAccounts().then((accounts) {
-      
-    }
-    ).catchError( (onError) {
-      injector.get<Logger>().e("Error on loading account");
-    });
-    setState(() {
-      
-    });
+
     WidgetsBinding.instance.addObserver(this);
   }
 

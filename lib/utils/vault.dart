@@ -30,27 +30,16 @@ class Vault {
   static const String sessionKey = 'fusion_session_key';
   static const String prefsCurrentAccountName = 'current_account_name';
 
+
+  static const String lastReferalInviter = "fusion_referal_last";
+
   final log = injector.get<Logger>();
   Box<Account> _accountsBox;
   Box<dynamic> preferences;
 
-  Vault() {
-    init();
-  }
+  Vault();
 
-  void init() async {
-    log.d(
-        "Checking encrypted accounts availability. ${Hive.isBoxOpen(accountsBox)}");
-    final pin = await getCurrentPin();
-    final encryptionKey = await getSecureEncryptionKey();
-    final isBiometricAuthEnabled = await getBiometricEnabled();
 
-    log.d(
-        "Encryption key ${encryptionKey != null ? 'exist' : 'not exist'}. \n : ${encryptionKey.toString()}");
-    log.d(
-        "Biometric auth is ${(isBiometricAuthEnabled != null) ? 'enabled' : 'disabled'}  [ $isBiometricAuthEnabled)] ");
-    log.d("Pincode is ${pin != null ? 'exist' : 'not exist'}");
-  }
 
   final FlutterSecureStorage secureStorage = new FlutterSecureStorage();
 
@@ -98,25 +87,15 @@ class Vault {
   }
 
   Future<void> deleteAll() async {
-    try {
-      if (await legacy()) {
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        await prefs.remove(encryptionKey);
-        await prefs.remove(seedKey);
-        await prefs.remove(pinKey);
-        await prefs.remove(sessionKey);
-        return;
-      }
-
-      await Hive.deleteFromDisk();
-
-
-
-      await secureStorage.deleteAll();
-    } on Exception catch (exception) {
-      return false;
+    if (await legacy()) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.remove(encryptionKey);
+      await prefs.remove(seedKey);
+      await prefs.remove(pinKey);
+      await prefs.remove(sessionKey);
+      return;
     }
-    return true;
+    return await secureStorage.deleteAll();
   }
 
   // Specific keys
@@ -238,6 +217,7 @@ class Vault {
     return account != null;
   }
 
+
   void saveAccount(String accountName, String pin, String mnemonic, String seed,
       String publicKey, String privateKey, String address) async {
     log.d("Creating and persisting new account $accountName");
@@ -245,6 +225,7 @@ class Vault {
   }
 
   Account get currentAccount => _accountsBox.getAt(0);
+
 
   Future<void> addContact(Contact contact) {
     if (!contact.isInBox) {
@@ -261,4 +242,12 @@ class Vault {
   Future<void> deleteAllAccounts() async {}
 
   Future<dynamic> setLastAuthentication({@required String uu}) async {}
+
+  void saveLastReferalInviter(String ref) {
+    secureStorage.write(key: lastReferalInviter, value: ref);
+  }
+
+  Future<String> getLastReferalInviter() async {
+    return await secureStorage.read(key: lastReferalInviter);
+  }
 }

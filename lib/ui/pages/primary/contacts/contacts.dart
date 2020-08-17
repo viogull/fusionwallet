@@ -98,8 +98,6 @@ class _ContactsPageState extends State<ContactsPage> {
                                   child: ContactItem(data: _contacts[index])
                               ),
                             );
-
-
                           },
                           physics: ClampingScrollPhysics(),
                           itemCount: _contacts.length,

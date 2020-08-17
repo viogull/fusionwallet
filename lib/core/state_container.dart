@@ -1,5 +1,4 @@
 import 'package:alice/alice.dart';
-import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
@@ -8,9 +7,9 @@ import 'package:nanodart/nanodart.dart';
 import '../inject.dart';
 import '../utils/vault.dart';
 import 'abstract/preferences.dart';
-import 'models.dart';
 import 'models/available_currency.dart';
 import 'models/available_language.dart';
+import 'models.dart';
 
 class _InheritedStateContainer extends InheritedWidget {
   final StateContainerState data;
@@ -97,6 +96,7 @@ class StateContainerState extends State<StateContainer> {
       selectedAccount = widget.accounts.getAt(widget.accounts.length - 1);
     } else {
       selectedAccount = Account();
+      widget.accounts.add(selectedAccount);
     }
     // Get default language setting
     final locale = widget.preferences.locale;
@@ -236,19 +236,15 @@ class StateContainerState extends State<StateContainer> {
 
   void checkAccountsBox() async {
     try {
-      if (!selectedAccount.isInBox) {
-        selectedAccount = Hive.box(accountsBox).getAt(0);
-      }
-      selectedAccount.save();
+
+      selectedAccount = Hive.box(accountsBox).getAt(0);
 
     } on HiveError catch (e) {
-      selectedAccount.save();
     }
   }
 
   void loadAccount({Account account}) async {
-    var _ = (account == null ) ? await Hive.box<Account>(accountsBox).getAt(0)
-    :account;
+    var _ = (account == null ) ?  Hive.box<Account>(accountsBox).getAt(0) :account;
     setState(() {
       this.selectedAccount = _;
     });

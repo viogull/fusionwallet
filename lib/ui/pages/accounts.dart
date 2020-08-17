@@ -2,11 +2,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:fusion_wallet/core/minter_rest.dart';
-import 'package:fusion_wallet/core/models/transanctions_response.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/delegate.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/push_funds_page.dart';
@@ -17,8 +15,6 @@ import 'package:fusion_wallet/ui/pages/primary/share_address.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-import './../../core/abstract/wallet.dart';
-import './../../main.dart';
 import '../../core/state_container.dart';
 import '../../inject.dart';
 import '../../localizations.dart';
@@ -28,24 +24,21 @@ class AccountsPage extends StatelessWidget {
   static const String navId = "/accounts";
 
   @override
-  Widget build(BuildContext context) =>
-      Observer(builder: (_) => _buildAccountsUi(context, wallet));
+  Widget build(BuildContext context) =>  _buildAccountsUi(context);
 
-  Widget _buildAccountsUi(BuildContext context, Wallet wallet) =>
-      Container(
-        child: AnimationLimiter(
-            child: ListView.builder(
-          itemCount: 6,
-          itemBuilder: (BuildContext context, int index) {
-            return AnimationConfiguration.staggeredList(
-              position: index,
-              duration: const Duration(milliseconds: 890),
-              child: FadeInAnimation(
-                  child: _buildAccountsPageBodyItem(context, index)),
-            );
-          },
-        )),
-      );
+  Widget _buildAccountsUi(BuildContext context) =>
+      AnimationLimiter(
+          child: ListView.builder(
+        itemCount: 5,
+        itemBuilder: (BuildContext context, int index) {
+          return AnimationConfiguration.staggeredList(
+            position: index,
+            duration: const Duration(milliseconds: 890),
+            child: FadeInAnimation(
+                child: _buildAccountsPageBodyItem(context, index)),
+          );
+        },
+      ));
 
   Widget _buildAccountsPageBodyItem(BuildContext context, int index) {
     switch (index) {
@@ -165,9 +158,13 @@ class AccountsPage extends StatelessWidget {
               : Container();
         }
         break;
-      case 5: {
-        return _buildTransactions(context);
-      }
+      case 5:
+        {
+          return AutoSizeText(
+            AppLocalizations.of(context).labelTransanctionsHistoryTitle(),
+            textAlign: TextAlign.center,
+          );
+        }
         break;
     }
   }
@@ -188,7 +185,7 @@ class AccountsPage extends StatelessWidget {
             debugPrint("Rendering balances length ${balances.length}");
             return AccountBalancesCard(data: snapshot.data);
           } else
-            Card(
+            return Card(
               margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
               shape: RoundedRectangleBorder(
                   borderRadius: FusionTheme.borderRadius,
@@ -239,59 +236,6 @@ class AccountsPage extends StatelessWidget {
             ),
           )),
     );
-  }
-
-
-  Widget _buildTransactions(BuildContext context) {
-    final theme = Theme.of(context);
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.8,
-      alignment: Alignment.center,
-      color: theme.colorScheme.surface,
-      child: Column(
-        children: [
-          AutoSizeText(
-          AppLocalizations.of(context).labelTransanctionsHistoryTitle(),
-      textAlign: TextAlign.center),
-      Padding(
-        padding: const EdgeInsets.all(4),
-      child: FutureBuilder(
-      future: injector.get<MinterRest>()
-          .fetchTransactions(StateContainer.of(context).selectedAccount.address),
-      builder: (context, state) {
-      switch(state.connectionState) {
-      case ConnectionState.done: {
-      if(state.hasData) {
-      final txs = (state.data as TransactionsResponse).data;
-      return ListView.builder(
-      itemCount: txs.length,
-      itemBuilder: (context, index) {
-      final tx = txs[index];
-      return new ListTile(title: Text(tx.from), subtitle: Text(tx.timestamp),);
-      });
-      }
-      }
-      break;
-      case ConnectionState.waiting: {
-      return
-      PlatformCircularProgressIndicator();
-      }
-      break;
-      default: {
-      return Container();
-      }
-      break;
-      }
-      return Container();
-      },
-      ),
-      )
-        ],
-      ),
-    );
-
-
-
   }
 }
 

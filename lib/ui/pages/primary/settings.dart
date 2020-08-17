@@ -5,6 +5,7 @@ import 'package:fusion_wallet/core/abstract/admin_notification.dart';
 import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/inject.dart';
 import 'package:fusion_wallet/localizations.dart';
+import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:fusion_wallet/ui/components/preferences/preference.dart';
 import 'package:fusion_wallet/ui/components/preferences/preference_switch.dart';
 import 'package:fusion_wallet/ui/components/preferences/single_choice_preference_item.dart';
@@ -95,57 +96,60 @@ class SettingsPage extends StatelessWidget {
                 showCupertinoModalBottomSheet(
                     context: context,
                     builder: (builder, scroll) {
-    @override
-    Widget build(BuildContext context) {
-              return ValueListenableBuilder(
-               valueListenable: Hive.box<AdminNotification>(notificationsBox)
-                  .listenable(),
-              builder: (context, Box<AdminNotification> notifications, _) {
-              final _contacts = notifications.values.toList();
 
-              return Container(
+              return FusionScaffold(
+                title: AppLocalizations.of(context).settingsItemNotifications(),
+                appBarIcon: null,
+                child: ValueListenableBuilder(
+                 valueListenable: Hive.box<AdminNotification>(notificationsBox)
+                    .listenable(),
+                builder: (context, Box<AdminNotification> notifications, _) {
+                final _contacts = notifications.values.toList();
 
-              constraints: BoxConstraints(
-              maxHeight: MediaQuery.of(context).size.height * 0.99,
-              ),
-              child: Column(
+                return Container(
 
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-              Flexible(
-              flex: 1,
-              child: Padding(
-              padding: const EdgeInsets.symmetric(
-              vertical: 8, horizontal: 16),
-              child: Container()
-              ),
-              ),
-              Flexible(
-              flex: 8,
-              child: AnimationLimiter(
-              child:(notifications.isEmpty)
-              ? showEmptyView(context)
-                  : ListView.builder(
-              itemBuilder: (context, index) {
-              return AnimationConfiguration.staggeredList(
-              child: FadeInAnimation(
-              duration: Duration(milliseconds: 500),
-              child: NotificationView(data: _contacts[index])
-              ),
-              );
+                constraints: BoxConstraints(
+                maxHeight: MediaQuery.of(context).size.height * 0.99,
+                ),
+                child: Column(
+
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                Flexible(
+                flex: 1,
+                child: Padding(
+                padding: const EdgeInsets.symmetric(
+                vertical: 8, horizontal: 16),
+                child: Container()
+                ),
+                ),
+                Flexible(
+                flex: 8,
+                child: AnimationLimiter(
+                child:(notifications.isEmpty)
+                ? showEmptyView(context)
+                    : ListView.builder(
+                itemBuilder: (context, index) {
+                return AnimationConfiguration.staggeredList(
+                child: FadeInAnimation(
+                duration: Duration(milliseconds: 500),
+                child: NotificationView(data: _contacts[index])
+                ),
+                );
 
 
-              },
-              physics: ClampingScrollPhysics(),
-              itemCount: _contacts.length,
-              ) ,
-              )
-              )
-              ]));
-              },
+                },
+                physics: ClampingScrollPhysics(),
+                itemCount: _contacts.length,
+                ) ,
+                )
+                )
+                ]));
+                },
+                ),
               );
               }
-                              });
+                              );
               }),
           SwitchFusionPreference(
               title: AppLocalizations.of(context).settingsItemShowRewards(),
@@ -181,9 +185,15 @@ class SettingsPage extends StatelessWidget {
   Widget showEmptyView(BuildContext context) =>
       Center(child: Text(AppLocalizations.of(context).noContactsTitle()));
 
-  Widget NotificationView({AdminNotification data}) => ListTile(
-    title: Text(data.title),
-    subtitle: Text(data.message),
+  Widget NotificationView({AdminNotification data}) => Card(
+    margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+    elevation:1,
+    child: ListTile(
+      title: Text(data.title),
+      subtitle: Text(data.message),
+      isThreeLine: false,
+      contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+    ),
   );
 }
 

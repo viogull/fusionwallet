@@ -198,6 +198,7 @@ style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onBackground
                                     textFieldBloc: bloc.stakeBloc,
                                     maxLines: 1,
                                     maxLength: 8,
+                                    maxLengthEnforced: false,
                                     keyboardType: TextInputType.numberWithOptions(decimal: true),
                                     decoration: InputDecoration(
                                       alignLabelWithHint: true,
@@ -206,7 +207,6 @@ style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onBackground
                                         labelText: AppLocalizations.of(context)
                                             .inputFundsStakeHint(),
                                         suffix: buildTextFieldMaxButton(context),
-
                                         border: inputBorder(context),
                                         enabledBorder: inputBorder(context)),
                                   ),

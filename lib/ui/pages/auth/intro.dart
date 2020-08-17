@@ -60,16 +60,6 @@ class IntroPage extends StatelessWidget {
       ),
     );
 
-    final labelAlreadyHaveAccount = Container(
-      height: 20,
-//      alignment: Alignment.topCenter,
-      child: Text(
-        AppLocalizations.of(context).labelAlreadyHaveAccount(),
-        style: TextStyle(
-          color: (theme.colorScheme.onSurface),
-        ),
-      ),
-    );
 
     final buttonRecoverFromPassphrase = Container(
       width: MediaQuery.of(context).size.width,
@@ -114,7 +104,21 @@ class IntroPage extends StatelessWidget {
                     ),
                     SizedBox(height: 5),
                     Flexible(
-                      child: labelAlreadyHaveAccount,
+                      child: GestureDetector(
+                        onDoubleTap: () {
+
+                        },
+                        child: Container(
+                          height: 20,
+//      alignment: Alignment.topCenter,
+                          child: Text(
+                            AppLocalizations.of(context).labelAlreadyHaveAccount(),
+                            style: TextStyle(
+                              color: (theme.colorScheme.onSurface),
+                            ),
+                          ),
+                        ),
+                      ),
                       flex: 2,
                     ),
                     SizedBox(height: 5),

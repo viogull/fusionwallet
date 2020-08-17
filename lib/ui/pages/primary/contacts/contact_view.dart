@@ -1,8 +1,8 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/core/models.dart';
-import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/utils/flasher.dart';
 import 'package:fusion_wallet/utils/haptic.dart';
 import 'package:fusion_wallet/utils/io_tools.dart';
@@ -69,10 +69,11 @@ class ContactItem extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               vertical: 4, horizontal: 4),
-                          child: Text(
+                          child: AutoSizeText(
                             data.address,
+                            maxLines: 1,
                             textAlign: TextAlign.start,
-                            style: FusionTheme.subtitleTextStyle,
+                            style: TextStyle(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7)),
                           ),
                         )
                       ],

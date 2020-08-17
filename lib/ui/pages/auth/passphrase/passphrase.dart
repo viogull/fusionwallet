@@ -12,7 +12,9 @@ import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:fusion_wallet/ui/pages/auth/account_name.dart';
+import 'package:fusion_wallet/ui/pages/popups/popup_page.dart';
 import 'package:fusion_wallet/ui/theme.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:share/share.dart';
 
 import '../../../../inject.dart';
@@ -423,17 +425,27 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
                                 if (_verificationStage == 2) {
                                   StateContainer.of(context)
                                       .persistPassphrase(mnemonic);
+                                  final blocCtx = context;
                                   Scaffold.of(context).showSnackBar(SnackBar(
                                     content: Text(AppLocalizations.of(context)
                                         .copiedSuccesfullyMessage()),
                                   ));
-                                  BlocProvider.of<AuthenticationBloc>(context)
-                                      .add(PassphraseVerifiedEvent(
-                                          mnemonic: mnemonic,
-                                          seed: cachedSeed,
-                                          address: cachedAddress,
-                                          publicKey: cachedPublicKey,
-                                          privateKey: cachedAddress));
+                                  showCupertinoModalBottomSheet(context: context, builder: (context, scrollControler) {
+                                    return PopupDialogWidget(title: AppLocalizations.of(context).popupPassVerifiedTitle(),
+                                        subtitle: AppLocalizations.of(context).popupPassVerifiedBody(),
+                                        asset: "assets/images/icons/ic_verified.svg",
+                                        onPressed: () {
+                                        Navigator.pop(context);
+                                          BlocProvider.of<AuthenticationBloc>(blocCtx)
+                                              .add(PassphraseVerifiedEvent(
+                                              mnemonic: mnemonic,
+                                              seed: cachedSeed,
+                                              address: cachedAddress,
+                                              publicKey: cachedPublicKey,
+                                              privateKey: cachedAddress));
+                                        },);
+                                  });
+
                                 } else {
                                   setState(() {
                                     _verificationStage = _verificationStage + 1;

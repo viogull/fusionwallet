@@ -15,8 +15,8 @@ import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/utils/flasher.dart';
 import 'package:fusion_wallet/utils/haptic.dart';
 import 'package:fusion_wallet/utils/io_tools.dart';
-import 'package:fusion_wallet/utils/vault.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
@@ -63,25 +63,19 @@ class _BottomHomePageState extends State<BottomHomePage> {
 
   @override
   void initState() {
-    super.initState();
-    injector.get<Vault>().getAccounts().then((accounts) {
-      if(accounts.isNotEmpty) {
-        setState(() {
-          _account = accounts[0];
-        });
-      }
-    }).catchError((onError) {
-      logger.e("Error on loading account. ${onError}");
-    });
+    if(_account == null) {
+      _account = Hive.box<Account>(accountsBox).getAt(0);
+      logger.d("Account is ${_account.name}");
+
+    }
     loadDynamicLinks();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<BottomNavigationProvider>(context);
-    if(this._account != null) {
-      StateContainer.of(context).loadAccount(account: this._account);
-    }
+
     final ThemeData theme = Theme.of(context);
     return FusionScaffold(
       child: Stack(
@@ -385,7 +379,8 @@ class _BottomHomePageState extends State<BottomHomePage> {
                             child: Padding(
                               padding: const EdgeInsets.only(left: 12, top: 8),
                               child: Text(
-                                  StateContainer.of(context).selectedAccount.name,
+                                  (StateContainer.of(context).selectedAccount.name != null) ?
+                                  StateContainer.of(context).selectedAccount.name : AppLocalizations.of(context).appName() ,
                                   style: GoogleFonts.robotoCondensed().copyWith(
                                       color:
                                           Theme.of(context).colorScheme.onPrimary,

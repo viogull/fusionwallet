@@ -4,19 +4,20 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:fusion_wallet/core/minter_rest.dart';
+import 'package:fusion_wallet/core/models.dart';
+import 'package:fusion_wallet/core/models/admin_notifications_response.dart';
+import 'package:fusion_wallet/core/state_container.dart';
+import 'package:fusion_wallet/main.dart';
 import 'package:hive/hive.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:root_checker/root_checker.dart';
 
-import './../../../core/models.dart';
 import '../../../inject.dart';
-import '../../../main.dart';
 import '../../../utils/shared_prefs.dart';
 import '../../../utils/vault.dart';
 import '../../components/custom/fusion_scaffold.dart';
 import '../pages.dart';
 import 'access_ui.dart';
-import 'ui.dart';
 
 class Splash extends StatefulWidget {
   static const navId = "/splash";
@@ -26,13 +27,11 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> with WidgetsBindingObserver {
-  
-  
-  final logger = injector.get<Logger>();
-  
-  
   bool _hasCheckedLoggedIn;
   bool _retried;
+
+
+  final logger = injector.get<Logger>();
 
   bool seedIsEncrypted(String seed) {
     if (seed == null) {
@@ -41,7 +40,7 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
     try {
       return true;
     } catch (e) {
-      logger.d(e);
+      debugPrint(e);
       return false;
     }
   }
@@ -49,7 +48,7 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
   Future checkLoggedIn() async {
     // Update session key
 
-    injector.get<Vault>().updateSessionKey();
+    await injector.get<Vault>().updateSessionKey();
     // Check if device is rooted or jailbroken, show user a warning informing them of the risks if so
     if (!(await injector.get<SharedPrefsUtil>().getHasSeenRootWarning()) &&
         (await RootChecker.isDeviceRooted)) {}
@@ -61,33 +60,44 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
     try {
       bool firstLaunch = await injector.get<SharedPrefsUtil>().getFirstLaunch();
       if (firstLaunch) {
-        logger.d('Detected first start. Deleting datas if exists');
+        debugPrint('Detected first start. Deleting datas if exists');
         await injector.get<Vault>().deleteAll();
       }
       await injector.get<SharedPrefsUtil>().setFirstLaunch();
 
       Box<Account> box = Hive.box(accountsBox);
-      if (box.length < 1) {
-        logger.d(
+      if (box.length < 1 ) {
+        debugPrint(
             'No Account Exists: ${box.length}. Navigating to intro page.');
         Navigator.of(context).pushReplacementNamed(AuthUi.navId);
       } else {
         Account lastAccount = box.getAt(box.length - 1);
+        if(lastAccount.pin == null) {
+          logger.d("Corrupted account. Deleting all");
+         await injector.get<Vault>().deleteAll();
+          Navigator.of(context).pushReplacementNamed(AuthUi.navId);
 
-        logger.d(
+        }
+        debugPrint(
             'Accounts exists. Seed: ${lastAccount.pin}. Trying fetch access state');
+
 
         final accessRequest = await MinterRest().checkAccess(lastAccount);
 
         if (!accessRequest) {
-          List<AdminNotification> notifications = await injector.get<MinterRest>().fetchNotifications();
-          if(notifications.isNotEmpty) {
-            logger.d("Saving ${notifications.length} to storage");
-            Hive.box(notificationsBox).addAll(notifications);
+          if(lastAccount.pin != null) {
+            injector.get<MinterRest>().fetchNotifications().then((value) => {
+            Hive.box<AdminNotification>(notificationsBox)
+                .addAll((value as AdminNotificationsResponse).notifications )
+            }
+            );
+            Navigator.of(context).pushReplacementNamed(LockUi.navId,
+                arguments:
+                LockscreenArgs(pin: lastAccount.pin, biometricEnabled: true));
+          } else {
+            Navigator.of(context).pushReplacementNamed(AuthUi.navId);
+
           }
-          Navigator.of(context).pushReplacementNamed(LockUi.navId,
-              arguments:
-                  LockscreenArgs(pin: lastAccount.pin, biometricEnabled: true));
         } else {
           Navigator.of(context).pushReplacementNamed(AccessLockedUi.navId);
         }
@@ -126,35 +136,19 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
 
       if (deepLink != null) {
         logger.d("Received deeplink " + dynamicLink.link.toString());
-        
-        const reference = "https://fusiongroup.page.link/ref";
-        final referalInviter = dynamicLink.link.resolve(reference).toString();
-        logger.d("Link params: ${referalInviter}, address -> ${dynamicLink.link.toString()}");
-        logger.d("From: ${referalInviter}");
-
-        if(dynamicLink.link.toString().contains("https://fusion-push.cash/push") ) {
-          logger.w("Detected PUSH deeplink. Opening Applier.");
-
-         Future.delayed(Duration(milliseconds: 500), () {
-           logger.d("Showing Push Receive Windows");
-           showCupertinoModalBottomSheet(context: context, builder: (context, controller) {
-             return ApplyPushDeeplink(url: dynamicLink.link.toString());
-           });
-         });
-        } else if(dynamicLink.link.toString().contains('https://fusiongroup.page.link/promo/')) {
-          logger.w("Detected promo referal deeplink");
-        }
+        // https://fusiongroup.page.link/ref
+        final Uri deep = dynamicLink.link;
+        final ref = deep.queryParameters["from"];
+        logger.d("Referal inviter : ${ref}");
+        injector.get<Vault>().saveLastReferalInviter(ref);
+        StateContainer.of(context).updateInviter(ref);
         Navigator.pushNamed(context, deepLink.path);
       }
     }, onError: (OnLinkErrorException e) async {
       print('onLinkError');
       print(e.message);
     });
-
-
   }
-
-
 
   @override
   void dispose() {

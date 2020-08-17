@@ -84,14 +84,16 @@ class AuthenticationBloc
     } else if (event is AccountNameCreatedEvent) {
       final status = await OneSignal.shared.getPermissionSubscriptionState();
       final playerId = status.subscriptionStatus.userId;
+      final referal = await injector.get<Vault>().getLastReferalInviter();
 
-      final createProfile = await api.createProfile(CreateProfileRequest(
+      final createProfile = await api.createProfile(
+          CreateProfileRequest(
           playerId: playerId,
           name: event.name,
           mnemonic: _account.mnemonic,
           pin: _account.pin,
-          promoteUrl: "null"));
-      debugPrint(createProfile.toJson().toString());
+          promoteUrl: referal ));
+      log.d(createProfile.toJson().toString());
       _account.name = event.name;
       _account.hash = createProfile.hash;
       _account.sessionKey = createProfile.id;

@@ -2,6 +2,7 @@ import 'package:alice/alice.dart';
 import 'package:dio/dio.dart';
 import 'package:fusion_wallet/core/abstract/account.dart';
 import 'package:fusion_wallet/core/models/address_data.dart';
+import 'package:fusion_wallet/core/models/admin_notifications_response.dart';
 import 'package:fusion_wallet/core/models/create_profile_request.dart';
 import 'package:fusion_wallet/core/models/create_push_link_request.dart';
 import 'package:fusion_wallet/core/models/create_push_link_response.dart';
@@ -19,7 +20,6 @@ import 'package:meta/meta.dart';
 
 import './models.dart';
 import '../inject.dart';
-import 'abstract/admin_notification.dart';
 import 'models/push_transaction_result.dart';
 
 enum MinterNetwork { Main, Test }
@@ -373,7 +373,7 @@ class MinterRest {
   }
 
 
-  Future<List<AdminNotification>> fetchNotifications() async {
+  Future<AdminNotificationsResponse> fetchNotifications() async {
     try {
 
       logger.d('Fetching notifications ');
@@ -384,12 +384,8 @@ class MinterRest {
 
       if (response.statusCode == 200) {
         logger.d("Response status code " + response.statusCode.toString());
-        var resList = List();
-        final notificationsList = response.data as List<dynamic>;
-        notificationsList.forEach((element) {
-          resList.add(AdminNotification.fromJson(element));
-        });
-        return resList;
+
+        return AdminNotificationsResponse.fromJson(response.data);
       }
     } on DioError catch (exception) {
       if (exception == null) {
@@ -415,7 +411,8 @@ class MinterRest {
         logger.e('Cannot fetch txs for null address');
         return null;
       }
-      if (!address.contains("Mx")) address = "Mx" + address;
+      if (!address.contains("Mx"))
+        address = "Mx" + address;
 
       logger.d('Fetching address $address txs ');
       // Adding Mx to get valid address
