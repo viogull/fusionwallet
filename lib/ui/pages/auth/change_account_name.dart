@@ -5,7 +5,6 @@ import 'package:fusion_wallet/core/abstract/preferences.dart';
 import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
-import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:hive/hive.dart';
 
 class AccountNamingFormBloc extends FormBloc<String, String> {
@@ -146,7 +145,7 @@ class SuccessScreen extends StatelessWidget {
             Icon(Icons.tag_faces, size: 100),
             SizedBox(height: 10),
             Text(
-              'Success',
+              AppLocalizations.of(context).flashOperationSuccess(),
               style: TextStyle(fontSize: 54, color: Colors.black),
               textAlign: TextAlign.center,
             ),
@@ -154,7 +153,7 @@ class SuccessScreen extends StatelessWidget {
             RaisedButton.icon(
               onPressed: () {},
               icon: Icon(Icons.replay),
-              label: Text('AGAIN'),
+              label: Text(AppLocalizations.of(context).labelAgain()),
             ),
           ],
         ),

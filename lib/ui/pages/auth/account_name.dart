@@ -210,7 +210,7 @@ class SuccessScreen extends StatelessWidget {
             Icon(Icons.tag_faces, size: 100),
             SizedBox(height: 10),
             Text(
-              'Success',
+             AppLocalizations.of(context).flashOperationSuccess(),
               style: TextStyle(fontSize: 54, color: Colors.black),
               textAlign: TextAlign.center,
             ),

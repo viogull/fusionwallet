@@ -1608,6 +1608,10 @@ class AppLocalizations {
   String errorInvalidInputsPush() =>
       Intl.message("Invalid values for push transaction",
           name: 'errorInvalidInputsPush');
+
+  String successfullySavedPin() => Intl.message("Succesfully saved PIN", name:  'successfullySavedPin');
+  String errorOnPinInput() => Intl.message("Invalid PIN", name:  'errorOnPinInput');
+
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
