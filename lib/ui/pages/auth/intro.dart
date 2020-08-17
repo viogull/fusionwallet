@@ -2,6 +2,7 @@ import 'package:alice/alice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
@@ -23,7 +24,8 @@ class IntroPage extends StatelessWidget {
     final bg = Image.asset(
       ('assets/images/backgrounds/bg_greeting.png'),
       fit: BoxFit.fitHeight,
-      height: MediaQuery.of(context).size.height * 1,
+
+      height: MediaQuery.of(context).size.height * 0.67,
       width: MediaQuery.of(context).size.width,
     );
 
