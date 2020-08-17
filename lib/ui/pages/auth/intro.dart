@@ -5,9 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
-import 'package:fusion_wallet/ui/pages/auth/recover.dart';
-import 'package:fusion_wallet/ui/pages/v2/bloc.dart';
-import 'package:fusion_wallet/ui/pages/v2/event.dart';
+
+import 'bloc.dart';
+import 'event.dart';
+
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -59,23 +60,13 @@ class IntroPage extends StatelessWidget {
       ),
     );
 
-    final labelAlreadyHaveAccount = Container(
-      height: 20,
-//      alignment: Alignment.topCenter,
-      child: Text(
-        AppLocalizations.of(context).labelAlreadyHaveAccount(),
-        style: TextStyle(
-          color: (theme.colorScheme.onSurface),
-        ),
-      ),
-    );
 
     final buttonRecoverFromPassphrase = Container(
       width: MediaQuery.of(context).size.width,
       child: FusionButton(
         text: AppLocalizations.of(context).buttonRecoverFromPassphrase(),
         onPressed: () {
-          Navigator.of(context).pushNamed(RecoverAccountPage.navId);
+          BlocProvider.of<AuthenticationBloc>(context).add(AccountStartRecoverEvent());
         },
         expandedWidth: true,
       ),
@@ -113,7 +104,21 @@ class IntroPage extends StatelessWidget {
                     ),
                     SizedBox(height: 5),
                     Flexible(
-                      child: labelAlreadyHaveAccount,
+                      child: GestureDetector(
+                        onDoubleTap: () {
+
+                        },
+                        child: Container(
+                          height: 20,
+//      alignment: Alignment.topCenter,
+                          child: Text(
+                            AppLocalizations.of(context).labelAlreadyHaveAccount(),
+                            style: TextStyle(
+                              color: (theme.colorScheme.onSurface),
+                            ),
+                          ),
+                        ),
+                      ),
                       flex: 2,
                     ),
                     SizedBox(height: 5),

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/main.dart';
 import 'package:fusion_wallet/ui/pages/auth/account_name.dart';
 import 'package:fusion_wallet/ui/pages/auth/biometrics.dart';
@@ -8,8 +7,8 @@ import 'package:fusion_wallet/ui/pages/auth/intro.dart';
 import 'package:fusion_wallet/ui/pages/auth/passphrase/passphrase.dart';
 import 'package:fusion_wallet/ui/pages/auth/pincode.dart';
 import 'package:fusion_wallet/ui/pages/auth/recover.dart';
+import 'package:fusion_wallet/ui/pages/pages.dart';
 
-import '../pages.dart';
 import 'bloc.dart';
 import 'state.dart';
 
@@ -47,7 +46,6 @@ class AuthUi extends StatelessWidget {
               return LockUi();
             }
             if (state is AccountUnlockedState) {
-              StateContainer.of(context).loadAccount();
               return HomePage();
             } else
               return IntroPage();

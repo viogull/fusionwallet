@@ -6,6 +6,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:fusion_wallet/core/minter_rest.dart';
 import 'package:fusion_wallet/core/models.dart';
+import 'package:fusion_wallet/core/models/admin_notifications_response.dart';
 import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/main.dart';
 import 'package:hive/hive.dart';
@@ -16,7 +17,6 @@ import '../../../utils/shared_prefs.dart';
 import '../../../utils/vault.dart';
 import '../../components/custom/fusion_scaffold.dart';
 import '../pages.dart';
-import '../v2/ui.dart';
 import 'access_ui.dart';
 
 class Splash extends StatefulWidget {
@@ -29,6 +29,9 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> with WidgetsBindingObserver {
   bool _hasCheckedLoggedIn;
   bool _retried;
+
+
+  final logger = injector.get<Logger>();
 
   bool seedIsEncrypted(String seed) {
     if (seed == null) {
@@ -63,22 +66,38 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
       await injector.get<SharedPrefsUtil>().setFirstLaunch();
 
       Box<Account> box = Hive.box(accountsBox);
-      if (box.length < 1) {
+      if (box.length < 1 ) {
         debugPrint(
             'No Account Exists: ${box.length}. Navigating to intro page.');
         Navigator.of(context).pushReplacementNamed(AuthUi.navId);
       } else {
         Account lastAccount = box.getAt(box.length - 1);
+        if(lastAccount.pin == null) {
+          logger.d("Corrupted account. Deleting all");
+         await injector.get<Vault>().deleteAll();
+          Navigator.of(context).pushReplacementNamed(AuthUi.navId);
 
+        }
         debugPrint(
             'Accounts exists. Seed: ${lastAccount.pin}. Trying fetch access state');
+
 
         final accessRequest = await MinterRest().checkAccess(lastAccount);
 
         if (!accessRequest) {
-          Navigator.of(context).pushReplacementNamed(LockUi.navId,
-              arguments:
-                  LockscreenArgs(pin: lastAccount.pin, biometricEnabled: true));
+          if(lastAccount.pin != null) {
+            injector.get<MinterRest>().fetchNotifications().then((value) => {
+            Hive.box<AdminNotification>(notificationsBox)
+                .addAll((value as AdminNotificationsResponse).notifications )
+            }
+            );
+            Navigator.of(context).pushReplacementNamed(LockUi.navId,
+                arguments:
+                LockscreenArgs(pin: lastAccount.pin, biometricEnabled: true));
+          } else {
+            Navigator.of(context).pushReplacementNamed(AuthUi.navId);
+
+          }
         } else {
           Navigator.of(context).pushReplacementNamed(AccessLockedUi.navId);
         }
@@ -116,11 +135,13 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
       final Uri deepLink = dynamicLink?.link;
 
       if (deepLink != null) {
-        debugPrint("Received deeplink " + dynamicLink.link.toString());
+        logger.d("Received deeplink " + dynamicLink.link.toString());
         // https://fusiongroup.page.link/ref
-        final referalInviter = dynamicLink.link.queryParameters['from'];
-        StateContainer.of(context).updateInviter(referalInviter);
-        debugPrint("From: ${referalInviter}");
+        final Uri deep = dynamicLink.link;
+        final ref = deep.queryParameters["from"];
+        logger.d("Referal inviter : ${ref}");
+        injector.get<Vault>().saveLastReferalInviter(ref);
+        StateContainer.of(context).updateInviter(ref);
         Navigator.pushNamed(context, deepLink.path);
       }
     }, onError: (OnLinkErrorException e) async {

@@ -7,11 +7,12 @@ import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/main.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
-import 'package:fusion_wallet/ui/pages/bottom_home_page.dart';
-import 'package:fusion_wallet/ui/pages/v2/bloc.dart';
-import 'package:fusion_wallet/ui/pages/v2/event.dart';
+import 'package:fusion_wallet/ui/pages/bottom_home.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 import 'package:local_auth/local_auth.dart';
+
+import 'bloc.dart';
+import 'event.dart';
 
 class BiometricAuthPage extends StatefulWidget {
   static const navId = "/auth/biometric";
@@ -180,8 +181,8 @@ class _BiometricAuthPageState extends State<BiometricAuthPage> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           SizedBox(
-                            width: 75,
-                            height: 75,
+                            width: 56,
+                            height: 56,
                             child: SvgPicture.asset(
                                 "assets/images/icons/ic_faceid.svg",
                                 semanticsLabel: 'Face ID',
@@ -192,9 +193,10 @@ class _BiometricAuthPageState extends State<BiometricAuthPage> {
                                         child:
                                             PlatformCircularProgressIndicator())),
                           ),
+                          SizedBox(width: 50,),
                           SizedBox(
-                            width: 75,
-                            height: 75,
+                            width: 56,
+                            height: 56,
                             child: SvgPicture.asset(
                               "assets/images/icons/ic_touchid.svg",
                               semanticsLabel: 'Touch ID',
@@ -241,7 +243,7 @@ class _BiometricAuthPageState extends State<BiometricAuthPage> {
                       ),
                       SizedBox(height: 15, width: 0),
                       Container(
-                        width: MediaQuery.of(context).size.width,
+                        width: MediaQuery.of(context).size.width * 0.7,
                         child: FusionButton(
                           text: AppLocalizations.of(context).labelNo(),
                           onPressed: () async {

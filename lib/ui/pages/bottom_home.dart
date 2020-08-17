@@ -8,24 +8,25 @@ import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
-import 'package:fusion_wallet/ui/components/custom/passphrase_view.dart';
 import 'package:fusion_wallet/ui/pages/accounts.dart';
 import 'package:fusion_wallet/ui/pages/auth/change_account_name.dart';
 import 'package:fusion_wallet/ui/pages/popups/popups_remove_account.dart';
 import 'package:fusion_wallet/ui/theme.dart';
-import 'package:fusion_wallet/ui/tools/flasher.dart';
+import 'package:fusion_wallet/utils/flasher.dart';
 import 'package:fusion_wallet/utils/haptic.dart';
 import 'package:fusion_wallet/utils/io_tools.dart';
-import 'package:fusion_wallet/utils/vault.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
+import './../../ui/pages/pages.dart';
 import '../../inject.dart';
-import '../components/fusion_sheet.dart';
+import 'auth/passphrase/share.dart';
 import 'lockscreen/lockscreen.dart';
 import 'primary/contacts/add_contact.dart';
-import 'primary/contacts/contacts_page.dart';
+import 'primary/contacts/contacts.dart';
 import 'primary/exchange_page.dart';
 import 'primary/history_page.dart';
 import 'primary/settings.dart';
@@ -48,9 +49,6 @@ class BottomHomePage extends StatefulWidget {
 }
 
 class _BottomHomePageState extends State<BottomHomePage> {
-  String _linkMessage;
-  bool _isCreatingLink = false;
-  String _testString = "Example";
 
 
   Account _account;
@@ -65,25 +63,19 @@ class _BottomHomePageState extends State<BottomHomePage> {
 
   @override
   void initState() {
-    super.initState();
-    injector.get<Vault>().getAccounts().then((accounts) {
-      if(accounts.isNotEmpty) {
-        setState(() {
-          _account = accounts[0];
-        });
-      }
-    }).catchError((onError) {
-      logger.e("Error on loading account. ${onError}");
-    });
+    if(_account == null) {
+      _account = Hive.box<Account>(accountsBox).getAt(0);
+      logger.d("Account is ${_account.name}");
+
+    }
     loadDynamicLinks();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<BottomNavigationProvider>(context);
-    if(this._account != null) {
-      StateContainer.of(context).loadAccount(account: this._account);
-    }
+
     final ThemeData theme = Theme.of(context);
     return FusionScaffold(
       child: Stack(
@@ -141,10 +133,11 @@ class _BottomHomePageState extends State<BottomHomePage> {
               ),
             ),
             onClick: () {
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (context) => ShareAddressPage(
-                      "Mx${StateContainer.of(context).selectedAccount.address}"),
-                  fullscreenDialog: true));
+              showCupertinoModalBottomSheet(context: context,
+                  builder: (context, controller) {
+                      return ShareAddressPage(
+                          "Mx${StateContainer.of(context).selectedAccount.address}");
+                  });
             }),
         DrawerItemData(
             title: AppLocalizations.of(context).menuItemSetDefaults(),
@@ -158,27 +151,39 @@ class _BottomHomePageState extends State<BottomHomePage> {
               child: Icon(FontAwesome.user_secret),
             ),
             onClick: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (_) => PassphraseViewWidget(),
-                  fullscreenDialog: true));
+              showCupertinoModalBottomSheet(context: context,
+                  builder: (BuildContext context, ScrollController controller) {
+                    return ViewPassphraseDialog(
+                        data: StateContainer
+                            .of(context)
+                            .selectedAccount
+                            .mnemonic);
+              });
             }),
         DrawerItemData(
           title: AppLocalizations.of(context).menuItemEditAccountName(),
           icon:
               _buildBottomNavItemIcon("assets/images/icons/ic_edit.svg", true),
           onClick: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (_) => ChangeAccountNameForm(),
-                fullscreenDialog: false));
+            showCupertinoModalBottomSheet(context: context,
+                builder: (BuildContext context, ScrollController controller) {
+                  return  ChangeAccountNameForm();
+                });
+
           },
         ),
         DrawerItemData(
+
+
             title: AppLocalizations.of(context).menuItemRemoveAccount(),
             icon: _buildBottomNavItemIcon(
                 "assets/images/icons/ic_folder.svg", true),
             onClick: () {
-              Sheets.showFusionBottomSheet(
-                  context: context, widget: PopupsRemoveAccount());
+              showCupertinoModalBottomSheet(context: context,
+                  builder: (BuildContext context, ScrollController controller) {
+                    return PopupsRemoveAccount();
+                  });
+
             }),
         DrawerItemData(
             title: AppLocalizations.of(context).menuItemWithdrawFunds(),
@@ -191,9 +196,11 @@ class _BottomHomePageState extends State<BottomHomePage> {
                 "assets/images/icons/ic_copy.svg", true),
             onClick: () async {
               injector.get<HapticUtil>().selection();
-              IOTools.setSecureClipboardItem(buildReferal(context));
+              final link = await _createDynamicLink(true, StateContainer.of(context).selectedAccount.address);
+              logger.d("Link ${link as dynamic}");
+              IOTools.setSecureClipboardItem((link as dynamic).toString());;
               FlashHelper.successBar(context,
-                  message: "Referal link was copied to clipboard.");
+                  message: AppLocalizations.of(context).pushLinkWasCopied());
             }),
       ]),
     );
@@ -209,14 +216,13 @@ class _BottomHomePageState extends State<BottomHomePage> {
     }
   }
 
-  Future<void> _createDynamicLink(bool short) async {
-    setState(() {
-      _isCreatingLink = true;
-    });
+  Future<void> _createDynamicLink(bool short, String address) async {
 
+    final host = Uri.parse('https://fusiongroup.page.link/promo/Mx$address');
+    logger.d("Deeplink pre -> $host");
     final params = DynamicLinkParameters(
-      uriPrefix: '',
-      link: Uri.parse('https://fusiongroup.page.link/push'),
+      uriPrefix: 'https://fusiongroup.page.link',
+      link: host,
       androidParameters: AndroidParameters(
         packageName: "com.fusiongroup.fusion.wallet",
         minimumVersion: 0,
@@ -236,11 +242,8 @@ class _BottomHomePageState extends State<BottomHomePage> {
     } else {
       url = await params.buildUrl();
     }
+    return url.toString();
 
-    setState(() {
-      _linkMessage = url.toString();
-      _isCreatingLink = false;
-    });
   }
 
   String _getToolbarTitle(BuildContext context, int index) {
@@ -372,14 +375,15 @@ class _BottomHomePageState extends State<BottomHomePage> {
                             BottomHomePage.drawerHeaderHeightRatio,
                         child: DrawerHeader(
                             decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.surface),
+                                color: Theme.of(context).colorScheme.primaryVariant),
                             child: Padding(
                               padding: const EdgeInsets.only(left: 12, top: 8),
                               child: Text(
-                                  AppLocalizations.of(context).appName(),
-                                  style: GoogleFonts.poppins().copyWith(
+                                  (StateContainer.of(context).selectedAccount.name != null) ?
+                                  StateContainer.of(context).selectedAccount.name : AppLocalizations.of(context).appName() ,
+                                  style: GoogleFonts.robotoCondensed().copyWith(
                                       color:
-                                          Theme.of(context).colorScheme.primary,
+                                          Theme.of(context).colorScheme.onPrimary,
                                       fontSize: 24)),
                             )),
                       );

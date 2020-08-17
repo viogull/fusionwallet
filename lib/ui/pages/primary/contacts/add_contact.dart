@@ -10,9 +10,7 @@ import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:fusion_wallet/ui/theme.dart';
-import 'package:fusion_wallet/utils/vault.dart';
-
-import '../../../../inject.dart';
+import 'package:hive/hive.dart';
 
 class AddContactPage extends StatefulWidget {
   final Account acc;
@@ -141,6 +139,7 @@ class _AddContactPageState extends State<AddContactPage> {
                           child: TextFieldBlocBuilder(
                             keyboardType: TextInputType.multiline,
                             textFieldBloc: loginFormBloc.address,
+                            textInputAction: TextInputAction.done,
                             maxLines: 4,
                             decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.symmetric(
@@ -230,17 +229,26 @@ class AddContactFormBloc extends FormBloc<String, String> {
     print(showSuccessResponse.value);
 
     try {
-      if (this.accountName.value != null && address.value != null) {
+      if (this.accountName.value != null
+          && address.value != null
+      && address.value.contains("Mx", 0)) {
         debugPrint("Checking current account contacts");
-        injector
-            .get<Vault>()
-            .addContact(Contact(accountName.value, address.value));
-        this.emitSuccess();
+        final contacts = Hive.box<Contact>(contactsBox);
+        if(!address.value.contains("Mx")) {
+          address.addFieldError("Must be valid Minter address with Mx prefix");
+          emitSubmissionCancelled();
+        }
+        await contacts.add(new Contact(accountName.value, address.value));
+        emitSuccess();
+      } else {
+        address.addFieldError("Must be valid Minter address with Mx prefix");
+        emitFailure();
       }
     } on Exception {
-      emitFailure();
+     // emitFailure();
     }
   }
+
 }
 
 class SuccessScreen extends StatelessWidget {

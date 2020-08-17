@@ -12,6 +12,9 @@ class PassphraseCreationState extends AccountCreationState {}
 
 class BiometricsConfigureState extends AccountCreationState {}
 
+
+class PassphraseVerifiedState extends AccountCreationState {}
+
 class AccountNamingState extends AccountCreationState {}
 
 class CreatePincodeState extends AccountCreationState {}

@@ -4,9 +4,8 @@ import 'dart:collection';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 
-import '../theme.dart';
+import '../ui/theme.dart';
 
 class _MessageItem<T> {
   final String message;
@@ -103,7 +102,7 @@ class FlashHelper {
     BuildContext context, {
     String title,
     @required String message,
-    Duration duration = const Duration(seconds: 3),
+    Duration duration = const Duration(seconds: 2),
   }) {
     return showFlash<T>(
       context: context,
@@ -112,23 +111,22 @@ class FlashHelper {
         return Flash(
           controller: controller,
           horizontalDismissDirection: HorizontalDismissDirection.horizontal,
-          backgroundColor: Theme.of(context).colorScheme.primaryVariant,
+          backgroundColor: Theme.of(context).colorScheme.secondaryVariant,
           style: FlashStyle.floating,
           margin: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-          position: FlashPosition.bottom,
+          position: FlashPosition.top,
           borderRadius: const BorderRadius.all(Radius.circular(8.0)),
           child: FlashBar(
             title: title == null
                 ? null
                 : Text(title,
                     style: _titleStyle(
-                        context, Theme.of(context).colorScheme.onPrimary)),
+                        context, Theme.of(context).colorScheme.onSecondary)),
             message: Text(message,
                 textAlign: TextAlign.center,
                 style: _contentStyle(
                     context, Theme.of(context).colorScheme.onPrimary)),
-            icon: Icon(AntDesign.qrcode,
-                color: Theme.of(context).colorScheme.onPrimary),
+
           ),
         );
       },
@@ -159,8 +157,8 @@ class FlashHelper {
               message:
 
                   Text(message, textAlign: TextAlign.center ,style: _contentStyle(context, Colors.white)),
-              icon: Icon(Icons.check_circle,
-                  color: Theme.of(context).colorScheme.onPrimary)),
+
+        )
         );
       },
     );
@@ -188,11 +186,12 @@ class FlashHelper {
             child: FlashBar(
               title: title == null
                   ? null
-                  : Text(title, style: _titleStyle(context, Theme.of(context).colorScheme.onError)),
+                  : Text(title, style: _titleStyle(context,
+                  Theme.of(context).colorScheme.onError)),
               message:
-                  Text(message, style: _contentStyle(context, Theme.of(context).colorScheme.onError)),
+                  Text(message, style:
+                  _contentStyle(context, Theme.of(context).colorScheme.onError)),
               primaryAction: primaryAction?.call(context, controller, setState),
-              icon: Icon(Icons.warning, color: Theme.of(context).colorScheme.onError),
             ),
           );
         });

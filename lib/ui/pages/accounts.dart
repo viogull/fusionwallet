@@ -2,21 +2,19 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:fusion_wallet/core/minter_rest.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
-import 'package:fusion_wallet/ui/pages/primary/accounts/delegate_funds_page.dart';
+import 'package:fusion_wallet/ui/pages/primary/accounts/delegate.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/push_funds_page.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/rewards_info_page.dart';
 import 'package:fusion_wallet/ui/pages/primary/accounts/send_funds_page.dart';
-import 'package:fusion_wallet/ui/pages/primary/accounts/unbound_funds_page.dart';
+import 'package:fusion_wallet/ui/pages/primary/accounts/unbound.dart';
 import 'package:fusion_wallet/ui/pages/primary/share_address.dart';
 import 'package:fusion_wallet/ui/theme.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-import './../../core/abstract/wallet.dart';
-import './../../main.dart';
 import '../../core/state_container.dart';
 import '../../inject.dart';
 import '../../localizations.dart';
@@ -26,10 +24,9 @@ class AccountsPage extends StatelessWidget {
   static const String navId = "/accounts";
 
   @override
-  Widget build(BuildContext context) =>
-      Observer(builder: (_) => _buildAccountsUi(context, wallet));
+  Widget build(BuildContext context) =>  _buildAccountsUi(context);
 
-  Widget _buildAccountsUi(BuildContext context, Wallet wallet) =>
+  Widget _buildAccountsUi(BuildContext context) =>
       AnimationLimiter(
           child: ListView.builder(
         itemCount: 5,
@@ -79,10 +76,10 @@ class AccountsPage extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                         borderRadius: FusionTheme.borderRadius),
                     onPressed: () {
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => ShareAddressPage(
-                              "Mx${StateContainer.of(context).selectedAccount.address}"),
-                          fullscreenDialog: true));
+                    showCupertinoModalBottomSheet(context: context, builder: (context, controller) {
+                      return ShareAddressPage(
+                          "Mx${StateContainer.of(context).selectedAccount.address}");
+                    });
                     },
                     icon: Icon(Icons.arrow_downward),
                     color: FusionTheme.greenButtonColor(),
@@ -118,7 +115,7 @@ class AccountsPage extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: FusionTheme.borderRadius),
                   onPressed: () {
-                    Navigator.pushNamed(context, UnboundFundsPage.navId);
+                    Navigator.pushNamed(context, UboundFundsPage.navId);
                   },
                   color: Theme.of(context).colorScheme.primary,
                   child: Text(
@@ -188,7 +185,7 @@ class AccountsPage extends StatelessWidget {
             debugPrint("Rendering balances length ${balances.length}");
             return AccountBalancesCard(data: snapshot.data);
           } else
-            Card(
+            return Card(
               margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
               shape: RoundedRectangleBorder(
                   borderRadius: FusionTheme.borderRadius,

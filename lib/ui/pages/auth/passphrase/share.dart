@@ -37,17 +37,16 @@ class ViewPassphraseDialog extends StatelessWidget {
                   children: <Widget>[
                     QrImage(
                       version: QrVersions.auto,
+                      foregroundColor: Theme.of(context).colorScheme.onBackground,
                       data: data == null ? qr.toString() : data,
-                      backgroundColor: Theme.of(context).colorScheme.background,
+                      backgroundColor: Colors.transparent,
+
                       size: MediaQuery.of(context).size.width * 0.5,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Center(
-                        child: Text(
-                          data == null ? qr : data,
-                          textAlign: TextAlign.center,
-                        ),
+                        child: Container(),
                       ),
                     ),
                     Padding(

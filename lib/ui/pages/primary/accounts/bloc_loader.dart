@@ -20,10 +20,11 @@ class BlocLoader extends StatelessWidget {
       child: Center(
         child: Card(
           elevation: 1,
+          color: Colors.transparent,
           child: Container(
-            width: 80,
-            height: 80,
-            padding: EdgeInsets.all(12.0),
+            width: 32,
+            height: 32,
+            padding: EdgeInsets.all(16.0),
             child: PlatformCircularProgressIndicator(),
           ),
         ),

@@ -4,13 +4,13 @@ import 'package:fusion_wallet/core/abstract/preferences.dart';
 import 'package:fusion_wallet/core/minter_rest.dart';
 import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/core/models/create_profile_request.dart';
+import 'package:fusion_wallet/inject.dart';
 import 'package:fusion_wallet/main.dart';
 import 'package:fusion_wallet/utils/biometric.dart';
 import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
-import '../../../inject.dart';
 import 'event.dart';
 import 'state.dart';
 
@@ -47,7 +47,8 @@ class AuthenticationBloc
       yield AccountRecoveryState();
     } else if (event is AccountCompleteRecoverEvent) {
       _isRecoveringAccount = true;
-      _account = event.recoveryAccount;
+      _account.mnemonic = event.mnemonic;
+      _account.name = event.name;
       yield CreatePincodeState();
     } else if (event is AccountCreateWalletEvent) {
       yield CreatePincodeState();
@@ -69,6 +70,7 @@ class AuthenticationBloc
     } else if (event is BiometricConfiguredEvent) {
 
       preferences.biometricEnabled = event.enableBiometrics;
+      preferences.save();
 
       yield PassphraseCreationState();
     } else if (event is PassphraseVerifiedEvent) {
@@ -82,14 +84,16 @@ class AuthenticationBloc
     } else if (event is AccountNameCreatedEvent) {
       final status = await OneSignal.shared.getPermissionSubscriptionState();
       final playerId = status.subscriptionStatus.userId;
+      final referal = await injector.get<Vault>().getLastReferalInviter();
 
-      final createProfile = await api.createProfile(CreateProfileRequest(
+      final createProfile = await api.createProfile(
+          CreateProfileRequest(
           playerId: playerId,
           name: event.name,
           mnemonic: _account.mnemonic,
           pin: _account.pin,
-          promoteUrl: "null"));
-      debugPrint(createProfile.toJson().toString());
+          promoteUrl: referal ));
+      log.d(createProfile.toJson().toString());
       _account.name = event.name;
       _account.hash = createProfile.hash;
       _account.sessionKey = createProfile.id;

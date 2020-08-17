@@ -12,14 +12,16 @@ import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:fusion_wallet/ui/pages/auth/account_name.dart';
-import 'package:fusion_wallet/ui/pages/v2/bloc.dart';
-import 'package:fusion_wallet/ui/pages/v2/event.dart';
+import 'package:fusion_wallet/ui/pages/popups/popup_page.dart';
 import 'package:fusion_wallet/ui/theme.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:share/share.dart';
 
 import '../../../../inject.dart';
 import '../../../../localizations.dart';
-import 'share_qr_page.dart';
+import '../../pages.dart';
+import  '../event.dart';
+import 'share.dart';
 
 class PassphraseCreationPage extends StatefulWidget {
   static String navId = "/passphrase/creation";
@@ -340,7 +342,7 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
           flex: 12,
           child: Card(
               elevation: 0,
-              color: Theme.of(context).colorScheme.surface,
+              color: Colors.transparent,
               margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 16),
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -365,6 +367,7 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
                                       ClipRRect(
                                           borderRadius:
                                               FusionTheme.borderRadius,
+
                                           child: Container(
                                             width: (MediaQuery.of(context)
                                                     .size
@@ -375,24 +378,28 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
                                                 vertical: 2, horizontal: 2),
                                             color: Theme.of(context)
                                                 .colorScheme
-                                                .surface,
+                                                .primary,
                                             child: Center(
                                               child: Card(
-                                                elevation: 1,
+                                                color: Colors.transparent,
+                                                elevation: 0,
+                                                borderOnForeground: false ,
                                                 child: Container(
+                                                  color: Theme.of(context).colorScheme.primary,
                                                   width: 75,
                                                   child: Padding(
                                                     padding:
                                                     const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
-                                                    child: new Text(
+                                                    child: new AutoSizeText(
                                                       shuffledWords[index],
                                                       maxLines: 1,
                                                       textAlign: TextAlign.center,
                                                       style: TextStyle(
+                                                        fontWeight: FontWeight.bold,
                                                         color: Theme.of(context)
                                                             .colorScheme
-                                                            .onSurface,
-                                                      ).copyWith(fontSize: 12),
+                                                            .onPrimary,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -418,17 +425,27 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
                                 if (_verificationStage == 2) {
                                   StateContainer.of(context)
                                       .persistPassphrase(mnemonic);
+                                  final blocCtx = context;
                                   Scaffold.of(context).showSnackBar(SnackBar(
                                     content: Text(AppLocalizations.of(context)
                                         .copiedSuccesfullyMessage()),
                                   ));
-                                  BlocProvider.of<AuthenticationBloc>(context)
-                                      .add(PassphraseVerifiedEvent(
-                                          mnemonic: mnemonic,
-                                          seed: cachedSeed,
-                                          address: cachedAddress,
-                                          publicKey: cachedPublicKey,
-                                          privateKey: cachedAddress));
+                                  showCupertinoModalBottomSheet(context: context, builder: (context, scrollControler) {
+                                    return PopupDialogWidget(title: AppLocalizations.of(context).popupPassVerifiedTitle(),
+                                        subtitle: AppLocalizations.of(context).popupPassVerifiedBody(),
+                                        asset: "assets/images/icons/ic_verified.svg",
+                                        onPressed: () {
+                                        Navigator.pop(context);
+                                          BlocProvider.of<AuthenticationBloc>(blocCtx)
+                                              .add(PassphraseVerifiedEvent(
+                                              mnemonic: mnemonic,
+                                              seed: cachedSeed,
+                                              address: cachedAddress,
+                                              publicKey: cachedPublicKey,
+                                              privateKey: cachedAddress));
+                                        },);
+                                  });
+
                                 } else {
                                   setState(() {
                                     _verificationStage = _verificationStage + 1;

@@ -5,12 +5,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 
+
+typedef PopupCallback = void Function();
+
+
 class PopupDialogWidget extends StatelessWidget {
   final String title;
   final String subtitle;
   final String asset;
+  final PopupCallback onPressed;
 
-  PopupDialogWidget(this.title, this.asset, this.subtitle);
+  PopupDialogWidget({this.title, this.asset, this.subtitle, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -70,12 +75,15 @@ class PopupDialogWidget extends StatelessWidget {
                 flex: 2,
                 child: Container(
                   padding: EdgeInsets.only(left: 24, right: 24),
-                  height: 50,
                   width: MediaQuery.of(context).size.width,
                   child: FusionButton(
                  text:   AppLocalizations.of(context).labelOk(),
                     onPressed: () {
-                      Navigator.pop(context);
+                      if(this.onPressed == null) {
+                        Navigator.pop(context);
+                      } else {
+                        this.onPressed();
+                      }
                     },
                   ),
                 ),
