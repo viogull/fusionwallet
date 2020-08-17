@@ -1,7 +1,7 @@
-# Fusion Wallet 
-[![Build Status](https://app.bitrise.io/app/078d4c59cda43563/status.svg?token=tovI3DjmdyFaFnGMXo7PQg)](https://app.bitrise.io/app/078d4c59cda43563)
-[![Codemagic build status](https://api.codemagic.io/apps/5f317971cfa936e4b9f461b7/5f317971cfa936e4b9f461b6/status_badge.svg)](https://codemagic.io/apps/5f317971cfa936e4b9f461b7/5f317971cfa936e4b9f461b6/latest_build)  
- Android/iOS wallet for Minter blockchain.
+# Fusion 
+[![Build Status](https://app.bitrise.io/app/352c71b99d029dd1/status.svg?token=KSQQzlyYuEdaMvrak9Yjhw&branch=releases)](https://app.bitrise.io/app/352c71b99d029dd1)
+ 
+#### Android/iOS wallet for Minter blockchain.
 ##
 `[✓] Flutter (Channel stable, 1.20.0, macOS 11.0 20A5323l,ru-UA)`
 
