@@ -9,7 +9,7 @@ import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:share/share.dart';
 
-import '../../pages/auth/passphrase/share.dart';
+import '../../pages/auth/share_passphrase.dart';
 
 class PassphraseViewWidget extends StatelessWidget {
   @override

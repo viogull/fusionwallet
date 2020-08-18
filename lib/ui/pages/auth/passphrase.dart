@@ -17,11 +17,11 @@ import 'package:fusion_wallet/ui/theme.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:share/share.dart';
 
-import '../../../../inject.dart';
-import '../../../../localizations.dart';
-import '../../pages.dart';
-import  '../event.dart';
-import 'share.dart';
+import '../../../inject.dart';
+import '../../../localizations.dart';
+import '../pages.dart';
+import  'event.dart';
+import 'share_passphrase.dart';
 
 class PassphraseCreationPage extends StatefulWidget {
   static String navId = "/passphrase/creation";
@@ -426,10 +426,9 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
                                   StateContainer.of(context)
                                       .persistPassphrase(mnemonic);
                                   final blocCtx = context;
-                                  Scaffold.of(context).showSnackBar(SnackBar(
-                                    content: Text(AppLocalizations.of(context)
-                                        .copiedSuccesfullyMessage()),
-                                  ));
+                                  FlashHelper.successBar(context, message: AppLocalizations.of(context)
+                                        .copiedSuccesfullyMessage(),
+                                  );
                                   showCupertinoModalBottomSheet(context: context, builder: (context, scrollControler) {
                                     return PopupDialogWidget(title: AppLocalizations.of(context).popupPassVerifiedTitle(),
                                         subtitle: AppLocalizations.of(context).popupPassVerifiedBody(),
@@ -447,19 +446,17 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
                                   });
 
                                 } else {
-                                  setState(() {
-                                    _verificationStage = _verificationStage + 1;
-                                  });
+//                                  setState(() {
+//                                    _verificationStage = _verificationStage + 1;
+//                                  });
                                 }
                               } else {
                                 if (_verificationStage > 0) {
-                                  Scaffold.of(context).showSnackBar(SnackBar(
-                                    content: Text(AppLocalizations.of(context)
-                                        .flashIncorrectWordMessage()),
-                                  ));
-                                  setState(() {
-                                    _verificationStage = -1;
-                                  });
+                                  FlashHelper.errorBar(context, message: AppLocalizations.of(context)
+                                      .flashIncorrectWordMessage());
+//                                  setState(() {
+//                                    _verificationStage = -1;
+//                                  });
                                 }
                               }
                             });

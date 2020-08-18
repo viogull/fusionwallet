@@ -1,1987 +1,2047 @@
 {
-  "@@last_modified": "2020-08-10T17:51:04.770627",
-  "appName": "Fusion",
-  "@appName": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonCreateAccount": "Create account",
-  "@buttonCreateAccount": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonRecoverFromPassphrase": "Recover account from passphrase",
-  "@buttonRecoverFromPassphrase": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelAlreadyHaveAccount": "Already have an account?",
-  "@labelAlreadyHaveAccount": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarChoosePassTitle": "Choose password",
-  "@toolbarChoosePassTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelChoosePassSubtitle": "Choose a six digit password",
-  "@labelChoosePassSubtitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelChoosePassVerifySubtitle": "Enter the same six digits",
-  "@labelChoosePassVerifySubtitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelEnableBiometricTitle": "Enable Touch ID/Face ID",
-  "@labelEnableBiometricTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelEnableBiometricSubtitle": "We recommend this for improved security",
-  "@labelEnableBiometricSubtitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelYes": "Yes",
-  "@labelYes": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelNo": "No",
-  "@labelNo": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarNewAccountTitle": "New Account",
-  "@toolbarNewAccountTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelBackupPassphraseSubtitle": "Back up this Passphrase",
-  "@labelBackupPassphraseSubtitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonVerifyRecoveryPhrase": "Verify recovery phrase",
-  "@buttonVerifyRecoveryPhrase": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonShare": "Share",
-  "@buttonShare": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelBackupPassphraseCaption": "In order to access this accout if you lose this device, ciopy or print this phrase and keep it someplace safe.",
-  "@labelBackupPassphraseCaption": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelQuestionIndicatorTitle": "Question {current} of {total}",
-  "@labelQuestionIndicatorTitle": {
-    "type": "text",
-    "placeholders": {
-      "current": {},
-      "total": {}
-    }
-  },
-  "labelWordIndicatorSubtitle": "Select the {position}th word of your passphrase",
-  "@labelWordIndicatorSubtitle": {
-    "type": "text",
-    "placeholders": {
-      "position": {}
-    }
-  },
-  "toastTryAgain": "Please, try again",
-  "@toastTryAgain": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "popupPassVerifiedTitle": "Passphrase Verified",
-  "@popupPassVerifiedTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "popupPassVerifiedBody": "Your passphrase has been verified. Make sure that you have backed it up as you will needit to recover your account.",
-  "@popupPassVerifiedBody": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelOk": "OK",
-  "@labelOk": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "inputAccountNameHelperText": "Account Name",
-  "@inputAccountNameHelperText": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "inputAccountNameHintText": "Please, name your account",
-  "@inputAccountNameHintText": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "checkboxTermsConditions": "I agree with terms&conditions",
-  "@checkboxTermsConditions": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonNext": "Next",
-  "@buttonNext": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarTermsConditionsTitle": "Terms and Conditions",
-  "@toolbarTermsConditionsTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarRecoverFromSeedTitle": "Recover from seed",
-  "@toolbarRecoverFromSeedTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "inputEnterScanPasshpraseHintText": "Enter passphrase or scan QR",
-  "@inputEnterScanPasshpraseHintText": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonVerify": "Verify",
-  "@buttonVerify": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarScanQrTitle": "Passphrase QR",
-  "@toolbarScanQrTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonClose": "Close",
-  "@buttonClose": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "popupAccVerificationWelcomeText": "Welcome to Algorand! Your account is ready to use.",
-  "@popupAccVerificationWelcomeText": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelUnlockTitle": "Unlock",
-  "@labelUnlockTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonLogOut": "Log out",
-  "@buttonLogOut": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelUnlockSubtitle": "Enter six digit pin",
-  "@labelUnlockSubtitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelTapToCopy": "Tap to copy",
-  "@labelTapToCopy": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarViewPasshraseTitle": "View Passphrase",
-  "@toolbarViewPasshraseTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonSend": "Send",
-  "@buttonSend": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonRequest": "Request",
-  "@buttonRequest": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonDelegate": "Delegate",
-  "@buttonDelegate": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonUnbound": "Unbound",
-  "@buttonUnbound": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonPush": "Push",
-  "@buttonPush": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelCryptoAvailable": "Cryptocurrency Available",
-  "@labelCryptoAvailable": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelTotalReward": "Total Rewards Earned",
-  "@labelTotalReward": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelTransanctionsHistoryTitle": "Transanctions History",
-  "@labelTransanctionsHistoryTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "navigationLabelAccounts": "Accounts",
-  "@navigationLabelAccounts": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "navigationLabelExchange": "Exchange",
-  "@navigationLabelExchange": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "navigationItemContacts": "Contacts",
-  "@navigationItemContacts": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "navigationItemHistory": "History",
-  "@navigationItemHistory": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "navigationItemSettings": "Settings",
-  "@navigationItemSettings": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "menuItemShowQR": "Show QR and Address",
-  "@menuItemShowQR": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "menuItemSetDefaults": "Set as defaults",
-  "@menuItemSetDefaults": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "menuItemViewPassphrase": "View Passphrase",
-  "@menuItemViewPassphrase": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "menuItemEditAccountName": "Edit Account Name",
-  "@menuItemEditAccountName": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "menuItemRemoveAccount": "Remove Account",
-  "@menuItemRemoveAccount": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "menuItemWithdrawFunds": "Withdraw funds",
-  "@menuItemWithdrawFunds": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "menuItemReferalLink": "Referal link",
-  "@menuItemReferalLink": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelTotalRewardTitle": "Total Rewards Earned",
-  "@labelTotalRewardTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelPendingRewardTitle": "Pending Rewards",
-  "@labelPendingRewardTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelPendingRewardSubtitle": "Pending rewards become confirmed when you send or receive BIP",
-  "@labelPendingRewardSubtitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelRewardsCaption": "For more information on Fusion Rewards, visit our FAQ",
-  "@labelRewardsCaption": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonPreview": "Preview",
-  "@buttonPreview": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelFrom": "From",
-  "@labelFrom": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelTo": "To",
-  "@labelTo": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelAmount": "Amount",
-  "@labelAmount": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelAddress": "Address",
-  "@labelAddress": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelMyContacts": "My Contacts",
-  "@labelMyContacts": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelContacts": "Contacts",
-  "@labelContacts": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelScanQr": "Scan QR",
-  "@labelScanQr": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarSendTitle": "Send funds",
-  "@toolbarSendTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "inputMaxAmountSuffix": "MAX",
-  "@inputMaxAmountSuffix": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "inputAddressHint": "Enter address",
-  "@inputAddressHint": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "inputFundsStakeHint": "Stake",
-  "@inputFundsStakeHint": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelSender": "Sender",
-  "@labelSender": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelReceiver": "Receiver",
-  "@labelReceiver": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelPubkeyOrDomain": "Public key or domain",
-  "@labelPubkeyOrDomain": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelCoin": "Coin",
-  "@labelCoin": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelName": "Name",
-  "@labelName": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "popupRemoveAccountTitle": "Remove account",
-  "@popupRemoveAccountTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "popupRemoveAccountBody": "You are about to remove an account. Are you sure you want to proceed with choice?",
-  "@popupRemoveAccountBody": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelCancel": "Cancel",
-  "@labelCancel": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelRemove": "Remove",
-  "@labelRemove": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelSave": "Save",
-  "@labelSave": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "inputEditAccountNameTitle": "Edit Account Name",
-  "@inputEditAccountNameTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "inputEditAccountNameHint": "Please, name your account",
-  "@inputEditAccountNameHint": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarHistoryTitle": "History",
-  "@toolbarHistoryTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelAccount": "Account:",
-  "@labelAccount": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelStartDate": "Start Date",
-  "@labelStartDate": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelEndDate": "End Date",
-  "@labelEndDate": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonViewResults": "View results",
-  "@buttonViewResults": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "settingsItemUiTheme": "Dark/Light Theme",
-  "@settingsItemUiTheme": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "settingsItemChgPassword": "Set/Change password",
-  "@settingsItemChgPassword": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "settingsItemBiometricFeature": "Touch ID/Face ID",
-  "@settingsItemBiometricFeature": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "settingsItemNotifications": "Notifications",
-  "@settingsItemNotifications": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "settingsItemShowRewards": "Show rewards",
-  "@settingsItemShowRewards": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "settingsItemLanguage": "Language",
-  "@settingsItemLanguage": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "settingsItemSendFeedback": "Send feedback",
-  "@settingsItemSendFeedback": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "settingsItemFaq": "FAQ",
-  "@settingsItemFaq": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelFeedbackNoteTitle": "Note",
-  "@labelFeedbackNoteTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "inputFeedbackCommentHint": "What is on your mind",
-  "@inputFeedbackCommentHint": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelFeedbackEmailSubtitle": "Email (optionally)",
-  "@labelFeedbackEmailSubtitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarContactsTitle": "Contacts",
-  "@toolbarContactsTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarAddContactTitle": "Add Contact",
-  "@toolbarAddContactTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "inputSearchContactHint": "Search contacts",
-  "@inputSearchContactHint": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelContactsNotFoundError": "No Contact found",
-  "@labelContactsNotFoundError": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelAddContactName": "Name",
-  "@labelAddContactName": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelAddContactAddress": "Address",
-  "@labelAddContactAddress": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "inputAddContactNameHint": "Contact Name",
-  "@inputAddContactNameHint": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "inputAddContactAddressHint": "Enter address",
-  "@inputAddContactAddressHint": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonAddContact": "Add contact",
-  "@buttonAddContact": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarExchangeTitle": "Exchange",
-  "@toolbarExchangeTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarRateTitle": "Rate",
-  "@toolbarRateTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarConvertTitle": "Convert",
-  "@toolbarConvertTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelExchangeCoins": "My Coins",
-  "@labelExchangeCoins": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonConvert": "Convert",
-  "@buttonConvert": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonRate": "Rate",
-  "@buttonRate": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonBuy": "Buy",
-  "@buttonBuy": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "buttonSell": "Sell",
-  "@buttonSell": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelExchangeUseCash": "Use cash balance",
-  "@labelExchangeUseCash": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelExchangeSimplex": "Simplex",
-  "@labelExchangeSimplex": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelBuy": "BUY",
-  "@labelBuy": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelSell": "SELL",
-  "@labelSell": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelConvertCoinHave": "Coin You have",
-  "@labelConvertCoinHave": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelConvertCoinWant": "Coin you want",
-  "@labelConvertCoinWant": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelConvertWillGet": "You will get approximztely",
-  "@labelConvertWillGet": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelConvertTransanctionFee": "Transanction Fee:",
-  "@labelConvertTransanctionFee": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarWidgetsTitle": "Components",
-  "@toolbarWidgetsTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarSharePasshpraseQr": "View Passphrase",
-  "@toolbarSharePasshpraseQr": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "cancel": "Cancel",
-  "@cancel": {
-    "description": "dialog_cancel",
-    "type": "text",
-    "placeholders": {}
-  },
-  "close": "Close",
-  "@close": {
-    "description": "dialog_close",
-    "type": "text",
-    "placeholders": {}
-  },
-  "confirm": "Confirm",
-  "@confirm": {
-    "description": "dialog_confirm",
-    "type": "text",
-    "placeholders": {}
-  },
-  "no": "No",
-  "@no": {
-    "description": "intro_new_wallet_backup_no",
-    "type": "text",
-    "placeholders": {}
-  },
-  "yes": "Yes",
-  "@yes": {
-    "description": "intro_new_wallet_backup_yes",
-    "type": "text",
-    "placeholders": {}
-  },
-  "onStr": "On",
-  "@onStr": {
-    "description": "generic_on",
-    "type": "text",
-    "placeholders": {}
-  },
-  "off": "Off",
-  "@off": {
-    "description": "generic_off",
-    "type": "text",
-    "placeholders": {}
-  },
-  "send": "Send",
-  "@send": {
-    "description": "home_send_cta",
-    "type": "text",
-    "placeholders": {}
-  },
-  "receive": "Receive",
-  "@receive": {
-    "description": "home_receive_cta",
-    "type": "text",
-    "placeholders": {}
-  },
-  "sent": "Sent",
-  "@sent": {
-    "description": "history_sent",
-    "type": "text",
-    "placeholders": {}
-  },
-  "received": "Received",
-  "@received": {
-    "description": "history_received",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transactions": "Transactions",
-  "@transactions": {
-    "description": "transaction_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "addressCopied": "Address Copied",
-  "@addressCopied": {
-    "description": "receive_copied",
-    "type": "text",
-    "placeholders": {}
-  },
-  "copyAddress": "Copy Address",
-  "@copyAddress": {
-    "description": "receive_copy_cta",
-    "type": "text",
-    "placeholders": {}
-  },
-  "addressShare": "Share Address",
-  "@addressShare": {
-    "description": "receive_share_cta",
-    "type": "text",
-    "placeholders": {}
-  },
-  "addressHint": "Enter Address",
-  "@addressHint": {
-    "description": "send_address_hint",
-    "type": "text",
-    "placeholders": {}
-  },
-  "seed": "Seed",
-  "@seed": {
-    "description": "intro_new_wallet_seed_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "seedInvalid": "Seed is Invalid",
-  "@seedInvalid": {
-    "description": "intro_seed_invalid",
-    "type": "text",
-    "placeholders": {}
-  },
-  "seedCopied": "Seed Copied to Clipboard\nIt is pasteable for 2 minutes.",
-  "@seedCopied": {
-    "description": "intro_new_wallet_seed_copied",
-    "type": "text",
-    "placeholders": {}
-  },
-  "scanQrCode": "Scan QR Code",
-  "@scanQrCode": {
-    "description": "send_scan_qr",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactsImportErr": "Failed to import contacts",
-  "@contactsImportErr": {
-    "description": "contact_import_error",
-    "type": "text",
-    "placeholders": {}
-  },
-  "viewDetails": "View Details",
-  "@viewDetails": {
-    "description": "transaction_details",
-    "type": "text",
-    "placeholders": {}
-  },
-  "qrInvalidSeed": "QR code does not contain a valid seed or private key",
-  "@qrInvalidSeed": {
-    "description": "qr_invalid_seed",
-    "type": "text",
-    "placeholders": {}
-  },
-  "qrInvalidAddress": "QR code does not contain a valid destination",
-  "@qrInvalidAddress": {
-    "description": "qr_invalid_address",
-    "type": "text",
-    "placeholders": {}
-  },
-  "qrInvalidPermissions": "Please Grant Camera Permissions to scan QR Codes",
-  "@qrInvalidPermissions": {
-    "description": "User did not grant camera permissions to the app",
-    "type": "text",
-    "placeholders": {}
-  },
-  "qrUnknownError": "Could not Read QR Code",
-  "@qrUnknownError": {
-    "description": "An unknown error occurred with the QR scanner",
-    "type": "text",
-    "placeholders": {}
-  },
-  "removeContact": "Remove Contact",
-  "@removeContact": {
-    "description": "contact_remove_btn",
-    "type": "text",
-    "placeholders": {}
-  },
-  "removeContactConfirmation": "Are you sure you want to delete %1?",
-  "@removeContactConfirmation": {
-    "description": "contact_remove_sure",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactHeader": "Contact",
-  "@contactHeader": {
-    "description": "contact_view_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactsHeader": "Contacts",
-  "@contactsHeader": {
-    "description": "contact_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "addContact": "Add Contact",
-  "@addContact": {
-    "description": "contact_add_button",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactNameHint": "Enter a Name @",
-  "@contactNameHint": {
-    "description": "contact_name_hint",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactInvalid": "Invalid Contact Name",
-  "@contactInvalid": {
-    "description": "contact_invalid_name",
-    "type": "text",
-    "placeholders": {}
-  },
-  "noContactsExport": "There's no contacts to export.",
-  "@noContactsExport": {
-    "description": "contact_export_none",
-    "type": "text",
-    "placeholders": {}
-  },
-  "noContactsImport": "No new contacts to import.",
-  "@noContactsImport": {
-    "description": "contact_import_none",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactsImportSuccess": "Sucessfully imported %1 contacts.",
-  "@contactsImportSuccess": {
-    "description": "contact_import_success",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactAdded": "%1 added to contacts.",
-  "@contactAdded": {
-    "description": "contact_added",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactRemoved": "%1 has been removed from contacts!",
-  "@contactRemoved": {
-    "description": "contact_removed",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactNameMissing": "Choose a Name for this Contact",
-  "@contactNameMissing": {
-    "description": "contact_name_missing",
-    "type": "text",
-    "placeholders": {}
-  },
-  "contactExists": "Contact Already Exists",
-  "@contactExists": {
-    "description": "contact_name_exists",
-    "type": "text",
-    "placeholders": {}
-  },
-  "backupYourSeed": "Backup your seed",
-  "@backupYourSeed": {
-    "description": "intro_new_wallet_seed_backup_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "backupSeedConfirm": "Are you sure that you backed up your wallet seed?",
-  "@backupSeedConfirm": {
-    "description": "intro_new_wallet_backup",
-    "type": "text",
-    "placeholders": {}
-  },
-  "seedBackupInfo": "Below is your wallet's seed. It is crucial that you backup your seed and never store it as plaintext or a screenshot.",
-  "@seedBackupInfo": {
-    "description": "intro_new_wallet_seed",
-    "type": "text",
-    "placeholders": {}
-  },
-  "copySeed": "Copy Seed",
-  "@copySeed": {
-    "description": "copy_seed_btn",
-    "type": "text",
-    "placeholders": {}
-  },
-  "seedCopiedShort": "Seed Copied",
-  "@seedCopiedShort": {
-    "description": "seed_copied_btn",
-    "type": "text",
-    "placeholders": {}
-  },
-  "importSeed": "Import Seed",
-  "@importSeed": {
-    "description": "intro_seed_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "importSeedHint": "Please enter your seed below.",
-  "@importSeedHint": {
-    "description": "intro_seed_info",
-    "type": "text",
-    "placeholders": {}
-  },
-  "welcomeText": "Welcome to Natrium. To begin, you may create a new wallet or import an existing one.",
-  "@welcomeText": {
-    "description": "intro_welcome_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "newWallet": "New Wallet",
-  "@newWallet": {
-    "description": "intro_welcome_new_wallet",
-    "type": "text",
-    "placeholders": {}
-  },
-  "importWallet": "Import Wallet",
-  "@importWallet": {
-    "description": "intro_welcome_have_wallet",
-    "type": "text",
-    "placeholders": {}
-  },
-  "sentTo": "Sent To",
-  "@sentTo": {
-    "description": "sent_to",
-    "type": "text",
-    "placeholders": {}
-  },
-  "sending": "Sending",
-  "@sending": {
-    "description": "send_sending",
-    "type": "text",
-    "placeholders": {}
-  },
-  "to": "To",
-  "@to": {
-    "description": "send_to",
-    "type": "text",
-    "placeholders": {}
-  },
-  "sendAmountConfirm": "Send %1 NANO",
-  "@sendAmountConfirm": {
-    "description": "send_pin_description",
-    "type": "text",
-    "placeholders": {}
-  },
-  "sendError": "An error occured. Try again later.",
-  "@sendError": {
-    "description": "send_generic_error",
-    "type": "text",
-    "placeholders": {}
-  },
-  "mantaError": "Couldn't Verify Request",
-  "@mantaError": {
-    "description": "Was unable to verify the manta/appia payment request (from scanning QR code, etc.)",
-    "type": "text",
-    "placeholders": {}
-  },
-  "enterAmount": "Enter Amount",
-  "@enterAmount": {
-    "description": "send_amount_hint",
-    "type": "text",
-    "placeholders": {}
-  },
-  "enterAddress": "Enter Address",
-  "@enterAddress": {
-    "description": "enter_address",
-    "type": "text",
-    "placeholders": {}
-  },
-  "invalidAddress": "Address entered was invalid",
-  "@invalidAddress": {
-    "description": "send_invalid_address",
-    "type": "text",
-    "placeholders": {}
-  },
-  "addressMising": "Please Enter an Address",
-  "@addressMising": {
-    "description": "send_enter_address",
-    "type": "text",
-    "placeholders": {}
-  },
-  "amountMissing": "Please Enter an Amount",
-  "@amountMissing": {
-    "description": "send_enter_amount",
-    "type": "text",
-    "placeholders": {}
-  },
-  "minimumSend": "Minimum send amount is %1 NANO",
-  "@minimumSend": {
-    "description": "send_minimum_error",
-    "type": "text",
-    "placeholders": {}
-  },
-  "insufficientBalance": "Insufficient Balance",
-  "@insufficientBalance": {
-    "description": "send_insufficient_balance",
-    "type": "text",
-    "placeholders": {}
-  },
-  "sendFrom": "Send From",
-  "@sendFrom": {
-    "description": "send_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "pinCreateTitle": "Create a 6-digit pin",
-  "@pinCreateTitle": {
-    "description": "pin_create_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "pinConfirmTitle": "Confirm your pin",
-  "@pinConfirmTitle": {
-    "description": "pin_confirm_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "pinEnterTitle": "Enter pin",
-  "@pinEnterTitle": {
-    "description": "pin_enter_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "pinConfirmError": "Pins do not match",
-  "@pinConfirmError": {
-    "description": "pin_confirm_error",
-    "type": "text",
-    "placeholders": {}
-  },
-  "pinInvalid": "Invalid pin entered",
-  "@pinInvalid": {
-    "description": "pin_error",
-    "type": "text",
-    "placeholders": {}
-  },
-  "themeHeader": "Theme",
-  "@themeHeader": {
-    "description": "theme_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "changeRepButton": "Change",
-  "@changeRepButton": {
-    "description": "change_representative_change",
-    "type": "text",
-    "placeholders": {}
-  },
-  "changeRepAuthenticate": "Change Representative",
-  "@changeRepAuthenticate": {
-    "description": "settings_change_rep",
-    "type": "text",
-    "placeholders": {}
-  },
-  "currentlyRepresented": "Currently Represented By",
-  "@currentlyRepresented": {
-    "description": "change_representative_current_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "changeRepSucces": "Representative Changed Successfully",
-  "@changeRepSucces": {
-    "description": "change_representative_success",
-    "type": "text",
-    "placeholders": {}
-  },
-  "repInfoHeader": "What is a representative?",
-  "@repInfoHeader": {
-    "description": "change_representative_info_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "repInfo": "A representative is an account that votes for network consensus. Voting power is weighted by balance, you may delegate your balance to increase the voting weight of a representative you trust. Your representative does not have spending power over your funds. You should choose a representative that has little downtime and is trustworthy.",
-  "@repInfo": {
-    "description": "change_representative_info",
-    "type": "text",
-    "placeholders": {}
-  },
-  "pinRepChange": "Enter PIN to change representative.",
-  "@pinRepChange": {
-    "description": "change_representative_pin",
-    "type": "text",
-    "placeholders": {}
-  },
-  "changeRepHint": "Enter New Representative",
-  "@changeRepHint": {
-    "description": "change_representative_hint",
-    "type": "text",
-    "placeholders": {}
-  },
-  "representatives": "Representatives",
-  "@representatives": {
-    "description": "representatives",
-    "type": "text",
-    "placeholders": {}
-  },
-  "pickFromList": "Pick From a List",
-  "@pickFromList": {
-    "description": "pick rep from list",
-    "type": "text",
-    "placeholders": {}
-  },
-  "votingWeight": "Voting Weight",
-  "@votingWeight": {
-    "description": "Representative Voting Weight",
-    "type": "text",
-    "placeholders": {}
-  },
-  "uptime": "Uptime",
-  "@uptime": {
-    "description": "Rep uptime",
-    "type": "text",
-    "placeholders": {}
-  },
-  "authMethod": "Authentication Method",
-  "@authMethod": {
-    "description": "settings_disable_fingerprint",
-    "type": "text",
-    "placeholders": {}
-  },
-  "pinMethod": "PIN",
-  "@pinMethod": {
-    "description": "settings_pin_method",
-    "type": "text",
-    "placeholders": {}
-  },
-  "privacyPolicy": "Privacy Policy",
-  "@privacyPolicy": {
-    "description": "settings_privacy_policy",
-    "type": "text",
-    "placeholders": {}
-  },
-  "biometricsMethod": "Biometrics",
-  "@biometricsMethod": {
-    "description": "settings_fingerprint_method",
-    "type": "text",
-    "placeholders": {}
-  },
-  "currency": "Currency",
-  "@currency": {
-    "description": "A settings menu item for changing currency",
-    "type": "text",
-    "placeholders": {}
-  },
-  "changeCurrency": "Change Currency",
-  "@changeCurrency": {
-    "description": "settings_local_currency",
-    "type": "text",
-    "placeholders": {}
-  },
-  "language": "Language",
-  "@language": {
-    "description": "settings_change_language",
-    "type": "text",
-    "placeholders": {}
-  },
-  "shareNatrium": "Share Natrium",
-  "@shareNatrium": {
-    "description": "settings_share",
-    "type": "text",
-    "placeholders": {}
-  },
-  "shareNatriumText": "Check out Natrium! A premier NANO mobile wallet!",
-  "@shareNatriumText": {
-    "description": "share_extra",
-    "type": "text",
-    "placeholders": {}
-  },
-  "logout": "Logout",
-  "@logout": {
-    "description": "settings_logout",
-    "type": "text",
-    "placeholders": {}
-  },
-  "rootWarning": "It appears your device is \"rooted\", \"jailbroken\", or modified in a way that compromises security. It is recommended that you reset your device to its original state before proceeding.",
-  "@rootWarning": {
-    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device",
-    "type": "text",
-    "placeholders": {}
-  },
-  "iUnderstandTheRisks": "I Understand the Risks",
-  "@iUnderstandTheRisks": {
-    "description": "Shown to users if they have a rooted Android device or jailbroken iOS device",
-    "type": "text",
-    "placeholders": {}
-  },
-  "exit": "Exit",
-  "@exit": {
-    "description": "Exit action, like a button",
-    "type": "text",
-    "placeholders": {}
-  },
-  "warning": "Warning",
-  "@warning": {
-    "description": "settings_logout_alert_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "logoutDetail": "Logging out will remove your seed and all Natrium-related data from this device. If your seed is not backed up, you will never be able to access your funds again",
-  "@logoutDetail": {
-    "description": "settings_logout_alert_message",
-    "type": "text",
-    "placeholders": {}
-  },
-  "logoutAction": "Delete Seed and Logout",
-  "@logoutAction": {
-    "description": "settings_logout_alert_confirm_cta",
-    "type": "text",
-    "placeholders": {}
-  },
-  "logoutAreYouSure": "Are you sure?",
-  "@logoutAreYouSure": {
-    "description": "settings_logout_warning_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "logoutReassurance": "As long as you've backed up your seed you have nothing to worry about.",
-  "@logoutReassurance": {
-    "description": "settings_logout_warning_message",
-    "type": "text",
-    "placeholders": {}
-  },
-  "settingsHeader": "Settings",
-  "@settingsHeader": {
-    "description": "settings_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "preferences": "Preferences",
-  "@preferences": {
-    "description": "settings_preferences_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "manage": "Manage",
-  "@manage": {
-    "description": "settings_manage_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "backupSeed": "Backup Seed",
-  "@backupSeed": {
-    "description": "settings_backup_seed",
-    "type": "text",
-    "placeholders": {}
-  },
-  "fingerprintSeedBackup": "Authenticate to backup seed.",
-  "@fingerprintSeedBackup": {
-    "description": "settings_fingerprint_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "pinSeedBackup": "Enter PIN to Backup Seed",
-  "@pinSeedBackup": {
-    "description": "settings_pin_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "systemDefault": "System Default",
-  "@systemDefault": {
-    "description": "settings_default_language_string",
-    "type": "text",
-    "placeholders": {}
-  },
-  "notifications": "Notifications",
-  "@notifications": {
-    "description": "notifications_settings",
-    "type": "text",
-    "placeholders": {}
-  },
-  "notificationTitle": "Received %1 NANO",
-  "@notificationTitle": {
-    "description": "notification_title",
-    "type": "text",
-    "placeholders": {}
-  },
-  "notificationBody": "Open Natrium to view this transaction",
-  "@notificationBody": {
-    "description": "notification_body",
-    "type": "text",
-    "placeholders": {}
-  },
-  "notificationHeaderSupplement": "Tap to open",
-  "@notificationHeaderSupplement": {
-    "description": "notificaiton_header_suplement",
-    "type": "text",
-    "placeholders": {}
-  },
-  "settingsTransfer": "Load from Paper Wallet",
-  "@settingsTransfer": {
-    "description": "settings_transfer",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferError": "An error has occurred during the transfer. Please try again later.",
-  "@transferError": {
-    "description": "transfer_error",
-    "type": "text",
-    "placeholders": {}
-  },
-  "paperWallet": "Paper Wallet",
-  "@paperWallet": {
-    "description": "paper_wallet",
-    "type": "text",
-    "placeholders": {}
-  },
-  "kaliumWallet": "Natrium Wallet",
-  "@kaliumWallet": {
-    "description": "kalium_wallet",
-    "type": "text",
-    "placeholders": {}
-  },
-  "manualEntry": "Manual Entry",
-  "@manualEntry": {
-    "description": "transfer_manual_entry",
-    "type": "text",
-    "placeholders": {}
-  },
-  "mnemonicPhrase": "Mnemonic Phrase",
-  "@mnemonicPhrase": {
-    "description": "mnemonic_phrase",
-    "type": "text",
-    "placeholders": {}
-  },
-  "rawSeed": "Raw Seed",
-  "@rawSeed": {
-    "description": "raw_seed",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferHeader": "Transfer Funds",
-  "@transferHeader": {
-    "description": "transfer_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transfer": "Transfer",
-  "@transfer": {
-    "description": "transfer_btn",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferManualHint": "Please enter the seed below.",
-  "@transferManualHint": {
-    "description": "transfer_hint",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferIntro": "This process will transfer the funds from a paper wallet to your Natrium wallet.\n\nTap the \"%1\" button to start.",
-  "@transferIntro": {
-    "description": "transfer_intro",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferQrScanHint": "Scan a Nano \nseed or private key",
-  "@transferQrScanHint": {
-    "description": "transfer_qr_scan_hint",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferQrScanError": "This QR code does not contain a valid seed.",
-  "@transferQrScanError": {
-    "description": "transfer_qr_scan_error",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferNoFunds": "This seed does not have any NANO on it",
-  "@transferNoFunds": {
-    "description": "transfer_no_funds_toast",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferConfirmInfo": "A wallet with a balance of %1 NANO has been detected.\n",
-  "@transferConfirmInfo": {
-    "description": "transfer_confirm_info_first",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferConfirmInfoSecond": "Tap confirm to transfer the funds.\n",
-  "@transferConfirmInfoSecond": {
-    "description": "transfer_confirm_info_second",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferConfirmInfoThird": "Transfer may take several seconds to complete.",
-  "@transferConfirmInfoThird": {
-    "description": "transfer_confirm_info_third",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferLoading": "Transferring",
-  "@transferLoading": {
-    "description": "transfer_loading_text",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferComplete": "%1 NANO successfully transferred to your Natrium Wallet.\n",
-  "@transferComplete": {
-    "description": "transfer_complete_text",
-    "type": "text",
-    "placeholders": {}
-  },
-  "transferClose": "Tap anywhere to close the window.",
-  "@transferClose": {
-    "description": "transfer_close_text",
-    "type": "text",
-    "placeholders": {}
-  },
-  "scanInstructions": "Scan a Nano \naddress QR code",
-  "@scanInstructions": {
-    "description": "scan_send_instruction_label",
-    "type": "text",
-    "placeholders": {}
-  },
-  "unlockPin": "Enter PIN to Unlock Natrium",
-  "@unlockPin": {
-    "description": "unlock_kalium_pin",
-    "type": "text",
-    "placeholders": {}
-  },
-  "unlockBiometrics": "Authenticate to Unlock Natrium",
-  "@unlockBiometrics": {
-    "description": "unlock_kalium_bio",
-    "type": "text",
-    "placeholders": {}
-  },
-  "lockAppSetting": "Authenticate on Launch",
-  "@lockAppSetting": {
-    "description": "authenticate_on_launch",
-    "type": "text",
-    "placeholders": {}
-  },
-  "locked": "Locked",
-  "@locked": {
-    "description": "lockedtxt",
-    "type": "text",
-    "placeholders": {}
-  },
-  "unlock": "Unlock",
-  "@unlock": {
-    "description": "unlocktxt",
-    "type": "text",
-    "placeholders": {}
-  },
-  "tooManyFailedAttempts": "Too many failed unlock attempts.",
-  "@tooManyFailedAttempts": {
-    "description": "fail_toomany_attempts",
-    "type": "text",
-    "placeholders": {}
-  },
-  "securityHeader": "Security",
-  "@securityHeader": {
-    "description": "security_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "autoLockHeader": "Automatically Lock",
-  "@autoLockHeader": {
-    "description": "auto_lock_header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "xMinutes": "After %1 minutes",
-  "@xMinutes": {
-    "description": "after_minutes",
-    "type": "text",
-    "placeholders": {}
-  },
-  "xMinute": "After %1 minute",
-  "@xMinute": {
-    "description": "after_minute",
-    "type": "text",
-    "placeholders": {}
-  },
-  "instantly": "Instantly",
-  "@instantly": {
-    "description": "insantly",
-    "type": "text",
-    "placeholders": {}
-  },
-  "setWalletPassword": "Set Wallet Password",
-  "@setWalletPassword": {
-    "description": "Allows user to encrypt wallet with a password",
-    "type": "text",
-    "placeholders": {}
-  },
-  "setPassword": "Set Password",
-  "@setPassword": {
-    "description": "A button that sets the wallet password",
-    "type": "text",
-    "placeholders": {}
-  },
-  "disableWalletPassword": "Disable Wallet Password",
-  "@disableWalletPassword": {
-    "description": "Allows user to deencrypt wallet with a password",
-    "type": "text",
-    "placeholders": {}
-  },
-  "encryptionFailedError": "Failed to set a wallet password",
-  "@encryptionFailedError": {
-    "description": "If encrypting a wallet raised an error",
-    "type": "text",
-    "placeholders": {}
-  },
-  "setPasswordSuccess": "Password has been set successfully",
-  "@setPasswordSuccess": {
-    "description": "Setting a Wallet Password was successful",
-    "type": "text",
-    "placeholders": {}
-  },
-  "disablePasswordSuccess": "Password has been disabled",
-  "@disablePasswordSuccess": {
-    "description": "Disabling a Wallet Password was successful",
-    "type": "text",
-    "placeholders": {}
-  },
-  "exampleCardIntro": "Welcome to Natrium. Once you receive NANO, transactions will show up like this:",
-  "@exampleCardIntro": {
-    "description": "example_card_intro",
-    "type": "text",
-    "placeholders": {}
-  },
-  "exampleCardLittle": "A little",
-  "@exampleCardLittle": {
-    "description": "example_card_little",
-    "type": "text",
-    "placeholders": {}
-  },
-  "exampleCardLot": "A lot of",
-  "@exampleCardLot": {
-    "description": "example_card_lot",
-    "type": "text",
-    "placeholders": {}
-  },
-  "exampleCardTo": "to someone",
-  "@exampleCardTo": {
-    "description": "example_card_to",
-    "type": "text",
-    "placeholders": {}
-  },
-  "exampleCardFrom": "from someone",
-  "@exampleCardFrom": {
-    "description": "example_card_from",
-    "type": "text",
-    "placeholders": {}
-  },
-  "defaultAccountName": "Main Account",
-  "@defaultAccountName": {
-    "description": "Default account name",
-    "type": "text",
-    "placeholders": {}
-  },
-  "defaultNewAccountName": "Account %1",
-  "@defaultNewAccountName": {
-    "description": "Default new account name - e.g. Account 1",
-    "type": "text",
-    "placeholders": {}
-  },
-  "newAccountIntro": "This is your new account. Once you receive NANO, transactions will show up like this:",
-  "@newAccountIntro": {
-    "description": "Alternate account intro card",
-    "type": "text",
-    "placeholders": {}
-  },
-  "account": "Account",
-  "@account": {
-    "description": "Account text",
-    "type": "text",
-    "placeholders": {}
-  },
-  "accounts": "Accounts",
-  "@accounts": {
-    "description": "Accounts header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "addAccount": "Add Account",
-  "@addAccount": {
-    "description": "Default new account name - e.g. Account 1",
-    "type": "text",
-    "placeholders": {}
-  },
-  "hideAccountHeader": "Hide Account?",
-  "@hideAccountHeader": {
-    "description": "Confirmation dialog header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "removeAccountText": "Are you sure you want to hide this account? You can re-add it later by tapping the \"%1\" button.",
-  "@removeAccountText": {
-    "description": "Remove account dialog body",
-    "type": "text",
-    "placeholders": {}
-  },
-  "tapToReveal": "Tap to reveal",
-  "@tapToReveal": {
-    "description": "Tap to reveal hidden content",
-    "type": "text",
-    "placeholders": {}
-  },
-  "tapToHide": "Tap to hide",
-  "@tapToHide": {
-    "description": "Tap to hide content",
-    "type": "text",
-    "placeholders": {}
-  },
-  "copied": "Copied",
-  "@copied": {
-    "description": "Copied (to clipboard)",
-    "type": "text",
-    "placeholders": {}
-  },
-  "copy": "Copy",
-  "@copy": {
-    "description": "Copy (to clipboard)",
-    "type": "text",
-    "placeholders": {}
-  },
-  "seedDescription": "A seed bears the same information as a secret phrase, but in a machine-readable way. As long as you have one of them backed up, you'll have access to your funds.",
-  "@seedDescription": {
-    "description": "Describing what a seed is",
-    "type": "text",
-    "placeholders": {}
-  },
-  "importSecretPhrase": "Import Secret Phrase",
-  "@importSecretPhrase": {
-    "description": "Header for restoring using mnemonic",
-    "type": "text",
-    "placeholders": {}
-  },
-  "importSecretPhraseHint": "Please enter your 24-word secret phrase below. Each word should be separated by a space.",
-  "@importSecretPhraseHint": {
-    "description": "helper message for importing mnemnic",
-    "type": "text",
-    "placeholders": {}
-  },
-  "qrMnemonicError": "QR does not contain a valid secret phrase",
-  "@qrMnemonicError": {
-    "description": "When QR does not contain a valid mnemonic phrase",
-    "type": "text",
-    "placeholders": {}
-  },
-  "mnemonicInvalidWord": "%1 is not a valid word",
-  "@mnemonicInvalidWord": {
-    "description": "A word that is not part of bip39",
-    "type": "text",
-    "placeholders": {}
-  },
-  "mnemonicSizeError": "Secret phrase may only contain 24 words",
-  "@mnemonicSizeError": {
-    "description": "err",
-    "type": "text",
-    "placeholders": {}
-  },
-  "secretPhrase": "Secret Phrase",
-  "@secretPhrase": {
-    "description": "Secret (mnemonic) phrase",
-    "type": "text",
-    "placeholders": {}
-  },
-  "backupConfirmButton": "I've Backed It Up",
-  "@backupConfirmButton": {
-    "description": "Has backed up seed confirmation button",
-    "type": "text",
-    "placeholders": {}
-  },
-  "secretInfoHeader": "Safety First!",
-  "@secretInfoHeader": {
-    "description": "secret info header",
-    "type": "text",
-    "placeholders": {}
-  },
-  "secretInfo": "In the next screen, you will see your secret phrase. It is a password to access your funds. It is crucial that you back it up and never share it with anyone.",
-  "@secretInfo": {
-    "description": "Description for seed",
-    "type": "text",
-    "placeholders": {}
-  },
-  "secretWarning": "If you lose your device or uninstall the application, you'll need your secret phrase or seed to recover your funds!",
-  "@secretWarning": {
-    "description": "Secret warning",
-    "type": "text",
-    "placeholders": {}
-  },
-  "gotItButton": "Got It!",
-  "@gotItButton": {
-    "description": "Got It! Acknowledgement button",
-    "type": "text",
-    "placeholders": {}
-  },
-  "ackBackedUp": "Are you sure that you've backed up your secret phrase or seed?",
-  "@ackBackedUp": {
-    "description": "Ack backed up",
-    "type": "text",
-    "placeholders": {}
-  },
-  "secretPhraseCopy": "Copy Secret Phrase",
-  "@secretPhraseCopy": {
-    "description": "Copy secret phrase to clipboard",
-    "type": "text",
-    "placeholders": {}
-  },
-  "secretPhraseCopied": "Secret Phrase Copied",
-  "@secretPhraseCopied": {
-    "description": "Copied secret phrase to clipboard",
-    "type": "text",
-    "placeholders": {}
-  },
-  "import": "Import",
-  "@import": {
-    "description": "Generic import",
-    "type": "text",
-    "placeholders": {}
-  },
-  "importSeedInstead": "Import Seed Instead",
-  "@importSeedInstead": {
-    "description": "importSeedInstead",
-    "type": "text",
-    "placeholders": {}
-  },
-  "switchToSeed": "Switch to Seed",
-  "@switchToSeed": {
-    "description": "switchToSeed",
-    "type": "text",
-    "placeholders": {}
-  },
-  "backupSecretPhrase": "Backup Secret Phrase",
-  "@backupSecretPhrase": {
-    "description": "backup seed",
-    "type": "text",
-    "placeholders": {}
-  },
-  "createPasswordHint": "Create a password",
-  "@createPasswordHint": {
-    "description": "A text field hint that tells the user to create a password",
-    "type": "text",
-    "placeholders": {}
-  },
-  "confirmPasswordHint": "Confirm the password",
-  "@confirmPasswordHint": {
-    "description": "A text field hint that tells the user to confirm the password",
-    "type": "text",
-    "placeholders": {}
-  },
-  "enterPasswordHint": "Enter your password",
-  "@enterPasswordHint": {
-    "description": "A text field hint that tells the users to enter their password",
-    "type": "text",
-    "placeholders": {}
-  },
-  "passwordsDontMatch": "Passwords do not match",
-  "@passwordsDontMatch": {
-    "description": "An error indicating a password has been confirmed incorrectly",
-    "type": "text",
-    "placeholders": {}
-  },
-  "passwordBlank": "Password cannot be empty",
-  "@passwordBlank": {
-    "description": "An error indicating a password has been entered incorrectly",
-    "type": "text",
-    "placeholders": {}
-  },
-  "invalidPassword": "Invalid Password",
-  "@invalidPassword": {
-    "description": "An error indicating a password has been entered incorrectly",
-    "type": "text",
-    "placeholders": {}
-  },
-  "passwordWillBeRequiredToOpenParagraph": "This password will be required to open Natrium.",
-  "@passwordWillBeRequiredToOpenParagraph": {
-    "description": "A paragraph that tells the users that the created password will be required to open Natrium.",
-    "type": "text",
-    "placeholders": {}
-  },
-  "passwordNoLongerRequiredToOpenParagraph": "You will not need a password to open Natrium anymore.",
-  "@passwordNoLongerRequiredToOpenParagraph": {
-    "description": "An info paragraph that tells the user a password will no longer be needed to open Natrium",
-    "type": "text",
-    "placeholders": {}
-  },
-  "createPasswordFirstParagraph": "You can create a password to add additional security to your wallet.",
-  "@createPasswordFirstParagraph": {
-    "description": "A paragraph that tells the users that they can create a password for additional security.",
-    "type": "text",
-    "placeholders": {}
-  },
-  "createPasswordSecondParagraph": "Password is optional, and your wallet will be protected with your PIN or biometrics regardless.",
-  "@createPasswordSecondParagraph": {
-    "description": "A paragraph that tells the users that the password creation is optional and the wallet will be still protected with biometrics or PIN regardless.",
-    "type": "text",
-    "placeholders": {}
-  },
-  "createAPasswordHeader": "Create a password.",
-  "@createAPasswordHeader": {
-    "description": "A paragraph that tells the users to create a password.",
-    "type": "text",
-    "placeholders": {}
-  },
-  "createPasswordSheetHeader": "Create",
-  "@createPasswordSheetHeader": {
-    "description": "Prompt user to create a new password",
-    "type": "text",
-    "placeholders": {}
-  },
-  "disablePasswordSheetHeader": "Disable",
-  "@disablePasswordSheetHeader": {
-    "description": "Prompt user to disable their password",
-    "type": "text",
-    "placeholders": {}
-  },
-  "requireAPasswordToOpenHeader": "Require a password to open Natrium?",
-  "@requireAPasswordToOpenHeader": {
-    "description": "A paragraph that asks the users if they would like a password to be required to open Natrium.",
-    "type": "text",
-    "placeholders": {}
-  },
-  "noSkipButton": "No, Skip",
-  "@noSkipButton": {
-    "description": "A button that declines and skips the mentioned process.",
-    "type": "text",
-    "placeholders": {}
-  },
-  "yesButton": "Yes",
-  "@yesButton": {
-    "description": "A button that accepts the mentioned process.",
-    "type": "text",
-    "placeholders": {}
-  },
-  "nextButton": "Next",
-  "@nextButton": {
-    "description": "A button that goes to the next screen.",
-    "type": "text",
-    "placeholders": {}
-  },
-  "goBackButton": "Go Back",
-  "@goBackButton": {
-    "description": "A button that goes to the previous screen.",
-    "type": "text",
-    "placeholders": {}
-  },
-  "supportButton": "Support",
-  "@supportButton": {
-    "description": "A button to open up the live support window",
-    "type": "text",
-    "placeholders": {}
-  },
-  "liveSupportButton": "Support",
-  "@liveSupportButton": {
-    "description": "A button to open up the live support window",
-    "type": "text",
-    "placeholders": {}
-  },
-  "connectingHeader": "Connecting",
-  "@connectingHeader": {
-    "description": "A header to let the user now that Natrium is currently connecting to (or loading) live chat.",
-    "type": "text",
-    "placeholders": {}
-  },
-  "localeEnglishItem": "English",
-  "@localeEnglishItem": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "localeRussianItem": "Russian",
-  "@localeRussianItem": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "generatingWalletMessage": "Creating wallet",
-  "@generatingWalletMessage": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarRewards": "Rewards",
-  "@toolbarRewards": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "toolbarTitleShowPassphrase": "Passphrase",
-  "@toolbarTitleShowPassphrase": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "errorCameraRestriction": "The user did not grant the camera permission!",
-  "@errorCameraRestriction": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "noContactsTitle": "No any contacts yet.",
-  "@noContactsTitle": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "flashOperationSuccess": "Operation was completed succesfully",
-  "@flashOperationSuccess": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "flashOperationFailed": "Operation was completed with failure.",
-  "@flashOperationFailed": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "flashFundsSended": "Succesfully sended",
-  "@flashFundsSended": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "flashAddressCopied": "Address was copied to clipboard.",
-  "@flashAddressCopied": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "accessBlocked": "Access was blocked. Please, contact with administration",
-  "@accessBlocked": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "pushLinkWasCopied": "Link was copied to clipboard.",
-  "@pushLinkWasCopied": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "sendFundsToPushWallet": "Send {qty} funds to {wallet}",
-  "@sendFundsToPushWallet": {
-    "type": "text",
-    "placeholders": {
-      "qty": {},
-      "wallet": {}
-    }
-  },
-  "copiedSuccesfullyMessage": "Succesfully saved passhprase.",
-  "@copiedSuccesfullyMessage": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "flashIncorrectWordMessage": "Incorrect word. Please try again",
-  "@flashIncorrectWordMessage": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "labelAgain": "Again",
-  "@labelAgain": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "hintSendedFrom": "Sending from",
-  "@hintSendedFrom": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "errorInvalidInputsPush": "Invalid values for push transaction",
-  "@errorInvalidInputsPush": {
-    "type": "text",
-    "placeholders": {}
-  }
+	"@@last_modified": "2020-08-18T19:44:40.994197",
+	"appName": "Fusion",
+	"@appName": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonCreateAccount": "Create account",
+	"@buttonCreateAccount": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonRecoverFromPassphrase": "Recover account from passphrase",
+	"@buttonRecoverFromPassphrase": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelAlreadyHaveAccount": "Already have an account?",
+	"@labelAlreadyHaveAccount": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarChoosePassTitle": "Choose password",
+	"@toolbarChoosePassTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelChoosePassSubtitle": "Choose a six digit password",
+	"@labelChoosePassSubtitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelChoosePassVerifySubtitle": "Enter the same six digits",
+	"@labelChoosePassVerifySubtitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelEnableBiometricTitle": "Enable Touch ID/Face ID",
+	"@labelEnableBiometricTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelEnableBiometricSubtitle": "We recommend this for improved security",
+	"@labelEnableBiometricSubtitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelYes": "Yes",
+	"@labelYes": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelNo": "No",
+	"@labelNo": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarNewAccountTitle": "New Account",
+	"@toolbarNewAccountTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelBackupPassphraseSubtitle": "Back up this Passphrase",
+	"@labelBackupPassphraseSubtitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonVerifyRecoveryPhrase": "Verify recovery phrase",
+	"@buttonVerifyRecoveryPhrase": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonShare": "Share",
+	"@buttonShare": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelBackupPassphraseCaption": "In order to access this accout if you lose this device, ciopy or print this phrase and keep it someplace safe.",
+	"@labelBackupPassphraseCaption": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelQuestionIndicatorTitle": "Question {current} of {total}",
+	"@labelQuestionIndicatorTitle": {
+		"type": "text",
+		"placeholders": {
+			"current": {},
+			"total": {}
+		}
+	},
+	"labelWordIndicatorSubtitle": "Select the {position}th word of your passphrase",
+	"@labelWordIndicatorSubtitle": {
+		"type": "text",
+		"placeholders": {
+			"position": {}
+		}
+	},
+	"toastTryAgain": "Please, try again",
+	"@toastTryAgain": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"popupPassVerifiedTitle": "Passphrase Verified",
+	"@popupPassVerifiedTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"popupPassVerifiedBody": "Your passphrase has been verified. Make sure that you have backed it up as you will needit to recover your account.",
+	"@popupPassVerifiedBody": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelOk": "OK",
+	"@labelOk": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"inputAccountNameHelperText": "Account Name",
+	"@inputAccountNameHelperText": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"inputAccountNameHintText": "Please, name your account",
+	"@inputAccountNameHintText": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"checkboxTermsConditions": "I agree with terms&conditions",
+	"@checkboxTermsConditions": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonNext": "Next",
+	"@buttonNext": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarTermsConditionsTitle": "Terms and Conditions",
+	"@toolbarTermsConditionsTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarRecoverFromSeedTitle": "Recover from seed",
+	"@toolbarRecoverFromSeedTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"inputEnterScanPasshpraseHintText": "Enter passphrase or scan QR",
+	"@inputEnterScanPasshpraseHintText": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonVerify": "Verify",
+	"@buttonVerify": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarScanQrTitle": "Passphrase QR",
+	"@toolbarScanQrTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonClose": "Close",
+	"@buttonClose": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"popupAccVerificationWelcomeText": "Welcome to Algorand! Your account is ready to use.",
+	"@popupAccVerificationWelcomeText": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelUnlockTitle": "Unlock",
+	"@labelUnlockTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonLogOut": "Log out",
+	"@buttonLogOut": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelUnlockSubtitle": "Enter six digit pin",
+	"@labelUnlockSubtitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelTapToCopy": "Tap to copy",
+	"@labelTapToCopy": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarViewPasshraseTitle": "View Passphrase",
+	"@toolbarViewPasshraseTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonSend": "Send",
+	"@buttonSend": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonRequest": "Request",
+	"@buttonRequest": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonDelegate": "Delegate",
+	"@buttonDelegate": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonUnbound": "Unbound",
+	"@buttonUnbound": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonPush": "Send Push",
+	"@buttonPush": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelCryptoAvailable": "Cryptocurrency Available",
+	"@labelCryptoAvailable": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelTotalReward": "Total Rewards Earned",
+	"@labelTotalReward": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelTransanctionsHistoryTitle": "Transanctions History",
+	"@labelTransanctionsHistoryTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"navigationLabelAccounts": "Accounts",
+	"@navigationLabelAccounts": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"navigationLabelExchange": "Exchange",
+	"@navigationLabelExchange": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"navigationItemContacts": "Contacts",
+	"@navigationItemContacts": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"navigationItemHistory": "History",
+	"@navigationItemHistory": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"navigationItemSettings": "Settings",
+	"@navigationItemSettings": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"menuItemShowQR": "Show QR and Address",
+	"@menuItemShowQR": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"menuItemSetDefaults": "Set as defaults",
+	"@menuItemSetDefaults": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"menuItemViewPassphrase": "View Passphrase",
+	"@menuItemViewPassphrase": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"menuItemEditAccountName": "Edit Account Name",
+	"@menuItemEditAccountName": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"menuItemRemoveAccount": "Remove Account",
+	"@menuItemRemoveAccount": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"menuItemWithdrawFunds": "Withdraw funds",
+	"@menuItemWithdrawFunds": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"menuItemReferalLink": "Referal link",
+	"@menuItemReferalLink": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelTotalRewardTitle": "Total Rewards Earned",
+	"@labelTotalRewardTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelPendingRewardTitle": "Pending Rewards",
+	"@labelPendingRewardTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelPendingRewardSubtitle": "Pending rewards become confirmed when you send or receive BIP",
+	"@labelPendingRewardSubtitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelRewardsCaption": "For more information on Fusion Rewards, visit our FAQ",
+	"@labelRewardsCaption": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonPreview": "Preview",
+	"@buttonPreview": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelFrom": "From",
+	"@labelFrom": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelTo": "To",
+	"@labelTo": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelAmount": "Amount",
+	"@labelAmount": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelAddress": "Address",
+	"@labelAddress": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelMyContacts": "My Contacts",
+	"@labelMyContacts": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelContacts": "Contacts",
+	"@labelContacts": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelScanQr": "Scan QR",
+	"@labelScanQr": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarSendTitle": "Send funds",
+	"@toolbarSendTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"inputMaxAmountSuffix": "MAX",
+	"@inputMaxAmountSuffix": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"inputAddressHint": "Enter address",
+	"@inputAddressHint": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"inputFundsStakeHint": "Stake",
+	"@inputFundsStakeHint": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelSender": "Sender",
+	"@labelSender": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelReceiver": "Receiver",
+	"@labelReceiver": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelPubkeyOrDomain": "Public key or domain",
+	"@labelPubkeyOrDomain": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelCoin": "Coin",
+	"@labelCoin": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelName": "Name",
+	"@labelName": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"popupRemoveAccountTitle": "Remove account",
+	"@popupRemoveAccountTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"popupRemoveAccountBody": "You are about to remove an account. Are you sure you want to proceed with choice?",
+	"@popupRemoveAccountBody": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelCancel": "Cancel",
+	"@labelCancel": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelRemove": "Remove",
+	"@labelRemove": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelSave": "Save",
+	"@labelSave": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"inputEditAccountNameTitle": "Edit Account Name",
+	"@inputEditAccountNameTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"inputEditAccountNameHint": "Please, name your account",
+	"@inputEditAccountNameHint": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarHistoryTitle": "History",
+	"@toolbarHistoryTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelAccount": "Account:",
+	"@labelAccount": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelStartDate": "Start Date",
+	"@labelStartDate": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelEndDate": "End Date",
+	"@labelEndDate": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonViewResults": "View results",
+	"@buttonViewResults": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"settingsItemUiTheme": "Dark/Light Theme",
+	"@settingsItemUiTheme": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"settingsItemChgPassword": "Set/Change password",
+	"@settingsItemChgPassword": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"settingsItemBiometricFeature": "Touch ID/Face ID",
+	"@settingsItemBiometricFeature": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"settingsItemNotifications": "Notifications",
+	"@settingsItemNotifications": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"settingsItemShowRewards": "Show rewards",
+	"@settingsItemShowRewards": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"settingsItemLanguage": "Language",
+	"@settingsItemLanguage": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"settingsItemSendFeedback": "Send feedback",
+	"@settingsItemSendFeedback": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"settingsItemFaq": "FAQ",
+	"@settingsItemFaq": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelFeedbackNoteTitle": "Note",
+	"@labelFeedbackNoteTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"inputFeedbackCommentHint": "What is on your mind",
+	"@inputFeedbackCommentHint": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelFeedbackEmailSubtitle": "Email (optionally)",
+	"@labelFeedbackEmailSubtitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarContactsTitle": "Contacts",
+	"@toolbarContactsTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarAddContactTitle": "Add Contact",
+	"@toolbarAddContactTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"inputSearchContactHint": "Search contacts",
+	"@inputSearchContactHint": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelContactsNotFoundError": "No Contact found",
+	"@labelContactsNotFoundError": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelAddContactName": "Name",
+	"@labelAddContactName": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelAddContactAddress": "Address",
+	"@labelAddContactAddress": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"inputAddContactNameHint": "Contact Name",
+	"@inputAddContactNameHint": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"inputAddContactAddressHint": "Enter address",
+	"@inputAddContactAddressHint": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonAddContact": "Add contact",
+	"@buttonAddContact": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarExchangeTitle": "Exchange",
+	"@toolbarExchangeTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarRateTitle": "Rate",
+	"@toolbarRateTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarConvertTitle": "Convert",
+	"@toolbarConvertTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelExchangeCoins": "My Coins",
+	"@labelExchangeCoins": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonConvert": "Convert",
+	"@buttonConvert": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonRate": "Rate",
+	"@buttonRate": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonBuy": "Buy",
+	"@buttonBuy": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"buttonSell": "Sell",
+	"@buttonSell": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelExchangeUseCash": "Use cash balance",
+	"@labelExchangeUseCash": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelExchangeSimplex": "Simplex",
+	"@labelExchangeSimplex": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelBuy": "BUY",
+	"@labelBuy": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelSell": "SELL",
+	"@labelSell": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelConvertCoinHave": "Coin You have",
+	"@labelConvertCoinHave": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelConvertCoinWant": "Coin you want",
+	"@labelConvertCoinWant": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelConvertWillGet": "You will get approximztely",
+	"@labelConvertWillGet": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelConvertTransanctionFee": "Transanction Fee:",
+	"@labelConvertTransanctionFee": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarWidgetsTitle": "Components",
+	"@toolbarWidgetsTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarSharePasshpraseQr": "View Passphrase",
+	"@toolbarSharePasshpraseQr": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"cancel": "Cancel",
+	"@cancel": {
+		"description": "dialog_cancel",
+		"type": "text",
+		"placeholders": {}
+	},
+	"close": "Close",
+	"@close": {
+		"description": "dialog_close",
+		"type": "text",
+		"placeholders": {}
+	},
+	"confirm": "Confirm",
+	"@confirm": {
+		"description": "dialog_confirm",
+		"type": "text",
+		"placeholders": {}
+	},
+	"no": "No",
+	"@no": {
+		"description": "intro_new_wallet_backup_no",
+		"type": "text",
+		"placeholders": {}
+	},
+	"yes": "Yes",
+	"@yes": {
+		"description": "intro_new_wallet_backup_yes",
+		"type": "text",
+		"placeholders": {}
+	},
+	"onStr": "On",
+	"@onStr": {
+		"description": "generic_on",
+		"type": "text",
+		"placeholders": {}
+	},
+	"off": "Off",
+	"@off": {
+		"description": "generic_off",
+		"type": "text",
+		"placeholders": {}
+	},
+	"send": "Send",
+	"@send": {
+		"description": "home_send_cta",
+		"type": "text",
+		"placeholders": {}
+	},
+	"receive": "Receive",
+	"@receive": {
+		"description": "home_receive_cta",
+		"type": "text",
+		"placeholders": {}
+	},
+	"sent": "Sent",
+	"@sent": {
+		"description": "history_sent",
+		"type": "text",
+		"placeholders": {}
+	},
+	"received": "Received",
+	"@received": {
+		"description": "history_received",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transactions": "Transactions",
+	"@transactions": {
+		"description": "transaction_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addressCopied": "Address Copied",
+	"@addressCopied": {
+		"description": "receive_copied",
+		"type": "text",
+		"placeholders": {}
+	},
+	"copyAddress": "Copy Address",
+	"@copyAddress": {
+		"description": "receive_copy_cta",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addressShare": "Share Address",
+	"@addressShare": {
+		"description": "receive_share_cta",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addressHint": "Enter Address",
+	"@addressHint": {
+		"description": "send_address_hint",
+		"type": "text",
+		"placeholders": {}
+	},
+	"seed": "Seed",
+	"@seed": {
+		"description": "intro_new_wallet_seed_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"seedInvalid": "Seed is Invalid",
+	"@seedInvalid": {
+		"description": "intro_seed_invalid",
+		"type": "text",
+		"placeholders": {}
+	},
+	"seedCopied": "Seed Copied to Clipboard\nIt is pasteable for 2 minutes.",
+	"@seedCopied": {
+		"description": "intro_new_wallet_seed_copied",
+		"type": "text",
+		"placeholders": {}
+	},
+	"scanQrCode": "Scan QR Code",
+	"@scanQrCode": {
+		"description": "send_scan_qr",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactsImportErr": "Failed to import contacts",
+	"@contactsImportErr": {
+		"description": "contact_import_error",
+		"type": "text",
+		"placeholders": {}
+	},
+	"viewDetails": "View Details",
+	"@viewDetails": {
+		"description": "transaction_details",
+		"type": "text",
+		"placeholders": {}
+	},
+	"qrInvalidSeed": "QR code does not contain a valid seed or private key",
+	"@qrInvalidSeed": {
+		"description": "qr_invalid_seed",
+		"type": "text",
+		"placeholders": {}
+	},
+	"qrInvalidAddress": "QR code does not contain a valid destination",
+	"@qrInvalidAddress": {
+		"description": "qr_invalid_address",
+		"type": "text",
+		"placeholders": {}
+	},
+	"qrInvalidPermissions": "Please Grant Camera Permissions to scan QR Codes",
+	"@qrInvalidPermissions": {
+		"description": "User did not grant camera permissions to the app",
+		"type": "text",
+		"placeholders": {}
+	},
+	"qrUnknownError": "Could not Read QR Code",
+	"@qrUnknownError": {
+		"description": "An unknown error occurred with the QR scanner",
+		"type": "text",
+		"placeholders": {}
+	},
+	"removeContact": "Remove Contact",
+	"@removeContact": {
+		"description": "contact_remove_btn",
+		"type": "text",
+		"placeholders": {}
+	},
+	"removeContactConfirmation": "Are you sure you want to delete %1?",
+	"@removeContactConfirmation": {
+		"description": "contact_remove_sure",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactHeader": "Contact",
+	"@contactHeader": {
+		"description": "contact_view_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactsHeader": "Contacts",
+	"@contactsHeader": {
+		"description": "contact_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addContact": "Add Contact",
+	"@addContact": {
+		"description": "contact_add_button",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactNameHint": "Enter a Name @",
+	"@contactNameHint": {
+		"description": "contact_name_hint",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactInvalid": "Invalid Contact Name",
+	"@contactInvalid": {
+		"description": "contact_invalid_name",
+		"type": "text",
+		"placeholders": {}
+	},
+	"noContactsExport": "There's no contacts to export.",
+	"@noContactsExport": {
+		"description": "contact_export_none",
+		"type": "text",
+		"placeholders": {}
+	},
+	"noContactsImport": "No new contacts to import.",
+	"@noContactsImport": {
+		"description": "contact_import_none",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactsImportSuccess": "Sucessfully imported %1 contacts.",
+	"@contactsImportSuccess": {
+		"description": "contact_import_success",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactAdded": "%1 added to contacts.",
+	"@contactAdded": {
+		"description": "contact_added",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactRemoved": "%1 has been removed from contacts!",
+	"@contactRemoved": {
+		"description": "contact_removed",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactNameMissing": "Choose a Name for this Contact",
+	"@contactNameMissing": {
+		"description": "contact_name_missing",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactExists": "Contact Already Exists",
+	"@contactExists": {
+		"description": "contact_name_exists",
+		"type": "text",
+		"placeholders": {}
+	},
+	"backupYourSeed": "Backup your seed",
+	"@backupYourSeed": {
+		"description": "intro_new_wallet_seed_backup_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"backupSeedConfirm": "Are you sure that you backed up your wallet seed?",
+	"@backupSeedConfirm": {
+		"description": "intro_new_wallet_backup",
+		"type": "text",
+		"placeholders": {}
+	},
+	"seedBackupInfo": "Below is your wallet's seed. It is crucial that you backup your seed and never store it as plaintext or a screenshot.",
+	"@seedBackupInfo": {
+		"description": "intro_new_wallet_seed",
+		"type": "text",
+		"placeholders": {}
+	},
+	"copySeed": "Copy Seed",
+	"@copySeed": {
+		"description": "copy_seed_btn",
+		"type": "text",
+		"placeholders": {}
+	},
+	"seedCopiedShort": "Seed Copied",
+	"@seedCopiedShort": {
+		"description": "seed_copied_btn",
+		"type": "text",
+		"placeholders": {}
+	},
+	"importSeed": "Import Seed",
+	"@importSeed": {
+		"description": "intro_seed_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"importSeedHint": "Please enter your seed below.",
+	"@importSeedHint": {
+		"description": "intro_seed_info",
+		"type": "text",
+		"placeholders": {}
+	},
+	"welcomeText": "Welcome to Natrium. To begin, you may create a new wallet or import an existing one.",
+	"@welcomeText": {
+		"description": "intro_welcome_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"newWallet": "New Wallet",
+	"@newWallet": {
+		"description": "intro_welcome_new_wallet",
+		"type": "text",
+		"placeholders": {}
+	},
+	"importWallet": "Import Wallet",
+	"@importWallet": {
+		"description": "intro_welcome_have_wallet",
+		"type": "text",
+		"placeholders": {}
+	},
+	"sentTo": "Sent To",
+	"@sentTo": {
+		"description": "sent_to",
+		"type": "text",
+		"placeholders": {}
+	},
+	"sending": "Sending",
+	"@sending": {
+		"description": "send_sending",
+		"type": "text",
+		"placeholders": {}
+	},
+	"to": "To",
+	"@to": {
+		"description": "send_to",
+		"type": "text",
+		"placeholders": {}
+	},
+	"sendAmountConfirm": "Send %1 NANO",
+	"@sendAmountConfirm": {
+		"description": "send_pin_description",
+		"type": "text",
+		"placeholders": {}
+	},
+	"sendError": "An error occured. Try again later.",
+	"@sendError": {
+		"description": "send_generic_error",
+		"type": "text",
+		"placeholders": {}
+	},
+	"mantaError": "Couldn't Verify Request",
+	"@mantaError": {
+		"description": "Was unable to verify the manta/appia payment request (from scanning QR code, etc.)",
+		"type": "text",
+		"placeholders": {}
+	},
+	"enterAmount": "Enter Amount",
+	"@enterAmount": {
+		"description": "send_amount_hint",
+		"type": "text",
+		"placeholders": {}
+	},
+	"enterAddress": "Enter Address",
+	"@enterAddress": {
+		"description": "enter_address",
+		"type": "text",
+		"placeholders": {}
+	},
+	"invalidAddress": "Address entered was invalid",
+	"@invalidAddress": {
+		"description": "send_invalid_address",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addressMising": "Please Enter an Address",
+	"@addressMising": {
+		"description": "send_enter_address",
+		"type": "text",
+		"placeholders": {}
+	},
+	"amountMissing": "Please Enter an Amount",
+	"@amountMissing": {
+		"description": "send_enter_amount",
+		"type": "text",
+		"placeholders": {}
+	},
+	"minimumSend": "Minimum send amount is %1 NANO",
+	"@minimumSend": {
+		"description": "send_minimum_error",
+		"type": "text",
+		"placeholders": {}
+	},
+	"insufficientBalance": "Insufficient Balance",
+	"@insufficientBalance": {
+		"description": "send_insufficient_balance",
+		"type": "text",
+		"placeholders": {}
+	},
+	"sendFrom": "Send From",
+	"@sendFrom": {
+		"description": "send_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"pinCreateTitle": "Create a 6-digit pin",
+	"@pinCreateTitle": {
+		"description": "pin_create_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"pinConfirmTitle": "Confirm your pin",
+	"@pinConfirmTitle": {
+		"description": "pin_confirm_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"pinEnterTitle": "Enter pin",
+	"@pinEnterTitle": {
+		"description": "pin_enter_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"pinConfirmError": "Pins do not match",
+	"@pinConfirmError": {
+		"description": "pin_confirm_error",
+		"type": "text",
+		"placeholders": {}
+	},
+	"pinInvalid": "Invalid pin entered",
+	"@pinInvalid": {
+		"description": "pin_error",
+		"type": "text",
+		"placeholders": {}
+	},
+	"themeHeader": "Theme",
+	"@themeHeader": {
+		"description": "theme_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"changeRepButton": "Change",
+	"@changeRepButton": {
+		"description": "change_representative_change",
+		"type": "text",
+		"placeholders": {}
+	},
+	"changeRepAuthenticate": "Change Representative",
+	"@changeRepAuthenticate": {
+		"description": "settings_change_rep",
+		"type": "text",
+		"placeholders": {}
+	},
+	"currentlyRepresented": "Currently Represented By",
+	"@currentlyRepresented": {
+		"description": "change_representative_current_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"changeRepSucces": "Representative Changed Successfully",
+	"@changeRepSucces": {
+		"description": "change_representative_success",
+		"type": "text",
+		"placeholders": {}
+	},
+	"repInfoHeader": "What is a representative?",
+	"@repInfoHeader": {
+		"description": "change_representative_info_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"repInfo": "A representative is an account that votes for network consensus. Voting power is weighted by balance, you may delegate your balance to increase the voting weight of a representative you trust. Your representative does not have spending power over your funds. You should choose a representative that has little downtime and is trustworthy.",
+	"@repInfo": {
+		"description": "change_representative_info",
+		"type": "text",
+		"placeholders": {}
+	},
+	"pinRepChange": "Enter PIN to change representative.",
+	"@pinRepChange": {
+		"description": "change_representative_pin",
+		"type": "text",
+		"placeholders": {}
+	},
+	"changeRepHint": "Enter New Representative",
+	"@changeRepHint": {
+		"description": "change_representative_hint",
+		"type": "text",
+		"placeholders": {}
+	},
+	"representatives": "Representatives",
+	"@representatives": {
+		"description": "representatives",
+		"type": "text",
+		"placeholders": {}
+	},
+	"pickFromList": "Pick From a List",
+	"@pickFromList": {
+		"description": "pick rep from list",
+		"type": "text",
+		"placeholders": {}
+	},
+	"votingWeight": "Voting Weight",
+	"@votingWeight": {
+		"description": "Representative Voting Weight",
+		"type": "text",
+		"placeholders": {}
+	},
+	"uptime": "Uptime",
+	"@uptime": {
+		"description": "Rep uptime",
+		"type": "text",
+		"placeholders": {}
+	},
+	"authMethod": "Authentication Method",
+	"@authMethod": {
+		"description": "settings_disable_fingerprint",
+		"type": "text",
+		"placeholders": {}
+	},
+	"pinMethod": "PIN",
+	"@pinMethod": {
+		"description": "settings_pin_method",
+		"type": "text",
+		"placeholders": {}
+	},
+	"privacyPolicy": "Privacy Policy",
+	"@privacyPolicy": {
+		"description": "settings_privacy_policy",
+		"type": "text",
+		"placeholders": {}
+	},
+	"biometricsMethod": "Biometrics",
+	"@biometricsMethod": {
+		"description": "settings_fingerprint_method",
+		"type": "text",
+		"placeholders": {}
+	},
+	"currency": "Currency",
+	"@currency": {
+		"description": "A settings menu item for changing currency",
+		"type": "text",
+		"placeholders": {}
+	},
+	"changeCurrency": "Change Currency",
+	"@changeCurrency": {
+		"description": "settings_local_currency",
+		"type": "text",
+		"placeholders": {}
+	},
+	"language": "Language",
+	"@language": {
+		"description": "settings_change_language",
+		"type": "text",
+		"placeholders": {}
+	},
+	"shareNatrium": "Share Natrium",
+	"@shareNatrium": {
+		"description": "settings_share",
+		"type": "text",
+		"placeholders": {}
+	},
+	"shareNatriumText": "Check out Natrium! A premier NANO mobile wallet!",
+	"@shareNatriumText": {
+		"description": "share_extra",
+		"type": "text",
+		"placeholders": {}
+	},
+	"logout": "Logout",
+	"@logout": {
+		"description": "settings_logout",
+		"type": "text",
+		"placeholders": {}
+	},
+	"rootWarning": "It appears your device is \"rooted\", \"jailbroken\", or modified in a way that compromises security. It is recommended that you reset your device to its original state before proceeding.",
+	"@rootWarning": {
+		"description": "Shown to users if they have a rooted Android device or jailbroken iOS device",
+		"type": "text",
+		"placeholders": {}
+	},
+	"iUnderstandTheRisks": "I Understand the Risks",
+	"@iUnderstandTheRisks": {
+		"description": "Shown to users if they have a rooted Android device or jailbroken iOS device",
+		"type": "text",
+		"placeholders": {}
+	},
+	"exit": "Exit",
+	"@exit": {
+		"description": "Exit action, like a button",
+		"type": "text",
+		"placeholders": {}
+	},
+	"warning": "Warning",
+	"@warning": {
+		"description": "settings_logout_alert_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"logoutDetail": "Logging out will remove your seed and all Natrium-related data from this device. If your seed is not backed up, you will never be able to access your funds again",
+	"@logoutDetail": {
+		"description": "settings_logout_alert_message",
+		"type": "text",
+		"placeholders": {}
+	},
+	"logoutAction": "Delete Seed and Logout",
+	"@logoutAction": {
+		"description": "settings_logout_alert_confirm_cta",
+		"type": "text",
+		"placeholders": {}
+	},
+	"logoutAreYouSure": "Are you sure?",
+	"@logoutAreYouSure": {
+		"description": "settings_logout_warning_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"logoutReassurance": "As long as you've backed up your seed you have nothing to worry about.",
+	"@logoutReassurance": {
+		"description": "settings_logout_warning_message",
+		"type": "text",
+		"placeholders": {}
+	},
+	"settingsHeader": "Settings",
+	"@settingsHeader": {
+		"description": "settings_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"preferences": "Preferences",
+	"@preferences": {
+		"description": "settings_preferences_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"manage": "Manage",
+	"@manage": {
+		"description": "settings_manage_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"backupSeed": "Backup Seed",
+	"@backupSeed": {
+		"description": "settings_backup_seed",
+		"type": "text",
+		"placeholders": {}
+	},
+	"fingerprintSeedBackup": "Authenticate to backup seed.",
+	"@fingerprintSeedBackup": {
+		"description": "settings_fingerprint_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"pinSeedBackup": "Enter PIN to Backup Seed",
+	"@pinSeedBackup": {
+		"description": "settings_pin_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"systemDefault": "System Default",
+	"@systemDefault": {
+		"description": "settings_default_language_string",
+		"type": "text",
+		"placeholders": {}
+	},
+	"notifications": "Notifications",
+	"@notifications": {
+		"description": "notifications_settings",
+		"type": "text",
+		"placeholders": {}
+	},
+	"notificationTitle": "Received %1 NANO",
+	"@notificationTitle": {
+		"description": "notification_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"notificationBody": "Open Natrium to view this transaction",
+	"@notificationBody": {
+		"description": "notification_body",
+		"type": "text",
+		"placeholders": {}
+	},
+	"notificationHeaderSupplement": "Tap to open",
+	"@notificationHeaderSupplement": {
+		"description": "notificaiton_header_suplement",
+		"type": "text",
+		"placeholders": {}
+	},
+	"settingsTransfer": "Load from Paper Wallet",
+	"@settingsTransfer": {
+		"description": "settings_transfer",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferError": "An error has occurred during the transfer. Please try again later.",
+	"@transferError": {
+		"description": "transfer_error",
+		"type": "text",
+		"placeholders": {}
+	},
+	"paperWallet": "Paper Wallet",
+	"@paperWallet": {
+		"description": "paper_wallet",
+		"type": "text",
+		"placeholders": {}
+	},
+	"kaliumWallet": "Natrium Wallet",
+	"@kaliumWallet": {
+		"description": "kalium_wallet",
+		"type": "text",
+		"placeholders": {}
+	},
+	"manualEntry": "Manual Entry",
+	"@manualEntry": {
+		"description": "transfer_manual_entry",
+		"type": "text",
+		"placeholders": {}
+	},
+	"mnemonicPhrase": "Mnemonic Phrase",
+	"@mnemonicPhrase": {
+		"description": "mnemonic_phrase",
+		"type": "text",
+		"placeholders": {}
+	},
+	"rawSeed": "Raw Seed",
+	"@rawSeed": {
+		"description": "raw_seed",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferHeader": "Transfer Funds",
+	"@transferHeader": {
+		"description": "transfer_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transfer": "Transfer",
+	"@transfer": {
+		"description": "transfer_btn",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferManualHint": "Please enter the seed below.",
+	"@transferManualHint": {
+		"description": "transfer_hint",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferIntro": "This process will transfer the funds from a paper wallet to your Natrium wallet.\n\nTap the \"%1\" button to start.",
+	"@transferIntro": {
+		"description": "transfer_intro",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferQrScanHint": "Scan a Nano \nseed or private key",
+	"@transferQrScanHint": {
+		"description": "transfer_qr_scan_hint",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferQrScanError": "This QR code does not contain a valid seed.",
+	"@transferQrScanError": {
+		"description": "transfer_qr_scan_error",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferNoFunds": "This seed does not have any NANO on it",
+	"@transferNoFunds": {
+		"description": "transfer_no_funds_toast",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferConfirmInfo": "A wallet with a balance of %1 NANO has been detected.\n",
+	"@transferConfirmInfo": {
+		"description": "transfer_confirm_info_first",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferConfirmInfoSecond": "Tap confirm to transfer the funds.\n",
+	"@transferConfirmInfoSecond": {
+		"description": "transfer_confirm_info_second",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferConfirmInfoThird": "Transfer may take several seconds to complete.",
+	"@transferConfirmInfoThird": {
+		"description": "transfer_confirm_info_third",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferLoading": "Transferring",
+	"@transferLoading": {
+		"description": "transfer_loading_text",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferComplete": "%1 NANO successfully transferred to your Natrium Wallet.\n",
+	"@transferComplete": {
+		"description": "transfer_complete_text",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferClose": "Tap anywhere to close the window.",
+	"@transferClose": {
+		"description": "transfer_close_text",
+		"type": "text",
+		"placeholders": {}
+	},
+	"scanInstructions": "Scan a Nano \naddress QR code",
+	"@scanInstructions": {
+		"description": "scan_send_instruction_label",
+		"type": "text",
+		"placeholders": {}
+	},
+	"unlockPin": "Enter PIN to Unlock Natrium",
+	"@unlockPin": {
+		"description": "unlock_kalium_pin",
+		"type": "text",
+		"placeholders": {}
+	},
+	"unlockBiometrics": "Authenticate to Unlock Natrium",
+	"@unlockBiometrics": {
+		"description": "unlock_kalium_bio",
+		"type": "text",
+		"placeholders": {}
+	},
+	"lockAppSetting": "Authenticate on Launch",
+	"@lockAppSetting": {
+		"description": "authenticate_on_launch",
+		"type": "text",
+		"placeholders": {}
+	},
+	"locked": "Locked",
+	"@locked": {
+		"description": "lockedtxt",
+		"type": "text",
+		"placeholders": {}
+	},
+	"unlock": "Unlock",
+	"@unlock": {
+		"description": "unlocktxt",
+		"type": "text",
+		"placeholders": {}
+	},
+	"tooManyFailedAttempts": "Too many failed unlock attempts.",
+	"@tooManyFailedAttempts": {
+		"description": "fail_toomany_attempts",
+		"type": "text",
+		"placeholders": {}
+	},
+	"securityHeader": "Security",
+	"@securityHeader": {
+		"description": "security_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"autoLockHeader": "Automatically Lock",
+	"@autoLockHeader": {
+		"description": "auto_lock_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"xMinutes": "After %1 minutes",
+	"@xMinutes": {
+		"description": "after_minutes",
+		"type": "text",
+		"placeholders": {}
+	},
+	"xMinute": "After %1 minute",
+	"@xMinute": {
+		"description": "after_minute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"instantly": "Instantly",
+	"@instantly": {
+		"description": "insantly",
+		"type": "text",
+		"placeholders": {}
+	},
+	"setWalletPassword": "Set Wallet Password",
+	"@setWalletPassword": {
+		"description": "Allows user to encrypt wallet with a password",
+		"type": "text",
+		"placeholders": {}
+	},
+	"setPassword": "Set Password",
+	"@setPassword": {
+		"description": "A button that sets the wallet password",
+		"type": "text",
+		"placeholders": {}
+	},
+	"disableWalletPassword": "Disable Wallet Password",
+	"@disableWalletPassword": {
+		"description": "Allows user to deencrypt wallet with a password",
+		"type": "text",
+		"placeholders": {}
+	},
+	"encryptionFailedError": "Failed to set a wallet password",
+	"@encryptionFailedError": {
+		"description": "If encrypting a wallet raised an error",
+		"type": "text",
+		"placeholders": {}
+	},
+	"setPasswordSuccess": "Password has been set successfully",
+	"@setPasswordSuccess": {
+		"description": "Setting a Wallet Password was successful",
+		"type": "text",
+		"placeholders": {}
+	},
+	"disablePasswordSuccess": "Password has been disabled",
+	"@disablePasswordSuccess": {
+		"description": "Disabling a Wallet Password was successful",
+		"type": "text",
+		"placeholders": {}
+	},
+	"exampleCardIntro": "Welcome to Natrium. Once you receive NANO, transactions will show up like this:",
+	"@exampleCardIntro": {
+		"description": "example_card_intro",
+		"type": "text",
+		"placeholders": {}
+	},
+	"exampleCardLittle": "A little",
+	"@exampleCardLittle": {
+		"description": "example_card_little",
+		"type": "text",
+		"placeholders": {}
+	},
+	"exampleCardLot": "A lot of",
+	"@exampleCardLot": {
+		"description": "example_card_lot",
+		"type": "text",
+		"placeholders": {}
+	},
+	"exampleCardTo": "to someone",
+	"@exampleCardTo": {
+		"description": "example_card_to",
+		"type": "text",
+		"placeholders": {}
+	},
+	"exampleCardFrom": "from someone",
+	"@exampleCardFrom": {
+		"description": "example_card_from",
+		"type": "text",
+		"placeholders": {}
+	},
+	"defaultAccountName": "Main Account",
+	"@defaultAccountName": {
+		"description": "Default account name",
+		"type": "text",
+		"placeholders": {}
+	},
+	"defaultNewAccountName": "Account %1",
+	"@defaultNewAccountName": {
+		"description": "Default new account name - e.g. Account 1",
+		"type": "text",
+		"placeholders": {}
+	},
+	"newAccountIntro": "This is your new account. Once you receive NANO, transactions will show up like this:",
+	"@newAccountIntro": {
+		"description": "Alternate account intro card",
+		"type": "text",
+		"placeholders": {}
+	},
+	"account": "Account",
+	"@account": {
+		"description": "Account text",
+		"type": "text",
+		"placeholders": {}
+	},
+	"accounts": "Accounts",
+	"@accounts": {
+		"description": "Accounts header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addAccount": "Add Account",
+	"@addAccount": {
+		"description": "Default new account name - e.g. Account 1",
+		"type": "text",
+		"placeholders": {}
+	},
+	"hideAccountHeader": "Hide Account?",
+	"@hideAccountHeader": {
+		"description": "Confirmation dialog header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"removeAccountText": "Are you sure you want to hide this account? You can re-add it later by tapping the \"%1\" button.",
+	"@removeAccountText": {
+		"description": "Remove account dialog body",
+		"type": "text",
+		"placeholders": {}
+	},
+	"tapToReveal": "Tap to reveal",
+	"@tapToReveal": {
+		"description": "Tap to reveal hidden content",
+		"type": "text",
+		"placeholders": {}
+	},
+	"tapToHide": "Tap to hide",
+	"@tapToHide": {
+		"description": "Tap to hide content",
+		"type": "text",
+		"placeholders": {}
+	},
+	"copied": "Copied",
+	"@copied": {
+		"description": "Copied (to clipboard)",
+		"type": "text",
+		"placeholders": {}
+	},
+	"copy": "Copy",
+	"@copy": {
+		"description": "Copy (to clipboard)",
+		"type": "text",
+		"placeholders": {}
+	},
+	"seedDescription": "A seed bears the same information as a secret phrase, but in a machine-readable way. As long as you have one of them backed up, you'll have access to your funds.",
+	"@seedDescription": {
+		"description": "Describing what a seed is",
+		"type": "text",
+		"placeholders": {}
+	},
+	"importSecretPhrase": "Import Secret Phrase",
+	"@importSecretPhrase": {
+		"description": "Header for restoring using mnemonic",
+		"type": "text",
+		"placeholders": {}
+	},
+	"importSecretPhraseHint": "Please enter your 24-word secret phrase below. Each word should be separated by a space.",
+	"@importSecretPhraseHint": {
+		"description": "helper message for importing mnemnic",
+		"type": "text",
+		"placeholders": {}
+	},
+	"qrMnemonicError": "QR does not contain a valid secret phrase",
+	"@qrMnemonicError": {
+		"description": "When QR does not contain a valid mnemonic phrase",
+		"type": "text",
+		"placeholders": {}
+	},
+	"mnemonicInvalidWord": "%1 is not a valid word",
+	"@mnemonicInvalidWord": {
+		"description": "A word that is not part of bip39",
+		"type": "text",
+		"placeholders": {}
+	},
+	"mnemonicSizeError": "Secret phrase may only contain 24 words",
+	"@mnemonicSizeError": {
+		"description": "err",
+		"type": "text",
+		"placeholders": {}
+	},
+	"secretPhrase": "Secret Phrase",
+	"@secretPhrase": {
+		"description": "Secret (mnemonic) phrase",
+		"type": "text",
+		"placeholders": {}
+	},
+	"backupConfirmButton": "I've Backed It Up",
+	"@backupConfirmButton": {
+		"description": "Has backed up seed confirmation button",
+		"type": "text",
+		"placeholders": {}
+	},
+	"secretInfoHeader": "Safety First!",
+	"@secretInfoHeader": {
+		"description": "secret info header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"secretInfo": "In the next screen, you will see your secret phrase. It is a password to access your funds. It is crucial that you back it up and never share it with anyone.",
+	"@secretInfo": {
+		"description": "Description for seed",
+		"type": "text",
+		"placeholders": {}
+	},
+	"secretWarning": "If you lose your device or uninstall the application, you'll need your secret phrase or seed to recover your funds!",
+	"@secretWarning": {
+		"description": "Secret warning",
+		"type": "text",
+		"placeholders": {}
+	},
+	"gotItButton": "Got It!",
+	"@gotItButton": {
+		"description": "Got It! Acknowledgement button",
+		"type": "text",
+		"placeholders": {}
+	},
+	"ackBackedUp": "Are you sure that you've backed up your secret phrase or seed?",
+	"@ackBackedUp": {
+		"description": "Ack backed up",
+		"type": "text",
+		"placeholders": {}
+	},
+	"secretPhraseCopy": "Copy Secret Phrase",
+	"@secretPhraseCopy": {
+		"description": "Copy secret phrase to clipboard",
+		"type": "text",
+		"placeholders": {}
+	},
+	"secretPhraseCopied": "Secret Phrase Copied",
+	"@secretPhraseCopied": {
+		"description": "Copied secret phrase to clipboard",
+		"type": "text",
+		"placeholders": {}
+	},
+	"import": "Import",
+	"@import": {
+		"description": "Generic import",
+		"type": "text",
+		"placeholders": {}
+	},
+	"importSeedInstead": "Import Seed Instead",
+	"@importSeedInstead": {
+		"description": "importSeedInstead",
+		"type": "text",
+		"placeholders": {}
+	},
+	"switchToSeed": "Switch to Seed",
+	"@switchToSeed": {
+		"description": "switchToSeed",
+		"type": "text",
+		"placeholders": {}
+	},
+	"backupSecretPhrase": "Backup Secret Phrase",
+	"@backupSecretPhrase": {
+		"description": "backup seed",
+		"type": "text",
+		"placeholders": {}
+	},
+	"createPasswordHint": "Create a password",
+	"@createPasswordHint": {
+		"description": "A text field hint that tells the user to create a password",
+		"type": "text",
+		"placeholders": {}
+	},
+	"confirmPasswordHint": "Confirm the password",
+	"@confirmPasswordHint": {
+		"description": "A text field hint that tells the user to confirm the password",
+		"type": "text",
+		"placeholders": {}
+	},
+	"enterPasswordHint": "Enter your password",
+	"@enterPasswordHint": {
+		"description": "A text field hint that tells the users to enter their password",
+		"type": "text",
+		"placeholders": {}
+	},
+	"passwordsDontMatch": "Passwords do not match",
+	"@passwordsDontMatch": {
+		"description": "An error indicating a password has been confirmed incorrectly",
+		"type": "text",
+		"placeholders": {}
+	},
+	"passwordBlank": "Password cannot be empty",
+	"@passwordBlank": {
+		"description": "An error indicating a password has been entered incorrectly",
+		"type": "text",
+		"placeholders": {}
+	},
+	"invalidPassword": "Invalid Password",
+	"@invalidPassword": {
+		"description": "An error indicating a password has been entered incorrectly",
+		"type": "text",
+		"placeholders": {}
+	},
+	"passwordWillBeRequiredToOpenParagraph": "This password will be required to open Natrium.",
+	"@passwordWillBeRequiredToOpenParagraph": {
+		"description": "A paragraph that tells the users that the created password will be required to open Natrium.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"passwordNoLongerRequiredToOpenParagraph": "You will not need a password to open Natrium anymore.",
+	"@passwordNoLongerRequiredToOpenParagraph": {
+		"description": "An info paragraph that tells the user a password will no longer be needed to open Natrium",
+		"type": "text",
+		"placeholders": {}
+	},
+	"createPasswordFirstParagraph": "You can create a password to add additional security to your wallet.",
+	"@createPasswordFirstParagraph": {
+		"description": "A paragraph that tells the users that they can create a password for additional security.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"createPasswordSecondParagraph": "Password is optional, and your wallet will be protected with your PIN or biometrics regardless.",
+	"@createPasswordSecondParagraph": {
+		"description": "A paragraph that tells the users that the password creation is optional and the wallet will be still protected with biometrics or PIN regardless.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"createAPasswordHeader": "Create a password.",
+	"@createAPasswordHeader": {
+		"description": "A paragraph that tells the users to create a password.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"createPasswordSheetHeader": "Create",
+	"@createPasswordSheetHeader": {
+		"description": "Prompt user to create a new password",
+		"type": "text",
+		"placeholders": {}
+	},
+	"disablePasswordSheetHeader": "Disable",
+	"@disablePasswordSheetHeader": {
+		"description": "Prompt user to disable their password",
+		"type": "text",
+		"placeholders": {}
+	},
+	"requireAPasswordToOpenHeader": "Require a password to open Natrium?",
+	"@requireAPasswordToOpenHeader": {
+		"description": "A paragraph that asks the users if they would like a password to be required to open Natrium.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"noSkipButton": "No, Skip",
+	"@noSkipButton": {
+		"description": "A button that declines and skips the mentioned process.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"yesButton": "Yes",
+	"@yesButton": {
+		"description": "A button that accepts the mentioned process.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"nextButton": "Next",
+	"@nextButton": {
+		"description": "A button that goes to the next screen.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"goBackButton": "Go Back",
+	"@goBackButton": {
+		"description": "A button that goes to the previous screen.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"supportButton": "Support",
+	"@supportButton": {
+		"description": "A button to open up the live support window",
+		"type": "text",
+		"placeholders": {}
+	},
+	"liveSupportButton": "Support",
+	"@liveSupportButton": {
+		"description": "A button to open up the live support window",
+		"type": "text",
+		"placeholders": {}
+	},
+	"connectingHeader": "Connecting",
+	"@connectingHeader": {
+		"description": "A header to let the user now that Natrium is currently connecting to (or loading) live chat.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"localeEnglishItem": "English",
+	"@localeEnglishItem": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"localeRussianItem": "Russian",
+	"@localeRussianItem": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"generatingWalletMessage": "Creating wallet",
+	"@generatingWalletMessage": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarRewards": "Rewards",
+	"@toolbarRewards": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"toolbarTitleShowPassphrase": "Passphrase",
+	"@toolbarTitleShowPassphrase": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"errorCameraRestriction": "The user did not grant the camera permission!",
+	"@errorCameraRestriction": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"noContactsTitle": "No any contacts yet.",
+	"@noContactsTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"flashOperationSuccess": "Operation was completed succesfully",
+	"@flashOperationSuccess": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"flashOperationFailed": "Operation was completed with failure.",
+	"@flashOperationFailed": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"flashFundsSended": "Succesfully sended",
+	"@flashFundsSended": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"flashAddressCopied": "Address was copied to clipboard.",
+	"@flashAddressCopied": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"accessBlocked": "Access was blocked. Please, contact with administration",
+	"@accessBlocked": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"pushLinkWasCopied": "Link was copied to clipboard.",
+	"@pushLinkWasCopied": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"sendFundsToPushWallet": "Send {qty} funds to {wallet}",
+	"@sendFundsToPushWallet": {
+		"type": "text",
+		"placeholders": {
+			"qty": {},
+			"wallet": {}
+		}
+	},
+	"copiedSuccesfullyMessage": "Succesfully saved passhprase.",
+	"@copiedSuccesfullyMessage": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"flashIncorrectWordMessage": "Incorrect word. Please try again",
+	"@flashIncorrectWordMessage": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelAgain": "Again",
+	"@labelAgain": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"hintSendedFrom": "Sending from",
+	"@hintSendedFrom": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"errorInvalidInputsPush": "Invalid values for push transaction",
+	"@errorInvalidInputsPush": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"successfullySavedPin": "Succesfully saved PIN",
+	"@successfullySavedPin": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"errorOnPinInput": "Invalid PIN",
+	"@errorOnPinInput": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"sharePushLink": "Share Push",
+	"@sharePushLink": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"authSuccess": "Succesfully authenticated",
+	"@authSuccess": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"invalidInput": "Invalid input. Check your params and try again",
+	"@invalidInput": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"chooseContactTitle": "Choose contact",
+	"@chooseContactTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"chooseAccountTitle": "Choose account",
+	"@chooseAccountTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"validateAddressError": "Must be valid Minter address with Mx prefix",
+	"@validateAddressError": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"authenticateToViewTransaction": "Please authenticate to view your transaction overview",
+	"@authenticateToViewTransaction": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"userAuthorized": "User is authenticated",
+	"@userAuthorized": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"userNotAuthorized": "User is not authorized",
+	"@userNotAuthorized": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"cannotRecoverAccount": "Cannot recover that account.",
+	"@cannotRecoverAccount": {
+		"type": "text",
+		"placeholders": {}
+	}
 }

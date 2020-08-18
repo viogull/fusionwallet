@@ -23,14 +23,14 @@ import 'package:provider/provider.dart';
 
 import './../../ui/pages/pages.dart';
 import '../../inject.dart';
-import 'auth/passphrase/share.dart';
-import 'lockscreen/lockscreen.dart';
-import 'primary/contacts/add_contact.dart';
-import 'primary/contacts/contacts.dart';
-import 'primary/exchange_page.dart';
-import 'primary/history_page.dart';
-import 'primary/settings.dart';
-import 'primary/share_address.dart';
+import 'auth/share_passphrase.dart';
+import 'auth/lockscreen.dart';
+
+import 'contacts/contacts.dart';
+import 'exchange_page.dart';
+import 'history_page.dart';
+import 'settings.dart';
+import 'share_address.dart';
 
 final logger = Logger();
 
@@ -165,7 +165,9 @@ class _BottomHomePageState extends State<BottomHomePage> {
           icon:
               _buildBottomNavItemIcon("assets/images/icons/ic_edit.svg", true),
           onClick: () {
-            showCupertinoModalBottomSheet(context: context,
+            showBarModalBottomSheet(context: context,
+                expand: true,
+                elevation: 24,
                 builder: (BuildContext context, ScrollController controller) {
                   return  ChangeAccountNameForm();
                 });

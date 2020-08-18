@@ -163,7 +163,7 @@ class AppLocalizations {
 
   buttonUnbound() => Intl.message('Unbound', name: 'buttonUnbound');
 
-  buttonPush() => Intl.message('Push', name: 'buttonPush');
+  buttonPush() => Intl.message('Send Push', name: 'buttonPush');
 
   labelCryptoAvailable() =>
       Intl.message('Cryptocurrency Available', name: 'labelCryptoAvailable');
@@ -1611,6 +1611,33 @@ class AppLocalizations {
 
   String successfullySavedPin() => Intl.message("Succesfully saved PIN", name:  'successfullySavedPin');
   String errorOnPinInput() => Intl.message("Invalid PIN", name:  'errorOnPinInput');
+
+  String  sharePushLink() => Intl.message("Share Push", name: 'sharePushLink');
+
+  String authSuccess()=> Intl.message("Succesfully authenticated", name: 'authSuccess');
+
+  String invalidInput() => Intl.message("Invalid input. Check your params and try again", name: 'invalidInput');
+
+
+
+
+  String chooseContactTitle() => Intl.message("Choose contact", name: 'chooseContactTitle');
+
+  String chooseAccountTitle() => Intl.message("Choose account", name: 'chooseAccountTitle');
+
+  String validateAddressError() => Intl.message("Must be valid Minter address with Mx prefix",
+      name: 'validateAddressError');
+
+  String  authenticateToViewTransaction() =>
+      Intl.message("Please authenticate to view your transaction overview",
+   name: 'authenticateToViewTransaction');
+
+  String   userAuthorized() => Intl.message("User is authenticated", name: 'userAuthorized');
+
+  String   userNotAuthorized() => Intl.message("User is not authorized", name: 'userNotAuthorized');
+
+ String  cannotRecoverAccount() => Intl.message("Cannot recover that account.",
+ name: 'cannotRecoverAccount' );
 
 }
 

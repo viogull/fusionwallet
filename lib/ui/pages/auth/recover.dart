@@ -17,6 +17,11 @@ import '../pages.dart';
 import 'event.dart';
 
 class RecoverAccountBloc extends FormBloc<String, String> {
+
+
+  final AppLocalizations localizations;
+
+
   final nameTextBloc = TextFieldBloc(
     validators: [
       FieldBlocValidators.required,
@@ -35,7 +40,7 @@ class RecoverAccountBloc extends FormBloc<String, String> {
 
 
 
-  RecoverAccountBloc()  {
+  RecoverAccountBloc({this.localizations})  {
     addFieldBlocs(
       fieldBlocs: [
         nameTextBloc,
@@ -68,7 +73,7 @@ class RecoverAccountBloc extends FormBloc<String, String> {
         if(canRecover)
           this.emitSuccess();
         else
-          this.emitFailure(failureResponse: "Cannot recover that account.");
+          this.emitFailure(failureResponse: localizations.cannotRecoverAccount());
       }
     } on Exception catch (e) {
       emitFailure();

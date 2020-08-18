@@ -185,7 +185,7 @@ class MinterRest {
 
   Future<dynamic> multisend() {}
 
-  Future<dynamic> delegate(DelegateUboundTxRequest txData, String hash) async {
+  Future<dynamic> delegate({DelegateUboundTxRequest txData, String hash}) async {
     try {
       Response response = await fusionDio.post('/tx/delegate?hash=$hash',
           data: txData.toJson(),
@@ -211,7 +211,7 @@ class MinterRest {
     }
   }
 
-  Future<dynamic> ubound(DelegateUboundTxRequest txData, String hash) async {
+  Future<dynamic> ubound({DelegateUboundTxRequest txData, String hash}) async {
     try {
       Response response = await fusionDio.post('/tx/ubound?hash=$hash',
           data: txData.toJson(),
@@ -240,9 +240,15 @@ class MinterRest {
   Future<CreatePushLinkResponse> createPushLink(
       {CreatePushLinkRequest txData, String receiver, String sender}) async {
     try {
-      final _acc =  Hive.box<Account>(accountsBox).getAt(0).sessionKey ;
+      Account _acc;
+      Hive.box<Account>(accountsBox).values.forEach((element) {
+        logger.d("Name ${element.name}, hash ${element.hash}, ${element.toString()}");
+        if(element != null)
+          _acc = element;
+      });
+
       Response response = await fusionDio.post(
-          "$fusionApiUrl/push/create?sender=${sender.isNotEmpty ? sender : _acc }&receiver=$receiver&creatorId=${_acc}",
+          "$fusionApiUrl/push/create?sender=${sender.isNotEmpty ? sender : _acc }&receiver=$receiver&creatorId=${_acc.sessionKey}",
           data: txData.toJson(),
           options: Options(contentType: "application/json"));
 

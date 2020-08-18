@@ -111,7 +111,7 @@ class FlashHelper {
         return Flash(
           controller: controller,
           horizontalDismissDirection: HorizontalDismissDirection.horizontal,
-          backgroundColor: Theme.of(context).colorScheme.secondaryVariant,
+          backgroundColor: Theme.of(context).colorScheme.primary,
           style: FlashStyle.floating,
           margin: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
           position: FlashPosition.top,
@@ -146,7 +146,7 @@ class FlashHelper {
         return Flash(
           controller: controller,
           horizontalDismissDirection: HorizontalDismissDirection.horizontal,
-          position: FlashPosition.bottom,
+          position: FlashPosition.top,
           borderRadius: const BorderRadius.all(Radius.circular(8.0)),
           margin: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
           backgroundColor: FusionTheme.greenButtonColor(),

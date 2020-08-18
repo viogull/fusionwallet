@@ -1912,5 +1912,17 @@
 	"pushLinkWasCopied": "Ссылка скопирована в буфер обмена.",
 	"sendFundsToPushWallet": "Отправить {qty} средства на {wallet}",
 	"toolbarRewards": "Награды",
-	"toolbarTitleShowPassphrase": "Показать кодовую фразу"
+	"toolbarTitleShowPassphrase": "Показать кодовую фразу",
+	"authSuccess": "Успешная авторизация",
+	"authenticateToViewTransaction": "Пожалуйста, авторизуйтесь, чтобы просмотреть транзакцию",
+	"cannotRecoverAccount": "Невозможно восстановить эту учетную запись.",
+	"chooseAccountTitle": "Выберите аккаунт",
+	"chooseContactTitle": "Выберите контакт",
+	"errorOnPinInput": "Неверный PIN-код",
+	"invalidInput": "Некорректный ввод. Проверьте свои параметры и попробуйте еще раз",
+	"sharePushLink": "Поделиться Push",
+	"successfullySavedPin": "PIN-код успешно сохранено",
+	"userAuthorized": "Пользователь авторизован",
+	"userNotAuthorized": "Пользователь не авторизован",
+	"validateAddressError": "Должен быть действующий адрес Minter с префиксом Mx"
 }

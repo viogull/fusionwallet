@@ -4,7 +4,7 @@ import 'package:fusion_wallet/main.dart';
 import 'package:fusion_wallet/ui/pages/auth/account_name.dart';
 import 'package:fusion_wallet/ui/pages/auth/biometrics.dart';
 import 'package:fusion_wallet/ui/pages/auth/intro.dart';
-import 'package:fusion_wallet/ui/pages/auth/passphrase/passphrase.dart';
+import 'package:fusion_wallet/ui/pages/auth/passphrase.dart';
 import 'package:fusion_wallet/ui/pages/auth/pincode.dart';
 import 'package:fusion_wallet/ui/pages/auth/recover.dart';
 import 'package:fusion_wallet/ui/pages/pages.dart';

@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fusion_wallet/core/state_container.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 typedef AppBarBackButtonCallback = void Function(String destination);
 
@@ -34,24 +35,27 @@ class FusionScaffold extends StatelessWidget {
         ? "assets/images/backgrounds/bg_primary.svg"
         : "assets/images/backgrounds/bg_primary_light.svg";
 
-    return Stack(
-      children: <Widget>[
-        Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: SvgPicture.asset(
-            background,
-            fit: BoxFit.fill,
+    return SafeArea(
+      maintainBottomViewPadding: true,
+      child: Stack(
+        children: <Widget>[
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: SvgPicture.asset(
+              background,
+              fit: BoxFit.fill,
+            ),
           ),
-        ),
-        Scaffold(
-          backgroundColor: Colors.transparent,
-          drawer: drawer,
-          appBar: _buildToolbar(context),
-          resizeToAvoidBottomPadding: false,
-          body: child,
-        ),
-      ],
+          Scaffold(
+            backgroundColor: Colors.transparent,
+            drawer: drawer,
+            appBar: _buildToolbar(context),
+            resizeToAvoidBottomPadding: false,
+            body: child,
+          ),
+        ],
+      ),
     );
   }
 
@@ -68,8 +72,12 @@ class FusionScaffold extends StatelessWidget {
           ? null
           : AutoSizeText(
               title,
-              style: theme.textTheme.headline6
-                  .copyWith(color: theme.colorScheme.onSurface, fontSize: 19),
+              maxFontSize: 16,
+              minFontSize: 14,
+              style: GoogleFonts.robotoTextTheme().headline6
+                  .copyWith(color: theme.colorScheme.onSurface,
+                fontSize: 16
+              ),
             ),
     );
   }

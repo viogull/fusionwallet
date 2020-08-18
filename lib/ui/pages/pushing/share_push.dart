@@ -28,7 +28,7 @@ class SharePush extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FusionScaffold(
-      title: AppLocalizations.of(context).buttonShare(),
+      title: AppLocalizations.of(context).sharePushLink(),
       child: Container(
         height: MediaQuery.of(context).size.height,
         child: Column(
@@ -89,8 +89,7 @@ class SharePush extends StatelessWidget {
                         FlashHelper.infoBar(context,
                             message: AppLocalizations.of(context)
                                 .pushLinkWasCopied());
-//                        Fluttertoast.showToast(
-//                            msg: AppLocalizations.of(context).labelOk());
+
                       },
                       child: Card(
                           margin: const EdgeInsets.all(12),
@@ -107,9 +106,9 @@ class SharePush extends StatelessWidget {
                             child: AutoSizeText(
                               shortDeeplink,
                               textAlign: TextAlign.center,
-                              minFontSize: 12,
+                              minFontSize: 21,
                               maxLines: 4,
-                              maxFontSize: 14,
+                              maxFontSize: 26,
                             ),
                           )),
                     ),
@@ -146,19 +145,20 @@ class SharePush extends StatelessWidget {
                   ],
                 )),
             Flexible(
-              flex: 1,
+              flex: 2,
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ButtonBar(
                     buttonMinWidth: MediaQuery.of(context).size.width * 0.9,
-                    buttonHeight: 45,
+                    buttonHeight: 50,
                     alignment: MainAxisAlignment.center,
                     children: <Widget>[
                       RaisedButton(
-                        child: Text(
+                        child: AutoSizeText(
                           AppLocalizations.of(context).buttonClose(),
+                          minFontSize: 16,
                           style: TextStyle(
                               color: Theme.of(context).colorScheme.onPrimary),
                         ),

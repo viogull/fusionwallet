@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -15,11 +17,13 @@ import 'package:fusion_wallet/ui/pages/information/faq_page.dart';
 import 'package:fusion_wallet/ui/pages/information/send_feedback_page.dart';
 import 'package:fusion_wallet/utils/biometric.dart';
 import 'package:fusion_wallet/utils/flasher.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:package_info/package_info.dart';
 
-import './../../../core/models.dart';
+import '../../core/models.dart';
 
 class SettingsPage extends StatelessWidget {
   static const navId = "/settings";
@@ -93,12 +97,12 @@ class SettingsPage extends StatelessWidget {
           FusionPreference(
               title: AppLocalizations.of(context).settingsItemNotifications(),
               onClick: () {
-                showCupertinoModalBottomSheet(
+                showBarModalBottomSheet(
                     context: context,
                     builder: (builder, scroll) {
 
               return FusionScaffold(
-                title: AppLocalizations.of(context).settingsItemNotifications(),
+                hideToolbar: true,
                 appBarIcon: null,
                 child: ValueListenableBuilder(
                  valueListenable: Hive.box<AdminNotification>(notificationsBox)
@@ -106,45 +110,51 @@ class SettingsPage extends StatelessWidget {
                 builder: (context, Box<AdminNotification> notifications, _) {
                 final _contacts = notifications.values.toList();
 
-                return Container(
+                return SafeArea(
+                  child: SingleChildScrollView(
+                    physics: ClampingScrollPhysics(),
+                    child: Container(
 
-                constraints: BoxConstraints(
-                maxHeight: MediaQuery.of(context).size.height * 0.99,
-                ),
-                child: Column(
+                    constraints: BoxConstraints(
+                    maxHeight: MediaQuery.of(context).size.height * 0.99,
+                    ),
+                    child: Column(
 
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                Flexible(
-                flex: 1,
-                child: Padding(
-                padding: const EdgeInsets.symmetric(
-                vertical: 8, horizontal: 16),
-                child: Container()
-                ),
-                ),
-                Flexible(
-                flex: 8,
-                child: AnimationLimiter(
-                child:(notifications.isEmpty)
-                ? showEmptyView(context)
-                    : ListView.builder(
-                itemBuilder: (context, index) {
-                return AnimationConfiguration.staggeredList(
-                child: FadeInAnimation(
-                duration: Duration(milliseconds: 500),
-                child: NotificationView(data: _contacts[index])
-                ),
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                    Flexible(
+                    flex: 1,
+                    child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                    vertical: 8, horizontal: 12),
+                    child: Container()
+                    ),
+                    ),
+                    Flexible(
+                    flex: 8,
+                    child: AnimationLimiter(
+                    child:(notifications.isEmpty)
+                    ? showEmptyView(context)
+                        : ListView.builder(
+                      reverse: true,
+                    physics: ClampingScrollPhysics(),
+                    itemBuilder: (context, index) {
+                    return AnimationConfiguration.staggeredList(
+                    child: FadeInAnimation(
+                    duration: Duration(milliseconds: 600),
+                    child: NotificationView(data: _contacts[index])
+                    ),
+                    );
+
+
+                    },
+                    itemCount: _contacts.length,
+                    ) ,
+                    )
+                    )
+                    ])),
+                  ),
                 );
-
-
-                },
-                physics: ClampingScrollPhysics(),
-                itemCount: _contacts.length,
-                ) ,
-                )
-                )
-                ]));
                 },
                 ),
               );
@@ -176,7 +186,7 @@ class SettingsPage extends StatelessWidget {
               title: AppLocalizations.of(context).settingsItemFaq(),
               onClick: () {
                 Navigator.pushNamed(context, FaqPage.navId);
-              }),
+              })
         ],
       ),
     );
@@ -186,8 +196,10 @@ class SettingsPage extends StatelessWidget {
       Center(child: Text(AppLocalizations.of(context).noContactsTitle()));
 
   Widget NotificationView({AdminNotification data}) => Card(
-    margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-    elevation:1,
+    margin: const EdgeInsets.symmetric(vertical: 4,
+        horizontal: 12),
+    elevation:4,
+    color: Colors.transparent,
     child: ListTile(
       title: Text(data.title),
       subtitle: Text(data.message),

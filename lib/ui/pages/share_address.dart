@@ -11,8 +11,8 @@ import 'package:fusion_wallet/utils/io_tools.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:share/share.dart';
 
-import '../../../inject.dart';
-import '../../../localizations.dart';
+import '../../inject.dart';
+import '../../localizations.dart';
 
 class ShareAddressPage extends StatelessWidget {
   static const String navId = "/qr/share";

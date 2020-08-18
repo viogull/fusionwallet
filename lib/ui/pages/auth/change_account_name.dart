@@ -1,18 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/core/abstract/preferences.dart';
 import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:hive/hive.dart';
 
+import '../../../inject.dart';
+import '../../theme.dart';
+import '../../widgets.dart';
+
 class AccountNamingFormBloc extends FormBloc<String, String> {
   // ignore: close_sinks
+
+  final logger = injector.get<Logger>();
+
   final accountName = TextFieldBloc();
 
   AccountNamingFormBloc() {
     addFieldBlocs(fieldBlocs: [accountName]);
+    var initialName  = Hive.box<Preferences>(preferencesBox).get(0).name;
+    logger.d("Initial name: $initialName");
+    accountName.updateInitialValue(initialName);
   }
 
   @override
@@ -23,6 +34,7 @@ class AccountNamingFormBloc extends FormBloc<String, String> {
 
     if (accountName.value.isNotEmpty) {
       preferences.name = accountName.value;
+      logger.d("Current Account -> ${Hive.box<Account>(accountsBox).getAt(0).uuid}");
       preferences.save();
       emitSuccess();
     } else {
@@ -34,69 +46,82 @@ class AccountNamingFormBloc extends FormBloc<String, String> {
 class ChangeAccountNameForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AccountNamingFormBloc(),
-      child: Builder(
-        builder: (context) {
-          final bloc = context.bloc<AccountNamingFormBloc>();
 
-          return FormBlocListener<AccountNamingFormBloc, String, String>(
-              onSubmitting: (context, state) {
-                LoadingDialog.show(context);
-              },
-              onSuccess: (context, state) {
-                LoadingDialog.hide(context);
+    return  SafeArea(
+      bottom: true,
+      top: true,
+      minimum: const EdgeInsets.all(8),
+      child:BlocProvider(
+        create: (context) => AccountNamingFormBloc(),
+        child: Builder(
+          builder: (context) {
+            final bloc = context.bloc<AccountNamingFormBloc>();
+            final theme = Theme.of(context);
+            return FormBlocListener<AccountNamingFormBloc, String, String>(
+                onSubmitting: (context, state) {
+                  LoadingDialog.show(context);
+                },
+                onSuccess: (context, state) {
+                  LoadingDialog.hide(context);
+                  FlashHelper.successBar(context,
+                      message:  AppLocalizations.of(context)
+                          .flashOperationSuccess());
+                  Navigator.of(context).pop();
+                },
+                onFailure: (context, state) {
+                  LoadingDialog.hide(context);
+                  FlashHelper.successBar(context, message: state.failureResponse);
 
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (_) => SuccessScreen()));
-              },
-              onFailure: (context, state) {
-                LoadingDialog.hide(context);
-
-                Scaffold.of(context).showSnackBar(
-                    SnackBar(content: Text(state.failureResponse)));
-              },
-              child: Material(
-                  child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    //LimitedBox (maxHeight: 60,),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    // LimitedBox(maxHeight: 30,),
-                    Flexible(
-                      flex: 2,
-                      child: Text(AppLocalizations.of(context)
-                          .menuItemEditAccountName()),
-                    ),
-                    Flexible(
-                        flex: 4,
-                        child: TextFieldBlocBuilder(
-                          textFieldBloc: bloc.accountName,
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                            labelText: AppLocalizations.of(context).labelName(),
-                            prefixIcon: Icon(AntDesign.user),
+                },
+                child: Material(
+                    color: Colors.transparent,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          //LimitedBox (maxHeight: 60,),
+                          SizedBox(
+                            height: 10,
                           ),
-                        )),
-                    //LimitedBox(maxHeight: 50,),
-                    SizedBox(height: 5.0),
-                    Flexible(
-                      flex: 5,
-                      child: FusionButton(
-                        text: AppLocalizations.of(context).labelSave(),
-                        onPressed: () {
-                          bloc.submit();
-                        },
+                          // LimitedBox(maxHeight: 30,),
+                          Flexible(
+                            flex: 2,
+                            child: Text(AppLocalizations.of(context)
+                                .menuItemEditAccountName()),
+                          ),
+                          Flexible(
+                              flex: 4,
+                              child: TextFieldBlocBuilder(
+                                textFieldBloc: bloc.accountName,
+                                keyboardType: TextInputType.text,
+                                decoration: InputDecoration(
+                                  labelText: AppLocalizations.of(context).labelName(),
+                                  prefixIcon: Icon(AntDesign.user),
+                                  border: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: theme.colorScheme.onSurface
+                                              .withOpacity(0.5)),
+                                      borderRadius: FusionTheme.borderRadius),
+                                ),
+                              )),
+                          //LimitedBox(maxHeight: 50,),
+                          SizedBox(height: 5.0),
+                          Flexible(
+                            flex: 5,
+                            child: FusionButton(
+                              expandedWidth: true,
+                              text: AppLocalizations.of(context).labelSave(),
+                              onPressed: () {
+                                bloc.submit();
+                              },
+                            ),
+                          )
+                        ],
                       ),
-                    )
-                  ],
-                ),
-              )));
-        },
+                    )));
+          },
+        ),
       ),
     );
   }
@@ -132,32 +157,4 @@ class LoadingDialog extends StatelessWidget {
   }
 }
 
-class SuccessScreen extends StatelessWidget {
-  SuccessScreen({Key key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Icon(Icons.tag_faces, size: 100),
-            SizedBox(height: 10),
-            Text(
-              AppLocalizations.of(context).flashOperationSuccess(),
-              style: TextStyle(fontSize: 54, color: Colors.black),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 10),
-            RaisedButton.icon(
-              onPressed: () {},
-              icon: Icon(Icons.replay),
-              label: Text(AppLocalizations.of(context).labelAgain()),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}

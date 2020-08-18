@@ -10,6 +10,7 @@ import 'package:fusion_wallet/core/models/admin_notifications_response.dart';
 import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/main.dart';
 import 'package:hive/hive.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:root_checker/root_checker.dart';
 
 import '../../../inject.dart';
@@ -136,6 +137,14 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
 
       if (deepLink != null) {
         logger.d("Received deeplink " + dynamicLink.link.toString());
+        if(dynamicLink.link.toString().contains("https://fusion-push.cash/push/")) {
+          logger.d("Detected PUSH deeplink");
+          Future.delayed(Duration(milliseconds: 1500), () {
+            Navigator.push(context, new MaterialPageRoute(builder: (context) {
+              return ApplyPushDeeplink(url: dynamicLink.link.toString());
+            }, fullscreenDialog: true));
+          });
+        }
         // https://fusiongroup.page.link/ref
         final Uri deep = dynamicLink.link;
         final ref = deep.queryParameters["from"];

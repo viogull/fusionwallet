@@ -6,19 +6,17 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:fusion_wallet/core/minter_rest.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
-import 'package:fusion_wallet/ui/pages/primary/accounts/delegate.dart';
-import 'package:fusion_wallet/ui/pages/primary/accounts/push_funds_page.dart';
-import 'package:fusion_wallet/ui/pages/primary/accounts/rewards_info_page.dart';
-import 'package:fusion_wallet/ui/pages/primary/accounts/send_funds_page.dart';
-import 'package:fusion_wallet/ui/pages/primary/accounts/unbound.dart';
-import 'package:fusion_wallet/ui/pages/primary/share_address.dart';
+
+import 'package:fusion_wallet/ui/pages/share_address.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../core/state_container.dart';
 import '../../inject.dart';
+import './pages.dart';
 import '../../localizations.dart';
 import '../components/lists/balances_card.dart';
+import 'transactions/rewards_info_page.dart';
 
 class AccountsPage extends StatelessWidget {
   static const String navId = "/accounts";
@@ -29,7 +27,7 @@ class AccountsPage extends StatelessWidget {
   Widget _buildAccountsUi(BuildContext context) =>
       AnimationLimiter(
           child: ListView.builder(
-        itemCount: 5,
+        itemCount: 6,
         itemBuilder: (BuildContext context, int index) {
           return AnimationConfiguration.staggeredList(
             position: index,
@@ -136,11 +134,11 @@ class AccountsPage extends StatelessWidget {
               FusionButton(
                   text: AppLocalizations.of(context).buttonPush(),
                   onPressed: () {
-                    Navigator.of(context).push(
-                      new MaterialPageRoute(builder: (context) {
-                        return PushFundsPage();
-                      }, fullscreenDialog: true)
-                    );
+                    showCupertinoModalBottomSheet(context: context, builder: (context, scrollController) {
+                      return SafeArea(
+                        child:  PushFundsPage()
+                      );
+                    });
                   })
             ],
           );
@@ -160,9 +158,12 @@ class AccountsPage extends StatelessWidget {
         break;
       case 5:
         {
-          return AutoSizeText(
-            AppLocalizations.of(context).labelTransanctionsHistoryTitle(),
-            textAlign: TextAlign.center,
+          return Padding(
+            padding: const EdgeInsets.all(16),
+            child: AutoSizeText(
+              AppLocalizations.of(context).labelTransanctionsHistoryTitle(),
+              textAlign: TextAlign.center,
+            ),
           );
         }
         break;
@@ -183,6 +184,7 @@ class AccountsPage extends StatelessWidget {
           var balances = snapshot.data.data.balances;
           if (balances.length > 0) {
             debugPrint("Rendering balances length ${balances.length}");
+
             return AccountBalancesCard(data: snapshot.data);
           } else
             return Card(

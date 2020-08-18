@@ -5,13 +5,14 @@ import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-import '../../../../core/models.dart';
-import '../../../../inject.dart';
-import '../../../../localizations.dart';
-import '../../../theme.dart';
-import '../../../widgets.dart';
-import '../../pages.dart';
-import 'bloc_loader.dart';
+import '../../../inject.dart';
+import '../../../core/models.dart';
+import '../../../localizations.dart';
+import '../../theme.dart';
+import '../../widgets.dart';
+import '../pages.dart';
+
+
 
 class PushFormBloc extends FormBloc<String, String> {
 
@@ -29,7 +30,13 @@ class PushFormBloc extends FormBloc<String, String> {
   }
 
 
-
+  @override
+  Future<Function> close() {
+    name.close();
+    qty.close();
+    coin.close();
+    super.close();
+  }
 
   @override
   void onSubmitting() async {
@@ -43,6 +50,7 @@ class PushFormBloc extends FormBloc<String, String> {
         value: amount, payload: receiverName),
       receiver: receiverName, sender: "" );
 
+    logger.d(req);
 
     if (req is CreatePushLinkResponse) {
       logger.d("Response from Push API. ${req.push_id}.\n Url: ${req.url}\m Shortified:${req.shortUrl}" );
@@ -222,7 +230,7 @@ class PushFundsPage extends StatelessWidget {
                         ),
                       ),
                       Flexible(
-                        flex: 2,
+                        flex: 4,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               vertical: 16, horizontal: 24),

@@ -17,7 +17,7 @@ export 'package:logger/logger.dart';
 export './core/minter_rest.dart';
 export './utils/haptic.dart';
 export './utils/vault.dart';
-
+export './utils/flasher.dart';
 
 /*
   Base Service Locator (DI)
@@ -38,5 +38,7 @@ void setupServiceLocator() {
   injector.registerLazySingleton<Alice>(() => Alice(showInspectorOnShake: true,
       showNotification: true));
 }
+
+
 
 

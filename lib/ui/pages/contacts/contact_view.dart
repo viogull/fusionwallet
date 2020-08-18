@@ -7,8 +7,10 @@ import 'package:fusion_wallet/utils/flasher.dart';
 import 'package:fusion_wallet/utils/haptic.dart';
 import 'package:fusion_wallet/utils/io_tools.dart';
 
-import '../../../../inject.dart';
-import '../../../../localizations.dart';
+import '../../../inject.dart';
+import '../../../localizations.dart';
+
+
 
 class ContactItem extends StatelessWidget {
   final Contact data;

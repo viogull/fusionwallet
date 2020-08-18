@@ -1,5 +1,5 @@
 {
-	"@@last_modified": "2020-08-10T17:51:04.770627",
+	"@@last_modified": "2020-08-18T19:44:40.994197",
 	"appName": "Fusion",
 	"@appName": {
 		"type": "text",
@@ -165,7 +165,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"popupAccVerificationWelcomeText": "Welcome! Your account is ready to use.",
+	"popupAccVerificationWelcomeText": "Welcome to Algorand! Your account is ready to use.",
 	"@popupAccVerificationWelcomeText": {
 		"type": "text",
 		"placeholders": {}
@@ -680,7 +680,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"onStr": "Вкл",
+	"onStr": "On",
 	"@onStr": {
 		"description": "generic_on",
 		"type": "text",
@@ -932,7 +932,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"welcomeText": "Welcome to Fusion. To begin, you may create a new wallet or import an existing one.",
+	"welcomeText": "Welcome to Natrium. To begin, you may create a new wallet or import an existing one.",
 	"@welcomeText": {
 		"description": "intro_welcome_title",
 		"type": "text",
@@ -968,7 +968,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"sendAmountConfirm": "Send %1 Fusion",
+	"sendAmountConfirm": "Send %1 NANO",
 	"@sendAmountConfirm": {
 		"description": "send_pin_description",
 		"type": "text",
@@ -1016,7 +1016,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"minimumSend": "Minimum send amount is %1 BIP",
+	"minimumSend": "Minimum send amount is %1 NANO",
 	"@minimumSend": {
 		"description": "send_minimum_error",
 		"type": "text",
@@ -1100,7 +1100,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"repInfo": "A representative is an account that votes for network consensus. Voting power is weighted by balance, you may delegate your balance to increase the voting weight of a representative you trust. ",
+	"repInfo": "A representative is an account that votes for network consensus. Voting power is weighted by balance, you may delegate your balance to increase the voting weight of a representative you trust. Your representative does not have spending power over your funds. You should choose a representative that has little downtime and is trustworthy.",
 	"@repInfo": {
 		"description": "change_representative_info",
 		"type": "text",
@@ -1184,13 +1184,13 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"shareNatrium": "Share Fusion",
+	"shareNatrium": "Share Natrium",
 	"@shareNatrium": {
 		"description": "settings_share",
 		"type": "text",
 		"placeholders": {}
 	},
-	"shareNatriumText": "Check out Fusion! A premier BIP mobile wallet!",
+	"shareNatriumText": "Check out Natrium! A premier NANO mobile wallet!",
 	"@shareNatriumText": {
 		"description": "share_extra",
 		"type": "text",
@@ -1226,7 +1226,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"logoutDetail": "Logging out will remove your seed and all Fusion-related data from this device. If your seed is not backed up, you will never be able to access your funds again",
+	"logoutDetail": "Logging out will remove your seed and all Natrium-related data from this device. If your seed is not backed up, you will never be able to access your funds again",
 	"@logoutDetail": {
 		"description": "settings_logout_alert_message",
 		"type": "text",
@@ -1256,7 +1256,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"preferences": "Settings",
+	"preferences": "Preferences",
 	"@preferences": {
 		"description": "settings_preferences_header",
 		"type": "text",
@@ -1298,13 +1298,13 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"notificationTitle": "Received %1 ",
+	"notificationTitle": "Received %1 NANO",
 	"@notificationTitle": {
 		"description": "notification_title",
 		"type": "text",
 		"placeholders": {}
 	},
-	"notificationBody": "Open Fusion to view this transaction",
+	"notificationBody": "Open Natrium to view this transaction",
 	"@notificationBody": {
 		"description": "notification_body",
 		"type": "text",
@@ -1334,7 +1334,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"kaliumWallet": "Fusion Wallet",
+	"kaliumWallet": "Natrium Wallet",
 	"@kaliumWallet": {
 		"description": "kalium_wallet",
 		"type": "text",
@@ -1376,13 +1376,13 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferIntro": "This process will transfer the funds from a paper wallet to your Fusion wallet.\n\nTap the \"%1\" button to start.",
+	"transferIntro": "This process will transfer the funds from a paper wallet to your Natrium wallet.\n\nTap the \"%1\" button to start.",
 	"@transferIntro": {
 		"description": "transfer_intro",
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferQrScanHint": "Scan a Fusion seed or private key",
+	"transferQrScanHint": "Scan a Nano \nseed or private key",
 	"@transferQrScanHint": {
 		"description": "transfer_qr_scan_hint",
 		"type": "text",
@@ -1394,13 +1394,13 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferNoFunds": "This seed does not have any BIP on it",
+	"transferNoFunds": "This seed does not have any NANO on it",
 	"@transferNoFunds": {
 		"description": "transfer_no_funds_toast",
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferConfirmInfo": "A wallet with a balance of %1  has been detected.\n",
+	"transferConfirmInfo": "A wallet with a balance of %1 NANO has been detected.\n",
 	"@transferConfirmInfo": {
 		"description": "transfer_confirm_info_first",
 		"type": "text",
@@ -1424,7 +1424,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferComplete": "%1  successfully transferred to your Fusion Wallet.\n",
+	"transferComplete": "%1 NANO successfully transferred to your Natrium Wallet.\n",
 	"@transferComplete": {
 		"description": "transfer_complete_text",
 		"type": "text",
@@ -1436,19 +1436,19 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"scanInstructions": "Scan a Mx-address QR code",
+	"scanInstructions": "Scan a Nano \naddress QR code",
 	"@scanInstructions": {
 		"description": "scan_send_instruction_label",
 		"type": "text",
 		"placeholders": {}
 	},
-	"unlockPin": "Enter PIN to Unlock Fusion",
+	"unlockPin": "Enter PIN to Unlock Natrium",
 	"@unlockPin": {
 		"description": "unlock_kalium_pin",
 		"type": "text",
 		"placeholders": {}
 	},
-	"unlockBiometrics": "Authenticate to Unlock Fusion",
+	"unlockBiometrics": "Authenticate to Unlock Natrium",
 	"@unlockBiometrics": {
 		"description": "unlock_kalium_bio",
 		"type": "text",
@@ -1544,7 +1544,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"exampleCardIntro": "Welcome to Fusion Wallet. Once you receive FUSION, transactions will show up like this:",
+	"exampleCardIntro": "Welcome to Natrium. Once you receive NANO, transactions will show up like this:",
 	"@exampleCardIntro": {
 		"description": "example_card_intro",
 		"type": "text",
@@ -1586,7 +1586,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"newAccountIntro": "This is your new account. Once you receive BIP, transactions will show up like this:",
+	"newAccountIntro": "This is your new account. Once you receive NANO, transactions will show up like this:",
 	"@newAccountIntro": {
 		"description": "Alternate account intro card",
 		"type": "text",
@@ -1658,7 +1658,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"importSecretPhraseHint": "Please enter your 12-word secret phrase below. Each word should be separated by a space.",
+	"importSecretPhraseHint": "Please enter your 24-word secret phrase below. Each word should be separated by a space.",
 	"@importSecretPhraseHint": {
 		"description": "helper message for importing mnemnic",
 		"type": "text",
@@ -1676,7 +1676,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"mnemonicSizeError": "Secret phrase may only contain 12 words",
+	"mnemonicSizeError": "Secret phrase may only contain 24 words",
 	"@mnemonicSizeError": {
 		"description": "err",
 		"type": "text",
@@ -1796,13 +1796,13 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"passwordWillBeRequiredToOpenParagraph": "This password will be required to open Fusion.",
+	"passwordWillBeRequiredToOpenParagraph": "This password will be required to open Natrium.",
 	"@passwordWillBeRequiredToOpenParagraph": {
 		"description": "A paragraph that tells the users that the created password will be required to open Natrium.",
 		"type": "text",
 		"placeholders": {}
 	},
-	"passwordNoLongerRequiredToOpenParagraph": "You will not need a password to open Fusion anymore.",
+	"passwordNoLongerRequiredToOpenParagraph": "You will not need a password to open Natrium anymore.",
 	"@passwordNoLongerRequiredToOpenParagraph": {
 		"description": "An info paragraph that tells the user a password will no longer be needed to open Natrium",
 		"type": "text",
@@ -1838,7 +1838,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"requireAPasswordToOpenHeader": "Require a password to open Fusion?",
+	"requireAPasswordToOpenHeader": "Require a password to open Natrium?",
 	"@requireAPasswordToOpenHeader": {
 		"description": "A paragraph that asks the users if they would like a password to be required to open Natrium.",
 		"type": "text",
@@ -1880,7 +1880,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"connectingHeader": "Connecting...",
+	"connectingHeader": "Connecting",
 	"@connectingHeader": {
 		"description": "A header to let the user now that Natrium is currently connecting to (or loading) live chat.",
 		"type": "text",
@@ -1896,7 +1896,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"generatingWalletMessage": "Creating a wallet",
+	"generatingWalletMessage": "Creating wallet",
 	"@generatingWalletMessage": {
 		"type": "text",
 		"placeholders": {}
@@ -1906,7 +1906,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"toolbarTitleShowPassphrase": "Show passphrase",
+	"toolbarTitleShowPassphrase": "Passphrase",
 	"@toolbarTitleShowPassphrase": {
 		"type": "text",
 		"placeholders": {}
@@ -1981,6 +1981,66 @@
 	},
 	"errorInvalidInputsPush": "Invalid values for push transaction",
 	"@errorInvalidInputsPush": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"successfullySavedPin": "Succesfully saved PIN",
+	"@successfullySavedPin": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"errorOnPinInput": "Invalid PIN",
+	"@errorOnPinInput": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"sharePushLink": "Share Push",
+	"@sharePushLink": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"authSuccess": "Succesfully authenticated",
+	"@authSuccess": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"invalidInput": "Invalid input. Check your params and try again",
+	"@invalidInput": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"chooseContactTitle": "Choose contact",
+	"@chooseContactTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"chooseAccountTitle": "Choose account",
+	"@chooseAccountTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"validateAddressError": "Must be valid Minter address with Mx prefix",
+	"@validateAddressError": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"authenticateToViewTransaction": "Please authenticate to view your transaction overview",
+	"@authenticateToViewTransaction": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"userAuthorized": "User is authenticated",
+	"@userAuthorized": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"userNotAuthorized": "User is not authorized",
+	"@userNotAuthorized": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"cannotRecoverAccount": "Cannot recover that account.",
+	"@cannotRecoverAccount": {
 		"type": "text",
 		"placeholders": {}
 	}

@@ -319,7 +319,7 @@ class _ReceiverCardState extends State<ReceiverCardWidget> {
             decoration: InputDecoration(
                 contentPadding: const EdgeInsets.symmetric(
                     horizontal:12, vertical: 4),
-                hintText: "Enter address",
+                hintText: AppLocalizations.of(context).enterAddress,
                 hintStyle: TextStyle(color: colors.onBackground.withOpacity(0.7)),
                 border: inputBorder(context),
                 enabled: true,
@@ -347,7 +347,7 @@ class _ReceiverCardState extends State<ReceiverCardWidget> {
             decoration: InputDecoration(
                 contentPadding: const EdgeInsets.symmetric(
                     horizontal:12, vertical: 4),
-                hintText: "Enter address",
+                hintText: AppLocalizations.of(context).enterAddress,
                 hintStyle: TextStyle(color: colors.onBackground.withOpacity(0.7)),
                 border: inputBorder(context),
                 enabled: true,
@@ -421,7 +421,7 @@ class _ReceiverCardState extends State<ReceiverCardWidget> {
                           navigationBar: CupertinoNavigationBar(
                             backgroundColor: colors.background,
                             leading: SvgPicture.asset("assets/images/icons/ic_contact.svg"),
-                            middle: Text("Choose contact", style: TextStyle(color: colors.onBackground),),
+                            middle: Text(AppLocalizations.of(context).chooseContactTitle(), style: TextStyle(color: colors.onBackground),),
                           ),
                           child: SafeArea(
                             bottom: false,
@@ -462,7 +462,7 @@ class _ReceiverCardState extends State<ReceiverCardWidget> {
                             navigationBar: CupertinoNavigationBar(
                               backgroundColor: colors.background,
                               leading: SvgPicture.asset("assets/images/icons/ic_contact.svg"),
-                              middle: Text("Choose account", style: TextStyle(color: colors.onBackground),),
+                              middle: Text(AppLocalizations.of(context).chooseAccountTitle(), style: TextStyle(color: colors.onBackground),),
                             ),
                             child: SafeArea(
                               bottom: false,

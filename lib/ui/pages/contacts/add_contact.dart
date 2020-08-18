@@ -81,7 +81,8 @@ class _AddContactPageState extends State<AddContactPage> {
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
           child: BlocProvider(
-            create: (context) => AddContactFormBloc(widget.acc),
+            create: (context) => AddContactFormBloc(account: widget.acc,
+              localizations: AppLocalizations.of(context)),
             child: Builder(
               builder: (context) {
                 final ThemeData theme = Theme.of(context);
@@ -190,7 +191,8 @@ class _AddContactPageState extends State<AddContactPage> {
 }
 
 class AddContactFormBloc extends FormBloc<String, String> {
-  final Account _account;
+  final Account account;
+  final AppLocalizations localizations;
 
   final accountName = TextFieldBloc(
     validators: [
@@ -212,7 +214,7 @@ class AddContactFormBloc extends FormBloc<String, String> {
 
   final showSuccessResponse = BooleanFieldBloc();
 
-  AddContactFormBloc(this._account) {
+  AddContactFormBloc({this.account, this.localizations}) {
     addFieldBlocs(
       fieldBlocs: [
         accountName,
@@ -235,13 +237,13 @@ class AddContactFormBloc extends FormBloc<String, String> {
         debugPrint("Checking current account contacts");
         final contacts = Hive.box<Contact>(contactsBox);
         if(!address.value.contains("Mx")) {
-          address.addFieldError("Must be valid Minter address with Mx prefix");
+          address.addFieldError(localizations.validateAddressError());
           emitSubmissionCancelled();
         }
         await contacts.add(new Contact(accountName.value, address.value));
         emitSuccess();
       } else {
-        address.addFieldError("Must be valid Minter address with Mx prefix");
+        address.addFieldError(localizations.validateAddressError());;
         emitFailure();
       }
     } on Exception {
@@ -264,7 +266,7 @@ class SuccessScreen extends StatelessWidget {
           Icon(Icons.tag_faces, size: 100),
           SizedBox(height: 10),
           Text(
-            'Success',
+            AppLocalizations.of(context).flashOperationSuccess(),
             style: TextStyle(fontSize: 54, color: Colors.black),
             textAlign: TextAlign.center,
           ),

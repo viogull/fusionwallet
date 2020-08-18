@@ -86,7 +86,7 @@ class _LockUiState extends State<LockUi> with TickerProviderStateMixin {
     try {
       isAuthenticated = await _auth.authenticateWithBiometrics(
         localizedReason:
-            "Please authenticate to view your transaction overview",
+            AppLocalizations.of(context).authenticateToViewTransaction(),
         useErrorDialogs: true,
         stickyAuth: true,
       );
@@ -97,8 +97,8 @@ class _LockUiState extends State<LockUi> with TickerProviderStateMixin {
     if (!mounted) return;
 
     isAuthenticated
-        ? widget.log.d('User is authenticated!')
-        : widget.log.d('User is not authenticated.');
+        ? widget.log.d(AppLocalizations.of(context).userAuthorized())
+        : widget.log.d(AppLocalizations.of(context).userNotAuthorized());
 
     if (isAuthenticated) {
       //injector.get<HapticUtil>().fingerprintSucess();
@@ -191,8 +191,16 @@ class _LockUiPincodeState extends State<LockUiPincode> {
       debugPrint(
           "PinLength is max, expected ${widget.expected}, entered $_otp");
       if (_otp == widget.expected) {
-        Navigator.of(context).pushReplacementNamed(HomePage.navId);
+        FlashHelper.successBar(context, message: AppLocalizations.of(context).authSuccess());
+
+        Future.delayed(Duration(milliseconds: 500), () {
+          Navigator.of(context).pushReplacementNamed(HomePage.navId);
+        });
       } else {
+
+        Future.delayed(Duration(milliseconds: 200), () {
+          FlashHelper.errorBar(context, message: AppLocalizations.of(context).pinInvalid);
+        });
         setState(() {
           this.pincode = _otp;
           this._otp = "";
@@ -294,86 +302,95 @@ class _LockUiPincodeState extends State<LockUiPincode> {
     );
 
     final keyboard = Container(
-      padding: EdgeInsets.only(bottom: 32),
+      padding: EdgeInsets.only(bottom: 16),
       alignment: Alignment.bottomCenter,
       child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  KeyboardNumber(
-                    n: 1,
-                    onPressed: () {
-                      // pinIndexSetup("0");
-                      _handleKeypadClick('1', context);
-                    },
-                  ),
-                  KeyboardNumber(
-                    n: 2,
-                    onPressed: () {
-                      // pinIndexSetup("0");
-                      _handleKeypadClick('2', context);
-                    },
-                  ),
-                  KeyboardNumber(
-                    n: 3,
-                    onPressed: () {
-                      // pinIndexSetup("0");
-                      _handleKeypadClick('3', context);
-                    },
-                  ),
-                ]),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  KeyboardNumber(
-                    n: 4,
-                    onPressed: () {
-                      // pinIndexSetup("0");
-                      _handleKeypadClick('4', context);
-                    },
-                  ),
-                  KeyboardNumber(
-                    n: 5,
-                    onPressed: () {
-                      // pinIndexSetup("0");
-                      _handleKeypadClick('5', context);
-                    },
-                  ),
-                  KeyboardNumber(
-                    n: 6,
-                    onPressed: () {
-                      // pinIndexSetup("0");
-                      _handleKeypadClick('6', context);
-                    },
-                  ),
-                ]),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  KeyboardNumber(
-                    n: 7,
-                    onPressed: () {
-                      // pinIndexSetup("0");
-                      _handleKeypadClick('7', context);
-                    },
-                  ),
-                  KeyboardNumber(
-                    n: 8,
-                    onPressed: () {
-                      // pinIndexSetup("0");
-                      _handleKeypadClick('8', context);
-                    },
-                  ),
-                  KeyboardNumber(
-                    n: 9,
-                    onPressed: () {
-                      // pinIndexSetup("0");
-                      _handleKeypadClick('9', context);
-                    },
-                  ),
-                ]),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    KeyboardNumber(
+                      n: 1,
+                      onPressed: () {
+                        // pinIndexSetup("0");
+                        _handleKeypadClick('1', context);
+                      },
+                    ),
+                    KeyboardNumber(
+                      n: 2,
+                      onPressed: () {
+                        // pinIndexSetup("0");
+                        _handleKeypadClick('2', context);
+                      },
+                    ),
+                    KeyboardNumber(
+                      n: 3,
+                      onPressed: () {
+                        // pinIndexSetup("0");
+                        _handleKeypadClick('3', context);
+                      },
+                    ),
+                  ]),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    KeyboardNumber(
+                      n: 4,
+                      onPressed: () {
+                        // pinIndexSetup("0");
+                        _handleKeypadClick('4', context);
+                      },
+                    ),
+                    KeyboardNumber(
+                      n: 5,
+                      onPressed: () {
+                        // pinIndexSetup("0");
+                        _handleKeypadClick('5', context);
+                      },
+                    ),
+                    KeyboardNumber(
+                      n: 6,
+                      onPressed: () {
+                        // pinIndexSetup("0");
+                        _handleKeypadClick('6', context);
+                      },
+                    ),
+                  ]),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    KeyboardNumber(
+                      n: 7,
+                      onPressed: () {
+                        // pinIndexSetup("0");
+                        _handleKeypadClick('7', context);
+                      },
+                    ),
+                    KeyboardNumber(
+                      n: 8,
+                      onPressed: () {
+                        // pinIndexSetup("0");
+                        _handleKeypadClick('8', context);
+                      },
+                    ),
+                    KeyboardNumber(
+                      n: 9,
+                      onPressed: () {
+                        // pinIndexSetup("0");
+                        _handleKeypadClick('9', context);
+                      },
+                    ),
+                  ]),
+            ),
             Container(
               margin: const EdgeInsets.only(bottom: 10.0),
               child: Row(
@@ -431,18 +448,16 @@ class _LockUiPincodeState extends State<LockUiPincode> {
               flex: 1,
               child: textLabel,
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.03,
-            ),
+
             Flexible(
-              flex: 1,
+              flex: 2,
               child: pinCodeView,
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.1,
             ),
             Flexible(
-              flex: 3,
+              flex: 5,
               child: keyboard,
             ),
           ],
@@ -482,7 +497,7 @@ class KeyboardNumber extends StatelessWidget {
           color: Theme.of(context).colorScheme.background),
       alignment: Alignment.center,
       child: MaterialButton(
-        padding: EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(1.0),
         onPressed: () {
           injector.get<HapticUtil>().selection();
           onPressed.call();
