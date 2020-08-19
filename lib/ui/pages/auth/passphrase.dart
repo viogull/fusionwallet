@@ -446,11 +446,13 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
                                   });
 
                                 } else {
-//                                  setState(() {
-//                                    _verificationStage = _verificationStage + 1;
-//                                  });
+                                  setState(() {
+                                    _verificationStage = _verificationStage + 1;
+                                  });
                                 }
                               } else {
+                                FlashHelper.errorBar(context, message: AppLocalizations.of(context)
+                                    .flashIncorrectWordMessage());
                                 if (_verificationStage > 0) {
                                   FlashHelper.errorBar(context, message: AppLocalizations.of(context)
                                       .flashIncorrectWordMessage());
