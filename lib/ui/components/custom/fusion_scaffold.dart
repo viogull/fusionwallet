@@ -35,27 +35,28 @@ class FusionScaffold extends StatelessWidget {
         ? "assets/images/backgrounds/bg_primary.svg"
         : "assets/images/backgrounds/bg_primary_light.svg";
 
-    return SafeArea(
-      maintainBottomViewPadding: true,
-      child: Stack(
-        children: <Widget>[
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: SvgPicture.asset(
-              background,
-              fit: BoxFit.fill,
-            ),
+    return  Stack(
+      children: <Widget>[
+        Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: SvgPicture.asset(
+            background,
+            fit: BoxFit.fill,
           ),
-          Scaffold(
+        ),
+        SafeArea(
+          bottom: true,
+          maintainBottomViewPadding: true,
+          child: Scaffold(
             backgroundColor: Colors.transparent,
             drawer: drawer,
             appBar: _buildToolbar(context),
             resizeToAvoidBottomPadding: false,
             body: child,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

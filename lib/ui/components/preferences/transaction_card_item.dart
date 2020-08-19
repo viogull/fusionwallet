@@ -18,9 +18,7 @@ class TransactionsView extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width * 0.5;
     return Card(
-      child: Container(
-        width: 500,
-        height: 300,
+      child: Expanded(
         child: Column(
           children: [
             Padding(

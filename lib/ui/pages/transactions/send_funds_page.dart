@@ -168,11 +168,11 @@ class SendFundsPage extends StatelessWidget {
               Flexible(
                 flex: 2,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(4.0),
                   child: ButtonBar(
                     alignment: MainAxisAlignment.center,
                     buttonMinWidth: MediaQuery.of(context).size.width * 0.9,
-                    buttonHeight: 45,
+                    buttonHeight: 50,
                     children: <Widget>[
                       RaisedButton(
                         onPressed: () {},

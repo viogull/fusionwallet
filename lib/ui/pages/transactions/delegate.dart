@@ -13,7 +13,6 @@ import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/utils/flasher.dart';
-import 'package:hive/hive.dart';
 
 import '../../../inject.dart';
 import '../../widgets.dart';
@@ -31,7 +30,6 @@ class DelegateFormBloc extends FormBloc<String, String> {
 
 
   AddressData _accountBalance;
-  AppLocalizations localizations;
 
   final pubkeyBloc = TextFieldBloc(
     initialValue: DEFAULT_DELEGATE_PUBKEY
@@ -40,16 +38,11 @@ class DelegateFormBloc extends FormBloc<String, String> {
 
   SelectFieldBloc<String, dynamic> coinBloc = SelectFieldBloc<String, dynamic>();
 
-  DelegateFormBloc({AddressData balance, AppLocalizations localizations}) {
+  DelegateFormBloc({AddressData balance}) {
     addFieldBlocs(fieldBlocs: [pubkeyBloc, coinBloc, stakeBloc]);
     pubkeyBloc.updateInitialValue(DEFAULT_DELEGATE_PUBKEY);
     _accountBalance = balance;
-    final box = Hive.box<Account>(accountsBox);
-    box.values.forEach((element) {
-      logger.d("Name ${element.name}, hash ${element.hash}, ${element.toString()}");
-      if(element != null)
-        _account = element;
-    });
+
     final items =  _accountBalance.data.balances.map((e) => "${e.coin} (${e.amount})").toList();
       coinBloc.updateItems(items);
 
@@ -73,7 +66,7 @@ class DelegateFormBloc extends FormBloc<String, String> {
           emitFailure(failureResponse: " ");
       else {
         final delegateRequest = await injector.get<MinterRest>().delegate(
-          txData:  DelegateUboundTxRequest(publicKey: pubkey,
+           txData:  DelegateUboundTxRequest(publicKey: pubkey,
                 coin: coin, stake: stake, gasCoin: 'BIP'), hash:  _account.hash);
 
         logger.d("Response from node -> $delegateRequest");
@@ -81,7 +74,7 @@ class DelegateFormBloc extends FormBloc<String, String> {
           final response = (delegateRequest as String);
           emitSuccess(successResponse: " ");
         } else {
-          emitFailure(failureResponse: localizations.invalidInput());
+          emitFailure(failureResponse: 'D');
         }
       }
     }on Exception catch (exception) {
@@ -128,7 +121,6 @@ class DelegateFundsPage extends StatelessWidget {
                   {
                     return BlocProvider(
                         create: (context) => DelegateFormBloc(
-                            localizations: AppLocalizations.of(context),
                             balance: snapshot.data as AddressData),
                         child: FormBlocListener<DelegateFormBloc, String, String>(
                             onSubmitting: (context, state) {
@@ -209,7 +201,13 @@ class DelegateFundsPage extends StatelessWidget {
                                                     AppLocalizations.of(context)
                                                         .labelCoin(),
                                                     textAlign: TextAlign.start,
-
+                                                    style: TextStyle(
+                                                        color: Theme
+                                                            .of(context)
+                                                            .colorScheme
+                                                            .onSurface,
+                                                        fontWeight: FontWeight
+                                                            .bold),
                                                   ),
                                                 ),
                                               ),
@@ -251,7 +249,11 @@ class DelegateFundsPage extends StatelessWidget {
                                                 child: Theme(
                                                   data: theme,
                                                   child: TextFieldBlocBuilder(
-
+                                                    style: TextStyle(color: Theme
+                                                        .of(context)
+                                                        .colorScheme
+                                                        .onBackground
+                                                        .withOpacity(0.6)),
                                                     textFieldBloc: bloc.stakeBloc,
                                                     maxLines: 1,
                                                     maxLengthEnforced: false,
@@ -282,20 +284,17 @@ class DelegateFundsPage extends StatelessWidget {
                                         ),
                                       ),
                                       Flexible(
-                                        flex: 5,
-                                        child: Align(
-                                          alignment: Alignment.bottomCenter,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: FusionButton(
-                                              text: AppLocalizations.of(context)
-                                                  .buttonDelegate()
-                                                  .toString(),
-                                              onPressed: () {
-                                                bloc.submit();
-                                              },
-                                              expandedWidth: true,
-                                            ),
+                                        flex: 2,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: FusionButton(
+                                            text: AppLocalizations.of(context)
+                                                .buttonDelegate()
+                                                .toString(),
+                                            onPressed: () {
+                                              bloc.submit();
+                                            },
+                                            expandedWidth: true,
                                           ),
                                         ),
                                       )
