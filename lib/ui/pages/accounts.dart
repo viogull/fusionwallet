@@ -5,15 +5,17 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:fusion_wallet/core/minter_rest.dart';
+import 'package:fusion_wallet/core/models/transaction.dart';
+import 'package:fusion_wallet/core/models/transanctions_response.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
-
+import 'package:fusion_wallet/ui/components/preferences/transaction_card_item.dart';
 import 'package:fusion_wallet/ui/pages/share_address.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
+import './pages.dart';
 import '../../core/state_container.dart';
 import '../../inject.dart';
-import './pages.dart';
 import '../../localizations.dart';
 import '../components/lists/balances_card.dart';
 import 'transactions/rewards_info_page.dart';
@@ -156,17 +158,50 @@ class AccountsPage extends StatelessWidget {
               : Container();
         }
         break;
-      case 5:
-        {
-          return Padding(
-            padding: const EdgeInsets.all(16),
-            child: AutoSizeText(
-              AppLocalizations.of(context).labelTransanctionsHistoryTitle(),
-              textAlign: TextAlign.center,
-            ),
-          );
-        }
-        break;
+      case 5: {
+        final theme = Theme.of(context);
+        final width = MediaQuery.of(context).size.width * 0.8;
+
+        return FutureBuilder(
+          future: injector.get<MinterRest>().fetchTransactions(
+               StateContainer.of(context).selectedAccount.address),
+          builder: (context, snapshot) {
+            debugPrint(
+                'Connection State ${snapshot.connectionState}, has data : ${snapshot.hasData}');
+            if (snapshot.connectionState == ConnectionState.done &&
+                snapshot.hasData) {
+              var txs =  (snapshot.data as TransactionsResponse);
+              if (txs != null) {
+
+                return TransactionsView(data: txs,);
+              } else
+                return Card(
+                  margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: FusionTheme.borderRadius,
+                      side: BorderSide(
+                          color: theme.colorScheme.onSurface, width: 0.1)),
+                  child: Container(
+                      height: 001, child: PlatformCircularProgressIndicator()),
+                );
+            } else {
+              return Card(
+                margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                shape: RoundedRectangleBorder(
+                    borderRadius: FusionTheme.borderRadius,
+                    side:
+                    BorderSide(color: theme.colorScheme.onSurface, width: 0.1)),
+                color: theme.colorScheme.surface,
+                elevation: 4,
+                child: Container(
+                    width: width,
+                    height: 100,
+                    child: Center(child: PlatformCircularProgressIndicator())),
+              );
+            }
+          },
+        );
+      }
     }
   }
 
@@ -217,6 +252,7 @@ class AccountsPage extends StatelessWidget {
 
   Widget _buildRewardsCard(BuildContext context) {
     final theme = Theme.of(context);
+    final width = MediaQuery.of(context).size.width * 0.8;
 
     return GestureDetector(
       onTap: () {
@@ -242,6 +278,11 @@ class AccountsPage extends StatelessWidget {
 }
 
 class TransanctionHistoryItem extends StatelessWidget {
+
+  final Transaction data;
+
+  const TransanctionHistoryItem({this.data});
+
   @override
   Widget build(BuildContext context) {
     return Text("NAme OF Receiver");
