@@ -38,49 +38,8 @@ class _HistoryPageState extends State<HistoryPage> {
 
 
 
-  Widget _buildBalancesCard(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final width = MediaQuery.of(context).size.width * 0.8;
-    return FutureBuilder(
-      future: injector.get<MinterRest>()(
-          address: StateContainer.of(context).selectedAccount.address),
-      builder: (context, snapshot) {
-        debugPrint(
-            'Connection State ${snapshot.connectionState}, has data : ${snapshot.hasData}');
-        if (snapshot.connectionState == ConnectionState.done &&
-            snapshot.hasData) {
-          var balances = snapshot.data.data.balances;
-          if (balances.length > 0) {
-            debugPrint("Rendering balances length ${balances.length}");
-            return AccountBalancesCard(data: snapshot.data);
-          } else
-            Card(
-              margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-              shape: RoundedRectangleBorder(
-                  borderRadius: FusionTheme.borderRadius,
-                  side: BorderSide(
-                      color: theme.colorScheme.onSurface, width: 0.1)),
-              child: Container(
-                  height: 001, child: PlatformCircularProgressIndicator()),
-            );
-        } else {
-          return Card(
-            margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-            shape: RoundedRectangleBorder(
-                borderRadius: FusionTheme.borderRadius,
-                side:
-                BorderSide(color: theme.colorScheme.onSurface, width: 0.1)),
-            color: theme.colorScheme.surface,
-            elevation: 4,
-            child: Container(
-                width: width,
-                height: 100,
-                child: Center(child: PlatformCircularProgressIndicator())),
-          );
-        }
-      },
-    );
-  }
+
+
 
   Future<Null> _endDateSelect(BuildContext context) async {
     final DateTime picked = await showDatePicker(
@@ -424,7 +383,7 @@ class _HistoryPageState extends State<HistoryPage> {
             ),
             Flexible(
               flex: 5,
-              child: _buildBalancesCard(context),
+              child: buttonResult,
             ),
             SizedBox(
               height: 45,
