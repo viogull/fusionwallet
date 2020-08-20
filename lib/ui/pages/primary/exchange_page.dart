@@ -6,6 +6,7 @@ import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_text_field.dart';
 import 'package:fusion_wallet/ui/pages/auth/account_name.dart';
+import 'package:fusion_wallet/ui/pages/auth/conditions.dart';
 import 'package:fusion_wallet/ui/pages/auth/intro.dart';
 
 import 'package:fusion_wallet/ui/pages/auth/pincode.dart';
@@ -91,7 +92,7 @@ class _ExchangePageState extends State<ExchangePage> {
       height: 50,
       width: MediaQuery.of(context).size.width * 0.30,
       child: FusionButton(text: AppLocalizations.of(context).buttonBuy(),onPressed: () {
-        Navigator.pushNamed(context, IntroPage.navId);
+        //Navigator.pushNamed(context, AccountCreationNameForm.navId);
       }),
     );
 
