@@ -27,5 +27,7 @@
 		<key>NSExtensionPrincipalClass</key>
 		<string>$(PRODUCT_MODULE_NAME).NotificationService</string>
 	</dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Your location is required for xyz benefits</string>
 </dict>
 </plist>
