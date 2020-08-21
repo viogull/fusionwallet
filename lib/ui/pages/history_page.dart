@@ -1,10 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/pages/popups/popups_history_page.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
+import '../../inject.dart';
 
 class HistoryPage extends StatefulWidget {
   static const String navId = '/HistoryPage';
@@ -13,6 +17,8 @@ class HistoryPage extends StatefulWidget {
 }
 
 class _HistoryPageState extends State<HistoryPage> {
+  String _selectedAccount;
+
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();
 
@@ -72,10 +78,8 @@ class _HistoryPageState extends State<HistoryPage> {
                             bottom: BorderSide(width: 2, color: Colors.white)),
                       ),
                       margin: const EdgeInsets.only(
-                          bottom: 10, top: 30, left: 22, right: 22),
+                          bottom: 10, top: 30, left: 12, right: 12),
                       child: Column(
-//                        crossAxisAlignment: CrossAxisAlignment.,
-//                        mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
                           SizedBox(
@@ -118,156 +122,11 @@ class _HistoryPageState extends State<HistoryPage> {
           });
     }
 
-    final labelAccount = Container(
-      alignment: Alignment.topLeft,
-      margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
-      child: Text(
-        'Account',
-        style: TextStyle(
-          color: (theme.colorScheme.onSurface),
-        ),
-      ),
-    );
-
-    final history = Container(
-      width: MediaQuery.of(context).size.width,
-      child: Card(
-        borderOnForeground: false,
-        elevation: 16,
-        color: Theme.of(context).colorScheme.surface,
-        shape: RoundedRectangleBorder(
-          borderRadius: FusionTheme.borderRadius,
-        ),
-        margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-        child: LimitedBox(
-          maxWidth: MediaQuery.of(context).size.width,
-          maxHeight: 35,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
-            child: GestureDetector(
-              onTap: _showModalSheet,
-              child: Row(
-                children: <Widget>[
-                  AutoSizeText(
-                    AppLocalizations.of(context).inputAccountNameHintText(),
-                    textAlign: TextAlign.left,
-                    minFontSize: 10,
-                    maxFontSize: 12,
-                  ),
-//                  SizedBox(
-//                    width: MediaQuery.of(context).size.width * 0.03,
-//                  ),
-                  SvgPicture.asset(
-                    ('assets/images/icons/ic_bitcoin.svg'),
-                    // color: Colors.white,
-                    fit: BoxFit.fill,
-                    height: 12,
-                    width: 12,
-                    // height: MediaQuery.of(context).size.height,
-                  ),
-                  SizedBox(
-                    width: 7,
-                  ),
-                  Text(
-                    '0.00',
-                    textAlign: TextAlign.right,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-
-    final cardStart = Center(
-      child: Card(
-        borderOnForeground: false,
-        elevation: 16,
-        color: Theme.of(context).colorScheme.surface,
-        shape: RoundedRectangleBorder(
-          borderRadius: FusionTheme.borderRadius,
-        ),
-        margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-        child: Container(
-          width: MediaQuery.of(context).size.width * 0.35,
-          height: 45,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            color: Theme.of(context).colorScheme.surface,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
-            child: GestureDetector(
-              child:
-                  Center(child: Text("${startDate.toLocal()}".split(' ')[0])),
-              onTap: () => _startDateSelect(context),
-            ),
-          ),
-        ),
-      ),
-    );
-
-    final cardEnd = Center(
-      child: Card(
-        borderOnForeground: false,
-        elevation: 16,
-        color: Theme.of(context).colorScheme.surface,
-        shape: RoundedRectangleBorder(
-          borderRadius: FusionTheme.borderRadius,
-        ),
-        margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-        child: Container(
-            width: MediaQuery.of(context).size.width * 0.35,
-            height: 45,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Theme.of(context).colorScheme.surface,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
-              child: GestureDetector(
-                child:
-                    Center(child: Text("${endDate.toLocal()}".split(' ')[0])),
-                onTap: () => _endDateSelect(context),
-              ),
-            )),
-      ),
-    );
-
-    final labelStartDate = Container(
-      alignment: Alignment.topLeft,
-      margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
-      child: Text(
-        "Start Date:",
-        style: TextStyle(
-          color: (theme.colorScheme.onSurface),
-        ),
-      ),
-    );
-
-    final labelEndDate = Container(
-      alignment: Alignment.topLeft,
-      margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
-      child: Text(
-        "End Date:",
-        style: TextStyle(
-          color: (theme.colorScheme.onSurface),
-        ),
-      ),
-    );
-
-    final buttonResult = Container(
-      height: 50,
-      width: MediaQuery.of(context).size.width,
-      child: FusionButton(
-        text: AppLocalizations.of(context).buttonViewResults(),
-        onPressed: () {
-          Navigator.pushNamed(context, PopupHistoryPage.navId);
-        },
-      ),
-    );
-
+    final colors = Theme.of(context).colorScheme;
+    final allAccounts = injector.get<Vault>().getAllAccounts();
+    allAccounts.forEach((acc) {
+      debugPrint("Account ${acc.name}, ${acc.address}, ${acc.hash}");
+    });
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
@@ -287,8 +146,141 @@ class _HistoryPageState extends State<HistoryPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  labelAccount,
-                  history,
+                  Container(
+                    alignment: Alignment.topLeft,
+                    margin:
+                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 8.0),
+                    child: Text(
+                      AppLocalizations.of(context).labelAccount(),
+                      style: TextStyle(
+                        color: (theme.colorScheme.onSurface),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Card(
+                      borderOnForeground: false,
+                      elevation: 16,
+                      color: Theme.of(context).colorScheme.surface,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: FusionTheme.borderRadius,
+                      ),
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 0, horizontal: 8),
+                      child: LimitedBox(
+                        maxWidth: MediaQuery.of(context).size.width,
+                        maxHeight: 35,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 6, horizontal: 4),
+                          child: GestureDetector(
+                            onTap: () async {
+                              final modalAddressSelection =
+                                  await showBarModalBottomSheet(
+                                      context: context,
+                                      backgroundColor: colors.background,
+                                      builder: (context, controller) {
+                                        return Material(
+                                          child: CupertinoPageScaffold(
+                                            backgroundColor: colors.background,
+                                            navigationBar:
+                                                CupertinoNavigationBar(
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              automaticallyImplyLeading: false,
+                                              middle: Text(
+                                                  AppLocalizations.of(context)
+                                                      .chooseAccountTitle(),
+                                                  style: TextStyle(
+                                                      color: theme.colorScheme
+                                                          .onBackground)),
+                                            ),
+                                            child: SafeArea(
+                                              bottom: false,
+                                              child: ListView.builder(
+                                                reverse: false,
+                                                shrinkWrap: true,
+                                                physics:
+                                                    ClampingScrollPhysics(),
+                                                controller: controller,
+                                                itemCount: allAccounts.length,
+                                                itemBuilder: (context, index) =>
+                                                    ListTile(
+                                                  title: AutoSizeText(
+                                                      allAccounts[index].name ==
+                                                              null
+                                                          ? allAccounts[index]
+                                                              .seed
+                                                          : allAccounts[index]
+                                                              .name),
+                                                  subtitle: AutoSizeText("Mx" +
+                                                      (allAccounts[index]
+                                                                  .address ==
+                                                              null
+                                                          ? ""
+                                                          : allAccounts[index]
+                                                              .address)),
+                                                  onTap: () {
+                                                    Navigator.of(context).pop(
+                                                        allAccounts[index]
+                                                            .name);
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      });
+                              setState(() {
+                                this._selectedAccount =
+                                    modalAddressSelection as String;
+                              });
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Flexible(
+                                  flex: 5,
+                                  child: AutoSizeText(
+                                    (this._selectedAccount == null)
+                                        ? AppLocalizations.of(context)
+                                            .inputAccountNameHintText()
+                                        : this._selectedAccount,
+                                    textAlign: TextAlign.left,
+                                    minFontSize: 10,
+                                    maxFontSize: 12,
+                                  ),
+                                ),
+                                Flexible(
+                                    flex: 5,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        SvgPicture.asset(
+                                          ('assets/images/icons/ic_bitcoin.svg'),
+                                          // color: Colors.white,
+                                          fit: BoxFit.fill,
+                                          height: 12,
+                                          width: 12,
+                                          // height: MediaQuery.of(context).size.height,
+                                        ),
+                                        SizedBox(
+                                          width: 7,
+                                        ),
+                                        Text(
+                                          '0.00',
+                                          textAlign: TextAlign.right,
+                                        )
+                                      ],
+                                    )),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -305,8 +297,47 @@ class _HistoryPageState extends State<HistoryPage> {
                       Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          labelStartDate,
-                          cardStart,
+                          Container(
+                            alignment: Alignment.topLeft,
+                            margin: EdgeInsets.symmetric(
+                                vertical: 0.0, horizontal: 20.0),
+                            child: Text(
+                              AppLocalizations.of(context).labelStartDate(),
+                              style: TextStyle(
+                                color: (theme.colorScheme.onSurface),
+                              ),
+                            ),
+                          ),
+                          Center(
+                            child: Card(
+                              borderOnForeground: false,
+                              elevation: 16,
+                              color: Theme.of(context).colorScheme.surface,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: FusionTheme.borderRadius,
+                              ),
+                              margin: const EdgeInsets.symmetric(
+                                  vertical: 0, horizontal: 0),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * 0.35,
+                                height: 45,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: Theme.of(context).colorScheme.surface,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 10, horizontal: 8),
+                                  child: GestureDetector(
+                                    child: Center(
+                                        child: Text("${startDate.toLocal()}"
+                                            .split(' ')[0])),
+                                    onTap: () => _startDateSelect(context),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       )
                     ],
@@ -317,8 +348,48 @@ class _HistoryPageState extends State<HistoryPage> {
                       Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          labelEndDate,
-                          cardEnd,
+                          Container(
+                            alignment: Alignment.topLeft,
+                            margin: EdgeInsets.symmetric(
+                                vertical: 0.0, horizontal: 20.0),
+                            child: Text(
+                              AppLocalizations.of(context).labelEndDate(),
+                              style: TextStyle(
+                                color: (theme.colorScheme.onSurface),
+                              ),
+                            ),
+                          ),
+                          Center(
+                            child: Card(
+                              borderOnForeground: false,
+                              elevation: 16,
+                              color: Theme.of(context).colorScheme.surface,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: FusionTheme.borderRadius,
+                              ),
+                              margin: const EdgeInsets.symmetric(
+                                  vertical: 0, horizontal: 0),
+                              child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.35,
+                                  height: 45,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color:
+                                        Theme.of(context).colorScheme.surface,
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 6, horizontal: 4),
+                                    child: GestureDetector(
+                                      child: Center(
+                                          child: Text("${endDate.toLocal()}"
+                                              .split(' ')[0])),
+                                      onTap: () => _endDateSelect(context),
+                                    ),
+                                  )),
+                            ),
+                          ),
                         ],
                       )
                     ],
@@ -334,7 +405,33 @@ class _HistoryPageState extends State<HistoryPage> {
             ),
             Flexible(
               flex: 1,
-              child: buttonResult,
+              child: Container(
+                height: 50,
+                width: MediaQuery.of(context).size.width,
+                child: FusionButton(
+                  text: AppLocalizations.of(context).buttonViewResults(),
+                  onPressed: () async {
+                    debugPrint(
+                        "Requesting history for ${this._selectedAccount} , startDate ${this.startDate.toIso8601String()} to ${this.endDate.toIso8601String()}");
+
+                    Navigator.of(context).push(new MaterialPageRoute(
+                        builder: (context) {
+                          return PopupHistoryPage(
+                              address: injector
+                                  .get<Vault>()
+                                  .getAllAccounts()
+                                  .firstWhere((element) =>
+                                      element.name == this._selectedAccount)
+                                  .address,
+                              name: this._selectedAccount,
+                              from: this.startDate,
+                              to: this.endDate);
+                          ;
+                        },
+                        fullscreenDialog: true));
+                  },
+                ),
+              ),
             ),
             SizedBox(
               height: 45,

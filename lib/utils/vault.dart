@@ -30,7 +30,6 @@ class Vault {
   static const String sessionKey = 'fusion_session_key';
   static const String prefsCurrentAccountName = 'current_account_name';
 
-
   static const String lastReferalInviter = "fusion_referal_last";
 
   final log = injector.get<Logger>();
@@ -38,8 +37,6 @@ class Vault {
   Box<dynamic> preferences;
 
   Vault();
-
-
 
   final FlutterSecureStorage secureStorage = new FlutterSecureStorage();
 
@@ -217,7 +214,6 @@ class Vault {
     return account != null;
   }
 
-
   void saveAccount(String accountName, String pin, String mnemonic, String seed,
       String publicKey, String privateKey, String address) async {
     log.d("Creating and persisting new account $accountName");
@@ -226,14 +222,15 @@ class Vault {
 
   Account get currentAccount => _accountsBox.getAt(0);
 
-
   Future<void> addContact(Contact contact) {
     if (!contact.isInBox) {
       contact.save();
     } else {
       Hive.box(contactsBox).add(contact).then((value) {
         return value;
-      }).catchError( (err) { return null; } );
+      }).catchError((err) {
+        return null;
+      });
     }
   }
 
@@ -249,5 +246,35 @@ class Vault {
 
   Future<String> getLastReferalInviter() async {
     return await secureStorage.read(key: lastReferalInviter);
+  }
+
+  Future<void> addAccount(
+      {String name,
+      String mnemonic,
+      String seed,
+      String address,
+      String privKey,
+      String publicKey}) async {
+    log.d("Creating additional account $name [$address]");
+    await Hive.box<Account>(additionalAccountsBox).add(new Account(
+        name: name,
+        address: address,
+        mnemonic: mnemonic,
+        seed: seed,
+        publicKey: publicKey,
+        privateKey: privKey));
+  }
+
+  List<Account> getAdditionals() =>
+      Hive.box<Account>(additionalAccountsBox).values.toList();
+
+  List<Account> getAllAccounts() {
+    Box<Account> accs = Hive.box<Account>(accountsBox);
+    Account root = accs.values.toList()[accs.values.length - 1];
+    List<Account> list = List();
+    list.add(root);
+    log.d(root.name);
+    list.addAll(getAdditionals());
+    return list;
   }
 }

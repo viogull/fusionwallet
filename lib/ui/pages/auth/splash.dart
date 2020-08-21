@@ -31,7 +31,6 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
   bool _hasCheckedLoggedIn;
   bool _retried;
 
-
   final logger = injector.get<Logger>();
 
   bool seedIsEncrypted(String seed) {
@@ -67,37 +66,33 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
       await injector.get<SharedPrefsUtil>().setFirstLaunch();
 
       Box<Account> box = Hive.box(accountsBox);
-      if (box.length < 1 ) {
+      if (box.length < 1) {
         debugPrint(
             'No Account Exists: ${box.length}. Navigating to intro page.');
         Navigator.of(context).pushReplacementNamed(AuthUi.navId);
       } else {
         Account lastAccount = box.getAt(box.length - 1);
-        if(lastAccount.pin == null) {
+        if (lastAccount.pin == null) {
           logger.d("Corrupted account. Deleting all");
-         await injector.get<Vault>().deleteAll();
+          await injector.get<Vault>().deleteAll();
           Navigator.of(context).pushReplacementNamed(AuthUi.navId);
-
         }
         debugPrint(
             'Accounts exists. Seed: ${lastAccount.pin}. Trying fetch access state');
 
-
         final accessRequest = await MinterRest().checkAccess(lastAccount);
 
         if (!accessRequest) {
-          if(lastAccount.pin != null) {
+          if (lastAccount.pin != null) {
             injector.get<MinterRest>().fetchNotifications().then((value) => {
-            Hive.box<AdminNotification>(notificationsBox)
-                .addAll((value as AdminNotificationsResponse).notifications )
-            }
-            );
+                  Hive.box<AdminNotification>(notificationsBox).addAll(
+                      (value as AdminNotificationsResponse).notifications)
+                });
             Navigator.of(context).pushReplacementNamed(LockUi.navId,
-                arguments:
-                LockscreenArgs(pin: lastAccount.pin, biometricEnabled: true));
+                arguments: LockscreenArgs(
+                    pin: lastAccount.pin, biometricEnabled: true));
           } else {
             Navigator.of(context).pushReplacementNamed(AuthUi.navId);
-
           }
         } else {
           Navigator.of(context).pushReplacementNamed(AccessLockedUi.navId);
@@ -137,12 +132,19 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
 
       if (deepLink != null) {
         logger.d("Received deeplink " + dynamicLink.link.toString());
-        if(dynamicLink.link.toString().contains("https://fusion-push.cash/push/")) {
+        if (dynamicLink.link
+            .toString()
+            .contains("https://fusion-push.cash/push/")) {
           logger.d("Detected PUSH deeplink");
           Future.delayed(Duration(milliseconds: 1500), () {
-            Navigator.push(context, new MaterialPageRoute(builder: (context) {
-              return ApplyPushDeeplink(url: dynamicLink.link.toString());
-            }, fullscreenDialog: true));
+            Navigator.push(
+                context,
+                new MaterialPageRoute(
+                    builder: (context) {
+                      return ApplyPushDeeplink(
+                          url: dynamicLink.link.toString());
+                    },
+                    fullscreenDialog: true));
           });
         }
         // https://fusiongroup.page.link/ref
@@ -186,21 +188,21 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return new FusionScaffold(
         child: Center(
-          child: (_hasCheckedLoggedIn) ? Column(
-      children: [
-          Flexible(
-            flex: 8,
-            child: Center(
-              child:  Image.asset(
-                "assets/images/icon.png",
-                width: 98,
-                height: 98,
-                fit: BoxFit.contain,
-              )
-            ),
-          )
-      ],
-    ): PlatformCircularProgressIndicator()
-        ));
+            child: (_hasCheckedLoggedIn)
+                ? Column(
+                    children: [
+                      Flexible(
+                        flex: 8,
+                        child: Center(
+                            child: Image.asset(
+                          "assets/images/icon.png",
+                          width: 98,
+                          height: 98,
+                          fit: BoxFit.contain,
+                        )),
+                      )
+                    ],
+                  )
+                : PlatformCircularProgressIndicator()));
   }
 }

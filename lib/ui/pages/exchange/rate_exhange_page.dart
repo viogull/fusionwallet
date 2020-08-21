@@ -1,89 +1,79 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fusion_wallet/core/models/coefficients_response.dart';
 import 'package:fusion_wallet/localizations.dart';
+import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 
-class RateExchangePage extends StatefulWidget {
+import '../../../inject.dart';
+
+class RateExchangePage extends StatelessWidget {
   static const String navId = '/RateExchangePage';
-  @override
-  _RateExchangePageState createState() => new _RateExchangePageState();
-}
 
-class _RateExchangePageState extends State<RateExchangePage> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
-    final background = SvgPicture.asset(
-      ('assets/images/backgrounds/bg_primary.svg'),
-      fit: BoxFit.fill,
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-    );
+    return FusionScaffold(
+      title: AppLocalizations.of(context).toolbarRateTitle(),
+      child: FutureBuilder(
+          future: injector.get<MinterRest>().fetchCoefficients(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return PlatformCircularProgressIndicator();
+            } else if (snapshot.connectionState == ConnectionState.done &&
+                snapshot.hasData == true) {
+              final response = snapshot.data as CoefficientsResponse;
+              debugPrint("Res: " + response.rates.length.toString());
 
-    return Scaffold(
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: Stack(
-          children: <Widget>[
-            background,
-            Container(
-              padding: EdgeInsets.only(
-                left: 24.0,
-                right: 24.0,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  AppBar(
-                    title: Text(
-                        AppLocalizations.of(context).toolbarExchangeTitle()),
-                    backgroundColor: Colors.transparent,
-                    centerTitle: true,
-                    elevation: 0,
-                    iconTheme: IconThemeData(
-                        color: Theme.of(context).colorScheme.primary),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border(
-                          // top: BorderSide(width: 1, color: Colors.white),
-                          bottom: BorderSide(width: 1, color: Colors.white)),
+              return Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                child: DataTable(
+                  columns: [
+                    DataColumn(
+                      label: Text("      ",
+                          style: TextStyle(fontSize: 14),
+                          textAlign: TextAlign.start),
+                      numeric: false,
                     ),
-                    margin: const EdgeInsets.only(
-                        bottom: 10, top: 30, left: 22, right: 22),
-                    child: Column(
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Flexible(
-                              flex: 1,
-                              child: SizedBox(
-                                width: 20,
-                              ),
-                            ),
-                            Flexible(
-                              flex: 1,
-                              child: Text("Продажа"),
-                            ),
-                            Flexible(
-                              flex: 1,
-                              child: Text("Покупка"),
-                            ),
-                          ],
-                        ),
-                      ],
+                    DataColumn(
+                      label: Text(AppLocalizations.of(context).buttonSell(),
+                          style: TextStyle(fontSize: 14),
+                          textAlign: TextAlign.center),
+                      numeric: false,
                     ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+                    DataColumn(
+                      label: Text(AppLocalizations.of(context).buttonBuy(),
+                          style: TextStyle(fontSize: 14),
+                          textAlign: TextAlign.center),
+                      numeric: false,
+                    ),
+                  ],
+                  rows: response.rates
+                      .map(
+                        (avenger) => DataRow(cells: [
+                          DataCell(
+                            Text(avenger.currency + " "),
+                          ),
+                          DataCell(
+                            Text(avenger.value.toString(),
+                                textAlign: TextAlign.center),
+                          ),
+                          DataCell(
+                            Text(avenger.value.toString()),
+                          ),
+                        ]),
+                      )
+                      .toList(),
+                ),
+              );
+            } else {
+              return Center(child: PlatformCircularProgressIndicator());
+            }
+          }),
     );
   }
 }

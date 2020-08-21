@@ -4,17 +4,26 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
-import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
+import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
+import 'package:fusion_wallet/ui/theme.dart';
 
 class AllFieldsFormBloc extends FormBloc<String, String> {
   final select1 = SelectFieldBloc(
     items: ['BIP (12345.00)', 'BIP (1232345.00)'],
   );
 
+  final select2 = SelectFieldBloc(
+    items: ['BIP (15.00)', 'BIP (145.00)'],
+  );
+
+  final text1 = TextFieldBloc();
+
   AllFieldsFormBloc() {
     addFieldBlocs(fieldBlocs: [
       select1,
+      select2,
+      text1,
     ]);
   }
 
@@ -41,14 +50,7 @@ class _ConvertExchangePageState extends State<ConvertExchangePage> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
-    final background = SvgPicture.asset(
-      ('assets/images/backgrounds/bg_primary.svg'),
-      fit: BoxFit.fill,
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-    );
-
-    final blll = BlocProvider(
+    final coinContainer = BlocProvider(
       create: (context) => AllFieldsFormBloc(),
       child: Builder(
         builder: (context) {
@@ -61,16 +63,117 @@ class _ConvertExchangePageState extends State<ConvertExchangePage> {
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(color: theme.colorScheme.primary),
               ),
-              height: 70.0,
-              child: DropdownFieldBlocBuilder<String>(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    gapPadding: 0.0,
+              height: 40.0,
+              child: Container(
+                margin: EdgeInsets.only(left: 24),
+                child: DropdownFieldBlocBuilder<String>(
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(0.0),
+                    border: OutlineInputBorder(
+//                    borderRadius: BorderRadius.zero,
+                      borderSide: BorderSide.none,
+                      gapPadding: 0.0,
+                    ),
                   ),
+                  selectFieldBloc: formBloc.select1,
+                  itemBuilder: (context, value) => value,
                 ),
-                selectFieldBloc: formBloc.select1,
-                itemBuilder: (context, value) => value,
+              ),
+            ),
+          );
+        },
+      ),
+    );
+
+    final coinWantContainer = BlocProvider(
+      create: (context) => AllFieldsFormBloc(),
+      child: Builder(
+        builder: (context) {
+          final formBloc = BlocProvider.of<AllFieldsFormBloc>(context);
+
+          return FormBlocListener<AllFieldsFormBloc, String, String>(
+            child: Container(
+              // margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                border: Border.all(color: theme.colorScheme.primary),
+              ),
+              height: 40.0,
+              child: Container(
+                margin: EdgeInsets.only(left: 24),
+                child: DropdownFieldBlocBuilder<String>(
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(0.0),
+                    border: OutlineInputBorder(
+//                    borderRadius: BorderRadius.zero,
+                      borderSide: BorderSide.none,
+                      gapPadding: 0.0,
+                    ),
+                  ),
+                  selectFieldBloc: formBloc.select2,
+                  itemBuilder: (context, value) => value,
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+
+    final coinWant = BlocProvider(
+      create: (context) => AllFieldsFormBloc(),
+      child: Builder(
+        builder: (context) {
+          final formBloc = BlocProvider.of<AllFieldsFormBloc>(context);
+
+          return FormBlocListener<AllFieldsFormBloc, String, String>(
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                border: Border.all(color: theme.colorScheme.primary),
+              ),
+              height: 40.0,
+              child: Container(
+                margin: EdgeInsets.only(left: 24),
+                child: Row(
+                  children: <Widget>[
+                    Flexible(
+                      flex: 6,
+                      child: TextFieldBlocBuilder(
+                        textFieldBloc: formBloc.text1,
+                        decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(0.0),
+                            border: OutlineInputBorder(
+//                    borderRadius: BorderRadius.zero,
+                              borderSide: BorderSide.none,
+                              gapPadding: 0.0,
+                            ),
+                            hintText: "0.00"),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 1,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(color: theme.colorScheme.primary),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 3, horizontal: 0),
+                        height: 25,
+                        width: 39,
+                        child: InkWell(
+                            child: GestureDetector(
+                          child: Text(
+                            AppLocalizations.of(context).inputMaxAmountSuffix(),
+                            textAlign: TextAlign.center,
+                          ),
+                        )),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           );
@@ -89,34 +192,6 @@ class _ConvertExchangePageState extends State<ConvertExchangePage> {
       ),
     );
 
-    final coinContainer = Container(
-      margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        border: Border.all(color: theme.colorScheme.primary),
-      ),
-      height: 30.0,
-      child: Center(
-        child: LimitedBox(
-          maxWidth: MediaQuery.of(context).size.width,
-          maxHeight: 35,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
-            child: GestureDetector(
-              child: Row(
-                children: <Widget>[
-                  Text(
-                    "BIP(12345.00)",
-                    textAlign: TextAlign.left,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-
     final amountLabel = Container(
       alignment: Alignment.topLeft,
       margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
@@ -128,52 +203,6 @@ class _ConvertExchangePageState extends State<ConvertExchangePage> {
       ),
     );
 
-    final amountContainer = Container(
-      margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        border: Border.all(color: theme.colorScheme.primary),
-      ),
-      height: 30.0,
-      child: Center(
-        child: LimitedBox(
-          maxWidth: MediaQuery.of(context).size.width,
-          maxHeight: 35,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 24, right: 4),
-            child: GestureDetector(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    "0.00",
-                    textAlign: TextAlign.left,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(color: theme.colorScheme.primary),
-                    ),
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 3, horizontal: 0),
-                    height: 25,
-                    width: 39,
-                    child: InkWell(
-                        child: GestureDetector(
-                      child: Text(
-                        AppLocalizations.of(context).inputMaxAmountSuffix(),
-                        textAlign: TextAlign.center,
-                      ),
-                    )),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-
     final coinWantLabel = Container(
       alignment: Alignment.topLeft,
       margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
@@ -181,34 +210,6 @@ class _ConvertExchangePageState extends State<ConvertExchangePage> {
         AppLocalizations.of(context).labelConvertCoinWant(),
         style: TextStyle(
           color: (theme.colorScheme.onSurface),
-        ),
-      ),
-    );
-
-    final coinWantContainer = Container(
-      margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        border: Border.all(color: theme.colorScheme.primary),
-      ),
-      height: 30.0,
-      child: Center(
-        child: LimitedBox(
-          maxWidth: MediaQuery.of(context).size.width,
-          maxHeight: 35,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 24),
-            child: GestureDetector(
-              child: Row(
-                children: <Widget>[
-                  Text(
-                    "BIP(12345.00)",
-                    textAlign: TextAlign.left,
-                  ),
-                ],
-              ),
-            ),
-          ),
         ),
       ),
     );
@@ -250,61 +251,55 @@ class _ConvertExchangePageState extends State<ConvertExchangePage> {
       height: 50,
       width: MediaQuery.of(context).size.width,
       child: FusionButton(
-          text: AppLocalizations.of(context).buttonConvert(),
-          onPressed: () {
-            Navigator.pushNamed(context, ConvertExchangePage.navId);
-          }),
+        text: AppLocalizations.of(context).buttonConvert(),
+        onPressed: () {
+          Navigator.pushNamed(context, ConvertExchangePage.navId);
+        },
+      ),
     );
 
-    return Scaffold(
-      body: Container(
+    return FusionScaffold(
+      title: AppLocalizations.of(context).toolbarConvertTitle(),
+      child: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Stack(
           children: <Widget>[
-            background,
             Container(
               padding: EdgeInsets.only(
                 left: 24.0,
                 right: 24.0,
               ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  AppBar(
-                    title: Text(
-                        AppLocalizations.of(context).toolbarConvertTitle()),
-                    backgroundColor: Colors.transparent,
-                    centerTitle: true,
-                    elevation: 0,
-                    iconTheme: IconThemeData(
-                        color: Theme.of(context).colorScheme.primary),
-                  ),
-
                   //LimitedBox (maxHeight: 60,),
                   Flexible(
-                    flex: 1,
-                    child: coinHaveLabel,
+                    flex: 2,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        coinHaveLabel,
+                        coinContainer,
+                      ],
+                    ),
                   ),
                   Flexible(
-                    flex: 1,
-                    child: coinContainer,
+                    flex: 2,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[amountLabel, coinWant],
+                    ),
                   ),
                   Flexible(
-                    flex: 1,
-                    child: amountLabel,
-                  ),
-                  Flexible(
-                    flex: 1,
-                    child: amountContainer,
-                  ),
-                  Flexible(
-                    flex: 1,
-                    child: coinWantLabel,
-                  ),
-                  Flexible(
-                    flex: 1,
-                    child: coinWantContainer,
+                    flex: 2,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        coinWantLabel,
+                        coinWantContainer,
+                      ],
+                    ),
                   ),
                   Flexible(
                     flex: 2,
@@ -314,7 +309,7 @@ class _ConvertExchangePageState extends State<ConvertExchangePage> {
                     height: 10,
                   ),
                   Flexible(
-                    flex: 3,
+                    flex: 2,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 6, horizontal: 24),
@@ -328,15 +323,10 @@ class _ConvertExchangePageState extends State<ConvertExchangePage> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
+
                   Flexible(
-                    flex: 3,
+                    flex: 2,
                     child: convertButton,
-                  ),
-                  SizedBox(
-                    height: 50,
                   ),
                 ],
               ),

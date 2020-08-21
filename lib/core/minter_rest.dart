@@ -13,6 +13,7 @@ import 'package:fusion_wallet/core/models/profile_response.dart';
 import 'package:fusion_wallet/core/models/send_tx_request.dart';
 import 'package:fusion_wallet/core/models/spec_exchange_rates_response.dart';
 import 'package:fusion_wallet/core/models/statistic_rewards_response.dart';
+import 'package:fusion_wallet/core/models/transaction.dart';
 import 'package:fusion_wallet/core/models/transanctions_response.dart';
 import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
@@ -20,6 +21,7 @@ import 'package:meta/meta.dart';
 
 import './models.dart';
 import '../inject.dart';
+import 'models/coefficients_response.dart';
 import 'models/push_transaction_result.dart';
 
 enum MinterNetwork { Main, Test }
@@ -47,7 +49,7 @@ class MinterRest {
       "https://bipchange.org/api/ex/$exchange";
 
   static MinterRest _instance = new MinterRest.internal();
-  MinterRest.internal({this.networkType = MinterNetwork.Test});
+  MinterRest.internal({this.networkType = MinterNetwork.Main});
   factory MinterRest() => _instance;
 
   static const ADDRESS_INFO_URL = explorerMainnetUrl + "addresses/";
@@ -297,7 +299,38 @@ class MinterRest {
     }
   }
 
-  Future<dynamic> fetchCoefficients() async {}
+  Future<CoefficientsResponse> fetchCoefficients() async {
+    try {
+      logger.d('Fetching coefficients');
+      // Adding Mx to get valid address
+      final url = "$fusionApiUrl/explorer/rates";
+      logger.d("Fetch Coefficients Data Url $url");
+      Response response = await fusionDio.get(url);
+
+      if (response.statusCode == 200) {
+        logger.d("Response status code " + response.statusCode.toString());
+        logger.d(response.data);
+        final datas = CoefficientsResponse.fromJson(response.data);
+        logger.d(datas);
+        return datas;
+      }
+    } on DioError catch (exception) {
+      if (exception == null) {
+        if (exception == null ||
+            exception.toString().contains('SocketException')) {
+          throw Exception("Network Error");
+        } else if (exception.type == DioErrorType.RECEIVE_TIMEOUT ||
+            exception.type == DioErrorType.CONNECT_TIMEOUT) {
+          throw Exception(
+              "Could'nt connect, please ensure you have a stable network.");
+        } else {
+          return null;
+        }
+      }
+      return null;
+    }
+    return null;
+  }
 
   Future<ExchangeRateResponse> fetchExchangeRates() async {
     //TODO
@@ -343,7 +376,7 @@ class MinterRest {
   }
 
   Future<TransactionsResponse> fetchTransactions(
-      @required String address) async {
+      {@required String address, DateTime from, DateTime to}) async {
     try {
       if (address == null) {
         logger.e('Cannot fetch txs for null address');
@@ -360,6 +393,16 @@ class MinterRest {
       if (response.statusCode == 200) {
         logger.d("Response status code " + response.statusCode.toString());
         var data = TransactionsResponse.fromJson(response.data);
+
+        if (from != null && to != null) {
+          logger.d("Filtering");
+          final filtered = data.data.where((element) {
+            final time = DateTime.parse(element.timestamp);
+            return (time.isAfter(from) && time.isBefore(to));
+          }).toList();
+          return TransactionsResponse(data: filtered);
+        }
+
         return data;
       }
     } on DioError catch (exception) {
@@ -377,6 +420,7 @@ class MinterRest {
       }
       return null;
     }
+    return null;
   }
 
   Future<AdminNotificationsResponse> fetchNotifications() async {
@@ -499,4 +543,10 @@ class MinterRest {
 
   //TODO
   canRecover(String value, String value2) {}
+
+  //TODO
+  Future<dynamic> fetchTopCurrencies() {}
+
+  //TODO
+
 }

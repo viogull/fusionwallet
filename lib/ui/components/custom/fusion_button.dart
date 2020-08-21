@@ -16,6 +16,7 @@ class FusionButton extends StatelessWidget {
   final bool expandedWidth;
 
   final double _width2height = 280 / 45;
+
   FusionButton(
       {@required this.text,
       @required this.onPressed,
@@ -33,11 +34,7 @@ class FusionButton extends StatelessWidget {
       margin: const EdgeInsets.all(8),
       width: (expandedWidth) ? fullWidth : 120,
       height: (expandedWidth) ? calculatedHeight : height,
-      decoration: BoxDecoration(
-        borderRadius: FusionTheme.borderRadius
-      ),
-
-
+      decoration: BoxDecoration(borderRadius: FusionTheme.borderRadius),
       child: PlatformButton(
         material: (_, __) => FusionTheme.buttonAndroidTheme,
         ios: (_) => FusionTheme.buttonIOSTheme,

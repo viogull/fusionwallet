@@ -1,21 +1,13 @@
 import 'package:alice/alice.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fusion_wallet/localizations.dart';
-import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
-import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 
-import 'bloc.dart';
-import 'event.dart';
+import '../../../localizations.dart';
+import '../../widgets.dart';
+import 'add_account_bloc.dart';
+import 'add_account_events.dart';
 
-class IntroPage extends StatelessWidget {
-  static const String navId = '/IntroPage';
-
-  final bool additionalAccount;
-
-  IntroPage({this.additionalAccount = false});
-
+class AddAccountIntroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -52,8 +44,8 @@ class IntroPage extends StatelessWidget {
       child: FusionButton(
         text: AppLocalizations.of(context).buttonCreateAccount(),
         onPressed: () {
-          BlocProvider.of<AuthenticationBloc>(context)
-              .add(AccountCreateWalletEvent());
+          BlocProvider.of<AddAccountBloc>(context)
+              .add(AddAccountCreateNewEvent());
         },
         expandedWidth: true,
       ),
@@ -64,8 +56,8 @@ class IntroPage extends StatelessWidget {
       child: FusionButton(
         text: AppLocalizations.of(context).buttonRecoverFromPassphrase(),
         onPressed: () {
-          BlocProvider.of<AuthenticationBloc>(context)
-              .add(AccountStartRecoverEvent());
+          BlocProvider.of<AddAccountBloc>(context)
+              .add(AddAccountFromRecoverEvent());
         },
         expandedWidth: true,
       ),
@@ -121,6 +113,16 @@ class IntroPage extends StatelessWidget {
                     ),
                     SizedBox(height: 5),
                     Flexible(flex: 5, child: buttonRecoverFromPassphrase),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: FusionButton(
+                        text: AppLocalizations.of(context).buttonClose(),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        expandedWidth: true,
+                      ),
+                    ),
                     SizedBox(height: 10),
                   ],
                 ),

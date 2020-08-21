@@ -13,8 +13,9 @@ import '../../../localizations.dart';
 
 class AccountBalancesCard extends StatefulWidget {
   final AddressData data;
+  final Function onPlusTapped;
 
-  AccountBalancesCard({this.data});
+  AccountBalancesCard({this.data, this.onPlusTapped});
 
   @override
   _AccountBalancesCardState createState() => _AccountBalancesCardState();
@@ -94,10 +95,11 @@ class _AccountBalancesCardState extends State<AccountBalancesCard> {
                     onTap: () {
                       injector.get<HapticUtil>().selection();
 
-                      String flashText = (this._showUsdValues) ? "Switched to currency values mode." : "Switched to USD mode";
+                      String flashText = (this._showUsdValues)
+                          ? AppLocalizations.of(context).cardCurrencyMode()
+                          : AppLocalizations.of(context).cardUsdMode();
                       FlashHelper.infoBar(context, message: flashText);
                       setState(() {
-
                         this._showUsdValues = !(this._showUsdValues);
                       });
                     },
@@ -131,7 +133,9 @@ class _AccountBalancesCardState extends State<AccountBalancesCard> {
                     Icons.add,
                     size: 24,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    widget.onPlusTapped();
+                  },
                   elevation: 0,
                 ),
               ),

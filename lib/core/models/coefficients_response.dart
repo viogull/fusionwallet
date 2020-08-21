@@ -23,7 +23,7 @@ class CoefficientsResponse {
 
 class Rates {
   String currency;
-  double value;
+  dynamic value;
   String sId;
 
   Rates({this.currency, this.value, this.sId});

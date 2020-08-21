@@ -16,16 +16,17 @@ import '../../inject.dart';
 import './pages.dart';
 import '../../localizations.dart';
 import '../components/lists/balances_card.dart';
+import 'additional/add_account_ui.dart';
+import 'auth/intro.dart';
 import 'transactions/rewards_info_page.dart';
 
 class AccountsPage extends StatelessWidget {
   static const String navId = "/accounts";
 
   @override
-  Widget build(BuildContext context) =>  _buildAccountsUi(context);
+  Widget build(BuildContext context) => _buildAccountsUi(context);
 
-  Widget _buildAccountsUi(BuildContext context) =>
-      AnimationLimiter(
+  Widget _buildAccountsUi(BuildContext context) => AnimationLimiter(
           child: ListView.builder(
         itemCount: 6,
         itemBuilder: (BuildContext context, int index) {
@@ -74,10 +75,12 @@ class AccountsPage extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                         borderRadius: FusionTheme.borderRadius),
                     onPressed: () {
-                    showCupertinoModalBottomSheet(context: context, builder: (context, controller) {
-                      return ShareAddressPage(
-                          "Mx${StateContainer.of(context).selectedAccount.address}");
-                    });
+                      showCupertinoModalBottomSheet(
+                          context: context,
+                          builder: (context, controller) {
+                            return ShareAddressPage(
+                                "Mx${StateContainer.of(context).selectedAccount.address}");
+                          });
                     },
                     icon: Icon(Icons.arrow_downward),
                     color: FusionTheme.greenButtonColor(),
@@ -129,16 +132,16 @@ class AccountsPage extends StatelessWidget {
             buttonHeight: 40,
             buttonMinWidth: 130,
             buttonPadding:
-            const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
             children: <Widget>[
               FusionButton(
                   text: AppLocalizations.of(context).buttonPush(),
                   onPressed: () {
-                    showCupertinoModalBottomSheet(context: context, builder: (context, scrollController) {
-                      return SafeArea(
-                        child:  PushFundsPage()
-                      );
-                    });
+                    showCupertinoModalBottomSheet(
+                        context: context,
+                        builder: (context, scrollController) {
+                          return SafeArea(child: PushFundsPage());
+                        });
                   })
             ],
           );
@@ -185,7 +188,18 @@ class AccountsPage extends StatelessWidget {
           if (balances.length > 0) {
             debugPrint("Rendering balances length ${balances.length}");
 
-            return AccountBalancesCard(data: snapshot.data);
+            return AccountBalancesCard(
+                data: snapshot.data,
+                onPlusTapped: () {
+                  showBarModalBottomSheet(
+                      context: context,
+                      expand: true,
+                      elevation: 24,
+                      builder:
+                          (BuildContext context, ScrollController controller) {
+                        return AddAccountUi();
+                      });
+                });
           } else
             return Card(
               margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -234,7 +248,10 @@ class AccountsPage extends StatelessWidget {
               leading: Icon(Icons.info),
               title:
                   AutoSizeText(AppLocalizations.of(context).labelTotalReward()),
-              trailing: AutoSizeText("0.00", minFontSize: 17,),
+              trailing: AutoSizeText(
+                "0.00",
+                minFontSize: 17,
+              ),
             ),
           )),
     );

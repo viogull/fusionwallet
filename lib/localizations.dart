@@ -44,7 +44,6 @@ class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-
   appName() => Intl.message('Fusion', name: 'appName');
 
   buttonCreateAccount() =>
@@ -1609,36 +1608,48 @@ class AppLocalizations {
       Intl.message("Invalid values for push transaction",
           name: 'errorInvalidInputsPush');
 
-  String successfullySavedPin() => Intl.message("Succesfully saved PIN", name:  'successfullySavedPin');
-  String errorOnPinInput() => Intl.message("Invalid PIN", name:  'errorOnPinInput');
+  String successfullySavedPin() =>
+      Intl.message("Succesfully saved PIN", name: 'successfullySavedPin');
+  String errorOnPinInput() =>
+      Intl.message("Invalid PIN", name: 'errorOnPinInput');
 
-  String  sharePushLink() => Intl.message("Share Push", name: 'sharePushLink');
+  String sharePushLink() => Intl.message("Share Push", name: 'sharePushLink');
 
-  String authSuccess()=> Intl.message("Succesfully authenticated", name: 'authSuccess');
+  String authSuccess() =>
+      Intl.message("Succesfully authenticated", name: 'authSuccess');
 
-  String invalidInput() => Intl.message("Invalid input. Check your params and try again", name: 'invalidInput');
+  String invalidInput() =>
+      Intl.message("Invalid input. Check your params and try again",
+          name: 'invalidInput');
 
+  String chooseContactTitle() =>
+      Intl.message("Choose contact", name: 'chooseContactTitle');
 
+  String chooseAccountTitle() =>
+      Intl.message("Choose account", name: 'chooseAccountTitle');
 
+  String validateAddressError() =>
+      Intl.message("Must be valid Minter address with Mx prefix",
+          name: 'validateAddressError');
 
-  String chooseContactTitle() => Intl.message("Choose contact", name: 'chooseContactTitle');
-
-  String chooseAccountTitle() => Intl.message("Choose account", name: 'chooseAccountTitle');
-
-  String validateAddressError() => Intl.message("Must be valid Minter address with Mx prefix",
-      name: 'validateAddressError');
-
-  String  authenticateToViewTransaction() =>
+  String authenticateToViewTransaction() =>
       Intl.message("Please authenticate to view your transaction overview",
-   name: 'authenticateToViewTransaction');
+          name: 'authenticateToViewTransaction');
 
-  String   userAuthorized() => Intl.message("User is authenticated", name: 'userAuthorized');
+  String userAuthorized() =>
+      Intl.message("User is authenticated", name: 'userAuthorized');
 
-  String   userNotAuthorized() => Intl.message("User is not authorized", name: 'userNotAuthorized');
+  String userNotAuthorized() =>
+      Intl.message("User is not authorized", name: 'userNotAuthorized');
 
- String  cannotRecoverAccount() => Intl.message("Cannot recover that account.",
- name: 'cannotRecoverAccount' );
+  String cannotRecoverAccount() => Intl.message("Cannot recover that account.",
+      name: 'cannotRecoverAccount');
 
+  String cardCurrencyMode() => Intl.message("Switched to currency values mode.",
+      name: 'cardCurrencyMode');
+
+  String cardUsdMode() =>
+      Intl.message("Switched to USD mode", name: 'cardUsdMode');
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

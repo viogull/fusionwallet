@@ -19,6 +19,7 @@ import 'inject.dart';
 import 'localizations.dart';
 import 'ui/components/custom/passcode/passcode_screen.dart';
 import 'ui/pages/accounts.dart';
+import 'ui/pages/additional/add_account_ui.dart';
 import 'ui/pages/auth/access_ui.dart';
 import 'ui/pages/auth/account_name.dart';
 import 'ui/pages/auth/biometrics.dart';
@@ -48,6 +49,7 @@ const String preferencesBox = 'prefsBox';
 const String accountsBox = 'accountsBox';
 const String contactsBox = 'contactsBox';
 const String notificationsBox = 'notificationsBox';
+const String additionalAccountsBox = 'additionals';
 
 final wallet = Wallet();
 
@@ -68,6 +70,7 @@ void main() async {
   Hive.registerAdapter<AdminNotification>(AdminNotificationAdapter());
 
   final accsBox = await Hive.openBox<Account>(accountsBox);
+  await Hive.openBox<Account>(additionalAccountsBox);
   try {
     await Hive.openBox<Contact>(contactsBox);
     final prefs = await Hive.openBox<Preferences>(preferencesBox);
@@ -156,7 +159,8 @@ class AppState extends State<App> {
           SendFeedbackPage.navId: (context) => SendFeedbackPage(),
           FaqPage.navId: (context) => FaqPage(),
           PasscodeScreen.navId: (context) => PasswordCreationPage(),
-          AuthUi.navId: (context) => AuthUi()
+          AuthUi.navId: (context) => AuthUi(),
+          AddAccountUi.navId: (context) => AddAccountUi()
         },
       );
 }

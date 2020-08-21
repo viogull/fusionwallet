@@ -49,8 +49,6 @@ class BottomHomePage extends StatefulWidget {
 }
 
 class _BottomHomePageState extends State<BottomHomePage> {
-
-
   Account _account;
 
   final List<Widget> tabs = [
@@ -63,10 +61,9 @@ class _BottomHomePageState extends State<BottomHomePage> {
 
   @override
   void initState() {
-    if(_account == null) {
+    if (_account == null) {
       _account = Hive.box<Account>(accountsBox).getAt(0);
       logger.d("Account is ${_account.name}");
-
     }
     loadDynamicLinks();
     super.initState();
@@ -133,10 +130,11 @@ class _BottomHomePageState extends State<BottomHomePage> {
               ),
             ),
             onClick: () {
-              showCupertinoModalBottomSheet(context: context,
+              showCupertinoModalBottomSheet(
+                  context: context,
                   builder: (context, controller) {
-                      return ShareAddressPage(
-                          "Mx${StateContainer.of(context).selectedAccount.address}");
+                    return ShareAddressPage(
+                        "Mx${StateContainer.of(context).selectedAccount.address}");
                   });
             }),
         DrawerItemData(
@@ -151,41 +149,38 @@ class _BottomHomePageState extends State<BottomHomePage> {
               child: Icon(FontAwesome.user_secret),
             ),
             onClick: () {
-              showCupertinoModalBottomSheet(context: context,
+              showCupertinoModalBottomSheet(
+                  context: context,
                   builder: (BuildContext context, ScrollController controller) {
                     return ViewPassphraseDialog(
-                        data: StateContainer
-                            .of(context)
+                        data: StateContainer.of(context)
                             .selectedAccount
                             .mnemonic);
-              });
+                  });
             }),
         DrawerItemData(
           title: AppLocalizations.of(context).menuItemEditAccountName(),
           icon:
               _buildBottomNavItemIcon("assets/images/icons/ic_edit.svg", true),
           onClick: () {
-            showBarModalBottomSheet(context: context,
-                expand: true,
+            showBarModalBottomSheet(
+                context: context,
                 elevation: 24,
                 builder: (BuildContext context, ScrollController controller) {
-                  return  ChangeAccountNameForm();
+                  return ChangeAccountNameForm();
                 });
-
           },
         ),
         DrawerItemData(
-
-
             title: AppLocalizations.of(context).menuItemRemoveAccount(),
             icon: _buildBottomNavItemIcon(
                 "assets/images/icons/ic_folder.svg", true),
             onClick: () {
-              showCupertinoModalBottomSheet(context: context,
+              showCupertinoModalBottomSheet(
+                  context: context,
                   builder: (BuildContext context, ScrollController controller) {
                     return PopupsRemoveAccount();
                   });
-
             }),
         DrawerItemData(
             title: AppLocalizations.of(context).menuItemWithdrawFunds(),
@@ -198,9 +193,11 @@ class _BottomHomePageState extends State<BottomHomePage> {
                 "assets/images/icons/ic_copy.svg", true),
             onClick: () async {
               injector.get<HapticUtil>().selection();
-              final link = await _createDynamicLink(true, StateContainer.of(context).selectedAccount.address);
+              final link = await _createDynamicLink(
+                  true, StateContainer.of(context).selectedAccount.address);
               logger.d("Link ${link as dynamic}");
-              IOTools.setSecureClipboardItem((link as dynamic).toString());;
+              IOTools.setSecureClipboardItem((link as dynamic).toString());
+              ;
               FlashHelper.successBar(context,
                   message: AppLocalizations.of(context).pushLinkWasCopied());
             }),
@@ -219,7 +216,6 @@ class _BottomHomePageState extends State<BottomHomePage> {
   }
 
   Future<void> _createDynamicLink(bool short, String address) async {
-
     final host = Uri.parse('https://fusiongroup.page.link/promo/Mx$address');
     logger.d("Deeplink pre -> $host");
     final params = DynamicLinkParameters(
@@ -245,7 +241,6 @@ class _BottomHomePageState extends State<BottomHomePage> {
       url = await params.buildUrl();
     }
     return url.toString();
-
   }
 
   String _getToolbarTitle(BuildContext context, int index) {
@@ -377,15 +372,24 @@ class _BottomHomePageState extends State<BottomHomePage> {
                             BottomHomePage.drawerHeaderHeightRatio,
                         child: DrawerHeader(
                             decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.primaryVariant),
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primaryVariant),
                             child: Padding(
                               padding: const EdgeInsets.only(left: 12, top: 8),
                               child: Text(
-                                  (StateContainer.of(context).selectedAccount.name != null) ?
-                                  StateContainer.of(context).selectedAccount.name : AppLocalizations.of(context).appName() ,
+                                  (StateContainer.of(context)
+                                              .selectedAccount
+                                              .name !=
+                                          null)
+                                      ? StateContainer.of(context)
+                                          .selectedAccount
+                                          .name
+                                      : AppLocalizations.of(context).appName(),
                                   style: GoogleFonts.robotoCondensed().copyWith(
-                                      color:
-                                          Theme.of(context).colorScheme.onPrimary,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onPrimary,
                                       fontSize: 24)),
                             )),
                       );
