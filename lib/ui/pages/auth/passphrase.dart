@@ -20,7 +20,7 @@ import 'package:share/share.dart';
 import '../../../inject.dart';
 import '../../../localizations.dart';
 import '../pages.dart';
-import  'event.dart';
+import 'event.dart';
 import 'share_passphrase.dart';
 
 class PassphraseCreationPage extends StatefulWidget {
@@ -58,7 +58,7 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
   Widget build(BuildContext context) {
     return FusionScaffold(
         //title: AppLocalizations.of(context).toolbarSharePasshpraseQr(),
-      hideToolbar: false,
+        hideToolbar: false,
         child: (this._verificationStage < 0)
             ? _showPassphraseView(context)
             : _showPassphraseQuestions(
@@ -367,13 +367,12 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
                                       ClipRRect(
                                           borderRadius:
                                               FusionTheme.borderRadius,
-
                                           child: Container(
                                             width: (MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                5),
-                                            height: 32,
+                                                4.5),
+                                            height: 50,
                                             padding: const EdgeInsets.symmetric(
                                                 vertical: 2, horizontal: 2),
                                             color: Theme.of(context)
@@ -383,19 +382,26 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
                                               child: Card(
                                                 color: Colors.transparent,
                                                 elevation: 0,
-                                                borderOnForeground: false ,
+                                                borderOnForeground: false,
                                                 child: Container(
-                                                  color: Theme.of(context).colorScheme.primary,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .primary,
                                                   width: 75,
                                                   child: Padding(
-                                                    padding:
-                                                    const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        vertical: 4,
+                                                        horizontal: 12),
                                                     child: new AutoSizeText(
                                                       shuffledWords[index],
+                                                      maxFontSize: 12,
                                                       maxLines: 1,
-                                                      textAlign: TextAlign.center,
+                                                      textAlign:
+                                                          TextAlign.center,
                                                       style: TextStyle(
-                                                        fontWeight: FontWeight.bold,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                         color: Theme.of(context)
                                                             .colorScheme
                                                             .onPrimary,
@@ -426,36 +432,47 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
                                   StateContainer.of(context)
                                       .persistPassphrase(mnemonic);
                                   final blocCtx = context;
-                                  FlashHelper.successBar(context, message: AppLocalizations.of(context)
+                                  FlashHelper.successBar(
+                                    context,
+                                    message: AppLocalizations.of(context)
                                         .copiedSuccesfullyMessage(),
                                   );
-                                  showCupertinoModalBottomSheet(context: context, builder: (context, scrollControler) {
-                                    return PopupDialogWidget(title: AppLocalizations.of(context).popupPassVerifiedTitle(),
-                                        subtitle: AppLocalizations.of(context).popupPassVerifiedBody(),
-                                        asset: "assets/images/icons/ic_verified.svg",
-                                        onPressed: () {
-                                        Navigator.pop(context);
-                                          BlocProvider.of<AuthenticationBloc>(blocCtx)
-                                              .add(PassphraseVerifiedEvent(
-                                              mnemonic: mnemonic,
-                                              seed: cachedSeed,
-                                              address: cachedAddress,
-                                              publicKey: cachedPublicKey,
-                                              privateKey: cachedAddress));
-                                        },);
-                                  });
-
+                                  showCupertinoModalBottomSheet(
+                                      context: context,
+                                      builder: (context, scrollControler) {
+                                        return PopupDialogWidget(
+                                          title: AppLocalizations.of(context)
+                                              .popupPassVerifiedTitle(),
+                                          subtitle: AppLocalizations.of(context)
+                                              .popupPassVerifiedBody(),
+                                          asset:
+                                              "assets/images/icons/ic_verified.svg",
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                            BlocProvider.of<AuthenticationBloc>(
+                                                    blocCtx)
+                                                .add(PassphraseVerifiedEvent(
+                                                    mnemonic: mnemonic,
+                                                    seed: cachedSeed,
+                                                    address: cachedAddress,
+                                                    publicKey: cachedPublicKey,
+                                                    privateKey: cachedAddress));
+                                          },
+                                        );
+                                      });
                                 } else {
                                   setState(() {
                                     _verificationStage = _verificationStage + 1;
                                   });
                                 }
                               } else {
-                                FlashHelper.errorBar(context, message: AppLocalizations.of(context)
-                                    .flashIncorrectWordMessage());
+                                FlashHelper.errorBar(context,
+                                    message: AppLocalizations.of(context)
+                                        .flashIncorrectWordMessage());
                                 if (_verificationStage > 0) {
-                                  FlashHelper.errorBar(context, message: AppLocalizations.of(context)
-                                      .flashIncorrectWordMessage());
+                                  FlashHelper.errorBar(context,
+                                      message: AppLocalizations.of(context)
+                                          .flashIncorrectWordMessage());
 //                                  setState(() {
 //                                    _verificationStage = -1;
 //                                  });

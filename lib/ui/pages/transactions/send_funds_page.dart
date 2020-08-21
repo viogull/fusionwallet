@@ -14,7 +14,6 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 class SendFundsPage extends StatelessWidget {
   static const String navId = "/funds/send";
 
-
   BoxDecoration formDecoration(BuildContext context) => BoxDecoration(
       borderRadius: FusionTheme.borderRadius,
       border:
@@ -211,20 +210,22 @@ class SendFundsPage extends StatelessWidget {
         ),
       );
 
-
-
   inputBorder(BuildContext context) => OutlineInputBorder(
       gapPadding: 4,
       borderRadius: FusionTheme.borderRadius,
       borderSide: BorderSide(color: Theme.of(context).colorScheme.primary));
 }
 
-
-enum  ReceiverCardMode {
-  NOT_SELECTED, ADDRESS, ACCOUNT, CONTACT, SCAN_QR, SELECTED
+enum ReceiverCardMode {
+  NOT_SELECTED,
+  ADDRESS,
+  ACCOUNT,
+  CONTACT,
+  SCAN_QR,
+  SELECTED
 }
 
-typedef ReceiverCardCallback = Function ();
+typedef ReceiverCardCallback = Function();
 
 class ReceiverCardWidget extends StatefulWidget {
   @override
@@ -234,14 +235,11 @@ class ReceiverCardWidget extends StatefulWidget {
 }
 
 class _ReceiverCardState extends State<ReceiverCardWidget> {
-
-
   ReceiverCardMode mode = ReceiverCardMode.NOT_SELECTED;
   String _selectedAddress;
 
   List<Contact> _contacts;
   List<Account> _accounts;
-
 
   final _cancelController = TextEditingController(text: "Cancel");
   var _aspectTolerance = 0.00;
@@ -254,13 +252,12 @@ class _ReceiverCardState extends State<ReceiverCardWidget> {
   List<BarcodeFormat> selectedFormats = [..._possibleFormats];
   ScanResult scanResult;
 
-
   @override
   void initState() {
     _contacts = Hive.box<Contact>(contactsBox).values.toList();
     _accounts = Hive.box<Account>(accountsBox).values.toList();
     debugPrint("Length ${_accounts.length}");
-    if(mode == ReceiverCardMode.SCAN_QR) {
+    if (mode == ReceiverCardMode.SCAN_QR) {
       Future.delayed(Duration.zero, () async {
         _numberOfCameras = await BarcodeScanner.numberOfCameras;
         setState(() {
@@ -304,250 +301,263 @@ class _ReceiverCardState extends State<ReceiverCardWidget> {
       borderRadius: FusionTheme.borderRadius,
       borderSide: BorderSide(color: Theme.of(context).colorScheme.primary));
 
-
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     // TODO: implement build
-    switch(mode) {
-      case ReceiverCardMode.ADDRESS: {
-        return   Theme(
-          data: ThemeData(
-              primaryColor:
-              Theme.of(context).colorScheme.primary),
-          child: TextField(
-            decoration: InputDecoration(
-                contentPadding: const EdgeInsets.symmetric(
-                    horizontal:12, vertical: 4),
-                hintText: AppLocalizations.of(context).enterAddress,
-                hintStyle: TextStyle(color: colors.onBackground.withOpacity(0.7)),
-                border: inputBorder(context),
-                enabled: true,
-                prefixIcon: IconButton(
-                  icon: Icon(Icons.cancel,
-                      color: colors.error, size: 18),
-                  onPressed: () {
-                    this.setState(() {
-                      this.mode = ReceiverCardMode.NOT_SELECTED;
-                    });
-                  },
-                ),
-                enabledBorder: inputBorder(context)),
-          ),
-        );
-      }
-      case ReceiverCardMode.SCAN_QR: {
-        return   Theme(
-          data: ThemeData(
-              primaryColor:
-              Theme.of(context).colorScheme.primary),
-          child: TextFormField(
-            initialValue: this.scanResult.rawContent,
-            style: TextStyle(color: colors.onBackground.withOpacity(0.7)),
-            decoration: InputDecoration(
-                contentPadding: const EdgeInsets.symmetric(
-                    horizontal:12, vertical: 4),
-                hintText: AppLocalizations.of(context).enterAddress,
-                hintStyle: TextStyle(color: colors.onBackground.withOpacity(0.7)),
-                border: inputBorder(context),
-                enabled: true,
-
-                prefixIcon: IconButton(
-                  icon: Icon(Icons.cancel,
-                      color: colors.error, size: 18),
-                  onPressed: () {
-                    this.setState(() {
-                      this.mode = ReceiverCardMode.NOT_SELECTED;
-                    });
-                  },
-                ),
-                enabledBorder: inputBorder(context)),
-          ),
-        );
-      }
-      case ReceiverCardMode.SELECTED: {
-        return   Theme(
-          data: ThemeData(
-              primaryColor:
-              Theme.of(context).colorScheme.primary),
-          child: TextFormField(
-            initialValue: _selectedAddress,
-            style: TextStyle(color: colors.onBackground.withOpacity(0.7)),
-            decoration: InputDecoration(
-                contentPadding: const EdgeInsets.symmetric(
-                    horizontal:12, vertical: 4),
-                hintText: "Enter address",
-                hintStyle: TextStyle(color: colors.onBackground.withOpacity(0.7)),
-                border: inputBorder(context),
-                enabled: true,
-
-                prefixIcon: IconButton(
-                  icon: Icon(Icons.cancel,
-                      color: colors.error, size: 18),
-                  onPressed: () {
-                    this.setState(() {
-                      this.mode = ReceiverCardMode.NOT_SELECTED;
-                    });
-                  },
-                ),
-                enabledBorder: inputBorder(context)),
-          ),
-        );
-      }
-      break;
-      default: {
-        return  Row(
-          children: <Widget>[
-            buildReceiverCardItem(
-                context: context,
-            label:   AppLocalizations.of(context).labelAddress(),
-              icon:   "assets/images/icons/ic_add.svg",
-              onPressed: () {
-                  setState(() {
-                    this.mode = ReceiverCardMode.ADDRESS;
-                  });
-              }
+    switch (mode) {
+      case ReceiverCardMode.ADDRESS:
+        {
+          return Theme(
+            data:
+                ThemeData(primaryColor: Theme.of(context).colorScheme.primary),
+            child: TextField(
+              decoration: InputDecoration(
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  hintText: AppLocalizations.of(context).enterAddress,
+                  hintStyle:
+                      TextStyle(color: colors.onBackground.withOpacity(0.7)),
+                  border: inputBorder(context),
+                  enabled: true,
+                  prefixIcon: IconButton(
+                    icon: Icon(Icons.cancel, color: colors.error, size: 18),
+                    onPressed: () {
+                      this.setState(() {
+                        this.mode = ReceiverCardMode.NOT_SELECTED;
+                      });
+                    },
+                  ),
+                  enabledBorder: inputBorder(context)),
             ),
-            buildReceiverCardItem(  context:context,
-                label:   AppLocalizations.of(context).labelMyContacts(),
-                icon:  "assets/images/icons/ic_contacts.svg",
-                onPressed: () async {
-                 final modalAddressSelection =
-                 await showBarModalBottomSheet(context: context,  backgroundColor: colors.background,
-                      builder: (context, controller) {
-                      return Material(
-                        child: CupertinoPageScaffold(
-                          backgroundColor: colors.background,
-                          navigationBar: CupertinoNavigationBar(
-                            backgroundColor: colors.background,
-                            leading: SvgPicture.asset("assets/images/icons/ic_contact.svg"),
-                            middle: Text(AppLocalizations.of(context).chooseContactTitle(), style: TextStyle(color: colors.onBackground),),
-                          ),
-                          child: SafeArea(
-                            bottom: false,
-                            child: ListView.builder(
-                              reverse: false,
-                              shrinkWrap: true,
-                              physics: ClampingScrollPhysics(),
-                                controller: controller,
-                              itemCount: _contacts.length,
-                              itemBuilder: (context, index) => ListTile(
-                                    title: Text(_contacts[index].name),
-                                      subtitle: Text(_contacts[index].address),
-                                onTap: () {
-                                      Navigator.of(context).pop( _contacts[index].address);
-                                },
-                                  ),
-                            ),
-                          ),
-                        ),
-                      );
-                  });
-                  setState(() {
-                    this.mode = ReceiverCardMode.SELECTED;
-                    this._selectedAddress = modalAddressSelection as String;
-                  });
-                }
+          );
+        }
+      case ReceiverCardMode.SCAN_QR:
+        {
+          return Theme(
+            data:
+                ThemeData(primaryColor: Theme.of(context).colorScheme.primary),
+            child: TextFormField(
+              initialValue: this.scanResult.rawContent,
+              style: TextStyle(color: colors.onBackground.withOpacity(0.7)),
+              decoration: InputDecoration(
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  hintText: AppLocalizations.of(context).enterAddress,
+                  hintStyle:
+                      TextStyle(color: colors.onBackground.withOpacity(0.7)),
+                  border: inputBorder(context),
+                  enabled: true,
+                  prefixIcon: IconButton(
+                    icon: Icon(Icons.cancel, color: colors.error, size: 18),
+                    onPressed: () {
+                      this.setState(() {
+                        this.mode = ReceiverCardMode.NOT_SELECTED;
+                      });
+                    },
+                  ),
+                  enabledBorder: inputBorder(context)),
             ),
-            buildReceiverCardItem(  context: context,
-                label:  AppLocalizations.of(context).labelAccount(),
-                icon: "assets/images/icons/ic_accounts.svg",
-                onPressed: () async {
-                  final modalAddressSelection =
-                  await showBarModalBottomSheet(context: context,  backgroundColor: colors.background,
-                      builder: (context, controller) {
-                        return Material(
-                          child: CupertinoPageScaffold(
-                            backgroundColor: colors.background,
-                            navigationBar: CupertinoNavigationBar(
+          );
+        }
+      case ReceiverCardMode.SELECTED:
+        {
+          return Theme(
+            data:
+                ThemeData(primaryColor: Theme.of(context).colorScheme.primary),
+            child: TextFormField(
+              initialValue: _selectedAddress,
+              style: TextStyle(color: colors.onBackground.withOpacity(0.7)),
+              decoration: InputDecoration(
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  hintText: "Enter address",
+                  hintStyle:
+                      TextStyle(color: colors.onBackground.withOpacity(0.7)),
+                  border: inputBorder(context),
+                  enabled: true,
+                  prefixIcon: IconButton(
+                    icon: Icon(Icons.cancel, color: colors.error, size: 18),
+                    onPressed: () {
+                      this.setState(() {
+                        this.mode = ReceiverCardMode.NOT_SELECTED;
+                      });
+                    },
+                  ),
+                  enabledBorder: inputBorder(context)),
+            ),
+          );
+        }
+        break;
+      default:
+        {
+          return Row(
+            children: <Widget>[
+              buildReceiverCardItem(
+                  context: context,
+                  label: AppLocalizations.of(context).labelAddress(),
+                  icon: "assets/images/icons/ic_add.svg",
+                  onPressed: () {
+                    setState(() {
+                      this.mode = ReceiverCardMode.ADDRESS;
+                    });
+                  }),
+              buildReceiverCardItem(
+                  context: context,
+                  label: AppLocalizations.of(context).labelMyContacts(),
+                  icon: "assets/images/icons/ic_contacts.svg",
+                  onPressed: () async {
+                    final modalAddressSelection = await showBarModalBottomSheet(
+                        context: context,
+                        backgroundColor: colors.background,
+                        builder: (context, controller) {
+                          return Material(
+                            child: CupertinoPageScaffold(
                               backgroundColor: colors.background,
-                              leading: SvgPicture.asset("assets/images/icons/ic_contact.svg"),
-                              middle: Text(AppLocalizations.of(context).chooseAccountTitle(), style: TextStyle(color: colors.onBackground),),
-                            ),
-                            child: SafeArea(
-                              bottom: false,
-                              child: ListView.builder(
-                                reverse: false,
-                                shrinkWrap: true,
-                                physics: ClampingScrollPhysics(),
-                                controller: controller,
-                                itemCount: _accounts.length,
-                                itemBuilder: (context, index) => ListTile(
-                                  title: Text(_accounts[index].address),
-                                  onTap: () {
-                                    Navigator.of(context).pop( _accounts[index].address);
-                                  },
+                              navigationBar: CupertinoNavigationBar(
+                                backgroundColor: colors.background,
+                                leading: SvgPicture.asset(
+                                    "assets/images/icons/ic_contacts.svg"),
+                                middle: Text(
+                                  AppLocalizations.of(context)
+                                      .chooseContactTitle(),
+                                  style: TextStyle(color: colors.onBackground),
+                                ),
+                              ),
+                              child: SafeArea(
+                                bottom: false,
+                                child: ListView.builder(
+                                  reverse: false,
+                                  shrinkWrap: true,
+                                  physics: ClampingScrollPhysics(),
+                                  controller: controller,
+                                  itemCount: _contacts.length,
+                                  itemBuilder: (context, index) => ListTile(
+                                    title: Text(_contacts[index].name),
+                                    subtitle: Text(_contacts[index].address),
+                                    onTap: () {
+                                      Navigator.of(context)
+                                          .pop(_contacts[index].address);
+                                    },
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        );
-                      });
-                  setState(() {
-                    this.mode = ReceiverCardMode.SELECTED;
-                    this._selectedAddress = modalAddressSelection as String;
-                  });
-                }
-
-            ),
-            buildReceiverCardItem(
-                context: context,
-                label:  AppLocalizations.of(context).labelScanQr(),
-                icon: "assets/images/icons/ic_qr.svg",
-                onPressed: () {
-                  _scan();
-                }),
-          ],
-        );
-      }
-      break;
+                          );
+                        });
+                    setState(() {
+                      this.mode = ReceiverCardMode.SELECTED;
+                      this._selectedAddress = modalAddressSelection as String;
+                    });
+                  }),
+              buildReceiverCardItem(
+                  context: context,
+                  label: AppLocalizations.of(context).labelAccount(),
+                  icon: "assets/images/icons/ic_accounts.svg",
+                  onPressed: () async {
+                    final modalAddressSelection = await showBarModalBottomSheet(
+                        context: context,
+                        backgroundColor: colors.background,
+                        builder: (context, controller) {
+                          return Material(
+                            child: CupertinoPageScaffold(
+                              backgroundColor: colors.background,
+                              navigationBar: CupertinoNavigationBar(
+                                backgroundColor: colors.background,
+                                leading: SvgPicture.asset(
+                                    "assets/images/icons/ic_contacts.svg"),
+                                middle: Text(
+                                  AppLocalizations.of(context)
+                                      .chooseAccountTitle(),
+                                  style: TextStyle(color: colors.onBackground),
+                                ),
+                              ),
+                              child: SafeArea(
+                                bottom: false,
+                                child: ListView.builder(
+                                  reverse: false,
+                                  shrinkWrap: true,
+                                  physics: ClampingScrollPhysics(),
+                                  controller: controller,
+                                  itemCount: _accounts.length,
+                                  itemBuilder: (context, index) => ListTile(
+                                    title: Text(_accounts[index].address == null
+                                        ? ""
+                                        : _accounts[index].address),
+                                    onTap: () {
+                                      Navigator.of(context)
+                                          .pop(_accounts[index].address);
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        });
+                    setState(() {
+                      this.mode = ReceiverCardMode.SELECTED;
+                      this._selectedAddress = modalAddressSelection as String;
+                    });
+                  }),
+              buildReceiverCardItem(
+                  context: context,
+                  label: AppLocalizations.of(context).labelScanQr(),
+                  icon: "assets/images/icons/ic_qr.svg",
+                  onPressed: () {
+                    _scan();
+                  }),
+            ],
+          );
+        }
+        break;
     }
   }
 
-  Widget buildReceiverCardItem({BuildContext context,
-      String label,
-      String icon,
-      ReceiverCardCallback onPressed}) => Flexible(
-    flex: 1,
-    child: GestureDetector(
-      onTap: () {
-        onPressed();
-      },
-      child: Center(
-        child: Card(
-          margin: const EdgeInsets.all(4),
-          elevation: 0,
-          color: Theme.of(context).colorScheme.surface,
-          shape: RoundedRectangleBorder(
-              borderRadius: FusionTheme.borderRadius,
-              side: BorderSide(color: Theme.of(context).colorScheme.primary)),
-          child: Container(
-            width: MediaQuery.of(context).size.width / 5,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                SvgPicture.asset(icon, color: Theme.of(context).colorScheme.primary,
-                  width: 24, height: 24, fit: BoxFit.scaleDown,),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Text(
-                      label,
-                      style: TextStyle(fontSize: 10),
-                      maxLines: 1
+  Widget buildReceiverCardItem(
+          {BuildContext context,
+          String label,
+          String icon,
+          ReceiverCardCallback onPressed}) =>
+      Flexible(
+        flex: 1,
+        child: GestureDetector(
+          onTap: () {
+            onPressed();
+          },
+          child: Center(
+            child: Card(
+              margin: const EdgeInsets.all(4),
+              elevation: 0,
+              color: Theme.of(context).colorScheme.surface,
+              shape: RoundedRectangleBorder(
+                  borderRadius: FusionTheme.borderRadius,
+                  side:
+                      BorderSide(color: Theme.of(context).colorScheme.primary)),
+              child: Container(
+                width: MediaQuery.of(context).size.width / 5,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    SvgPicture.asset(
+                      icon,
+                      color: Theme.of(context).colorScheme.primary,
+                      width: 24,
+                      height: 24,
+                      fit: BoxFit.scaleDown,
                     ),
-                  ),
-                )
-              ],
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Text(label,
+                            style: TextStyle(fontSize: 10), maxLines: 1),
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ),
           ),
         ),
-      ),
-    ),
-  );
-
+      );
 }
-
-
-

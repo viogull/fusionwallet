@@ -81,8 +81,7 @@ class _AddContactPageState extends State<AddContactPage> {
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
           child: BlocProvider(
-            create: (context) => AddContactFormBloc(account: widget.acc,
-              localizations: AppLocalizations.of(context)),
+            create: (context) => AddContactFormBloc(account: widget.acc),
             child: Builder(
               builder: (context) {
                 final ThemeData theme = Theme.of(context);
@@ -192,7 +191,6 @@ class _AddContactPageState extends State<AddContactPage> {
 
 class AddContactFormBloc extends FormBloc<String, String> {
   final Account account;
-  final AppLocalizations localizations;
 
   final accountName = TextFieldBloc(
     validators: [
@@ -208,13 +206,13 @@ class AddContactFormBloc extends FormBloc<String, String> {
 
   @override
   Future<Function> close() {
-      address.close();
-      accountName.close();
+    address.close();
+    accountName.close();
   }
 
   final showSuccessResponse = BooleanFieldBloc();
 
-  AddContactFormBloc({this.account, this.localizations}) {
+  AddContactFormBloc({this.account}) {
     addFieldBlocs(
       fieldBlocs: [
         accountName,
@@ -231,26 +229,26 @@ class AddContactFormBloc extends FormBloc<String, String> {
     print(showSuccessResponse.value);
 
     try {
-      if (this.accountName.value != null
-          && address.value != null
-      && address.value.contains("Mx", 0)) {
+      if (this.accountName.value != null &&
+          address.value != null &&
+          address.value.contains("Mx", 0)) {
         debugPrint("Checking current account contacts");
         final contacts = Hive.box<Contact>(contactsBox);
-        if(!address.value.contains("Mx")) {
-          address.addFieldError(localizations.validateAddressError());
+        if (!address.value.contains("Mx")) {
+          address.addFieldError("Invalidd address");
           emitSubmissionCancelled();
         }
         await contacts.add(new Contact(accountName.value, address.value));
         emitSuccess();
       } else {
-        address.addFieldError(localizations.validateAddressError());;
+        address.addFieldError("Check address");
+        ;
         emitFailure();
       }
     } on Exception {
-     // emitFailure();
+      // emitFailure();
     }
   }
-
 }
 
 class SuccessScreen extends StatelessWidget {

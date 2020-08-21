@@ -14,8 +14,7 @@ class LockscreenArgs {
   final String pin;
   final bool biometricEnabled;
 
-  const LockscreenArgs({@required this.pin,
-    @required this.biometricEnabled});
+  const LockscreenArgs({@required this.pin, @required this.biometricEnabled});
 }
 
 typedef OnUnlockCallback = Function();
@@ -107,8 +106,6 @@ class _LockUiState extends State<LockUi> with TickerProviderStateMixin {
     Navigator.of(context).pushReplacementNamed(HomePage.navId);
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -191,15 +188,16 @@ class _LockUiPincodeState extends State<LockUiPincode> {
       debugPrint(
           "PinLength is max, expected ${widget.expected}, entered $_otp");
       if (_otp == widget.expected) {
-        FlashHelper.successBar(context, message: AppLocalizations.of(context).authSuccess());
+        FlashHelper.successBar(context,
+            message: AppLocalizations.of(context).authSuccess());
 
         Future.delayed(Duration(milliseconds: 500), () {
           Navigator.of(context).pushReplacementNamed(HomePage.navId);
         });
       } else {
-
         Future.delayed(Duration(milliseconds: 200), () {
-          FlashHelper.errorBar(context, message: AppLocalizations.of(context).pinInvalid);
+          FlashHelper.errorBar(context,
+              message: AppLocalizations.of(context).pinInvalid);
         });
         setState(() {
           this.pincode = _otp;
@@ -232,7 +230,6 @@ class _LockUiPincodeState extends State<LockUiPincode> {
 
     // print(_otp);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -448,16 +445,12 @@ class _LockUiPincodeState extends State<LockUiPincode> {
               flex: 1,
               child: textLabel,
             ),
-
             Flexible(
               flex: 2,
               child: pinCodeView,
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.1,
-            ),
             Flexible(
-              flex: 5,
+              flex: 6,
               child: keyboard,
             ),
           ],

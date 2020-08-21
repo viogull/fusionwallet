@@ -153,9 +153,7 @@ class MinterRest {
   }
 
   //put
-  Future<dynamic> updateProfileData() {
-    
-  }
+  Future<dynamic> updateProfileData() {}
 
   Future<dynamic> send(SendTxRequest txData) async {
     try {
@@ -185,7 +183,8 @@ class MinterRest {
 
   Future<dynamic> multisend() {}
 
-  Future<dynamic> delegate({DelegateUboundTxRequest txData, String hash}) async {
+  Future<dynamic> delegate(
+      {DelegateUboundTxRequest txData, String hash}) async {
     try {
       Response response = await fusionDio.post('/tx/delegate?hash=$hash',
           data: txData.toJson(),
@@ -242,13 +241,13 @@ class MinterRest {
     try {
       Account _acc;
       Hive.box<Account>(accountsBox).values.forEach((element) {
-        logger.d("Name ${element.name}, hash ${element.hash}, ${element.toString()}");
-        if(element != null)
-          _acc = element;
+        logger.d(
+            "Name ${element.name}, hash ${element.hash}, ${element.toString()}");
+        if (element != null) _acc = element;
       });
 
       Response response = await fusionDio.post(
-          "$fusionApiUrl/push/create?sender=${sender.isNotEmpty ? sender : _acc }&receiver=$receiver&creatorId=${_acc.sessionKey}",
+          "$fusionApiUrl/push/create?sender=${sender.isNotEmpty ? sender : _acc}&receiver=$receiver&creatorId=${_acc.sessionKey}",
           data: txData.toJson(),
           options: Options(contentType: "application/json"));
 
@@ -297,6 +296,8 @@ class MinterRest {
       }
     }
   }
+
+  Future<dynamic> fetchCoefficients() async {}
 
   Future<ExchangeRateResponse> fetchExchangeRates() async {
     //TODO
@@ -378,10 +379,8 @@ class MinterRest {
     }
   }
 
-
   Future<AdminNotificationsResponse> fetchNotifications() async {
     try {
-
       logger.d('Fetching notifications ');
       // Adding Mx to get valid address
       final url = "$fusionApiUrl/notifications/";
@@ -417,8 +416,7 @@ class MinterRest {
         logger.e('Cannot fetch txs for null address');
         return null;
       }
-      if (!address.contains("Mx"))
-        address = "Mx" + address;
+      if (!address.contains("Mx")) address = "Mx" + address;
 
       logger.d('Fetching address $address txs ');
       // Adding Mx to get valid address
