@@ -1,4 +1,3 @@
-import 'package:alice/alice.dart';
 import 'package:dio/dio.dart';
 import 'package:fusion_wallet/core/abstract/account.dart';
 import 'package:fusion_wallet/core/models/address_data.dart';
@@ -13,7 +12,6 @@ import 'package:fusion_wallet/core/models/profile_response.dart';
 import 'package:fusion_wallet/core/models/send_tx_request.dart';
 import 'package:fusion_wallet/core/models/spec_exchange_rates_response.dart';
 import 'package:fusion_wallet/core/models/statistic_rewards_response.dart';
-import 'package:fusion_wallet/core/models/transaction.dart';
 import 'package:fusion_wallet/core/models/transanctions_response.dart';
 import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
@@ -81,11 +79,7 @@ class MinterRest {
   final Dio dio = Dio(dioOptions);
   final Dio fusionDio = Dio(fusionDioOptions);
 
-  void loadInterceptors() async {
-    final alice = injector.get<Alice>();
-    dio.interceptors.add(alice.getDioInterceptor());
-    fusionDio.interceptors.add(alice.getDioInterceptor());
-  }
+  void loadInterceptors() async {}
 
   final logger = injector.get<Logger>();
 

@@ -1,8 +1,6 @@
-import 'package:alice/alice.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../inject.dart';
 import '../../../localizations.dart';
 import '../../widgets.dart';
 
@@ -30,9 +28,7 @@ class AccessLockedUi extends StatelessWidget {
         Flexible(
           flex: 8,
           child: GestureDetector(
-            onTap: () {
-              injector.get<Alice>().showInspector();
-            },
+            onTap: () {},
             child: Center(
               child: Image.asset(
                 "assets/images/icon.png",

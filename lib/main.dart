@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:alice/alice.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -93,8 +92,7 @@ void main() async {
     runApp(new StateContainer(
         child: new App(),
         accounts: accsBox,
-        preferences: _prefsSingle,
-        alice: injector.get<Alice>()));
+        preferences: _prefsSingle));
   } on Exception catch (exception) {
     logger.d("Error on start");
   }
@@ -113,7 +111,6 @@ class AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-        navigatorKey: injector.get<Alice>().getNavigatorKey(),
         theme: FusionTheme.light,
         darkTheme: FusionTheme.dark,
         themeMode: StateContainer.of(context).darkModeEnabled

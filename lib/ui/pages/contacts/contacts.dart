@@ -49,19 +49,16 @@ class _ContactsPageState extends State<ContactsPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return ValueListenableBuilder(
       valueListenable: Hive.box<Contact>(contactsBox).listenable(),
       builder: (context, Box<Contact> contacts, _) {
         final _contacts = contacts.values.toList();
 
         return Container(
-
             constraints: BoxConstraints(
               maxHeight: MediaQuery.of(context).size.height * 0.99,
             ),
             child: Column(
-
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Flexible(
@@ -82,29 +79,29 @@ class _ContactsPageState extends State<ContactsPage> {
                             prefixIcon: Icon(Icons.search),
                             border: OutlineInputBorder(
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(5.0)))),
+                                    BorderRadius.all(Radius.circular(5.0)))),
                       ),
                     ),
                   ),
                   Flexible(
                       flex: 8,
                       child: AnimationLimiter(
-                        child:(_contacts.isEmpty)
+                        child: (_contacts.isEmpty)
                             ? showEmptyView(context)
                             : ListView.builder(
-                          itemBuilder: (context, index) {
-                            return AnimationConfiguration.staggeredList(
-                              child: FadeInAnimation(
-                                  duration: Duration(milliseconds: 500),
-                                  child: ContactItem(data: _contacts[index])
+                                itemBuilder: (context, index) {
+                                  return AnimationConfiguration.staggeredList(
+                                      child: FadeInAnimation(
+                                          duration: Duration(milliseconds: 500),
+                                          child: ContactItem(
+                                            data: _contacts[index],
+                                          )),
+                                      position: index);
+                                },
+                                physics: ClampingScrollPhysics(),
+                                itemCount: _contacts.length,
                               ),
-                            );
-                          },
-                          physics: ClampingScrollPhysics(),
-                          itemCount: _contacts.length,
-                        ) ,
-                      )
-                  )
+                      ))
                 ]));
       },
     );

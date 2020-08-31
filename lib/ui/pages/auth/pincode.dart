@@ -26,8 +26,7 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
   bool isVerified = false;
   bool passCreate = false;
 
-  _PasswordCreationPageState({this.passCreate}) {
-  }
+  _PasswordCreationPageState({this.passCreate});
 
 
   @override

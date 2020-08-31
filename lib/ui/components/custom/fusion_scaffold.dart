@@ -25,7 +25,8 @@ class FusionScaffold extends StatelessWidget {
       Container body,
       this.onBackClicked,
       this.hideDrawer = true,
-      this.hideToolbar = false, this.appBarIcon});
+      this.hideToolbar = false,
+      this.appBarIcon});
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +36,11 @@ class FusionScaffold extends StatelessWidget {
         ? "assets/images/backgrounds/bg_primary.svg"
         : "assets/images/backgrounds/bg_primary_light.svg";
 
-    return  Stack(
+    return Stack(
       children: <Widget>[
         Container(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+          height: MediaQuery.of(context).size.height * 0.95,
           child: SvgPicture.asset(
             background,
             fit: BoxFit.fill,
@@ -75,10 +76,9 @@ class FusionScaffold extends StatelessWidget {
               title,
               maxFontSize: 16,
               minFontSize: 14,
-              style: GoogleFonts.robotoTextTheme().headline6
-                  .copyWith(color: theme.colorScheme.onSurface,
-                fontSize: 16
-              ),
+              style: GoogleFonts.robotoTextTheme()
+                  .headline6
+                  .copyWith(color: theme.colorScheme.onSurface, fontSize: 16),
             ),
     );
   }

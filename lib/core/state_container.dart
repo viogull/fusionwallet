@@ -1,4 +1,3 @@
-import 'package:alice/alice.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
@@ -30,13 +29,11 @@ class StateContainer extends StatefulWidget {
   final Widget child;
   final Box<Account> accounts;
   final Preferences preferences;
-  final Alice alice;
 
   StateContainer(
       {@required this.child,
       @required this.accounts,
-      @required this.preferences,
-      @required this.alice});
+      @required this.preferences});
 
   @override
   State<StatefulWidget> createState() => StateContainerState();
@@ -236,15 +233,13 @@ class StateContainerState extends State<StateContainer> {
 
   void checkAccountsBox() async {
     try {
-
-      selectedAccount = Hive.box(accountsBox).getAt(0);
-
-    } on HiveError catch (e) {
-    }
+      selectedAccount = Hive.box<Account>(accountsBox).getAt(0);
+    } on HiveError catch (e) {}
   }
 
   void loadAccount({Account account}) async {
-    var _ = (account == null ) ?  Hive.box<Account>(accountsBox).getAt(0) :account;
+    var _ =
+        (account == null) ? Hive.box<Account>(accountsBox).getAt(0) : account;
     setState(() {
       this.selectedAccount = _;
     });

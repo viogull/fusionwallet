@@ -17,15 +17,11 @@ import '../pages.dart';
 import 'event.dart';
 
 class RecoverAccountBloc extends FormBloc<String, String> {
-
-
   final AppLocalizations localizations;
-
 
   final nameTextBloc = TextFieldBloc(
     validators: [
       FieldBlocValidators.required,
-
     ],
   );
 
@@ -35,45 +31,32 @@ class RecoverAccountBloc extends FormBloc<String, String> {
     ],
   );
 
-
-
-
-
-
-  RecoverAccountBloc({this.localizations})  {
+  RecoverAccountBloc({this.localizations}) {
     addFieldBlocs(
       fieldBlocs: [
         nameTextBloc,
         mnemonicTextBloc,
       ],
     );
-
-
-
   }
 
   @override
   void onSubmitting() async {
-
-
-
-
     print(nameTextBloc.value);
     print(mnemonicTextBloc.value);
-
-
 
     try {
       if (this.nameTextBloc.value != null && mnemonicTextBloc.value != null) {
         debugPrint("Checking current account contacts");
-        final canRecover = await injector
+        bool canRecover = await injector
             .get<MinterRest>()
             .canRecover(nameTextBloc.value, mnemonicTextBloc.value);
 
-        if(canRecover)
+        if (canRecover)
           this.emitSuccess();
         else
-          this.emitFailure(failureResponse: localizations.cannotRecoverAccount());
+          this.emitFailure(
+              failureResponse: localizations.cannotRecoverAccount());
       }
     } on Exception catch (e) {
       emitFailure();
@@ -81,7 +64,6 @@ class RecoverAccountBloc extends FormBloc<String, String> {
 
     debugPrint("Loading succesfully");
   }
-
 }
 
 class RecoverAccountPage extends StatefulWidget {
@@ -100,8 +82,8 @@ class _RecoverAccountState extends State<RecoverAccountPage> {
   static final _possibleFormats = BarcodeFormat.values.toList()
     ..removeWhere((e) => e == BarcodeFormat.unknown);
 
-
-  void _nextRecoveryStage(BuildContext context, {String name, String mnemonic}) {
+  void _nextRecoveryStage(BuildContext context,
+      {String name, String mnemonic}) {
     BlocProvider.of<AuthenticationBloc>(context)
         .add(AccountCompleteRecoverEvent(name: name, mnemonic: mnemonic));
   }
@@ -128,149 +110,146 @@ class _RecoverAccountState extends State<RecoverAccountPage> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     debugPrint("Building recover page, initial data -> ${this._scannedQrData}");
-
 
     return BlocProvider(
       create: (context) => RecoverAccountBloc(),
       child: Builder(
         builder: (context) {
           final bloc = context.bloc<RecoverAccountBloc>();
-          if(this._scannedQrData != null) {
+          if (this._scannedQrData != null) {
             bloc.mnemonicTextBloc.updateInitialValue(this._scannedQrData);
           }
           return FormBlocListener<RecoverAccountBloc, String, String>(
-
               onLoading: (context, state) {
-               // BlocLoader.show(context);
+                // BlocLoader.show(context);
               },
               onSuccess: (context, state) {
-              //  BlocLoader.hide(context);
-              debugPrint("Hodle");
+                //  BlocLoader.hide(context);
 
-              _nextRecoveryStage(context,
-                  name: bloc.nameTextBloc.value, mnemonic: bloc.mnemonicTextBloc.value);
+                _nextRecoveryStage(context,
+                    name: bloc.nameTextBloc.value,
+                    mnemonic: bloc.mnemonicTextBloc.value);
 //                BlocProvider.of<AuthenticationBloc>(context)
 //                    .add(AccountCompleteRecoverEvent(name: bloc.nameTextBloc.value,
 //                    mnemonic: bloc.mnemonicTextBloc.value));
               },
               onFailure: (context, state) {
-             //   BlocLoader.hide(context);
+                //   BlocLoader.hide(context);
 
                 Scaffold.of(context).showSnackBar(
                     SnackBar(content: Text(state.failureResponse)));
               },
               child: SafeArea(
                   child: FusionScaffold(
-                    title: AppLocalizations.of(context).toolbarRecoverFromSeedTitle(),
-                    appBarIcon: IconButton(
-                      icon: Icon(Icons.arrow_back, color: Theme.of(context).colorScheme.primary),
-                      onPressed: () {
-                        BlocProvider.of<AuthenticationBloc>(context).add(
-                            AccountInitialEvent()
-                        );
-                      },
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          Flexible(
-                              flex: 4,
-                              child: SvgPicture.asset(
-                                ('assets/images/icons/ic_recoverpasswordicon.svg'),
-                                placeholderBuilder: (context) => CircularProgressIndicator(),
-                                height: 100.0,
-                              )),
+                title:
+                    AppLocalizations.of(context).toolbarRecoverFromSeedTitle(),
+                appBarIcon: IconButton(
+                  icon: Icon(Icons.arrow_back,
+                      color: Theme.of(context).colorScheme.primary),
+                  onPressed: () {
+                    BlocProvider.of<AuthenticationBloc>(context)
+                        .add(AccountInitialEvent());
+                  },
+                ),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Flexible(
+                          flex: 4,
+                          child: SvgPicture.asset(
+                            ('assets/images/icons/ic_recoverpasswordicon.svg'),
+                            placeholderBuilder: (context) =>
+                                CircularProgressIndicator(),
+                            height: 100.0,
+                          )),
 
-                          SizedBox(
-                            height: 10,
-                          ),
+                      SizedBox(
+                        height: 10,
+                      ),
 
-                          Flexible(
-                            flex: 4,
-                            child: Center(
-                                child: TextFieldBlocBuilder(
-                                    textFieldBloc: bloc.nameTextBloc,
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      labelText: AppLocalizations.of(context).inputAccountNameHelperText(),
-
-                                      labelStyle: TextStyle(
-                                        color: (theme.colorScheme.onSurface),
-                                      ),
-                                    )
-                                ))),
-                          Flexible(
-                            flex: 8,
-                            child: Container(
-                              height: 300.0,
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  border: Border.all(color: theme.primaryColor)),
-                              child: SizedBox.expand(
-                                child: TextFieldBlocBuilder(
-                                  textFieldBloc: bloc.mnemonicTextBloc,
-                                  textInputAction: TextInputAction.done,
-                                  maxLines: 14,
-                                  style: TextStyle(
+                      Flexible(
+                          flex: 4,
+                          child: Center(
+                              child: TextFieldBlocBuilder(
+                                  textFieldBloc: bloc.nameTextBloc,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: AppLocalizations.of(context)
+                                        .inputAccountNameHelperText(),
+                                    labelStyle: TextStyle(
+                                      color: (theme.colorScheme.onSurface),
+                                    ),
+                                  )))),
+                      Flexible(
+                        flex: 8,
+                        child: Container(
+                          height: 300.0,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              border: Border.all(color: theme.primaryColor)),
+                          child: SizedBox.expand(
+                            child: TextFieldBlocBuilder(
+                              textFieldBloc: bloc.mnemonicTextBloc,
+                              textInputAction: TextInputAction.done,
+                              maxLines: 14,
+                              style: TextStyle(
+                                color: (theme.colorScheme.onSurface),
+                              ),
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  hintText: this._scannedQrData == null
+                                      ? AppLocalizations.of(context)
+                                          .inputEnterScanPasshpraseHintText()
+                                      : "",
+                                  hintStyle: TextStyle(
                                     color: (theme.colorScheme.onSurface),
                                   ),
-                                  decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      hintText: this._scannedQrData == null
-                                          ? AppLocalizations.of(context)
-                                          .inputEnterScanPasshpraseHintText()
-                                          : "",
-                                      hintStyle: TextStyle(
-                                        color: (theme.colorScheme.onSurface),
+                                  suffixIcon: IconButton(
+                                      icon: SvgPicture.asset(
+                                        'assets/images/icons/ic_qrcodescan.svg',
+                                        height: 35.0,
                                       ),
-                                      suffixIcon: IconButton(
-                                          icon: SvgPicture.asset(
-                                            'assets/images/icons/ic_qrcodescan.svg',
-                                            height: 35.0,
-                                          ),
-                                          onPressed: _scan)),
-                                ),
-                              ),
+                                      onPressed: _scan)),
                             ),
                           ),
-                          SizedBox(
-                            height: 20,
-                          ),
-//                  SizedBox(height: 30.0),
-                          LimitedBox(
-                            maxHeight: 70.0,
-                          ),
-                          Flexible(
-                            flex: 5,
-                            child: Container(
-                              width: MediaQuery.of(context).size.width,
-                              child: FusionButton(
-                                  text: AppLocalizations.of(context).buttonVerify(),
-                                  onPressed: () {
-                                    debugPrint("Tapped on submit");
-                                   bloc.submit();
-                                  }),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
-                  )));
+                      SizedBox(
+                        height: 20,
+                      ),
+//                  SizedBox(height: 30.0),
+                      LimitedBox(
+                        maxHeight: 70.0,
+                      ),
+                      Flexible(
+                        flex: 5,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          child: FusionButton(
+                              text: AppLocalizations.of(context).buttonVerify(),
+                              onPressed: () {
+                                debugPrint("Tapped on submit");
+                                bloc.submit();
+                              }),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
+                ),
+              )));
         },
       ),
     );
   }
 }
-
-

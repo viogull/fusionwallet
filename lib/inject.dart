@@ -1,4 +1,3 @@
-import 'package:alice/alice.dart';
 import 'package:fusion_wallet/core/abstract/preferences.dart';
 import 'package:fusion_wallet/core/minter_rest.dart';
 import 'package:fusion_wallet/core/models.dart';
@@ -26,19 +25,14 @@ export './utils/flasher.dart';
 GetIt injector = GetIt.instance;
 
 void setupServiceLocator() {
-  injector.registerLazySingleton<Preferences>(() =>
-      Hive.box<Preferences>(preferencesBox).getAt(0));
+  injector.registerLazySingleton<Preferences>(
+      () => Hive.box<Preferences>(preferencesBox).getAt(0));
   injector.registerLazySingleton<HapticUtil>(() => HapticUtil());
   injector.registerLazySingleton<BiometricUtil>(() => BiometricUtil());
   injector.registerLazySingleton<Vault>(() => Vault());
   injector.registerLazySingleton<SharedPrefsUtil>(() => SharedPrefsUtil());
-  injector.registerLazySingleton<Logger>(() => Logger(printer: PrettyPrinter()));
+  injector
+      .registerLazySingleton<Logger>(() => Logger(printer: PrettyPrinter()));
   injector.registerLazySingleton<MinterChannel>(() => MinterChannel());
   injector.registerLazySingleton<MinterRest>(() => MinterRest());
-  injector.registerLazySingleton<Alice>(() => Alice(showInspectorOnShake: true,
-      showNotification: true));
 }
-
-
-
-

@@ -1,4 +1,3 @@
-import 'package:alice/alice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,9 +34,7 @@ class AddAccountIntroPage extends StatelessWidget {
             ),
           ),
         ),
-        onTap: () {
-          Alice().showInspector();
-        });
+        onTap: () {});
 
     final buttonCreateAccount = Container(
       width: MediaQuery.of(context).size.width,

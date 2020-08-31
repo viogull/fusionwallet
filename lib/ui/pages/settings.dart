@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -117,7 +115,7 @@ class SettingsPage extends StatelessWidget {
                                     constraints: BoxConstraints(
                                       maxHeight:
                                           MediaQuery.of(context).size.height *
-                                              0.99,
+                                              0.7,
                                     ),
                                     child: Column(
                                         mainAxisAlignment:
@@ -138,7 +136,7 @@ class SettingsPage extends StatelessWidget {
                                                 child: (notifications.isEmpty)
                                                     ? showEmptyView(context)
                                                     : ListView.builder(
-                                                        reverse: true,
+                                                        reverse: false,
                                                         physics:
                                                             ClampingScrollPhysics(),
                                                         itemBuilder:

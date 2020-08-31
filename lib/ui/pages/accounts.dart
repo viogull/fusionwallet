@@ -17,7 +17,6 @@ import './pages.dart';
 import '../../localizations.dart';
 import '../components/lists/balances_card.dart';
 import 'additional/add_account_ui.dart';
-import 'auth/intro.dart';
 import 'transactions/rewards_info_page.dart';
 
 class AccountsPage extends StatelessWidget {
@@ -66,7 +65,7 @@ class AccountsPage extends StatelessWidget {
                   },
                   icon: Icon(Icons.arrow_upward),
                   color: FusionTheme.redButtonColor(),
-                  label: Text(AppLocalizations.of(context)
+                  label: AutoSizeText(AppLocalizations.of(context)
                       .buttonSend()
                       .toString()
                       .toUpperCase()),
@@ -84,7 +83,7 @@ class AccountsPage extends StatelessWidget {
                     },
                     icon: Icon(Icons.arrow_downward),
                     color: FusionTheme.greenButtonColor(),
-                    label: Text(AppLocalizations.of(context)
+                    label: AutoSizeText(AppLocalizations.of(context)
                         .buttonRequest()
                         .toString()
                         .toUpperCase()))
@@ -109,7 +108,7 @@ class AccountsPage extends StatelessWidget {
                   Navigator.pushNamed(context, DelegateFundsPage.navId);
                 },
                 color: Theme.of(context).colorScheme.primary,
-                child: Text(
+                child: AutoSizeText(
                     AppLocalizations.of(context).buttonDelegate().toString()),
               ),
               RaisedButton(
@@ -119,7 +118,7 @@ class AccountsPage extends StatelessWidget {
                     Navigator.pushNamed(context, UboundFundsPage.navId);
                   },
                   color: Theme.of(context).colorScheme.primary,
-                  child: Text(
+                  child: AutoSizeText(
                       AppLocalizations.of(context).buttonUnbound().toString()))
             ],
           );
@@ -191,14 +190,7 @@ class AccountsPage extends StatelessWidget {
             return AccountBalancesCard(
                 data: snapshot.data,
                 onPlusTapped: () {
-                  showBarModalBottomSheet(
-                      context: context,
-                      expand: true,
-                      elevation: 24,
-                      builder:
-                          (BuildContext context, ScrollController controller) {
-                        return AddAccountUi();
-                      });
+                  Navigator.of(context).pushNamed(AddAccountUi.navId);
                 });
           } else
             return Card(
