@@ -47,20 +47,38 @@ class AuthenticationBloc
       yield AccountRecoveryState();
     } else if (event is AccountCompleteRecoverEvent) {
       _isRecoveringAccount = true;
-      _account.mnemonic = event.mnemonic;
-      _account.name = event.name;
+      _account.mnemonic = event.profile.mnemonic;
+      _account.name = event.profile.name;
+      _account.seed = event.profile.id;
+      _account.hash = event.profile.hash;
+      _account.address = event.profile.address;
+
       yield CreatePincodeState();
     } else if (event is AccountCreateWalletEvent) {
       yield CreatePincodeState();
     } else if (event is PincodeCreatedEvent) {
       _account.pin = event.pin;
-      if (this._isRecoveringAccount)
-        yield AccountUnlockedState();
-      else {
-        final isBiometricAvailable = await injector.get<BiometricUtil>().hasBiometrics();
 
-        log.d("Checking biometrics for availability, is available? -> $isBiometricAvailable");
-        if(isBiometricAvailable)
+      if (this._isRecoveringAccount) {
+        log.d("Recovering account is succesfully finished. Saved "
+            "${_account.name} with pin ${_account.pin}");
+
+        log.d("Fetching profile data for recovering...");
+
+        if (_account.isInBox) {
+          _account.save();
+        } else {
+          log.d("Account not saved. Persisting...");
+          Hive.box<Account>(accountsBox).add(_account);
+        }
+        yield AccountUnlockedState();
+      } else {
+        final isBiometricAvailable =
+            await injector.get<BiometricUtil>().hasBiometrics();
+
+        log.d(
+            "Checking biometrics for availability, is available? -> $isBiometricAvailable");
+        if (isBiometricAvailable)
           yield BiometricsConfigureState();
         else {
           preferences.biometricEnabled = false;
@@ -68,7 +86,6 @@ class AuthenticationBloc
         }
       }
     } else if (event is BiometricConfiguredEvent) {
-
       preferences.biometricEnabled = event.enableBiometrics;
       preferences.save();
 
@@ -86,13 +103,12 @@ class AuthenticationBloc
       final playerId = status.subscriptionStatus.userId;
       final referal = await injector.get<Vault>().getLastReferalInviter();
 
-      final createProfile = await api.createProfile(
-          CreateProfileRequest(
+      final createProfile = await api.createProfile(CreateProfileRequest(
           playerId: playerId,
           name: event.name,
           mnemonic: _account.mnemonic,
           pin: _account.pin,
-          promoteUrl: referal ));
+          promoteUrl: referal));
       log.d(createProfile.toJson().toString());
       _account.name = event.name;
       _account.hash = createProfile.hash;
