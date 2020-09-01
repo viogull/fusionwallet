@@ -53,8 +53,6 @@ const String additionalAccountsBox = 'additionals';
 final wallet = Wallet();
 
 void main() async {
-// or
-
   WidgetsFlutterBinding.ensureInitialized();
 
   setupServiceLocator();
@@ -86,13 +84,12 @@ void main() async {
       OSiOSSettings.autoPrompt: false,
       OSiOSSettings.inAppLaunchUrl: true
     });
+
     OneSignal.shared
         .setInFocusDisplayType(OSNotificationDisplayType.notification);
 
     runApp(new StateContainer(
-        child: new App(),
-        accounts: accsBox,
-        preferences: _prefsSingle));
+        child: new App(), accounts: accsBox, preferences: _prefsSingle));
   } on Exception catch (exception) {
     logger.d("Error on start");
   }

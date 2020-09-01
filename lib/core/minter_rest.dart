@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:fusion_wallet/core/abstract/account.dart';
 import 'package:fusion_wallet/core/models/address_data.dart';
 import 'package:fusion_wallet/core/models/admin_notifications_response.dart';
+import 'package:fusion_wallet/core/models/can_recover_request.dart';
+import 'package:fusion_wallet/core/models/can_recover_response.dart';
 import 'package:fusion_wallet/core/models/create_profile_request.dart';
 import 'package:fusion_wallet/core/models/create_push_link_request.dart';
 import 'package:fusion_wallet/core/models/create_push_link_response.dart';
@@ -536,7 +538,32 @@ class MinterRest {
   recover(String value, String value2) {}
 
   //TODO
-  canRecover(String value, String value2) {}
+  Future<dynamic> canRecover(String name, String mnemonic) async {
+    try {
+      Response response = await fusionDio.post(
+          "$fusionApiUrl/profile/restore/status",
+          data: CanRecoverRequest(name: name, mnemonic: mnemonic).toJson(),
+          options: Options(contentType: "application/json"));
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return CanRecoverResponse.fromJson(response.data);
+      } else
+        return null;
+    } on DioError catch (exception) {
+      if (exception == null) {
+        if (exception == null ||
+            exception.toString().contains('SocketException')) {
+          throw Exception("Network Error");
+        } else if (exception.type == DioErrorType.RECEIVE_TIMEOUT ||
+            exception.type == DioErrorType.CONNECT_TIMEOUT) {
+          throw Exception(
+              "Could'nt connect, please ensure you have a stable network.");
+        } else {
+          return null;
+        }
+      }
+    }
+  }
 
   //TODO
   Future<dynamic> fetchTopCurrencies() {}

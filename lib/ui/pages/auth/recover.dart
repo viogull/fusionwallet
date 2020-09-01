@@ -8,6 +8,8 @@ import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_bloc/form_bloc.dart';
 import 'package:fusion_wallet/core/minter_rest.dart';
+import 'package:fusion_wallet/core/models/can_recover_response.dart';
+import 'package:fusion_wallet/core/models/profile_response.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 
@@ -48,12 +50,12 @@ class RecoverAccountBloc extends FormBloc<String, String> {
     try {
       if (this.nameTextBloc.value != null && mnemonicTextBloc.value != null) {
         debugPrint("Checking current account contacts");
-        bool canRecover = await injector
-            .get<MinterRest>()
-            .canRecover(nameTextBloc.value, mnemonicTextBloc.value);
+        var canRecover = await injector.get<MinterRest>().canRecover(
+            nameTextBloc.value, mnemonicTextBloc.value) as CanRecoverResponse;
 
-        if (canRecover)
-          this.emitSuccess();
+        debugPrint("Can recover -> $canRecover");
+        if (canRecover.restore)
+          this.emitSuccess(successResponse: canRecover.data.toString());
         else
           this.emitFailure(
               failureResponse: localizations.cannotRecoverAccount());
@@ -82,10 +84,9 @@ class _RecoverAccountState extends State<RecoverAccountPage> {
   static final _possibleFormats = BarcodeFormat.values.toList()
     ..removeWhere((e) => e == BarcodeFormat.unknown);
 
-  void _nextRecoveryStage(BuildContext context,
-      {String name, String mnemonic}) {
+  void _nextRecoveryStage(BuildContext context, {dynamic profile}) {
     BlocProvider.of<AuthenticationBloc>(context)
-        .add(AccountCompleteRecoverEvent(name: name, mnemonic: mnemonic));
+        .add(AccountCompleteRecoverEvent(profile: profile));
   }
 
   Future _scan() async {
@@ -129,10 +130,8 @@ class _RecoverAccountState extends State<RecoverAccountPage> {
               },
               onSuccess: (context, state) {
                 //  BlocLoader.hide(context);
-
-                _nextRecoveryStage(context,
-                    name: bloc.nameTextBloc.value,
-                    mnemonic: bloc.mnemonicTextBloc.value);
+                final profile = ProfileResponse.fromJson(state.successResponse);
+                _nextRecoveryStage(context, profile: profile);
 //                BlocProvider.of<AuthenticationBloc>(context)
 //                    .add(AccountCompleteRecoverEvent(name: bloc.nameTextBloc.value,
 //                    mnemonic: bloc.mnemonicTextBloc.value));

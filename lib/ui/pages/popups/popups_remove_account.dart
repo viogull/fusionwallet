@@ -9,7 +9,13 @@ import 'package:fusion_wallet/utils/vault.dart';
 
 import '../../../inject.dart';
 
+typedef OnClearSelected = Function();
+
 class PopupsRemoveAccount extends StatelessWidget {
+  OnClearSelected onClearSelected;
+
+  PopupsRemoveAccount({this.onClearSelected});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,18 +81,14 @@ class PopupsRemoveAccount extends StatelessWidget {
                         Flexible(
                           flex: 1,
                           child: FusionButton(
-                           text:  AppLocalizations.of(context).labelOk(),
-                          onPressed:  () async {
-                              await injector.get<Vault>().deleteAll();
-                              Navigator.of(context).pushNamedAndRemoveUntil(IntroPage.navId, (route) => (route.settings.name == Splash.navId));
-                            },
-                          ),
+                              text: AppLocalizations.of(context).labelOk(),
+                              onPressed: this.onClearSelected),
                         ),
                         Flexible(
                           flex: 1,
                           child: FusionButton(
-                           text:  AppLocalizations.of(context).labelCancel(),
-                           onPressed: () {
+                            text: AppLocalizations.of(context).labelCancel(),
+                            onPressed: () {
                               Navigator.pop(context);
                             },
                           ),

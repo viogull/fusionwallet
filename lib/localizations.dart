@@ -1650,6 +1650,10 @@ class AppLocalizations {
 
   String cardUsdMode() =>
       Intl.message("Switched to USD mode", name: 'cardUsdMode');
+
+  String noNotificationsAvailable() =>
+      Intl.message("No any notifications were received",
+          name: 'noNotificationsAvailable');
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

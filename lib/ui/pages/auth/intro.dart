@@ -69,9 +69,7 @@ class IntroPage extends StatelessWidget {
     );
 
     return FusionScaffold(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+        child: SafeArea(
           child: Stack(
             children: [
               bg,

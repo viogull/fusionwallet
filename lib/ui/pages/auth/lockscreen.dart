@@ -34,13 +34,14 @@ class LockUi extends StatefulWidget {
 
 class _LockUiState extends State<LockUi> with TickerProviderStateMixin {
   AnimationController _lockAnimController;
+  String _expected;
   final _auth = LocalAuthentication();
 
   @override
   void initState() {
     widget.log.d("CanCheckBiometric() -> ");
-
     _lockAnimController = AnimationController(vsync: this);
+
     super.initState();
   }
 
@@ -108,14 +109,16 @@ class _LockUiState extends State<LockUi> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final pin =
+        (ModalRoute.of(context).settings.arguments as LockscreenArgs).pin;
+
     return Center(
         child: FusionScaffold(
       child: Container(
           height: MediaQuery.of(context).size.height,
           child: StateContainer.of(context).biometricEnabled
               ? buildBiometricUnlockUi(context)
-              : buildPinUnlockUi(
-                  context, StateContainer.of(context).selectedAccount.pin)),
+              : buildPinUnlockUi(context, pin)),
     ));
   }
 

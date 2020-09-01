@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:fusion_wallet/core/models/profile_response.dart';
 import 'package:meta/meta.dart';
 
 class AccountCreationEvent extends Equatable {
@@ -47,16 +48,15 @@ class PassphraseVerifiedEvent extends AccountCreationEvent {
 }
 
 class AccountCompleteRecoverEvent extends AccountCreationEvent {
-  final String name;
-  final String mnemonic;
+  final ProfileResponse profile;
 
-  const AccountCompleteRecoverEvent({@required this.name, @required this.mnemonic});
-
-  @override
-  List<Object> get props => [name.toString()];
+  const AccountCompleteRecoverEvent({@required this.profile});
 
   @override
-  String toString() => 'AccountCompleteRecoverEvent { $name } ';
+  List<Object> get props => [profile.name.toString()];
+
+  @override
+  String toString() => 'AccountCompleteRecoverEvent { $profile.name } ';
 }
 
 class BiometricConfiguredEvent extends AccountCreationEvent {

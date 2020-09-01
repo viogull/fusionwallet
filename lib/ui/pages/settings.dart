@@ -115,7 +115,7 @@ class SettingsPage extends StatelessWidget {
                                     constraints: BoxConstraints(
                                       maxHeight:
                                           MediaQuery.of(context).size.height *
-                                              0.7,
+                                              0.9,
                                     ),
                                     child: Column(
                                         mainAxisAlignment:
@@ -143,6 +143,7 @@ class SettingsPage extends StatelessWidget {
                                                             (context, index) {
                                                           return AnimationConfiguration
                                                               .staggeredList(
+                                                            position: index,
                                                             child: FadeInAnimation(
                                                                 duration: Duration(
                                                                     milliseconds:
@@ -195,12 +196,12 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  Widget showEmptyView(BuildContext context) =>
-      Center(child: Text(AppLocalizations.of(context).noContactsTitle()));
+  Widget showEmptyView(BuildContext context) => Center(
+      child: Text(AppLocalizations.of(context).noNotificationsAvailable()));
 
   Widget NotificationView({AdminNotification data}) => Card(
         margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
-        elevation: 1,
+        elevation: 0.5,
         color: Colors.transparent,
         child: ListTile(
           title: Text(data.title),

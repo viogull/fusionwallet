@@ -87,6 +87,8 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
                   Hive.box<AdminNotification>(notificationsBox).addAll(
                       (value as AdminNotificationsResponse).notifications)
                 });
+            logger
+                .d("Navigating to lockscreen for account ${lastAccount.name}");
             Navigator.of(context).pushReplacementNamed(LockUi.navId,
                 arguments: LockscreenArgs(
                     pin: lastAccount.pin, biometricEnabled: true));

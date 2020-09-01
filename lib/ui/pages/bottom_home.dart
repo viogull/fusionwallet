@@ -23,9 +23,11 @@ import 'package:provider/provider.dart';
 
 import './../../ui/pages/pages.dart';
 import '../../inject.dart';
+import 'auth/intro.dart';
 import 'auth/share_passphrase.dart';
 import 'auth/lockscreen.dart';
 
+import 'auth/splash.dart';
 import 'contacts/contacts.dart';
 import 'exchange_page.dart';
 import 'history_page.dart';
@@ -62,8 +64,12 @@ class _BottomHomePageState extends State<BottomHomePage> {
   @override
   void initState() {
     if (_account == null) {
-      _account = Hive.box<Account>(accountsBox).getAt(0);
+      Box<Account> box = Hive.box<Account>(accountsBox);
+      _account = box.getAt(box.length - 1);
       logger.d("Account is ${_account.name}");
+      Future.delayed(const Duration(milliseconds: 300), () {
+        StateContainer.of(context).loadAccount(account: _account);
+      });
     }
     loadDynamicLinks();
     super.initState();
@@ -179,7 +185,12 @@ class _BottomHomePageState extends State<BottomHomePage> {
               showCupertinoModalBottomSheet(
                   context: context,
                   builder: (BuildContext context, ScrollController controller) {
-                    return PopupsRemoveAccount();
+                    return PopupsRemoveAccount(onClearSelected: () async {
+                      await injector.get<Vault>().deleteAll();
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          AuthUi.navId,
+                          (route) => (route.settings.name == Splash.navId));
+                    });
                   });
             }),
         DrawerItemData(

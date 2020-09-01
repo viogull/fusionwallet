@@ -40,14 +40,14 @@ class FusionScaffold extends StatelessWidget {
       children: <Widget>[
         Container(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.95,
+          height: MediaQuery.of(context).size.height,
           child: SvgPicture.asset(
             background,
             fit: BoxFit.fill,
           ),
         ),
         SafeArea(
-          bottom: true,
+          bottom: false,
           maintainBottomViewPadding: true,
           child: Scaffold(
             backgroundColor: Colors.transparent,

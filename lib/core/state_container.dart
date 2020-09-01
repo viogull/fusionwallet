@@ -90,7 +90,15 @@ class StateContainerState extends State<StateContainer> {
   void initState() {
     super.initState();
     if (widget.accounts.length > 0) {
+      log.d("Accounts exists");
+
       selectedAccount = widget.accounts.getAt(widget.accounts.length - 1);
+
+      log.d("Expected pin ${selectedAccount.pin}");
+
+      setState(() {
+        this.selectedAccount = selectedAccount;
+      });
     } else {
       selectedAccount = Account();
       widget.accounts.add(selectedAccount);
@@ -238,8 +246,8 @@ class StateContainerState extends State<StateContainer> {
   }
 
   void loadAccount({Account account}) async {
-    var _ =
-        (account == null) ? Hive.box<Account>(accountsBox).getAt(0) : account;
+    Box<Account> box = Hive.box<Account>(accountsBox);
+    var _ = (account == null) ? box.getAt(box.length - 1) : account;
     setState(() {
       this.selectedAccount = _;
     });

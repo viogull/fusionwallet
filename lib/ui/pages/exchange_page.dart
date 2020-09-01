@@ -19,245 +19,6 @@ class _ExchangePageState extends State<ExchangePage> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
-    final myCoinLabel = Container(
-      alignment: Alignment.topLeft,
-      margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 00.0),
-      child: Text(
-        AppLocalizations.of(context).labelExchangeCoins(),
-        style: TextStyle(
-          color: (theme.colorScheme.onSurface),
-        ),
-      ),
-    );
-
-    final currency1 = Container(
-      margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        border: Border.all(color: theme.colorScheme.primary),
-      ),
-      height: 30.0,
-      child: Center(
-        child: LimitedBox(
-          maxWidth: MediaQuery.of(context).size.width,
-          maxHeight: 35,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
-            child: GestureDetector(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Flexible(
-                    flex: 3,
-                    child: Row(
-                      children: <Widget>[
-                        SvgPicture.asset(
-                          ('assets/images/icons/ic_bitcoin.svg'),
-                          // color: Colors.white,
-                          fit: BoxFit.fill,
-                          height: 12,
-                          width: 12,
-                          // height: MediaQuery.of(context).size.height,
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.02,
-                        ),
-                        Text(
-                          "Currency 1 ",
-                          textAlign: TextAlign.left,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: 7,
-                  ),
-                  Flexible(
-                    flex: 1,
-                    child: Text(
-                      '0.00',
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-
-    final currency2 = Container(
-      margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        border: Border.all(color: theme.colorScheme.primary),
-      ),
-      height: 30.0,
-      child: Center(
-        child: LimitedBox(
-          maxWidth: MediaQuery.of(context).size.width,
-          maxHeight: 35,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
-            child: GestureDetector(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Flexible(
-                    flex: 3,
-                    child: Row(
-                      children: <Widget>[
-                        SvgPicture.asset(
-                          ('assets/images/icons/ic_bitcoin.svg'),
-                          // color: Colors.white,
-                          fit: BoxFit.fill,
-                          height: 12,
-                          width: 12,
-                          // height: MediaQuery.of(context).size.height,
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.02,
-                        ),
-                        Text(
-                          "Currency 2 ",
-                          textAlign: TextAlign.left,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: 7,
-                  ),
-                  Flexible(
-                    flex: 1,
-                    child: Text(
-                      '0.00',
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-
-    final currency3 = Container(
-      margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        border: Border.all(color: theme.colorScheme.primary),
-      ),
-      height: 30.0,
-      child: Center(
-        child: LimitedBox(
-          maxWidth: MediaQuery.of(context).size.width,
-          maxHeight: 35,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
-            child: GestureDetector(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Flexible(
-                    flex: 3,
-                    child: Row(
-                      children: <Widget>[
-                        SvgPicture.asset(
-                          ('assets/images/icons/ic_bitcoin.svg'),
-                          // color: Colors.white,
-                          fit: BoxFit.fill,
-                          height: 12,
-                          width: 12,
-                          // height: MediaQuery.of(context).size.height,
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.02,
-                        ),
-                        Text(
-                          "Currency 3 ",
-                          textAlign: TextAlign.left,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: 7,
-                  ),
-                  Flexible(
-                    flex: 1,
-                    child: Text(
-                      '0.00',
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-
-    final convertButton = Container(
-      height: 50,
-      width: MediaQuery.of(context).size.width,
-      child: FusionButton(
-          text: AppLocalizations.of(context).buttonConvert(),
-          onPressed: () {
-            Navigator.pushNamed(context, ConvertExchangePage.navId);
-          }),
-    );
-
-    final rateButton = Container(
-      height: 50,
-      width: MediaQuery.of(context).size.width,
-      child: FusionButton(
-          text: AppLocalizations.of(context).buttonRate(),
-          onPressed: () {
-            Navigator.pushNamed(context, RateExchangePage.navId);
-          }),
-    );
-
-    final cashBalance = Center(
-      child: Text(
-        AppLocalizations.of(context).labelExchangeUseCash(),
-        style: TextStyle(
-          color: (theme.colorScheme.onSurface),
-        ),
-      ),
-    );
-
-    final simplex = Container(
-      alignment: Alignment.center,
-      margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 00.0),
-      child: Text(
-        AppLocalizations.of(context).labelExchangeSimplex(),
-        style: TextStyle(
-          color: (theme.colorScheme.onSurface),
-        ),
-      ),
-    );
-
-    final buyButton1 = Container(
-      height: 50,
-      width: MediaQuery.of(context).size.width * 0.30,
-      child: FusionButton(
-          text: AppLocalizations.of(context).buttonBuy(),
-          onPressed: () {
-            Navigator.pushNamed(context, PasswordCreationPage.navId);
-          }),
-    );
-
-    final buyButton2 = Container(
-      height: 50,
-      width: MediaQuery.of(context).size.width * 0.30,
-      child: FusionButton(
-          text: AppLocalizations.of(context).buttonBuy(), onPressed: () {}),
-    );
-
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
@@ -272,33 +33,229 @@ class _ExchangePageState extends State<ExchangePage> {
             //LimitedBox (maxHeight: 60,),
             Flexible(
               flex: 1,
-              child: myCoinLabel,
+              child: Container(
+                alignment: Alignment.topLeft,
+                margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 00.0),
+                child: Text(
+                  AppLocalizations.of(context).labelExchangeCoins(),
+                  style: TextStyle(
+                    color: (theme.colorScheme.onSurface),
+                  ),
+                ),
+              ),
             ),
             Flexible(
               flex: 1,
-              child: currency1,
+              child: Container(
+                margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  border: Border.all(color: theme.colorScheme.primary),
+                ),
+                height: 30.0,
+                child: Center(
+                  child: LimitedBox(
+                    maxWidth: MediaQuery.of(context).size.width,
+                    maxHeight: 35,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 6, horizontal: 4),
+                      child: GestureDetector(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            Flexible(
+                              flex: 3,
+                              child: Row(
+                                children: <Widget>[
+                                  SvgPicture.asset(
+                                    ('assets/images/icons/ic_bitcoin.svg'),
+                                    // color: Colors.white,
+                                    fit: BoxFit.fill,
+                                    height: 12,
+                                    width: 12,
+                                    // height: MediaQuery.of(context).size.height,
+                                  ),
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.02,
+                                  ),
+                                  Text(
+                                    "Currency 1 ",
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              width: 7,
+                            ),
+                            Flexible(
+                              flex: 1,
+                              child: Text(
+                                '0.00',
+                                textAlign: TextAlign.right,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ),
             Flexible(
               flex: 1,
-              child: currency2,
+              child: Container(
+                margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  border: Border.all(color: theme.colorScheme.primary),
+                ),
+                height: 30.0,
+                child: Center(
+                  child: LimitedBox(
+                    maxWidth: MediaQuery.of(context).size.width,
+                    maxHeight: 35,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 6, horizontal: 4),
+                      child: GestureDetector(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            Flexible(
+                              flex: 3,
+                              child: Row(
+                                children: <Widget>[
+                                  SvgPicture.asset(
+                                    ('assets/images/icons/ic_bitcoin.svg'),
+                                    // color: Colors.white,
+                                    fit: BoxFit.fill,
+                                    height: 12,
+                                    width: 12,
+                                    // height: MediaQuery.of(context).size.height,
+                                  ),
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.02,
+                                  ),
+                                  Text(
+                                    "Currency 2 ",
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              width: 7,
+                            ),
+                            Flexible(
+                              flex: 1,
+                              child: Text(
+                                '0.00',
+                                textAlign: TextAlign.right,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ),
             Flexible(
               flex: 1,
-              child: currency3,
+              child: Container(
+                margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  border: Border.all(color: theme.colorScheme.primary),
+                ),
+                height: 30.0,
+                child: Center(
+                  child: LimitedBox(
+                    maxWidth: MediaQuery.of(context).size.width,
+                    maxHeight: 35,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 6, horizontal: 4),
+                      child: GestureDetector(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            Flexible(
+                              flex: 3,
+                              child: Row(
+                                children: <Widget>[
+                                  SvgPicture.asset(
+                                    ('assets/images/icons/ic_bitcoin.svg'),
+                                    // color: Colors.white,
+                                    fit: BoxFit.fill,
+                                    height: 12,
+                                    width: 12,
+                                    // height: MediaQuery.of(context).size.height,
+                                  ),
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.02,
+                                  ),
+                                  Text(
+                                    "Currency 3 ",
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              width: 7,
+                            ),
+                            Flexible(
+                              flex: 1,
+                              child: Text(
+                                '0.00',
+                                textAlign: TextAlign.right,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ),
             SizedBox(
               height: 15,
             ),
             Flexible(
               flex: 1,
-              child: convertButton,
+              child: Container(
+                height: 50,
+                width: MediaQuery.of(context).size.width,
+                child: FusionButton(
+                    text: AppLocalizations.of(context).buttonConvert(),
+                    onPressed: () {
+                      Navigator.pushNamed(context, ConvertExchangePage.navId);
+                    }),
+              ),
             ),
             SizedBox(
               height: 10,
             ),
             Flexible(
               flex: 1,
-              child: rateButton,
+              child: Container(
+                height: 50,
+                width: MediaQuery.of(context).size.width,
+                child: FusionButton(
+                    text: AppLocalizations.of(context).buttonRate(),
+                    onPressed: () {
+                      Navigator.pushNamed(context, RateExchangePage.navId);
+                    }),
+              ),
             ),
             SizedBox(
               height: 10,
@@ -308,8 +265,24 @@ class _ExchangePageState extends State<ExchangePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  cashBalance,
-                  buyButton1,
+                  Center(
+                    child: Text(
+                      AppLocalizations.of(context).labelExchangeUseCash(),
+                      style: TextStyle(
+                        color: (theme.colorScheme.onSurface),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 50,
+                    width: MediaQuery.of(context).size.width * 0.30,
+                    child: FusionButton(
+                        text: AppLocalizations.of(context).buttonBuy(),
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, PasswordCreationPage.navId);
+                        }),
+                  ),
                 ],
               ),
             ),
@@ -321,8 +294,24 @@ class _ExchangePageState extends State<ExchangePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  simplex,
-                  buyButton2,
+                  Container(
+                    alignment: Alignment.center,
+                    margin:
+                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 00.0),
+                    child: Text(
+                      AppLocalizations.of(context).labelExchangeSimplex(),
+                      style: TextStyle(
+                        color: (theme.colorScheme.onSurface),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 50,
+                    width: MediaQuery.of(context).size.width * 0.30,
+                    child: FusionButton(
+                        text: AppLocalizations.of(context).buttonBuy(),
+                        onPressed: () {}),
+                  ),
                 ],
               ),
             ),
