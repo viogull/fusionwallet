@@ -53,7 +53,7 @@ class RecoverAccountBloc extends FormBloc<String, String> {
             .get<MinterRest>()
             .canRecover(nameTextBloc.value, mnemonicTextBloc.value);
 
-        if (canRecover)
+        if (canRecover.restore)
           this.emitSuccess();
         else
           this.emitFailure(

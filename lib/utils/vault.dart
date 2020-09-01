@@ -92,7 +92,8 @@ class Vault {
       await prefs.remove(sessionKey);
       return;
     }
-    return await secureStorage.deleteAll();
+    await secureStorage.deleteAll();
+    return await Hive.box<Account>(accountsBox).clear();
   }
 
   // Specific keys

@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:fusion_wallet/core/models/profile_response.dart';
+import 'package:fusion_wallet/core/models/recover_response.dart';
 import 'package:meta/meta.dart';
 
 class AccountCreationEvent extends Equatable {
@@ -48,7 +49,7 @@ class PassphraseVerifiedEvent extends AccountCreationEvent {
 }
 
 class AccountCompleteRecoverEvent extends AccountCreationEvent {
-  final ProfileResponse profile;
+  final RecoverResponse profile;
 
   const AccountCompleteRecoverEvent({@required this.profile});
 

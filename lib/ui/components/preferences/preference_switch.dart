@@ -49,7 +49,7 @@ class _SwitchFusionPreferenceState extends State<SwitchFusionPreference> {
         child: Container(
           width: cardWidth,
           height: cardHeight,
-          padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisSize: MainAxisSize.max,

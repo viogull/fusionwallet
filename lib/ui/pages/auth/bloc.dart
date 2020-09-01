@@ -46,9 +46,12 @@ class AuthenticationBloc
     if (event is AccountStartRecoverEvent) {
       yield AccountRecoveryState();
     } else if (event is AccountCompleteRecoverEvent) {
+      log.d("Completing account recovery for ${event.profile.name}, id"
+          " ${event.profile.id}");
       _isRecoveringAccount = true;
       _account.mnemonic = event.profile.mnemonic;
       _account.name = event.profile.name;
+      preferences.name = event.profile.name;
       _account.seed = event.profile.id;
       _account.hash = event.profile.hash;
       _account.address = event.profile.address;

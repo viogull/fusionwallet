@@ -56,71 +56,6 @@ class _HistoryPageState extends State<HistoryPage> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    //DateTime selectedDate = DateTime.now();
-
-    void _showModalSheet() {
-      showModalBottomSheet(
-          context: context,
-          builder: (builder) {
-            return new Container(
-              color: Theme.of(context).colorScheme.surface,
-              child: Expanded(
-                //Expanded is used so that all the widget get fit into the available screen
-                child: ListView.builder(
-                  itemCount: 8,
-                  itemBuilder: (context, i) => SizedBox(
-                    height: 75.0,
-                    child: Container(
-//                      width: MediaQuery.of(context).size.width * 0.8,
-                      decoration: BoxDecoration(
-                        border: Border(
-                            // top: BorderSide(width: 1, color: Colors.white),
-                            bottom: BorderSide(width: 2, color: Colors.white)),
-                      ),
-                      margin: const EdgeInsets.only(
-                          bottom: 10, top: 30, left: 12, right: 12),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                AutoSizeText(
-                                  AppLocalizations.of(context)
-                                      .inputAccountNameHelperText(),
-                                  textAlign: TextAlign.left,
-                                ),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.3,
-                                ),
-                                SvgPicture.asset(
-                                  ('assets/images/icons/ic_bitcoin.svg'),
-                                  // color: Colors.white,
-                                  fit: BoxFit.fill,
-                                  height: 12,
-                                  width: 12,
-                                ),
-                                Text(
-                                  '0.00',
-                                  textAlign: TextAlign.right,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            );
-          });
-    }
 
     final colors = Theme.of(context).colorScheme;
     final allAccounts = injector.get<Vault>().getAllAccounts();
@@ -214,7 +149,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                                               .seed
                                                           : allAccounts[index]
                                                               .name),
-                                                  subtitle: AutoSizeText("Mx" +
+                                                  subtitle: AutoSizeText("" +
                                                       (allAccounts[index]
                                                                   .address ==
                                                               null

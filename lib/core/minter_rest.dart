@@ -11,6 +11,7 @@ import 'package:fusion_wallet/core/models/delegate_ubound_tx_request.dart';
 import 'package:fusion_wallet/core/models/exchange_rate_response.dart';
 import 'package:fusion_wallet/core/models/nonce_response.dart';
 import 'package:fusion_wallet/core/models/profile_response.dart';
+import 'package:fusion_wallet/core/models/recover_response.dart';
 import 'package:fusion_wallet/core/models/send_tx_request.dart';
 import 'package:fusion_wallet/core/models/spec_exchange_rates_response.dart';
 import 'package:fusion_wallet/core/models/statistic_rewards_response.dart';
@@ -538,7 +539,7 @@ class MinterRest {
   recover(String value, String value2) {}
 
   //TODO
-  Future<dynamic> canRecover(String name, String mnemonic) async {
+  Future<RecoverResponse> canRecover(String name, String mnemonic) async {
     try {
       Response response = await fusionDio.post(
           "$fusionApiUrl/profile/restore/status",
@@ -546,7 +547,7 @@ class MinterRest {
           options: Options(contentType: "application/json"));
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        return CanRecoverResponse.fromJson(response.data);
+        return RecoverResponse.fromJson(response.data);
       } else
         return null;
     } on DioError catch (exception) {

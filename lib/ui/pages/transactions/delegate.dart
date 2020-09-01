@@ -124,11 +124,11 @@ class DelegateFundsPage extends StatelessWidget {
                             balance: snapshot.data as AddressData),
                         child: FormBlocListener<DelegateFormBloc, String, String>(
                             onSubmitting: (context, state) {
-                              BlocLoader.show(context);
+                              BlocLoadingIndicator.show(context);
                             }, onSuccess: (context, state) {
-                          BlocLoader.hide(context);
+                          BlocLoadingIndicator.hide(context);
                         }, onFailure: (context, state) {
-                          BlocLoader.hide(context);
+                          BlocLoadingIndicator.hide(context);
                           FlashHelper.errorBar(
                               context, message: state.failureResponse);
                         }, child: Builder(builder: (context) {

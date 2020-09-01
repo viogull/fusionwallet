@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:barcode_scan/platform_wrapper.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,6 +12,7 @@ import 'package:form_bloc/form_bloc.dart';
 import 'package:fusion_wallet/core/minter_rest.dart';
 import 'package:fusion_wallet/core/models/can_recover_response.dart';
 import 'package:fusion_wallet/core/models/profile_response.dart';
+import 'package:fusion_wallet/core/models/recover_response.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 
@@ -50,12 +53,13 @@ class RecoverAccountBloc extends FormBloc<String, String> {
     try {
       if (this.nameTextBloc.value != null && mnemonicTextBloc.value != null) {
         debugPrint("Checking current account contacts");
-        var canRecover = await injector.get<MinterRest>().canRecover(
-            nameTextBloc.value, mnemonicTextBloc.value) as CanRecoverResponse;
+        final recovery = await injector
+            .get<MinterRest>()
+            .canRecover(nameTextBloc.value, mnemonicTextBloc.value);
 
-        debugPrint("Can recover -> $canRecover");
-        if (canRecover.restore)
-          this.emitSuccess(successResponse: canRecover.data.toString());
+        debugPrint("Can recover -> ${recovery.toString()}");
+        if (recovery.restore)
+          this.emitSuccess(successResponse: json.encode(recovery));
         else
           this.emitFailure(
               failureResponse: localizations.cannotRecoverAccount());
@@ -63,8 +67,6 @@ class RecoverAccountBloc extends FormBloc<String, String> {
     } on Exception catch (e) {
       emitFailure();
     }
-
-    debugPrint("Loading succesfully");
   }
 }
 
@@ -85,8 +87,9 @@ class _RecoverAccountState extends State<RecoverAccountPage> {
     ..removeWhere((e) => e == BarcodeFormat.unknown);
 
   void _nextRecoveryStage(BuildContext context, {dynamic profile}) {
-    BlocProvider.of<AuthenticationBloc>(context)
-        .add(AccountCompleteRecoverEvent(profile: profile));
+    BlocProvider.of<AuthenticationBloc>(context).add(
+        AccountCompleteRecoverEvent(
+            profile: RecoverResponse.fromJson(profile)));
   }
 
   Future _scan() async {
@@ -130,8 +133,9 @@ class _RecoverAccountState extends State<RecoverAccountPage> {
               },
               onSuccess: (context, state) {
                 //  BlocLoader.hide(context);
-                final profile = ProfileResponse.fromJson(state.successResponse);
-                _nextRecoveryStage(context, profile: profile);
+                final rec = json.decode(state.successResponse);
+
+                _nextRecoveryStage(context, profile: rec);
 //                BlocProvider.of<AuthenticationBloc>(context)
 //                    .add(AccountCompleteRecoverEvent(name: bloc.nameTextBloc.value,
 //                    mnemonic: bloc.mnemonicTextBloc.value));

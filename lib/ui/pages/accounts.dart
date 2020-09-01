@@ -78,7 +78,7 @@ class AccountsPage extends StatelessWidget {
                           context: context,
                           builder: (context, controller) {
                             return ShareAddressPage(
-                                "Mx${StateContainer.of(context).selectedAccount.address}");
+                                "${StateContainer.of(context).selectedAccount.address}");
                           });
                     },
                     icon: Icon(Icons.arrow_downward),
@@ -128,13 +128,15 @@ class AccountsPage extends StatelessWidget {
         {
           return ButtonBar(
             alignment: MainAxisAlignment.center,
-            buttonHeight: 40,
             buttonMinWidth: 130,
+            buttonHeight: 45,
             buttonPadding:
                 const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
             children: <Widget>[
-              FusionButton(
-                  text: AppLocalizations.of(context).buttonPush(),
+              RaisedButton(
+                  child:
+                      AutoSizeText(AppLocalizations.of(context).buttonPush()),
+                  color: Theme.of(context).colorScheme.primary,
                   onPressed: () {
                     showCupertinoModalBottomSheet(
                         context: context,
@@ -238,8 +240,11 @@ class AccountsPage extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.8,
             child: ListTile(
               leading: Icon(Icons.info),
-              title:
-                  AutoSizeText(AppLocalizations.of(context).labelTotalReward()),
+              title: AutoSizeText(
+                AppLocalizations.of(context).labelTotalReward(),
+                maxLines: 1,
+                textAlign: TextAlign.left,
+              ),
               trailing: AutoSizeText(
                 "0.00",
                 minFontSize: 17,

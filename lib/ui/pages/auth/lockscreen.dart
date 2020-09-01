@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
@@ -239,12 +240,11 @@ class _LockUiPincodeState extends State<LockUiPincode> {
     final textLabel = Stack(children: <Widget>[
       Container(
           height: 70,
-          margin: const EdgeInsets.only(top: 30),
-          child: Text(
+          margin: const EdgeInsets.only(top: 8),
+          child: AutoSizeText(
             AppLocalizations.of(context).labelUnlockSubtitle(),
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 20,
               fontWeight: FontWeight.w400,
             ),
           ))
@@ -435,29 +435,25 @@ class _LockUiPincodeState extends State<LockUiPincode> {
 
     return FusionScaffold(
       title: AppLocalizations.of(context).labelUnlockTitle(),
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.05,
-            ),
-            Flexible(
-              flex: 1,
-              child: textLabel,
-            ),
-            Flexible(
-              flex: 2,
-              child: pinCodeView,
-            ),
-            Flexible(
-              flex: 6,
-              child: keyboard,
-            ),
-          ],
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.05,
+          ),
+          Flexible(
+            flex: 1,
+            child: textLabel,
+          ),
+          Flexible(
+            flex: 2,
+            child: pinCodeView,
+          ),
+          Flexible(
+            flex: 7,
+            child: keyboard,
+          ),
+        ],
       ),
     );
   }
@@ -503,7 +499,7 @@ class KeyboardNumber extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
         ),
         height: 90.0,
-        child: Text(
+        child: AutoSizeText(
           "$n",
           textAlign: TextAlign.center,
           style: TextStyle(

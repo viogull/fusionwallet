@@ -140,7 +140,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
                   context: context,
                   builder: (context, controller) {
                     return ShareAddressPage(
-                        "Mx${StateContainer.of(context).selectedAccount.address}");
+                        "${StateContainer.of(context).selectedAccount.address}");
                   });
             }),
         DrawerItemData(
@@ -258,7 +258,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
     String title = StateContainer.of(context).selectedAccount.name;
     switch (index) {
       case 0:
-        title = StateContainer.of(context).preferences().name;
+        title = StateContainer.of(context).selectedAccount.name;
         break;
       case 1:
         title = AppLocalizations.of(context).toolbarExchangeTitle();

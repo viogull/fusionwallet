@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class BlocLoader extends StatelessWidget {
+class BlocLoadingIndicator extends StatelessWidget {
   static void show(BuildContext context, {Key key}) => showDialog<void>(
         context: context,
         useRootNavigator: false,
         barrierDismissible: false,
-        builder: (_) => BlocLoader(key: key),
+        builder: (_) => BlocLoadingIndicator(key: key),
       ).then((_) => FocusScope.of(context).requestFocus(FocusNode()));
 
   static void hide(BuildContext context) => Navigator.pop(context);
 
-  BlocLoader({Key key}) : super(key: key);
+  BlocLoadingIndicator({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

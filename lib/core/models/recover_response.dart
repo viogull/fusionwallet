@@ -1,19 +1,19 @@
 /// hasAccess : true
 /// rewards : []
-/// _id : "5f2ab7067c8bff52909ddac9"
-/// name : "Joe"
-/// mnemonic : "city scrap little candy glide artist force strike demand raven okay twist"
-/// address : "Mx5d9db9d7e1c18835805f5ce373d493e6e353192d"
+/// _id : "5f32ba7e1b36ce000cdcefe9"
+/// name : "Flex"
+/// mnemonic : "provide juice trick rebel airport carpet knock arctic perfect swing lizard short"
+/// address : "Mx14f063a59a034bac0f05598955ceef336a5c52fb"
 /// hash : "bcb15f821479b4d5772bd0ca866c00ad5f926e3580720659cc80d39c9d09802a"
-/// player_id : "b1e0e02b-8468-4793-9c3c-efeb958ddf39"
-/// uuid : "58d56599-ca54-4493-9cc2-40538f6a5787"
+/// player_id : "b1636d23-cea2-48b0-b276-7f6f1baf3706"
+/// uuid : "43289c04-20a3-43c5-b4b9-f9d2234d9d44"
 /// promote_url : "null"
-/// lastSync : "2020-08-05T13:41:26.818Z"
+/// lastSync : "2020-08-11T15:34:22.721Z"
 /// __v : 0
+/// restore : true
 
-class ProfileResponse {
+class RecoverResponse {
   bool hasAccess;
-  List<dynamic> rewards;
   String id;
   String name;
   String mnemonic;
@@ -24,10 +24,10 @@ class ProfileResponse {
   String promoteUrl;
   String lastSync;
   int v;
+  bool restore;
 
-  ProfileResponse(
+  RecoverResponse(
       {this.hasAccess,
-      this.rewards,
       this.id,
       this.name,
       this.mnemonic,
@@ -37,16 +37,12 @@ class ProfileResponse {
       this.uuid,
       this.promoteUrl,
       this.lastSync,
-      this.v});
+      this.v,
+      this.restore});
 
-  ProfileResponse.fromJson(dynamic json) {
+  RecoverResponse.fromJson(dynamic json) {
     hasAccess = json["hasAccess"];
-//    if (json["rewards"] != null) {
-//      rewards = [];
-//      json["rewards"].forEach((v) {
-//        rewards.add(v.fromJson(v));
-//      });
-//    }
+
     id = json["_id"];
     name = json["name"];
     mnemonic = json["mnemonic"];
@@ -57,14 +53,12 @@ class ProfileResponse {
     promoteUrl = json["promote_url"];
     lastSync = json["lastSync"];
     v = json["__v"];
+    restore = json["restore"];
   }
 
   Map<String, dynamic> toJson() {
     var map = <String, dynamic>{};
     map["hasAccess"] = hasAccess;
-    if (rewards != null) {
-      map["rewards"] = rewards.map((v) => v.toJson()).toList();
-    }
     map["_id"] = id;
     map["name"] = name;
     map["mnemonic"] = mnemonic;
@@ -75,6 +69,7 @@ class ProfileResponse {
     map["promote_url"] = promoteUrl;
     map["lastSync"] = lastSync;
     map["__v"] = v;
+    map["restore"] = restore;
     return map;
   }
 }

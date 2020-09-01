@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive/hive.dart';
@@ -88,8 +90,11 @@ void main() async {
     OneSignal.shared
         .setInFocusDisplayType(OSNotificationDisplayType.notification);
 
-    runApp(new StateContainer(
-        child: new App(), accounts: accsBox, preferences: _prefsSingle));
+    runApp(DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => new StateContainer(
+          child: new App(), accounts: accsBox, preferences: _prefsSingle),
+    ));
   } on Exception catch (exception) {
     logger.d("Error on start");
   }
@@ -103,6 +108,7 @@ class App extends StatefulWidget {
 class AppState extends State<App> {
   @override
   void initState() {
+    //  Instabug.start('d1b6a52e4472dc8189e4acc091569f17', [InvocationEvent.shake]);
     super.initState();
   }
 
@@ -119,7 +125,8 @@ class AppState extends State<App> {
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
         ],
-        locale: StateContainer.of(context).locale,
+        locale: DevicePreview.of(context).locale,
+        builder: DevicePreview.appBuilder,
         supportedLocales: AppLocalizations.Locales,
         initialRoute: Splash.navId,
         routes: <String, WidgetBuilder>{

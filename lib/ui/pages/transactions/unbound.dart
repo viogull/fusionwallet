@@ -13,14 +13,13 @@ import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/utils/flasher.dart';
 import 'package:hive/hive.dart';
 
-
 import '../../../inject.dart';
 import '../../widgets.dart';
 import '../../../core/models.dart';
 
 class UboundFormBloc extends FormBloc<String, String> {
-
-  static const DEFAULT_DELEGATE_PUBKEY = "Mp4926c68cec9b85d743810c801c35c33bd3d1e74ae0a801e4e08998e656835727";
+  static const DEFAULT_DELEGATE_PUBKEY =
+      "Mp4926c68cec9b85d743810c801c35c33bd3d1e74ae0a801e4e08998e656835727";
   AddressData _accountBalance;
   AppLocalizations localizations;
 
@@ -28,13 +27,11 @@ class UboundFormBloc extends FormBloc<String, String> {
 
   Account _account;
 
-  final pubkeyBloc = TextFieldBloc(
-      initialValue: DEFAULT_DELEGATE_PUBKEY
-  );
+  final pubkeyBloc = TextFieldBloc(initialValue: DEFAULT_DELEGATE_PUBKEY);
   final stakeBloc = TextFieldBloc(validators: [FieldBlocValidators.required]);
 
-  SelectFieldBloc<String, dynamic> coinBloc = SelectFieldBloc<String, dynamic>();
-
+  SelectFieldBloc<String, dynamic> coinBloc =
+      SelectFieldBloc<String, dynamic>();
 
   UboundFormBloc({AddressData balance, AppLocalizations localizations}) {
     addFieldBlocs(fieldBlocs: [pubkeyBloc, coinBloc, stakeBloc]);
@@ -44,21 +41,20 @@ class UboundFormBloc extends FormBloc<String, String> {
     _accountBalance = balance;
     final box = Hive.box<Account>(accountsBox);
     box.values.forEach((element) {
-      logger.d("Name ${element.name}, hash ${element.hash}, ${element.toString()}");
-      if(element != null)
-        _account = element;
+      logger.d(
+          "Name ${element.name}, hash ${element.hash}, ${element.toString()}");
+      if (element != null) _account = element;
     });
-    final items =  _accountBalance.data.balances.map((e) => "${e.coin}").toList();
+    final items =
+        _accountBalance.data.balances.map((e) => "${e.coin}").toList();
     coinBloc.updateItems(items);
   }
 
-
-
-  Account getAccount()  {
+  Account getAccount() {
     final accounts = Hive.box<Account>(accountsBox).values;
     Account _resultAccount;
-    for(final account in accounts) {
-      if(account != null && account.name.isNotEmpty) {
+    for (final account in accounts) {
+      if (account != null && account.name.isNotEmpty) {
         _resultAccount = account;
         break;
       }
@@ -66,23 +62,23 @@ class UboundFormBloc extends FormBloc<String, String> {
     return _resultAccount;
   }
 
-
   @override
   void onSubmitting() async {
-
     final stake = stakeBloc.value;
     final coin = coinBloc.value;
 
     final pubkey = pubkeyBloc.value;
 
-    logger.d("Delegating with  $stake $coin to $pubkey .Account (${_account.hash}");
+    logger.d(
+        "Delegating with  $stake $coin to $pubkey .Account (${_account.hash}");
     try {
-      if(_account == null)
+      if (_account == null)
         emitFailure(failureResponse: " ");
       else {
         final request = await injector.get<MinterRest>().ubound(
-          txData:  DelegateUboundTxRequest(publicKey: pubkey,
-                coin: coin, stake: stake, gasCoin: 'BIP'),  hash: _account.hash);
+            txData: DelegateUboundTxRequest(
+                publicKey: pubkey, coin: coin, stake: stake, gasCoin: 'BIP'),
+            hash: _account.hash);
 
         logger.d("Response from node -> ${request}");
         if (request != null) {
@@ -92,7 +88,7 @@ class UboundFormBloc extends FormBloc<String, String> {
           emitFailure(failureResponse: localizations.invalidInput());
         }
       }
-    }on Exception catch (exception) {
+    } on Exception catch (exception) {
       emitFailure(failureResponse: "DD");
     }
     emitFailure(failureResponse: "ss");
@@ -100,18 +96,17 @@ class UboundFormBloc extends FormBloc<String, String> {
 
   @override
   void onLoading() async {
-    injector.get<Vault>().getAccounts().then((accounts) async  {
-      if(accounts.isNotEmpty) {
+    injector.get<Vault>().getAccounts().then((accounts) async {
+      if (accounts.isNotEmpty) {
         logger.d("Not empty accounts.");
-        final balances =
-        await injector.get<MinterRest>().fetchAddressData(address: accounts[0].address);
+        final balances = await injector
+            .get<MinterRest>()
+            .fetchAddressData(address: accounts[0].address);
         logger.d(balances);
       }
-    }
-    ).catchError((onError) => logger.e(onError));
+    }).catchError((onError) => logger.e(onError));
   }
 }
-
 
 class UboundFundsPage extends StatelessWidget {
   static const String navId = "/funds/ubound";
@@ -119,41 +114,36 @@ class UboundFundsPage extends StatelessWidget {
   BoxDecoration formDecoration(BuildContext context) => BoxDecoration(
       borderRadius: FusionTheme.borderRadius,
       border:
-      Border.all(color: Theme.of(context).colorScheme.primary, width: 1));
+          Border.all(color: Theme.of(context).colorScheme.primary, width: 1));
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return FutureBuilder(
         future: injector.get<MinterRest>().fetchAddressData(
-            address: StateContainer
-                .of(context)
-                .selectedAccount
-                .address),
+            address: StateContainer.of(context).selectedAccount.address),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
               {
-                return Center(
-                    child: PlatformCircularProgressIndicator()
-                );
+                return Center(child: PlatformCircularProgressIndicator());
               }
               break;
             default:
               {
                 if (snapshot.hasData) {
                   return BlocProvider(
-                      create: (context) => UboundFormBloc(balance: snapshot.data),
+                      create: (context) =>
+                          UboundFormBloc(balance: snapshot.data),
                       child: FormBlocListener<UboundFormBloc, String, String>(
                           onSubmitting: (context, state) {
-                            BlocLoader.show(context);
-                          },
-                          onSuccess: (context, state) {
-                        BlocLoader.hide(context);
+                        BlocLoadingIndicator.show(context);
+                      }, onSuccess: (context, state) {
+                        BlocLoadingIndicator.hide(context);
                       }, onFailure: (context, state) {
-                        BlocLoader.hide(context);
-                        FlashHelper.errorBar(
-                            context, message: state.failureResponse);
+                        BlocLoadingIndicator.hide(context);
+                        FlashHelper.errorBar(context,
+                            message: state.failureResponse);
                       }, child: Builder(builder: (context) {
                         final bloc = context.bloc<UboundFormBloc>();
                         return FusionScaffold(
@@ -164,10 +154,8 @@ class UboundFundsPage extends StatelessWidget {
                               padding: const EdgeInsets.all(8.0),
                               child: Container(
                                 constraints: BoxConstraints(
-                                  maxHeight: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height * 0.86,
+                                  maxHeight:
+                                      MediaQuery.of(context).size.height * 0.86,
                                 ),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -177,101 +165,104 @@ class UboundFundsPage extends StatelessWidget {
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Column(
-                                          mainAxisAlignment: MainAxisAlignment
-                                              .start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           children: <Widget>[
                                             Padding(
-                                              padding: const EdgeInsets
-                                                  .symmetric(vertical: 8),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 8),
                                               child: Theme(
                                                 data: theme,
                                                 child: TextFieldBlocBuilder(
-                                                  textFieldBloc: bloc
-                                                      .pubkeyBloc,
-                                                  suffixButton: SuffixButton
-                                                      .clearText,
-
-
+                                                  textFieldBloc:
+                                                      bloc.pubkeyBloc,
+                                                  suffixButton:
+                                                      SuffixButton.clearText,
                                                   decoration: InputDecoration(
-                                                      contentPadding: const EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 16,
-                                                          vertical: 8),
+                                                      contentPadding:
+                                                          const EdgeInsets
+                                                                  .symmetric(
+                                                              horizontal: 16,
+                                                              vertical: 8),
                                                       labelText: AppLocalizations
-                                                          .of(context)
+                                                              .of(context)
                                                           .labelPubkeyOrDomain(),
-                                                      border: inputBorder(
-                                                          context),
+                                                      border:
+                                                          inputBorder(context),
                                                       enabled: true,
                                                       alignLabelWithHint: true,
-                                                      enabledBorder: inputBorder(
-                                                          context)),
+                                                      enabledBorder:
+                                                          inputBorder(context)),
                                                 ),
                                               ),
                                             ),
                                             Padding(
-                                              padding: const EdgeInsets
-                                                  .symmetric(vertical: 8),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 8),
                                               child: Theme(
                                                 data: Theme.of(context),
                                                 child: DropdownFieldBlocBuilder<
                                                     String>(
-
-                                                  selectFieldBloc: bloc
-                                                      .coinBloc,
+                                                  selectFieldBloc:
+                                                      bloc.coinBloc,
                                                   showEmptyItem: false,
                                                   decoration: InputDecoration(
-                                                      prefixIcon: _buildUsdEndIcon(
-                                                          context),
-                                                      prefixIconConstraints: BoxConstraints(
-                                                          maxWidth: 24,
-                                                          maxHeight: 24
-                                                      ),
-                                                      labelText: AppLocalizations
-                                                          .of(context)
-                                                          .labelCoin(),
-                                                      contentPadding: const EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 16,
-                                                          vertical: 8),
-                                                      border: inputBorder(
-                                                          context),
+                                                      prefixIcon:
+                                                          _buildUsdEndIcon(
+                                                              context),
+                                                      prefixIconConstraints:
+                                                          BoxConstraints(
+                                                              maxWidth: 24,
+                                                              maxHeight: 24),
+                                                      labelText:
+                                                          AppLocalizations.of(
+                                                                  context)
+                                                              .labelCoin(),
+                                                      contentPadding:
+                                                          const EdgeInsets
+                                                                  .symmetric(
+                                                              horizontal: 16,
+                                                              vertical: 8),
+                                                      border:
+                                                          inputBorder(context),
                                                       enabled: true,
-                                                      enabledBorder: inputBorder(
-                                                          context)
-                                                  ),
-                                                  itemBuilder: (context,
-                                                      value) => value,
+                                                      enabledBorder:
+                                                          inputBorder(context)),
+                                                  itemBuilder:
+                                                      (context, value) => value,
                                                 ),
                                               ),
                                             ),
                                             Padding(
-                                              padding: const EdgeInsets
-                                                  .symmetric(vertical: 0),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 0),
                                               child: Theme(
                                                 data: theme,
                                                 child: TextFieldBlocBuilder(
-
                                                   textFieldBloc: bloc.stakeBloc,
                                                   maxLines: 1,
                                                   keyboardType: TextInputType
                                                       .numberWithOptions(
-                                                      decimal: true),
+                                                          decimal: true),
                                                   decoration: InputDecoration(
-                                                      contentPadding: const EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 16,
-                                                          vertical: 8),
+                                                      contentPadding:
+                                                          const EdgeInsets
+                                                                  .symmetric(
+                                                              horizontal: 16,
+                                                              vertical: 8),
                                                       labelText: AppLocalizations
-                                                          .of(context)
+                                                              .of(context)
                                                           .inputFundsStakeHint(),
-                                                      suffix: buildTextFieldMaxButton(
-                                                          context),
-
-                                                      border: inputBorder(
-                                                          context),
-                                                      enabledBorder: inputBorder(
-                                                          context)),
+                                                      suffix:
+                                                          buildTextFieldMaxButton(
+                                                              context),
+                                                      border:
+                                                          inputBorder(context),
+                                                      enabledBorder:
+                                                          inputBorder(context)),
                                                 ),
                                               ),
                                             ),
@@ -309,34 +300,33 @@ class UboundFundsPage extends StatelessWidget {
         });
   }
 
-
   Widget buildTextFieldMaxButton(BuildContext context) => Container(
-    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 3),
-    width: 36,
-    margin: const EdgeInsets.all(4),
-    decoration: BoxDecoration(
-        borderRadius: FusionTheme.borderRadius,
-        border: Border.all(color: Theme.of(context).colorScheme.primary)),
-    child: Center(
-      child: AutoSizeText(
-        AppLocalizations.of(context)
-            .inputMaxAmountSuffix()
-            .toString()
-            .toUpperCase(),
-        maxFontSize: 12,
-        style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
-      ),
-    ),
-  );
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 3),
+        width: 36,
+        margin: const EdgeInsets.all(4),
+        decoration: BoxDecoration(
+            borderRadius: FusionTheme.borderRadius,
+            border: Border.all(color: Theme.of(context).colorScheme.primary)),
+        child: Center(
+          child: AutoSizeText(
+            AppLocalizations.of(context)
+                .inputMaxAmountSuffix()
+                .toString()
+                .toUpperCase(),
+            maxFontSize: 12,
+            style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+          ),
+        ),
+      );
 
-  Widget _buildUsdEndIcon(BuildContext context) =>  Padding(
-    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-    child: SvgPicture.asset("assets/images/icons/ic_dollar.svg",
-        color: Theme.of(context).colorScheme.onBackground,
-        fit: BoxFit.fill,
-        width: 24, height: 24
-    ),
-  );
+  Widget _buildUsdEndIcon(BuildContext context) => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+        child: SvgPicture.asset("assets/images/icons/ic_dollar.svg",
+            color: Theme.of(context).colorScheme.onBackground,
+            fit: BoxFit.fill,
+            width: 24,
+            height: 24),
+      );
 
   inputBorder(BuildContext context) => OutlineInputBorder(
       gapPadding: 4,
@@ -344,15 +334,15 @@ class UboundFundsPage extends StatelessWidget {
       borderSide: BorderSide(color: Theme.of(context).colorScheme.primary));
 
   buildScanQrEndIcon(BuildContext context) => LimitedBox(
-    maxWidth: 20,
-    maxHeight: 20,
-    child: Align(
-      alignment: Alignment.centerRight,
-      child: Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: SvgPicture.asset("assets/images/icons/ic_qrcodescan.svg",
-            width: 16, height: 16),
-      ),
-    ),
-  );
+        maxWidth: 20,
+        maxHeight: 20,
+        child: Align(
+          alignment: Alignment.centerRight,
+          child: Padding(
+            padding: const EdgeInsets.all(2.0),
+            child: SvgPicture.asset("assets/images/icons/ic_qrcodescan.svg",
+                width: 16, height: 16),
+          ),
+        ),
+      );
 }

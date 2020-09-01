@@ -140,16 +140,16 @@ class PushFundsPage extends StatelessWidget {
         create: (context) => PushFormBloc(),
         child: FormBlocListener<PushFormBloc, String, String>(
             onSubmitting: (context, state) {
-          BlocLoader.show(context);
+          BlocLoadingIndicator.show(context);
         }, onSuccess: (context, state) async {
-          BlocLoader.hide(context);
+          BlocLoadingIndicator.hide(context);
 
             showCupertinoModalBottomSheet(context: context, builder: (context, scrollController) {
               return SharePush( shortDeeplink: state.successResponse,);
             });
 
         }, onFailure: (context, state) {
-          BlocLoader.hide(context);
+          BlocLoadingIndicator.hide(context);
         }, child: Builder(builder: (context) {
           final pushBloc = context.bloc<PushFormBloc>();
 
