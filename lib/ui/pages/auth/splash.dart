@@ -48,7 +48,6 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
     // Update session key
 
     await injector.get<Vault>().updateSessionKey();
-    // Check if device is rooted or jailbroken, show user a warning informing them of the risks if so
     if (!(await injector.get<SharedPrefsUtil>().getHasSeenRootWarning()) &&
         (await RootChecker.isDeviceRooted)) {}
     if (!_hasCheckedLoggedIn) {
@@ -80,13 +79,12 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
             'Accounts exists. Seed: ${lastAccount.pin}. Trying fetch access state');
 
         final accessRequest = await MinterRest().checkAccess(lastAccount);
-
+        injector.get<MinterRest>().fetchNotifications().then((value) => {
+              Hive.box<AdminNotification>(notificationsBox)
+                  .addAll((value).notifications)
+            });
         if (!accessRequest) {
           if (lastAccount.pin != null) {
-            injector.get<MinterRest>().fetchNotifications().then((value) => {
-                  Hive.box<AdminNotification>(notificationsBox).addAll(
-                      (value as AdminNotificationsResponse).notifications)
-                });
             logger
                 .d("Navigating to lockscreen for account ${lastAccount.name}");
             Navigator.of(context).pushReplacementNamed(LockUi.navId,

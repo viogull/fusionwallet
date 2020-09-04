@@ -348,22 +348,25 @@ class _HistoryPageState extends State<HistoryPage> {
                   onPressed: () async {
                     debugPrint(
                         "Requesting history for ${this._selectedAccount} , startDate ${this.startDate.toIso8601String()} to ${this.endDate.toIso8601String()}");
-
-                    Navigator.of(context).push(new MaterialPageRoute(
-                        builder: (context) {
-                          return PopupHistoryPage(
-                              address: injector
-                                  .get<Vault>()
-                                  .getAllAccounts()
-                                  .firstWhere((element) =>
-                                      element.name == this._selectedAccount)
-                                  .address,
-                              name: this._selectedAccount,
-                              from: this.startDate,
-                              to: this.endDate);
-                          ;
-                        },
-                        fullscreenDialog: true));
+                    if (this._selectedAccount == null ||
+                        this.startDate == null ||
+                        this.endDate == null) {
+                      return;
+                    } else
+                      Navigator.of(context).push(new MaterialPageRoute(
+                          builder: (context) {
+                            return PopupHistoryPage(
+                                address: injector
+                                    .get<Vault>()
+                                    .getAllAccounts()
+                                    .firstWhere((element) =>
+                                        element.name == this._selectedAccount)
+                                    .address,
+                                name: this._selectedAccount,
+                                from: this.startDate,
+                                to: this.endDate);
+                          },
+                          fullscreenDialog: true));
                   },
                 ),
               ),

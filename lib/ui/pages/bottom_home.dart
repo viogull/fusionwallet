@@ -11,6 +11,7 @@ import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:fusion_wallet/ui/pages/accounts.dart';
 import 'package:fusion_wallet/ui/pages/auth/change_account_name.dart';
 import 'package:fusion_wallet/ui/pages/popups/popups_remove_account.dart';
+import 'package:fusion_wallet/ui/pages/show_passphrase.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/utils/flasher.dart';
 import 'package:fusion_wallet/utils/haptic.dart';
@@ -158,8 +159,8 @@ class _BottomHomePageState extends State<BottomHomePage> {
               showCupertinoModalBottomSheet(
                   context: context,
                   builder: (BuildContext context, ScrollController controller) {
-                    return ViewPassphraseDialog(
-                        data: StateContainer.of(context)
+                    return ShowPassphraseUi(
+                        mnemonic: StateContainer.of(context)
                             .selectedAccount
                             .mnemonic);
                   });

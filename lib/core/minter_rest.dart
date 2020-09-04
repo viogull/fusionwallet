@@ -383,7 +383,8 @@ class MinterRest {
 
       logger.d('Fetching address $address txs ');
       // Adding Mx to get valid address
-      final url = "$explorerMainnetUrl/transactions?address=$address";
+      final url =
+          "https://explorer-api.minter.network/api/v1/addresses/$address/transactions";
       logger.d("Fetch Address Data Url $url");
       Response response = await dio.get(url);
 
@@ -527,9 +528,8 @@ class MinterRest {
 
   Future<bool> checkAccess(Account lastAccount) async {
     fetchProfileData(lastAccount.sessionKey, lastAccount.hash).then((value) {
-      logger.d(value);
-      if (value is ProfileResponse) return value.hasAccess;
-      return false;
+      logger.d(value.hasAccess);
+      return value.hasAccess;
     }).catchError((onError) {
       return false;
     });

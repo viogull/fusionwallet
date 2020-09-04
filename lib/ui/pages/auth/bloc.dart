@@ -116,6 +116,8 @@ class AuthenticationBloc
       _account.name = event.name;
       _account.hash = createProfile.hash;
       _account.sessionKey = createProfile.id;
+      _account.address = createProfile.address;
+
       preferences.name = event.name;
 
       if (createProfile != null) {
