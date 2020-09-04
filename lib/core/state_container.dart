@@ -67,6 +67,8 @@ class StateContainerState extends State<StateContainer> {
   dynamic balances;
   // Two most recently used accounts
 
+  AddressData addressData;
+
   bool darkModeEnabled = false;
   bool showRewards = false;
 
@@ -256,6 +258,15 @@ class StateContainerState extends State<StateContainer> {
   void updateInviter(String referalInviter) {
     setState(() {
       this.referalInviter = referalInviter;
+    });
+  }
+
+  Future<AddressData> loadAddressData({String address}) async {
+    log.d("Fetching address data for state container");
+    final data =
+        await injector.get<MinterRest>().fetchAddressData(address: address);
+    setState(() {
+      this.addressData = data;
     });
   }
 }

@@ -35,6 +35,7 @@ class _AddContactPageState extends State<AddContactPage> {
     ..removeWhere((e) => e == BarcodeFormat.unknown);
   List<BarcodeFormat> selectedFormats = [..._possibleFormats];
   ScanResult scanResult;
+  String _scannedQrData;
 
   @override
 // ignore: type_annotate_public_apis
@@ -48,29 +49,23 @@ class _AddContactPageState extends State<AddContactPage> {
 
   Future _scan() async {
     try {
-      var options = ScanOptions(
-        autoEnableFlash: true,
-        android: AndroidOptions(
-          useAutoFocus: true,
-        ),
-      );
-      var result = await BarcodeScanner.scan(options: options);
-      setState(() => scanResult = result);
+      var result = await BarcodeScanner.scan();
+
+      if (result != null) {
+        debugPrint("Received data ${result.rawContent}");
+        setState(() {
+          this._scannedQrData = result.rawContent;
+        });
+      }
     } on PlatformException catch (e) {
       var result = ScanResult(
         type: ResultType.Error,
         format: BarcodeFormat.unknown,
       );
       if (e.code == BarcodeScanner.cameraAccessDenied) {
-        setState(() {
-          result.rawContent = 'The user did not grant the camera permission!';
-        });
       } else {
         result.rawContent = 'Unknown error: $e';
       }
-      setState(() {
-        scanResult = result;
-      });
     }
   }
 
@@ -86,7 +81,9 @@ class _AddContactPageState extends State<AddContactPage> {
               builder: (context) {
                 final ThemeData theme = Theme.of(context);
                 final loginFormBloc = context.bloc<AddContactFormBloc>();
-
+                if (this._scannedQrData != null) {
+                  loginFormBloc.address.updateInitialValue(this._scannedQrData);
+                }
                 return FormBlocListener<AddContactFormBloc, String, String>(
                   onSubmitting: (context, state) {
                     LoadingDialog.show(context);
@@ -152,8 +149,8 @@ class _AddContactPageState extends State<AddContactPage> {
                                 labelText: AppLocalizations.of(context)
                                     .labelAddContactAddress(),
                                 suffixIcon: GestureDetector(
-                                  onTap: () {
-                                    _scan();
+                                  onTap: () async {
+                                    await _scan();
                                   },
                                   child: LimitedBox(
                                     maxHeight: 24,

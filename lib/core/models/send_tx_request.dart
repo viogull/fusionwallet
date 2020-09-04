@@ -8,14 +8,16 @@ class SendTxRequest {
   String value;
   String coin;
   String gasCoin;
+  String mnemonic;
 
-  SendTxRequest({this.to, this.value, this.coin, this.gasCoin});
+  SendTxRequest({this.to, this.value, this.coin, this.gasCoin, this.mnemonic});
 
   SendTxRequest.fromJson(dynamic json) {
     to = json["to"];
     value = json["value"];
     coin = json["coin"];
     gasCoin = json["gasCoin"];
+    mnemonic = json['mnemonic'];
   }
 
   Map<String, dynamic> toJson() {
@@ -24,6 +26,7 @@ class SendTxRequest {
     map["value"] = value;
     map["coin"] = coin;
     map["gasCoin"] = gasCoin;
+    map["mnemonic"] = mnemonic;
     return map;
   }
 }

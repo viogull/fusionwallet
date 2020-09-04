@@ -33,12 +33,14 @@ class UboundFormBloc extends FormBloc<String, String> {
   SelectFieldBloc<String, dynamic> coinBloc =
       SelectFieldBloc<String, dynamic>();
 
-  UboundFormBloc({AddressData balance, AppLocalizations localizations}) {
+  UboundFormBloc(
+      {AddressData balance, AppLocalizations localizations, Account account}) {
     addFieldBlocs(fieldBlocs: [pubkeyBloc, coinBloc, stakeBloc]);
 
     pubkeyBloc.updateInitialValue(DEFAULT_DELEGATE_PUBKEY);
     this.localizations = localizations;
     _accountBalance = balance;
+    _account = account;
     final box = Hive.box<Account>(accountsBox);
     box.values.forEach((element) {
       logger.d(
@@ -77,13 +79,16 @@ class UboundFormBloc extends FormBloc<String, String> {
       else {
         final request = await injector.get<MinterRest>().ubound(
             txData: DelegateUboundTxRequest(
-                publicKey: pubkey, coin: coin, stake: stake, gasCoin: 'BIP'),
+                publicKey: pubkey,
+                coin: coin,
+                stake: stake,
+                gasCoin: 'BIP',
+                mnemonic: _account.mnemonic),
             hash: _account.hash);
 
         logger.d("Response from node -> ${request}");
         if (request != null) {
-          final response = (request as String);
-          emitSuccess(successResponse: response);
+          emitSuccess(successResponse: "");
         } else {
           emitFailure(failureResponse: localizations.invalidInput());
         }
@@ -119,185 +124,138 @@ class UboundFundsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return FutureBuilder(
-        future: injector.get<MinterRest>().fetchAddressData(
-            address: StateContainer.of(context).selectedAccount.address),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              {
-                return Center(child: PlatformCircularProgressIndicator());
-              }
-              break;
-            default:
-              {
-                if (snapshot.hasData) {
-                  return BlocProvider(
-                      create: (context) =>
-                          UboundFormBloc(balance: snapshot.data),
-                      child: FormBlocListener<UboundFormBloc, String, String>(
-                          onSubmitting: (context, state) {
-                        BlocLoadingIndicator.show(context);
-                      }, onSuccess: (context, state) {
-                        BlocLoadingIndicator.hide(context);
-                      }, onFailure: (context, state) {
-                        BlocLoadingIndicator.hide(context);
-                        FlashHelper.errorBar(context,
-                            message: state.failureResponse);
-                      }, child: Builder(builder: (context) {
-                        final bloc = context.bloc<UboundFormBloc>();
-                        return FusionScaffold(
-                          title: AppLocalizations.of(context).buttonUnbound(),
-                          child: SingleChildScrollView(
-                            physics: ClampingScrollPhysics(),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                constraints: BoxConstraints(
-                                  maxHeight:
-                                      MediaQuery.of(context).size.height * 0.86,
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Flexible(
-                                      flex: 7,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: <Widget>[
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 8),
-                                              child: Theme(
-                                                data: theme,
-                                                child: TextFieldBlocBuilder(
-                                                  textFieldBloc:
-                                                      bloc.pubkeyBloc,
-                                                  suffixButton:
-                                                      SuffixButton.clearText,
-                                                  decoration: InputDecoration(
-                                                      contentPadding:
-                                                          const EdgeInsets
-                                                                  .symmetric(
-                                                              horizontal: 16,
-                                                              vertical: 8),
-                                                      labelText: AppLocalizations
-                                                              .of(context)
-                                                          .labelPubkeyOrDomain(),
-                                                      border:
-                                                          inputBorder(context),
-                                                      enabled: true,
-                                                      alignLabelWithHint: true,
-                                                      enabledBorder:
-                                                          inputBorder(context)),
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 8),
-                                              child: Theme(
-                                                data: Theme.of(context),
-                                                child: DropdownFieldBlocBuilder<
-                                                    String>(
-                                                  selectFieldBloc:
-                                                      bloc.coinBloc,
-                                                  showEmptyItem: false,
-                                                  decoration: InputDecoration(
-                                                      prefixIcon:
-                                                          _buildUsdEndIcon(
-                                                              context),
-                                                      prefixIconConstraints:
-                                                          BoxConstraints(
-                                                              maxWidth: 24,
-                                                              maxHeight: 24),
-                                                      labelText:
-                                                          AppLocalizations.of(
-                                                                  context)
-                                                              .labelCoin(),
-                                                      contentPadding:
-                                                          const EdgeInsets
-                                                                  .symmetric(
-                                                              horizontal: 16,
-                                                              vertical: 8),
-                                                      border:
-                                                          inputBorder(context),
-                                                      enabled: true,
-                                                      enabledBorder:
-                                                          inputBorder(context)),
-                                                  itemBuilder:
-                                                      (context, value) => value,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 0),
-                                              child: Theme(
-                                                data: theme,
-                                                child: TextFieldBlocBuilder(
-                                                  textFieldBloc: bloc.stakeBloc,
-                                                  maxLines: 1,
-                                                  keyboardType: TextInputType
-                                                      .numberWithOptions(
-                                                          decimal: true),
-                                                  decoration: InputDecoration(
-                                                      contentPadding:
-                                                          const EdgeInsets
-                                                                  .symmetric(
-                                                              horizontal: 16,
-                                                              vertical: 8),
-                                                      labelText: AppLocalizations
-                                                              .of(context)
-                                                          .inputFundsStakeHint(),
-                                                      suffix:
-                                                          buildTextFieldMaxButton(
-                                                              context),
-                                                      border:
-                                                          inputBorder(context),
-                                                      enabledBorder:
-                                                          inputBorder(context)),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Flexible(
-                                      flex: 2,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: FusionButton(
-                                          text: AppLocalizations.of(context)
-                                              .buttonUnbound()
-                                              .toString(),
-                                          onPressed: () {
-                                            bloc.submit();
-                                          },
-                                          expandedWidth: true,
-                                        ),
-                                      ),
-                                    )
-                                  ],
+    final addressData =
+        ModalRoute.of(context).settings.arguments as AddressData;
+    final currentAccount = StateContainer.of(context).selectedAccount;
+
+    return BlocProvider(
+        create: (context) =>
+            UboundFormBloc(balance: addressData, account: currentAccount),
+        child: FormBlocListener<UboundFormBloc, String, String>(
+            onSubmitting: (context, state) {
+          BlocLoadingIndicator.show(context);
+        }, onSuccess: (context, state) {
+          BlocLoadingIndicator.hide(context);
+        }, onFailure: (context, state) {
+          BlocLoadingIndicator.hide(context);
+          FlashHelper.errorBar(context, message: state.failureResponse);
+        }, child: Builder(builder: (context) {
+          final bloc = context.bloc<UboundFormBloc>();
+          return FusionScaffold(
+            title: AppLocalizations.of(context).buttonUnbound(),
+            child: SingleChildScrollView(
+              physics: ClampingScrollPhysics(),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  constraints: BoxConstraints(
+                    maxHeight: MediaQuery.of(context).size.height * 0.86,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Flexible(
+                        flex: 7,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8),
+                                child: Theme(
+                                  data: theme,
+                                  child: TextFieldBlocBuilder(
+                                    textFieldBloc: bloc.pubkeyBloc,
+                                    suffixButton: SuffixButton.clearText,
+                                    decoration: InputDecoration(
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                horizontal: 16, vertical: 8),
+                                        labelText: AppLocalizations.of(context)
+                                            .labelPubkeyOrDomain(),
+                                        border: inputBorder(context),
+                                        enabled: true,
+                                        alignLabelWithHint: true,
+                                        enabledBorder: inputBorder(context)),
+                                  ),
                                 ),
                               ),
-                            ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8),
+                                child: Theme(
+                                  data: Theme.of(context),
+                                  child: DropdownFieldBlocBuilder<String>(
+                                    selectFieldBloc: bloc.coinBloc,
+                                    showEmptyItem: false,
+                                    decoration: InputDecoration(
+                                        prefixIcon: _buildUsdEndIcon(context),
+                                        prefixIconConstraints: BoxConstraints(
+                                            maxWidth: 24, maxHeight: 24),
+                                        labelText: AppLocalizations.of(context)
+                                            .labelCoin(),
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                horizontal: 16, vertical: 8),
+                                        border: inputBorder(context),
+                                        enabled: true,
+                                        enabledBorder: inputBorder(context)),
+                                    itemBuilder: (context, value) => value,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 0),
+                                child: Theme(
+                                  data: theme,
+                                  child: TextFieldBlocBuilder(
+                                    textFieldBloc: bloc.stakeBloc,
+                                    maxLines: 1,
+                                    keyboardType:
+                                        TextInputType.numberWithOptions(
+                                            decimal: true),
+                                    decoration: InputDecoration(
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                horizontal: 16, vertical: 8),
+                                        labelText: AppLocalizations.of(context)
+                                            .inputFundsStakeHint(),
+                                        suffix:
+                                            buildTextFieldMaxButton(context),
+                                        border: inputBorder(context),
+                                        enabledBorder: inputBorder(context)),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        );
-                      })));
-                } else
-                  return Container();
-              }
-              break;
-          }
-        });
+                        ),
+                      ),
+                      Flexible(
+                        flex: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: FusionButton(
+                            text: AppLocalizations.of(context)
+                                .buttonUnbound()
+                                .toString(),
+                            onPressed: () {
+                              bloc.submit();
+                            },
+                            expandedWidth: true,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        })));
   }
 
   Widget buildTextFieldMaxButton(BuildContext context) => Container(

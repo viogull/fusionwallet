@@ -5,7 +5,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:fusion_wallet/core/minter_rest.dart';
+import 'package:fusion_wallet/core/models/transanctions_response.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
+import 'package:fusion_wallet/ui/components/transaction_view.dart';
 
 import 'package:fusion_wallet/ui/pages/share_address.dart';
 import 'package:fusion_wallet/ui/theme.dart';
@@ -27,7 +29,7 @@ class AccountsPage extends StatelessWidget {
 
   Widget _buildAccountsUi(BuildContext context) => AnimationLimiter(
           child: ListView.builder(
-        itemCount: 6,
+        itemCount: 7,
         itemBuilder: (BuildContext context, int index) {
           return AnimationConfiguration.staggeredList(
             position: index,
@@ -60,8 +62,16 @@ class AccountsPage extends StatelessWidget {
                 RaisedButton.icon(
                   shape: RoundedRectangleBorder(
                       borderRadius: FusionTheme.borderRadius),
-                  onPressed: () {
-                    Navigator.pushNamed(context, SendFundsPage.navId);
+                  onPressed: () async {
+                    final datas = await injector
+                        .get<MinterRest>()
+                        .fetchAddressData(
+                            address: StateContainer.of(context)
+                                .selectedAccount
+                                .address);
+                    debugPrint("Datas Balances: ${datas.data.address}");
+                    Navigator.pushNamed(context, SendFundsPage.navId,
+                        arguments: datas);
                   },
                   icon: Icon(Icons.arrow_upward),
                   color: FusionTheme.redButtonColor(),
@@ -104,8 +114,16 @@ class AccountsPage extends StatelessWidget {
               RaisedButton(
                 shape: RoundedRectangleBorder(
                     borderRadius: FusionTheme.borderRadius),
-                onPressed: () {
-                  Navigator.pushNamed(context, DelegateFundsPage.navId);
+                onPressed: () async {
+                  final datas = await injector
+                      .get<MinterRest>()
+                      .fetchAddressData(
+                          address: StateContainer.of(context)
+                              .selectedAccount
+                              .address);
+                  debugPrint("Datas Balances: ${datas.data.address}");
+                  Navigator.pushNamed(context, DelegateFundsPage.navId,
+                      arguments: datas);
                 },
                 color: Theme.of(context).colorScheme.primary,
                 child: AutoSizeText(
@@ -114,8 +132,15 @@ class AccountsPage extends StatelessWidget {
               RaisedButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: FusionTheme.borderRadius),
-                  onPressed: () {
-                    Navigator.pushNamed(context, UboundFundsPage.navId);
+                  onPressed: () async {
+                    final datas = await injector
+                        .get<MinterRest>()
+                        .fetchAddressData(
+                            address: StateContainer.of(context)
+                                .selectedAccount
+                                .address);
+                    Navigator.pushNamed(context, UboundFundsPage.navId,
+                        arguments: datas);
                   },
                   color: Theme.of(context).colorScheme.primary,
                   child: AutoSizeText(
@@ -169,6 +194,45 @@ class AccountsPage extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           );
+        }
+        break;
+      case 6:
+        {
+          return FutureBuilder(
+              future: injector.get<MinterRest>().fetchTransactions(
+                  address: StateContainer.of(context).selectedAccount.address),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done &&
+                    snapshot.hasData) {
+                  final txs = (snapshot.data as TransactionsResponse).data;
+                  final theme = Theme.of(context);
+                  return Flexible(
+                    flex: 6,
+                    child: (txs.isNotEmpty)
+                        ? Container(
+                            height: MediaQuery.of(context).size.height * 0.6,
+                            child: ListView.builder(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 2, horizontal: 12),
+                                itemCount: txs.length,
+                                itemBuilder: (context, i) => TransactionView(
+                                      transaction: txs[i],
+                                      requestedAddress:
+                                          StateContainer.of(context)
+                                              .selectedAccount
+                                              .address,
+                                    )),
+                          )
+                        : Container(
+                            child: Center(
+                                child: AutoSizeText(AppLocalizations.of(context)
+                                    .transferLoading))),
+                  );
+                } else
+                  return Container(
+                      child:
+                          Center(child: PlatformCircularProgressIndicator()));
+              });
         }
         break;
     }
@@ -232,7 +296,7 @@ class AccountsPage extends StatelessWidget {
       },
       child: Card(
           color: theme.colorScheme.surface,
-          margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           shape: RoundedRectangleBorder(
               borderRadius: FusionTheme.borderRadius,
               side: BorderSide(color: theme.colorScheme.onSurface, width: 0.1)),

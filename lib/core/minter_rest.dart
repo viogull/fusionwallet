@@ -154,16 +154,16 @@ class MinterRest {
   //put
   Future<dynamic> updateProfileData() {}
 
-  Future<dynamic> send(SendTxRequest txData) async {
+  Future<bool> send({SendTxRequest txData, String hash}) async {
     try {
-      Response response = await fusionDio.post('/tx/send',
+      Response response = await fusionDio.post('/tx/send?hash=$hash',
           data: txData.toJson(),
           options: Options(contentType: "application/json"));
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        return TransactionsResponse.fromJson(response.data);
+        return true;
       } else
-        return null;
+        return false;
     } on DioError catch (exception) {
       if (exception == null) {
         if (exception == null ||
@@ -182,17 +182,16 @@ class MinterRest {
 
   Future<dynamic> multisend() {}
 
-  Future<dynamic> delegate(
-      {DelegateUboundTxRequest txData, String hash}) async {
+  Future<bool> delegate({DelegateUboundTxRequest txData, String hash}) async {
     try {
       Response response = await fusionDio.post('/tx/delegate?hash=$hash',
           data: txData.toJson(),
           options: Options(contentType: "application/json"));
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        return response.data;
+        return true;
       } else
-        return null;
+        return false;
     } on DioError catch (exception) {
       if (exception == null) {
         if (exception == null ||
@@ -216,9 +215,9 @@ class MinterRest {
           options: Options(contentType: "application/json"));
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        return response.data;
+        return true;
       } else
-        return null;
+        return false;
     } on DioError catch (exception) {
       if (exception == null) {
         if (exception == null ||

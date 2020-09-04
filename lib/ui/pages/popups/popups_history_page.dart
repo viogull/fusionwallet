@@ -286,7 +286,10 @@ class _PopupHistoryPageState extends State<PopupHistoryPage> {
                                   child: ListView.builder(
                                       itemCount: txs.length,
                                       itemBuilder: (context, i) =>
-                                          TransactionView(transaction: txs[i])),
+                                          TransactionView(
+                                            transaction: txs[i],
+                                            requestedAddress: widget.address,
+                                          )),
                                 )
                               : Container(
                                   child: Center(

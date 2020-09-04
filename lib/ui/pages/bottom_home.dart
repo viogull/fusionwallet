@@ -209,7 +209,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
                   true, StateContainer.of(context).selectedAccount.address);
               logger.d("Link ${link as dynamic}");
               IOTools.setSecureClipboardItem((link as dynamic).toString());
-              ;
+
               FlashHelper.successBar(context,
                   message: AppLocalizations.of(context).pushLinkWasCopied());
             }),
@@ -416,7 +416,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
                       return Padding(
                         padding: const EdgeInsets.only(left: 32, right: 32),
                         child: Divider(
-                          color: Theme.of(context).colorScheme.onPrimary,
+                          color: Theme.of(context).colorScheme.onBackground,
                           thickness: 0.25,
                         ),
                       );

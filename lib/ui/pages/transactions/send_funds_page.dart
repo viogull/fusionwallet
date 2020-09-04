@@ -1,18 +1,46 @@
 import 'package:barcode_scan/barcode_scan.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fusion_wallet/core/models.dart';
+import 'package:fusion_wallet/core/models/send_tx_request.dart';
+import 'package:fusion_wallet/core/models/transanctions_response.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 import 'package:hive/hive.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-class SendFundsPage extends StatelessWidget {
+import '../../../inject.dart';
+import '../../widgets.dart';
+
+typedef ReceiverCardCallback = Function();
+
+enum ReceiverCardMode {
+  NOT_SELECTED,
+  ADDRESS,
+  ACCOUNT,
+  CONTACT,
+  SCAN_QR,
+  SELECTED
+}
+
+class SendFundsPage extends StatefulWidget {
   static const String navId = "/funds/send";
+
+  @override
+  _SendFundsState createState() => _SendFundsState();
+}
+
+class _SendFundsState extends State<SendFundsPage> {
+  String _selectedAddress;
+  String _selectedCoin;
+  String _selectedQty;
+
+  final _qtyController = TextEditingController();
 
   BoxDecoration formDecoration(BuildContext context) => BoxDecoration(
       borderRadius: FusionTheme.borderRadius,
@@ -47,7 +75,10 @@ class SendFundsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final log = injector.get<Logger>();
     final theme = Theme.of(context);
+    final addressBalances =
+        ModalRoute.of(context).settings.arguments as AddressData;
     return FusionScaffold(
       title: AppLocalizations.of(context).toolbarSendTitle(),
       child: SingleChildScrollView(
@@ -71,7 +102,7 @@ class SendFundsPage extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Text(
-                            AppLocalizations.of(context).labelFrom(),
+                            AppLocalizations.of(context).labelCoin(),
                             style: TextStyle(
                                 color: Theme.of(context).colorScheme.onSurface,
                                 fontWeight: FontWeight.bold),
@@ -79,20 +110,33 @@ class SendFundsPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Theme(
-                        data: ThemeData(
-                            primaryColor:
-                                Theme.of(context).colorScheme.primary),
-                        child: TextField(
-                          decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 1),
-                              hintText: "Sendfrom",
-                              suffix: buildBitcoinEndIcon(
-                                  context, "0.00", MainAxisAlignment.end),
-                              border: inputBorder(context),
-                              enabled: true,
-                              enabledBorder: inputBorder(context)),
+                      DropdownSearch<String>(
+                        mode: Mode.MENU,
+                        maxHeight: 300,
+                        showSelectedItem: true,
+                        selectedItem: (this._selectedCoin == null)
+                            ? ""
+                            : this._selectedCoin,
+                        items: addressBalances.data.balances
+                            .map((e) => e.coin)
+                            .toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            this._selectedCoin = value;
+                          });
+                        },
+                        showSearchBox: false,
+                        searchBoxDecoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          contentPadding: EdgeInsets.fromLTRB(12, 12, 8, 0),
+                          labelText: AppLocalizations.of(context)
+                              .labelConvertCoinHave(),
+                        ),
+                        popupShape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(12),
+                            topRight: Radius.circular(12),
+                          ),
                         ),
                       ),
                       Align(
@@ -112,14 +156,20 @@ class SendFundsPage extends StatelessWidget {
                         data: ThemeData(
                             primaryColor:
                                 Theme.of(context).colorScheme.primary),
-                        child: TextField(
+                        child: TextFormField(
+                          keyboardType: TextInputType.numberWithOptions(
+                              signed: false, decimal: true),
+                          controller: _qtyController,
+                          style: TextStyle(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onBackground
+                                  .withOpacity(0.99)),
                           decoration: InputDecoration(
                               contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 1),
-                              hintText: "Sendfrom",
-                              suffix: buildTextFieldMaxButton(context),
-                              prefix: buildBitcoinEndIcon(
-                                  context, "0.00", MainAxisAlignment.start),
+                                  horizontal: 12, vertical: 1),
+                              hintText:
+                                  AppLocalizations.of(context).enterAmount,
                               border: inputBorder(context),
                               enabledBorder: inputBorder(context)),
                         ),
@@ -137,7 +187,7 @@ class SendFundsPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      ReceiverCardWidget(),
+                      buildReceiverCard(context),
                       Align(
                         alignment: Alignment.centerRight,
                         child: Container(
@@ -174,7 +224,37 @@ class SendFundsPage extends StatelessWidget {
                     buttonHeight: 50,
                     children: <Widget>[
                       RaisedButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          log.d(
+                              "Trying send ${this._qtyController.value.text}  ${this._selectedCoin}  to ${this._selectedAddress}");
+
+                          final sendTxRes = await injector
+                              .get<MinterRest>()
+                              .send(
+                                  txData: SendTxRequest(
+                                      to: this._selectedAddress,
+                                      value: this._qtyController.value.text,
+                                      mnemonic: StateContainer.of(context)
+                                          .selectedAccount
+                                          .mnemonic,
+                                      coin: this._selectedCoin),
+                                  hash: StateContainer.of(context)
+                                      .selectedAccount
+                                      .hash);
+                          log.d("Response Data after sending... ${sendTxRes}");
+                          if (sendTxRes == true) {
+                            FlashHelper.successBar(context,
+                                message: AppLocalizations.of(context)
+                                    .flashOperationSuccess());
+                            Future.delayed(Duration(seconds: 1), () {
+                              Navigator.pop(context);
+                            });
+                          } else {
+                            FlashHelper.errorBar(context,
+                                message: AppLocalizations.of(context)
+                                    .flashOperationFailed());
+                          }
+                        },
                         child: Text(
                           AppLocalizations.of(context).buttonPreview(),
                           style: TextStyle(
@@ -214,29 +294,8 @@ class SendFundsPage extends StatelessWidget {
       gapPadding: 4,
       borderRadius: FusionTheme.borderRadius,
       borderSide: BorderSide(color: Theme.of(context).colorScheme.primary));
-}
 
-enum ReceiverCardMode {
-  NOT_SELECTED,
-  ADDRESS,
-  ACCOUNT,
-  CONTACT,
-  SCAN_QR,
-  SELECTED
-}
-
-typedef ReceiverCardCallback = Function();
-
-class ReceiverCardWidget extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _ReceiverCardState();
-  }
-}
-
-class _ReceiverCardState extends State<ReceiverCardWidget> {
   ReceiverCardMode mode = ReceiverCardMode.NOT_SELECTED;
-  String _selectedAddress;
 
   List<Contact> _contacts;
   List<Account> _accounts;
@@ -296,13 +355,7 @@ class _ReceiverCardState extends State<ReceiverCardWidget> {
     }
   }
 
-  inputBorder(BuildContext context) => OutlineInputBorder(
-      gapPadding: 4,
-      borderRadius: FusionTheme.borderRadius,
-      borderSide: BorderSide(color: Theme.of(context).colorScheme.primary));
-
-  @override
-  Widget build(BuildContext context) {
+  Widget buildReceiverCard(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     // TODO: implement build
     switch (mode) {
@@ -320,7 +373,7 @@ class _ReceiverCardState extends State<ReceiverCardWidget> {
                       TextStyle(color: colors.onBackground.withOpacity(0.7)),
                   border: inputBorder(context),
                   enabled: true,
-                  prefixIcon: IconButton(
+                  suffixIcon: IconButton(
                     icon: Icon(Icons.cancel, color: colors.error, size: 18),
                     onPressed: () {
                       this.setState(() {
@@ -348,7 +401,7 @@ class _ReceiverCardState extends State<ReceiverCardWidget> {
                       TextStyle(color: colors.onBackground.withOpacity(0.7)),
                   border: inputBorder(context),
                   enabled: true,
-                  prefixIcon: IconButton(
+                  suffixIcon: IconButton(
                     icon: Icon(Icons.cancel, color: colors.error, size: 18),
                     onPressed: () {
                       this.setState(() {
@@ -371,13 +424,15 @@ class _ReceiverCardState extends State<ReceiverCardWidget> {
               decoration: InputDecoration(
                   contentPadding:
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                  hintText: "Enter address",
+                  hintText: AppLocalizations.of(context).enterAddress,
                   hintStyle:
                       TextStyle(color: colors.onBackground.withOpacity(0.7)),
                   border: inputBorder(context),
                   enabled: true,
-                  prefixIcon: IconButton(
-                    icon: Icon(Icons.cancel, color: colors.error, size: 18),
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.cancel,
+                        color: Theme.of(context).colorScheme.onBackground,
+                        size: 18),
                     onPressed: () {
                       this.setState(() {
                         this.mode = ReceiverCardMode.NOT_SELECTED;
@@ -503,8 +558,8 @@ class _ReceiverCardState extends State<ReceiverCardWidget> {
                   context: context,
                   label: AppLocalizations.of(context).labelScanQr(),
                   icon: "assets/images/icons/ic_qr.svg",
-                  onPressed: () {
-                    _scan();
+                  onPressed: () async {
+                    await _scan();
                   }),
             ],
           );

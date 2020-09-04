@@ -8,15 +8,17 @@ class DelegateUboundTxRequest {
   String coin;
   String stake;
   String gasCoin;
+  String mnemonic;
 
   DelegateUboundTxRequest(
-      {this.publicKey, this.coin, this.stake, this.gasCoin});
+      {this.publicKey, this.coin, this.stake, this.gasCoin, this.mnemonic});
 
   DelegateUboundTxRequest.fromJson(dynamic json) {
     publicKey = json["publicKey"];
     coin = json["coin"];
     stake = json["stake"];
     gasCoin = json["gasCoin"];
+    mnemonic = json['mnemonic'];
   }
 
   Map<String, dynamic> toJson() {
@@ -25,6 +27,7 @@ class DelegateUboundTxRequest {
     map["coin"] = coin;
     map["stake"] = stake;
     map["gasCoin"] = gasCoin;
+    map["mnemonic"] = mnemonic;
     return map;
   }
 }
