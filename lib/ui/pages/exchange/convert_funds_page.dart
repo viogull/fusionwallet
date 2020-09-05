@@ -1,8 +1,11 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fusion_wallet/core/models.dart';
+import 'package:fusion_wallet/core/models/coin_list_response.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
@@ -19,7 +22,7 @@ class AllFieldsFormBloc extends FormBloc<String, String> {
 
   final text1 = TextFieldBloc();
 
-  AllFieldsFormBloc() {
+  AllFieldsFormBloc(ConvertPageArguments args) {
     addFieldBlocs(fieldBlocs: [
       select1,
       select2,
@@ -39,6 +42,13 @@ class AllFieldsFormBloc extends FormBloc<String, String> {
   }
 }
 
+class ConvertPageArguments {
+  final AddressData balancesData;
+  final CoinListResponse coinsList;
+
+  const ConvertPageArguments({this.balancesData, this.coinsList});
+}
+
 class ConvertExchangePage extends StatefulWidget {
   static const String navId = '/ConvertExchangePage';
   @override
@@ -49,12 +59,13 @@ class _ConvertExchangePageState extends State<ConvertExchangePage> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-
+    final args =
+        ModalRoute.of(context).settings.arguments as ConvertPageArguments;
     final coinContainer = BlocProvider(
       create: (context) => AllFieldsFormBloc(),
       child: Builder(
         builder: (context) {
-          final formBloc = BlocProvider.of<AllFieldsFormBloc>(context);
+          final formBloc = BlocProvider.of<AllFieldsFormBloc>(context, args);
 
           return FormBlocListener<AllFieldsFormBloc, String, String>(
             child: Container(
@@ -76,41 +87,6 @@ class _ConvertExchangePageState extends State<ConvertExchangePage> {
                     ),
                   ),
                   selectFieldBloc: formBloc.select1,
-                  itemBuilder: (context, value) => value,
-                ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-
-    final coinWantContainer = BlocProvider(
-      create: (context) => AllFieldsFormBloc(),
-      child: Builder(
-        builder: (context) {
-          final formBloc = BlocProvider.of<AllFieldsFormBloc>(context);
-
-          return FormBlocListener<AllFieldsFormBloc, String, String>(
-            child: Container(
-              // margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(color: theme.colorScheme.primary),
-              ),
-              height: 40.0,
-              child: Container(
-                margin: EdgeInsets.only(left: 24),
-                child: DropdownFieldBlocBuilder<String>(
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(0.0),
-                    border: OutlineInputBorder(
-//                    borderRadius: BorderRadius.zero,
-                      borderSide: BorderSide.none,
-                      gapPadding: 0.0,
-                    ),
-                  ),
-                  selectFieldBloc: formBloc.select2,
                   itemBuilder: (context, value) => value,
                 ),
               ),
@@ -297,7 +273,20 @@ class _ConvertExchangePageState extends State<ConvertExchangePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         coinWantLabel,
-                        coinWantContainer,
+                        DropdownSearch<String>(
+                            mode: Mode.MENU,
+                            showSelectedItem: true,
+                            items: [
+                              "Brazil",
+                              "Italia (Disabled)",
+                              "Tunisia",
+                              'Canada'
+                            ],
+                            label: "Menu mode",
+                            hint: "country in menu mode",
+                            popupItemDisabled: (String s) => s.startsWith('I'),
+                            onChanged: print,
+                            selectedItem: "Brazil"),
                       ],
                     ),
                   ),

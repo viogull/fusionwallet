@@ -242,7 +242,7 @@ class AccountsPage extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final width = MediaQuery.of(context).size.width * 0.8;
     return FutureBuilder(
-      future: injector.get<MinterRest>().fetchAddressData(
+      future: injector.get<MinterRest>().fetchUsdAddressData(
           address: StateContainer.of(context).selectedAccount.address),
       builder: (context, snapshot) {
         debugPrint(

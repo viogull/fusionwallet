@@ -24,36 +24,40 @@ class BalancesCardItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             Flexible(
-              fit: FlexFit.tight,
-              flex: 1,
-              child: SizedBox(
-                width: 16,
-                height: 16,
-                child: SvgPicture.asset(
-                    (showUsd)
-                        ? "assets/images/icons/ic_dollar.svg"
-                        : "assets/images/icons/ic_bitcoin.svg",
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurface
-                        .withOpacity(0.7),
-                    placeholderBuilder: (BuildContext context) => Container(
-                        padding: const EdgeInsets.all(24.0),
-                        child: PlatformCircularProgressIndicator())),
+              flex: 4,
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: SizedBox(
+                  width: 16,
+                  height: 16,
+                  child: SvgPicture.asset(
+                      (showUsd)
+                          ? "assets/images/icons/ic_dollar.svg"
+                          : "assets/images/icons/ic_bitcoin.svg",
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withOpacity(0.7),
+                      placeholderBuilder: (BuildContext context) => Container(
+                          padding: const EdgeInsets.all(24.0),
+                          child: PlatformCircularProgressIndicator())),
+                ),
               ),
             ),
             Flexible(
               flex: 10,
-              child: Text(
-                title,
-                style: FusionTheme.subtitleTextStyle.copyWith(fontSize: 24),
-                textAlign: TextAlign.center,
+              child: Center(
+                child: Text(
+                  title,
+                  style: FusionTheme.subtitleTextStyle.copyWith(fontSize: 24),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
             Flexible(
                 flex: 10,
                 child: Text(value,
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.start,
                     style:
                         FusionTheme.subtitleTextStyle.copyWith(fontSize: 24)))
           ],

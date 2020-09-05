@@ -8,6 +8,9 @@ import 'package:fusion_wallet/ui/pages/auth/pincode.dart';
 import 'package:fusion_wallet/ui/pages/exchange/convert_funds_page.dart';
 import 'package:fusion_wallet/ui/pages/exchange/rate_exhange_page.dart';
 
+import '../../inject.dart';
+import '../widgets.dart';
+
 class ExchangePage extends StatefulWidget {
   static const String navId = '/ExchangePage';
   @override
@@ -237,8 +240,18 @@ class _ExchangePageState extends State<ExchangePage> {
                 width: MediaQuery.of(context).size.width,
                 child: FusionButton(
                     text: AppLocalizations.of(context).buttonConvert(),
-                    onPressed: () {
-                      Navigator.pushNamed(context, ConvertExchangePage.navId);
+                    onPressed: () async {
+                      final coinsList =
+                          await injector.get<MinterRest>().fetchMinterCoins();
+                      final addressData = await injector
+                          .get<MinterRest>()
+                          .fetchAddressData(
+                              address: StateContainer.of(context)
+                                  .selectedAccount
+                                  .address);
+                      Navigator.pushNamed(context, ConvertExchangePage.navId,
+                          arguments: ConvertPageArguments(
+                              balancesData: addressData, coinsList: coinsList));
                     }),
               ),
             ),

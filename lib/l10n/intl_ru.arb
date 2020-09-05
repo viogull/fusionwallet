@@ -962,7 +962,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"to": "",
+	"to": "Кому",
 	"@to": {
 		"description": "send_to",
 		"type": "text",
@@ -1924,5 +1924,13 @@
 	"successfullySavedPin": "PIN-код успешно сохранено",
 	"userAuthorized": "Пользователь авторизован",
 	"userNotAuthorized": "Пользователь не авторизован",
-	"validateAddressError": "Должен быть действующий адрес Minter с префиксом Mx"
+	"validateAddressError": "Должен быть действующий адрес Minter с префиксом Mx",
+	"applyPushBody": "Использовать push-ссылку и зачислить {qty} {coin} на ваш счет?",
+	"applyPushTitle": "Зачислить средства",
+	"cardCurrencyMode": "Режим отображения в токенах",
+	"cardUsdMode": "Отображение в долларах США",
+	"feedbackWasSended": "Успешно отправлено. Спасибо за отзыв.",
+	"noNotificationsAvailable": "Никаких уведомлений не поступало",
+	"pushFundsNotApplied": "Вложение средств было завершено с неожиданной ошибкой.",
+	"pushFundsSuccesfullyApplied": "Средства были успешно добавлены в ваш кошелек."
 }

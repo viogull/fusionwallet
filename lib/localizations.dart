@@ -1654,6 +1654,24 @@ class AppLocalizations {
   String noNotificationsAvailable() =>
       Intl.message("No any notifications were received",
           name: 'noNotificationsAvailable');
+
+  String feedbackWasSended() =>
+      Intl.message("Successfully sended. Thanks for feedback.",
+          name: 'feedbackWasSended');
+
+  String applyPushTitle() =>
+      Intl.message("Apply Push funds", name: 'applyPushTitle');
+
+  String applyPushBody(String coin, String qty, String address) =>
+      Intl.message('Do you want to apply $qty $coin to address $address',
+          args: [coin, qty, address], name: 'applyPushBody');
+
+  String pushFundsSuccesfullyApplied() =>
+      Intl.message("Funds were succesfully added to your wallet.",
+          name: 'pushFundsSuccesfullyApplied');
+  String pushFundsNotApplied() =>
+      Intl.message("Applying of funds was finished with unexpectable error.",
+          name: 'pushFundsNotApplied');
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -37,12 +37,20 @@ class _LockUiState extends State<LockUi> with TickerProviderStateMixin {
   AnimationController _lockAnimController;
   String _expected;
   final _auth = LocalAuthentication();
+  final log = injector.get<Logger>();
 
   @override
   void initState() {
-    widget.log.d("CanCheckBiometric() -> ");
     _lockAnimController = AnimationController(vsync: this);
-
+    Future.delayed(Duration(milliseconds: 750), () async {
+      final isBiometricAvailable = await _isBiometricAvailable();
+      log.d(
+          "Biometric Available? -> $isBiometricAvailable.\n Biometric Enabled -> ${StateContainer.of(context).biometricEnabled}");
+      if (StateContainer.of(context).biometricEnabled && isBiometricAvailable)
+        _authenticateUser(context);
+      else
+        log.e("Skipping biometric because it is disabled in preference");
+    });
     super.initState();
   }
 
@@ -102,7 +110,8 @@ class _LockUiState extends State<LockUi> with TickerProviderStateMixin {
         : widget.log.d(AppLocalizations.of(context).userNotAuthorized());
 
     if (isAuthenticated) {
-      //injector.get<HapticUtil>().fingerprintSucess();
+      log.d("Authenticated with Biometric...");
+      injector.get<HapticUtil>().fingerprintSucess();
       Navigator.of(context).pushReplacementNamed(HomePage.navId);
     }
     Navigator.of(context).pushReplacementNamed(HomePage.navId);
@@ -117,9 +126,7 @@ class _LockUiState extends State<LockUi> with TickerProviderStateMixin {
         child: FusionScaffold(
       child: Container(
           height: MediaQuery.of(context).size.height,
-          child: StateContainer.of(context).biometricEnabled
-              ? buildBiometricUnlockUi(context)
-              : buildPinUnlockUi(context, pin)),
+          child: buildPinUnlockUi(context, pin)),
     ));
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:fusion_wallet/inject.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 
 import '../../../localizations.dart';
@@ -170,16 +171,6 @@ class _SendFeedbackPageState extends State<SendFeedbackPage> {
       ),
     );
 
-    final sendButton = Container(
-      height: 50,
-      width: MediaQuery.of(context).size.width,
-      child: FusionButton(
-          text: AppLocalizations.of(context).buttonSend(),
-          onPressed: () {
-            Navigator.pushNamed(context, AddContactPage.navId);
-          }),
-    );
-
     return FusionScaffold(
       title: AppLocalizations.of(context).settingsItemSendFeedback(),
       child: Container(
@@ -229,7 +220,17 @@ class _SendFeedbackPageState extends State<SendFeedbackPage> {
 
                   Flexible(
                     flex: 3,
-                    child: sendButton,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.85,
+                      child: FusionButton(
+                          text: AppLocalizations.of(context).buttonSend(),
+                          onPressed: () async {
+                            FlashHelper.successBar(context,
+                                message: AppLocalizations.of(context)
+                                    .feedbackWasSended());
+                            Navigator.of(context).pop();
+                          }),
+                    ),
                   ),
                 ],
               ),

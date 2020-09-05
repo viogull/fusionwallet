@@ -19,11 +19,13 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static m0(current, total) => "Question ${current} of ${total}";
+  static m0(coin, qty, address) => "Do you want to apply ${qty} ${coin} to address ${address}?";
 
-  static m1(position) => "Select the ${position}th word of your passphrase";
+  static m1(current, total) => "Question ${current} of ${total}";
 
-  static m2(qty, wallet) => "Send ${qty} funds to ${wallet}";
+  static m2(position) => "Select the ${position}th word of your passphrase";
+
+  static m3(qty, wallet) => "Send ${qty} funds to ${wallet}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
@@ -39,6 +41,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "addressShare" : MessageLookupByLibrary.simpleMessage("Share Address"),
     "amountMissing" : MessageLookupByLibrary.simpleMessage("Please Enter an Amount"),
     "appName" : MessageLookupByLibrary.simpleMessage("Fusion"),
+    "applyPushBody" : m0,
+    "applyPushTitle" : MessageLookupByLibrary.simpleMessage("Apply Push funds"),
     "authMethod" : MessageLookupByLibrary.simpleMessage("Authentication Method"),
     "authSuccess" : MessageLookupByLibrary.simpleMessage("Succesfully authenticated"),
     "authenticateToViewTransaction" : MessageLookupByLibrary.simpleMessage("Please authenticate to view your transaction overview"),
@@ -71,6 +75,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "buttonViewResults" : MessageLookupByLibrary.simpleMessage("View results"),
     "cancel" : MessageLookupByLibrary.simpleMessage("Cancel"),
     "cannotRecoverAccount" : MessageLookupByLibrary.simpleMessage("Cannot recover that account."),
+    "cardCurrencyMode" : MessageLookupByLibrary.simpleMessage("Switched to currency values mode."),
+    "cardUsdMode" : MessageLookupByLibrary.simpleMessage("Switched to USD mode"),
     "changeCurrency" : MessageLookupByLibrary.simpleMessage("Change Currency"),
     "changeRepAuthenticate" : MessageLookupByLibrary.simpleMessage("Change Representative"),
     "changeRepButton" : MessageLookupByLibrary.simpleMessage("Change"),
@@ -123,6 +129,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "exampleCardLot" : MessageLookupByLibrary.simpleMessage("A lot of"),
     "exampleCardTo" : MessageLookupByLibrary.simpleMessage("to someone"),
     "exit" : MessageLookupByLibrary.simpleMessage("Exit"),
+    "feedbackWasSended" : MessageLookupByLibrary.simpleMessage("Successfully sended. Thanks for feedback."),
     "fingerprintSeedBackup" : MessageLookupByLibrary.simpleMessage("Authenticate to backup seed."),
     "flashAddressCopied" : MessageLookupByLibrary.simpleMessage("Address was copied to clipboard."),
     "flashFundsSended" : MessageLookupByLibrary.simpleMessage("Succesfully sended"),
@@ -197,7 +204,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "labelPendingRewardSubtitle" : MessageLookupByLibrary.simpleMessage("Pending rewards become confirmed when you send or receive BIP"),
     "labelPendingRewardTitle" : MessageLookupByLibrary.simpleMessage("Pending Rewards"),
     "labelPubkeyOrDomain" : MessageLookupByLibrary.simpleMessage("Public key or domain"),
-    "labelQuestionIndicatorTitle" : m0,
+    "labelQuestionIndicatorTitle" : m1,
     "labelReceiver" : MessageLookupByLibrary.simpleMessage("Receiver"),
     "labelRemove" : MessageLookupByLibrary.simpleMessage("Remove"),
     "labelRewardsCaption" : MessageLookupByLibrary.simpleMessage("For more information on Fusion Rewards, visit our FAQ"),
@@ -213,7 +220,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "labelTransanctionsHistoryTitle" : MessageLookupByLibrary.simpleMessage("Transanctions History"),
     "labelUnlockSubtitle" : MessageLookupByLibrary.simpleMessage("Enter six digit pin"),
     "labelUnlockTitle" : MessageLookupByLibrary.simpleMessage("Unlock"),
-    "labelWordIndicatorSubtitle" : m1,
+    "labelWordIndicatorSubtitle" : m2,
     "labelYes" : MessageLookupByLibrary.simpleMessage("Yes"),
     "language" : MessageLookupByLibrary.simpleMessage("Language"),
     "liveSupportButton" : MessageLookupByLibrary.simpleMessage("Support"),
@@ -252,6 +259,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "noContactsExport" : MessageLookupByLibrary.simpleMessage("There\'s no contacts to export."),
     "noContactsImport" : MessageLookupByLibrary.simpleMessage("No new contacts to import."),
     "noContactsTitle" : MessageLookupByLibrary.simpleMessage("No any contacts yet."),
+    "noNotificationsAvailable" : MessageLookupByLibrary.simpleMessage("No any notifications were received"),
     "noSkipButton" : MessageLookupByLibrary.simpleMessage("No, Skip"),
     "notificationBody" : MessageLookupByLibrary.simpleMessage("Open Natrium to view this transaction"),
     "notificationHeaderSupplement" : MessageLookupByLibrary.simpleMessage("Tap to open"),
@@ -280,6 +288,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "popupRemoveAccountTitle" : MessageLookupByLibrary.simpleMessage("Remove account"),
     "preferences" : MessageLookupByLibrary.simpleMessage("Preferences"),
     "privacyPolicy" : MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+    "pushFundsNotApplied" : MessageLookupByLibrary.simpleMessage("Applying of funds was finished with unexpectable error."),
+    "pushFundsSuccesfullyApplied" : MessageLookupByLibrary.simpleMessage("Funds were succesfully added to your wallet."),
     "pushLinkWasCopied" : MessageLookupByLibrary.simpleMessage("Link was copied to clipboard."),
     "qrInvalidAddress" : MessageLookupByLibrary.simpleMessage("QR code does not contain a valid destination"),
     "qrInvalidPermissions" : MessageLookupByLibrary.simpleMessage("Please Grant Camera Permissions to scan QR Codes"),
@@ -316,7 +326,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "sendAmountConfirm" : MessageLookupByLibrary.simpleMessage("Send %1 NANO"),
     "sendError" : MessageLookupByLibrary.simpleMessage("An error occured. Try again later."),
     "sendFrom" : MessageLookupByLibrary.simpleMessage("Send From"),
-    "sendFundsToPushWallet" : m2,
+    "sendFundsToPushWallet" : m3,
     "sending" : MessageLookupByLibrary.simpleMessage("Sending"),
     "sent" : MessageLookupByLibrary.simpleMessage("Sent"),
     "sentTo" : MessageLookupByLibrary.simpleMessage("Sent To"),

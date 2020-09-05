@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fusion_wallet/core/models/address_data_with_usd.dart';
 import 'package:fusion_wallet/core/models/models.dart';
 import 'package:fusion_wallet/ui/components/balances_card_item.dart';
 import 'package:fusion_wallet/ui/theme.dart';
@@ -12,7 +13,7 @@ import '../../../inject.dart';
 import '../../../localizations.dart';
 
 class AccountBalancesCard extends StatefulWidget {
-  final AddressData data;
+  final AddressDataWithUsd data;
   final Function onPlusTapped;
 
   AccountBalancesCard({this.data, this.onPlusTapped});
@@ -24,13 +25,38 @@ class AccountBalancesCard extends StatefulWidget {
 class _AccountBalancesCardState extends State<AccountBalancesCard> {
   bool _showUsdValues = false;
 
+  final log = injector.get<Logger>();
   Widget buildBalancesList(BuildContext context) {
+    log.d("Length of currencies -> ${widget.data.data.balances.length}");
     return ListView.builder(
         itemCount: widget.data.data.balances.length,
         itemBuilder: (_, index) {
           return ListTile(
               title: Text(widget.data.data.balances[index].coin.toString()));
         });
+  }
+
+  List<Widget> _buildBalancesListItems(BuildContext context) {
+    var widgetsList = List<Widget>();
+    widgetsList.add(
+      Padding(
+        padding: const EdgeInsets.only(bottom: 12, top: 8),
+        child: Text(
+          AppLocalizations.of(context).labelCryptoAvailable(),
+          textAlign: TextAlign.left,
+          style: TextStyle(
+              fontSize: 12,
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.9)),
+        ),
+      ),
+    );
+    widget.data.data.balances.forEach((element) {
+      widgetsList.add(BalancesCardItem(
+          title: element.coin,
+          value: element.amount,
+          showUsd: this._showUsdValues));
+    });
+    return widgetsList;
   }
 
   @override
@@ -58,27 +84,8 @@ class _AccountBalancesCardState extends State<AccountBalancesCard> {
                     child: Padding(
                         padding: const EdgeInsets.only(top: 4),
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(bottom: 12, top: 8),
-                              child: Text(
-                                AppLocalizations.of(context)
-                                    .labelCryptoAvailable(),
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: theme.colorScheme.onSurface
-                                        .withOpacity(0.9)),
-                              ),
-                            ),
-                            BalancesCardItem(
-                                title: widget.data.data.balances.first.coin,
-                                value: widget.data.data.balances.first.amount,
-                                showUsd: this._showUsdValues)
-                          ],
-                        ))),
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: _buildBalancesListItems(context)))),
               ),
             ),
             Align(

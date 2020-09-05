@@ -1,5 +1,5 @@
 {
-	"@@last_modified": "2020-08-18T19:44:40.994197",
+	"@@last_modified": "2020-09-05T18:30:42.204274",
 	"appName": "Fusion",
 	"@appName": {
 		"type": "text",
@@ -2041,6 +2041,50 @@
 	},
 	"cannotRecoverAccount": "Cannot recover that account.",
 	"@cannotRecoverAccount": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"cardCurrencyMode": "Switched to currency values mode.",
+	"@cardCurrencyMode": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"cardUsdMode": "Switched to USD mode",
+	"@cardUsdMode": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"noNotificationsAvailable": "No any notifications were received",
+	"@noNotificationsAvailable": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"feedbackWasSended": "Successfully sended. Thanks for feedback.",
+	"@feedbackWasSended": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"applyPushTitle": "Apply Push funds",
+	"@applyPushTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"applyPushBody": "Do you want to apply {qty} {coin} to address {address}?",
+	"@applyPushBody": {
+		"type": "text",
+		"placeholders": {
+			"coin": {},
+			"qty": {},
+			"address": {}
+		}
+	},
+	"pushFundsSuccesfullyApplied": "Funds were succesfully added to your wallet.",
+	"@pushFundsSuccesfullyApplied": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"pushFundsNotApplied": "Applying of funds was finished with unexpectable error.",
+	"@pushFundsNotApplied": {
 		"type": "text",
 		"placeholders": {}
 	}

@@ -19,11 +19,13 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ru';
 
-  static m0(current, total) => "Вопрос ${current} с ${total}";
+  static m0(coin, qty, address) => "Использовать push-ссылку и зачислить ${qty} ${coin} на ваш счет?";
 
-  static m1(position) => "Выберите ${position}-е слово вашей контрольной фразы.";
+  static m1(current, total) => "Вопрос ${current} с ${total}";
 
-  static m2(qty, wallet) => "Отправить ${qty} средства на ${wallet}";
+  static m2(position) => "Выберите ${position}-е слово вашей контрольной фразы.";
+
+  static m3(qty, wallet) => "Отправить ${qty} средства на ${wallet}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
@@ -39,6 +41,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "addressShare" : MessageLookupByLibrary.simpleMessage("Поделиться адресом"),
     "amountMissing" : MessageLookupByLibrary.simpleMessage("Пожалуйста, введите сумму"),
     "appName" : MessageLookupByLibrary.simpleMessage("Fusion"),
+    "applyPushBody" : m0,
+    "applyPushTitle" : MessageLookupByLibrary.simpleMessage("Зачислить средства"),
     "authMethod" : MessageLookupByLibrary.simpleMessage("Метод проверки подлинности"),
     "authSuccess" : MessageLookupByLibrary.simpleMessage("Успешная авторизация"),
     "authenticateToViewTransaction" : MessageLookupByLibrary.simpleMessage("Пожалуйста, авторизуйтесь, чтобы просмотреть транзакцию"),
@@ -71,6 +75,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "buttonViewResults" : MessageLookupByLibrary.simpleMessage("Показать результаты"),
     "cancel" : MessageLookupByLibrary.simpleMessage("Отменить"),
     "cannotRecoverAccount" : MessageLookupByLibrary.simpleMessage("Невозможно восстановить эту учетную запись."),
+    "cardCurrencyMode" : MessageLookupByLibrary.simpleMessage("Режим отображения в токенах"),
+    "cardUsdMode" : MessageLookupByLibrary.simpleMessage("Отображение в долларах США"),
     "changeCurrency" : MessageLookupByLibrary.simpleMessage("Изменить валюту"),
     "changeRepAuthenticate" : MessageLookupByLibrary.simpleMessage("Сменить представителя"),
     "changeRepButton" : MessageLookupByLibrary.simpleMessage("+ Изменить"),
@@ -123,6 +129,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "exampleCardLot" : MessageLookupByLibrary.simpleMessage("Полно"),
     "exampleCardTo" : MessageLookupByLibrary.simpleMessage("кому-то"),
     "exit" : MessageLookupByLibrary.simpleMessage("Выход"),
+    "feedbackWasSended" : MessageLookupByLibrary.simpleMessage("Успешно отправлено. Спасибо за отзыв."),
     "fingerprintSeedBackup" : MessageLookupByLibrary.simpleMessage("Авторизуйтесь в резервной копии."),
     "flashAddressCopied" : MessageLookupByLibrary.simpleMessage("Адрес скопирован в буфер обмена."),
     "flashFundsSended" : MessageLookupByLibrary.simpleMessage("Успешно отправлено"),
@@ -197,7 +204,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "labelPendingRewardSubtitle" : MessageLookupByLibrary.simpleMessage("Награда становиться подтвержденной после получения или отправки BIP"),
     "labelPendingRewardTitle" : MessageLookupByLibrary.simpleMessage("Ожидающие награды"),
     "labelPubkeyOrDomain" : MessageLookupByLibrary.simpleMessage("Публичный ключ или домен"),
-    "labelQuestionIndicatorTitle" : m0,
+    "labelQuestionIndicatorTitle" : m1,
     "labelReceiver" : MessageLookupByLibrary.simpleMessage("Получатель"),
     "labelRemove" : MessageLookupByLibrary.simpleMessage("Удалить"),
     "labelRewardsCaption" : MessageLookupByLibrary.simpleMessage("За информацией о наградах Fusion, посетите наш FAQ"),
@@ -213,7 +220,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "labelTransanctionsHistoryTitle" : MessageLookupByLibrary.simpleMessage("История сделок"),
     "labelUnlockSubtitle" : MessageLookupByLibrary.simpleMessage("Введите 6-символьный ПИН код"),
     "labelUnlockTitle" : MessageLookupByLibrary.simpleMessage("Разблокировать"),
-    "labelWordIndicatorSubtitle" : m1,
+    "labelWordIndicatorSubtitle" : m2,
     "labelYes" : MessageLookupByLibrary.simpleMessage("Да"),
     "language" : MessageLookupByLibrary.simpleMessage("Язык"),
     "liveSupportButton" : MessageLookupByLibrary.simpleMessage("Служба поддержки"),
@@ -252,6 +259,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "noContactsExport" : MessageLookupByLibrary.simpleMessage("Нет контактов для экспорта."),
     "noContactsImport" : MessageLookupByLibrary.simpleMessage("Нет новых контактов для импорта."),
     "noContactsTitle" : MessageLookupByLibrary.simpleMessage("Никаких контактов пока нет."),
+    "noNotificationsAvailable" : MessageLookupByLibrary.simpleMessage("Никаких уведомлений не поступало"),
     "noSkipButton" : MessageLookupByLibrary.simpleMessage("Нет, пропустить"),
     "notificationBody" : MessageLookupByLibrary.simpleMessage("Откройте Fusion, чтобы просмотреть эту транзакцию"),
     "notificationHeaderSupplement" : MessageLookupByLibrary.simpleMessage("Нажмите, чтобы открыть"),
@@ -280,6 +288,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "popupRemoveAccountTitle" : MessageLookupByLibrary.simpleMessage("Удаление аккаунта"),
     "preferences" : MessageLookupByLibrary.simpleMessage("Настройки"),
     "privacyPolicy" : MessageLookupByLibrary.simpleMessage("Политика конфиденциальности"),
+    "pushFundsNotApplied" : MessageLookupByLibrary.simpleMessage("Вложение средств было завершено с неожиданной ошибкой."),
+    "pushFundsSuccesfullyApplied" : MessageLookupByLibrary.simpleMessage("Средства были успешно добавлены в ваш кошелек."),
     "pushLinkWasCopied" : MessageLookupByLibrary.simpleMessage("Ссылка скопирована в буфер обмена."),
     "qrInvalidAddress" : MessageLookupByLibrary.simpleMessage("QR-код не содержит действительного адреса"),
     "qrInvalidPermissions" : MessageLookupByLibrary.simpleMessage("Пожалуйста, предоставьте разрешение камеры на сканирование QR-кодов"),
@@ -316,7 +326,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "sendAmountConfirm" : MessageLookupByLibrary.simpleMessage("Отправить %1 Fusion"),
     "sendError" : MessageLookupByLibrary.simpleMessage("Произошла ошибка. Попробуйте позже."),
     "sendFrom" : MessageLookupByLibrary.simpleMessage("Отправлено из"),
-    "sendFundsToPushWallet" : m2,
+    "sendFundsToPushWallet" : m3,
     "sending" : MessageLookupByLibrary.simpleMessage("Отправка"),
     "sent" : MessageLookupByLibrary.simpleMessage("Отправил"),
     "sentTo" : MessageLookupByLibrary.simpleMessage("Отправлено "),
@@ -343,7 +353,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tapToHide" : MessageLookupByLibrary.simpleMessage("Нажмите, чтобы скрыть"),
     "tapToReveal" : MessageLookupByLibrary.simpleMessage("Нажмите, чтобы открыть"),
     "themeHeader" : MessageLookupByLibrary.simpleMessage("Тема"),
-    "to" : MessageLookupByLibrary.simpleMessage(""),
+    "to" : MessageLookupByLibrary.simpleMessage("Кому"),
     "toastTryAgain" : MessageLookupByLibrary.simpleMessage("Пожалуйста, попробуйте еще раз"),
     "tooManyFailedAttempts" : MessageLookupByLibrary.simpleMessage("Слишком много неудачных попыток разблокировки."),
     "toolbarAddContactTitle" : MessageLookupByLibrary.simpleMessage("Добавить контакт"),

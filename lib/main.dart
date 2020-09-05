@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -184,7 +185,38 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
+    FirebaseDynamicLinks.instance.onLink(
+        onSuccess: (PendingDynamicLinkData dynamicLink) async {
+      final Uri deepLink = dynamicLink?.link;
 
+      if (deepLink != null) {
+        logger.d("Received deeplink " + dynamicLink.link.toString());
+        if (dynamicLink.link
+            .toString()
+            .contains("https://fusion-push.cash/push/")) {
+          logger.d("Detected PUSH deeplink");
+
+          Timer.run(() {
+            showCupertinoModalBottomSheet(
+                context: context,
+                builder: (BuildContext context, ScrollController controller) {
+                  return ApplyPushDeeplink(url: dynamicLink.link.toString());
+                });
+          });
+        } else {
+          // https://fusiongroup.page.link/ref
+          final Uri deep = dynamicLink.link;
+          final ref = deep.queryParameters["from"];
+          logger.d("Referal inviter : ${ref}");
+          injector.get<Vault>().saveLastReferalInviter(ref);
+          StateContainer.of(context).updateInviter(ref);
+          Navigator.pushNamed(context, deepLink.path);
+        }
+      }
+    }, onError: (OnLinkErrorException e) async {
+      print('onLinkError');
+      print(e.message);
+    });
     WidgetsBinding.instance.addObserver(this);
   }
 

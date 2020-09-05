@@ -1,13 +1,18 @@
 import 'package:dio/dio.dart';
 import 'package:fusion_wallet/core/abstract/account.dart';
 import 'package:fusion_wallet/core/models/address_data.dart';
+import 'package:fusion_wallet/core/models/address_data_with_usd.dart';
 import 'package:fusion_wallet/core/models/admin_notifications_response.dart';
 import 'package:fusion_wallet/core/models/can_recover_request.dart';
 import 'package:fusion_wallet/core/models/can_recover_response.dart';
+import 'package:fusion_wallet/core/models/coin_list_response.dart';
+import 'package:fusion_wallet/core/models/convert_request.dart';
 import 'package:fusion_wallet/core/models/create_profile_request.dart';
 import 'package:fusion_wallet/core/models/create_push_link_request.dart';
 import 'package:fusion_wallet/core/models/create_push_link_response.dart';
 import 'package:fusion_wallet/core/models/delegate_ubound_tx_request.dart';
+import 'package:fusion_wallet/core/models/estimate_request.dart';
+import 'package:fusion_wallet/core/models/estimate_response.dart';
 import 'package:fusion_wallet/core/models/exchange_rate_response.dart';
 import 'package:fusion_wallet/core/models/nonce_response.dart';
 import 'package:fusion_wallet/core/models/profile_response.dart';
@@ -151,6 +156,35 @@ class MinterRest {
     return null;
   }
 
+  Future<CoinListResponse> fetchMinterCoins() async {
+    try {
+      // Adding Mx to get valid address
+      final url = "$fusionApiUrl/explorer/coins";
+      logger.d("Fetch Address Data Url $url");
+      Response response = await fusionDio.get(url);
+
+      if (response.statusCode == 200) {
+        logger.d("Response status code " + response.statusCode.toString());
+        return CoinListResponse.fromJson(response.data);
+      }
+    } on DioError catch (exception) {
+      if (exception == null) {
+        if (exception == null ||
+            exception.toString().contains('SocketException')) {
+          throw Exception("Network Error");
+        } else if (exception.type == DioErrorType.RECEIVE_TIMEOUT ||
+            exception.type == DioErrorType.CONNECT_TIMEOUT) {
+          throw Exception(
+              "Could'nt connect, please ensure you have a stable network.");
+        } else {
+          return null;
+        }
+      }
+      return null;
+    }
+    return null;
+  }
+
   //put
   Future<dynamic> updateProfileData() {}
 
@@ -245,7 +279,7 @@ class MinterRest {
       });
 
       Response response = await fusionDio.post(
-          "$fusionApiUrl/push/create?sender=${sender.isNotEmpty ? sender : _acc}&receiver=$receiver&creatorId=${_acc.sessionKey}",
+          "$fusionApiUrl/push/create?sender=${sender.isNotEmpty ? sender : _acc}&receiver=$receiver&creatorId=${_acc.seed}",
           data: txData.toJson(),
           options: Options(contentType: "application/json"));
 
@@ -269,16 +303,68 @@ class MinterRest {
     }
   }
 
-  Future<dynamic> applyPush(String pushId, String to) async {
+  Future<bool> convert({ConvertRequest requestData}) async {
     try {
-      Response response = await fusionDio.put(
-          "$fusionApiUrl/push/$pushId?to=$to",
+      Response response = await fusionDio.post('/tx/convert',
+          data: requestData.toJson(),
           options: Options(contentType: "application/json"));
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        return response.data;
+        return true;
+      } else
+        return false;
+    } on DioError catch (exception) {
+      if (exception == null) {
+        if (exception == null ||
+            exception.toString().contains('SocketException')) {
+          throw Exception("Network Error");
+        } else if (exception.type == DioErrorType.RECEIVE_TIMEOUT ||
+            exception.type == DioErrorType.CONNECT_TIMEOUT) {
+          throw Exception(
+              "Could'nt connect, please ensure you have a stable network.");
+        } else {
+          return null;
+        }
+      }
+    }
+  }
+
+  // ignore: missing_return
+  Future<EstimateResponse> estimate({EstimateRequest estimateData}) async {
+    try {
+      Response response = await fusionDio.post('/tx/convert/estimate',
+          data: estimateData.toJson(),
+          options: Options(contentType: "application/json"));
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return EstimateResponse.fromJson(response.data);
       } else
         return null;
+    } on DioError catch (exception) {
+      if (exception == null) {
+        if (exception == null ||
+            exception.toString().contains('SocketException')) {
+          throw Exception("Network Error");
+        } else if (exception.type == DioErrorType.RECEIVE_TIMEOUT ||
+            exception.type == DioErrorType.CONNECT_TIMEOUT) {
+          throw Exception(
+              "Could'nt connect, please ensure you have a stable network.");
+        } else {
+          return null;
+        }
+      }
+    }
+  }
+
+  Future<bool> applyPush(String url, String address) async {
+    try {
+      Response response = await fusionDio.put("$url?address=$address",
+          options: Options(contentType: "application/json"));
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return true;
+      } else
+        return false;
     } on DioError catch (exception) {
       if (exception == null) {
         if (exception == null ||
@@ -418,6 +504,37 @@ class MinterRest {
       return null;
     }
     return null;
+  }
+
+  Future<AddressDataWithUsd> fetchUsdAddressData({String address}) async {
+    try {
+      logger.d('Fetching notifications ');
+      // Adding Mx to get valid address
+      final url =
+          "https://explorer-api.minter.network/api/v1/addresses/$address?withSum=true";
+      logger.d("Fetch Address Data with USDs Url $url");
+      Response response = await dio.get(url);
+
+      if (response.statusCode == 200) {
+        logger.d("Response status code " + response.statusCode.toString());
+
+        return AddressDataWithUsd.fromJson(response.data);
+      }
+    } on DioError catch (exception) {
+      if (exception == null) {
+        if (exception == null ||
+            exception.toString().contains('SocketException')) {
+          throw Exception("Network Error");
+        } else if (exception.type == DioErrorType.RECEIVE_TIMEOUT ||
+            exception.type == DioErrorType.CONNECT_TIMEOUT) {
+          throw Exception(
+              "Could'nt connect, please ensure you have a stable network.");
+        } else {
+          return null;
+        }
+      }
+      return null;
+    }
   }
 
   Future<AdminNotificationsResponse> fetchNotifications() async {
