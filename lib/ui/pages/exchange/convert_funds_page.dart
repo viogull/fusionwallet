@@ -61,101 +61,101 @@ class _ConvertExchangePageState extends State<ConvertExchangePage> {
     final ThemeData theme = Theme.of(context);
     final args =
         ModalRoute.of(context).settings.arguments as ConvertPageArguments;
-    final coinContainer = BlocProvider(
-      create: (context) => AllFieldsFormBloc(),
-      child: Builder(
-        builder: (context) {
-          final formBloc = BlocProvider.of<AllFieldsFormBloc>(context, args);
+//     final coinContainer = BlocProvider(
+//       create: (context) => AllFieldsFormBloc(),
+//       child: Builder(
+//         builder: (context) {
+//           final formBloc = BlocProvider.of<AllFieldsFormBloc>(context, args);
+//
+//           return FormBlocListener<AllFieldsFormBloc, String, String>(
+//             child: Container(
+//               margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
+//               decoration: BoxDecoration(
+//                 borderRadius: BorderRadius.circular(5),
+//                 border: Border.all(color: theme.colorScheme.primary),
+//               ),
+//               height: 40.0,
+//               child: Container(
+//                 margin: EdgeInsets.only(left: 24),
+//                 child: DropdownFieldBlocBuilder<String>(
+//                   decoration: InputDecoration(
+//                     contentPadding: EdgeInsets.all(0.0),
+//                     border: OutlineInputBorder(
+// //                    borderRadius: BorderRadius.zero,
+//                       borderSide: BorderSide.none,
+//                       gapPadding: 0.0,
+//                     ),
+//                   ),
+//                   selectFieldBloc: formBloc.select1,
+//                   itemBuilder: (context, value) => value,
+//                 ),
+//               ),
+//             ),
+//           );
+//         },
+//       ),
+//     );
 
-          return FormBlocListener<AllFieldsFormBloc, String, String>(
-            child: Container(
-              margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(color: theme.colorScheme.primary),
-              ),
-              height: 40.0,
-              child: Container(
-                margin: EdgeInsets.only(left: 24),
-                child: DropdownFieldBlocBuilder<String>(
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(0.0),
-                    border: OutlineInputBorder(
-//                    borderRadius: BorderRadius.zero,
-                      borderSide: BorderSide.none,
-                      gapPadding: 0.0,
-                    ),
-                  ),
-                  selectFieldBloc: formBloc.select1,
-                  itemBuilder: (context, value) => value,
-                ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-
-    final coinWant = BlocProvider(
-      create: (context) => AllFieldsFormBloc(),
-      child: Builder(
-        builder: (context) {
-          final formBloc = BlocProvider.of<AllFieldsFormBloc>(context);
-
-          return FormBlocListener<AllFieldsFormBloc, String, String>(
-            child: Container(
-              margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(color: theme.colorScheme.primary),
-              ),
-              height: 40.0,
-              child: Container(
-                margin: EdgeInsets.only(left: 24),
-                child: Row(
-                  children: <Widget>[
-                    Flexible(
-                      flex: 6,
-                      child: TextFieldBlocBuilder(
-                        textFieldBloc: formBloc.text1,
-                        decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(0.0),
-                            border: OutlineInputBorder(
-//                    borderRadius: BorderRadius.zero,
-                              borderSide: BorderSide.none,
-                              gapPadding: 0.0,
-                            ),
-                            hintText: "0.00"),
-                      ),
-                    ),
-                    Flexible(
-                      flex: 1,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          border: Border.all(color: theme.colorScheme.primary),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 3, horizontal: 0),
-                        height: 25,
-                        width: 39,
-                        child: InkWell(
-                            child: GestureDetector(
-                          child: Text(
-                            AppLocalizations.of(context).inputMaxAmountSuffix(),
-                            textAlign: TextAlign.center,
-                          ),
-                        )),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
+//     final coinWant = BlocProvider(
+//       create: (context) => AllFieldsFormBloc(),
+//       child: Builder(
+//         builder: (context) {
+//           final formBloc = BlocProvider.of<AllFieldsFormBloc>(context);
+//
+//           return FormBlocListener<AllFieldsFormBloc, String, String>(
+//             child: Container(
+//               margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
+//               decoration: BoxDecoration(
+//                 borderRadius: BorderRadius.circular(5),
+//                 border: Border.all(color: theme.colorScheme.primary),
+//               ),
+//               height: 40.0,
+//               child: Container(
+//                 margin: EdgeInsets.only(left: 24),
+//                 child: Row(
+//                   children: <Widget>[
+//                     Flexible(
+//                       flex: 6,
+//                       child: TextFieldBlocBuilder(
+//                         textFieldBloc: formBloc.text1,
+//                         decoration: InputDecoration(
+//                             contentPadding: EdgeInsets.all(0.0),
+//                             border: OutlineInputBorder(
+// //                    borderRadius: BorderRadius.zero,
+//                               borderSide: BorderSide.none,
+//                               gapPadding: 0.0,
+//                             ),
+//                             hintText: "0.00"),
+//                       ),
+//                     ),
+//                     Flexible(
+//                       flex: 1,
+//                       child: Container(
+//                         decoration: BoxDecoration(
+//                           borderRadius: BorderRadius.circular(5),
+//                           border: Border.all(color: theme.colorScheme.primary),
+//                         ),
+//                         padding: const EdgeInsets.symmetric(
+//                             vertical: 3, horizontal: 0),
+//                         height: 25,
+//                         width: 39,
+//                         child: InkWell(
+//                             child: GestureDetector(
+//                           child: Text(
+//                             AppLocalizations.of(context).inputMaxAmountSuffix(),
+//                             textAlign: TextAlign.center,
+//                           ),
+//                         )),
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//           );
+//         },
+//       ),
+//     );
 
     final coinHaveLabel = Container(
       alignment: Alignment.topLeft,
@@ -256,7 +256,7 @@ class _ConvertExchangePageState extends State<ConvertExchangePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         coinHaveLabel,
-                        coinContainer,
+                    //    coinContainer,
                       ],
                     ),
                   ),
@@ -264,7 +264,9 @@ class _ConvertExchangePageState extends State<ConvertExchangePage> {
                     flex: 2,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[amountLabel, coinWant],
+                      children: <Widget>[amountLabel,
+                      //  coinWant
+                      ],
                     ),
                   ),
                   Flexible(
