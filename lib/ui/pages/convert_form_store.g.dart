@@ -143,6 +143,21 @@ mixin _$ConvertFormStore on _ConvertFormStore, Store {
     });
   }
 
+  final _$messagesStreamAtom = Atom(name: '_ConvertFormStore.messagesStream');
+
+  @override
+  Observable<InformationMessage> get messagesStream {
+    _$messagesStreamAtom.reportRead();
+    return super.messagesStream;
+  }
+
+  @override
+  set messagesStream(Observable<InformationMessage> value) {
+    _$messagesStreamAtom.reportWrite(value, super.messagesStream, () {
+      super.messagesStream = value;
+    });
+  }
+
   final _$validateEstimationAsyncAction =
       AsyncAction('_ConvertFormStore.validateEstimation');
 
@@ -150,6 +165,13 @@ mixin _$ConvertFormStore on _ConvertFormStore, Store {
   Future<dynamic> validateEstimation(String update) {
     return _$validateEstimationAsyncAction
         .run(() => super.validateEstimation(update));
+  }
+
+  final _$exchangeAsyncAction = AsyncAction('_ConvertFormStore.exchange');
+
+  @override
+  Future exchange(String memo) {
+    return _$exchangeAsyncAction.run(() => super.exchange(memo));
   }
 
   final _$estimateAsyncAction = AsyncAction('_ConvertFormStore.estimate');
@@ -249,6 +271,7 @@ fee: ${fee},
 willGet: ${willGet},
 balances: ${balances},
 coins: ${coins},
+messagesStream: ${messagesStream},
 isSellCoinSelected: ${isSellCoinSelected},
 isBuyCoinSelected: ${isBuyCoinSelected},
 isSellValueEntered: ${isSellValueEntered},
