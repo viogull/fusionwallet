@@ -10,6 +10,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/core/models/coin_list_response.dart';
 import 'package:fusion_wallet/core/state_container.dart';
+import 'package:fusion_wallet/inject.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
@@ -50,6 +51,7 @@ class _ConvertState extends State<ConvertPage> {
 
   final ConvertFormStore store = ConvertFormStore();
 
+  ReactionDisposer _disposer;
 
   @override
   void initState() {
@@ -58,6 +60,11 @@ class _ConvertState extends State<ConvertPage> {
       store.fetchInitials(address:
       StateContainer.of(context).selectedAccount.address) ;});
     store.setupEstimationCalculators();
+    _disposer = reaction(
+            (_) => store.messagesStream.value,
+            (result) => Future.delayed(Duration(milliseconds: 800), () {
+      FlashHelper.infoBar( context, message:  (result as InformationMessage).message);
+    }));
   }
 
   @override
@@ -70,7 +77,6 @@ class _ConvertState extends State<ConvertPage> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final account = StateContainer.of(context).selectedAccount;
     return FusionScaffold(
       title: AppLocalizations.of(context).toolbarConvertTitle(),
       child: Stack(

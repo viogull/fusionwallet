@@ -15,6 +15,14 @@ class ConvertFormStore = _ConvertFormStore with _$ConvertFormStore;
 
 
 
+class InformationMessage {
+  bool isError;
+  String message;
+
+  InformationMessage({this.isError, this.message});
+
+}
+
 abstract class _ConvertFormStore with Store {
 
 
@@ -46,6 +54,8 @@ abstract class _ConvertFormStore with Store {
   ObservableFuture<List<String>> coins;
 
 
+  @observable
+  Observable<InformationMessage> messagesStream;
 
   @computed
   bool get isSellCoinSelected => coinToSell.isNotEmpty;
@@ -94,6 +104,8 @@ abstract class _ConvertFormStore with Store {
   @action
   Future fetchCoins() => coins = ObservableFuture(api.fetchMinterCoins()).then((MinterCoinsResponse value) => value.coins);
 
+
+
   void fetchInitials({String address}) {
     fetchBalances(address);
     fetchCoins();
@@ -133,7 +145,13 @@ abstract class _ConvertFormStore with Store {
   void exchange(String memo) async {
     if(isEstimationAllowed) {
       log.d("Converting ...");
-      await api.convert(requestData: ConvertRequest(coinToBuy: coinToBuy, coinToSell: coinToSell, valueToSell: valueToSell, mnemonic: memo));
+      final succes = await api.convert(requestData: ConvertRequest(coinToBuy: coinToBuy, coinToSell: coinToSell, valueToSell: valueToSell, mnemonic: memo));
+      if(succes) {
+        messagesStream.value = InformationMessage(isError: false, message:  "Succesfully converted");
+      } else {
+        messagesStream.value = InformationMessage(isError: true, message:  "Failed on exchange. Please, try later.");
+
+      }
       return;
     }
   }
