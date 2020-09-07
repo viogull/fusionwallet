@@ -170,7 +170,7 @@ mixin _$ConvertFormStore on _ConvertFormStore, Store {
   final _$exchangeAsyncAction = AsyncAction('_ConvertFormStore.exchange');
 
   @override
-  Future exchange(String memo) {
+  Future<dynamic> exchange(String memo) {
     return _$exchangeAsyncAction.run(() => super.exchange(memo));
   }
 

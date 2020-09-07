@@ -142,7 +142,7 @@ abstract class _ConvertFormStore with Store {
 
 
   @action
-  void exchange(String memo) async {
+  Future  exchange(String memo) async {
     if(isEstimationAllowed) {
       log.d("Converting ...");
       final succes = await api.convert(requestData: ConvertRequest(coinToBuy: coinToBuy, coinToSell: coinToSell, valueToSell: valueToSell, mnemonic: memo));
