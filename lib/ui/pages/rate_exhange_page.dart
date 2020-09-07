@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/core/models/coefficients_response.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
 
-import '../../../inject.dart';
+import '../../inject.dart';
 
 class RateExchangePage extends StatelessWidget {
   static const String navId = '/RateExchangePage';

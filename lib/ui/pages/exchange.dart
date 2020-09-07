@@ -5,26 +5,27 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
 import 'package:fusion_wallet/ui/pages/auth/pincode.dart';
-import 'package:fusion_wallet/ui/pages/exchange/convert_funds_page.dart';
-import 'package:fusion_wallet/ui/pages/exchange/rate_exhange_page.dart';
+import 'package:fusion_wallet/ui/pages/convert.dart';
+import 'package:fusion_wallet/ui/pages/rate_exhange_page.dart';
 
 import '../../inject.dart';
 import '../widgets.dart';
 
-class ExchangePage extends StatefulWidget {
+class ExchangePage extends StatelessWidget {
   static const String navId = '/ExchangePage';
-  @override
-  _ExchangePageState createState() => new _ExchangePageState();
-}
 
-class _ExchangePageState extends State<ExchangePage> {
-  @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
     return Container(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
+      height: MediaQuery
+          .of(context)
+          .size
+          .height,
+      width: MediaQuery
+          .of(context)
+          .size
+          .width,
       child: Container(
         padding: EdgeInsets.only(
           left: 24.0,
@@ -58,7 +59,10 @@ class _ExchangePageState extends State<ExchangePage> {
                 height: 30.0,
                 child: Center(
                   child: LimitedBox(
-                    maxWidth: MediaQuery.of(context).size.width,
+                    maxWidth: MediaQuery
+                        .of(context)
+                        .size
+                        .width,
                     maxHeight: 35,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
@@ -80,7 +84,10 @@ class _ExchangePageState extends State<ExchangePage> {
                                     // height: MediaQuery.of(context).size.height,
                                   ),
                                   SizedBox(
-                                    width: MediaQuery.of(context).size.width *
+                                    width: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .width *
                                         0.02,
                                   ),
                                   Text(
@@ -119,7 +126,10 @@ class _ExchangePageState extends State<ExchangePage> {
                 height: 30.0,
                 child: Center(
                   child: LimitedBox(
-                    maxWidth: MediaQuery.of(context).size.width,
+                    maxWidth: MediaQuery
+                        .of(context)
+                        .size
+                        .width,
                     maxHeight: 35,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
@@ -141,7 +151,10 @@ class _ExchangePageState extends State<ExchangePage> {
                                     // height: MediaQuery.of(context).size.height,
                                   ),
                                   SizedBox(
-                                    width: MediaQuery.of(context).size.width *
+                                    width: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .width *
                                         0.02,
                                   ),
                                   Text(
@@ -180,7 +193,10 @@ class _ExchangePageState extends State<ExchangePage> {
                 height: 30.0,
                 child: Center(
                   child: LimitedBox(
-                    maxWidth: MediaQuery.of(context).size.width,
+                    maxWidth: MediaQuery
+                        .of(context)
+                        .size
+                        .width,
                     maxHeight: 35,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
@@ -202,7 +218,10 @@ class _ExchangePageState extends State<ExchangePage> {
                                     // height: MediaQuery.of(context).size.height,
                                   ),
                                   SizedBox(
-                                    width: MediaQuery.of(context).size.width *
+                                    width: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .width *
                                         0.02,
                                   ),
                                   Text(
@@ -237,21 +256,14 @@ class _ExchangePageState extends State<ExchangePage> {
               flex: 1,
               child: Container(
                 height: 50,
-                width: MediaQuery.of(context).size.width,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
                 child: FusionButton(
                     text: AppLocalizations.of(context).buttonConvert(),
                     onPressed: () async {
-                      final coinsList =
-                          await injector.get<MinterRest>().fetchMinterCoins();
-                      final addressData = await injector
-                          .get<MinterRest>()
-                          .fetchAddressData(
-                              address: StateContainer.of(context)
-                                  .selectedAccount
-                                  .address);
-                      Navigator.pushNamed(context, ConvertExchangePage.navId,
-                          arguments: ConvertPageArguments(
-                              balancesData: addressData, coinsList: coinsList));
+                      Navigator.of(context).pushNamed(ConvertPage.navId);
                     }),
               ),
             ),
@@ -262,7 +274,10 @@ class _ExchangePageState extends State<ExchangePage> {
               flex: 1,
               child: Container(
                 height: 50,
-                width: MediaQuery.of(context).size.width,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
                 child: FusionButton(
                     text: AppLocalizations.of(context).buttonRate(),
                     onPressed: () {
@@ -288,7 +303,10 @@ class _ExchangePageState extends State<ExchangePage> {
                   ),
                   Container(
                     height: 50,
-                    width: MediaQuery.of(context).size.width * 0.30,
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.30,
                     child: FusionButton(
                         text: AppLocalizations.of(context).buttonBuy(),
                         onPressed: () {
@@ -310,7 +328,7 @@ class _ExchangePageState extends State<ExchangePage> {
                   Container(
                     alignment: Alignment.center,
                     margin:
-                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 00.0),
+                    EdgeInsets.symmetric(vertical: 0.0, horizontal: 00.0),
                     child: Text(
                       AppLocalizations.of(context).labelExchangeSimplex(),
                       style: TextStyle(
@@ -320,7 +338,10 @@ class _ExchangePageState extends State<ExchangePage> {
                   ),
                   Container(
                     height: 50,
-                    width: MediaQuery.of(context).size.width * 0.30,
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.30,
                     child: FusionButton(
                         text: AppLocalizations.of(context).buttonBuy(),
                         onPressed: () {}),

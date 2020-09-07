@@ -20,6 +20,7 @@ class TransactionView extends StatelessWidget {
       isReceiving = true;
     else
       isReceiving = false;
+    var type;
 
     return Card(
       borderOnForeground: false,

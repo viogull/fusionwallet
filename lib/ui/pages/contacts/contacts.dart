@@ -5,9 +5,9 @@ import 'package:fusion_wallet/localizations.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'contact_view.dart';
+import 'view.dart';
 
-export 'add_contact.dart';
+export 'add.dart';
 export 'contacts.dart';
 
 class ContactsPage extends StatefulWidget {

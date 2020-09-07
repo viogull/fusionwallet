@@ -5,7 +5,7 @@
 /// name : "BIP"
 /// symbol : "BIP"
 
-class CoinListResponse {
+class MinterCoin {
   int crr;
   String volume;
   String reserveBalance;
@@ -13,7 +13,7 @@ class CoinListResponse {
   String name;
   String symbol;
 
-  CoinListResponse(
+  MinterCoin(
       {this.crr,
       this.volume,
       this.reserveBalance,
@@ -21,7 +21,7 @@ class CoinListResponse {
       this.name,
       this.symbol});
 
-  CoinListResponse.fromJson(dynamic json) {
+  MinterCoin.fromJson(dynamic json) {
     crr = json["crr"];
     volume = json["volume"];
     reserveBalance = json["reserveBalance"];

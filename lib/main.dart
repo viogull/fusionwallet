@@ -33,19 +33,20 @@ import 'ui/pages/auth/pincode.dart';
 import 'ui/pages/auth/recover.dart';
 import 'ui/pages/auth/splash.dart';
 import 'ui/pages/auth/ui.dart';
-import 'ui/pages/bottom_home.dart';
-import 'ui/pages/exchange/convert_funds_page.dart';
-import 'ui/pages/exchange/rate_exhange_page.dart';
-import 'ui/pages/information/faq_page.dart';
-import 'ui/pages/information/send_feedback_page.dart';
+import 'ui/pages/primary.dart';
+import 'ui/pages/convert.dart';
+import 'ui/pages/rate_exhange_page.dart';
+import 'ui/pages/info/faq.dart';
+import 'ui/pages/info/feedback.dart';
 import 'ui/pages/auth/lockscreen.dart';
 import 'ui/pages/pages.dart';
 import 'ui/pages/popups/popups_history_page.dart';
 
-import 'ui/pages/history_page.dart';
+import 'ui/pages/history.dart';
 import 'ui/pages/settings.dart';
-import 'ui/pages/transactions/rewards_info_page.dart';
+import 'ui/pages/transactions/rewards.dart';
 import 'ui/theme.dart';
+import 'utils/wallets.dart';
 
 const String preferencesBox = 'prefsBox';
 const String accountsBox = 'accountsBox';
@@ -91,6 +92,10 @@ void main() async {
     OneSignal.shared
         .setInFocusDisplayType(OSNotificationDisplayType.notification);
 
+    logger.d("Generating test ERC20 Wallet");
+    final ethWallet = await Wallets.createEthWallet();
+    logger.d("Ethereum wallet created. \n Address ->  ${ethWallet.hex}"
+        "\n Eip55 ${ethWallet.hexEip55} \n Noox: ${ethWallet.hexNo0x}");
     runApp(DevicePreview(
       enabled: !kReleaseMode,
       builder: (context) => new StateContainer(
@@ -126,7 +131,7 @@ class AppState extends State<App> {
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
         ],
-        locale: DevicePreview.of(context).locale,
+        locale: StateContainer.of(context).locale,
         builder: DevicePreview.appBuilder,
         supportedLocales: AppLocalizations.Locales,
         initialRoute: Splash.navId,
@@ -145,7 +150,7 @@ class AppState extends State<App> {
           RecoverAccountPage.navId: (context) => RecoverAccountPage(),
           TermsConditions.navId: (context) => TermsConditions(),
           PasswordCreationPage.navId: (context) => PasswordCreationPage(),
-          HistoryPage.navId: (context) => HistoryPage(),
+          History.navId: (context) => History(),
           PopupHistoryPage.navId: (context) => PopupHistoryPage(),
           ContactsPage.navId: (context) => ContactsPage(),
           AccountsPage.navId: (context) => AccountsPage(),
@@ -156,7 +161,7 @@ class AppState extends State<App> {
           PushFundsPage.navId: (context) => PushFundsPage(),
           SettingsPage.navId: (context) => SettingsPage(),
           RewardInformationPage.navId: (context) => RewardInformationPage(),
-          ConvertExchangePage.navId: (context) => ConvertExchangePage(),
+          ConvertPage.navId: (context) => ConvertPage(),
           RateExchangePage.navId: (context) => RateExchangePage(),
           SendFeedbackPage.navId: (context) => SendFeedbackPage(),
           FaqPage.navId: (context) => FaqPage(),

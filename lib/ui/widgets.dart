@@ -4,3 +4,6 @@ export 'components/custom/fusion_scaffold.dart';
 export 'components/passphrase_widget.dart';
 export 'components/passphrase_word.dart';
 export 'components/bloc_loader.dart';
+export 'components/preferences/preference.dart';
+export 'components/preferences/preference_switch.dart';
+export 'components/preferences/single_choice_preference_item.dart';

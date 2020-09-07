@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fusion_wallet/core/models/coin_list_response.dart';
 import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 import 'package:nanodart/nanodart.dart';
@@ -68,6 +69,7 @@ class StateContainerState extends State<StateContainer> {
   // Two most recently used accounts
 
   AddressData addressData;
+  List<MinterCoin> coins;
 
   bool darkModeEnabled = false;
   bool showRewards = false;
@@ -129,6 +131,9 @@ class StateContainerState extends State<StateContainer> {
     updateLanguage(currentLocale);
     setBiometric(widget.preferences.biometricEnabled);
     setRewardsVisibility(rewardsEnabled);
+
+
+    loadAdditionals();
   }
 
   void updateName({String name}) async {
@@ -267,6 +272,15 @@ class StateContainerState extends State<StateContainer> {
         await injector.get<MinterRest>().fetchAddressData(address: address);
     setState(() {
       this.addressData = data;
+    });
+  }
+
+  void loadAdditionals() async  {
+    final balances =
+    await injector.get<MinterRest>().fetchAddressData(address: selectedAccount.address);
+
+    setState(() {
+      this.addressData = balances;
     });
   }
 }

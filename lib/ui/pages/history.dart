@@ -10,13 +10,13 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../inject.dart';
 
-class HistoryPage extends StatefulWidget {
-  static const String navId = '/HistoryPage';
+class History extends StatefulWidget {
+  static const String navId = '/history';
   @override
-  _HistoryPageState createState() => new _HistoryPageState();
+  _HistoryState createState() => new _HistoryState();
 }
 
-class _HistoryPageState extends State<HistoryPage> {
+class _HistoryState extends State<History> {
   String _selectedAccount;
 
   DateTime startDate = DateTime.now();

@@ -6,7 +6,6 @@ import '../../localizations.dart';
 import '../../utils/routes.dart';
 
 class Sheets {
-  //App Ninty Height Sheet
   static Future<T> showFusionSheet<T>(
       {@required BuildContext context,
       @required Widget widget,

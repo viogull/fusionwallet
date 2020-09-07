@@ -19,7 +19,8 @@ import './pages.dart';
 import '../../localizations.dart';
 import '../components/lists/balances_card.dart';
 import 'additional/add_account_ui.dart';
-import 'transactions/rewards_info_page.dart';
+import 'push/create.dart';
+import 'transactions/rewards.dart';
 
 class AccountsPage extends StatelessWidget {
   static const String navId = "/accounts";

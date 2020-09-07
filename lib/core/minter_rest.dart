@@ -14,6 +14,7 @@ import 'package:fusion_wallet/core/models/delegate_ubound_tx_request.dart';
 import 'package:fusion_wallet/core/models/estimate_request.dart';
 import 'package:fusion_wallet/core/models/estimate_response.dart';
 import 'package:fusion_wallet/core/models/exchange_rate_response.dart';
+import 'package:fusion_wallet/core/models/minter_coins_response.dart';
 import 'package:fusion_wallet/core/models/nonce_response.dart';
 import 'package:fusion_wallet/core/models/profile_response.dart';
 import 'package:fusion_wallet/core/models/recover_response.dart';
@@ -156,16 +157,16 @@ class MinterRest {
     return null;
   }
 
-  Future<CoinListResponse> fetchMinterCoins() async {
+  Future<MinterCoinsResponse> fetchMinterCoins() async {
     try {
       // Adding Mx to get valid address
       final url = "$fusionApiUrl/explorer/coins";
-      logger.d("Fetch Address Data Url $url");
+      logger.d("Fetch Minter Coins Data Url $url");
       Response response = await fusionDio.get(url);
 
       if (response.statusCode == 200) {
-        logger.d("Response status code " + response.statusCode.toString());
-        return CoinListResponse.fromJson(response.data);
+        return MinterCoinsResponse.fromJson(response.data);
+
       }
     } on DioError catch (exception) {
       if (exception == null) {
@@ -330,7 +331,7 @@ class MinterRest {
   }
 
   // ignore: missing_return
-  Future<EstimateResponse> estimate({EstimateRequest estimateData}) async {
+  Future<EstimateResponse> estimate( EstimateRequest estimateData) async {
     try {
       Response response = await fusionDio.post('/tx/convert/estimate',
           data: estimateData.toJson(),

@@ -114,7 +114,6 @@ class _LockUiState extends State<LockUi> with TickerProviderStateMixin {
       injector.get<HapticUtil>().fingerprintSucess();
       Navigator.of(context).pushReplacementNamed(HomePage.navId);
     }
-    Navigator.of(context).pushReplacementNamed(HomePage.navId);
   }
 
   @override

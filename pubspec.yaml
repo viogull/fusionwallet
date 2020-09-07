@@ -1,7 +1,7 @@
 name: fusion_wallet
 description: Android/iOS wallet for Minter.Network
 
-version: 1.0.8+28
+version: 1.0.9+29
 
 environment:
   sdk: ">=2.2.0 <3.0.0"
@@ -32,7 +32,7 @@ dependencies:
   google_fonts: ^1.1.0
   flutter_spinkit: ^4.1.2+1
   provider: ^4.3.0
-  flutter_bloc: ^6.0.4
+  flutter_bloc: ^6.0.5
   qr_flutter: ^3.2.0
   flutter_datetime_picker: ^1.4.0
   pin_input_text_field: ^3.0.4

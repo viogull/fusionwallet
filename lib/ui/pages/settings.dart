@@ -1,28 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:fusion_wallet/core/abstract/admin_notification.dart';
-import 'package:fusion_wallet/core/state_container.dart';
-import 'package:fusion_wallet/inject.dart';
-import 'package:fusion_wallet/localizations.dart';
-import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
-import 'package:fusion_wallet/ui/components/preferences/preference.dart';
-import 'package:fusion_wallet/ui/components/preferences/preference_switch.dart';
-import 'package:fusion_wallet/ui/components/preferences/single_choice_preference_item.dart';
-import 'package:fusion_wallet/ui/pages/auth/pincode.dart';
-import 'package:fusion_wallet/ui/pages/bottom_home.dart';
-import 'package:fusion_wallet/ui/pages/information/faq_page.dart';
-import 'package:fusion_wallet/ui/pages/information/send_feedback_page.dart';
-import 'package:fusion_wallet/utils/biometric.dart';
-import 'package:fusion_wallet/utils/flasher.dart';
+
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../core/models.dart';
+import '../../inject.dart';
+import '../../localizations.dart';
+import '../widgets.dart';
+import 'auth/pincode.dart';
+import 'info/faq.dart';
+import 'info/feedback.dart';
 
 class SettingsPage extends StatelessWidget {
   static const navId = "/settings";
+
+  final logger = injector.get<Logger>();
+
 
   @override
   Widget build(BuildContext context) {

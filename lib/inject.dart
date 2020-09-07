@@ -17,6 +17,7 @@ export './core/minter_rest.dart';
 export './utils/haptic.dart';
 export './utils/vault.dart';
 export './utils/flasher.dart';
+export './utils/biometric.dart';
 
 /*
   Base Service Locator (DI)

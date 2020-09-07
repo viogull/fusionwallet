@@ -30,8 +30,8 @@ import 'auth/lockscreen.dart';
 
 import 'auth/splash.dart';
 import 'contacts/contacts.dart';
-import 'exchange_page.dart';
-import 'history_page.dart';
+import 'exchange.dart';
+import 'history.dart';
 import 'settings.dart';
 import 'share_address.dart';
 
@@ -58,7 +58,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
     AccountsPage(),
     ExchangePage(),
     ContactsPage(),
-    HistoryPage(),
+    History(),
     SettingsPage(),
   ];
 
