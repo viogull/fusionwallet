@@ -29,7 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
-    "accessBlocked" : MessageLookupByLibrary.simpleMessage("Профиль заблокирован. Пожалуйста, свяжитесь с администрацией."),
+    "accessBlocked" : MessageLookupByLibrary.simpleMessage("Профиль заблокирован.  Пожалуйста, свяжитесь с администрацией."),
     "account" : MessageLookupByLibrary.simpleMessage("Профиль"),
     "accounts" : MessageLookupByLibrary.simpleMessage("Счета"),
     "ackBackedUp" : MessageLookupByLibrary.simpleMessage("Вы уверены, что сохранили свою секретную фразу?"),
@@ -160,7 +160,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "inputEditAccountNameHint" : MessageLookupByLibrary.simpleMessage("Имя аккаунта"),
     "inputEditAccountNameTitle" : MessageLookupByLibrary.simpleMessage("Изменить имя"),
     "inputEnterScanPasshpraseHintText" : MessageLookupByLibrary.simpleMessage("Введите фразу или сканируйте QR"),
-    "inputFeedbackCommentHint" : MessageLookupByLibrary.simpleMessage("What is on your mind"),
+    "inputFeedbackCommentHint" : MessageLookupByLibrary.simpleMessage("Расскажите о проблеме"),
     "inputFundsStakeHint" : MessageLookupByLibrary.simpleMessage("Ставка"),
     "inputMaxAmountSuffix" : MessageLookupByLibrary.simpleMessage("MAX"),
     "inputSearchContactHint" : MessageLookupByLibrary.simpleMessage("Поиск контактов"),
@@ -285,7 +285,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pinEnterTitle" : MessageLookupByLibrary.simpleMessage("Введите пин-код"),
     "pinInvalid" : MessageLookupByLibrary.simpleMessage("Введен неверный PIN-код"),
     "pinMethod" : MessageLookupByLibrary.simpleMessage("PIN"),
-    "pinRepChange" : MessageLookupByLibrary.simpleMessage("Введите ПИН-код, чтобы сменить представителя.q"),
+    "pinRepChange" : MessageLookupByLibrary.simpleMessage("Введите ПИН-код, чтобы сменить представителя"),
     "pinSeedBackup" : MessageLookupByLibrary.simpleMessage("Введите PIN-код для резервного копирования"),
     "popupAccVerificationWelcomeText" : MessageLookupByLibrary.simpleMessage("Добро пожаловать! Вы можете начать пользоваться кошельком."),
     "popupPassVerifiedBody" : MessageLookupByLibrary.simpleMessage("Ваша контрольная фраза создана. Сохраните её в надежном месте ради возможности в будущем восстановить аккаунт."),
@@ -294,6 +294,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "popupRemoveAccountTitle" : MessageLookupByLibrary.simpleMessage("Удаление аккаунта"),
     "preferences" : MessageLookupByLibrary.simpleMessage("Настройки"),
     "privacyPolicy" : MessageLookupByLibrary.simpleMessage("Политика конфиденциальности"),
+    "privateKeyCopied" : MessageLookupByLibrary.simpleMessage("Приватный ключ скопирован!"),
     "pushFundsNotApplied" : MessageLookupByLibrary.simpleMessage("Вложение средств было завершено с неожиданной ошибкой."),
     "pushFundsSuccesfullyApplied" : MessageLookupByLibrary.simpleMessage("Средства были успешно добавлены в ваш кошелек."),
     "pushLinkWasCopied" : MessageLookupByLibrary.simpleMessage("Ссылка скопирована в буфер обмена."),
@@ -366,7 +367,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "toolbarAddContactTitle" : MessageLookupByLibrary.simpleMessage("Добавить контакт"),
     "toolbarChoosePassTitle" : MessageLookupByLibrary.simpleMessage("Создание пароля"),
     "toolbarContactsTitle" : MessageLookupByLibrary.simpleMessage("Контакты"),
-    "toolbarConvertTitle" : MessageLookupByLibrary.simpleMessage("Конвертировать"),
+    "toolbarConvertTitle" : MessageLookupByLibrary.simpleMessage("Конвертация"),
     "toolbarExchangeTitle" : MessageLookupByLibrary.simpleMessage("Обмен"),
     "toolbarHistoryTitle" : MessageLookupByLibrary.simpleMessage("История"),
     "toolbarNewAccountTitle" : MessageLookupByLibrary.simpleMessage("Новый аккаунт"),

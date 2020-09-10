@@ -1700,6 +1700,10 @@ class AppLocalizations {
   String showErcPrivateKeyDrawerLabel()   =>
       Intl.message("ERC20 Keys",
           name: 'showErcPrivateKeyDrawerLabel');
+
+  String privateKeyCopied()  =>
+      Intl.message("Private key was copied",
+          name: 'privateKeyCopied');
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

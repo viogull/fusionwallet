@@ -48,7 +48,7 @@ abstract class _ConvertFormStore with Store {
 
 
   @observable
-  ObservableFuture<AddressData> balances;
+  ObservableFuture<AddressData> balances ;
 
   @observable
   ObservableFuture<List<String>> coins;
@@ -57,20 +57,11 @@ abstract class _ConvertFormStore with Store {
   @observable
   Observable<InformationMessage> messagesStream;
 
-  @computed
-  bool get isSellCoinSelected => coinToSell.isNotEmpty;
 
-
-  @computed
-  bool get isBuyCoinSelected => coinToBuy.isNotEmpty;
 
 
   @computed
-  bool get isSellValueEntered => valueToSell.isNotEmpty;
-
-
-  @computed
-  bool get isEstimationAllowed => isSellCoinSelected && isBuyCoinSelected && isSellValueEntered;
+  bool get isEstimationAllowed => coinToSell.isNotEmpty && coinToBuy.isNotEmpty && valueToSell.isNotEmpty;
 
 
   List<ReactionDisposer> _disposers;

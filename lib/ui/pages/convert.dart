@@ -66,7 +66,7 @@ class _ConvertState extends State<ConvertPage> {
             (_) => store.messagesStream.value,
             (result) => Future.delayed(Duration(milliseconds: 800), () {
               log.d("Occured some action ${(result as InformationMessage).message}");
-      FlashHelper.infoBar( context, message:  (result as InformationMessage).message);
+      FlashHelper.successBar( context, message:  (result as InformationMessage).message);
     }));
   }
 
@@ -282,6 +282,9 @@ class _ConvertState extends State<ConvertPage> {
       child: Observer(
         builder: (_) {
           final future = store.coins;
+          if(future == null ) {
+            return PlatformCircularProgressIndicator();
+          }
           if(future.status == FutureStatus.fulfilled)
           {
             final currencies = future.result as List<String>;
@@ -308,6 +311,8 @@ class _ConvertState extends State<ConvertPage> {
                 label:AppLocalizations.of(context)
                     .labelConvertCoinWant(),
                 onChanged: (value) => store.selectCoinToBuy(value));
+          } else if(future.status ==  FutureStatus.rejected) {
+           return PlatformCircularProgressIndicator();
           }
 
           else return PlatformCircularProgressIndicator();
@@ -323,7 +328,8 @@ class _ConvertState extends State<ConvertPage> {
       child: Observer(
         builder: (_) {
           final future = store.balances;
-          logger.d("Future Status ${future.status}");
+          if(future == null)
+            return PlatformCircularProgressIndicator();
           if(future.status == FutureStatus.fulfilled)
               {
                 final balances = future.result as AddressData;

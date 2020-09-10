@@ -84,6 +84,7 @@ class PushFormBloc extends FormBloc<String, String> {
       ),
       iosParameters: IosParameters(
         bundleId: "com.fusiongroup.wallet",
+
       ),
     );
     final short =  await params.buildShortLink();

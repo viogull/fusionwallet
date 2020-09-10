@@ -505,7 +505,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"inputFeedbackCommentHint": "What is on your mind",
+	"inputFeedbackCommentHint": "Расскажите о проблеме",
 	"@inputFeedbackCommentHint": {
 		"type": "text",
 		"placeholders": {}
@@ -570,7 +570,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"toolbarConvertTitle": "Конвертировать",
+	"toolbarConvertTitle": "Конвертация",
 	"@toolbarConvertTitle": {
 		"type": "text",
 		"placeholders": {}
@@ -1106,7 +1106,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"pinRepChange": "Введите ПИН-код, чтобы сменить представителя.q",
+	"pinRepChange": "Введите ПИН-код, чтобы сменить представителя",
 	"@pinRepChange": {
 		"description": "change_representative_pin",
 		"type": "text",
@@ -1896,7 +1896,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"accessBlocked": "Профиль заблокирован. Пожалуйста, свяжитесь с администрацией.",
+	"accessBlocked": "Профиль заблокирован.  Пожалуйста, свяжитесь с администрацией.",
 	"copiedSuccesfullyMessage": "Фраза сохранена.",
 	"errorCameraRestriction": "Пользователь не предоставил разрешение камере!",
 	"errorInvalidInputsPush": "Недействительные значения для push-транзакции",
@@ -1939,5 +1939,6 @@
 	"labelChooseAccType": "Выберите тип кошелька",
 	"labelErc20Wallet": "Кошелек ERC20",
 	"labelMinterWallet": "Minter",
-	"showErcPrivateKeyDrawerLabel": "Ключи ERC20"
+	"showErcPrivateKeyDrawerLabel": "Ключи ERC20",
+	"privateKeyCopied": "Приватный ключ скопирован!"
 }

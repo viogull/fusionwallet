@@ -1,6 +1,7 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,6 +12,7 @@ import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/scaffold.dart';
 import 'package:fusion_wallet/ui/pages/accounts.dart';
 import 'package:fusion_wallet/ui/pages/auth/change_account_name.dart';
+import 'package:fusion_wallet/ui/pages/erc20_ui.dart';
 import 'package:fusion_wallet/ui/pages/popups/popups_remove_account.dart';
 import 'package:fusion_wallet/ui/pages/show_passphrase.dart';
 import 'package:fusion_wallet/ui/theme.dart';
@@ -74,7 +76,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
       });
     }
     loadDynamicLinks();
-    injector.get<MinterRest>().getEthBalance(address: Hive.box<Erc20Wallet>(erc20walletsBox).getAt(0).address);
+   // injector.get<MinterRest>().getEthBalance(address: Hive.box<Erc20Wallet>(erc20walletsBox).getAt(0).address);
     super.initState();
   }
 
@@ -153,14 +155,13 @@ class _BottomHomePageState extends State<BottomHomePage> {
               child: Icon(FlutterIcons.ethereum_faw5d),
             ),
             onClick: () {
-              showCupertinoModalBottomSheet(
-                  context: context,
-                  builder: (BuildContext context, ScrollController controller) {
-                    return ShowPassphraseUi(
-                        mnemonic: StateContainer.of(context)
-                            .selectedAccount
-                            .mnemonic);
-                  });
+              final box = Hive.box<Erc20Wallet>(erc20walletsBox);
+              final wallet = box.getAt(0);
+              Clipboard.setData(ClipboardData(text: wallet.privateKey.toString()));
+              injector.get<HapticUtil>().selection();
+              FlashHelper.successBar(context,
+                  message:
+                  AppLocalizations.of(context).privateKeyCopied());
             }),
         DrawerItemData(
             title: AppLocalizations.of(context).menuItemSetDefaults(),

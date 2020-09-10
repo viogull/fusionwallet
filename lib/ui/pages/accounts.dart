@@ -215,9 +215,7 @@ class AccountsPage extends StatelessWidget {
                     snapshot.hasData) {
                   final txs = (snapshot.data as TransactionsResponse).data;
                   final theme = Theme.of(context);
-                  return Flexible(
-                    flex: 6,
-                    child: (txs.isNotEmpty)
+                  return  (txs.isNotEmpty)
                         ? Container(
                             height: MediaQuery.of(context).size.height * 0.6,
                             child: ListView.builder(
@@ -236,8 +234,8 @@ class AccountsPage extends StatelessWidget {
                         : Container(
                             child: Center(
                                 child: AutoSizeText(AppLocalizations.of(context)
-                                    .transferLoading))),
-                  );
+                                    .transferLoading)));
+
                 } else
                   return Container(
                       child:

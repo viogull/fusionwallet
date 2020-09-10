@@ -1,5 +1,5 @@
 {
-	"@@last_modified": "2020-09-10T16:56:53.568260",
+	"@@last_modified": "2020-09-10T19:58:28.698909",
 	"appName": "Fusion",
 	"@appName": {
 		"type": "text",
@@ -2103,7 +2103,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"historyNoAccountError": "Please,  choose account to explore history.",
+	"historyNoAccountError": "Please, choose account to explore history.",
 	"@historyNoAccountError": {
 		"type": "text",
 		"placeholders": {}
@@ -2120,6 +2120,11 @@
 	},
 	"showErcPrivateKeyDrawerLabel": "ERC20 Keys",
 	"@showErcPrivateKeyDrawerLabel": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"privateKeyCopied": "Private key was copied",
+	"@privateKeyCopied": {
 		"type": "text",
 		"placeholders": {}
 	}

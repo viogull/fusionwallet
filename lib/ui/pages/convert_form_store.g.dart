@@ -9,27 +9,6 @@ part of 'convert_form_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ConvertFormStore on _ConvertFormStore, Store {
-  Computed<bool> _$isSellCoinSelectedComputed;
-
-  @override
-  bool get isSellCoinSelected => (_$isSellCoinSelectedComputed ??=
-          Computed<bool>(() => super.isSellCoinSelected,
-              name: '_ConvertFormStore.isSellCoinSelected'))
-      .value;
-  Computed<bool> _$isBuyCoinSelectedComputed;
-
-  @override
-  bool get isBuyCoinSelected => (_$isBuyCoinSelectedComputed ??= Computed<bool>(
-          () => super.isBuyCoinSelected,
-          name: '_ConvertFormStore.isBuyCoinSelected'))
-      .value;
-  Computed<bool> _$isSellValueEnteredComputed;
-
-  @override
-  bool get isSellValueEntered => (_$isSellValueEnteredComputed ??=
-          Computed<bool>(() => super.isSellValueEntered,
-              name: '_ConvertFormStore.isSellValueEntered'))
-      .value;
   Computed<bool> _$isEstimationAllowedComputed;
 
   @override
@@ -272,9 +251,6 @@ willGet: ${willGet},
 balances: ${balances},
 coins: ${coins},
 messagesStream: ${messagesStream},
-isSellCoinSelected: ${isSellCoinSelected},
-isBuyCoinSelected: ${isBuyCoinSelected},
-isSellValueEntered: ${isSellValueEntered},
 isEstimationAllowed: ${isEstimationAllowed}
     ''';
   }
