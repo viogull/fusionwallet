@@ -1,9 +1,9 @@
 export './../core/state_container.dart';
-export 'components/custom/fusion_button.dart';
-export 'components/custom/fusion_scaffold.dart';
+export 'components/custom/button.dart';
+export 'components/custom/scaffold.dart';
 export 'components/passphrase_widget.dart';
 export 'components/passphrase_word.dart';
-export 'components/bloc_loader.dart';
+export 'components/loader.dart';
 export 'components/preferences/preference.dart';
 export 'components/preferences/preference_switch.dart';
 export 'components/preferences/single_choice_preference_item.dart';

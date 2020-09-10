@@ -5,6 +5,8 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:fusion_wallet/core/abstract/erc20_wallet.dart';
+import 'package:fusion_wallet/ui/pages/erc20_ui.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -46,13 +48,13 @@ import 'ui/pages/history.dart';
 import 'ui/pages/settings.dart';
 import 'ui/pages/transactions/rewards.dart';
 import 'ui/theme.dart';
-import 'utils/wallets.dart';
 
 const String preferencesBox = 'prefsBox';
 const String accountsBox = 'accountsBox';
 const String contactsBox = 'contactsBox';
 const String notificationsBox = 'notificationsBox';
 const String additionalAccountsBox = 'additionals';
+const String erc20walletsBox = 'erc20walletsBox';
 
 final wallet = Wallet();
 
@@ -69,9 +71,13 @@ void main() async {
   Hive.registerAdapter<Contact>(ContactAdapter());
   Hive.registerAdapter<Preferences>(PreferencesAdapter());
   Hive.registerAdapter<AdminNotification>(AdminNotificationAdapter());
+  Hive.registerAdapter<Erc20Wallet>(Erc20WalletAdapter());
+
+
 
   final accsBox = await Hive.openBox<Account>(accountsBox);
   await Hive.openBox<Account>(additionalAccountsBox);
+  await Hive.openBox<Erc20Wallet>(erc20walletsBox);
   try {
     await Hive.openBox<Contact>(contactsBox);
     final prefs = await Hive.openBox<Preferences>(preferencesBox);
@@ -92,10 +98,6 @@ void main() async {
     OneSignal.shared
         .setInFocusDisplayType(OSNotificationDisplayType.notification);
 
-    logger.d("Generating test ERC20 Wallet");
-    final ethWallet = await Wallets.createEthWallet();
-    logger.d("Ethereum wallet created. \n Address ->  ${ethWallet.hex}"
-        "\n Eip55 ${ethWallet.hexEip55} \n Noox: ${ethWallet.hexNo0x}");
     runApp(DevicePreview(
       enabled: !kReleaseMode,
       builder: (context) => new StateContainer(
@@ -167,6 +169,7 @@ class AppState extends State<App> {
           FaqPage.navId: (context) => FaqPage(),
           PasscodeScreen.navId: (context) => PasswordCreationPage(),
           AuthUi.navId: (context) => AuthUi(),
+          Erc20WalletUi.navId: (context) => Erc20WalletUi(),
           AddAccountUi.navId: (context) => AddAccountUi()
         },
       );

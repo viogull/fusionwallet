@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
-import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
+import 'package:fusion_wallet/ui/components/custom/scaffold.dart';
 import 'package:fusion_wallet/utils/flasher.dart';
 import 'package:fusion_wallet/utils/haptic.dart';
 

@@ -10,8 +10,8 @@ import 'package:fusion_wallet/core/models/address_data.dart';
 import 'package:fusion_wallet/core/models/coin_list_response.dart';
 import 'package:fusion_wallet/core/models/delegate_ubound_tx_request.dart';
 import 'package:fusion_wallet/localizations.dart';
-import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
-import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
+import 'package:fusion_wallet/ui/components/custom/button.dart';
+import 'package:fusion_wallet/ui/components/custom/scaffold.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/utils/flasher.dart';
 

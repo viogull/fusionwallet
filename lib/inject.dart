@@ -26,14 +26,12 @@ export './utils/biometric.dart';
 GetIt injector = GetIt.instance;
 
 void setupServiceLocator() {
-  injector.registerLazySingleton<Preferences>(
-      () => Hive.box<Preferences>(preferencesBox).getAt(0));
+  injector.registerLazySingleton<Preferences>(() => Hive.box<Preferences>(preferencesBox).getAt(0));
   injector.registerLazySingleton<HapticUtil>(() => HapticUtil());
   injector.registerLazySingleton<BiometricUtil>(() => BiometricUtil());
   injector.registerLazySingleton<Vault>(() => Vault());
   injector.registerLazySingleton<SharedPrefsUtil>(() => SharedPrefsUtil());
-  injector
-      .registerLazySingleton<Logger>(() => Logger(printer: PrettyPrinter()));
+  injector.registerLazySingleton<Logger>(() => Logger(printer: PrettyPrinter()));
   injector.registerLazySingleton<MinterChannel>(() => MinterChannel());
   injector.registerLazySingleton<MinterRest>(() => MinterRest());
 }

@@ -7,7 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/localizations.dart';
-import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
+import 'package:fusion_wallet/ui/components/custom/scaffold.dart';
 import 'package:fusion_wallet/ui/pages/accounts.dart';
 import 'package:fusion_wallet/ui/pages/auth/change_account_name.dart';
 import 'package:fusion_wallet/ui/pages/popups/popups_remove_account.dart';
@@ -33,7 +33,7 @@ import 'contacts/contacts.dart';
 import 'exchange.dart';
 import 'history.dart';
 import 'settings.dart';
-import 'share_address.dart';
+import 'adresses.dart';
 
 final logger = Logger();
 

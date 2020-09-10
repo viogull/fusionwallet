@@ -4,7 +4,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fusion_wallet/core/models/address_data_with_usd.dart';
 import 'package:fusion_wallet/core/models/models.dart';
-import 'package:fusion_wallet/ui/components/balances_card_item.dart';
+import 'package:fusion_wallet/ui/components/balances/balances_card_item.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/utils/flasher.dart';
 import 'package:fusion_wallet/utils/haptic.dart';

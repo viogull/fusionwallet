@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fusion_wallet/core/state_container.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:keyboard_avoider/keyboard_avoider.dart';
 
 typedef AppBarBackButtonCallback = void Function(String destination);
 

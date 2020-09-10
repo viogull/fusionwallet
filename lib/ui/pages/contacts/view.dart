@@ -20,12 +20,12 @@ class ContactItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 2,
+      elevation: 4,
       color: Theme.of(context).colorScheme.surface,
-      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 13),
+      margin: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
       child: GestureDetector(
         onTap: () {
-          FlashHelper.infoBar(context,
+          FlashHelper.successBar(context,
               message:
               AppLocalizations.of(context).addressCopied);
           injector.get<HapticUtil>().selection();

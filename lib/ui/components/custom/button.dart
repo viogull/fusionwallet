@@ -9,7 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 typedef FusionButtonTapCallBack = void Function();
 
-class FusionButton extends StatelessWidget {
+class FusionButton extends RaisedButton {
   final String text;
   final FusionButtonTapCallBack onPressed;
   final Icon icons;
@@ -49,7 +49,7 @@ class FusionButton extends StatelessWidget {
             text,
             textAlign: TextAlign.center,
             maxFontSize: 24,
-            minFontSize: 16,
+            minFontSize: 14,
             maxLines: 1,
             style: GoogleFonts.openSans().copyWith(
               color: (theme.colorScheme.onPrimary),

@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/core/abstract/preferences.dart';
 import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/localizations.dart';
-import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
+import 'package:fusion_wallet/ui/components/custom/button.dart';
 import 'package:hive/hive.dart';
 
 import '../../../inject.dart';

@@ -124,7 +124,11 @@ class SettingsPage extends StatelessWidget {
                                                     const EdgeInsets.symmetric(
                                                         vertical: 8,
                                                         horizontal: 12),
-                                                child: Container()),
+                                                child: Container(
+                                                  child: Center(
+                                                    child: Text(AppLocalizations.of(context).notifications),
+                                                  )
+                                                )),
                                           ),
                                           Flexible(
                                               flex: 8,

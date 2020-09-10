@@ -9,7 +9,7 @@ import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/core/models/send_tx_request.dart';
 import 'package:fusion_wallet/core/models/transanctions_response.dart';
 import 'package:fusion_wallet/localizations.dart';
-import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
+import 'package:fusion_wallet/ui/components/custom/scaffold.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 import 'package:hive/hive.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -160,6 +160,7 @@ class _SendFundsState extends State<SendFundsPage> {
                           keyboardType: TextInputType.numberWithOptions(
                               signed: false, decimal: true),
                           controller: _qtyController,
+                          textInputAction: TextInputAction.next,
                           style: TextStyle(
                               color: Theme.of(context)
                                   .colorScheme

@@ -2,15 +2,19 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/core/minter_rest.dart';
 import 'package:fusion_wallet/core/models/transanctions_response.dart';
-import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
+import 'package:fusion_wallet/ui/components/custom/button.dart';
+import 'package:fusion_wallet/ui/components/custom/scaffold.dart';
 import 'package:fusion_wallet/ui/components/transaction_view.dart';
 
-import 'package:fusion_wallet/ui/pages/share_address.dart';
+import 'package:fusion_wallet/ui/pages/adresses.dart';
 import 'package:fusion_wallet/ui/theme.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../core/state_container.dart';
@@ -19,6 +23,7 @@ import './pages.dart';
 import '../../localizations.dart';
 import '../components/lists/balances_card.dart';
 import 'additional/add_account_ui.dart';
+import 'erc20_ui.dart';
 import 'push/create.dart';
 import 'transactions/rewards.dart';
 
@@ -30,6 +35,7 @@ class AccountsPage extends StatelessWidget {
 
   Widget _buildAccountsUi(BuildContext context) => AnimationLimiter(
           child: ListView.builder(
+            physics: RangeMaintainingScrollPhysics(),
         itemCount: 7,
         itemBuilder: (BuildContext context, int index) {
           return AnimationConfiguration.staggeredList(
@@ -157,11 +163,13 @@ class AccountsPage extends StatelessWidget {
             buttonMinWidth: 130,
             buttonHeight: 45,
             buttonPadding:
-                const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
             children: <Widget>[
               RaisedButton(
                   child:
                       AutoSizeText(AppLocalizations.of(context).buttonPush()),
+                  shape: RoundedRectangleBorder(
+    borderRadius: FusionTheme.borderRadius),
                   color: Theme.of(context).colorScheme.primary,
                   onPressed: () {
                     showCupertinoModalBottomSheet(
@@ -214,8 +222,9 @@ class AccountsPage extends StatelessWidget {
                             height: MediaQuery.of(context).size.height * 0.6,
                             child: ListView.builder(
                                 padding: const EdgeInsets.symmetric(
-                                    vertical: 2, horizontal: 12),
+                                    vertical: 2, horizontal: 8),
                                 itemCount: txs.length,
+                                physics: BouncingScrollPhysics(),
                                 itemBuilder: (context, i) => TransactionView(
                                       transaction: txs[i],
                                       requestedAddress:
@@ -257,8 +266,16 @@ class AccountsPage extends StatelessWidget {
             return AccountBalancesCard(
                 data: snapshot.data,
                 onPlusTapped: () {
-                  Navigator.of(context).pushNamed(AddAccountUi.navId);
+
+                  showBarModalBottomSheet(context: context,  backgroundColor: Theme.of(context).colorScheme.surface,
+                      elevation: 16,
+                      builder: (context, scrollController) {
+                    return ChooseAccountTypePopup();
+                  });
+
+
                 });
+
           } else
             return Card(
               margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -318,6 +335,44 @@ class AccountsPage extends StatelessWidget {
           )),
     );
   }
+}
+
+class ChooseAccountTypePopup extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Material(
+      child: Container(
+        alignment: Alignment.center,
+        height:  MediaQuery.of(context).size.height * 0.4,
+        color: Theme.of(context).colorScheme.background,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: AutoSizeText(AppLocalizations.of(context).labelChooseAccType(),
+                style: GoogleFonts.robotoCondensed(fontSize: 20)),
+              ),
+            FusionButton(onPressed: () {  Navigator.of(context).pushNamed(AddAccountUi.navId);
+      },            text: AppLocalizations.of(context).labelMinterWallet(), expandedWidth: true,
+            ),
+              FusionButton(onPressed: () {
+                showBarModalBottomSheet(context: context, builder: (context, scrollController) {
+                  return FusionScaffold(
+                    title: AppLocalizations.of(context).labelErc20Wallet(),
+                    child : Erc20WalletUi()
+                  );
+                });
+              }, text: AppLocalizations.of(context).labelErc20Wallet(),
+                expandedWidth: true,),
+        ]),
+      ),
+    );
+  }
+
+  Widget icon(String asset) => LimitedBox(maxWidth: 32,
+      maxHeight: 32, child: SvgPicture.asset(asset, width: 32, height: 32));
 }
 
 class TransanctionHistoryItem extends StatelessWidget {

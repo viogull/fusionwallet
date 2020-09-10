@@ -17,7 +17,7 @@ import 'package:root_checker/root_checker.dart';
 import '../../../inject.dart';
 import '../../../utils/shared_prefs.dart';
 import '../../../utils/vault.dart';
-import '../../components/custom/fusion_scaffold.dart';
+import '../../components/custom/scaffold.dart';
 import '../pages.dart';
 import 'access_ui.dart';
 

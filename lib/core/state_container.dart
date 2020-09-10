@@ -118,9 +118,9 @@ class StateContainerState extends State<StateContainer> {
 
     final currentLocale =
         (locale == 'en') ? Locale('en', '') : Locale('ru', '');
-    debugPrint(
+    log.d(
         "Preferences Theme Selected $preferencesTheme , Theme Mode: $currentTheme");
-    debugPrint(
+    log.d(
         "Preferences Language Selected $locale , Theme Mode: $currentLocale");
 
     final rewardsEnabled = selectedAccount.showRewards;
@@ -137,9 +137,9 @@ class StateContainerState extends State<StateContainer> {
   }
 
   void updateName({String name}) async {
-    debugPrint(
+    log.d(
         "Updating name with new $name. Accounts In Box ${selectedAccount.isInBox}");
-    debugPrint("Writing $name to prefs storage");
+    log.d("Writing $name to prefs storage");
     checkAccountsBox();
     selectedAccount.name = name;
     selectedAccount.save();
@@ -152,9 +152,9 @@ class StateContainerState extends State<StateContainer> {
           Set save:true to persist preference into storage.
        */
   void updateTheme({bool isDarkModeEnabled}) async {
-    debugPrint(
+    log.d(
         "Updating theme with new $isDarkModeEnabled. Accounts In Box ${selectedAccount.isInBox}");
-    debugPrint("Writing $isDarkModeEnabled to prefs storage");
+    log.d("Writing $isDarkModeEnabled to prefs storage");
     checkAccountsBox();
     widget.preferences.darkThemeEnabled = isDarkModeEnabled;
     widget.preferences.save();
@@ -164,9 +164,9 @@ class StateContainerState extends State<StateContainer> {
   }
 
   void setBiometric(@required bool isEnabled, {bool save = false}) async {
-    debugPrint("Updating [biometric] with new $isEnabled");
+    log.d("Updating [biometric] with new $isEnabled");
 
-    debugPrint("Writing new biometric status $isEnabled to secure storage");
+    log.d("Writing new biometric status $isEnabled to secure storage");
     widget.preferences.biometricEnabled = isEnabled;
     widget.preferences.save();
 
@@ -180,7 +180,7 @@ class StateContainerState extends State<StateContainer> {
     debugPrint(
         "Updating [Show Rewards] prefserence with new $isShowRewardsEnabled");
 
-    debugPrint("Writing $isShowRewardsEnabled to prefs storage");
+    log.d("Writing $isShowRewardsEnabled to prefs storage");
     //      await widget.preferences
     //          .put(Vault.prefsShowRewards, isShowRewardsEnabled);
     selectedAccount.showRewards = isShowRewardsEnabled;
@@ -192,9 +192,9 @@ class StateContainerState extends State<StateContainer> {
   }
 
   void updateLanguage(Locale updatedLocale, {bool save = false}) {
-    debugPrint("Updating language with new $updatedLocale, save mode -> $save");
+    log.d("Updating language with new $updatedLocale, save mode -> $save");
     if (save) {
-      debugPrint("Writing $updatedLocale to prefs storage");
+      log.d("Writing $updatedLocale to prefs storage");
       widget.preferences.locale = updatedLocale.languageCode;
       widget.preferences.save();
     }

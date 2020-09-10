@@ -4,6 +4,7 @@ import 'dart:collection';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../ui/theme.dart';
 
@@ -94,8 +95,8 @@ class FlashHelper {
 
   static TextStyle _contentStyle(BuildContext context, [Color color]) {
     var theme = Theme.of(context);
-    return (theme.dialogTheme?.contentTextStyle ?? theme.textTheme.bodyText2)
-        .copyWith(color: color);
+    return GoogleFonts.robotoCondensed()
+        .copyWith(color: color, fontSize: 16);
   }
 
   static Future<T> infoBar<T>(
@@ -115,7 +116,7 @@ class FlashHelper {
           style: FlashStyle.floating,
           margin: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
           position: FlashPosition.top,
-          borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+          borderRadius: const BorderRadius.all(Radius.circular(5.0)),
           child: FlashBar(
             title: title == null
                 ? null
@@ -147,8 +148,8 @@ class FlashHelper {
           controller: controller,
           horizontalDismissDirection: HorizontalDismissDirection.horizontal,
           position: FlashPosition.top,
-          borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-          margin: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+          borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+          margin: EdgeInsets.symmetric(vertical: 12, horizontal: 18),
           backgroundColor: FusionTheme.greenButtonColor(),
           child: FlashBar(
               title: title == null
@@ -178,8 +179,8 @@ class FlashHelper {
         return StatefulBuilder(builder: (context, setState) {
           return Flash(
             controller: controller,
-            position: FlashPosition.bottom,
-            borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+            position: FlashPosition.top,
+            borderRadius: const BorderRadius.all(Radius.circular(5.0)),
             margin: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
             horizontalDismissDirection: HorizontalDismissDirection.horizontal,
             backgroundColor: Theme.of(context).colorScheme.error,
@@ -189,7 +190,7 @@ class FlashHelper {
                   : Text(title, style: _titleStyle(context,
                   Theme.of(context).colorScheme.onError)),
               message:
-                  Text(message, style:
+                  Text(message, textAlign: TextAlign.center,style:
                   _contentStyle(context, Theme.of(context).colorScheme.onError)),
               primaryAction: primaryAction?.call(context, controller, setState),
             ),

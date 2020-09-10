@@ -23,78 +23,93 @@ class TransactionView extends StatelessWidget {
     var type;
 
     return Card(
-      borderOnForeground: false,
       elevation: 4,
       color: Theme.of(context).colorScheme.surface,
       shape: RoundedRectangleBorder(
         side: BorderSide(width: 0.2, color: Colors.white),
         borderRadius: FusionTheme.borderRadius,
       ),
-      margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            SizedBox(
-              height: 8,
-            ),
-            Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      margin: const EdgeInsets.symmetric(vertical:4, horizontal: 8),
+      child:Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+        child: Row(
+          children: [
+            Flexible(
+              flex: 12,
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-                  AutoSizeText(
-                    this.transaction.from.substring(0, 12),
-                    textAlign: TextAlign.start,
-                    style: GoogleFonts.notoSans(fontWeight: FontWeight.bold),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      AutoSizeText(
+                        this.transaction.from.substring(0, 12),
+                        textAlign: TextAlign.start,
+                        style: GoogleFonts.notoSans(fontWeight: FontWeight.bold),
+                      ),
+
+
+
+                    ],
                   ),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.3,
+                    height: 10,
                   ),
-                  SvgPicture.asset(
-                    ('assets/images/icons/ic_bitcoin.svg'),
-                    // color: Colors.white,
-                    fit: BoxFit.fill,
-                    height: 12,
-                    width: 12,
-                  ),
-                  Row(
-                    children: [
-                      AutoSizeText(
-                        this.transaction.data.value == null
-                            ? "0.00"
-                            : NumberUtil.sanitizeNumber(
-                                this.transaction.data.value),
-                        minFontSize: 12,
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            color: (isReceiving) ? Colors.green : Colors.red),
-                      ),
-                      AutoSizeText(
-                        this.transaction.data.coin == null
-                            ? " BIP"
-                            : " ${this.transaction.data.coin}",
-                        minFontSize: 12,
-                        textAlign: TextAlign.start,
-                      ),
-                    ],
+                  LimitedBox(
+                    maxWidth: MediaQuery.of(context).size.width * 0.6,
+                    child: Row(
+                      children: <Widget>[
+                        Container(
+                          child: AutoSizeText(
+                            this.transaction.timestamp,
+                            maxFontSize: 12,
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              children: <Widget>[
-                Container(
-                  child: AutoSizeText(
-                    this.transaction.timestamp,
-                    textAlign: TextAlign.left,
-                  ),
+            Flexible(
+              flex: 8,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+    Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: SvgPicture.asset(
+      ('assets/images/icons/ic_bitcoin.svg'),
+      // color: Colors.white,
+      fit: BoxFit.fill,
+      height: 12,
+      width: 12,
+      ),
+    ),
+                    AutoSizeText(
+                      this.transaction.data.value == null
+                          ? "0.00"
+                          : NumberUtil.sanitizeNumber(
+                          this.transaction.data.value, maxDecimalDigits: 6),
+
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: (isReceiving) ? Colors.green : Colors.red),
+                    ),
+                    AutoSizeText(
+                      this.transaction.data.coin == null
+                          ? " BIP"
+                          : " ${this.transaction.data.coin}",
+                      maxFontSize: 12,
+                      textAlign: TextAlign.end,
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            )
           ],
         ),
       ),

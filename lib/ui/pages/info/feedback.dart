@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:fusion_wallet/inject.dart';
-import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
+import 'package:fusion_wallet/ui/components/custom/scaffold.dart';
 
 import '../../../localizations.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +9,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:fusion_wallet/localizations.dart';
 
-import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
+import 'package:fusion_wallet/ui/components/custom/button.dart';
 
 import '../pages.dart';
 

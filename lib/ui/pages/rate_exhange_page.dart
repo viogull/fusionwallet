@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:fusion_wallet/core/models/coefficients_response.dart';
 import 'package:fusion_wallet/localizations.dart';
-import 'package:fusion_wallet/ui/components/custom/fusion_scaffold.dart';
+import 'package:fusion_wallet/ui/components/custom/scaffold.dart';
 
 import '../../inject.dart';
 
@@ -21,7 +21,7 @@ class RateExchangePage extends StatelessWidget {
           future: injector.get<MinterRest>().fetchCoefficients(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return PlatformCircularProgressIndicator();
+              return Center(child: PlatformCircularProgressIndicator());
             } else if (snapshot.connectionState == ConnectionState.done &&
                 snapshot.hasData == true) {
               final response = snapshot.data as CoefficientsResponse;

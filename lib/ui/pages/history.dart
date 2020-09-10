@@ -1,11 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flash/flash.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
+import 'package:fusion_wallet/ui/components/custom/scaffold.dart';
 import 'package:fusion_wallet/ui/theme.dart';
-import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
+import 'package:fusion_wallet/ui/components/custom/button.dart';
 import 'package:fusion_wallet/ui/pages/popups/popups_history_page.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../inject.dart';
@@ -115,29 +118,20 @@ class _HistoryState extends State<History> {
                                   await showBarModalBottomSheet(
                                       context: context,
                                       backgroundColor: colors.background,
+                                      expand: true,
+                                      clipBehavior: Clip.antiAlias,
                                       builder: (context, controller) {
                                         return Material(
-                                          child: CupertinoPageScaffold(
-                                            backgroundColor: colors.background,
-                                            navigationBar:
-                                                CupertinoNavigationBar(
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              automaticallyImplyLeading: false,
-                                              middle: Text(
-                                                  AppLocalizations.of(context)
-                                                      .chooseAccountTitle(),
-                                                  style: TextStyle(
-                                                      color: theme.colorScheme
-                                                          .onBackground)),
-                                            ),
+                                          child: FusionScaffold(
+                                           title:   AppLocalizations.of(context)
+                                               .chooseAccountTitle(),
                                             child: SafeArea(
                                               bottom: false,
                                               child: ListView.builder(
                                                 reverse: false,
                                                 shrinkWrap: true,
                                                 physics:
-                                                    ClampingScrollPhysics(),
+                                                    BouncingScrollPhysics(),
                                                 controller: controller,
                                                 itemCount: allAccounts.length,
                                                 itemBuilder: (context, index) =>
@@ -341,7 +335,6 @@ class _HistoryState extends State<History> {
             Flexible(
               flex: 1,
               child: Container(
-                height: 50,
                 width: MediaQuery.of(context).size.width,
                 child: FusionButton(
                   text: AppLocalizations.of(context).buttonViewResults(),
@@ -351,6 +344,7 @@ class _HistoryState extends State<History> {
                     if (this._selectedAccount == null ||
                         this.startDate == null ||
                         this.endDate == null) {
+                      FlashHelper.errorBar(context, message: AppLocalizations.of(context).historyNoAccountError());
                       return;
                     } else
                       Navigator.of(context).push(new MaterialPageRoute(

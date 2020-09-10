@@ -1672,6 +1672,22 @@ class AppLocalizations {
   String pushFundsNotApplied() =>
       Intl.message("Applying of funds was finished with unexpectable error.",
           name: 'pushFundsNotApplied');
+
+  String labelMinterWallet() =>
+      Intl.message("Minter",
+          name: 'labelMinterWallet');
+
+  String labelErc20Wallet() =>
+      Intl.message("ERC-20",
+          name: 'labelErc20Wallet');
+
+  String labelChooseAccType() =>
+      Intl.message("Choose wallet type",
+          name: 'labelChooseAccType');
+
+ String  historyNoAccountError() =>
+     Intl.message("Please, choose account to explore history.",
+         name: 'historyNoAccountError');
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

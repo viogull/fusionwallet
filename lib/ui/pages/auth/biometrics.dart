@@ -6,7 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/main.dart';
-import 'package:fusion_wallet/ui/components/custom/fusion_button.dart';
+import 'package:fusion_wallet/ui/components/custom/button.dart';
 import 'package:fusion_wallet/ui/pages/primary.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 import 'package:local_auth/local_auth.dart';
