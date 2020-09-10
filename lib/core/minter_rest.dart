@@ -11,6 +11,7 @@ import 'package:fusion_wallet/core/models/create_profile_request.dart';
 import 'package:fusion_wallet/core/models/create_push_link_request.dart';
 import 'package:fusion_wallet/core/models/create_push_link_response.dart';
 import 'package:fusion_wallet/core/models/delegate_ubound_tx_request.dart';
+import 'package:fusion_wallet/core/models/erc20_balance_request.dart';
 import 'package:fusion_wallet/core/models/estimate_request.dart';
 import 'package:fusion_wallet/core/models/estimate_response.dart';
 import 'package:fusion_wallet/core/models/exchange_rate_response.dart';
@@ -40,6 +41,15 @@ class MinterRest {
 
 //  static const fusionApiMirrorUrl =
 //      "https://whispering-depths-02969.herokuapp.com";
+
+
+  static const erc20ProjectId = "f7cbcc98baf84807b1ef700c8e278cd0";
+  static const erc20Sec = "2c95173bd55e44e29e4e7823f5c0fd80";
+
+
+  static const erc20MainnetUrl = "https://mainnet.infura.io/v3/$erc20ProjectId";
+
+
 
   static const explorerMainnetUrl =
       "https://explorer-api.minter.network/api/v1";
@@ -85,14 +95,54 @@ class MinterRest {
           return false;
       });
 
+  static final BaseOptions erc20DioOptions = BaseOptions(
+      baseUrl: erc20MainnetUrl,
+      responseType: ResponseType.json,
+      connectTimeout: 30000,
+      receiveTimeout: 30000,
+      validateStatus: (code) {
+        if (code >= 200)
+          return true;
+        else
+          return false;
+      });
+
   final Dio dio = Dio(dioOptions);
   final Dio fusionDio = Dio(fusionDioOptions);
+  final Dio erc20Dio = Dio(erc20DioOptions);
 
   void loadInterceptors() async {}
 
   final logger = injector.get<Logger>();
 
-  //post
+
+  Future<Erc20BalanceResponse> getEthBalance({String address}) async {
+    try {
+      Response response = await erc20Dio.post("",
+          data: Erc20BalanceRequest(address).toJson(),
+          options: Options(contentType: "application/json"));
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return Erc20BalanceResponse.fromJson(response.data);
+      } else
+        return null;
+    } on DioError catch (exception) {
+      if (exception == null) {
+        if (exception == null ||
+            exception.toString().contains('SocketException')) {
+          throw Exception("Network Error");
+        } else if (exception.type == DioErrorType.RECEIVE_TIMEOUT ||
+            exception.type == DioErrorType.CONNECT_TIMEOUT) {
+          throw Exception(
+              "Could'nt connect, please ensure you have a stable network.");
+        } else {
+          return null;
+        }
+      }
+    }
+    return null;
+  }
+
 
   Future<ProfileResponse> createProfile(CreateProfileRequest data) async {
     try {
@@ -273,11 +323,15 @@ class MinterRest {
       {CreatePushLinkRequest txData, String receiver, String sender}) async {
     try {
       Account _acc;
+      String memo;
       Hive.box<Account>(accountsBox).values.forEach((element) {
+        memo = element.mnemonic;
         logger.d(
             "Name ${element.name}, hash ${element.hash}, ${element.toString()}");
         if (element != null) _acc = element;
       });
+
+      txData.sendFrom = memo;
 
       Response response = await fusionDio.post(
           "$fusionApiUrl/push/create?sender=${sender.isNotEmpty ? sender : _acc}&receiver=$receiver&creatorId=${_acc.seed}",
@@ -391,8 +445,6 @@ class MinterRest {
       Response response = await fusionDio.get(url);
 
       if (response.statusCode == 200) {
-        logger.d("Response status code " + response.statusCode.toString());
-        logger.d(response.data);
         final datas = CoefficientsResponse.fromJson(response.data);
         logger.d(datas);
         return datas;
@@ -437,7 +489,6 @@ class MinterRest {
       Response response = await dio.get(url);
 
       if (response.statusCode == 200) {
-        logger.d("Response status code " + response.statusCode.toString());
         var data = AddressData.fromJson(response.data);
         return data;
       }
@@ -471,11 +522,9 @@ class MinterRest {
       // Adding Mx to get valid address
       final url =
           "https://explorer-api.minter.network/api/v1/addresses/$address/transactions";
-      logger.d("Fetch Address Data Url $url");
       Response response = await dio.get(url);
 
       if (response.statusCode == 200) {
-        logger.d("Response status code " + response.statusCode.toString());
         var data = TransactionsResponse.fromJson(response.data);
 
         if (from != null && to != null) {
@@ -516,9 +565,9 @@ class MinterRest {
       logger.d("Fetch Address Data with USDs Url $url");
       Response response = await dio.get(url);
 
-      if (response.statusCode == 200) {
-        logger.d("Response status code " + response.statusCode.toString());
 
+
+      if (response.statusCode == 200) {
         return AddressDataWithUsd.fromJson(response.data);
       }
     } on DioError catch (exception) {

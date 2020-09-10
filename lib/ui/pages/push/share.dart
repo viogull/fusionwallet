@@ -86,7 +86,7 @@ class SharePush extends StatelessWidget {
                         Clipboard.setData(
                             ClipboardData(text: shortDeeplink));
                         injector.get<HapticUtil>().success();
-                        FlashHelper.infoBar(context,
+                        FlashHelper.successBar(context,
                             message: AppLocalizations.of(context)
                                 .pushLinkWasCopied());
 

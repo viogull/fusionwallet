@@ -48,13 +48,16 @@ abstract class _Erc20Store with Store {
       log.d("Detected ERC20 wallets. Fetching...");
       final wallet = _erc20Box.getAt(0);
       address = wallet.address;
+      log.d("Address $address");
       privateKey = wallet.privateKey.toString();
+    } else {
+      isWalletPersisted = false;
     }
   }
 
-  void init() async {
+  void init()  {
     log.i("Initialization  of ErcWalletUi");
-    await loadErc20Wallets();
+     loadErc20Wallets();
   }
 
 

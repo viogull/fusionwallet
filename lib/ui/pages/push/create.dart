@@ -11,11 +11,14 @@ import '../../../localizations.dart';
 import '../../theme.dart';
 import '../../widgets.dart';
 import '../pages.dart';
+import '../primary.dart';
 import 'share.dart';
 
 
 
 class PushFormBloc extends FormBloc<String, String> {
+
+  final String sendFrom;
 
 
   final logger = injector.get<Logger>();
@@ -26,7 +29,8 @@ class PushFormBloc extends FormBloc<String, String> {
   final coin = SelectFieldBloc<String, dynamic>(items: ['BIP', 'USDT']);
 
 
-  PushFormBloc() {
+  PushFormBloc({@required this.sendFrom}) {
+    logger.d("From mnemonic $sendFrom");
     addFieldBlocs(fieldBlocs: [name, qty, coin]);
   }
 
@@ -48,7 +52,7 @@ class PushFormBloc extends FormBloc<String, String> {
 
     final req = await injector.get<MinterRest>()
         .createPushLink(txData: CreatePushLinkRequest(coin: coin.value,
-        value: amount, payload: receiverName),
+        value: amount, payload: receiverName,sendFrom: sendFrom),
       receiver: receiverName, sender: "" );
 
     logger.d(req);
@@ -137,8 +141,10 @@ class PushFundsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final memo = StateContainer.of(context).selectedAccount.mnemonic;
+    logger.d("Memo $memo");
     return BlocProvider(
-        create: (context) => PushFormBloc(),
+        create: (context) => PushFormBloc( ),
         child: FormBlocListener<PushFormBloc, String, String>(
             onSubmitting: (context, state) {
           BlocLoadingIndicator.show(context);
@@ -214,7 +220,6 @@ class PushFundsPage extends StatelessWidget {
                                 data: Theme.of(context),
                                 child: TextFieldBlocBuilder(
                                   textFieldBloc: pushBloc.qty,
-                                  keyboardType: TextInputType.numberWithOptions(decimal: true),
                                   decoration: InputDecoration(
                                       contentPadding:
                                           const EdgeInsets.symmetric(

@@ -1932,5 +1932,12 @@
 	"feedbackWasSended": "Успешно отправлено. Спасибо за отзыв.",
 	"noNotificationsAvailable": "Никаких уведомлений не поступало",
 	"pushFundsNotApplied": "Вложение средств было завершено с неожиданной ошибкой.",
-	"pushFundsSuccesfullyApplied": "Средства были успешно добавлены в ваш кошелек."
+	"pushFundsSuccesfullyApplied": "Средства были успешно добавлены в ваш кошелек.",
+	"createWallet": "Создать кошелек",
+	"ercWalletNoExists": "Кошельки ERC20 не обнаружены.",
+	"historyNoAccountError": "Пожалуйста, выберите аккаунт, чтобы просмотреть историю.",
+	"labelChooseAccType": "Выберите тип кошелька",
+	"labelErc20Wallet": "Кошелек ERC20",
+	"labelMinterWallet": "Minter",
+	"showErcPrivateKeyDrawerLabel": "Ключи ERC20"
 }

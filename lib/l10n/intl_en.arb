@@ -1,5 +1,5 @@
 {
-	"@@last_modified": "2020-09-05T18:30:42.204274",
+	"@@last_modified": "2020-09-10T16:56:53.568260",
 	"appName": "Fusion",
 	"@appName": {
 		"type": "text",
@@ -2069,7 +2069,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"applyPushBody": "Do you want to apply {qty} {coin} to address {address}?",
+	"applyPushBody": "Do you want to apply {qty} {coin} to address {address}",
 	"@applyPushBody": {
 		"type": "text",
 		"placeholders": {
@@ -2085,6 +2085,41 @@
 	},
 	"pushFundsNotApplied": "Applying of funds was finished with unexpectable error.",
 	"@pushFundsNotApplied": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelMinterWallet": "Minter",
+	"@labelMinterWallet": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelErc20Wallet": "ERC20 Wallet",
+	"@labelErc20Wallet": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"labelChooseAccType": "Choose wallet type",
+	"@labelChooseAccType": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"historyNoAccountError": "Please,  choose account to explore history.",
+	"@historyNoAccountError": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"createWallet": "Create wallet",
+	"@createWallet": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"ercWalletNoExists": "No any ERC20 wallets detected.",
+	"@ercWalletNoExists": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"showErcPrivateKeyDrawerLabel": "ERC20 Keys",
+	"@showErcPrivateKeyDrawerLabel": {
 		"type": "text",
 		"placeholders": {}
 	}

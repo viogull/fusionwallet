@@ -265,8 +265,8 @@ class AccountsPage extends StatelessWidget {
 
             return AccountBalancesCard(
                 data: snapshot.data,
-                onPlusTapped: () {
-
+                onPlusTapped: () async {
+                  StateContainer.of(context).loadErcBalances();
                   showBarModalBottomSheet(context: context,  backgroundColor: Theme.of(context).colorScheme.surface,
                       elevation: 16,
                       builder: (context, scrollController) {
@@ -354,16 +354,20 @@ class ChooseAccountTypePopup extends StatelessWidget {
                 child: AutoSizeText(AppLocalizations.of(context).labelChooseAccType(),
                 style: GoogleFonts.robotoCondensed(fontSize: 20)),
               ),
-            FusionButton(onPressed: () {  Navigator.of(context).pushNamed(AddAccountUi.navId);
+            FusionButton(onPressed: () {
+              Navigator.pop(context);
+              Navigator.of(context).pushNamed(AddAccountUi.navId);
       },            text: AppLocalizations.of(context).labelMinterWallet(), expandedWidth: true,
             ),
               FusionButton(onPressed: () {
-                showBarModalBottomSheet(context: context, builder: (context, scrollController) {
-                  return FusionScaffold(
-                    title: AppLocalizations.of(context).labelErc20Wallet(),
-                    child : Erc20WalletUi()
-                  );
-                });
+                Navigator.pop(context);
+                showBarModalBottomSheet(context: context,
+                    useRootNavigator: false,
+                    builder: (context, scrollController) {
+                      return  Erc20WalletUi(hideToolbar: false,);
+
+                    });
+
               }, text: AppLocalizations.of(context).labelErc20Wallet(),
                 expandedWidth: true,),
         ]),

@@ -64,7 +64,7 @@ class ShareAddressState extends State<ShareAddressPage> with  SingleTickerProvid
             physics: BouncingScrollPhysics(),
             children: [
               _buildMinterSharePage(context),
-              Erc20WalletUi()
+              Erc20WalletUi(hideToolbar: true)
             ],
           ),
         ),
@@ -173,7 +173,7 @@ class ShareAddressState extends State<ShareAddressPage> with  SingleTickerProvid
                 ),
                 GestureDetector(
                   onTap: () async {
-                    FlashHelper.infoBar(context,
+                    FlashHelper.successBar(context,
                         message:
                         AppLocalizations.of(context).addressCopied);
                     injector.get<HapticUtil>().selection();
@@ -184,9 +184,9 @@ class ShareAddressState extends State<ShareAddressPage> with  SingleTickerProvid
                     child: AutoSizeText(
                       AppLocalizations.of(context).labelTapToCopy(),
                       textAlign: TextAlign.center,
-                      minFontSize: 6,
+                      minFontSize: 8,
                       maxLines: 1,
-                      maxFontSize: 10,
+                      maxFontSize: 14,
                     ),
                   ),
                 )

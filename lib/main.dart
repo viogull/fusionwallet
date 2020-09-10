@@ -77,7 +77,7 @@ void main() async {
 
   final accsBox = await Hive.openBox<Account>(accountsBox);
   await Hive.openBox<Account>(additionalAccountsBox);
-  await Hive.openBox<Erc20Wallet>(erc20walletsBox);
+  final ercWallets = await Hive.openBox<Erc20Wallet>(erc20walletsBox);
   try {
     await Hive.openBox<Contact>(contactsBox);
     final prefs = await Hive.openBox<Preferences>(preferencesBox);
@@ -87,6 +87,8 @@ void main() async {
     if (_prefsSingle.isInBox == false) prefs.add(_prefsSingle);
 
     await Hive.openBox<AdminNotification>(notificationsBox);
+
+    logger.d("Checking availability of ERC20 Wallets. Exists: ${ercWallets.isNotEmpty}");
 
     OneSignal.shared.setLogLevel(OSLogLevel.debug, OSLogLevel.none);
 

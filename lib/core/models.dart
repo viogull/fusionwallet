@@ -11,3 +11,6 @@ export './models/address_data.dart';
 
 export './models/estimate_request.dart';
 export './models/estimate_response.dart';
+
+
+export './models/erc20_balance_response.dart';

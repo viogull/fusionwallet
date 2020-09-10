@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fusion_wallet/core/abstract/erc20_wallet.dart';
 import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/localizations.dart';
@@ -73,6 +74,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
       });
     }
     loadDynamicLinks();
+    injector.get<MinterRest>().getEthBalance(address: Hive.box<Erc20Wallet>(erc20walletsBox).getAt(0).address);
     super.initState();
   }
 
@@ -142,6 +144,22 @@ class _BottomHomePageState extends State<BottomHomePage> {
                   builder: (context, controller) {
                     return ShareAddressPage(
                         "${StateContainer.of(context).selectedAccount.address}");
+                  });
+            }),
+        DrawerItemData(
+            title: AppLocalizations.of(context).showErcPrivateKeyDrawerLabel(),
+            icon: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Icon(FlutterIcons.ethereum_faw5d),
+            ),
+            onClick: () {
+              showCupertinoModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context, ScrollController controller) {
+                    return ShowPassphraseUi(
+                        mnemonic: StateContainer.of(context)
+                            .selectedAccount
+                            .mnemonic);
                   });
             }),
         DrawerItemData(

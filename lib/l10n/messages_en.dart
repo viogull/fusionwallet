@@ -19,7 +19,7 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static m0(coin, qty, address) => "Do you want to apply ${qty} ${coin} to address ${address}?";
+  static m0(coin, qty, address) => "Do you want to apply ${qty} ${coin} to address ${address}";
 
   static m1(current, total) => "Question ${current} of ${total}";
 
@@ -109,6 +109,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "createPasswordHint" : MessageLookupByLibrary.simpleMessage("Create a password"),
     "createPasswordSecondParagraph" : MessageLookupByLibrary.simpleMessage("Password is optional, and your wallet will be protected with your PIN or biometrics regardless."),
     "createPasswordSheetHeader" : MessageLookupByLibrary.simpleMessage("Create"),
+    "createWallet" : MessageLookupByLibrary.simpleMessage("Create wallet"),
     "currency" : MessageLookupByLibrary.simpleMessage("Currency"),
     "currentlyRepresented" : MessageLookupByLibrary.simpleMessage("Currently Represented By"),
     "defaultAccountName" : MessageLookupByLibrary.simpleMessage("Main Account"),
@@ -120,6 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "enterAddress" : MessageLookupByLibrary.simpleMessage("Enter Address"),
     "enterAmount" : MessageLookupByLibrary.simpleMessage("Enter Amount"),
     "enterPasswordHint" : MessageLookupByLibrary.simpleMessage("Enter your password"),
+    "ercWalletNoExists" : MessageLookupByLibrary.simpleMessage("No any ERC20 wallets detected."),
     "errorCameraRestriction" : MessageLookupByLibrary.simpleMessage("The user did not grant the camera permission!"),
     "errorInvalidInputsPush" : MessageLookupByLibrary.simpleMessage("Invalid values for push transaction"),
     "errorOnPinInput" : MessageLookupByLibrary.simpleMessage("Invalid PIN"),
@@ -141,6 +143,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "gotItButton" : MessageLookupByLibrary.simpleMessage("Got It!"),
     "hideAccountHeader" : MessageLookupByLibrary.simpleMessage("Hide Account?"),
     "hintSendedFrom" : MessageLookupByLibrary.simpleMessage("Sending from"),
+    "historyNoAccountError" : MessageLookupByLibrary.simpleMessage("Please,  choose account to explore history."),
     "iUnderstandTheRisks" : MessageLookupByLibrary.simpleMessage("I Understand the Risks"),
     "import" : MessageLookupByLibrary.simpleMessage("Import"),
     "importSecretPhrase" : MessageLookupByLibrary.simpleMessage("Import Secret Phrase"),
@@ -178,6 +181,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "labelBackupPassphraseSubtitle" : MessageLookupByLibrary.simpleMessage("Back up this Passphrase"),
     "labelBuy" : MessageLookupByLibrary.simpleMessage("BUY"),
     "labelCancel" : MessageLookupByLibrary.simpleMessage("Cancel"),
+    "labelChooseAccType" : MessageLookupByLibrary.simpleMessage("Choose wallet type"),
     "labelChoosePassSubtitle" : MessageLookupByLibrary.simpleMessage("Choose a six digit password"),
     "labelChoosePassVerifySubtitle" : MessageLookupByLibrary.simpleMessage("Enter the same six digits"),
     "labelCoin" : MessageLookupByLibrary.simpleMessage("Coin"),
@@ -191,12 +195,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "labelEnableBiometricSubtitle" : MessageLookupByLibrary.simpleMessage("We recommend this for improved security"),
     "labelEnableBiometricTitle" : MessageLookupByLibrary.simpleMessage("Enable Touch ID/Face ID"),
     "labelEndDate" : MessageLookupByLibrary.simpleMessage("End Date"),
+    "labelErc20Wallet" : MessageLookupByLibrary.simpleMessage("ERC20 Wallet"),
     "labelExchangeCoins" : MessageLookupByLibrary.simpleMessage("My Coins"),
     "labelExchangeSimplex" : MessageLookupByLibrary.simpleMessage("Simplex"),
     "labelExchangeUseCash" : MessageLookupByLibrary.simpleMessage("Use cash balance"),
     "labelFeedbackEmailSubtitle" : MessageLookupByLibrary.simpleMessage("Email (optionally)"),
     "labelFeedbackNoteTitle" : MessageLookupByLibrary.simpleMessage("Note"),
     "labelFrom" : MessageLookupByLibrary.simpleMessage("From"),
+    "labelMinterWallet" : MessageLookupByLibrary.simpleMessage("Minter"),
     "labelMyContacts" : MessageLookupByLibrary.simpleMessage("My Contacts"),
     "labelName" : MessageLookupByLibrary.simpleMessage("Name"),
     "labelNo" : MessageLookupByLibrary.simpleMessage("No"),
@@ -346,6 +352,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "shareNatrium" : MessageLookupByLibrary.simpleMessage("Share Natrium"),
     "shareNatriumText" : MessageLookupByLibrary.simpleMessage("Check out Natrium! A premier NANO mobile wallet!"),
     "sharePushLink" : MessageLookupByLibrary.simpleMessage("Share Push"),
+    "showErcPrivateKeyDrawerLabel" : MessageLookupByLibrary.simpleMessage("ERC20 Keys"),
     "successfullySavedPin" : MessageLookupByLibrary.simpleMessage("Succesfully saved PIN"),
     "supportButton" : MessageLookupByLibrary.simpleMessage("Support"),
     "switchToSeed" : MessageLookupByLibrary.simpleMessage("Switch to Seed"),

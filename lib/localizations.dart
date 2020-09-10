@@ -1678,7 +1678,7 @@ class AppLocalizations {
           name: 'labelMinterWallet');
 
   String labelErc20Wallet() =>
-      Intl.message("ERC-20",
+      Intl.message("ERC20 Wallet",
           name: 'labelErc20Wallet');
 
   String labelChooseAccType() =>
@@ -1688,6 +1688,18 @@ class AppLocalizations {
  String  historyNoAccountError() =>
      Intl.message("Please, choose account to explore history.",
          name: 'historyNoAccountError');
+
+ String  createWallet()  =>
+     Intl.message("Create wallet",
+         name: 'createWallet');
+
+  String ercWalletNoExists()  =>
+      Intl.message("No any ERC20 wallets detected.",
+          name: 'ercWalletNoExists');
+
+  String showErcPrivateKeyDrawerLabel()   =>
+      Intl.message("ERC20 Keys",
+          name: 'showErcPrivateKeyDrawerLabel');
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

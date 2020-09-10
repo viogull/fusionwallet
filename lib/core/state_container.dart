@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fusion_wallet/core/abstract/erc20_wallet.dart';
 import 'package:fusion_wallet/core/models/coin_list_response.dart';
+import 'package:fusion_wallet/core/models/erc20_balance_request.dart';
 import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 import 'package:nanodart/nanodart.dart';
@@ -71,6 +73,12 @@ class StateContainerState extends State<StateContainer> {
   AddressData addressData;
   List<MinterCoin> coins;
 
+
+  Erc20BalanceResponse erc20Balance;
+
+
+  Box<Erc20Wallet> erc20WalletsBox = Hive.box<Erc20Wallet>(erc20walletsBox);
+
   bool darkModeEnabled = false;
   bool showRewards = false;
 
@@ -132,6 +140,7 @@ class StateContainerState extends State<StateContainer> {
     setBiometric(widget.preferences.biometricEnabled);
     setRewardsVisibility(rewardsEnabled);
 
+    loadErcBalances();
 
     loadAdditionals();
   }
@@ -283,4 +292,21 @@ class StateContainerState extends State<StateContainer> {
       this.addressData = balances;
     });
   }
+
+
+  void loadErcBalances() async {
+    log.d("Fetching balances");
+    if(erc20WalletsBox.isNotEmpty) {
+      final wallet = erc20WalletsBox.getAt(0);
+      final balance = await injector.get<MinterRest>().getEthBalance(address: wallet.address );
+      log.d("Fetched balances for ${wallet.address}. Result -> ${balance.result} wei");
+      setState(() {
+        this.erc20Balance = balance;
+      });
+    } else {
+      log.e("Empty wallet box");
+    }
+
+  }
+
 }

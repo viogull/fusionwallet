@@ -1,4 +1,4 @@
-<babeledit_project version="1.2" be_version="2.7.0">
+<babeledit_project be_version="2.7.0" version="1.2">
     <!--
 
     BabelEdit project file
@@ -1376,6 +1376,23 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>createWallet</name>
+                <definition_loaded>false</definition_loaded>
+                <description></description>
+                <comment></comment>
+                <default_text></default_text>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>ru-RU</language>
+                        <approved>false</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>currency</name>
                 <definition_loaded>false</definition_loaded>
                 <description>A settings menu item for changing currency</description>
@@ -1549,6 +1566,23 @@
                 <name>enterPasswordHint</name>
                 <definition_loaded>false</definition_loaded>
                 <description>A text field hint that tells the users to enter their password</description>
+                <comment></comment>
+                <default_text></default_text>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>ru-RU</language>
+                        <approved>false</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>ercWalletNoExists</name>
+                <definition_loaded>false</definition_loaded>
+                <description></description>
                 <comment></comment>
                 <default_text></default_text>
                 <translations>
@@ -1904,6 +1938,23 @@
             </concept_node>
             <concept_node>
                 <name>hintSendedFrom</name>
+                <definition_loaded>false</definition_loaded>
+                <description></description>
+                <comment></comment>
+                <default_text></default_text>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>ru-RU</language>
+                        <approved>false</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>historyNoAccountError</name>
                 <definition_loaded>false</definition_loaded>
                 <description></description>
                 <comment></comment>
@@ -2549,6 +2600,23 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>labelChooseAccType</name>
+                <definition_loaded>false</definition_loaded>
+                <description></description>
+                <comment></comment>
+                <default_text></default_text>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>ru-RU</language>
+                        <approved>false</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>labelChoosePassSubtitle</name>
                 <definition_loaded>false</definition_loaded>
                 <description></description>
@@ -2770,6 +2838,23 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>labelErc20Wallet</name>
+                <definition_loaded>false</definition_loaded>
+                <description></description>
+                <comment></comment>
+                <default_text></default_text>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>ru-RU</language>
+                        <approved>false</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>labelExchangeCoins</name>
                 <definition_loaded>false</definition_loaded>
                 <description></description>
@@ -2856,6 +2941,23 @@
             </concept_node>
             <concept_node>
                 <name>labelFrom</name>
+                <definition_loaded>false</definition_loaded>
+                <description></description>
+                <comment></comment>
+                <default_text></default_text>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>ru-RU</language>
+                        <approved>false</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>labelMinterWallet</name>
                 <definition_loaded>false</definition_loaded>
                 <description></description>
                 <comment></comment>
@@ -5405,6 +5507,23 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>showErcPrivateKeyDrawerLabel</name>
+                <definition_loaded>false</definition_loaded>
+                <description></description>
+                <comment></comment>
+                <default_text></default_text>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>ru-RU</language>
+                        <approved>false</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>successfullySavedPin</name>
                 <definition_loaded>false</definition_loaded>
                 <description></description>
@@ -6380,7 +6499,7 @@
         <language>
             <code>en-US</code>
             <source_id></source_id>
-            <source_file>lib/l10n/intl_en.arb</source_file>
+            <source_file>lib/l10n/intl_messages.arb</source_file>
         </language>
         <language>
             <code>ru-RU</code>
@@ -6390,10 +6509,10 @@
     </languages>
     <translation_files>
         <translation_file>
-            <file>lib/l10n/intl_en.arb</file>
+            <file>lib/l10n/intl_ru.arb</file>
         </translation_file>
         <translation_file>
-            <file>lib/l10n/intl_ru.arb</file>
+            <file>lib/l10n/intl_messages.arb</file>
         </translation_file>
     </translation_files>
     <editor_configuration>
