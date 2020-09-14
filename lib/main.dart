@@ -37,7 +37,7 @@ import 'ui/pages/auth/splash.dart';
 import 'ui/pages/auth/ui.dart';
 import 'ui/pages/primary.dart';
 import 'ui/pages/convert.dart';
-import 'ui/pages/rate_exhange_page.dart';
+import 'ui/pages/rates.dart';
 import 'ui/pages/info/faq.dart';
 import 'ui/pages/info/feedback.dart';
 import 'ui/pages/auth/lockscreen.dart';
@@ -195,6 +195,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
+
     FirebaseDynamicLinks.instance.onLink(
         onSuccess: (PendingDynamicLinkData dynamicLink) async {
       final Uri deepLink = dynamicLink?.link;

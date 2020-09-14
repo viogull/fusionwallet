@@ -80,12 +80,15 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
         debugPrint(
             'Accounts exists. Seed: ${lastAccount.pin}. Trying fetch access state');
 
-        final accessRequest = await MinterRest().checkAccess(lastAccount);
+        final accessRequest = await  injector.get<MinterRest>().checkAccess(lastAccount);
+
+        logger.d("Access: $accessRequest");
+
         injector.get<MinterRest>().fetchNotifications().then((value) => {
               Hive.box<AdminNotification>(notificationsBox)
                   .addAll((value).notifications)
             });
-        if (!accessRequest) {
+        if (accessRequest) {
           if (lastAccount.pin != null) {
             logger
                 .d("Navigating to lockscreen for account ${lastAccount.name}");

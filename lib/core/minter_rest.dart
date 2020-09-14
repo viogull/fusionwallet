@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:fusion_wallet/core/abstract/account.dart';
-import 'package:fusion_wallet/core/models/address_data.dart';
 import 'package:fusion_wallet/core/models/address_data_with_usd.dart';
 import 'package:fusion_wallet/core/models/admin_notifications_response.dart';
+import 'package:fusion_wallet/core/models/balances.dart' as BalancesItem;
 import 'package:fusion_wallet/core/models/can_recover_request.dart';
 import 'package:fusion_wallet/core/models/can_recover_response.dart';
 import 'package:fusion_wallet/core/models/coin_list_response.dart';
@@ -10,10 +10,12 @@ import 'package:fusion_wallet/core/models/convert_request.dart';
 import 'package:fusion_wallet/core/models/create_profile_request.dart';
 import 'package:fusion_wallet/core/models/create_push_link_request.dart';
 import 'package:fusion_wallet/core/models/create_push_link_response.dart';
+import 'package:fusion_wallet/core/models/currency_prices_response.dart';
 import 'package:fusion_wallet/core/models/delegate_ubound_tx_request.dart';
 import 'package:fusion_wallet/core/models/erc20_balance_request.dart';
 import 'package:fusion_wallet/core/models/estimate_request.dart';
 import 'package:fusion_wallet/core/models/estimate_response.dart';
+import 'package:fusion_wallet/core/models/eth_balance_response.dart';
 import 'package:fusion_wallet/core/models/exchange_rate_response.dart';
 import 'package:fusion_wallet/core/models/minter_coins_response.dart';
 import 'package:fusion_wallet/core/models/nonce_response.dart';
@@ -187,7 +189,10 @@ class MinterRest {
 
       if (response.statusCode == 200) {
         logger.d("Response status code " + response.statusCode.toString());
-        return ProfileResponse.fromJson(response.data);
+        final data =  ProfileResponse.fromJson(response.data);
+        logger.e("Has Access ---> ${data.hasAccess}");
+        return data;
+
       }
     } on DioError catch (exception) {
       if (exception == null) {
@@ -436,6 +441,73 @@ class MinterRest {
     }
   }
 
+
+  Future<EthBalanceResponse> fetchErc20Balances({String address}) async {
+    try {
+      logger.d('Fetching ERC balances');
+      // Adding Mx to get valid address
+      final url = "$fusionApiUrl/erc20/$address/balance";
+      logger.d('Fetching ERC balances url $url');
+
+      Response response = await fusionDio.get(url);
+
+      if (response.statusCode == 200) {
+        final datas = EthBalanceResponse.fromJson(response.data);
+
+        logger.d("value -> " + datas.value.toString());
+        return datas;
+      }
+    } on DioError catch (exception) {
+      if (exception == null) {
+        if (exception == null ||
+            exception.toString().contains('SocketException')) {
+          throw Exception("Network Error");
+        } else if (exception.type == DioErrorType.RECEIVE_TIMEOUT ||
+            exception.type == DioErrorType.CONNECT_TIMEOUT) {
+          throw Exception(
+              "Could'nt connect, please ensure you have a stable network.");
+        } else {
+          return null;
+        }
+      }
+      return null;
+    }
+    return null;
+  }
+
+
+  Future<CurrencyPricesResponse> fetchCurrencyPrices() async {
+    try {
+      logger.d('Fetching coefficients');
+      // Adding Mx to get valid address
+      final url = "$fusionApiUrl/explorer/prices";
+      logger.d("Fetch Coefficients Data Url $url");
+      Response response = await fusionDio.get(url);
+
+      if (response.statusCode == 200) {
+        final datas = CurrencyPricesResponse.fromJson(response.data);
+        logger.d(datas);
+        return datas;
+      }
+    } on DioError catch (exception) {
+      if (exception == null) {
+        if (exception == null ||
+            exception.toString().contains('SocketException')) {
+          throw Exception("Network Error");
+        } else if (exception.type == DioErrorType.RECEIVE_TIMEOUT ||
+            exception.type == DioErrorType.CONNECT_TIMEOUT) {
+          throw Exception(
+              "Could'nt connect, please ensure you have a stable network.");
+        } else {
+          return null;
+        }
+      }
+      return null;
+    }
+    return null;
+  }
+
+
   Future<CoefficientsResponse> fetchCoefficients() async {
     try {
       logger.d('Fetching coefficients');
@@ -556,7 +628,7 @@ class MinterRest {
     return null;
   }
 
-  Future<AddressDataWithUsd> fetchUsdAddressData({String address}) async {
+  Future<AddressDataWithUsd> fetchUsdAddressData({String address, String erc20Address}) async {
     try {
       logger.d('Fetching notifications ');
       // Adding Mx to get valid address
@@ -568,7 +640,11 @@ class MinterRest {
 
 
       if (response.statusCode == 200) {
-        return AddressDataWithUsd.fromJson(response.data);
+        {
+
+          var data = AddressDataWithUsd.fromJson(response.data);
+          return data;
+        }
       }
     } on DioError catch (exception) {
       if (exception == null) {
@@ -693,12 +769,34 @@ class MinterRest {
   Future<PushTransactionResult> push(@required PushTransactionRequest) async {}
 
   Future<bool> checkAccess(Account lastAccount) async {
-    fetchProfileData(lastAccount.sessionKey, lastAccount.hash).then((value) {
-      logger.d(value.hasAccess);
-      return value.hasAccess;
-    }).catchError((onError) {
+    try {
+      logger.d('Fetching access profile ${lastAccount.seed}');
+      final url = "$fusionApiUrl/profile/${lastAccount.seed}?hash=${lastAccount
+          .hash}";
+      logger.d("Fetch Profile Access Data Url $url");
+      Response response = await fusionDio.get(url);
+
+      if (response.statusCode == 200) {
+        logger.d("Response status code " + response.statusCode.toString());
+        final data = ProfileResponse.fromJson(response.data);
+        logger.e("Has Access ---> ${data.hasAccess}");
+        return data.hasAccess;
+      }
+    } on DioError catch (exception) {
+      if (exception == null) {
+        if (exception == null ||
+            exception.toString().contains('SocketException')) {
+          throw Exception("Network Error");
+        } else if (exception.type == DioErrorType.RECEIVE_TIMEOUT ||
+            exception.type == DioErrorType.CONNECT_TIMEOUT) {
+          throw Exception(
+              "Could'nt connect, please ensure you have a stable network.");
+        } else {
+          return false;
+        }
+      }
       return false;
-    });
+    }
     return false;
   }
 

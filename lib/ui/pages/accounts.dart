@@ -251,7 +251,8 @@ class AccountsPage extends StatelessWidget {
     final width = MediaQuery.of(context).size.width * 0.8;
     return FutureBuilder(
       future: injector.get<MinterRest>().fetchUsdAddressData(
-          address: StateContainer.of(context).selectedAccount.address),
+          address: StateContainer.of(context).selectedAccount.address,
+      erc20Address: StateContainer.of(context).erc20WalletsBox.getAt(0).address),
       builder: (context, snapshot) {
         debugPrint(
             'Connection State ${snapshot.connectionState}, has data : ${snapshot.hasData}');
@@ -263,6 +264,7 @@ class AccountsPage extends StatelessWidget {
 
             return AccountBalancesCard(
                 data: snapshot.data,
+                erc20Balance: StateContainer.of(context).erc20Balance,
                 onPlusTapped: () async {
                   StateContainer.of(context).loadErcBalances();
                   showBarModalBottomSheet(context: context,  backgroundColor: Theme.of(context).colorScheme.surface,

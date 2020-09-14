@@ -74,7 +74,7 @@ class StateContainerState extends State<StateContainer> {
   List<MinterCoin> coins;
 
 
-  Erc20BalanceResponse erc20Balance;
+  double erc20Balance;
 
 
   Box<Erc20Wallet> erc20WalletsBox = Hive.box<Erc20Wallet>(erc20walletsBox);
@@ -294,15 +294,18 @@ class StateContainerState extends State<StateContainer> {
   }
 
 
-  void loadErcBalances() async {
-    log.d("Fetching balances");
+  void loadErcBalances()  {
+    log.d("Loading ERC balances");
     if(erc20WalletsBox.isNotEmpty) {
       final wallet = erc20WalletsBox.getAt(0);
-      final balance = await injector.get<MinterRest>().getEthBalance(address: wallet.address );
-      log.d("Fetched balances for ${wallet.address}. Result -> ${balance.result} wei");
-      setState(() {
-        this.erc20Balance = balance;
+       injector.get<MinterRest>().fetchErc20Balances(address: wallet.address ).then((datas) {
+        log.d("Fetched balances for ${wallet.address}. Result -> ${datas.value} wei");
+        setState(() {
+          log.d("Balance -> ${datas.value}");
+          this.erc20Balance = datas.value;
+        });
       });
+
     } else {
       log.e("Empty wallet box");
     }

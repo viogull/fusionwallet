@@ -9,7 +9,7 @@ import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/button.dart';
 import 'package:fusion_wallet/ui/pages/auth/pincode.dart';
 import 'package:fusion_wallet/ui/pages/convert.dart';
-import 'package:fusion_wallet/ui/pages/rate_exhange_page.dart';
+import 'package:fusion_wallet/ui/pages/rates.dart';
 import 'package:fusion_wallet/utils/numbers.dart';
 import 'package:google_fonts/google_fonts.dart';
 

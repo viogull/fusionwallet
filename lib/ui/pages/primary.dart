@@ -12,7 +12,6 @@ import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/scaffold.dart';
 import 'package:fusion_wallet/ui/pages/accounts.dart';
 import 'package:fusion_wallet/ui/pages/auth/change_account_name.dart';
-import 'package:fusion_wallet/ui/pages/erc20_ui.dart';
 import 'package:fusion_wallet/ui/pages/popups/popups_remove_account.dart';
 import 'package:fusion_wallet/ui/pages/show_passphrase.dart';
 import 'package:fusion_wallet/ui/theme.dart';
@@ -24,6 +23,7 @@ import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
+import 'package:wallet_hd/wallet_hd.dart';
 
 import './../../ui/pages/pages.dart';
 import '../../inject.dart';
@@ -73,6 +73,8 @@ class _BottomHomePageState extends State<BottomHomePage> {
       logger.d("Account is ${_account.name}");
       Future.delayed(const Duration(milliseconds: 300), () {
         StateContainer.of(context).loadAccount(account: _account);
+        StateContainer.of(context).loadErcBalances();
+
       });
     }
     loadDynamicLinks();
@@ -157,6 +159,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
             onClick: () {
               final box = Hive.box<Erc20Wallet>(erc20walletsBox);
               final wallet = box.getAt(0);
+
               Clipboard.setData(ClipboardData(text: wallet.privateKey.toString()));
               injector.get<HapticUtil>().selection();
               FlashHelper.successBar(context,
@@ -297,7 +300,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
     }
     debugPrint("Title $title");
     return (title == null)
-        ? StateContainer.of(context).selectedAccount.name
+        ? (StateContainer.of(context).selectedAccount.name ==  null ? "" : StateContainer.of(context).selectedAccount.name)
         : title;
   }
 
