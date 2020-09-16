@@ -5,8 +5,8 @@ import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-import '../../../inject.dart';
 import '../../../core/models.dart';
+import '../../../inject.dart';
 import '../../../localizations.dart';
 import '../../theme.dart';
 import '../../widgets.dart';
@@ -66,7 +66,7 @@ class PushFormBloc extends FormBloc<String, String> {
       logger.d("Dynamic Link Result ->  $shortUrl");
       emitSuccess(successResponse: shortUrl);
     } else {
-      emitFailure(failureResponse: '');
+      emitFailure(failureResponse: 'Error. Insufficient costs.');
     }
   }
 
@@ -152,8 +152,8 @@ class PushFundsPage extends StatelessWidget {
         }, onSuccess: (context, state) async {
           BlocLoadingIndicator.hide(context);
 
-            showCupertinoModalBottomSheet(context: context, builder: (context, scrollController) {
-              return SharePush( shortDeeplink: state.successResponse,);
+            showCupertinoModalBottomSheet(context: context, builder: (context) {
+              return SharePush( shortDeeplink: state.successResponse);
             });
 
         }, onFailure: (context, state) {
@@ -161,8 +161,8 @@ class PushFundsPage extends StatelessWidget {
         }, child: Builder(builder: (context) {
           final pushBloc = context.bloc<PushFormBloc>();
 
-          return SafeArea(
-            child: FusionScaffold(
+          return
+           FusionScaffold(
               title: AppLocalizations.of(context).buttonPush(),
               child: SingleChildScrollView(
                 physics: NeverScrollableScrollPhysics(),
@@ -237,10 +237,10 @@ class PushFundsPage extends StatelessWidget {
                         ),
                       ),
                       Flexible(
-                        flex: 4,
+                        flex: 6,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                              vertical: 16, horizontal: 24),
+                              vertical: 32, horizontal: 24),
                           child: FusionButton(
                               text: AppLocalizations.of(context)
                                   .buttonPush()
@@ -256,7 +256,7 @@ class PushFundsPage extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
+
           );
         })));
   }

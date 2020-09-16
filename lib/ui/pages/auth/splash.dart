@@ -1,17 +1,13 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:fusion_wallet/core/minter_rest.dart';
 import 'package:fusion_wallet/core/models.dart';
-import 'package:fusion_wallet/core/models/admin_notifications_response.dart';
-import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/main.dart';
 import 'package:hive/hive.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:root_checker/root_checker.dart';
 
 import '../../../inject.dart';

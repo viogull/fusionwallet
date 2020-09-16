@@ -5,7 +5,6 @@ import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nanodart/nanodart.dart';
 
 import '../ui/theme.dart';
 
@@ -96,7 +95,6 @@ class FlashHelper {
   }
 
   static TextStyle _contentStyle(BuildContext context, [Color color]) {
-    var theme = Theme.of(context);
     return GoogleFonts.robotoCondensed()
         .copyWith(color: color, fontSize: 16);
   }

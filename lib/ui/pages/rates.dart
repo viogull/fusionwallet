@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:fusion_wallet/core/models/coefficients_response.dart';
 import 'package:fusion_wallet/core/models/currency_prices_response.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/scaffold.dart';
@@ -26,7 +25,6 @@ class RateExchangePage extends StatelessWidget {
             } else if (snapshot.connectionState == ConnectionState.done &&
                 snapshot.hasData == true) {
               final response = snapshot.data as CurrencyPricesResponse;
-              var list =  List();
 
               return Container(
                 height: MediaQuery.of(context).size.height,

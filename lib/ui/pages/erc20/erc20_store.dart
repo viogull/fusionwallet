@@ -7,10 +7,8 @@
 
 
 
-import 'package:fusion_wallet/core/abstract/account.dart';
 import 'package:fusion_wallet/core/abstract/erc20_wallet.dart';
 import 'package:fusion_wallet/main.dart';
-import 'package:fusion_wallet/ui/pages/erc20_ui.dart';
 import 'package:fusion_wallet/utils/wallets.dart';
 import 'package:hive/hive.dart';
 import 'package:mobx/mobx.dart';
@@ -29,7 +27,6 @@ abstract class _Erc20Store with Store {
   final api = injector.get<MinterRest>();
   final log = injector.get<Logger>();
   final _erc20Box = Hive.box<Erc20Wallet>(erc20walletsBox);
-  final _accountsBox = Hive.box<Account>(accountsBox);
 
   @observable
   bool isWalletPersisted = false;

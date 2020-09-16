@@ -11,7 +11,6 @@ import 'package:fusion_wallet/localizations.dart';
 
 import 'package:fusion_wallet/ui/components/custom/button.dart';
 
-import '../pages.dart';
 
 class SendFeedbackPage extends StatefulWidget {
   static const navId = "/feedback";

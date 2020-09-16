@@ -223,7 +223,7 @@ class Vault {
 
   Account get currentAccount => _accountsBox.getAt(0);
 
-  Future<void> addContact(Contact contact) {
+  Future addContact(Contact contact) {
     if (!contact.isInBox) {
       contact.save();
     } else {
@@ -233,6 +233,7 @@ class Vault {
         return null;
       });
     }
+    return null;
   }
 
   Future<List<Account>> getAccounts() async {}

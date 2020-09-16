@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -92,7 +91,7 @@ class SettingsPage extends StatelessWidget {
               onClick: () {
                 showBarModalBottomSheet(
                     context: context,
-                    builder: (builder, scroll) {
+                    builder: (builder) {
                       return FusionScaffold(
                         hideToolbar: true,
                         appBarIcon: null,
@@ -148,7 +147,7 @@ class SettingsPage extends StatelessWidget {
                                                                 duration: Duration(
                                                                     milliseconds:
                                                                         600),
-                                                                child: NotificationView(
+                                                                child: buildNotificationView(
                                                                     data: _contacts[
                                                                         index])),
                                                           );
@@ -199,7 +198,7 @@ class SettingsPage extends StatelessWidget {
   Widget showEmptyView(BuildContext context) => Center(
       child: Text(AppLocalizations.of(context).noNotificationsAvailable()));
 
-  Widget NotificationView({AdminNotification data}) => Card(
+  Widget buildNotificationView({AdminNotification data}) => Card(
         margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
         elevation: 0.5,
         color: Colors.transparent,

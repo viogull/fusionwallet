@@ -2,14 +2,12 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/core/minter_rest.dart';
 import 'package:fusion_wallet/core/models/transanctions_response.dart';
 import 'package:fusion_wallet/ui/components/custom/button.dart';
-import 'package:fusion_wallet/ui/components/custom/scaffold.dart';
 import 'package:fusion_wallet/ui/components/transaction_view.dart';
 
 import 'package:fusion_wallet/ui/pages/adresses.dart';
@@ -93,7 +91,7 @@ class AccountsPage extends StatelessWidget {
                     onPressed: () {
                       showCupertinoModalBottomSheet(
                           context: context,
-                          builder: (context, controller) {
+                          builder: (context) {
                             return ShareAddressPage(
                                 "${StateContainer.of(context).selectedAccount.address}");
                           });
@@ -172,10 +170,10 @@ class AccountsPage extends StatelessWidget {
     borderRadius: FusionTheme.borderRadius),
                   color: Theme.of(context).colorScheme.primary,
                   onPressed: () {
-                    showCupertinoModalBottomSheet(
+                    showBarModalBottomSheet(
                         context: context,
-                        builder: (context, scrollController) {
-                          return SafeArea(child: PushFundsPage());
+                        builder: (context) {
+                          return PushFundsPage();
                         });
                   })
             ],
@@ -269,7 +267,7 @@ class AccountsPage extends StatelessWidget {
                   StateContainer.of(context).loadErcBalances();
                   showBarModalBottomSheet(context: context,  backgroundColor: Theme.of(context).colorScheme.surface,
                       elevation: 16,
-                      builder: (context, scrollController) {
+                      builder: (context) {
                     return ChooseAccountTypePopup();
                   });
 
@@ -363,9 +361,8 @@ class ChooseAccountTypePopup extends StatelessWidget {
                 Navigator.pop(context);
                 showBarModalBottomSheet(context: context,
                     useRootNavigator: false,
-                    builder: (context, scrollController) {
-                      return  Erc20WalletUi(hideToolbar: false,);
-
+                    builder: (context) {
+                      return  Erc20WalletUi(hideToolbar: false);
                     });
 
               }, text: AppLocalizations.of(context).labelErc20Wallet(),

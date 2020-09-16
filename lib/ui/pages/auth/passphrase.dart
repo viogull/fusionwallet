@@ -439,7 +439,7 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
                                   );
                                   showCupertinoModalBottomSheet(
                                       context: context,
-                                      builder: (context, scrollControler) {
+                                      builder: (context) {
                                         return PopupDialogWidget(
                                           title: AppLocalizations.of(context)
                                               .popupPassVerifiedTitle(),

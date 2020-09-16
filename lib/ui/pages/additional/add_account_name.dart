@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fusion_wallet/core/abstract/preferences.dart';
-import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/button.dart';
 import 'package:fusion_wallet/ui/components/custom/scaffold.dart';
 import 'package:fusion_wallet/ui/pages/auth/conditions.dart';
-import 'package:hive/hive.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:styled_text/styled_text.dart';
 
-import '../../../main.dart';
 import '../../theme.dart';
 import '../pages.dart';
 import 'add_account_bloc.dart';
@@ -141,7 +135,7 @@ class AddAccountNamePage extends StatelessWidget {
                                           {
                                         showCupertinoModalBottomSheet(
                                             context: context,
-                                            builder: (context, controller) {
+                                            builder: (context) {
                                               return TermsConditions();
                                             })
                                       },

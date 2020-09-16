@@ -436,7 +436,7 @@ class _AddAccountMnemonicState extends State<AddAccountMnemonicPage> {
                                   );
                                   showCupertinoModalBottomSheet(
                                       context: context,
-                                      builder: (context, scrollControler) {
+                                      builder: (context) {
                                         return PopupDialogWidget(
                                           title: AppLocalizations.of(context)
                                               .popupPassVerifiedTitle(),

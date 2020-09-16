@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/core/abstract/preferences.dart';
 import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/localizations.dart';

@@ -7,7 +7,7 @@ import 'add_account_events.dart';
 import 'add_account_states.dart';
 
 class AddAccountBloc extends Bloc<AddAccountEvent, AddAccountState> {
-  AddAccountBloc() : super(null) {}
+  AddAccountBloc() : super(null);
 
   final log = Logger();
 

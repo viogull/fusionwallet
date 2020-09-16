@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:fusion_wallet/core/models/profile_response.dart';
 import 'package:fusion_wallet/core/models/recover_response.dart';
 import 'package:meta/meta.dart';
 

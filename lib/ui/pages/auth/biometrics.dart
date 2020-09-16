@@ -7,7 +7,6 @@ import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/main.dart';
 import 'package:fusion_wallet/ui/components/custom/button.dart';
-import 'package:fusion_wallet/ui/pages/primary.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 import 'package:local_auth/local_auth.dart';
 
@@ -30,20 +29,6 @@ class _BiometricAuthPageState extends State<BiometricAuthPage> {
   String _authorized = 'Not Authorized';
   bool _isAuthenticating = false;
 
-  Future<void> _checkBiometrics() async {
-    logger.d('Checking biometrics availability');
-    bool canCheckBiometrics;
-    try {
-      canCheckBiometrics = await auth.canCheckBiometrics;
-    } on Exception catch (e) {
-      print(e);
-    }
-    if (!mounted) return;
-
-    setState(() {
-      _canCheckBiometrics = canCheckBiometrics;
-    });
-  }
 
   Future<void> _getAvailableBiometrics() async {
     List<BiometricType> availableBiometrics;
@@ -88,13 +73,10 @@ class _BiometricAuthPageState extends State<BiometricAuthPage> {
     }
   }
 
-  void _cancelAuthentication() {
-    auth.stopAuthentication();
-  }
+
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _getAvailableBiometrics();
   }

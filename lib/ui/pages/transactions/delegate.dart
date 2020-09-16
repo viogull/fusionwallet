@@ -2,12 +2,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fusion_wallet/core/minter_channel.dart';
 import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/core/models/address_data.dart';
-import 'package:fusion_wallet/core/models/coin_list_response.dart';
 import 'package:fusion_wallet/core/models/delegate_ubound_tx_request.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/button.dart';
@@ -249,14 +246,7 @@ class DelegateFundsPage extends StatelessWidget {
             )),
       );
 
-  Widget _buildUsdEndIcon(BuildContext context) => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-        child: SvgPicture.asset("assets/images/icons/ic_dollar.svg",
-            color: Theme.of(context).colorScheme.onBackground,
-            fit: BoxFit.fill,
-            width: 24,
-            height: 24),
-      );
+
 
   inputBorder(BuildContext context) => OutlineInputBorder(
       gapPadding: 4,

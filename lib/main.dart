@@ -5,8 +5,6 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:fusion_wallet/core/abstract/erc20_wallet.dart';
-import 'package:fusion_wallet/ui/pages/erc20_ui.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -15,6 +13,7 @@ import 'package:provider/provider.dart';
 
 import 'core/abstract/admin_notification.dart';
 import 'core/abstract/contact.dart';
+import 'core/abstract/erc20_wallet.dart';
 import 'core/abstract/preferences.dart';
 import 'core/minter_rest.dart';
 import 'core/models.dart';
@@ -35,6 +34,7 @@ import 'ui/pages/auth/pincode.dart';
 import 'ui/pages/auth/recover.dart';
 import 'ui/pages/auth/splash.dart';
 import 'ui/pages/auth/ui.dart';
+import 'ui/pages/erc20_ui.dart';
 import 'ui/pages/primary.dart';
 import 'ui/pages/convert.dart';
 import 'ui/pages/rates.dart';
@@ -210,7 +210,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
           Timer.run(() {
             showCupertinoModalBottomSheet(
                 context: context,
-                builder: (BuildContext context, ScrollController controller) {
+                builder: (BuildContext context) {
                   return ApplyPushDeeplink(url: dynamicLink.link.toString());
                 });
           });
@@ -218,10 +218,11 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
           // https://fusiongroup.page.link/ref
           final Uri deep = dynamicLink.link;
           final ref = deep.queryParameters["from"];
-          logger.d("Referal inviter : ${ref}");
-          injector.get<Vault>().saveLastReferalInviter(ref);
-          StateContainer.of(context).updateInviter(ref);
-          Navigator.pushNamed(context, deepLink.path);
+          showCupertinoModalBottomSheet(
+              context: context,
+              builder: (BuildContext context) {
+                return ApplyPushDeeplink(url: deepLink.toString());
+              });
         }
       }
     }, onError: (OnLinkErrorException e) async {

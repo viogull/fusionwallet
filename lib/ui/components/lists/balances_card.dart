@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fusion_wallet/core/models/address_data_with_usd.dart';
-import 'package:fusion_wallet/core/models/balances.dart';
 import 'package:fusion_wallet/core/models/eth_balance_response.dart';
 import 'package:fusion_wallet/ui/components/balances/balances_card_item.dart';
 import 'package:fusion_wallet/ui/theme.dart';

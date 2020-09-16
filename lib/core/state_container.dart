@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fusion_wallet/core/abstract/erc20_wallet.dart';
 import 'package:fusion_wallet/core/models/coin_list_response.dart';
-import 'package:fusion_wallet/core/models/erc20_balance_request.dart';
 import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 import 'package:nanodart/nanodart.dart';

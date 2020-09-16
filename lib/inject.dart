@@ -1,11 +1,11 @@
-import 'package:fusion_wallet/core/abstract/preferences.dart';
-import 'package:fusion_wallet/core/minter_rest.dart';
-import 'package:fusion_wallet/core/models.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 
+import 'core/abstract/preferences.dart';
 import 'core/minter_channel.dart';
+import 'core/minter_rest.dart';
+import 'core/models.dart';
 import 'utils/biometric.dart';
 import 'utils/haptic.dart';
 import 'utils/shared_prefs.dart';

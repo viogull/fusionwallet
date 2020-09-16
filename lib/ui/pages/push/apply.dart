@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fusion_wallet/core/models/create_push_link_response.dart';
 import 'package:fusion_wallet/ui/components/custom/scaffold.dart';
 
 import '../../../inject.dart';
@@ -12,7 +11,7 @@ class ApplyPushDeeplink extends StatelessWidget {
   final String url;
 
   ApplyPushDeeplink({this.url});
-
+//TODO
   @override
   Widget build(BuildContext context) {
     return FusionScaffold(

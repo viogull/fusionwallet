@@ -10,8 +10,6 @@ import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_bloc/form_bloc.dart';
 import 'package:fusion_wallet/core/minter_rest.dart';
-import 'package:fusion_wallet/core/models/can_recover_response.dart';
-import 'package:fusion_wallet/core/models/profile_response.dart';
 import 'package:fusion_wallet/core/models/recover_response.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/button.dart';
@@ -65,6 +63,7 @@ class RecoverAccountBloc extends FormBloc<String, String> {
               failureResponse: localizations.cannotRecoverAccount());
       }
     } on Exception catch (e) {
+
       emitFailure();
     }
   }

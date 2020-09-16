@@ -25,12 +25,9 @@ class AddContactPage extends StatefulWidget {
 }
 
 class _AddContactPageState extends State<AddContactPage> {
-  final _cancelController = TextEditingController(text: "Cancel");
-  var _aspectTolerance = 0.00;
+
   var _numberOfCameras = 0;
-  var _selectedCamera = -1;
-  var _useAutoFocus = true;
-  var _autoEnableFlash = false;
+
   static final _possibleFormats = BarcodeFormat.values.toList()
     ..removeWhere((e) => e == BarcodeFormat.unknown);
   List<BarcodeFormat> selectedFormats = [..._possibleFormats];
@@ -205,6 +202,7 @@ class AddContactFormBloc extends FormBloc<String, String> {
   Future<Function> close() {
     address.close();
     accountName.close();
+    super.close();
   }
 
   final showSuccessResponse = BooleanFieldBloc();
@@ -239,7 +237,7 @@ class AddContactFormBloc extends FormBloc<String, String> {
         emitSuccess();
       } else {
         address.addFieldError("Check address");
-        ;
+
         emitFailure();
       }
     } on Exception {

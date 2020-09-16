@@ -138,7 +138,7 @@ class AccountCreationNameForm extends StatelessWidget {
                               'link': ActionTextStyle(
                               decoration: TextDecoration.underline,
                               onTap: (TextSpan text, Map<String, String> attrs) => {
-                              showCupertinoModalBottomSheet(context: context, builder: (context, controller) {
+                              showCupertinoModalBottomSheet(context: context, builder: (context) {
                               return TermsConditions();
                               })
                               },

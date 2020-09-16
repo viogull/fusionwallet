@@ -23,20 +23,16 @@ import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
-import 'package:wallet_hd/wallet_hd.dart';
 
 import './../../ui/pages/pages.dart';
 import '../../inject.dart';
-import 'auth/intro.dart';
-import 'auth/share_passphrase.dart';
+import 'adresses.dart';
 import 'auth/lockscreen.dart';
-
 import 'auth/splash.dart';
 import 'contacts/contacts.dart';
 import 'exchange.dart';
 import 'history.dart';
 import 'settings.dart';
-import 'adresses.dart';
 
 final logger = Logger();
 
@@ -145,7 +141,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
             onClick: () {
               showCupertinoModalBottomSheet(
                   context: context,
-                  builder: (context, controller) {
+                  builder: (context) {
                     return ShareAddressPage(
                         "${StateContainer.of(context).selectedAccount.address}");
                   });
@@ -180,7 +176,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
             onClick: () {
               showCupertinoModalBottomSheet(
                   context: context,
-                  builder: (BuildContext context, ScrollController controller) {
+                  builder: (BuildContext context) {
                     return ShowPassphraseUi(
                         mnemonic: StateContainer.of(context)
                             .selectedAccount
@@ -195,7 +191,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
             showBarModalBottomSheet(
                 context: context,
                 elevation: 24,
-                builder: (BuildContext context, ScrollController controller) {
+                builder: (BuildContext context) {
                   return ChangeAccountNameForm();
                 });
           },
@@ -207,7 +203,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
             onClick: () {
               showCupertinoModalBottomSheet(
                   context: context,
-                  builder: (BuildContext context, ScrollController controller) {
+                  builder: (BuildContext context) {
                     return PopupsRemoveAccount(onClearSelected: () async {
                       await injector.get<Vault>().deleteAll();
                       Navigator.of(context).pushNamedAndRemoveUntil(

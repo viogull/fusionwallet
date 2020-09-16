@@ -102,18 +102,6 @@ class _PasswordCreationPageState extends State<PasswordCreationPage> {
     // print(_otp);
   }
 
-  void _clean() {
-    setState(() {
-      if (_otp.length > 0) {
-        _otp = _otp.substring(0, _otp.length - 1);
-        for (int i = _otp.length; i < 6; i++) _otpSymbols[i] = "\u{25CB}";
-      }
-    });
-    if (_otp.length < 6) passCreate = false;
-
-    // print(_otp);
-  }
-
 
   @override
   Widget build(BuildContext context) {
