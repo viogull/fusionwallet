@@ -15,7 +15,7 @@
 
 
     <application
-        android:name=".FusionApplication"
+        android:name="io.flutter.app.FlutterApplication"
         android:label="Fusion"
         android:icon="@mipmap/launcher_icon">
 

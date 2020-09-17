@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:instabug_flutter/CrashReporting.dart';
-import 'package:instabug_flutter/Instabug.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
@@ -100,23 +98,17 @@ void main() async {
 
     OneSignal.shared
         .setInFocusDisplayType(OSNotificationDisplayType.notification);
-    Instabug.start('d1b6a52e4472dc8189e4acc091569f17', [InvocationEvent.shake]);
-    FlutterError.onError = (FlutterErrorDetails details) {
-      Zone.current.handleUncaughtError(details.exception, details.stack);
-    };
 
-    runZoned<Future<void>>(() async {
-      runApp(DevicePreview(
-        enabled: !kReleaseMode,
-        builder: (context) => new StateContainer(
-            child: new App(), accounts: accsBox, preferences: _prefsSingle),
-      ));
-    }, onError: (dynamic error, StackTrace stackTrace) {
-      CrashReporting.reportCrash(error, stackTrace);
-    });
+
+
+    runApp(DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => new StateContainer(
+          child: new App(), accounts: accsBox, preferences: _prefsSingle),
+    ));
 
   } on Exception catch (exception) {
-    logger.d("Error on start");
+    logger.e("Error on start. Reason -> ${exception}");
   }
 }
 
