@@ -77,7 +77,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
    // injector.get<MinterRest>().getEthBalance(address: Hive.box<Erc20Wallet>(erc20walletsBox).getAt(0).address);
     Future.delayed(const Duration(seconds: 3), () {
       logger.d("Presenting bug report information");
-      FlashHelper.infoBar(context, message: "Shake device to open special bug report tool.", duration: const Duration(seconds: 2));
+      FlashHelper.infoBar(context, message: AppLocalizations.of(context).instabugInfoMessage(), duration: const Duration(seconds: 2));
 
     });
 

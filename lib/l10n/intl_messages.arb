@@ -1,5 +1,5 @@
 {
-	"@@last_modified": "2020-09-10T19:58:28.698909",
+	"@@last_modified": "2020-09-17T18:31:19.770808",
 	"appName": "Fusion",
 	"@appName": {
 		"type": "text",
@@ -1304,7 +1304,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"notificationBody": "Open Natrium to view this transaction",
+	"notificationBody": "Open Fusion to view this transaction",
 	"@notificationBody": {
 		"description": "notification_body",
 		"type": "text",
@@ -1334,7 +1334,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"kaliumWallet": "Natrium Wallet",
+	"kaliumWallet": "Fusion Wallet",
 	"@kaliumWallet": {
 		"description": "kalium_wallet",
 		"type": "text",
@@ -2125,6 +2125,16 @@
 	},
 	"privateKeyCopied": "Private key was copied",
 	"@privateKeyCopied": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"chooseCurrency": "Choose currency",
+	"@chooseCurrency": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"instabugInfoMessage": "Shake device to open special bug report tool.",
+	"@instabugInfoMessage": {
 		"type": "text",
 		"placeholders": {}
 	}

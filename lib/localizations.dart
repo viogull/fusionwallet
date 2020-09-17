@@ -1708,6 +1708,8 @@ class AppLocalizations {
   String chooseCurrency() =>
       Intl.message("Choose currency",
           name: 'chooseCurrency');
+
+ String instabugInfoMessage() => Intl.message("Shake device to open special bug report tool.", name: 'instabugInfoMessage');
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

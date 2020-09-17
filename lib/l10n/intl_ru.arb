@@ -680,7 +680,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"onStr": "On",
+	"onStr": "На",
 	"@onStr": {
 		"description": "generic_on",
 		"type": "text",
@@ -722,7 +722,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"addressCopied": "Адрес скопирован",
+	"addressCopied": "Адрес скопирован в буфер обмена",
 	"@addressCopied": {
 		"description": "receive_copied",
 		"type": "text",
@@ -980,7 +980,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"mantaError": "Couldn't Verify Request!",
+	"mantaError": "Не удалось проверить запрос",
 	"@mantaError": {
 		"description": "Was unable to verify the manta/appia payment request (from scanning QR code, etc.)",
 		"type": "text",
@@ -1010,7 +1010,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"amountMissing": "Пожалуйста, введите сумму",
+	"amountMissing": "Пожалуйста,  введите сумму",
 	"@amountMissing": {
 		"description": "send_enter_amount",
 		"type": "text",
@@ -1316,19 +1316,19 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"settingsTransfer": "Load from Paper Wallet",
+	"settingsTransfer": "Загрузить из бумажного кошелька",
 	"@settingsTransfer": {
 		"description": "settings_transfer",
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferError": "An error has occurred during the transfer. Please try again later.",
+	"transferError": "Во время передачи произошла ошибка. Пожалуйста, попробуйте позже.",
 	"@transferError": {
 		"description": "transfer_error",
 		"type": "text",
 		"placeholders": {}
 	},
-	"paperWallet": "Paper Wallet",
+	"paperWallet": "Бумажный кошелек",
 	"@paperWallet": {
 		"description": "paper_wallet",
 		"type": "text",
@@ -1454,7 +1454,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"lockAppSetting": "Аутентифицироваться при запуске",
+	"lockAppSetting": "Авторизоваться при запуске",
 	"@lockAppSetting": {
 		"description": "authenticate_on_launch",
 		"type": "text",
@@ -1478,7 +1478,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"securityHeader": "Security",
+	"securityHeader": "Безопасность",
 	"@securityHeader": {
 		"description": "security_header",
 		"type": "text",
@@ -1508,7 +1508,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"setWalletPassword": "Set Wallet Password",
+	"setWalletPassword": "Установить пароль кошелька",
 	"@setWalletPassword": {
 		"description": "Allows user to encrypt wallet with a password",
 		"type": "text",
@@ -1706,7 +1706,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"secretWarning": "If you lose your device or uninstall the application, you'll need your secret phrase or seed to recover your funds!",
+	"secretWarning": "Если вы потеряете свое устройство или удалите приложение, вам понадобится секретная фраза или начальное число, чтобы вернуть свои средства!",
 	"@secretWarning": {
 		"description": "Secret warning",
 		"type": "text",
@@ -1844,7 +1844,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"noSkipButton": "Нет, пропустить",
+	"noSkipButton": "Нет,  пропустить",
 	"@noSkipButton": {
 		"description": "A button that declines and skips the mentioned process.",
 		"type": "text",
@@ -1896,7 +1896,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"accessBlocked": "Профиль заблокирован.  Пожалуйста, свяжитесь с администрацией.",
+	"accessBlocked": "Доступ заблокирован.  Пожалуйста, свяжитесь с администрацией.",
 	"copiedSuccesfullyMessage": "Фраза сохранена.",
 	"errorCameraRestriction": "Пользователь не предоставил разрешение камере!",
 	"errorInvalidInputsPush": "Недействительные значения для push-транзакции",
@@ -1914,7 +1914,7 @@
 	"toolbarRewards": "Награды",
 	"toolbarTitleShowPassphrase": "Показать кодовую фразу",
 	"authSuccess": "Успешная авторизация",
-	"authenticateToViewTransaction": "Пожалуйста, авторизуйтесь, чтобы просмотреть транзакцию",
+	"authenticateToViewTransaction": "Пожалуйста,  авторизуйтесь, чтобы просмотреть транзакцию",
 	"cannotRecoverAccount": "Невозможно восстановить эту учетную запись.",
 	"chooseAccountTitle": "Выберите аккаунт",
 	"chooseContactTitle": "Выберите контакт",
@@ -1939,6 +1939,8 @@
 	"labelChooseAccType": "Выберите тип кошелька",
 	"labelErc20Wallet": "Кошелек ERC20",
 	"labelMinterWallet": "Minter",
-	"showErcPrivateKeyDrawerLabel": "Ключи ERC20",
-	"privateKeyCopied": "Приватный ключ скопирован!"
+	"showErcPrivateKeyDrawerLabel": "Прив. ключ ERC20",
+	"privateKeyCopied": "Приватный ключ скопирован!",
+	"chooseCurrency": "Выберите валюту",
+	"instabugInfoMessage": "Встряхните устройство, чтобы открыть специальный инструмент сообщения об ошибке."
 }
