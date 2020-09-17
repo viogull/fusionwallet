@@ -9,15 +9,14 @@ import 'package:fusion_wallet/core/minter_rest.dart';
 import 'package:fusion_wallet/core/models/transanctions_response.dart';
 import 'package:fusion_wallet/ui/components/custom/button.dart';
 import 'package:fusion_wallet/ui/components/transaction_view.dart';
-
 import 'package:fusion_wallet/ui/pages/adresses.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
+import './pages.dart';
 import '../../core/state_container.dart';
 import '../../inject.dart';
-import './pages.dart';
 import '../../localizations.dart';
 import '../components/lists/balances_card.dart';
 import 'additional/add_account_ui.dart';
@@ -215,6 +214,7 @@ class AccountsPage extends StatelessWidget {
                   final theme = Theme.of(context);
                   return  (txs.isNotEmpty)
                         ? Container(
+                    margin: const EdgeInsets.only(bottom: 64, top: 16),
                             height: MediaQuery.of(context).size.height * 0.6,
                             child: ListView.builder(
                                 padding: const EdgeInsets.symmetric(

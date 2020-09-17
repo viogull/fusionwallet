@@ -1704,6 +1704,10 @@ class AppLocalizations {
   String privateKeyCopied()  =>
       Intl.message("Private key was copied",
           name: 'privateKeyCopied');
+
+  String chooseCurrency() =>
+      Intl.message("Choose currency",
+          name: 'chooseCurrency');
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -33,7 +33,9 @@ allprojects {
         jcenter()
         maven { url "https://dl.bintray.com/minterteam/android" }
         google()
-
+        maven {
+            url "https://sdks.instabug.com/nexus/repository/instabug-cp"
+        }
     }
 }
 

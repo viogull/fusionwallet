@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:instabug_flutter/CrashReporting.dart';
+import 'package:instabug_flutter/Instabug.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
@@ -28,23 +30,22 @@ import 'ui/pages/auth/account_name.dart';
 import 'ui/pages/auth/biometrics.dart';
 import 'ui/pages/auth/conditions.dart';
 import 'ui/pages/auth/intro.dart';
+import 'ui/pages/auth/lockscreen.dart';
 import 'ui/pages/auth/passphrase.dart';
-import 'ui/pages/auth/share_passphrase.dart';
 import 'ui/pages/auth/pincode.dart';
 import 'ui/pages/auth/recover.dart';
+import 'ui/pages/auth/share_passphrase.dart';
 import 'ui/pages/auth/splash.dart';
 import 'ui/pages/auth/ui.dart';
-import 'ui/pages/erc20_ui.dart';
-import 'ui/pages/primary.dart';
 import 'ui/pages/convert.dart';
-import 'ui/pages/rates.dart';
+import 'ui/pages/erc20_ui.dart';
+import 'ui/pages/history.dart';
 import 'ui/pages/info/faq.dart';
 import 'ui/pages/info/feedback.dart';
-import 'ui/pages/auth/lockscreen.dart';
 import 'ui/pages/pages.dart';
-import 'ui/pages/popups/popups_history_page.dart';
-
-import 'ui/pages/history.dart';
+import 'ui/pages/popups/overlay_history.dart';
+import 'ui/pages/primary.dart';
+import 'ui/pages/rates.dart';
 import 'ui/pages/settings.dart';
 import 'ui/pages/transactions/rewards.dart';
 import 'ui/theme.dart';
@@ -99,12 +100,21 @@ void main() async {
 
     OneSignal.shared
         .setInFocusDisplayType(OSNotificationDisplayType.notification);
+    Instabug.start('d1b6a52e4472dc8189e4acc091569f17', [InvocationEvent.shake]);
+    FlutterError.onError = (FlutterErrorDetails details) {
+      Zone.current.handleUncaughtError(details.exception, details.stack);
+    };
 
-    runApp(DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) => new StateContainer(
-          child: new App(), accounts: accsBox, preferences: _prefsSingle),
-    ));
+    runZoned<Future<void>>(() async {
+      runApp(DevicePreview(
+        enabled: !kReleaseMode,
+        builder: (context) => new StateContainer(
+            child: new App(), accounts: accsBox, preferences: _prefsSingle),
+      ));
+    }, onError: (dynamic error, StackTrace stackTrace) {
+      CrashReporting.reportCrash(error, stackTrace);
+    });
+
   } on Exception catch (exception) {
     logger.d("Error on start");
   }
@@ -118,7 +128,6 @@ class App extends StatefulWidget {
 class AppState extends State<App> {
   @override
   void initState() {
-    //  Instabug.start('d1b6a52e4472dc8189e4acc091569f17', [InvocationEvent.shake]);
     super.initState();
   }
 
@@ -246,7 +255,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
         await FirebaseDynamicLinks.instance.getInitialLink();
     final Uri deepLink = data?.link;
     if (deepLink != null) {
-      Navigator.pushNamed(context, deepLink.path);
+     //Navigator.pushNamed(context, deepLink.path);
     }
   }
 

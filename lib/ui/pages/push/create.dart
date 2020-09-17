@@ -1,6 +1,7 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -53,7 +54,7 @@ class PushFormBloc extends FormBloc<String, String> {
     final req = await injector.get<MinterRest>()
         .createPushLink(txData: CreatePushLinkRequest(coin: coin.value,
         value: amount, payload: receiverName,sendFrom: sendFrom),
-      receiver: receiverName, sender: "" );
+      receiver: receiverName, sender: receiverName );
 
     logger.d(req);
 
@@ -84,7 +85,7 @@ class PushFormBloc extends FormBloc<String, String> {
       ),
       iosParameters: IosParameters(
         bundleId: "com.fusiongroup.wallet",
-
+        appStoreId: '1526215694'
       ),
     );
     final short =  await params.buildShortLink();
@@ -189,6 +190,9 @@ class PushFundsPage extends StatelessWidget {
                                   keyboardType: TextInputType.name,
                                   maxLines: 1,
                                   decoration: InputDecoration(
+                                    labelStyle: TextStyle(
+                                      color: Theme.of(context).colorScheme.onBackground
+                                    ),
                                       contentPadding:
                                           const EdgeInsets.symmetric(
                                               horizontal: 16, vertical: 4),
@@ -221,6 +225,7 @@ class PushFundsPage extends StatelessWidget {
                                 data: Theme.of(context),
                                 child: TextFieldBlocBuilder(
                                   textFieldBloc: pushBloc.qty,
+                                  keyboardType: TextInputType.numberWithOptions(decimal: true, signed: true),
                                   decoration: InputDecoration(
                                       contentPadding:
                                           const EdgeInsets.symmetric(

@@ -9,7 +9,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fusion_wallet/core/minter_channel.dart';
 import 'package:fusion_wallet/ui/pages/auth/share_passphrase.dart';
-import 'package:fusion_wallet/ui/pages/popups/popup_page.dart';
+import 'package:fusion_wallet/ui/pages/popups/dialog.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:share/share.dart';
 

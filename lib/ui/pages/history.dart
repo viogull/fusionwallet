@@ -3,10 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/localizations.dart';
-import 'package:fusion_wallet/ui/components/custom/scaffold.dart';
-import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/ui/components/custom/button.dart';
-import 'package:fusion_wallet/ui/pages/popups/popups_history_page.dart';
+import 'package:fusion_wallet/ui/components/custom/scaffold.dart';
+import 'package:fusion_wallet/ui/pages/popups/overlay_history.dart';
+import 'package:fusion_wallet/ui/theme.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../inject.dart';

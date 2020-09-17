@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fusion_wallet/core/models.dart';
+import 'package:fusion_wallet/core/models/multisend_request.dart';
+import 'package:fusion_wallet/core/models/receivers.dart';
+import 'package:fusion_wallet/core/models/send_tx_request.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/scaffold.dart';
 import 'package:fusion_wallet/ui/pages/transactions/receiver_card.dart';
@@ -29,6 +32,11 @@ class _SendFundsState extends State<SendFundsPage> {
 
 
   List<TextEditingController> _qtyControllers = [TextEditingController()];
+  List<TextEditingController> _addressControllers = [TextEditingController()];
+
+
+
+  final log = injector.get<Logger>();
 
 
 
@@ -87,23 +95,14 @@ class _SendFundsState extends State<SendFundsPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Text(
-                            AppLocalizations.of(context).labelCoin(),
-                            style: TextStyle(
-                                color: Theme.of(context).colorScheme.onSurface,
-                                fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.start,
-                          ),
-                        ),
-                      ),
+
                       DropdownSearch<String>(
                         mode: Mode.MENU,
                         maxHeight: 300,
                         showSelectedItem: true,
+                        label: AppLocalizations.of(context).labelCoin(),
+                        hint: AppLocalizations.of(context).chooseCurrency(),
+
                         selectedItem: (this._selectedCoin == null)
                             ? ""
                             : this._selectedCoin,
@@ -154,6 +153,7 @@ class _SendFundsState extends State<SendFundsPage> {
                                 setState(() {
                                   this._receiversQty ++;
                                   _qtyControllers.add(TextEditingController());
+                                  _addressControllers.add(TextEditingController());
                                 });
                               }
                             },
@@ -179,35 +179,80 @@ class _SendFundsState extends State<SendFundsPage> {
                           animationDuration: const Duration(milliseconds: 800),
                           shape: RoundedRectangleBorder(borderRadius: FusionTheme.borderRadius),
                           onPressed: () async {
-                            // log.d(
-                            //     "Trying send ${this._qtyController.value.text}  ${this._selectedCoin}  to ${this._selectedAddress}");
 
-                            // final sendTxRes = await injector
-                            //     .get<MinterRest>()
-                            //     .send(
-                            //         txData: SendTxRequest(
-                            //             to: this._selectedAddress,
-                            //             value: this._qtyController.value.text,
-                            //             mnemonic: StateContainer.of(context)
-                            //                 .selectedAccount
-                            //                 .mnemonic,
-                            //             coin: this._selectedCoin),
-                            //         hash: StateContainer.of(context)
-                            //             .selectedAccount
-                            //             .hash);
-                         //   log.d("Response Data after sending... ${sendTxRes}");
-                         //    if (sendTxRes == true) {
-                         //      FlashHelper.successBar(context,
-                         //          message: AppLocalizations.of(context)
-                         //              .flashOperationSuccess());
-                         //      Future.delayed(Duration(seconds: 1), () {
-                         //        Navigator.pop(context);
-                         //      });
-                         //    } else {
-                         //      FlashHelper.errorBar(context,
-                         //          message: AppLocalizations.of(context)
-                         //              .flashOperationFailed());
-                         //    }
+                            log.d("Starting sending funds operation. Coin -> [$_selectedCoin]. ");
+                            log.d("Count of receivers -> $_receiversQty . Iterating...");
+
+
+                            if(_receiversQty == 1) {
+                               log.d(
+                                   "Trying send ${this._qtyControllers.first.value.text}  ${this._selectedCoin}  to ${this._addressControllers.first.value.text}");
+
+                               final sendTxRes = await injector
+                                   .get<MinterRest>()
+                                   .send(
+                                       txData: SendTxRequest(
+                                           to: this._addressControllers.first.value.text,
+                                           value: this._qtyControllers.first.value.text,
+                                           mnemonic: StateContainer.of(context)
+                                               .selectedAccount
+                                               .mnemonic,
+                                           coin: this._selectedCoin),
+                                       hash: StateContainer.of(context)
+                                           .selectedAccount
+                                           .hash);
+                              log.d("Response Data after sending... ${sendTxRes}");
+                               if (sendTxRes == true) {
+                                 FlashHelper.successBar(context,
+                                     message: AppLocalizations.of(context)
+                                         .flashOperationSuccess());
+                                 Future.delayed(Duration(seconds: 1), () {
+                                   Navigator.pop(context);
+                                 });
+                               } else {
+                                 FlashHelper.errorBar(context,
+                                     message: AppLocalizations.of(context)
+                                         .flashOperationFailed());
+                               }
+                            } else if(_receiversQty > 1) {
+                              //TODO Perform multisend
+
+                              List<Receivers> receivers = [];
+                              log.d("Building multisend request body");
+                              for(var i = 0; i < _receiversQty; i++) {
+                                log.d("${_qtyControllers[i].value.text} ${this._selectedCoin} -----> ${_addressControllers[i].value.text}");
+                                receivers.add(Receivers(to: _addressControllers[i].value.text,  value: _qtyControllers[i].value.text));
+                              }
+                              var multisendRequest = MultisendRequest(
+                                mnemonic: StateContainer.of(context)
+                                    .selectedAccount
+                                    .mnemonic,
+                                coin: this._selectedCoin,
+                                receivers: receivers
+                              );
+                              final multisendTxRes = await injector
+                                  .get<MinterRest>()
+                                  .multisend(
+                                  request: multisendRequest,
+                                  hash: StateContainer.of(context)
+                                      .selectedAccount
+                                      .hash);
+                              log.d("Response Data after sending... ${multisendTxRes}");
+                              if (multisendTxRes == true) {
+                                FlashHelper.successBar(context,
+                                    message: AppLocalizations.of(context)
+                                        .flashOperationSuccess());
+                                Future.delayed(Duration(seconds: 1), () {
+                                  Navigator.pop(context);
+                                });
+                              } else {
+                                FlashHelper.errorBar(context,
+                                    message: AppLocalizations.of(context)
+                                        .flashOperationFailed());
+                              }
+
+                            }
+
                           },
                           child: Text(
                             AppLocalizations.of(context).buttonPreview(),
@@ -239,10 +284,11 @@ class _SendFundsState extends State<SendFundsPage> {
               setState(() {
                 this._receiversQty --;
                 this._qtyControllers.removeLast();
+                this._addressControllers.removeLast();
               });
             }
 
-          }, ),
+          },addressController: _addressControllers[index]),
       itemCount: this._receiversQty,),
     );
   }

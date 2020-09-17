@@ -15,6 +15,7 @@ import 'package:fusion_wallet/core/models/estimate_response.dart';
 import 'package:fusion_wallet/core/models/eth_balance_response.dart';
 import 'package:fusion_wallet/core/models/exchange_rate_response.dart';
 import 'package:fusion_wallet/core/models/minter_coins_response.dart';
+import 'package:fusion_wallet/core/models/multisend_request.dart';
 import 'package:fusion_wallet/core/models/nonce_response.dart';
 import 'package:fusion_wallet/core/models/profile_response.dart';
 import 'package:fusion_wallet/core/models/recover_response.dart';
@@ -267,7 +268,32 @@ class MinterRest {
     }
   }
 
-  Future<dynamic> multisend() {}
+  Future<bool> multisend({MultisendRequest request, String hash}) async {
+    try {
+      Response response = await fusionDio.post('/tx/v2/multisend?hash=$hash',
+          data: request.toJson(),
+          options: Options(contentType: "application/json"));
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return true;
+      } else
+        return false;
+    } on DioError catch (exception) {
+      if (exception == null) {
+        if (exception == null ||
+            exception.toString().contains('SocketException')) {
+          throw Exception("Network Error");
+        } else if (exception.type == DioErrorType.RECEIVE_TIMEOUT ||
+            exception.type == DioErrorType.CONNECT_TIMEOUT) {
+          throw Exception(
+              "Could'nt connect, please ensure you have a stable network.");
+        } else {
+          return false;
+        }
+      }
+    }
+    return false;
+  }
 
   Future<bool> delegate({DelegateUboundTxRequest txData, String hash}) async {
     try {

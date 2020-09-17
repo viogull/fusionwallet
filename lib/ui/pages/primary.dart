@@ -12,7 +12,7 @@ import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/scaffold.dart';
 import 'package:fusion_wallet/ui/pages/accounts.dart';
 import 'package:fusion_wallet/ui/pages/auth/change_account_name.dart';
-import 'package:fusion_wallet/ui/pages/popups/popups_remove_account.dart';
+import 'package:fusion_wallet/ui/pages/popups/delete_account.dart';
 import 'package:fusion_wallet/ui/pages/show_passphrase.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/utils/flasher.dart';
@@ -75,6 +75,12 @@ class _BottomHomePageState extends State<BottomHomePage> {
     }
     loadDynamicLinks();
    // injector.get<MinterRest>().getEthBalance(address: Hive.box<Erc20Wallet>(erc20walletsBox).getAt(0).address);
+    Future.delayed(const Duration(seconds: 3), () {
+      logger.d("Presenting bug report information");
+      FlashHelper.infoBar(context, message: "Shake device to open special bug report tool.", duration: const Duration(seconds: 2));
+
+    });
+
     super.initState();
   }
 

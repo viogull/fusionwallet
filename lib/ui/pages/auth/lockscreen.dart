@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
+import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:logger/logger.dart';
 import 'package:meta/meta.dart';
@@ -494,24 +495,27 @@ class KeyboardNumber extends StatelessWidget {
           shape: BoxShape.rectangle,
           color: Theme.of(context).colorScheme.background),
       alignment: Alignment.center,
-      child: MaterialButton(
-        padding: EdgeInsets.all(1.0),
-        onPressed: () {
-          injector.get<HapticUtil>().selection();
-          onPressed.call();
-        },
-        elevation: 50,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        height: 90.0,
-        child: AutoSizeText(
-          "$n",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 24 * MediaQuery.of(context).textScaleFactor,
-            color: Theme.of(context).colorScheme.onSurface,
-            fontWeight: FontWeight.bold,
+      child: Bounce(
+        duration: const Duration(milliseconds: 600),
+        child: MaterialButton(
+          padding: EdgeInsets.all(1.0),
+          onPressed: () {
+            injector.get<HapticUtil>().base();
+            onPressed.call();
+          },
+          elevation: 50,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          height: 90.0,
+          child: AutoSizeText(
+            "$n",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 24 * MediaQuery.of(context).textScaleFactor,
+              color: Theme.of(context).colorScheme.onSurface,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),

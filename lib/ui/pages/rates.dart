@@ -5,6 +5,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:fusion_wallet/core/models/currency_prices_response.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/scaffold.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../inject.dart';
 
@@ -53,7 +54,7 @@ class RateExchangePage extends StatelessWidget {
                   rows: [
                 DataRow(cells:
                 [
-                  DataCell(Text('BTC'),),
+                  DataCell(Text('BTC', style: headerStyle(),)),
                   DataCell(Text(response.bTC.buy.toString(),textAlign: TextAlign.center),),
                   DataCell(Text(response.bTC.sell.toString()),) ]
                 ),
@@ -67,7 +68,7 @@ class RateExchangePage extends StatelessWidget {
                     [
                       DataCell(Text('FUSION'),),
                       DataCell(Text(response.fUSION.buy.toString(),textAlign: TextAlign.center),),
-                      DataCell(Text(response.fUSION.sell.toString()),) ]
+                      DataCell(Text(response.fUSION.sell.toString(), textAlign: TextAlign.center,),) ]
                     ),
                     DataRow(cells:
                     [
@@ -90,4 +91,6 @@ class RateExchangePage extends StatelessWidget {
           }),
     );
   }
+
+  headerStyle() => GoogleFonts.cabinCondensed(fontSize: 16);
 }

@@ -12,7 +12,7 @@ import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/ui/components/custom/button.dart';
 import 'package:fusion_wallet/ui/components/custom/scaffold.dart';
 import 'package:fusion_wallet/ui/pages/auth/account_name.dart';
-import 'package:fusion_wallet/ui/pages/popups/popup_page.dart';
+import 'package:fusion_wallet/ui/pages/popups/dialog.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:share/share.dart';

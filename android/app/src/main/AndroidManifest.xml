@@ -15,7 +15,7 @@
 
 
     <application
-        android:name="io.flutter.app.FlutterApplication"
+        android:name=".FusionApplication"
         android:label="Fusion"
         android:icon="@mipmap/launcher_icon">
 
@@ -23,6 +23,7 @@
         <activity
             android:name="com.fusiongroup.fusion.wallet.MainActivity"
             android:launchMode="singleTop"
+
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"

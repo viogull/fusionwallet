@@ -31,6 +31,9 @@ import '../../theme.dart';
 
 typedef ReceiverCardCallback = Function();
 
+
+typedef ReceiverCardAddressCallback = Function(String address);
+
 enum ReceiverCardMode {
   NOT_SELECTED,
   ADDRESS,
@@ -49,9 +52,10 @@ class ReceiverCard extends StatefulWidget {
   ReceiverCardCallback onMinusClicked;
   bool isFirst;
   TextEditingController qtyController;
+  TextEditingController addressController;
 
 
-  ReceiverCard({this.addressData, this.qtyController, this.isFirst = false,this.isLast = false, this.onMinusClicked});
+  ReceiverCard({this.addressData, this.qtyController, this.isFirst = false,this.isLast = false, this.onMinusClicked, this.addressController});
 
   @override
   _ReceiverCardState createState ()=> _ReceiverCardState();
@@ -175,7 +179,7 @@ class _ReceiverCardState extends State<ReceiverCard> {
                 primaryColor:
                 Theme.of(context).colorScheme.primary),
             child: TextFormField(
-              keyboardType: TextInputType.number,
+              keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
               controller: widget.qtyController,
               textInputAction: TextInputAction.done,
               style: TextStyle(
@@ -189,7 +193,7 @@ class _ReceiverCardState extends State<ReceiverCard> {
                   hintText:
                   AppLocalizations.of(context).enterAmount,
                   border: inputBorder(context),
-                  enabledBorder: inputBorder(context)),
+                  ),
             ),
           ),
           Align(
@@ -228,8 +232,7 @@ class _ReceiverCardState extends State<ReceiverCard> {
                   contentPadding:
                   const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                   hintText: AppLocalizations.of(context).enterAddress,
-                  hintStyle:
-                  TextStyle(color: colors.onBackground.withOpacity(0.7)),
+
                   border: inputBorder(context),
                   enabled: true,
                   suffixIcon: IconButton(
@@ -239,8 +242,7 @@ class _ReceiverCardState extends State<ReceiverCard> {
                         this.mode = ReceiverCardMode.NOT_SELECTED;
                       });
                     },
-                  ),
-                  enabledBorder: inputBorder(context)),
+                  ),),
             ),
           );
         }
@@ -278,7 +280,7 @@ class _ReceiverCardState extends State<ReceiverCard> {
             data:
             ThemeData(primaryColor: Theme.of(context).colorScheme.primary),
             child: TextFormField(
-              initialValue: _selectedAddress,
+              controller: widget.addressController,
               style: TextStyle(color: colors.onBackground.withOpacity(0.7)),
               decoration: InputDecoration(
                   contentPadding:
@@ -361,6 +363,8 @@ class _ReceiverCardState extends State<ReceiverCard> {
                     setState(() {
                       this.mode = ReceiverCardMode.SELECTED;
                       this._selectedAddress = modalAddressSelection as String;
+                      widget.addressController.text = _selectedAddress;
+
                     });
                   }),
               buildReceiverCardItem(
@@ -409,6 +413,7 @@ class _ReceiverCardState extends State<ReceiverCard> {
                     setState(() {
                       this.mode = ReceiverCardMode.SELECTED;
                       this._selectedAddress = modalAddressSelection as String;
+                      widget.addressController.text = _selectedAddress;
                     });
                   }),
               buildReceiverCardItem(

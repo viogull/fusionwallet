@@ -156,15 +156,19 @@ class SharePush extends StatelessWidget {
                     alignment: MainAxisAlignment.center,
                     children: <Widget>[
                       RaisedButton(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: FusionTheme.borderRadius
+                        ),
                         child: AutoSizeText(
                           AppLocalizations.of(context).buttonClose(),
                           minFontSize: 16,
                           style: TextStyle(
                               color: Theme.of(context).colorScheme.onPrimary),
                         ),
-                        color: Theme.of(context).colorScheme.error,
+                        color: Colors.red,
                         onPressed: () {
                           Navigator.of(context).pop();
+
                         },
                       )
                     ],

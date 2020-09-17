@@ -5,6 +5,7 @@ import 'package:fusion_wallet/core/models/transaction.dart';
 import 'package:fusion_wallet/utils/io_tools.dart';
 import 'package:fusion_wallet/utils/numbers.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../inject.dart';
 import '../theme.dart';
@@ -24,11 +25,28 @@ class TransactionView extends StatelessWidget {
       isReceiving = false;
     var type;
 
+
+
+    launchURL(url) async {
+      if (await canLaunch(url)) {
+        await launch(url);
+      } else {
+        throw 'Could not launch $url';
+      }
+    }
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         injector.get<HapticUtil>().success();
         FlashHelper.infoBar(context, message: "Link with transaction info was copied to clipboard.");
-        IOTools.setSecureClipboardItem("https://explorer.minter.network/transactions/${transaction.txn}");
+        final comment = "https://explorer.minter.network/transactions/${transaction.hash}";
+
+        IOTools.setSecureClipboardItem(comment);
+      },
+      onLongPress: () async  {
+        final comment = "https://explorer.minter.network/transactions/${transaction.hash}";
+        debugPrint("Tx Url -> $comment");
+        await launchURL(comment);
+
       },
       child: Card(
         elevation: 4,
