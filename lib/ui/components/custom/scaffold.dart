@@ -17,6 +17,9 @@ class FusionScaffold extends StatelessWidget {
   final bool hideDrawer;
   final bool hideToolbar;
 
+
+  final Widget fab;
+
   FusionScaffold(
       {@required this.child,
       this.title,
@@ -26,7 +29,8 @@ class FusionScaffold extends StatelessWidget {
       this.onBackClicked,
       this.hideDrawer = true,
       this.hideToolbar = false,
-      this.appBarIcon});
+      this.appBarIcon,
+      this.fab});
 
   @override
   Widget build(BuildContext context) {
@@ -49,11 +53,13 @@ class FusionScaffold extends StatelessWidget {
         SafeArea(
           bottom: false,
           maintainBottomViewPadding: true,
+          top:false,
           child: Scaffold(
             backgroundColor: Colors.transparent,
             drawer: drawer,
             appBar: _buildToolbar(context),
             resizeToAvoidBottomPadding: false,
+            floatingActionButton: (fab),
             body: child,
           ),
         ),

@@ -21,7 +21,7 @@ class Account extends HiveObject {
   @HiveField(7)
   bool showRewards = true;
   @HiveField(8)
-  String sessionKey = "";
+  String sessionKey = ""; // used to persist DB ID
   @HiveField(9)
   String hash;
   @HiveField(10)

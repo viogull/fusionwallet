@@ -91,7 +91,6 @@ class _ConvertState extends State<ConvertPage> {
             Flexible(
               flex: 2,
               child:  _buildBalancesDropdown(context)
-              ,
             ),
             Flexible(
               flex: 2,

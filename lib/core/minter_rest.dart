@@ -1,36 +1,14 @@
 import 'package:dio/dio.dart';
-import 'package:fusion_wallet/core/abstract/account.dart';
-import 'package:fusion_wallet/core/models/address_data_with_usd.dart';
-import 'package:fusion_wallet/core/models/admin_notifications_response.dart';
-import 'package:fusion_wallet/core/models/can_recover_request.dart';
-import 'package:fusion_wallet/core/models/convert_request.dart';
-import 'package:fusion_wallet/core/models/create_profile_request.dart';
-import 'package:fusion_wallet/core/models/create_push_link_request.dart';
-import 'package:fusion_wallet/core/models/create_push_link_response.dart';
-import 'package:fusion_wallet/core/models/currency_prices_response.dart';
-import 'package:fusion_wallet/core/models/delegate_ubound_tx_request.dart';
-import 'package:fusion_wallet/core/models/erc20_balance_request.dart';
-import 'package:fusion_wallet/core/models/estimate_request.dart';
-import 'package:fusion_wallet/core/models/estimate_response.dart';
-import 'package:fusion_wallet/core/models/eth_balance_response.dart';
-import 'package:fusion_wallet/core/models/exchange_rate_response.dart';
-import 'package:fusion_wallet/core/models/minter_coins_response.dart';
-import 'package:fusion_wallet/core/models/multisend_request.dart';
-import 'package:fusion_wallet/core/models/nonce_response.dart';
-import 'package:fusion_wallet/core/models/profile_response.dart';
-import 'package:fusion_wallet/core/models/recover_response.dart';
-import 'package:fusion_wallet/core/models/send_tx_request.dart';
-import 'package:fusion_wallet/core/models/spec_exchange_rates_response.dart';
-import 'package:fusion_wallet/core/models/statistic_rewards_response.dart';
-import 'package:fusion_wallet/core/models/transanctions_response.dart';
 import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 import 'package:meta/meta.dart';
 
 import './models.dart';
 import '../inject.dart';
-import 'models/coefficients_response.dart';
+import 'models/nonce_response.dart';
 import 'models/push_transaction_result.dart';
+import 'models/statistic_rewards_response.dart';
+
 
 enum MinterNetwork { Main, Test }
 
@@ -794,7 +772,7 @@ class MinterRest {
   Future<bool> checkAccess(Account lastAccount) async {
     try {
       logger.d('Fetching access profile ${lastAccount.seed}');
-      final url = "$fusionApiUrl/profile/${lastAccount.seed}?hash=${lastAccount
+      final url = "$fusionApiUrl/profile/${lastAccount.sessionKey}?hash=${lastAccount
           .hash}";
       logger.d("Fetch Profile Access Data Url $url");
       Response response = await fusionDio.get(url);
@@ -857,5 +835,94 @@ class MinterRest {
   Future<dynamic> fetchTopCurrencies() {}
 
   //TODO
+
+
+  Future<PersonalInvoicesResponse> fetchInvoices({String id}) async {
+    try {
+      logger.d('Fetching withdrawal invoices ');
+      // Adding Mx to get valid address
+      final url = "$fusionApiUrl/personal/$id/invoices";
+      logger.d("Fetch Address Data Url $url");
+      Response response = await dio.get(url);
+
+      if (response.statusCode == 200) {
+        logger.d("Response status code " + response.statusCode.toString() + "Data: ${response.data}");
+
+        return PersonalInvoicesResponse.fromJson(response.data);
+      }
+    } on DioError catch (exception) {
+      if (exception == null) {
+        if (exception == null ||
+            exception.toString().contains('SocketException')) {
+          throw Exception("Network Error");
+        } else if (exception.type == DioErrorType.RECEIVE_TIMEOUT ||
+            exception.type == DioErrorType.CONNECT_TIMEOUT) {
+          throw Exception(
+              "Could'nt connect, please ensure you have a stable network.");
+        } else {
+          return null;
+        }
+      }
+      return null;
+    }
+  }
+
+
+  Future<WithdrawInvoice> createWithdrawalInvoice(CreateInvoiceRequest invoiceData) async {
+    try {
+
+      Response response = await fusionDio.post('/invoice',
+          data: invoiceData.toJson(),
+          options: Options(contentType: "application/json"));
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return WithdrawInvoice.fromJson(response.data);
+      } else
+        return null;
+    } on DioError catch (exception) {
+      if (exception == null) {
+        if (exception == null ||
+            exception.toString().contains('SocketException')) {
+          throw Exception("Network Error");
+        } else if (exception.type == DioErrorType.RECEIVE_TIMEOUT ||
+            exception.type == DioErrorType.CONNECT_TIMEOUT) {
+          throw Exception(
+              "Could'nt connect, please ensure you have a stable network.");
+        } else {
+          return null;
+        }
+      }
+    }
+  }
+
+
+  Future<EstimateInvoiceResponse> estimateInvoice({String from, String to, double qty}) async {
+    try {
+      final EstimateInvoiceRequest estimationData = EstimateInvoiceRequest(from: from,
+      to: to, qty: qty);
+      Response response = await fusionDio.post('/invoices/estimate',
+          data: estimationData.toJson(),
+          options: Options(contentType: "application/json"));
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return EstimateInvoiceResponse.fromJson(response.data);
+      } else
+        return null;
+    } on DioError catch (exception) {
+      if (exception == null) {
+        if (exception == null ||
+            exception.toString().contains('SocketException')) {
+          throw Exception("Network Error");
+        } else if (exception.type == DioErrorType.RECEIVE_TIMEOUT ||
+            exception.type == DioErrorType.CONNECT_TIMEOUT) {
+          throw Exception(
+              "Could'nt connect, please ensure you have a stable network.");
+        } else {
+          return null;
+        }
+      }
+    }
+  }
+
 
 }

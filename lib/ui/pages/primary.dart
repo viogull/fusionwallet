@@ -63,23 +63,22 @@ class _BottomHomePageState extends State<BottomHomePage> {
 
   @override
   void initState() {
-    if (_account == null) {
-      Box<Account> box = Hive.box<Account>(accountsBox);
-      _account = box.getAt(box.length - 1);
-      logger.d("Account is ${_account.name}");
-      Future.delayed(const Duration(milliseconds: 300), () {
-        StateContainer.of(context).loadAccount(account: _account);
-        StateContainer.of(context).loadErcBalances();
-
-      });
+    try {
+      if (_account == null) {
+        Box<Account> box = Hive.box<Account>(accountsBox);
+        _account = box.getAt(box.length - 1);
+        logger.d("Account is ${_account.name}");
+        Future.delayed(const Duration(milliseconds: 300), () {
+          StateContainer.of(context).loadAccount(account: _account);
+          StateContainer.of(context).loadErcBalances();
+        });
+      }
+      loadDynamicLinks();
+    }  on  RangeError catch (ex)  {
+      logger.e(ex.message);
     }
-    loadDynamicLinks();
    // injector.get<MinterRest>().getEthBalance(address: Hive.box<Erc20Wallet>(erc20walletsBox).getAt(0).address);
-    Future.delayed(const Duration(seconds: 3), () {
-      logger.d("Presenting bug report information");
-      FlashHelper.infoBar(context, message: AppLocalizations.of(context).instabugInfoMessage(), duration: const Duration(seconds: 2));
 
-    });
 
     super.initState();
   }
@@ -222,7 +221,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
             title: AppLocalizations.of(context).menuItemWithdrawFunds(),
             icon: _buildBottomNavItemIcon(
                 "assets/images/icons/ic_withdraw.svg", true),
-            navId: LockUi.navId),
+            navId: WithdrawUi .navId),
         DrawerItemData(
             title: AppLocalizations.of(context).menuItemReferalLink(),
             icon: _buildBottomNavItemIcon(
@@ -383,71 +382,72 @@ class _BottomHomePageState extends State<BottomHomePage> {
 
   _buildFusionDrawer(BuildContext context, List<DrawerItemData> items) =>
       Drawer(
-        child: Stack(
-          children: <Widget>[
-            Container(
-              color: Colors.transparent,
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child: SvgPicture.asset(
-                (StateContainer.of(context).darkModeEnabled)
-                    ? "assets/images/backgrounds/bg_primary.svg"
-                    : "assets/images/backgrounds/bg_primary_light.svg",
-                fit: BoxFit.fitWidth,
+        child: SafeArea(
+          child: Stack(
+            children: <Widget>[
+              Container(
+                width: MediaQuery.of(context).size.width,
+                child: SvgPicture.asset(
+                  (StateContainer.of(context).darkModeEnabled)
+                      ? "assets/images/backgrounds/bg_primary.svg"
+                      : "assets/images/backgrounds/bg_primary_light.svg",
+                  fit: BoxFit.fitWidth,
+                ),
               ),
-            ),
-            Container(
-              color: Theme.of(context).colorScheme.surface,
-              width: MediaQuery.of(context).size.width *
-                  BottomHomePage.drawerWidthRatio,
-              child: ListView.separated(
-                  itemBuilder: (context, index) {
-                    if (index == 0)
-                      return LimitedBox(
-                        maxHeight: MediaQuery.of(context).size.height *
-                            BottomHomePage.drawerHeaderHeightRatio,
-                        child: DrawerHeader(
-                            decoration: BoxDecoration(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .primaryVariant),
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 12, top: 8),
-                              child: Text(
-                                  (StateContainer.of(context)
-                                              .selectedAccount
-                                              .name !=
-                                          null)
-                                      ? StateContainer.of(context)
-                                          .selectedAccount
-                                          .name
-                                      : AppLocalizations.of(context).appName(),
-                                  style: GoogleFonts.robotoCondensed().copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onPrimary,
-                                      fontSize: 24)),
-                            )),
-                      );
-                    else {
-                      return DrawerItem(data: items[index]);
-                    }
-                  },
-                  separatorBuilder: (context, index) {
-                    if (index == 0) {
-                      return SizedBox();
-                    } else
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 32, right: 32),
-                        child: Divider(
-                          color: Theme.of(context).colorScheme.onBackground,
-                          thickness: 0.25,
-                        ),
-                      );
-                  },
-                  itemCount: items.length),
-            )
-          ],
+              Container(
+                color: Theme.of(context).colorScheme.surface,
+                width: MediaQuery.of(context).size.width *
+                    BottomHomePage.drawerWidthRatio,
+                height: MediaQuery.of(context).size.height,
+                child: ListView.separated(
+                    itemBuilder: (context, index) {
+                      if (index == 0)
+                        return LimitedBox(
+                          maxHeight: MediaQuery.of(context).size.height *
+                              BottomHomePage.drawerHeaderHeightRatio,
+                          child: DrawerHeader(
+                              decoration: BoxDecoration(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .primaryVariant),
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 12, top: 8),
+                                child: Text(
+                                    (StateContainer.of(context)
+                                                .selectedAccount
+                                                .name !=
+                                            null)
+                                        ? StateContainer.of(context)
+                                            .selectedAccount
+                                            .name
+                                        : AppLocalizations.of(context).appName(),
+                                    style: GoogleFonts.robotoCondensed().copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary,
+                                        fontSize: 24)),
+                              )),
+                        );
+                      else {
+                        return DrawerItem(data: items[index]);
+                      }
+                    },
+                    separatorBuilder: (context, index) {
+                      if (index == 0) {
+                        return SizedBox();
+                      } else
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 32, right: 32),
+                          child: Divider(
+                            color: Theme.of(context).colorScheme.onBackground,
+                            thickness: 0.25,
+                          ),
+                        );
+                    },
+                    itemCount: items.length),
+              )
+            ],
+          ),
         ),
       );
 

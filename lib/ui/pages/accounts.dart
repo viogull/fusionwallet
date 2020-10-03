@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -247,10 +248,41 @@ class AccountsPage extends StatelessWidget {
   Widget _buildBalancesCard(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final width = MediaQuery.of(context).size.width * 0.8;
+    var erc20Address = "";
+    if(StateContainer.of(context).erc20WalletsBox.isEmpty) {
+      return Card(
+        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+        shape: RoundedRectangleBorder(
+            borderRadius: FusionTheme.borderRadius,
+            side: BorderSide(
+                color: theme.colorScheme.onError, width: 0.1)),
+        child: GestureDetector(
+          onTap: () {
+            showPlatformModalSheet(context: context, builder: (context) => ShareAddressPage(
+                "${StateContainer.of(context).selectedAccount.address}"));
+          },
+          child: Container(
+            color: theme.colorScheme.error,
+              height: 100,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(FlutterIcons.ethereum_faw5d, color: theme.colorScheme.onError,),
+                  ),
+                  Center(child: AutoSizeText(AppLocalizations.of(context).erc20ErrorHint(), textAlign: TextAlign.center,
+                    style: GoogleFonts.cabinCondensed(color: theme.colorScheme.onError),),)
+                ],
+              )),
+        ),
+      );
+    }
+      erc20Address  = StateContainer.of(context).erc20WalletsBox.getAt(0).address;
     return FutureBuilder(
       future: injector.get<MinterRest>().fetchUsdAddressData(
           address: StateContainer.of(context).selectedAccount.address,
-      erc20Address: StateContainer.of(context).erc20WalletsBox.getAt(0).address),
+      erc20Address: erc20Address ),
       builder: (context, snapshot) {
         debugPrint(
             'Connection State ${snapshot.connectionState}, has data : ${snapshot.hasData}');
@@ -282,7 +314,7 @@ class AccountsPage extends StatelessWidget {
                   side: BorderSide(
                       color: theme.colorScheme.onSurface, width: 0.1)),
               child: Container(
-                  height: 001, child: PlatformCircularProgressIndicator()),
+                  height: 100, child: PlatformCircularProgressIndicator()),
             );
         } else {
           return Card(

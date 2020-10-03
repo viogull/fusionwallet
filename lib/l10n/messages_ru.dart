@@ -25,7 +25,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static m2(position) => "Выберите ${position}-е слово вашей контрольной фразы.";
 
-  static m3(qty, wallet) => "Отправить ${qty} средства на ${wallet}";
+  static m3(maximum) => "Максимальная к-во: ${maximum}";
+
+  static m4(qty, wallet) => "Отправить ${qty} средства на ${wallet}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
@@ -40,6 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "addressMising" : MessageLookupByLibrary.simpleMessage("Пожалуйста, введите адрес"),
     "addressShare" : MessageLookupByLibrary.simpleMessage("Поделиться адресом"),
     "amountMissing" : MessageLookupByLibrary.simpleMessage("Пожалуйста,  введите сумму"),
+    "amountWithdrawLabel" : MessageLookupByLibrary.simpleMessage("Количество для вывода"),
     "appName" : MessageLookupByLibrary.simpleMessage("Fusion"),
     "applyPushBody" : m0,
     "applyPushTitle" : MessageLookupByLibrary.simpleMessage("Зачислить средства"),
@@ -76,6 +79,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "cancel" : MessageLookupByLibrary.simpleMessage("Отменить"),
     "cannotRecoverAccount" : MessageLookupByLibrary.simpleMessage("Невозможно восстановить эту учетную запись."),
     "cardCurrencyMode" : MessageLookupByLibrary.simpleMessage("Режим отображения в токенах"),
+    "cardLabelAddition" : MessageLookupByLibrary.simpleMessage("Номер карты"),
+    "cardNumberLabel" : MessageLookupByLibrary.simpleMessage("Номер карты"),
     "cardUsdMode" : MessageLookupByLibrary.simpleMessage("Отображение в долларах США"),
     "changeCurrency" : MessageLookupByLibrary.simpleMessage("Изменить валюту"),
     "changeRepAuthenticate" : MessageLookupByLibrary.simpleMessage("Сменить представителя"),
@@ -84,9 +89,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "changeRepSucces" : MessageLookupByLibrary.simpleMessage("Представитель успешно изменен"),
     "checkboxTermsConditions" : MessageLookupByLibrary.simpleMessage("Я согласен с условиями"),
     "chooseAccountTitle" : MessageLookupByLibrary.simpleMessage("Выберите аккаунт"),
+    "chooseBlockchainLabel" : MessageLookupByLibrary.simpleMessage("Выберите блокчейн"),
     "chooseContactTitle" : MessageLookupByLibrary.simpleMessage("Выберите контакт"),
     "chooseCurrency" : MessageLookupByLibrary.simpleMessage("Выберите валюту"),
     "close" : MessageLookupByLibrary.simpleMessage("Закрыть"),
+    "coinWithdrawLabel" : MessageLookupByLibrary.simpleMessage("Выберите монету для вывода"),
     "confirm" : MessageLookupByLibrary.simpleMessage("Подтвердить"),
     "confirmPasswordHint" : MessageLookupByLibrary.simpleMessage("Подтвердите Пароль"),
     "connectingHeader" : MessageLookupByLibrary.simpleMessage("Подключение ..."),
@@ -106,6 +113,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "copyAddress" : MessageLookupByLibrary.simpleMessage("Копировать адрес"),
     "copySeed" : MessageLookupByLibrary.simpleMessage("Копировать seed"),
     "createAPasswordHeader" : MessageLookupByLibrary.simpleMessage("Создайте пароль."),
+    "createInvoiceBtn" : MessageLookupByLibrary.simpleMessage("Cоздать заявку"),
+    "createInvoiceTitle" : MessageLookupByLibrary.simpleMessage("Новое заявление"),
     "createPasswordFirstParagraph" : MessageLookupByLibrary.simpleMessage("Вы можете создать пароль, чтобы повысить безопасность своего кошелька."),
     "createPasswordHint" : MessageLookupByLibrary.simpleMessage("Создайте пароль"),
     "createPasswordSecondParagraph" : MessageLookupByLibrary.simpleMessage("Пароль не является обязательным, и ваш кошелек будет защищен вашим PIN-кодом или биометрическими данными в любом случае."),
@@ -122,6 +131,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "enterAddress" : MessageLookupByLibrary.simpleMessage("Введите адрес"),
     "enterAmount" : MessageLookupByLibrary.simpleMessage("Введите количество"),
     "enterPasswordHint" : MessageLookupByLibrary.simpleMessage("Введите ваш пароль"),
+    "erc20ErrorHint" : MessageLookupByLibrary.simpleMessage("Создайте новый кошелек ERC20 в адресах, чтобы увидеть балансы"),
     "ercWalletNoExists" : MessageLookupByLibrary.simpleMessage("Кошельки ERC20 не обнаружены."),
     "errorCameraRestriction" : MessageLookupByLibrary.simpleMessage("Пользователь не предоставил разрешение камере!"),
     "errorInvalidInputsPush" : MessageLookupByLibrary.simpleMessage("Недействительные значения для push-транзакции"),
@@ -171,6 +181,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "invalidAddress" : MessageLookupByLibrary.simpleMessage("Введенный адрес недействителен"),
     "invalidInput" : MessageLookupByLibrary.simpleMessage("Некорректный ввод. Проверьте свои параметры и попробуйте еще раз"),
     "invalidPassword" : MessageLookupByLibrary.simpleMessage("Неверный пароль"),
+    "invoiceStatusLabel" : MessageLookupByLibrary.simpleMessage("Состояние: "),
     "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Fusion Wallet"),
     "labelAccount" : MessageLookupByLibrary.simpleMessage("Аккаунт:"),
     "labelAddContactAddress" : MessageLookupByLibrary.simpleMessage("Адрес"),
@@ -244,6 +255,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "manage" : MessageLookupByLibrary.simpleMessage("Управление"),
     "mantaError" : MessageLookupByLibrary.simpleMessage("Не удалось проверить запрос"),
     "manualEntry" : MessageLookupByLibrary.simpleMessage("Ручной ввод"),
+    "maximumQtyLabel" : m3,
     "menuItemEditAccountName" : MessageLookupByLibrary.simpleMessage("Изменить имя учетной записи"),
     "menuItemReferalLink" : MessageLookupByLibrary.simpleMessage("Реферальная ссылка"),
     "menuItemRemoveAccount" : MessageLookupByLibrary.simpleMessage("Удалить учетную запись"),
@@ -255,6 +267,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "mnemonicInvalidWord" : MessageLookupByLibrary.simpleMessage("%1 не является допустимым словом"),
     "mnemonicPhrase" : MessageLookupByLibrary.simpleMessage("Мнемоническая фраза"),
     "mnemonicSizeError" : MessageLookupByLibrary.simpleMessage("Секретная фраза может содержать не более 12 слов"),
+    "myInvoicesTitle" : MessageLookupByLibrary.simpleMessage("Мои запросы"),
     "navigationItemContacts" : MessageLookupByLibrary.simpleMessage("Контакты"),
     "navigationItemHistory" : MessageLookupByLibrary.simpleMessage("История"),
     "navigationItemSettings" : MessageLookupByLibrary.simpleMessage("Настройки"),
@@ -267,6 +280,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "noContactsExport" : MessageLookupByLibrary.simpleMessage("Нет контактов для экспорта."),
     "noContactsImport" : MessageLookupByLibrary.simpleMessage("Нет новых контактов для импорта."),
     "noContactsTitle" : MessageLookupByLibrary.simpleMessage("Никаких контактов пока нет."),
+    "noInvoicesLabel" : MessageLookupByLibrary.simpleMessage("Никаких запросов на снятие средств"),
     "noNotificationsAvailable" : MessageLookupByLibrary.simpleMessage("Никаких уведомлений не поступало"),
     "noSkipButton" : MessageLookupByLibrary.simpleMessage("Нет,  пропустить"),
     "notificationBody" : MessageLookupByLibrary.simpleMessage("Откройте Fusion, чтобы просмотреть эту транзакцию"),
@@ -331,11 +345,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "seedCopiedShort" : MessageLookupByLibrary.simpleMessage("Seed скопировано"),
     "seedDescription" : MessageLookupByLibrary.simpleMessage("Seed содержит ту же информацию, что и секретная фраза, но в машиночитаемом виде. Пока у вас есть резервная копия одного из них, у вас будет доступ к своим средствам."),
     "seedInvalid" : MessageLookupByLibrary.simpleMessage("Seed недействителен"),
+    "selectFiatHint" : MessageLookupByLibrary.simpleMessage("Выберите валюту для получения"),
     "send" : MessageLookupByLibrary.simpleMessage("Отправить"),
     "sendAmountConfirm" : MessageLookupByLibrary.simpleMessage("Отправить %1 Fusion"),
     "sendError" : MessageLookupByLibrary.simpleMessage("Произошла ошибка. Попробуйте позже."),
     "sendFrom" : MessageLookupByLibrary.simpleMessage("Отправлено из"),
-    "sendFundsToPushWallet" : m3,
+    "sendFundsToPushWallet" : m4,
     "sending" : MessageLookupByLibrary.simpleMessage("Отправка"),
     "sent" : MessageLookupByLibrary.simpleMessage("Отправил"),
     "sentTo" : MessageLookupByLibrary.simpleMessage("Отправлено "),

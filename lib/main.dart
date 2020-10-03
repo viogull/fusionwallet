@@ -5,6 +5,7 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:fusion_wallet/ui/pages/withdraw.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -145,9 +146,7 @@ class AppState extends State<App> {
           LockUi.navId: (context) => LockUi(),
           AccessLockedUi.navId: (context) => AccessLockedUi(),
           HomePage.navId: (context) => HomePage(),
-          ViewPassphraseDialog.navId: (context) => ViewPassphraseDialog(
-                data: null,
-              ),
+          ViewPassphraseDialog.navId: (context) => ViewPassphraseDialog(data: null),
           BiometricAuthPage.navId: (context) => BiometricAuthPage(),
           PassphraseCreationPage.navId: (context) => PassphraseCreationPage(),
           IntroPage.navId: (BuildContext context) => IntroPage(),
@@ -173,7 +172,8 @@ class AppState extends State<App> {
           PasscodeScreen.navId: (context) => PasswordCreationPage(),
           AuthUi.navId: (context) => AuthUi(),
           Erc20WalletUi.navId: (context) => Erc20WalletUi(),
-          AddAccountUi.navId: (context) => AddAccountUi()
+          AddAccountUi.navId: (context) => AddAccountUi(),
+          WithdrawUi.navId: (context) => WithdrawUi()
         },
       );
 }

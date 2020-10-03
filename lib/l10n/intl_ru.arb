@@ -1942,5 +1942,18 @@
 	"showErcPrivateKeyDrawerLabel": "Прив. ключ ERC20",
 	"privateKeyCopied": "Приватный ключ скопирован!",
 	"chooseCurrency": "Выберите валюту",
-	"instabugInfoMessage": "Встряхните устройство, чтобы открыть специальный инструмент сообщения об ошибке."
+	"instabugInfoMessage": "Встряхните устройство, чтобы открыть специальный инструмент сообщения об ошибке.",
+	"amountWithdrawLabel": "Количество для вывода",
+	"cardLabelAddition": "Номер карты",
+	"cardNumberLabel": "Номер карты",
+	"chooseBlockchainLabel": "Выберите блокчейн",
+	"coinWithdrawLabel": "Выберите монету для вывода",
+	"createInvoiceBtn": "Cоздать заявку",
+	"createInvoiceTitle": "Новое заявление",
+	"erc20ErrorHint": "Создайте новый кошелек ERC20 в адресах, чтобы увидеть балансы",
+	"invoiceStatusLabel": "Состояние: ",
+	"maximumQtyLabel": "Максимальная к-во: {maximum}",
+	"myInvoicesTitle": "Мои запросы",
+	"noInvoicesLabel": "Никаких запросов на снятие средств",
+	"selectFiatHint": "Выберите валюту для получения"
 }

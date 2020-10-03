@@ -1710,6 +1710,44 @@ class AppLocalizations {
           name: 'chooseCurrency');
 
  String instabugInfoMessage() => Intl.message("Shake device to open special bug report tool.", name: 'instabugInfoMessage');
+
+  String cardLabelAddition() =>  Intl.message("Card ", name: 'cardLabelAddition');
+
+  String invoiceStatusLabel() =>  Intl.message("Status:  ", name: 'invoiceStatusLabel');
+
+  String selectFiatHint() =>  Intl.message('Choose currency to receive' ,
+      name: 'selectFiatHint');
+
+  String cardNumberLabel() =>  Intl.message('Card Number' ,
+      name: 'cardNumberLabel');
+
+
+  String amountWithdrawLabel() =>  Intl.message('Amount to withdraw' ,
+      name: 'amountWithdrawLabel');
+  String erc20ErrorHint() =>  Intl.message(  'Create new ERC20 Wallet in addresses to see balances', name: 'erc20ErrorHint');
+
+
+  String  maximumQtyLabel(String maximum) =>
+     Intl.message('Max amount is $maximum',
+  args: [maximum], name: 'maximumQtyLabel');
+
+  String coinWithdrawLabel() => Intl.message('Select coin to withdraw',
+  name: 'coinWithdrawLabel');
+
+
+
+  String noInvoicesLabel() => Intl.message('No any invoices',
+      name: 'noInvoicesLabel');
+
+  String createInvoiceBtn() => Intl.message('Create invoice',
+      name: 'createInvoiceBtn');
+
+  String createInvoiceTitle() => Intl.message('New invoice',
+      name: 'createInvoiceTitle');
+  String myInvoicesTitle() => Intl.message('My invoices',
+      name: 'myInvoicesTitle');
+  String chooseBlockchainLabel() => Intl.message('Choose blockchain',
+      name: 'chooseBlockchainLabel');
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

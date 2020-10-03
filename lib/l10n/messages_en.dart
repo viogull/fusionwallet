@@ -25,7 +25,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static m2(position) => "Select the ${position}th word of your passphrase";
 
-  static m3(qty, wallet) => "Send ${qty} funds to ${wallet}";
+  static m3(maximum) => "Max amount is ${maximum}";
+
+  static m4(qty, wallet) => "Send ${qty} funds to ${wallet}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
@@ -40,6 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "addressMising" : MessageLookupByLibrary.simpleMessage("Please Enter an Address"),
     "addressShare" : MessageLookupByLibrary.simpleMessage("Share Address"),
     "amountMissing" : MessageLookupByLibrary.simpleMessage("Please Enter an Amount"),
+    "amountWithdrawLabel" : MessageLookupByLibrary.simpleMessage("Amount to withdraw"),
     "appName" : MessageLookupByLibrary.simpleMessage("Fusion"),
     "applyPushBody" : m0,
     "applyPushTitle" : MessageLookupByLibrary.simpleMessage("Apply Push funds"),
@@ -76,6 +79,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "cancel" : MessageLookupByLibrary.simpleMessage("Cancel"),
     "cannotRecoverAccount" : MessageLookupByLibrary.simpleMessage("Cannot recover that account."),
     "cardCurrencyMode" : MessageLookupByLibrary.simpleMessage("Switched to currency values mode."),
+    "cardLabelAddition" : MessageLookupByLibrary.simpleMessage("Card "),
+    "cardNumberLabel" : MessageLookupByLibrary.simpleMessage("Card Number"),
     "cardUsdMode" : MessageLookupByLibrary.simpleMessage("Switched to USD mode"),
     "changeCurrency" : MessageLookupByLibrary.simpleMessage("Change Currency"),
     "changeRepAuthenticate" : MessageLookupByLibrary.simpleMessage("Change Representative"),
@@ -84,9 +89,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "changeRepSucces" : MessageLookupByLibrary.simpleMessage("Representative Changed Successfully"),
     "checkboxTermsConditions" : MessageLookupByLibrary.simpleMessage("I agree with terms&conditions"),
     "chooseAccountTitle" : MessageLookupByLibrary.simpleMessage("Choose account"),
+    "chooseBlockchainLabel" : MessageLookupByLibrary.simpleMessage("Choose blockchain"),
     "chooseContactTitle" : MessageLookupByLibrary.simpleMessage("Choose contact"),
     "chooseCurrency" : MessageLookupByLibrary.simpleMessage("Choose currency"),
     "close" : MessageLookupByLibrary.simpleMessage("Close"),
+    "coinWithdrawLabel" : MessageLookupByLibrary.simpleMessage("Select coin to withdraw"),
     "confirm" : MessageLookupByLibrary.simpleMessage("Confirm"),
     "confirmPasswordHint" : MessageLookupByLibrary.simpleMessage("Confirm the password"),
     "connectingHeader" : MessageLookupByLibrary.simpleMessage("Connecting"),
@@ -106,6 +113,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "copyAddress" : MessageLookupByLibrary.simpleMessage("Copy Address"),
     "copySeed" : MessageLookupByLibrary.simpleMessage("Copy Seed"),
     "createAPasswordHeader" : MessageLookupByLibrary.simpleMessage("Create a password."),
+    "createInvoiceBtn" : MessageLookupByLibrary.simpleMessage("Create invoice"),
+    "createInvoiceTitle" : MessageLookupByLibrary.simpleMessage("New invoice"),
     "createPasswordFirstParagraph" : MessageLookupByLibrary.simpleMessage("You can create a password to add additional security to your wallet."),
     "createPasswordHint" : MessageLookupByLibrary.simpleMessage("Create a password"),
     "createPasswordSecondParagraph" : MessageLookupByLibrary.simpleMessage("Password is optional, and your wallet will be protected with your PIN or biometrics regardless."),
@@ -122,6 +131,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "enterAddress" : MessageLookupByLibrary.simpleMessage("Enter Address"),
     "enterAmount" : MessageLookupByLibrary.simpleMessage("Enter Amount"),
     "enterPasswordHint" : MessageLookupByLibrary.simpleMessage("Enter your password"),
+    "erc20ErrorHint" : MessageLookupByLibrary.simpleMessage("Create new ERC20 Wallet in addresses to see balances"),
     "ercWalletNoExists" : MessageLookupByLibrary.simpleMessage("No any ERC20 wallets detected."),
     "errorCameraRestriction" : MessageLookupByLibrary.simpleMessage("The user did not grant the camera permission!"),
     "errorInvalidInputsPush" : MessageLookupByLibrary.simpleMessage("Invalid values for push transaction"),
@@ -171,7 +181,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "invalidAddress" : MessageLookupByLibrary.simpleMessage("Address entered was invalid"),
     "invalidInput" : MessageLookupByLibrary.simpleMessage("Invalid input. Check your params and try again"),
     "invalidPassword" : MessageLookupByLibrary.simpleMessage("Invalid Password"),
-    "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Fusion Wallet"),
+    "invoiceStatusLabel" : MessageLookupByLibrary.simpleMessage("Status:  "),
+    "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Natrium Wallet"),
     "labelAccount" : MessageLookupByLibrary.simpleMessage("Account:"),
     "labelAddContactAddress" : MessageLookupByLibrary.simpleMessage("Address"),
     "labelAddContactName" : MessageLookupByLibrary.simpleMessage("Name"),
@@ -244,6 +255,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "manage" : MessageLookupByLibrary.simpleMessage("Manage"),
     "mantaError" : MessageLookupByLibrary.simpleMessage("Couldn\'t Verify Request"),
     "manualEntry" : MessageLookupByLibrary.simpleMessage("Manual Entry"),
+    "maximumQtyLabel" : m3,
     "menuItemEditAccountName" : MessageLookupByLibrary.simpleMessage("Edit Account Name"),
     "menuItemReferalLink" : MessageLookupByLibrary.simpleMessage("Referal link"),
     "menuItemRemoveAccount" : MessageLookupByLibrary.simpleMessage("Remove Account"),
@@ -255,6 +267,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "mnemonicInvalidWord" : MessageLookupByLibrary.simpleMessage("%1 is not a valid word"),
     "mnemonicPhrase" : MessageLookupByLibrary.simpleMessage("Mnemonic Phrase"),
     "mnemonicSizeError" : MessageLookupByLibrary.simpleMessage("Secret phrase may only contain 24 words"),
+    "myInvoicesTitle" : MessageLookupByLibrary.simpleMessage("My invoices"),
     "navigationItemContacts" : MessageLookupByLibrary.simpleMessage("Contacts"),
     "navigationItemHistory" : MessageLookupByLibrary.simpleMessage("History"),
     "navigationItemSettings" : MessageLookupByLibrary.simpleMessage("Settings"),
@@ -267,9 +280,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "noContactsExport" : MessageLookupByLibrary.simpleMessage("There\'s no contacts to export."),
     "noContactsImport" : MessageLookupByLibrary.simpleMessage("No new contacts to import."),
     "noContactsTitle" : MessageLookupByLibrary.simpleMessage("No any contacts yet."),
+    "noInvoicesLabel" : MessageLookupByLibrary.simpleMessage("No any invoices"),
     "noNotificationsAvailable" : MessageLookupByLibrary.simpleMessage("No any notifications were received"),
     "noSkipButton" : MessageLookupByLibrary.simpleMessage("No, Skip"),
-    "notificationBody" : MessageLookupByLibrary.simpleMessage("Open Fusion to view this transaction"),
+    "notificationBody" : MessageLookupByLibrary.simpleMessage("Open Natrium to view this transaction"),
     "notificationHeaderSupplement" : MessageLookupByLibrary.simpleMessage("Tap to open"),
     "notificationTitle" : MessageLookupByLibrary.simpleMessage("Received %1 NANO"),
     "notifications" : MessageLookupByLibrary.simpleMessage("Notifications"),
@@ -331,11 +345,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "seedCopiedShort" : MessageLookupByLibrary.simpleMessage("Seed Copied"),
     "seedDescription" : MessageLookupByLibrary.simpleMessage("A seed bears the same information as a secret phrase, but in a machine-readable way. As long as you have one of them backed up, you\'ll have access to your funds."),
     "seedInvalid" : MessageLookupByLibrary.simpleMessage("Seed is Invalid"),
+    "selectFiatHint" : MessageLookupByLibrary.simpleMessage("Choose currency to receive"),
     "send" : MessageLookupByLibrary.simpleMessage("Send"),
     "sendAmountConfirm" : MessageLookupByLibrary.simpleMessage("Send %1 NANO"),
     "sendError" : MessageLookupByLibrary.simpleMessage("An error occured. Try again later."),
     "sendFrom" : MessageLookupByLibrary.simpleMessage("Send From"),
-    "sendFundsToPushWallet" : m3,
+    "sendFundsToPushWallet" : m4,
     "sending" : MessageLookupByLibrary.simpleMessage("Sending"),
     "sent" : MessageLookupByLibrary.simpleMessage("Sent"),
     "sentTo" : MessageLookupByLibrary.simpleMessage("Sent To"),

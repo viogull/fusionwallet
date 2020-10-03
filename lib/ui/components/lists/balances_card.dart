@@ -40,13 +40,15 @@ class _AccountBalancesCardState extends State<AccountBalancesCard> {
   void initState() {
     if (erc20UsdBalance == null) {
       Future.delayed(Duration(milliseconds: 200), () async {
+       if( StateContainer
+            .of(context)
+            .erc20WalletsBox.isNotEmpty)
         final erc20Value = await injector.get<MinterRest>().fetchErc20Balances(
             address: StateContainer
                 .of(context)
                 .erc20WalletsBox
                 .getAt(0)
                 .address);
-        log.d("Erc20Value ${erc20Value.value}");
 
       });
   }
