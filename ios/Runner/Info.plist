@@ -24,6 +24,10 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+	<string>${PRODUCT_BUNDLE_IDENTIFIER}</string>
+	</array>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
