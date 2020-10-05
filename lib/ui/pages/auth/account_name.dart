@@ -12,6 +12,7 @@ import 'package:hive/hive.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:styled_text/styled_text.dart';
 
+import '../../../inject.dart';
 import '../../../main.dart';
 import '../../theme.dart';
 import '../pages.dart';
@@ -28,7 +29,7 @@ class AccountNamingFormBloc extends FormBloc<String, String> {
 
   @override
   void onSubmitting() async {
-    if(applyTermsBloc.value) {
+    if (applyTermsBloc.value == true) {
       debugPrint("Saving ${accountName.value} name to settings.");
       Box<Preferences> prefs = Hive.box(preferencesBox);
       final preferences = prefs.getAt(0);
@@ -37,8 +38,10 @@ class AccountNamingFormBloc extends FormBloc<String, String> {
         preferences.save();
         emitSuccess();
       } else {
-        emitFailure();
+        emitFailure(failureResponse: 'Please, enter name');
       }
+    } else {
+      this.emitFailure(failureResponse: 'Please, apply terms of usage.');
     }
   }
 }
@@ -82,9 +85,7 @@ class AccountCreationNameForm extends StatelessWidget {
               },
               onFailure: (context, state) {
                 LoadingDialog.hide(context);
-
-                Scaffold.of(context).showSnackBar(
-                    SnackBar(content: Text(state.failureResponse)));
+                FlashHelper.errorBar(context, message: state.failureResponse);
               },
               child: FusionScaffold(
                   title: AppLocalizations.of(context).toolbarNewAccountTitle(),
@@ -126,29 +127,31 @@ class AccountCreationNameForm extends StatelessWidget {
 
                         Flexible(
                           flex: 4,
-                          child:  CheckboxFieldBlocBuilder(
-                            booleanFieldBloc: bloc.applyTermsBloc,
-                            body: Container(
-                              alignment: Alignment.centerLeft,
-                              width: double.infinity,
-                              child: StyledText(
-                                text: "<link>${AppLocalizations.of(context).checkboxTermsConditions()}</link>",
-
-                                styles: {
-                              'link': ActionTextStyle(
-                              decoration: TextDecoration.underline,
-                              onTap: (TextSpan text, Map<String, String> attrs) => {
-                              showCupertinoModalBottomSheet(context: context, builder: (context) {
-                              return TermsConditions();
-                              })
-                              },
-                              ),
-                              },
-                              ),
-                            )
-                          ),
+                          child: CheckboxFieldBlocBuilder(
+                              booleanFieldBloc: bloc.applyTermsBloc,
+                              body: Container(
+                                alignment: Alignment.centerLeft,
+                                width: double.infinity,
+                                child: StyledText(
+                                  text:
+                                      "<link>${AppLocalizations.of(context).checkboxTermsConditions()}</link>",
+                                  styles: {
+                                    'link': ActionTextStyle(
+                                      decoration: TextDecoration.underline,
+                                      onTap: (TextSpan text,
+                                              Map<String, String> attrs) =>
+                                          {
+                                        showCupertinoModalBottomSheet(
+                                            context: context,
+                                            builder: (context) {
+                                              return TermsConditions();
+                                            })
+                                      },
+                                    ),
+                                  },
+                                ),
+                              )),
                         ),
-
 
                         // LimitedBox(maxHeight: 30,),
 
@@ -210,7 +213,7 @@ class SuccessScreen extends StatelessWidget {
             Icon(Icons.tag_faces, size: 100),
             SizedBox(height: 10),
             Text(
-             AppLocalizations.of(context).flashOperationSuccess(),
+              AppLocalizations.of(context).flashOperationSuccess(),
               style: TextStyle(fontSize: 54, color: Colors.black),
               textAlign: TextAlign.center,
             ),

@@ -437,29 +437,34 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
                                     message: AppLocalizations.of(context)
                                         .copiedSuccesfullyMessage(),
                                   );
-                                  showCupertinoModalBottomSheet(
-                                      context: context,
-                                      builder: (context) {
-                                        return PopupDialogWidget(
-                                          title: AppLocalizations.of(context)
-                                              .popupPassVerifiedTitle(),
-                                          subtitle: AppLocalizations.of(context)
-                                              .popupPassVerifiedBody(),
-                                          asset:
-                                              "assets/images/icons/ic_verified.svg",
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                            BlocProvider.of<AuthenticationBloc>(
-                                                    blocCtx)
-                                                .add(PassphraseVerifiedEvent(
-                                                    mnemonic: mnemonic,
-                                                    seed: cachedSeed,
-                                                    address: cachedAddress,
-                                                    publicKey: cachedPublicKey,
-                                                    privateKey: cachedAddress));
-                                          },
-                                        );
-                                      });
+                                  Navigator.of(context)
+                                      .push(new MaterialPageRoute(
+                                          builder: (_) => PopupDialogWidget(
+                                                title: AppLocalizations.of(
+                                                        context)
+                                                    .popupPassVerifiedTitle(),
+                                                subtitle: AppLocalizations.of(
+                                                        context)
+                                                    .popupPassVerifiedBody(),
+                                                asset:
+                                                    "assets/images/icons/ic_verified.svg",
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                  BlocProvider.of<
+                                                              AuthenticationBloc>(
+                                                          blocCtx)
+                                                      .add(PassphraseVerifiedEvent(
+                                                          mnemonic: mnemonic,
+                                                          seed: cachedSeed,
+                                                          address:
+                                                              cachedAddress,
+                                                          publicKey:
+                                                              cachedPublicKey,
+                                                          privateKey:
+                                                              cachedAddress));
+                                                },
+                                              ),
+                                          fullscreenDialog: true));
                                 } else {
                                   setState(() {
                                     _verificationStage = _verificationStage + 1;

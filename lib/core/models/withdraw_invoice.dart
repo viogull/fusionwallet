@@ -9,7 +9,7 @@ class WithdrawInvoice {
   String networkType;
   String coin;
   String createdBy;
-  double  qty;
+  num qty;
   String card;
   String mnemonic;
   String fiatCurrency;
@@ -17,25 +17,27 @@ class WithdrawInvoice {
   String updatedAt;
   int v;
 
-  WithdrawInvoice({
-      this.estimation, 
-      this.creationDate, 
-      this.status, 
-      this.completed, 
-      this.id, 
-      this.networkType, 
-      this.coin, 
-      this.createdBy, 
-      this.qty, 
-      this.card, 
-      this.mnemonic, 
-      this.fiatCurrency, 
-      this.createdAt, 
-      this.updatedAt, 
+  WithdrawInvoice(
+      {this.estimation,
+      this.creationDate,
+      this.status,
+      this.completed,
+      this.id,
+      this.networkType,
+      this.coin,
+      this.createdBy,
+      this.qty,
+      this.card,
+      this.mnemonic,
+      this.fiatCurrency,
+      this.createdAt,
+      this.updatedAt,
       this.v});
 
   WithdrawInvoice.fromJson(dynamic json) {
-    estimation = json["estimation"] != null ? Estimation.fromJson(json["estimation"]) : null;
+    estimation = json["estimation"] != null
+        ? Estimation.fromJson(json["estimation"])
+        : null;
     creationDate = json["creationDate"];
     status = json["status"];
     completed = json["completed"];
@@ -73,5 +75,4 @@ class WithdrawInvoice {
     map["__v"] = v;
     return map;
   }
-
 }

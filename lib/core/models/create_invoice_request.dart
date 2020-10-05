@@ -2,18 +2,18 @@ class CreateInvoiceRequest {
   String networkType;
   String coin;
   String createdBy;
-  int qty;
+  double qty;
   String card;
   String mnemonic;
   String fiatCurrency;
 
-  CreateInvoiceRequest({
-      this.networkType, 
-      this.coin, 
-      this.createdBy, 
-      this.qty, 
-      this.card, 
-      this.mnemonic, 
+  CreateInvoiceRequest(
+      {this.networkType,
+      this.coin,
+      this.createdBy,
+      this.qty,
+      this.card,
+      this.mnemonic,
       this.fiatCurrency});
 
   CreateInvoiceRequest.fromJson(dynamic json) {
@@ -37,5 +37,4 @@ class CreateInvoiceRequest {
     map["fiatCurrency"] = fiatCurrency;
     return map;
   }
-
 }

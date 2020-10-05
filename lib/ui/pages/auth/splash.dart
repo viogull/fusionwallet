@@ -68,15 +68,20 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
         Navigator.of(context).pushReplacementNamed(AuthUi.navId);
       } else {
         Account lastAccount = box.getAt(box.length - 1);
-        if (lastAccount.pin == null) {
+        if (lastAccount.pin == null ||
+            lastAccount.hash == null ||
+            lastAccount.sessionKey == null) {
           logger.d("Corrupted account. Deleting all");
+          await injector.get<SharedPrefsUtil>().setFirstLaunch();
+
           await injector.get<Vault>().deleteAll();
           Navigator.of(context).pushReplacementNamed(AuthUi.navId);
         }
         debugPrint(
             'Accounts exists. Seed: ${lastAccount.pin}. Trying fetch access state');
 
-        final accessRequest = await  injector.get<MinterRest>().checkAccess(lastAccount);
+        final accessRequest =
+            await injector.get<MinterRest>().checkAccess(lastAccount);
 
         logger.d("Access: $accessRequest");
 
