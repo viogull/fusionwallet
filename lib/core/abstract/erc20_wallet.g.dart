@@ -19,7 +19,7 @@ class Erc20WalletAdapter extends TypeAdapter<Erc20Wallet> {
     return Erc20Wallet(
       name: fields[0] as String,
       address: fields[2] as String,
-      privateKey: fields[1] as Uint8List,
+      privateKey: fields[1] as String,
     );
   }
 

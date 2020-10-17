@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
 
@@ -13,7 +12,6 @@ import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/button.dart';
 import 'package:fusion_wallet/ui/components/custom/scaffold.dart';
 import 'package:fusion_wallet/ui/theme.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class QrPageData {
@@ -64,7 +62,7 @@ class ViewPassphraseDialog extends StatelessWidget {
                           foregroundColor:
                               Theme.of(context).colorScheme.onBackground,
                           data: data == null ? qr.toString() : data,
-                          backgroundColor: Colors.transparent,
+                          backgroundColor: Theme.of(context).colorScheme.background,
                           size: MediaQuery.of(context).size.width * 0.5,
                         )),
                     Padding(

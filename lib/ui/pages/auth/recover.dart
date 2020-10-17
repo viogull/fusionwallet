@@ -145,10 +145,9 @@ class _RecoverAccountState extends State<RecoverAccountPage> {
                 Scaffold.of(context).showSnackBar(
                     SnackBar(content: Text(state.failureResponse)));
               },
-              child: SafeArea(
-                  child: FusionScaffold(
+              child: FusionScaffold(
                 title:
-                    AppLocalizations.of(context).toolbarRecoverFromSeedTitle(),
+                AppLocalizations.of(context).toolbarRecoverFromSeedTitle(),
                 appBarIcon: IconButton(
                   icon: Icon(Icons.arrow_back,
                       color: Theme.of(context).colorScheme.primary),
@@ -159,7 +158,7 @@ class _RecoverAccountState extends State<RecoverAccountPage> {
                 ),
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
@@ -209,7 +208,7 @@ class _RecoverAccountState extends State<RecoverAccountPage> {
                                   border: OutlineInputBorder(),
                                   hintText: this._scannedQrData == null
                                       ? AppLocalizations.of(context)
-                                          .inputEnterScanPasshpraseHintText()
+                                      .inputEnterScanPasshpraseHintText()
                                       : "",
                                   hintStyle: TextStyle(
                                     color: (theme.colorScheme.onSurface),
@@ -249,7 +248,7 @@ class _RecoverAccountState extends State<RecoverAccountPage> {
                     ],
                   ),
                 ),
-              )));
+              ));
         },
       ),
     );

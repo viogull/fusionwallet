@@ -302,8 +302,6 @@ class AccountsPage extends StatelessWidget {
                       builder: (context) {
                     return ChooseAccountTypePopup();
                   });
-
-
                 });
 
           } else
@@ -396,7 +394,6 @@ class ChooseAccountTypePopup extends StatelessWidget {
                     builder: (context) {
                       return  Erc20WalletUi(hideToolbar: false);
                     });
-
               }, text: AppLocalizations.of(context).labelErc20Wallet(),
                 expandedWidth: true,),
         ]),

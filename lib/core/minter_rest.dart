@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:dio_firebase_performance/dio_firebase_performance.dart';
+import 'package:dio_flutter_transformer/dio_flutter_transformer.dart';
 import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 import 'package:meta/meta.dart';
@@ -89,7 +91,12 @@ class MinterRest {
   final Dio fusionDio = Dio(fusionDioOptions);
   final Dio erc20Dio = Dio(erc20DioOptions);
 
-  void loadInterceptors() async {}
+  void loadInterceptors() async {
+    [dio, fusionDio, erc20Dio].forEach((d) {
+      d.interceptors.add(DioFirebasePerformanceInterceptor());
+      d.transformer = FlutterTransformer();
+    });
+  }
 
   final logger = injector.get<Logger>();
 

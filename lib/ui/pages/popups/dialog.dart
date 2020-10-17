@@ -72,9 +72,9 @@ class PopupDialogWidget extends StatelessWidget {
                 ),
               ),
               Flexible(
-                flex: 2,
+                flex: 3,
                 child: Container(
-                  padding: EdgeInsets.only(left: 24, right: 24),
+                  padding: EdgeInsets.symmetric(vertical:32, horizontal: 24),
                   width: MediaQuery.of(context).size.width,
                   child: FusionButton(
                  text:   AppLocalizations.of(context).labelOk(),

@@ -9,10 +9,8 @@
 
 import 'package:fusion_wallet/core/abstract/erc20_wallet.dart';
 import 'package:fusion_wallet/main.dart';
-import 'package:fusion_wallet/utils/wallets.dart';
 import 'package:hive/hive.dart';
 import 'package:mobx/mobx.dart';
-import 'package:web3dart/credentials.dart';
 
 import '../../../inject.dart';
 
@@ -61,18 +59,9 @@ abstract class _Erc20Store with Store {
   @action
   Future createErc20Wallet({String name, String password}) async {
 
-    Wallet wallet  = await  Wallets.createEthWallet(password: password);
-    final address = await wallet.privateKey.extractAddress();
 
-    Erc20Wallet _boxWallet = Erc20Wallet(name: name,
-        privateKey: wallet.privateKey.privateKey , address: address.hex);
 
-    _erc20Box.add(_boxWallet);
-    this.address = address.toString();
-    this.privateKey = wallet.privateKey.toString();
-    this.isWalletPersisted = _erc20Box.isNotEmpty;
-
-    return _boxWallet;
+    return _erc20Box.getAt(0);
     
   }
 

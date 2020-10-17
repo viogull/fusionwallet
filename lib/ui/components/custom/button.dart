@@ -37,7 +37,7 @@ class FusionButton extends RaisedButton {
       decoration: BoxDecoration(borderRadius: FusionTheme.borderRadius),
       child: PlatformButton(
         material: (_, __) => FusionTheme.buttonAndroidTheme,
-        ios: (_) => FusionTheme.buttonIOSTheme,
+        cupertino: (_, __) => FusionTheme.buttonIOSTheme,
         color: theme.colorScheme.primary,
         onPressed: () {
           injector.get<HapticUtil>().impact();

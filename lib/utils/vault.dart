@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fusion_wallet/core/abstract/erc20_wallet.dart';
 import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/main.dart';
 import 'package:hive/hive.dart';
@@ -93,6 +94,7 @@ class Vault {
       return;
     }
     await secureStorage.deleteAll();
+    await Hive.box<Erc20Wallet>(erc20walletsBox).clear();
     return await Hive.box<Account>(accountsBox).clear();
   }
 

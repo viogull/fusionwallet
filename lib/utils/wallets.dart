@@ -1,9 +1,7 @@
-import 'dart:math';
 
 import 'package:fusion_wallet/core/abstract/erc20_wallet.dart';
 import 'package:fusion_wallet/main.dart';
 import 'package:hive/hive.dart';
-import 'package:web3dart/credentials.dart';
 
 import '../inject.dart';
 
@@ -21,10 +19,6 @@ class Wallets {
       log.d("ERC-20 Wallet exists.");
     } else {
       log.d("ERC-20 Wallet not exists. Creating...");
-      createEthWallet().then((wallet) => {
-      }).catchError((onError) {
-        log.e(onError);
-      });
     }
   }
 
@@ -35,10 +29,4 @@ class Wallets {
 
 
 
-  static Future<Wallet> createEthWallet({String password}) async {
-    final rng = new Random.secure();
-    Credentials creds = EthPrivateKey.createRandom(rng);
-    final wallet = Wallet.createNew(creds, password, rng);
-    return wallet;
-  }
 }

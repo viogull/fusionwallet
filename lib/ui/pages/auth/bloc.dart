@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fusion_wallet/core/abstract/erc20_wallet.dart';
 import 'package:fusion_wallet/core/abstract/preferences.dart';
 import 'package:fusion_wallet/core/minter_rest.dart';
 import 'package:fusion_wallet/core/models.dart';
@@ -25,6 +26,8 @@ class AuthenticationBloc
 
   Preferences preferences;
   Account _account = Account();
+  Erc20Wallet _erc20wallet = Erc20Wallet();
+
   Box<Preferences> _box = Hive.box(preferencesBox);
 
   bool _isRecoveringAccount = false;
@@ -120,7 +123,21 @@ class AuthenticationBloc
 
       preferences.name = event.name;
 
+
+      _erc20wallet.address = createProfile.erc20.address;
+      _erc20wallet.privateKey = createProfile.erc20.privateKey;
+      _erc20wallet.name = event.name;
+
       if (createProfile != null) {
+
+        if (_erc20wallet.isInBox) {
+          _erc20wallet.save();
+        } else {
+          Box<Erc20Wallet> wallets = Hive.box(erc20walletsBox);
+          wallets.add(_erc20wallet);
+          _erc20wallet.save();
+        }
+
         if (_account.isInBox) {
           _account.save();
           preferences.save();

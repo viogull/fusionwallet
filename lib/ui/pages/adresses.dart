@@ -1,8 +1,6 @@
 import 'dart:typed_data';
 import 'dart:ui';
 
-
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
@@ -151,7 +149,7 @@ class ShareAddressState extends State<ShareAddressPage> with  SingleTickerProvid
 //                            msg: AppLocalizations.of(context).labelOk());
                   },
                   child: Card(
-                      margin: const EdgeInsets.all(12),
+                      margin: const EdgeInsets.all(4),
                       color: Theme.of(context).colorScheme.surface,
                       elevation: 0,
                       shape: RoundedRectangleBorder(

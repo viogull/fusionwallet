@@ -21,9 +21,9 @@ class IntroPage extends StatelessWidget {
 
     final bg = Image.asset(
       ('assets/images/backgrounds/bg_greeting.png'),
-      fit: BoxFit.fitHeight,
-      height: MediaQuery.of(context).size.height * 1,
-      width: MediaQuery.of(context).size.width,
+      fit: BoxFit.cover,
+      height: MediaQuery.of(context).size.height * 0.75,
+      width: MediaQuery.of(context).size.width
     );
 
     final logo = Image.asset(('assets/images/icon.png'),
@@ -69,60 +69,49 @@ class IntroPage extends StatelessWidget {
     );
 
     return FusionScaffold(
-        child: SafeArea(
-          child: Stack(
-            children: [
-              bg,
-              Container(
-                color: Colors.transparent,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    SizedBox(height: 60),
-                    LimitedBox(maxHeight: 90),
-                    Flexible(
-                      child: logo,
-                      flex: 6,
-                    ),
-                    SizedBox(height: 20),
-                    SizedBox(height: 20),
-                    Flexible(
-                      flex: 4,
-                      child: someText1,
-                    ),
-                    SizedBox(height: 180),
-                    LimitedBox(maxHeight: 230),
-                    Flexible(
-                      child: buttonCreateAccount,
-                      flex: 5,
-                    ),
-                    SizedBox(height: 5),
-                    Flexible(
-                      child: GestureDetector(
-                        onDoubleTap: () {},
-                        child: Container(
-                          height: 20,
-//      alignment: Alignment.topCenter,
-                          child: Text(
-                            AppLocalizations.of(context)
-                                .labelAlreadyHaveAccount(),
-                            style: TextStyle(
-                              color: (theme.colorScheme.onSurface),
-                            ),
-                          ),
-                        ),
-                      ),
-                      flex: 2,
-                    ),
-                    SizedBox(height: 5),
-                    Flexible(flex: 5, child: buttonRecoverFromPassphrase),
-                    SizedBox(height: 10),
-                  ],
-                ),
-              ),
-            ],
-          ),
+        child: Stack(
+      children: [
+      bg,
+      Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            SizedBox(height: 60),
+            LimitedBox(maxHeight: 90),
+            Flexible(
+              child: logo,
+              flex: 6,
+            ),
+
+            Flexible(
+              flex: 6,
+              child: someText1,
+            ),
+            SizedBox(height: MediaQuery.of(context).size.height / 3),
+           Padding(
+             padding: const EdgeInsets.symmetric(vertical: 32,  horizontal: 20),
+             child: Column(
+               children: [
+                 buttonCreateAccount,
+                 Padding(
+                   padding: const EdgeInsets.all(8.0),
+                   child: Text(
+                     AppLocalizations.of(context)
+                         .labelAlreadyHaveAccount(),
+                     style: TextStyle(
+                       color: (theme.colorScheme.onSurface),
+                     ),
+                   ),
+                 ),
+                 buttonRecoverFromPassphrase
+               ],
+             ),
+           )
+          ],
         ),
+      ),
+      ],
+    ),
         hideToolbar: true);
   }
 }

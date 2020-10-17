@@ -38,10 +38,10 @@ class AccountNamingFormBloc extends FormBloc<String, String> {
         preferences.save();
         emitSuccess();
       } else {
-        emitFailure(failureResponse: 'Please, enter name');
+        emitFailure(failureResponse: '');
       }
     } else {
-      this.emitFailure(failureResponse: 'Please, apply terms of usage.');
+      this.emitFailure(failureResponse: '');
     }
   }
 }

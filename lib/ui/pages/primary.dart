@@ -89,6 +89,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
 
     final ThemeData theme = Theme.of(context);
     return FusionScaffold(
+
       child: Stack(
         children: <Widget>[
           tabs[provider.currentIndex],
@@ -160,7 +161,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
             onClick: () {
               final box = Hive.box<Erc20Wallet>(erc20walletsBox);
               final wallet = box.getAt(0);
-
+            //  final privateKeyString = EthPrivateKey(privateKeyBytesToPublic(privateKey)).
               Clipboard.setData(ClipboardData(text: wallet.privateKey.toString()));
               injector.get<HapticUtil>().selection();
               FlashHelper.successBar(context,
@@ -251,7 +252,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
   }
 
   Future<void> _createDynamicLink(bool short, String address) async {
-    final host = Uri.parse('https://fusiongroup.page.link/promo/Mx$address');
+    final host = Uri.parse('https://fusiongroup.page.link/promo/$address');
     logger.d("Deeplink pre -> $host");
     final params = DynamicLinkParameters(
       uriPrefix: 'https://fusiongroup.page.link',
@@ -382,73 +383,73 @@ class _BottomHomePageState extends State<BottomHomePage> {
 
   _buildFusionDrawer(BuildContext context, List<DrawerItemData> items) =>
       Drawer(
-        child: SafeArea(
-          child: Stack(
-            children: <Widget>[
-              Container(
-                width: MediaQuery.of(context).size.width,
-                child: SvgPicture.asset(
-                  (StateContainer.of(context).darkModeEnabled)
-                      ? "assets/images/backgrounds/bg_primary.svg"
-                      : "assets/images/backgrounds/bg_primary_light.svg",
-                  fit: BoxFit.fitWidth,
-                ),
+        elevation: 32,
+        child:Stack(
+          children: <Widget>[
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: SvgPicture.asset(
+                (StateContainer.of(context).darkModeEnabled)
+                    ? "assets/images/backgrounds/bg_primary.svg"
+                    : "assets/images/backgrounds/bg_primary_light.svg",
+                fit: BoxFit.fitHeight,
               ),
-              Container(
-                color: Theme.of(context).colorScheme.surface,
-                width: MediaQuery.of(context).size.width *
-                    BottomHomePage.drawerWidthRatio,
-                height: MediaQuery.of(context).size.height,
-                child: ListView.separated(
-                    itemBuilder: (context, index) {
-                      if (index == 0)
-                        return LimitedBox(
-                          maxHeight: MediaQuery.of(context).size.height *
-                              BottomHomePage.drawerHeaderHeightRatio,
-                          child: DrawerHeader(
-                              decoration: BoxDecoration(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .primaryVariant),
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 12, top: 8),
-                                child: Text(
-                                    (StateContainer.of(context)
-                                                .selectedAccount
-                                                .name !=
-                                            null)
-                                        ? StateContainer.of(context)
-                                            .selectedAccount
-                                            .name
-                                        : AppLocalizations.of(context).appName(),
-                                    style: GoogleFonts.robotoCondensed().copyWith(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onPrimary,
-                                        fontSize: 24)),
-                              )),
-                        );
-                      else {
-                        return DrawerItem(data: items[index]);
-                      }
-                    },
-                    separatorBuilder: (context, index) {
-                      if (index == 0) {
-                        return SizedBox();
-                      } else
-                        return Padding(
-                          padding: const EdgeInsets.only(left: 32, right: 32),
-                          child: Divider(
-                            color: Theme.of(context).colorScheme.onBackground,
-                            thickness: 0.25,
-                          ),
-                        );
-                    },
-                    itemCount: items.length),
-              )
-            ],
-          ),
-        ),
+            ),
+            Container(
+              color: Theme.of(context).colorScheme.surface,
+              width: MediaQuery.of(context).size.width *
+                  BottomHomePage.drawerWidthRatio,
+              height: MediaQuery.of(context).size.height,
+              child: ListView.separated(
+                  itemBuilder: (context, index) {
+                    if (index == 0)
+                      return LimitedBox(
+                        maxHeight: MediaQuery.of(context).size.height *
+                            BottomHomePage.drawerHeaderHeightRatio,
+                        child: DrawerHeader(
+                          duration: Duration(seconds: 1),
+                            decoration: BoxDecoration(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primaryVariant),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 12, top: 8),
+                              child: Text(
+                                  (StateContainer.of(context)
+                                      .selectedAccount
+                                      .name !=
+                                      null)
+                                      ? StateContainer.of(context)
+                                      .selectedAccount
+                                      .name
+                                      : AppLocalizations.of(context).appName(),
+                                  style: GoogleFonts.robotoCondensed().copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onPrimary,
+                                      fontSize: 24)),
+                            )),
+                      );
+                    else {
+                      return DrawerItem(data: items[index]);
+                    }
+                  },
+                  separatorBuilder: (context, index) {
+                    if (index == 0) {
+                      return SizedBox();
+                    } else
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 32, right: 32),
+                        child: Divider(
+                          color: Theme.of(context).colorScheme.onBackground,
+                          thickness: 0.25,
+                        ),
+                      );
+                  },
+                  itemCount: items.length),
+            )
+          ],
+        )
       );
 
   Widget buildToolbarTitle(BuildContext context, currentIndex) {

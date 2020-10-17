@@ -3,10 +3,8 @@
 
 
 
-import 'dart:typed_data';
 
 import 'package:hive/hive.dart';
-
 
 part 'erc20_wallet.g.dart';
 
@@ -15,7 +13,7 @@ class Erc20Wallet extends HiveObject {
   @HiveField(0)
   String name;
   @HiveField(1)
-  Uint8List privateKey;
+  String privateKey;
   @HiveField(2)
   String address;
 

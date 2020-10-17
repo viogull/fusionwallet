@@ -82,7 +82,7 @@ class _Erc20WalletUiState extends State<Erc20WalletUi> {
                     Flexible(
                       flex: 4,
                       child: Padding(
-                        padding: EdgeInsets.all(16),
+                        padding: EdgeInsets.all(4),
                         child: Column(
                           children: <Widget>[
                             RepaintBoundary(
@@ -109,9 +109,9 @@ class _Erc20WalletUiState extends State<Erc20WalletUi> {
                       ),
                     ),
                     Flexible(
-                      flex: 2,
+                      flex:1,
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(4.0),
                         child: RaisedButton.icon(
                             color: Theme
                                 .of(context)
@@ -234,7 +234,7 @@ class _Erc20WalletUiState extends State<Erc20WalletUi> {
             );
           }
           else if(!isWalletExist) {
-            return _buildNoWalletsUi(context);
+            return _buildLoadingUi(context);
           } else if(isWalletExist == null)
             return _buildLoadingUi(context);
         return _buildLoadingUi(context);
@@ -288,7 +288,6 @@ class _Erc20WalletUiState extends State<Erc20WalletUi> {
                 padding: const EdgeInsets.all(32.0),
                 child: PlatformCircularProgressIndicator(),
               ),
-              Text(AppLocalizations.of(context).generatingWalletMessage())
             ],
           ),
         ),

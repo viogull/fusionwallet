@@ -57,8 +57,9 @@ class FusionScaffold extends StatelessWidget {
           child: Scaffold(
             backgroundColor: Colors.transparent,
             drawer: drawer,
+            drawerEnableOpenDragGesture: true,
             appBar: _buildToolbar(context),
-            resizeToAvoidBottomPadding: false,
+            resizeToAvoidBottomInset: true,
             floatingActionButton: (fab),
             body: child,
           ),

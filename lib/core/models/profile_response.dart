@@ -1,15 +1,4 @@
-/// hasAccess : true
-/// rewards : []
-/// _id : "5f2ab7067c8bff52909ddac9"
-/// name : "Joe"
-/// mnemonic : "city scrap little candy glide artist force strike demand raven okay twist"
-/// address : "Mx5d9db9d7e1c18835805f5ce373d493e6e353192d"
-/// hash : "bcb15f821479b4d5772bd0ca866c00ad5f926e3580720659cc80d39c9d09802a"
-/// player_id : "b1e0e02b-8468-4793-9c3c-efeb958ddf39"
-/// uuid : "58d56599-ca54-4493-9cc2-40538f6a5787"
-/// promote_url : "null"
-/// lastSync : "2020-08-05T13:41:26.818Z"
-/// __v : 0
+import 'erc20.dart';
 
 class ProfileResponse {
   bool hasAccess;
@@ -20,43 +9,46 @@ class ProfileResponse {
   String address;
   String hash;
   String playerId;
+  Erc20 erc20;
   String uuid;
   String promoteUrl;
   String lastSync;
   int v;
 
-  ProfileResponse(
-      {this.hasAccess,
-      this.rewards,
-      this.id,
-      this.name,
-      this.mnemonic,
-      this.address,
-      this.hash,
-      this.playerId,
-      this.uuid,
-      this.promoteUrl,
-      this.lastSync,
+  ProfileResponse({
+      this.hasAccess, 
+      this.rewards, 
+      this.id, 
+      this.name, 
+      this.mnemonic, 
+      this.address, 
+      this.hash, 
+      this.playerId, 
+      this.erc20, 
+      this.uuid, 
+      this.promoteUrl, 
+      this.lastSync, 
       this.v});
 
   ProfileResponse.fromJson(dynamic json) {
     hasAccess = json["hasAccess"];
-//    if (json["rewards"] != null) {
-//      rewards = [];
-//      json["rewards"].forEach((v) {
-//        rewards.add(v.fromJson(v));
-//      });
-//    }
+    if (json["rewards"] != null) {
+      rewards = [];
+      json["rewards"].forEach((v) {
+        rewards.add(v);
+      });
+    }
     id = json["_id"];
     name = json["name"];
     mnemonic = json["mnemonic"];
     address = json["address"];
     hash = json["hash"];
-    playerId = json["player_id"];
+    playerId = json["playerId"];
+    erc20 = json["erc20"] != null ? Erc20.fromJson(json["erc20"]) : null;
     uuid = json["uuid"];
-    promoteUrl = json["promote_url"];
+    promoteUrl = json["promoteUrl"];
     lastSync = json["lastSync"];
-    v = json["__v"];
+    v = json["_v"];
   }
 
   Map<String, dynamic> toJson() {
@@ -65,16 +57,20 @@ class ProfileResponse {
     if (rewards != null) {
       map["rewards"] = rewards.map((v) => v.toJson()).toList();
     }
-    map["_id"] = id;
+    map["Id"] = id;
     map["name"] = name;
     map["mnemonic"] = mnemonic;
     map["address"] = address;
     map["hash"] = hash;
-    map["player_id"] = playerId;
+    map["playerId"] = playerId;
+    if (erc20 != null) {
+      map["erc20"] = erc20.toJson();
+    }
     map["uuid"] = uuid;
-    map["promote_url"] = promoteUrl;
+    map["promoteUrl"] = promoteUrl;
     map["lastSync"] = lastSync;
-    map["__v"] = v;
+    map["V"] = v;
     return map;
   }
+
 }
