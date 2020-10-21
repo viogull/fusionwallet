@@ -9,6 +9,7 @@ import 'package:pointycastle/export.dart';
 import 'package:pointycastle/pointycastle.dart';
 
 class Encryptor {
+
   final String key;
   final String iv;
   final ParametersWithIV<KeyParameter> _params;

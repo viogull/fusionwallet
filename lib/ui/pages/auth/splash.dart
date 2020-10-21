@@ -85,10 +85,10 @@ class _SplashState extends State<Splash> with WidgetsBindingObserver {
 
         logger.d("Access: $accessRequest");
 
-        injector.get<MinterRest>().fetchNotifications().then((value) => {
-              Hive.box<AdminNotification>(notificationsBox)
-                  .addAll((value).notifications)
-            });
+        // injector.get<MinterRest>().fetchNotifications().then((value) => {
+        //       Hive.box<AdminNotification>(notificationsBox)
+        //           .addAll((value).notifications)
+        //     });
         if (accessRequest) {
           if (lastAccount.pin != null) {
             logger

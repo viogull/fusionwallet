@@ -3,8 +3,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fusion_wallet/core/models/transaction.dart';
-import 'package:fusion_wallet/core/models/transanctions_response.dart';
+import 'package:fusion_wallet/core/pojo/transactions_response.dart';
 
 import '../../../localizations.dart';
 import '../../theme.dart';

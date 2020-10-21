@@ -87,8 +87,6 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "network.minter.android:minter-android-core:${minterCoreSDK}"
-    implementation "network.minter.android:minter-android-explorer:${minterExplorerSDK}"
-    implementation "network.minter.android:minter-android-blockchain:${minterBlockchainSDK}"
+
 
 }

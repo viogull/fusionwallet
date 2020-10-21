@@ -21,9 +21,7 @@ class InvoiceItem extends StatelessWidget {
 
     var statusColor = colorScheme.primaryVariant;
 
-    final icon = (data.completed)
-        ? Icon(FlutterIcons.check_ant, color: Colors.green)
-        : Icon(FlutterIcons.error_mdi, color: Colors.red);
+
 
     if (data.status == 'rejected')
       statusColor = Colors.red;

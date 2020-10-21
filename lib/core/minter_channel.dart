@@ -20,8 +20,7 @@ class MinterChannel {
 
   Future<dynamic> generateAddressData() async {
     try {
-      return await platformChannel
-          .invokeMethod<Map<dynamic, dynamic>>('create_address');
+      return injector.get<MinterRest>().generateAddressData();
     } on Exception catch (e) {
       log.e(" Exception on generating new address. Details: "
           "\n $e \n");

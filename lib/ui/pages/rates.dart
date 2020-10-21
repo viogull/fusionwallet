@@ -30,60 +30,93 @@ class RateExchangePage extends StatelessWidget {
               return Container(
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 child: DataTable(
-                  columns: [
-                    DataColumn(
-                      label: Text("      ",
-                          style: TextStyle(fontSize: 14),
-                          textAlign: TextAlign.start),
-                      numeric: false,
-                    ),
-                    DataColumn(
-                      label: Text(AppLocalizations.of(context).buttonSell(),
-                          style: TextStyle(fontSize: 14),
-                          textAlign: TextAlign.center),
-                      numeric: false,
-                    ),
-                    DataColumn(
-                      label: Text(AppLocalizations.of(context).buttonBuy(),
-                          style: TextStyle(fontSize: 14),
-                          textAlign: TextAlign.center),
-                      numeric: false,
-                    ),
-                  ],
-                  rows: [
-                DataRow(cells:
-                [
-                  DataCell(Text('BTC', style: headerStyle(),)),
-                  DataCell(Text(response.bTC.buy.toString(),textAlign: TextAlign.center),),
-                  DataCell(Text(response.bTC.sell.toString()),) ]
-                ),
-                    DataRow(cells:
-                    [
-                      DataCell(Text('ETH'),),
-                      DataCell(Text(response.eTH.buy.toString(),textAlign: TextAlign.center),),
-                      DataCell(Text(response.eTH.sell.toString()),) ]
-                    ),
-                    DataRow(cells:
-                    [
-                      DataCell(Text('FUSION'),),
-                      DataCell(Text(response.fUSION.buy.toString(),textAlign: TextAlign.center),),
-                      DataCell(Text(response.fUSION.sell.toString(), textAlign: TextAlign.center,),) ]
-                    ),
-                    DataRow(cells:
-                    [
-                      DataCell(Text('BIP'),),
-                      DataCell(Text(response.bIP.buy.toString(),textAlign: TextAlign.center),),
-                      DataCell(Text(response.bIP.sell.toString()),) ]
-                    ),
-                    DataRow(cells:
-                    [
-                      DataCell(Text('USDT'),),
-                      DataCell(Text(response.uSDT.buy.toString(),textAlign: TextAlign.center),),
-                      DataCell(Text(response.uSDT.sell.toString()),) ]
-                    ),
-                  ]
-                ),
+                    columns: [
+                      DataColumn(
+                        label: Text("      ",
+                            style: TextStyle(fontSize: 14),
+                            textAlign: TextAlign.center),
+                      ),
+                      DataColumn(
+                        label: Text(AppLocalizations.of(context).buttonSell(),
+                            style: TextStyle(fontSize: 14),
+                            textAlign: TextAlign.center),
+                      ),
+                      DataColumn(
+                        label: Text(AppLocalizations.of(context).buttonBuy(),
+                            style: TextStyle(fontSize: 14),
+                            textAlign: TextAlign.center),
+                      ),
+                    ],
+                    horizontalMargin: 4,
+                    rows: [
+                      DataRow(cells: [
+                        DataCell(Text(
+                          'BTC',
+                          textAlign: TextAlign.center,
+                          style: headerStyle(context),
+                        )),
+                        DataCell(
+                          Text(response.bTC.buy.toStringAsFixed(4),
+                              textAlign: TextAlign.center),
+                        ),
+                        DataCell(
+                          Text(response.bTC.sell.toStringAsFixed(4)),
+                        )
+                      ]),
+                      DataRow(cells: [
+                        DataCell(
+                          Text('ETH', textAlign: TextAlign.center,),
+                        ),
+                        DataCell(
+                          Text(response.eTH.buy.toStringAsFixed(4),
+                              textAlign: TextAlign.center),
+                        ),
+                        DataCell(
+                          Text(response.eTH.sell.toStringAsFixed(4)),
+                        )
+                      ]),
+                      DataRow(cells: [
+                        DataCell(
+                          Text('FUSION', textAlign: TextAlign.center, style: headerStyle(context),),
+                        ),
+                        DataCell(
+                          Text(response.fUSION.buy.toStringAsFixed(8),
+                              textAlign: TextAlign.center),
+                        ),
+                        DataCell(
+                          Text(
+                            response.fUSION.sell.toStringAsFixed(8),
+                            textAlign: TextAlign.center,
+                          ),
+                        )
+                      ]),
+                      DataRow(cells: [
+                        DataCell(
+                          Text('BIP', textAlign: TextAlign.center, style: headerStyle(context),),
+                        ),
+                        DataCell(
+                          Text(response.bIP.buy.toStringAsFixed(5),
+                              textAlign: TextAlign.center),
+                        ),
+                        DataCell(
+                          Text(response.bIP.sell.toStringAsFixed(5), textAlign: TextAlign.center,),
+                        )
+                      ]),
+                      DataRow(cells: [
+                        DataCell(
+                          Text('USDT', textAlign: TextAlign.center,  style: headerStyle(context),),
+                        ),
+                        DataCell(
+                          Text(response.uSDT.buy.toStringAsFixed(4),
+                              textAlign: TextAlign.center),
+                        ),
+                        DataCell(
+                          Text(response.uSDT.sell.toStringAsFixed(4), textAlign: TextAlign.center,),
+                        )
+                      ]),
+                    ]),
               );
             } else {
               return Center(child: PlatformCircularProgressIndicator());
@@ -92,5 +125,7 @@ class RateExchangePage extends StatelessWidget {
     );
   }
 
-  headerStyle() => GoogleFonts.cabinCondensed(fontSize: 16);
+
+
+  headerStyle(BuildContext context) => GoogleFonts.robotoMono(fontSize: 16, color: Theme.of(context).colorScheme.onBackground.withOpacity(0.8));
 }

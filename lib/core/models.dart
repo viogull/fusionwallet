@@ -38,5 +38,4 @@ export './models/push_transaction_request.dart';
 export './models/recover_response.dart';
 export './models/send_tx_request.dart';
 export './models/spec_exchange_rates_response.dart';
-export './models/transanctions_response.dart';
 export './models/withdraw_invoice.dart';

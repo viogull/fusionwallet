@@ -1,100 +1,101 @@
-/// data : {"address":"Mx039f3c8b3568812dfc1fbf2d22f214d2538df712","balances":[{"coin":"BIP","amount":"0.000000000000000000"}]}
-/// latest_block_time : "2020-07-08T18:54:33Z"
-
 class AddressData {
-  Data _data;
-  String _latestBlockTime;
-
-  Data get data => _data;
-  String get latestBlockTime => _latestBlockTime;
+  Data data;
+  String latestBlockTime;
 
   AddressData({
-      Data data, 
-      String latestBlockTime}){
-    _data = data;
-    _latestBlockTime = latestBlockTime;
-}
+      this.data, 
+      this.latestBlockTime});
 
   AddressData.fromJson(dynamic json) {
-    _data = json["data"] != null ? Data.fromJson(json["data"]) : null;
-    _latestBlockTime = json["latestBlockTime"];
+    data = json["data"] != null ? Data.fromJson(json["data"]) : null;
+    latestBlockTime = json["latestBlockTime"];
   }
 
   Map<String, dynamic> toJson() {
     var map = <String, dynamic>{};
-    if (_data != null) {
-      map["data"] = _data.toJson();
+    if (data != null) {
+      map["data"] = data.toJson();
     }
-    map["latestBlockTime"] = _latestBlockTime;
+    map["latestBlockTime"] = latestBlockTime;
     return map;
   }
 
 }
 
-/// address : "Mx039f3c8b3568812dfc1fbf2d22f214d2538df712"
-/// balances : [{"coin":"BIP","amount":"0.000000000000000000"}]
-
 class Data {
-  String _address;
-  List<Balances> _balances;
-
-  String get address => _address;
-  List<Balances> get balances => _balances;
+  String address;
+  List<Balances> balances;
 
   Data({
-      String address, 
-      List<Balances> balances}){
-    _address = address;
-    _balances = balances;
-}
+      this.address, 
+      this.balances});
 
   Data.fromJson(dynamic json) {
-    _address = json["address"];
+    address = json["address"];
     if (json["balances"] != null) {
-      _balances = [];
+      balances = [];
       json["balances"].forEach((v) {
-        _balances.add(Balances.fromJson(v));
+        balances.add(Balances.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
     var map = <String, dynamic>{};
-    map["address"] = _address;
-    if (_balances != null) {
-      map["balances"] = _balances.map((v) => v.toJson()).toList();
+    map["address"] = address;
+    if (balances != null) {
+      map["balances"] = balances.map((v) => v.toJson()).toList();
     }
     return map;
   }
 
 }
 
-/// coin : "BIP"
-/// amount : "0.000000000000000000"
-
 class Balances {
-  String _coin;
-  String _amount;
-
-  String get coin => _coin;
-  String get amount => _amount;
+  Coin coin;
+  String amount;
+  String bipAmount;
 
   Balances({
-      String coin, 
-      String amount}){
-    _coin = coin;
-    _amount = amount;
-}
+      this.coin, 
+      this.amount, 
+      this.bipAmount});
 
   Balances.fromJson(dynamic json) {
-    _coin = json["coin"];
-    _amount = json["amount"];
+    coin = json["coin"] != null ? Coin.fromJson(json["coin"]) : null;
+    amount = json["amount"];
+    bipAmount = json["bip_amount"];
   }
 
   Map<String, dynamic> toJson() {
     var map = <String, dynamic>{};
-    map["coin"] = _coin;
-    map["amount"] = _amount;
+    if (coin != null) {
+      map["coin"] = coin.toJson();
+    }
+    map["amount"] = amount;
+    map["bip_amount"] = bipAmount;
+    return map;
+  }
+
+}
+
+class Coin {
+  int id;
+  String symbol;
+
+  Coin({
+      this.id, 
+      this.symbol});
+
+  Coin.fromJson(dynamic json) {
+    id = json["id"];
+    symbol = json["symbol"];
+  }
+
+  Map<String, dynamic> toJson() {
+    var map = <String, dynamic>{};
+    map["id"] = id;
+    map["symbol"] = symbol;
     return map;
   }
 

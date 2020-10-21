@@ -55,7 +55,8 @@ class ReceiverCard extends StatefulWidget {
   TextEditingController addressController;
 
 
-  ReceiverCard({this.addressData, this.qtyController, this.isFirst = false,this.isLast = false, this.onMinusClicked, this.addressController});
+  ReceiverCard({this.addressData, this.qtyController,
+    this.isFirst = false,this.isLast = false, this.onMinusClicked, this.addressController});
 
   @override
   _ReceiverCardState createState ()=> _ReceiverCardState();

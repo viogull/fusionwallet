@@ -12,9 +12,9 @@ import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/utils/flasher.dart';
 import 'package:hive/hive.dart';
 
+import '../../../core/models.dart';
 import '../../../inject.dart';
 import '../../widgets.dart';
-import '../../../core/models.dart';
 
 class UboundFormBloc extends FormBloc<String, String> {
   static const DEFAULT_DELEGATE_PUBKEY =
@@ -47,7 +47,7 @@ class UboundFormBloc extends FormBloc<String, String> {
       if (element != null) _account = element;
     });
     final items =
-        _accountBalance.data.balances.map((e) => "${e.coin}").toList();
+        _accountBalance.data.balances.map((e) => "${e.coin.symbol}").toList();
     coinBloc.updateItems(items);
   }
 

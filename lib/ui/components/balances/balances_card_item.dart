@@ -7,9 +7,10 @@ import 'package:fusion_wallet/ui/theme.dart';
 class BalancesCardItem extends StatelessWidget {
   final String title;
   final String value;
+  final String valueUsd;
   bool showUsd = false;
 
-  BalancesCardItem({@required this.title, @required this.value, this.showUsd});
+  BalancesCardItem({@required this.title, @required this.value, this.valueUsd,  this.showUsd});
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +57,7 @@ class BalancesCardItem extends StatelessWidget {
             ),
             Flexible(
                 flex: 10,
-                child: Text(value,
+                child: Text(showUsd ? valueUsd : value,
                     textAlign: TextAlign.start,
                     style:
                         FusionTheme.subtitleTextStyle.copyWith(fontSize: 24)))

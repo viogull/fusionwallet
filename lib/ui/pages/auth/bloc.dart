@@ -115,7 +115,7 @@ class AuthenticationBloc
           mnemonic: _account.mnemonic,
           pin: _account.pin,
           promoteUrl: referal));
-      log.d(createProfile.toJson().toString());
+      log.d(createProfile.toString());
       _account.name = event.name;
       _account.hash = createProfile.hash;
       _account.sessionKey = createProfile.id;

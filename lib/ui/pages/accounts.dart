@@ -7,7 +7,8 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/core/minter_rest.dart';
-import 'package:fusion_wallet/core/models/transanctions_response.dart';
+import 'package:fusion_wallet/core/pojo/total_balances_response.dart';
+import 'package:fusion_wallet/core/pojo/transactions_response.dart';
 import 'package:fusion_wallet/ui/components/custom/button.dart';
 import 'package:fusion_wallet/ui/components/transaction_view.dart';
 import 'package:fusion_wallet/ui/pages/adresses.dart';
@@ -149,7 +150,7 @@ class AccountsPage extends StatelessWidget {
                   },
                   color: Theme.of(context).colorScheme.primary,
                   child: AutoSizeText(
-                      AppLocalizations.of(context).buttonUnbound().toString()))
+                      "Unbound"))
             ],
           );
         }
@@ -232,8 +233,7 @@ class AccountsPage extends StatelessWidget {
                           )
                         : Container(
                             child: Center(
-                                child: AutoSizeText(AppLocalizations.of(context)
-                                    .transferLoading)));
+                                child: AutoSizeText("")));
 
                 } else
                   return Container(
@@ -280,23 +280,23 @@ class AccountsPage extends StatelessWidget {
     }
       erc20Address  = StateContainer.of(context).erc20WalletsBox.getAt(0).address;
     return FutureBuilder(
-      future: injector.get<MinterRest>().fetchUsdAddressData(
-          address: StateContainer.of(context).selectedAccount.address,
+      future: injector.get<MinterRest>().fetchBalances(
+          minterAddress: StateContainer.of(context).selectedAccount.address,
       erc20Address: erc20Address ),
       builder: (context, snapshot) {
         debugPrint(
             'Connection State ${snapshot.connectionState}, has data : ${snapshot.hasData}');
         if (snapshot.connectionState == ConnectionState.done &&
             snapshot.hasData) {
-          var balances = snapshot.data.data.balances;
-          if (balances.length > 0) {
-            debugPrint("Rendering balances length ${balances.length}");
+          var data = snapshot.data as TotalBalancesResponse;
+
+          if (data.minter.length > 0) {
+            debugPrint("Rendering balances length ${data.minter.length}");
 
             return AccountBalancesCard(
                 data: snapshot.data,
                 erc20Balance: StateContainer.of(context).erc20Balance,
                 onPlusTapped: () async {
-                  StateContainer.of(context).loadErcBalances();
                   showBarModalBottomSheet(context: context,  backgroundColor: Theme.of(context).colorScheme.surface,
                       elevation: 16,
                       builder: (context) {

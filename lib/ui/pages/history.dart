@@ -20,7 +20,7 @@ class History extends StatefulWidget {
 class _HistoryState extends State<History> {
   String _selectedAccount;
 
-  DateTime startDate = DateTime.now();
+  DateTime startDate = DateTime.now().subtract(Duration(days: 7));
   DateTime endDate = DateTime.now();
 
   Future<Null> _startDateSelect(BuildContext context) async {
@@ -96,9 +96,9 @@ class _HistoryState extends State<History> {
                   Container(
                     width: MediaQuery.of(context).size.width,
                     child: Card(
-                      borderOnForeground: false,
+                      borderOnForeground: true,
                       elevation: 16,
-                      color: Theme.of(context).colorScheme.surface,
+                      color: Theme.of(context).colorScheme.background,
                       shape: RoundedRectangleBorder(
                         borderRadius: FusionTheme.borderRadius,
                       ),

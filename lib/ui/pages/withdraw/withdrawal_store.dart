@@ -66,7 +66,7 @@ abstract class _WithdrawalStore with Store {
     this.coin = value;
 
     this.maximum = double.parse(balances.value.data.balances
-        .firstWhere((element) => element.coin == this.coin)
+        .firstWhere((element) => element.coin.symbol == this.coin)
         .amount);
   }
 

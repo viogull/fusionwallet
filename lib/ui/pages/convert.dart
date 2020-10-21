@@ -341,7 +341,7 @@ popupShape: OutlineInputBorder(
 ),
                     dropdownBuilderSupportsNullItem: true,
                     dropDownButton: Icon(FlutterIcons.arrow_drop_down_mdi, color: Theme.of(context).colorScheme.primary,),
-                    items: balances.data.balances.map((e) => e.coin).toList(),
+                    items: balances.data.balances.map((e) => e.coin.symbol).toList(),
 
                     label:AppLocalizations.of(context)
                         .labelConvertCoinHave(),

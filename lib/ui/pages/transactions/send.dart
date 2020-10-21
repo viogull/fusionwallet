@@ -101,13 +101,14 @@ class _SendFundsState extends State<SendFundsPage> {
                         maxHeight: 300,
                         showSelectedItem: true,
                         label: AppLocalizations.of(context).labelCoin(),
+                        popupBackgroundColor: Theme.of(context).colorScheme.surface,
                         hint: AppLocalizations.of(context).chooseCurrency(),
 
                         selectedItem: (this._selectedCoin == null)
                             ? ""
                             : this._selectedCoin,
                         items: addressBalances.data.balances
-                            .map((e) => e.coin)
+                            .map((e) => e.coin.symbol)
                             .toList(),
                         onChanged: (value) {
                           setState(() {
@@ -201,7 +202,7 @@ class _SendFundsState extends State<SendFundsPage> {
                                        hash: StateContainer.of(context)
                                            .selectedAccount
                                            .hash);
-                              log.d("Response Data after sending... ${sendTxRes}");
+                              log.d("Response Data after sending... ");
                                if (sendTxRes == true) {
                                  FlashHelper.successBar(context,
                                      message: AppLocalizations.of(context)
@@ -255,7 +256,7 @@ class _SendFundsState extends State<SendFundsPage> {
 
                           },
                           child: Text(
-                            AppLocalizations.of(context).buttonPreview(),
+                            AppLocalizations.of(context).buttonSend(),
                             style: TextStyle(
                                 color: Theme.of(context).colorScheme.onPrimary),
                           ),

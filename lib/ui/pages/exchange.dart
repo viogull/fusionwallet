@@ -7,7 +7,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/core/models.dart';
 import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/ui/components/custom/button.dart';
-import 'package:fusion_wallet/ui/pages/auth/pincode.dart';
 import 'package:fusion_wallet/ui/pages/convert.dart';
 import 'package:fusion_wallet/ui/pages/rates.dart';
 import 'package:fusion_wallet/utils/numbers.dart';
@@ -109,7 +108,7 @@ class ExchangePage extends StatelessWidget {
                                                       0.02,
                                                 ),
                                                 AutoSizeText(
-                                                  element.coin,
+                                                  element.coin.symbol,
                                                   style: GoogleFonts.robotoCondensed(color: theme.colorScheme.onBackground, fontSize: 18),
                                                   textAlign: TextAlign.left,
                                                 ),
@@ -208,8 +207,7 @@ class ExchangePage extends StatelessWidget {
                         child: FusionButton(
                             text: AppLocalizations.of(context).buttonBuy(),
                             onPressed: () {
-                              Navigator.pushNamed(
-                                  context, PasswordCreationPage.navId);
+
                             }),
                       ),
                     ),

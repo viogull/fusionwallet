@@ -94,8 +94,9 @@ class Vault {
       return;
     }
     await secureStorage.deleteAll();
+
     await Hive.box<Erc20Wallet>(erc20walletsBox).clear();
-    return await Hive.box<Account>(accountsBox).clear();
+     await Hive.box<Account>(accountsBox).clear();
   }
 
   // Specific keys

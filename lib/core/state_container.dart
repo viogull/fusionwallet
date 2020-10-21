@@ -139,8 +139,6 @@ class StateContainerState extends State<StateContainer> {
     setBiometric(widget.preferences.biometricEnabled);
     setRewardsVisibility(rewardsEnabled);
 
-    loadErcBalances();
-
     loadAdditionals();
   }
 
@@ -284,31 +282,21 @@ class StateContainerState extends State<StateContainer> {
   }
 
   void loadAdditionals() async  {
-    final balances =
-    await injector.get<MinterRest>().fetchAddressData(address: selectedAccount.address);
-
-    setState(() {
-      this.addressData = balances;
-    });
+   //  final balances =
+   // // await injector.get<MinterRest>().fetchAddressData(address: selectedAccount.address);
+   //
+   //  setState(() {
+   //    this.addressData = balances;
+   //  });
   }
 
-
-  void loadErcBalances()  {
-    log.d("Loading ERC balances");
-    if(erc20WalletsBox.isNotEmpty) {
-      final wallet = erc20WalletsBox.getAt(0);
-       injector.get<MinterRest>().fetchErc20Balances(address: wallet.address ).then((datas) {
-        log.d("Fetched balances for ${wallet.address}. Result -> ${datas.value} wei");
-        setState(() {
-          log.d("Balance -> ${datas.value}");
-          this.erc20Balance = datas.value;
+  void loadNotifications() {
+    injector.get<MinterRest>().fetchNotifications().then((value) => {
+          Hive.box<AdminNotification>(notificationsBox)
+              .addAll((value).notifications)
         });
-      });
-
-    } else {
-      log.e("Empty wallet box");
-    }
-
   }
+
+
 
 }

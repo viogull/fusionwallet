@@ -192,7 +192,6 @@ class _RecoverAccountState extends State<RecoverAccountPage> {
                         flex: 8,
                         child: Container(
                           height: 300.0,
-                          width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               border: Border.all(color: theme.primaryColor)),

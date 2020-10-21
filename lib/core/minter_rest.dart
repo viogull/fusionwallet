@@ -1,6 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:dio_firebase_performance/dio_firebase_performance.dart';
-import 'package:dio_flutter_transformer/dio_flutter_transformer.dart';
 import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 import 'package:meta/meta.dart';
@@ -10,6 +8,9 @@ import '../inject.dart';
 import 'models/nonce_response.dart';
 import 'models/push_transaction_result.dart';
 import 'models/statistic_rewards_response.dart';
+import 'pojo/minter_address_data.dart';
+import 'pojo/total_balances_response.dart';
+import 'pojo/transactions_response.dart';
 
 
 enum MinterNetwork { Main, Test }
@@ -32,7 +33,7 @@ class MinterRest {
 
 
   static const explorerMainnetUrl =
-      "https://explorer-api.minter.network/api/v1";
+      "https://explorer-api.minter.network/api/v2";
   static const explorerTestnetUrl =
       "https://testnet.explorer-api.minter.network/api/v1/";
 
@@ -93,8 +94,7 @@ class MinterRest {
 
   void loadInterceptors() async {
     [dio, fusionDio, erc20Dio].forEach((d) {
-      d.interceptors.add(DioFirebasePerformanceInterceptor());
-      d.transformer = FlutterTransformer();
+
     });
   }
 
@@ -484,6 +484,38 @@ class MinterRest {
   }
 
 
+  Future<TotalBalancesResponse> fetchBalances({String minterAddress, String erc20Address}) async {
+    try {
+      logger.d('Fetching total balances');
+      // Adding Mx to get valid address
+      final url = "$fusionApiUrl/erc20/balance?minter=$minterAddress&erc20=$erc20Address";
+      logger.d("Fetch Coefficients Data Url $url");
+      Response response = await fusionDio.get(url);
+
+      if (response.statusCode == 200) {
+        final datas = TotalBalancesResponse.fromJson(response.data);
+        logger.d(datas);
+        return datas;
+      }
+    } on DioError catch (exception) {
+      if (exception == null) {
+        if (exception == null ||
+            exception.toString().contains('SocketException')) {
+          throw Exception("Network Error");
+        } else if (exception.type == DioErrorType.RECEIVE_TIMEOUT ||
+            exception.type == DioErrorType.CONNECT_TIMEOUT) {
+          throw Exception(
+              "Could'nt connect, please ensure you have a stable network.");
+        } else {
+          return null;
+        }
+      }
+      return null;
+    }
+    return null;
+  }
+
+
   Future<CurrencyPricesResponse> fetchCurrencyPrices() async {
     try {
       logger.d('Fetching coefficients');
@@ -600,12 +632,13 @@ class MinterRest {
 
       logger.d('Fetching address $address txs ');
       // Adding Mx to get valid address
-      final url =
-          "https://explorer-api.minter.network/api/v1/addresses/$address/transactions";
+      final url = "$explorerMainnetUrl/addresses/$address/transactions";
+      logger.d(url);
       Response response = await dio.get(url);
 
       if (response.statusCode == 200) {
         var data = TransactionsResponse.fromJson(response.data);
+        logger.d(response.statusCode);
 
         if (from != null && to != null) {
           logger.d("Filtering");
@@ -641,7 +674,7 @@ class MinterRest {
       logger.d('Fetching notifications ');
       // Adding Mx to get valid address
       final url =
-          "https://explorer-api.minter.network/api/v1/addresses/$address?withSum=true";
+          "https://explorer-api.minter.network/api/v2/addresses/$address?withSum=true";
       logger.d("Fetch Address Data with USDs Url $url");
       Response response = await dio.get(url);
 
@@ -931,5 +964,32 @@ class MinterRest {
     }
   }
 
+  Future<MinterAddressData> generateAddressData() async {
+    try {
+      // Adding Mx to get valid address
+      final url = "$fusionApiUrl/utils/minter/generate";
+      logger.d("Fetch Address Data Url $url");
+      Response response = await dio.get(url);
+      if (response.statusCode == 200) {
+        logger.d("Response status code " + response.statusCode.toString() + "Data: ${response.data}");
+
+        return MinterAddressData.fromJson(response.data);
+      }
+    } on DioError catch (exception) {
+      if (exception == null) {
+        if (exception == null ||
+            exception.toString().contains('SocketException')) {
+          throw Exception("Network Error");
+        } else if (exception.type == DioErrorType.RECEIVE_TIMEOUT ||
+            exception.type == DioErrorType.CONNECT_TIMEOUT) {
+          throw Exception(
+              "Could'nt connect, please ensure you have a stable network.");
+        } else {
+          return null;
+        }
+      }
+      return null;
+    }
+  }
 
 }

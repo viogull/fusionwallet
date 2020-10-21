@@ -38,7 +38,7 @@ class DelegateFormBloc extends FormBloc<String, String> {
     _account = account;
 
     final items =
-        _accountBalance.data.balances.map((e) => "${e.coin}").toList();
+        _accountBalance.data.balances.map((e) => "${e.coin.symbol}").toList();
     coinBloc.updateItems(items);
 
     logger.d(_accountBalance.data.address);

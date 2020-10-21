@@ -102,6 +102,8 @@ void main() async {
 
 
 
+    injector.get<MinterRest>().loadInterceptors();
+
     runApp(DevicePreview(
       enabled: !kReleaseMode,
       builder: (context) => new StateContainer(
@@ -126,6 +128,7 @@ class AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
+
         theme: FusionTheme.light,
         darkTheme: FusionTheme.dark,
         themeMode: StateContainer.of(context).darkModeEnabled
@@ -209,6 +212,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
           logger.d("Detected PUSH deeplink");
 
           Timer.run(() {
+
             showCupertinoModalBottomSheet(
                 context: context,
                 builder: (BuildContext context) {

@@ -81,11 +81,11 @@ class FusionScaffold extends StatelessWidget {
           ? null
           : AutoSizeText(
               title,
-              maxFontSize: 16,
-              minFontSize: 14,
+              maxFontSize: 20,
+              minFontSize: 17,
               style: GoogleFonts.robotoTextTheme()
                   .headline6
-                  .copyWith(color: theme.colorScheme.onSurface, fontSize: 16),
+                  .copyWith(color: theme.colorScheme.onSurface, fontSize: 18),
             ),
     );
   }

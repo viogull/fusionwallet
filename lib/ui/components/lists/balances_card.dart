@@ -4,6 +4,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fusion_wallet/core/models/address_data_with_usd.dart';
 import 'package:fusion_wallet/core/models/eth_balance_response.dart';
+import 'package:fusion_wallet/core/pojo/total_balances_response.dart';
 import 'package:fusion_wallet/ui/components/balances/balances_card_item.dart';
 import 'package:fusion_wallet/ui/theme.dart';
 import 'package:fusion_wallet/utils/flasher.dart';
@@ -14,7 +15,7 @@ import '../../../localizations.dart';
 import '../../widgets.dart';
 
 class AccountBalancesCard extends StatefulWidget {
-  AddressDataWithUsd data;
+  TotalBalancesResponse data;
   double erc20Balance;
   final Function onPlusTapped;
 
@@ -36,32 +37,14 @@ class _AccountBalancesCardState extends State<AccountBalancesCard> {
   final log = injector.get<Logger>();
 
 
-  @override
-  void initState() {
-    if (erc20UsdBalance == null) {
-      Future.delayed(Duration(milliseconds: 200), () async {
-       if( StateContainer
-            .of(context)
-            .erc20WalletsBox.isNotEmpty)
-        final erc20Value = await injector.get<MinterRest>().fetchErc20Balances(
-            address: StateContainer
-                .of(context)
-                .erc20WalletsBox
-                .getAt(0)
-                .address);
-
-      });
-  }
-    super.initState();
-  }
 
   Widget buildBalancesList(BuildContext context) {
-    log.d("Length of currencies -> ${widget.data.data.balances.length}");
+    log.d("Length of minter currencies -> ${widget.data.minter.length}");
     return ListView.builder(
-        itemCount: widget.data.data.balances.length  ,
+        itemCount: widget.data.minter.length  ,
         itemBuilder: (_, index) {
           return ListTile(
-              title: Text(widget.data.data.balances[index].coin.toString()));
+              title: Text(widget.data.minter[index].coin.symbol.toString()));
         });
   }
 
@@ -79,20 +62,15 @@ class _AccountBalancesCardState extends State<AccountBalancesCard> {
         ),
       ),
     );
-    widget.data.data.balances.forEach((element) {
+    widget.data.minter.forEach((element) {
+      log.d("Building coin list item for ${element.coin} ${element.amount} ${element.usdAmount}");
       widgetsList.add(BalancesCardItem(
-          title: element.coin,
+          title: element.coin.symbol,
           value: element.amount,
+          valueUsd: element.usdAmount,
           showUsd: this._showUsdValues));
     });
-    if(usdValue  != null) {
-      debugPrint("Adding ERC wallet to list");
-      widgetsList.add(BalancesCardItem(
-        title: "USDT",
-        value: usdValue.toStringAsPrecision(12),
-        showUsd: this._showUsdValues,
-      ));
-    }
+
     log.d("WidgetsLength => ${widgetsList.length}");
     return widgetsList;
   }
@@ -101,21 +79,6 @@ class _AccountBalancesCardState extends State<AccountBalancesCard> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final ThemeData theme = Theme.of(context);
-    return FutureBuilder(
-      future: injector.get<MinterRest>().fetchErc20Balances(address: StateContainer.of(context).erc20WalletsBox.getAt(0).address),
-      builder: (context, snapshot) {
-
-        num usdValue;
-
-        if(snapshot.connectionState == ConnectionState.waiting)
-          return Padding (
-              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
-              child: Center(child: PlatformCircularProgressIndicator()));
-        else if(snapshot.connectionState == ConnectionState.done && snapshot.hasData == true)
-          {
-
-            usdValue = (snapshot.data as EthBalanceResponse).value;
-          }
 
 
         return Padding(
@@ -140,7 +103,7 @@ class _AccountBalancesCardState extends State<AccountBalancesCard> {
                             padding: const EdgeInsets.only(top: 4),
                             child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
-                                children: _buildBalancesListItems(context: context, usdValue: usdValue)))),
+                                children: _buildBalancesListItems(context: context)))),
                   ),
                 ),
                 Align(
@@ -206,9 +169,6 @@ class _AccountBalancesCardState extends State<AccountBalancesCard> {
             ),
           ),
         );
-      },
-
-    );
 
   }
 }

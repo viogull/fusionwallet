@@ -8,13 +8,13 @@ import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/core/minter_channel.dart';
+import 'package:fusion_wallet/core/pojo/minter_address_data.dart';
 import 'package:fusion_wallet/core/state_container.dart';
 import 'package:fusion_wallet/ui/components/custom/button.dart';
 import 'package:fusion_wallet/ui/components/custom/scaffold.dart';
 import 'package:fusion_wallet/ui/pages/auth/account_name.dart';
 import 'package:fusion_wallet/ui/pages/popups/dialog.dart';
 import 'package:fusion_wallet/ui/theme.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:share/share.dart';
 
 import '../../../inject.dart';
@@ -71,13 +71,14 @@ class _PassphraseCreationPageState extends State<PassphraseCreationPage> {
         if (snapshot.connectionState == ConnectionState.done &&
             snapshot.hasData) {
           List<String> words;
-          String mnemonic = (snapshot.data['mnemonic'] as String);
+          var generatedAddress = snapshot.data as MinterAddressData;
+          String mnemonic = generatedAddress.mnemonic;
           if (mnemonic != null) {
             words = mnemonic.split(" ");
-            cachedSeed = (snapshot.data['seed'] as String);
-            cachedAddress = (snapshot.data['address'] as String);
-            cachedPublicKey = (snapshot.data['public_key'] as String);
-            cachedPrivateKey = (snapshot.data['private_key'] as String);
+            cachedSeed = generatedAddress.seed;
+            cachedAddress = generatedAddress.address;
+            cachedPublicKey = generatedAddress.publicKey;
+            cachedPrivateKey = generatedAddress.privateKey;
           }
 
           return Center(

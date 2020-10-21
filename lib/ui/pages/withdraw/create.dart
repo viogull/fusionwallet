@@ -151,7 +151,7 @@ class _CreateInvoiceUiState extends State<CreateInvoiceUi> {
                     FlutterIcons.arrow_drop_down_mdi,
                     color: Theme.of(context).colorScheme.primary,
                   ),
-                  items: balances.data.balances.map((e) => e.coin).toList(),
+                  items: balances.data.balances.map((e) => e.coin.symbol).toList(),
                   hint: AppLocalizations.of(context).coinWithdrawLabel(),
                   label: AppLocalizations.of(context).labelConvertCoinHave(),
                   onChanged: (value) => store.enterCoin(value));

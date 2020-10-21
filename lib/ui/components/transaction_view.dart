@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fusion_wallet/core/models/transaction.dart';
+import 'package:fusion_wallet/core/pojo/transactions_response.dart';
 import 'package:fusion_wallet/utils/io_tools.dart';
 import 'package:fusion_wallet/utils/numbers.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,7 +11,7 @@ import '../../inject.dart';
 import '../theme.dart';
 
 class TransactionView extends StatelessWidget {
-  final Transaction transaction;
+  final Transaction  transaction;
   final String requestedAddress;
 
   const TransactionView({this.transaction, this.requestedAddress});
@@ -19,7 +19,7 @@ class TransactionView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isReceiving;
-    if (transaction.data.to == requestedAddress)
+    if (transaction.from == requestedAddress)
       isReceiving = true;
     else
       isReceiving = false;
@@ -128,7 +128,7 @@ class TransactionView extends StatelessWidget {
                       AutoSizeText(
                         this.transaction.data.coin == null
                             ? " BIP"
-                            : " ${this.transaction.data.coin}",
+                            : " ${this.transaction.data.coin.symbol}",
                         maxFontSize: 12,
                         textAlign: TextAlign.end,
                       ),

@@ -70,7 +70,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
         logger.d("Account is ${_account.name}");
         Future.delayed(const Duration(milliseconds: 300), () {
           StateContainer.of(context).loadAccount(account: _account);
-          StateContainer.of(context).loadErcBalances();
+          StateContainer.of(context).loadNotifications();
         });
       }
       loadDynamicLinks();
@@ -112,8 +112,8 @@ class _BottomHomePageState extends State<BottomHomePage> {
                 selectedItemColor: theme.colorScheme.onPrimary,
                 unselectedItemColor:
                     theme.colorScheme.onPrimary.withOpacity(0.6),
-                selectedFontSize: 13,
-                unselectedFontSize: 12,
+                selectedFontSize: 12.5,
+                unselectedFontSize: 11,
                 iconSize: 30,
                 elevation: 8,
                 type: BottomNavigationBarType.fixed,
@@ -232,7 +232,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
               final link = await _createDynamicLink(
                   true, StateContainer.of(context).selectedAccount.address);
               logger.d("Link ${link as dynamic}");
-              IOTools.setSecureClipboardItem((link as dynamic).toString());
+              IOTools.setSecureClipboardItem((link as String).toString());
 
               FlashHelper.successBar(context,
                   message: AppLocalizations.of(context).pushLinkWasCopied());
@@ -268,6 +268,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
         bundleId: "com.fusiongroup.wallet",
         minimumVersion: '0',
       ),
+      navigationInfoParameters: NavigationInfoParameters(forcedRedirectEnabled: true)
     );
     Uri url;
     if (short) {

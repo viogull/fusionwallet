@@ -1,4 +1,6 @@
-import 'data.dart';
+
+
+import 'address_data.dart';
 
 /// data : {"address":"Mx9dafdb2de4f6d4db4a1a4408aae31fb315acc7d9","balances":[{"coin":"BIP","amount":"0.379000000000000000"}],"total_balance_sum":"0.379000000000000000","total_balance_sum_usd":"0.001837213870000000","available_balance_sum":"0.379000000000000000","available_balance_sum_usd":"0.001837213870000000"}
 /// latest_block_time : "2020-09-05T12:15:01Z"
