@@ -1,7 +1,7 @@
 name: fusion_wallet
 description: Android/iOS wallet for Minter.Network
 
-version: 1.3.0+70
+version: 1.3.0+71
 
 environment:
   sdk: ">=2.2.2 <3.0.0"

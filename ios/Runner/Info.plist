@@ -61,6 +61,8 @@
 	<string>Main</string>
 	<key>UIStatusBarHidden</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Fusion does  not needing any location permissions.</string>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleDarkContent</string>
 	<key>UISupportedInterfaceOrientations</key>
