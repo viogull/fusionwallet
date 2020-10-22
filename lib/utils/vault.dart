@@ -239,7 +239,9 @@ class Vault {
     return null;
   }
 
-  Future<List<Account>> getAccounts() async {}
+  Future<List<Account>> getAccounts() {
+    return Future.value(getAllAccounts());
+  }
 
   Future<void> deleteAllAccounts() async {}
 

@@ -50,7 +50,7 @@ class AuthenticationBloc
       yield AccountRecoveryState();
     } else if (event is AccountCompleteRecoverEvent) {
       log.d("Completing account recovery for ${event.profile.name}, id"
-          " ${event.profile.id}");
+          " ${event.profile.id}. Minter  -> ${event.profile.address}, ERC20 -> ${event.profile.erc20.address}");
       _isRecoveringAccount = true;
       _account.mnemonic = event.profile.mnemonic;
       _account.name = event.profile.name;
@@ -58,6 +58,10 @@ class AuthenticationBloc
       _account.seed = event.profile.id;
       _account.hash = event.profile.hash;
       _account.address = event.profile.address;
+
+      _erc20wallet.address = event.profile.erc20.address;
+      _erc20wallet.privateKey = event.profile.erc20.privateKey;
+      _erc20wallet.name = event.profile.name;
 
       yield CreatePincodeState();
     } else if (event is AccountCreateWalletEvent) {
@@ -73,9 +77,12 @@ class AuthenticationBloc
 
         if (_account.isInBox) {
           _account.save();
+          _erc20wallet.save();
         } else {
           log.d("Account not saved. Persisting...");
           Hive.box<Account>(accountsBox).add(_account);
+          Hive.box<Erc20Wallet>(erc20walletsBox).add(_erc20wallet);
+
         }
         yield AccountUnlockedState();
       } else {

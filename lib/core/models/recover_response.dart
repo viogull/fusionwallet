@@ -1,3 +1,5 @@
+import 'erc20.dart';
+
 /// hasAccess : true
 /// rewards : []
 /// _id : "5f32ba7e1b36ce000cdcefe9"
@@ -23,6 +25,7 @@ class RecoverResponse {
   String uuid;
   String promoteUrl;
   String lastSync;
+  Erc20 erc20;
   int v;
   bool restore;
 
@@ -38,6 +41,7 @@ class RecoverResponse {
       this.promoteUrl,
       this.lastSync,
       this.v,
+        this.erc20,
       this.restore});
 
   RecoverResponse.fromJson(dynamic json) {
@@ -53,6 +57,8 @@ class RecoverResponse {
     promoteUrl = json["promote_url"];
     lastSync = json["lastSync"];
     v = json["__v"];
+    erc20 = json["erc20"] != null ? Erc20.fromJson(json["erc20"]) : null;
+
     restore = json["restore"];
   }
 
@@ -66,6 +72,9 @@ class RecoverResponse {
     map["hash"] = hash;
     map["player_id"] = playerId;
     map["uuid"] = uuid;
+    if (erc20 != null) {
+      map["erc20"] = erc20.toJson();
+    }
     map["promote_url"] = promoteUrl;
     map["lastSync"] = lastSync;
     map["__v"] = v;

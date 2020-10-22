@@ -10,6 +10,7 @@ import '../../inject.dart';
 import '../../localizations.dart';
 import '../widgets.dart';
 import 'auth/pincode.dart';
+import 'info/about.dart';
 import 'info/faq.dart';
 import 'info/feedback.dart';
 
@@ -189,7 +190,12 @@ class SettingsPage extends StatelessWidget {
               title: AppLocalizations.of(context).settingsItemFaq(),
               onClick: () {
                 Navigator.pushNamed(context, FaqPage.navId);
-              })
+              }),
+          FusionPreference(title: "About build", onClick: () {
+            showModalBottomSheet(context: context, builder: (context) {
+              return AboutBuildUi();
+            });
+          })
         ],
       ),
     );

@@ -80,7 +80,7 @@ class RecoverAccountPage extends StatefulWidget {
 class _RecoverAccountState extends State<RecoverAccountPage> {
   ScanResult scanResult;
   List<BarcodeFormat> selectedFormats = [..._possibleFormats];
-  String _scannedQrData =  "";
+  String _scannedQrData =  "occur lunar grit evil fun urban fuel aspect door hair hammer inside";
 
   static final _possibleFormats = BarcodeFormat.values.toList()
     ..removeWhere((e) => e == BarcodeFormat.unknown);
@@ -197,7 +197,11 @@ class _RecoverAccountState extends State<RecoverAccountPage> {
                             child: TextFieldBlocBuilder(
                               textFieldBloc: bloc.mnemonicTextBloc,
                               textInputAction: TextInputAction.done,
+                              animateWhenCanShow: true,
                               maxLines: 14,
+                              enableSuggestions: true,
+                              enableInteractiveSelection: true,
+                              showSuggestionsWhenIsEmpty: true,
                               style: TextStyle(
                                 color: (theme.colorScheme.onSurface),
                               ),

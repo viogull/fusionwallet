@@ -97,6 +97,10 @@ class StateContainerState extends State<StateContainer> {
   // When wallet is encrypted
   String encryptedSecret;
 
+
+
+
+
   @override
   void initState() {
     super.initState();

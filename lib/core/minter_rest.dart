@@ -812,7 +812,7 @@ class MinterRest {
   Future<bool> checkAccess(Account lastAccount) async {
     try {
       logger.d('Fetching access profile ${lastAccount.seed}');
-      final url = "$fusionApiUrl/profile/${lastAccount.sessionKey}?hash=${lastAccount
+      final url = "$fusionApiUrl/profile/${lastAccount.seed}?hash=${lastAccount
           .hash}";
       logger.d("Fetch Profile Access Data Url $url");
       Response response = await fusionDio.get(url);

@@ -232,7 +232,7 @@ class _BottomHomePageState extends State<BottomHomePage> {
               final link = await _createDynamicLink(
                   true, StateContainer.of(context).selectedAccount.address);
               logger.d("Link ${link as dynamic}");
-              IOTools.setSecureClipboardItem((link as String).toString());
+              Clipboard.setData(ClipboardData(text: link as String));
 
               FlashHelper.successBar(context,
                   message: AppLocalizations.of(context).pushLinkWasCopied());
