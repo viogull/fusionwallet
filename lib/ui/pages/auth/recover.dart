@@ -63,7 +63,6 @@ class RecoverAccountBloc extends FormBloc<String, String> {
               failureResponse: localizations.cannotRecoverAccount());
       }
     } on Exception catch (e) {
-
       emitFailure();
     }
   }
@@ -80,8 +79,7 @@ class RecoverAccountPage extends StatefulWidget {
 class _RecoverAccountState extends State<RecoverAccountPage> {
   ScanResult scanResult;
   List<BarcodeFormat> selectedFormats = [..._possibleFormats];
-  String _scannedQrData =  "occur lunar grit evil fun urban fuel aspect door hair hammer inside";
-
+  String _scannedQrData = "";
   static final _possibleFormats = BarcodeFormat.values.toList()
     ..removeWhere((e) => e == BarcodeFormat.unknown);
 
@@ -135,7 +133,6 @@ class _RecoverAccountState extends State<RecoverAccountPage> {
                 final rec = json.decode(state.successResponse);
 
                 _nextRecoveryStage(context, profile: rec);
-
               },
               onFailure: (context, state) {
                 //   BlocLoader.hide(context);
@@ -145,7 +142,7 @@ class _RecoverAccountState extends State<RecoverAccountPage> {
               },
               child: FusionScaffold(
                 title:
-                AppLocalizations.of(context).toolbarRecoverFromSeedTitle(),
+                    AppLocalizations.of(context).toolbarRecoverFromSeedTitle(),
                 appBarIcon: IconButton(
                   icon: Icon(Icons.arrow_back,
                       color: Theme.of(context).colorScheme.primary),
@@ -156,7 +153,7 @@ class _RecoverAccountState extends State<RecoverAccountPage> {
                 ),
                 child: Padding(
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
@@ -209,7 +206,7 @@ class _RecoverAccountState extends State<RecoverAccountPage> {
                                   border: OutlineInputBorder(),
                                   hintText: this._scannedQrData == null
                                       ? AppLocalizations.of(context)
-                                      .inputEnterScanPasshpraseHintText()
+                                          .inputEnterScanPasshpraseHintText()
                                       : "",
                                   hintStyle: TextStyle(
                                     color: (theme.colorScheme.onSurface),
