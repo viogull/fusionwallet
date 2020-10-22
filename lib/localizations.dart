@@ -1748,6 +1748,31 @@ class AppLocalizations {
       name: 'myInvoicesTitle');
   String chooseBlockchainLabel() => Intl.message('Choose blockchain',
       name: 'chooseBlockchainLabel');
+
+  String coinTransfer() => Intl.message('Transfer', name: 'coinTransfer');
+
+  String coinConvertation() => Intl.message('Exchange', name: 'coinConvertation');
+
+  String coinDelegation() => Intl.message('Delegation', name: 'coinDelegation');
+  String coinUnbounding() => Intl.message('Ubounding', name: 'coinUnbounding');
+
+  String aboutBuildLabel() => Intl.message("About build", name: 'aboutBuildLabel');
+
+  String labelBuildsAbout()=> Intl.message("About app", name: 'labelBuildsAbout');
+
+  String labelBuildName() => Intl.message("Platform", name: 'labelBuildName');
+
+  String labelBuildRunningOn() => Intl.message("Running on", name: 'labelBuildRunningOn');
+
+  String labelBuildVersion()=> Intl.message("Version", name: 'labelBuildVersion');
+
+  String labelBuildVersionCode() => Intl.message("Build number", name: 'labelBuildVersionCode');
+
+  String labelBuildAppId() => Intl.message("App Id", name: 'labelBuildAppId');
+  
+  
+
+
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

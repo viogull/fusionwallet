@@ -191,7 +191,7 @@ class SettingsPage extends StatelessWidget {
               onClick: () {
                 Navigator.pushNamed(context, FaqPage.navId);
               }),
-          FusionPreference(title: "About build", onClick: () {
+          FusionPreference(title: AppLocalizations.of(context).aboutBuildLabel(), onClick: () {
             showModalBottomSheet(context: context, builder: (context) {
               return AboutBuildUi();
             });

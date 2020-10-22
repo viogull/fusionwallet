@@ -6,13 +6,15 @@ import 'package:flutter/services.dart';
 import 'package:fusion_wallet/ui/components/custom/scaffold.dart';
 import 'package:get_version/get_version.dart';
 
+import '../../../localizations.dart';
+
 class AboutBuildUi extends StatefulWidget {
   @override
   _MyAppState createState() => new _MyAppState();
 }
 
 class _MyAppState extends State<AboutBuildUi> {
-  String _platformVersion = 'Unknown';
+  String _platformVersion = '';
   String _projectVersion = '';
   String _projectCode = '';
   String _projectAppID = '';
@@ -85,7 +87,7 @@ class _MyAppState extends State<AboutBuildUi> {
   @override
   Widget build(BuildContext context) {
     return  FusionScaffold(
-        title: "About",
+        title: AppLocalizations.of(context).labelBuildsAbout(),
         child: new SingleChildScrollView(
           child: new ListBody(
             children: <Widget>[
@@ -100,7 +102,7 @@ class _MyAppState extends State<AboutBuildUi> {
               ),
               new ListTile(
                 leading: new Icon(Icons.info),
-                title: const Text('Name'),
+                title:  Text( AppLocalizations.of(context).labelBuildName()),
                 subtitle: new Text(_projectName),
               ),
               new Container(
@@ -108,7 +110,7 @@ class _MyAppState extends State<AboutBuildUi> {
               ),
               new ListTile(
                 leading: new Icon(Icons.info),
-                title: const Text('Running on'),
+                title:  Text( AppLocalizations.of(context).labelBuildRunningOn()),
                 subtitle: new Text(_platformVersion),
               ),
               new Divider(
@@ -116,7 +118,7 @@ class _MyAppState extends State<AboutBuildUi> {
               ),
               new ListTile(
                 leading: new Icon(Icons.info),
-                title: const Text('Version Name'),
+                title:  Text( AppLocalizations.of(context).labelBuildVersion()),
                 subtitle: new Text(_projectVersion),
               ),
               new Divider(
@@ -124,7 +126,7 @@ class _MyAppState extends State<AboutBuildUi> {
               ),
               new ListTile(
                 leading: new Icon(Icons.info),
-                title: const Text('Version Code'),
+                title:  Text( AppLocalizations.of(context).labelBuildVersionCode()),
                 subtitle: new Text(_projectCode),
               ),
               new Divider(
@@ -132,7 +134,7 @@ class _MyAppState extends State<AboutBuildUi> {
               ),
               new ListTile(
                 leading: new Icon(Icons.info),
-                title: const Text('App ID'),
+                title:  Text( AppLocalizations.of(context).labelBuildAppId()),
                 subtitle: new Text(_projectAppID),
               ),
             ],

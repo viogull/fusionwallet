@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fusion_wallet/core/pojo/transactions_response.dart';
+import 'package:fusion_wallet/localizations.dart';
 import 'package:fusion_wallet/utils/io_tools.dart';
 import 'package:fusion_wallet/utils/numbers.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,6 +16,22 @@ class TransactionView extends StatelessWidget {
   final String requestedAddress;
 
   const TransactionView({this.transaction, this.requestedAddress});
+
+
+  String getTypeLabel(BuildContext context) {
+    final locales = AppLocalizations.of(context);
+    var label = "";
+    if(transaction.type == 1)
+      label = locales.coinTransfer();
+    else if(transaction.type == 2  ||  transaction.type  ==3 || transaction.type ==4)
+      label = locales.coinConvertation();
+    else if(transaction.type == 7 )
+      label = locales.coinDelegation();
+    else if(transaction.type == 8) {
+      label = locales.coinUnbounding();
+    }
+    return label;
+}
 
   @override
   Widget build(BuildContext context) {
@@ -102,36 +119,45 @@ class TransactionView extends StatelessWidget {
                 flex: 8,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Row(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-      Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: SvgPicture.asset(
-        ('assets/images/icons/ic_bitcoin.svg'),
-        // color: Colors.white,
-        fit: BoxFit.fill,
-        height: 12,
-        width: 12,
-        ),
-      ),
-                      AutoSizeText(
-                        this.transaction.data.value == null
-                            ? "0.00"
-                            : NumberUtil.sanitizeNumber(
-                            this.transaction.data.value, maxDecimalDigits: 6),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: SvgPicture.asset(
+                              ('assets/images/icons/ic_bitcoin.svg'),
+                              // color: Colors.white,
+                              fit: BoxFit.fill,
+                              height: 12,
+                              width: 12,
+                            ),
+                          ),
+                          AutoSizeText(
+                            this.transaction.data.value == null
+                                ? "0.00"
+                                : NumberUtil.sanitizeNumber(
+                                this.transaction.data.value, maxDecimalDigits: 6),
 
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            color: (isReceiving) ? Colors.green : Colors.red),
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                color: (isReceiving) ? Colors.green : Colors.red),
+                          ),
+                          AutoSizeText(
+                            this.transaction.data.coin == null
+                                ? " BIP"
+                                : " ${this.transaction.data.coin.symbol}",
+                            maxFontSize: 12,
+                            textAlign: TextAlign.end,
+                          ),
+                        ],
                       ),
-                      AutoSizeText(
-                        this.transaction.data.coin == null
-                            ? " BIP"
-                            : " ${this.transaction.data.coin.symbol}",
-                        maxFontSize: 12,
-                        textAlign: TextAlign.end,
-                      ),
+                      AutoSizeText(getTypeLabel(context), maxFontSize: 12, maxLines: 1,
+                        style: GoogleFonts.lato(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6)),
+                        textAlign: TextAlign.end,)
                     ],
                   ),
                 ),
