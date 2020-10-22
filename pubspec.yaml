@@ -107,8 +107,6 @@ flutter:
 
   assets:
 
-    - assets/anim/locker.json
-    - assets/anim/locker2.json
     - assets/lang/en.json
     - assets/lang/ru.json
 

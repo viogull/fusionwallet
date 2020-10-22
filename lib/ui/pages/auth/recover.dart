@@ -80,7 +80,7 @@ class RecoverAccountPage extends StatefulWidget {
 class _RecoverAccountState extends State<RecoverAccountPage> {
   ScanResult scanResult;
   List<BarcodeFormat> selectedFormats = [..._possibleFormats];
-  String _scannedQrData;
+  String _scannedQrData =  "";
 
   static final _possibleFormats = BarcodeFormat.values.toList()
     ..removeWhere((e) => e == BarcodeFormat.unknown);
@@ -123,7 +123,7 @@ class _RecoverAccountState extends State<RecoverAccountPage> {
       child: Builder(
         builder: (context) {
           final bloc = context.bloc<RecoverAccountBloc>();
-          if (this._scannedQrData != null) {
+          if (this._scannedQrData.isNotEmpty) {
             bloc.mnemonicTextBloc.updateInitialValue(this._scannedQrData);
           }
           return FormBlocListener<RecoverAccountBloc, String, String>(
@@ -135,9 +135,7 @@ class _RecoverAccountState extends State<RecoverAccountPage> {
                 final rec = json.decode(state.successResponse);
 
                 _nextRecoveryStage(context, profile: rec);
-//                BlocProvider.of<AuthenticationBloc>(context)
-//                    .add(AccountCompleteRecoverEvent(name: bloc.nameTextBloc.value,
-//                    mnemonic: bloc.mnemonicTextBloc.value));
+
               },
               onFailure: (context, state) {
                 //   BlocLoader.hide(context);

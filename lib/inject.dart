@@ -14,10 +14,10 @@ import 'utils/vault.dart';
 export 'package:logger/logger.dart';
 
 export './core/minter_rest.dart';
+export './utils/biometric.dart';
+export './utils/flasher.dart';
 export './utils/haptic.dart';
 export './utils/vault.dart';
-export './utils/flasher.dart';
-export './utils/biometric.dart';
 
 /*
   Base Service Locator (DI)
@@ -31,7 +31,7 @@ void setupServiceLocator() {
   injector.registerLazySingleton<BiometricUtil>(() => BiometricUtil());
   injector.registerLazySingleton<Vault>(() => Vault());
   injector.registerLazySingleton<SharedPrefsUtil>(() => SharedPrefsUtil());
-  injector.registerLazySingleton<Logger>(() => Logger(printer: PrettyPrinter()));
+  injector.registerLazySingleton<Logger>(() => Logger(printer: PrettyPrinter(printTime: true)));
   injector.registerLazySingleton<MinterChannel>(() => MinterChannel());
   injector.registerLazySingleton<MinterRest>(() => MinterRest());
 }

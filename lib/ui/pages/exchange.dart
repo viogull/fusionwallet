@@ -53,7 +53,7 @@ class ExchangePage extends StatelessWidget {
               ),
             ),
             Flexible(
-              flex: 3,
+              flex: 4,
               child: Container(
                 width: MediaQuery
                     .of(context)
@@ -135,7 +135,7 @@ class ExchangePage extends StatelessWidget {
                           ),
                         ),);
                       });
-                      return Container(
+                      return Expanded(
                         child: Column(
                           children: balances,
                         ),

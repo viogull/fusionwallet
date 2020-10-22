@@ -19,7 +19,7 @@ class TransactionView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isReceiving;
-    if (transaction.from == requestedAddress)
+    if (transaction.data.to == requestedAddress)
       isReceiving = true;
     else
       isReceiving = false;

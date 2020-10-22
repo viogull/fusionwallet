@@ -259,10 +259,11 @@ class _ConvertState extends State<ConvertPage> {
                 child: FusionButton(
                   text: AppLocalizations.of(context)
                       .buttonConvert(),
-                  onPressed: () {
-                    store.exchange(
+                  onPressed: () async {
+                    await store.exchange(
                         StateContainer.of(context).selectedAccount.mnemonic
                     );
+                    Navigator.pop(context);
                   },
                 ),
               ),
@@ -292,12 +293,12 @@ class _ConvertState extends State<ConvertPage> {
                 popupBarrierColor: Theme.of(context).colorScheme.surface.withOpacity(0.2),
                 dropDownButton: Icon(FlutterIcons.arrow_drop_down_mdi, color: Theme.of(context).colorScheme.primary,),
                 popupBackgroundColor: Theme.of(context).colorScheme.surface.withOpacity(0.8),
-                emptyBuilder: (context) => Container(
+                emptyBuilder: (context, item) => Container(
                   child: Center(
                     child: PlatformCircularProgressIndicator(),
                   ),
                 ),
-                loadingBuilder: (context) => Container(
+                loadingBuilder: (context, item) => Container(
                   child: Center(
                     child: PlatformCircularProgressIndicator(),
                   ),
