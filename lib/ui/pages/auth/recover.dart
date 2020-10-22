@@ -61,9 +61,13 @@ class RecoverAccountBloc extends FormBloc<String, String> {
         else
           this.emitFailure(
               failureResponse: localizations.cannotRecoverAccount());
+      }  else {
+        if (nameTextBloc.value.isEmpty)
+          nameTextBloc.addFieldError(
+             localizations.newsCannotBeEmpty());
       }
-    } on Exception catch (e) {
-      emitFailure();
+    } on Exception catch (ex) {
+      emitFailure(failureResponse: ex.toString());
     }
   }
 }

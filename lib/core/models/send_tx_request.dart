@@ -25,7 +25,6 @@ class SendTxRequest {
     map["to"] = to;
     map["value"] = value;
     map["coin"] = coin;
-    map["gasCoin"] = gasCoin;
     map["mnemonic"] = mnemonic;
     return map;
   }

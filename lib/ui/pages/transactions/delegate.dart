@@ -58,18 +58,17 @@ class DelegateFormBloc extends FormBloc<String, String> {
               publicKey: pubkey,
               coin: coin,
               stake: stake,
-              gasCoin: 'BIP',
               mnemonic: _account.mnemonic),
           hash: _account.hash);
 
       logger.d("Response from node -> $delegateRequest");
       if (delegateRequest == true) {
-        emitSuccess(successResponse: " ");
+        emitSuccess(successResponse: "Delegated succesfully");
       } else {
-        emitFailure(failureResponse: 'D');
+        emitFailure(failureResponse: 'Delegation was failed');
       }
     } on Exception catch (exception) {
-      emitFailure(failureResponse: "DD");
+      emitFailure(failureResponse: exception.toString());
     }
   }
 }

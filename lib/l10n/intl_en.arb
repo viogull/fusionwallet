@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-10-03T19:12:57.937877",
+  "@@last_modified": "2020-10-23T02:05:24.261515",
   "appName": "Fusion",
   "@appName": {
     "type": "text",
@@ -2202,6 +2202,66 @@
   },
   "chooseBlockchainLabel": "Choose blockchain",
   "@chooseBlockchainLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "coinTransfer": "Transfer",
+  "@coinTransfer": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "coinConvertation": "Exchange",
+  "@coinConvertation": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "coinDelegation": "Delegation",
+  "@coinDelegation": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "coinUnbounding": "Ubounding",
+  "@coinUnbounding": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutBuildLabel": "About build",
+  "@aboutBuildLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelBuildsAbout": "About app",
+  "@labelBuildsAbout": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelBuildName": "Platform",
+  "@labelBuildName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelBuildRunningOn": "Running on",
+  "@labelBuildRunningOn": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelBuildVersion": "Version",
+  "@labelBuildVersion": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelBuildVersionCode": "Build number",
+  "@labelBuildVersionCode": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelBuildAppId": "App Id",
+  "@labelBuildAppId": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "newsCannotBeEmpty": "Name cannot be empty",
+  "@newsCannotBeEmpty": {
     "type": "text",
     "placeholders": {}
   }

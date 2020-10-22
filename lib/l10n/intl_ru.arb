@@ -1955,5 +1955,17 @@
 	"maximumQtyLabel": "Максимальная к-во: {maximum}",
 	"myInvoicesTitle": "Мои запросы",
 	"noInvoicesLabel": "Никаких запросов на снятие средств",
-	"selectFiatHint": "Выберите валюту для получения"
+	"selectFiatHint": "Выберите валюту для получения",
+	"aboutBuildLabel": "О сборке",
+	"coinConvertation": "Обмен",
+	"coinDelegation": "Делегация",
+	"coinTransfer": "Перевод",
+	"coinUnbounding": "",
+	"labelBuildAppId": "Идентификатор",
+	"labelBuildName": "Модуль",
+	"labelBuildRunningOn": "Устройство",
+	"labelBuildVersion": "Версия",
+	"labelBuildVersionCode": "Номер сборки",
+	"labelBuildsAbout": "О  программе",
+	"newsCannotBeEmpty": "Имя не может буть пустым"
 }

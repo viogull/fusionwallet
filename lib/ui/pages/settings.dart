@@ -192,7 +192,7 @@ class SettingsPage extends StatelessWidget {
                 Navigator.pushNamed(context, FaqPage.navId);
               }),
           FusionPreference(title: AppLocalizations.of(context).aboutBuildLabel(), onClick: () {
-            showModalBottomSheet(context: context, builder: (context) {
+            showCupertinoModalBottomSheet(context: context, builder: (context) {
               return AboutBuildUi();
             });
           })

@@ -81,13 +81,12 @@ class UboundFormBloc extends FormBloc<String, String> {
                 publicKey: pubkey,
                 coin: coin,
                 stake: stake,
-                gasCoin: 'BIP',
                 mnemonic: _account.mnemonic),
             hash: _account.hash);
 
         logger.d("Response from node -> ${request}");
-        if (request != null) {
-          emitSuccess(successResponse: "");
+        if (request != null && request == true) {
+          emitSuccess(successResponse: "Succesfully ubounded");
         } else {
           emitFailure(failureResponse: localizations.invalidInput());
         }
@@ -95,7 +94,6 @@ class UboundFormBloc extends FormBloc<String, String> {
     } on Exception catch (exception) {
       emitFailure(failureResponse: exception.toString());
     }
-    emitFailure(failureResponse: "ss");
   }
 
   @override

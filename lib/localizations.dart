@@ -1769,6 +1769,8 @@ class AppLocalizations {
   String labelBuildVersionCode() => Intl.message("Build number", name: 'labelBuildVersionCode');
 
   String labelBuildAppId() => Intl.message("App Id", name: 'labelBuildAppId');
+
+  String newsCannotBeEmpty() => Intl.message( "Name cannot be empty",  name :"newsCannotBeEmpty");
   
   
 

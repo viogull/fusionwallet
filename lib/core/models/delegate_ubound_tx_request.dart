@@ -26,7 +26,6 @@ class DelegateUboundTxRequest {
     map["publicKey"] = publicKey;
     map["coin"] = coin;
     map["stake"] = stake;
-    map["gasCoin"] = gasCoin;
     map["mnemonic"] = mnemonic;
     return map;
   }
