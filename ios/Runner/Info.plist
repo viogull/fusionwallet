@@ -51,6 +51,10 @@
 	<string>Fusion is needing access to FaceID to secure your account.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Fusion does  not needing any location permissions.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Fusion does not needing any location permissions.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Fusion does not need  any  location permission.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
@@ -63,10 +67,6 @@
 	<string>Main</string>
 	<key>UIStatusBarHidden</key>
 	<true/>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Fusion does not need  any  location permission.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Fusion does not needing any location permissions.</string>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleDarkContent</string>
 	<key>UISupportedInterfaceOrientations</key>
