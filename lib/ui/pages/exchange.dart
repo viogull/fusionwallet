@@ -107,7 +107,7 @@ class ExchangePage extends StatelessWidget {
                                                       .width *
                                                       0.02,
                                                 ),
-                                                AutoSizeText(
+                                                Text(
                                                   element.coin.symbol,
                                                   style: GoogleFonts.robotoCondensed(color: theme.colorScheme.onBackground, fontSize: 18),
                                                   textAlign: TextAlign.left,

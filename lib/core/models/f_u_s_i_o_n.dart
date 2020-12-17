@@ -1,6 +1,6 @@
 class FUSION {
-  double buy;
-  double sell;
+  num buy;
+  num sell;
 
   FUSION({
       this.buy, 
